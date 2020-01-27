@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Score : MonoBehaviour
+public class General_Score : MonoBehaviour
 {
     [HideInInspector] public int money = 100;
     [HideInInspector] public int trust = 0;

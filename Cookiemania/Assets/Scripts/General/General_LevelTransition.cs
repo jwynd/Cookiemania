@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LevelTransition : MonoBehaviour
+public class General_LevelTransition : MonoBehaviour
 {
     public Dropdown LevelSelect;
     //public string sceneName;
