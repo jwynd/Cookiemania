@@ -1,5 +1,9 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/MattTown.unity
+=======
+- path: Assets/Scenes/Desktop.unity
+>>>>>>> f50f6ecd2d8091154401a9e86387c7dbf948c7d4
   isLoaded: 1
   isActive: 1
   isSubScene: 0
