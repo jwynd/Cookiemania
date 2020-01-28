@@ -76,12 +76,13 @@ public class JumperCameraController : MonoBehaviour
             if (targetPos.y - buffer > rb.position.y )
             {
                // velocity.y = rb.velocity.y < 0 ? catchUpSpeed.y * 2: catchUpSpeed.y ;
-                velocity.y = catchUpSpeed.y;
+               
+                velocity.y = (targetPos.y - rb.position.y) * catchUpSpeed.y;
             }
             else if (targetPos.y + buffer < rb.position.y)
             {
                // velocity.y = rb.velocity.y < 0 ? -catchUpSpeed.y * 2 : -catchUpSpeed.y;
-                velocity.y = -catchUpSpeed.y;
+                velocity.y = (targetPos.y - rb.position.y) * catchUpSpeed.y;
 
             }
         }

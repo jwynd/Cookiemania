@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Obstacle
+  - Platform
+  - Hurts
+  - Pickup
+  - WorldSides
   layers:
   - Default
   - TransparentFX
@@ -13,9 +18,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - PlayerCollision
+  - Player
+  - Platforms
   - 
   - 
   - 
@@ -38,6 +43,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 4085799021
+    locked: 0
+  - name: Midground
+    uniqueID: 4237817269
+    locked: 0
+  - name: Foreground
+    uniqueID: 634366703
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
