@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Genral_TabButton : MonoBehaviour
+public class General_TabButton : MonoBehaviour
 {
     public bool homeTab = false;
     public GameObject[] otherTabs;
@@ -16,12 +16,14 @@ public class Genral_TabButton : MonoBehaviour
         if(!this.gameObject.activeSelf){
             this.gameObject.SetActive(true);
             deactivateOthers();
+            this.gameObject.tag = "Untagged";
         }
     }
 
     private void deactivateOthers(){
         foreach(GameObject g in otherTabs){
             g.SetActive(false);
+            g.tag = "DeactivateOnLoad";
         }
     }
 }
