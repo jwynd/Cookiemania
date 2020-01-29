@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JumperObstacleController : MonoBehaviour
+public class JumperEnemyController : MonoBehaviour
 {
-    public float damage = 2.0f;
-    //all obstacles can be destroyed
-    
     // Start is called before the first frame update
-
+    public bool destructable = true;
+    public float health = 5;
+    public float damage = 2.0f;
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -20,5 +19,8 @@ public class JumperObstacleController : MonoBehaviour
         
     }
 
-    
+    public void TakesDamage(float damage)
+    {
+
+    }
 }

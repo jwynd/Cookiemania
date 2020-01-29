@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4790512461018026977}
   - component: {fileID: 2253716481641927315}
   m_Layer: 8
-  m_Name: Box
+  m_Name: JumperPickup
   m_TagString: Pickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
