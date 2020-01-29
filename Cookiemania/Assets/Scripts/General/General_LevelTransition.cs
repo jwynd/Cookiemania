@@ -46,7 +46,7 @@ public class General_LevelTransition : MonoBehaviour
     }
 
     // called when exiting a minigame and returning to the desktop
-    private void returnDesktop(){
+    public void returnDesktop(){
         if(loadedScene == null) return; // if loadedScene is null then we are not in a mini-game
         foreach(GameObject g in DisableOnLevelChange){
             if(g.tag == "DeactivateOnLoad") continue; // we don't want everything in desktop active at once
