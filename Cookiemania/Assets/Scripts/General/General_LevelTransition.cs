@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class General_LevelTransition : MonoBehaviour
 {
     public Dropdown LevelSelect;
+    public GameObject[] DisableOnLevelChange;
     private string loadedScene = null;
     void start(){
         LevelSelect.onValueChanged.AddListener(delegate {
@@ -16,13 +17,10 @@ public class General_LevelTransition : MonoBehaviour
     public void transition(Dropdown target){
         switch(target.value){
             case 0:
-                if(loadedScene == null) break;
-                SceneManager.UnloadSceneAsync(loadedScene);
-                loadedScene = null;
+                returnDesktop();
                 break;
             case 1:
-                SceneManager.LoadScene("Jumper", LoadSceneMode.Additive);
-                loadedScene = "Jumper";
+                leaveDesktop("Jumper");
                 break;
             default:
                 Debug.LogError("Level Select: Selection not recognized");
@@ -31,6 +29,31 @@ public class General_LevelTransition : MonoBehaviour
                 #endif
                 break;
 
+        }
+    }
+
+    private void leaveDesktop(string sceneName){
+        foreach(GameObject g in DisableOnLevelChange){
+            g.SetActive(false);
+        }
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+        loadedScene = sceneName;
+    }
+
+    private void returnDesktop(){
+        if(loadedScene == null) return;
+        foreach(GameObject g in DisableOnLevelChange){
+            if(g.tag == "DeactivateOnLoad") continue;
+            g.SetActive(true);
+        }
+        SceneManager.UnloadSceneAsync(loadedScene);
+        loadedScene = null;
+    }
+
+    void Update(){
+        if(loadedScene == null) return;
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            returnDesktop();
         }
     }
 }

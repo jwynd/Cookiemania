@@ -1687,6 +1687,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelSelect: {fileID: 110672780}
+  DisableOnLevelChange:
+  - {fileID: 1319970853}
+  - {fileID: 1365991720}
+  - {fileID: 1419960844}
+  - {fileID: 465540752}
+  - {fileID: 733111613}
+  - {fileID: 791384869}
+  - {fileID: 110672778}
+  - {fileID: 890766272}
 --- !u!4 &1233017395
 Transform:
   m_ObjectHideFlags: 0
@@ -1977,7 +1986,7 @@ GameObject:
   - component: {fileID: 1365991722}
   m_Layer: 0
   m_Name: Analytics
-  m_TagString: Untagged
+  m_TagString: DeactivateOnLoad
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2182,7 +2191,7 @@ GameObject:
   - component: {fileID: 1419960846}
   m_Layer: 0
   m_Name: Email
-  m_TagString: Untagged
+  m_TagString: DeactivateOnLoad
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
