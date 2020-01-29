@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Genral_TabButton : MonoBehaviour
+public class General_TabButton : MonoBehaviour
 {
     public bool homeTab = false;
     public GameObject[] otherTabs;
