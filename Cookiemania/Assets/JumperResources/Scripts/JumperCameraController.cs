@@ -15,6 +15,7 @@ public class JumperCameraController : MonoBehaviour
     public Vector2 lookAhead = new Vector2(2.0f, 1.0f); 
     public Vector2 catchUpSpeed = new Vector2(1.0f, 10.0f);
     public float buffer = 1.0f;
+    public float timeToNextScene = 3.0f;
     private Vector2 targetPos = Vector2.zero;
     
     public BoxCollider2D cameraBounds;
@@ -86,10 +87,24 @@ public class JumperCameraController : MonoBehaviour
 
             }
         }
+        else
+        {
+            //start countdown to next scene
+            timeToNextScene -= Time.fixedDeltaTime;
+            if (timeToNextScene <= 0)
+            {
+                //transition scene
+            }
+        }
         rb.velocity = velocity;
     }
 
-
+    public void PlayerDestroyed()
+    {
+        isFollowing = false;
+        playerRB = null;
+        rb.velocity = Vector2.zero;
+    }
 
 
 

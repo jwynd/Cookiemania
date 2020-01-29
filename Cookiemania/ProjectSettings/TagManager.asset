@@ -9,7 +9,7 @@ TagManager:
   - Hurts
   - Pickup
   - WorldSides
-  - DeactivateOnLoad
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -22,7 +22,7 @@ TagManager:
   - PlayerCollision
   - Player
   - Platforms
-  - 
+  - NoPlayerCollisions
   - 
   - 
   - 
