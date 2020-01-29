@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class General_LevelTransition : MonoBehaviour
 {
     public Dropdown LevelSelect;
-    //public string sceneName;
+    private string loadedScene = null;
     void start(){
         LevelSelect.onValueChanged.AddListener(delegate {
             transition(LevelSelect);
@@ -16,15 +16,21 @@ public class General_LevelTransition : MonoBehaviour
     public void transition(Dropdown target){
         switch(target.value){
             case 0:
+                if(loadedScene == null) break;
+                SceneManager.UnloadSceneAsync(loadedScene);
+                loadedScene = null;
                 break;
             case 1:
-                SceneManager.LoadScene("SampleScene");
+                SceneManager.LoadScene("Jumper", LoadSceneMode.Additive);
+                loadedScene = "Jumper";
                 break;
             default:
-                print("Not Recognized");
+                Debug.LogError("Level Select: Selection not recognized");
+                #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+                #endif
                 break;
 
         }
-        //SceneManager.LoadScene(sceneName);
     }
 }
