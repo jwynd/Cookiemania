@@ -6,23 +6,23 @@ public class enemy : MonoBehaviour
 {
     public float speed = 10;
     public Rigidbody2D rigidBody;
-    // public Sprite startingImage;
-    //public Sprite altImage;
-    //private SpriteRenderer spriteRenderer;
-   // public float secBeforSpriteChange = .05f;
+    public Sprite startingImage;
+    public Sprite altImage;
+    private SpriteRenderer spriteRenderer;
+    public float secBeforeSpriteChange = .5f;
     public GameObject enemyFire;
     public float minFireRateTime = 1.0f;
     public float maxFireRateTime = 3.0f;
     public float baseFireWaitTime = 3.0f;
-    //public Sprite playerdeathImage;
+    public Sprite playerdeathImage;
 
     // Start is called before the first frame update
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.velocity = new Vector2(1, 0) * speed;
-        //spriteRenderer = GetComponent<SpriteRenderer>();
-        //StartCoroutine(ChangeEnemySprite());
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        StartCoroutine(changeEnemySprite());
         baseFireWaitTime = baseFireWaitTime + Random.Range(minFireRateTime, maxFireRateTime);
 
     }
@@ -63,25 +63,25 @@ public class enemy : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    /*   public IEnumerator changeEnemySprite()
+       public IEnumerator changeEnemySprite()
        {
            while (true)
            {
-               if(SpriteRenderer.sprite == startingImage)
+               if(spriteRenderer.sprite == startingImage)
                {
-                   SpriteRenderer.sprite = altImage;
-                   soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemysound);
+                   spriteRenderer.sprite = altImage;
+                  // soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemysound);
 
                }
                else
                {
-                   SpriteRenderer.sprite = startingImage;
-                   soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemysound2);
+                   spriteRenderer.sprite = startingImage;
+                  // soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemysound2);
                }
 
                yield return new WaitForSeconds(secBeforeSpriteChange);
            }
-       }*/
+       }
 
     private void FixedUpdate()
     {
@@ -94,12 +94,12 @@ public class enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.gameObject.tag == "player")
+        if(col.gameObject.tag == "Player")
         {
             //soundmanager.Instance.PlayOneShot(soundmanager.Instance.playerdeath);
-            //col.GetComponent<SpriteRenderer>().sprite = playerdeathImage;
+            col.GetComponent<SpriteRenderer>().sprite = playerdeathImage;
             Destroy(gameObject);
-            DestroyObject(col.gameObject); //.05f
+            DestroyObject(col.gameObject, .05f); //.05f
 
         }
     }

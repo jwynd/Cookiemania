@@ -10,6 +10,11 @@ TagManager:
   - Pickup
   - WorldSides
   - Enemy
+  - DeactivateOnLoad
+  - enemyfire
+  - fire
+  - shield
+  - wall
   layers:
   - Default
   - TransparentFX
@@ -23,11 +28,11 @@ TagManager:
   - Player
   - Platforms
   - NoPlayerCollisions
-  - 
-  - 
-  - 
-  - 
-  - 
+  - wall
+  - Enemy
+  - shield
+  - fire
+  - enemyfire
   - 
   - 
   - 

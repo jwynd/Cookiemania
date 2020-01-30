@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class playerfire : MonoBehaviour
 {
-    public float speed = 30;
+    public float speed = 20;
     private Rigidbody2D rigidBody;
     public Sprite EExplosionImage;
 

@@ -18,7 +18,7 @@ public class Enemyfire : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.gameObject.tag == "player")
+        if(col.gameObject.tag == "Player")
         {
             //SoundManager.Instance.PlayOneShot(SoundManager.Instance.playerdeath);
             col.GetComponent<SpriteRenderer>().sprite = PExplosionImage;
@@ -32,6 +32,11 @@ public class Enemyfire : MonoBehaviour
              Destroy (gameObject);
              DestroyObject(col.gameObject);
          }
+
+        if (col.tag == "Wall")
+        {
+            Destroy(gameObject);
+        }
 
     }
     void OnBecomeInvisible()

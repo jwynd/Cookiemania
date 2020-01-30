@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class player : MonoBehaviour
 {
-    public float speed = 30;
+    public float speed = 20;
     public GameObject theplayerfire;
     private void FixedUpdate()
     {

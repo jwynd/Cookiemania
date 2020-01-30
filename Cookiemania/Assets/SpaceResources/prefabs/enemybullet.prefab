@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -7581135007724980892}
   - component: {fileID: -612681983241386530}
   - component: {fileID: -1793070532486616889}
-  m_Layer: 11
+  m_Layer: 16
   m_Name: enemybullet
   m_TagString: enemyfire
   m_Icon: {fileID: 0}
@@ -157,6 +157,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65cac50a502c604fb6e02123db8069a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
+  speed: 20
   PExplosionImage: {fileID: 8463096131581357343, guid: 9602e3d91879a97489b64b8514aada9b,
     type: 3}
