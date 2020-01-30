@@ -94,6 +94,7 @@ public class JumperCameraController : MonoBehaviour
             if (timeToNextScene <= 0)
             {
                 //transition scene
+                
             }
         }
         rb.velocity = velocity;
