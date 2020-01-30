@@ -93,7 +93,8 @@ public class JumperCameraController : MonoBehaviour
             timeToNextScene -= Time.fixedDeltaTime;
             if (timeToNextScene <= 0)
             {
-                GameObject.Find("LevelController").GetComponent<General_LevelTransition>().returnDesktop();
+                //transition scene
+                
             }
         }
         rb.velocity = velocity;
