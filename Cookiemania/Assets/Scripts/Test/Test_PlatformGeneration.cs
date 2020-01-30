@@ -22,7 +22,7 @@ public class Test_PlatformGeneration : MonoBehaviour
     [Range(0.0f, 360.0f)]
     public float rotation = 0.0f;
 
-    private max = density * 2;
+    private int max;
     void OnValidate(){
         if(this.transform.childCount != 0){
             Debug.LogError("Ensure Spawner has no children");
@@ -31,6 +31,7 @@ public class Test_PlatformGeneration : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        max  = density * 2;
         BuildSection();
     }
 
@@ -42,7 +43,7 @@ public class Test_PlatformGeneration : MonoBehaviour
             g.transform.parent = this.transform;
             g.transform.SetAsFirstSibling();
             if(i == density - 1) Instantiate(trigger, pos, Quaternion.identity);
-            if(this.transform.childCount > max) Destroy(this.transform.Child(this.transform.childCount-1));
+            if(this.transform.childCount > max) Destroy(this.transform.GetChild(this.transform.childCount-1));
         }
     }
     // // Update is called once per frame
