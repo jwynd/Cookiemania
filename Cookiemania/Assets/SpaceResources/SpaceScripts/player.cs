@@ -21,4 +21,9 @@ public class player : MonoBehaviour
             //SoundManager.Instance.PlayOneShot(SoundManager.Instance.playerfire);
         }
     }
+
+    void OnDestroy()
+    {
+        GameObject.Find("LevelController").GetComponent<General_LevelTransition>().returnDesktop();
+    }
 }

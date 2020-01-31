@@ -290,7 +290,9 @@ MonoBehaviour:
       m_Image: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
     - m_Text: Jumper
       m_Image: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-    - m_Text: ShouldCauseError
+    - m_Text: Spacemini
+      m_Image: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+    - m_Text: ExitGame
       m_Image: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_OnValueChanged:
     m_PersistentCalls:

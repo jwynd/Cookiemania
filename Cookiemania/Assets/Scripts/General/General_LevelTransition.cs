@@ -26,6 +26,16 @@ public class General_LevelTransition : MonoBehaviour
             case 1:
                 leaveDesktop("Jumper");
                 break;
+            case 2:
+                leaveDesktop("Spacemini");
+                break;
+            case 3:
+                #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+                #else
+                Application.Quit();
+                #endif
+                break;
             default:
                 Debug.LogError("General_LevelTransition: Selection not recognized"); // print error message
                 #if UNITY_EDITOR // we only kick the user out in the editor
@@ -58,6 +68,7 @@ public class General_LevelTransition : MonoBehaviour
         // AsyncOperation async = SceneManger.UnloadSceneAsync(loadedScene);
         // while(!async.isDone); // Lock the scene in busy wait
         loadedScene = null;
+        LevelSelect.value = 0;
     }
 
     // contains temporary controls to return to desktop, remove in final version
