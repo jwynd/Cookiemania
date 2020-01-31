@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Jumper.unity
     guid: 5bac6f7a0f2b737418802aa859a5f8a1
+  - enabled: 1
+    path: Assets/Scenes/Spacemini.unity
+    guid: 18675ef7018a9094f9373e3c5b1d4d08
   m_configObjects: {}
