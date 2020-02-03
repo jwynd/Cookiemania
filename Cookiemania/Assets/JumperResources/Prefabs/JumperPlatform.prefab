@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 7021541821841218255}
   - component: {fileID: 2470613282563711199}
   - component: {fileID: 1887133924701154446}
+  - component: {fileID: 5769490489735045119}
   m_Layer: 0
-  m_Name: Barrel (2)
+  m_Name: JumperPlatform
   m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,3 +108,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.77, y: 2.38}
   m_EdgeRadius: 0
+--- !u!114 &5769490489735045119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8552561703256424470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 714d41a275a56764e94c5c79fc19356c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

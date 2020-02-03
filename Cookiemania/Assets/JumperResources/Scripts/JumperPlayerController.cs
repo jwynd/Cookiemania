@@ -268,6 +268,7 @@ public class JumperPlayerController : MonoBehaviour
             //the below method allows wall jumps sometimes, kinda jank, but less buggy if you're 
             //cool with wall jumps
             jumpCount = transform.position.y > collision.transform.position.y ? maxJumps : jumpCount;
+            collision.gameObject.GetComponent<JumperPlatformController>().Remove();
             
         }
         else if (collision.gameObject.CompareTag("Enemy")) 
