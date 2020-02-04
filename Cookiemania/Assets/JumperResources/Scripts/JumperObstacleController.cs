@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class JumperObstacleController : MonoBehaviour
 {
-    public float damage = 2.0f;
+    [SerializeField]
+    private float damage = 2.0f;
     //all obstacles can be destroyed
     
     // Start is called before the first frame update
@@ -20,5 +21,8 @@ public class JumperObstacleController : MonoBehaviour
         
     }
 
-    
+    public float GetDamage()
+    {
+        return damage;
+    }
 }

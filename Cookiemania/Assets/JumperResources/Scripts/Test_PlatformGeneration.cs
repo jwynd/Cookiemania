@@ -43,7 +43,7 @@ public class Test_PlatformGeneration : MonoBehaviour
             g.transform.parent = this.transform;
             g.transform.SetAsFirstSibling();
             if(i == density - 1) Instantiate(trigger, pos, Quaternion.identity);
-            if(this.transform.childCount > max) Destroy(this.transform.GetChild(this.transform.childCount-1));
+            if(this.transform.childCount > max) Destroy(this.transform.GetChild(this.transform.childCount-1).gameObject);
         }
     }
     // // Update is called once per frame
