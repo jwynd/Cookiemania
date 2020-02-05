@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class playerfire : MonoBehaviour
 {
-    public float speed = 20;
+    public float speed = 5;
     private Rigidbody2D rigidBody;
     public Sprite EExplosionImage;
 
@@ -26,14 +26,14 @@ public class playerfire : MonoBehaviour
 
             col.GetComponent<SpriteRenderer>().sprite = EExplosionImage;
             Destroy(gameObject);
-            DestroyObject(col.gameObject, 0.5f); //DestroyObject(col.gameObject, 0.5f)
+            Destroy(col.gameObject, 0.5f); //DestroyObject(col.gameObject, 0.5f)
 
         }
 
         if (col.tag == "shield") 
         {
             Destroy (gameObject);
-            DestroyObject(col.gameObject);
+            Destroy(col.gameObject);
         }
         
     }
@@ -50,5 +50,10 @@ public class playerfire : MonoBehaviour
         score += 10;
 
         textUIComp.text = score.ToString();
+    }
+
+    private void Update()
+    {
+        Destroy(this.gameObject, 1.5f);
     }
 }

@@ -11,9 +11,9 @@ public class enemy : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public float secBeforeSpriteChange = .5f;
     public GameObject enemyFire;
-    public float minFireRateTime = 1.0f;
+    public float minFireRateTime = .3f;
     public float maxFireRateTime = 3.0f;
-    public float baseFireWaitTime = 3.0f;
+    public float baseFireWaitTime = 5.0f;
     public Sprite playerdeathImage;
 
     // Start is called before the first frame update
@@ -24,6 +24,7 @@ public class enemy : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         StartCoroutine(changeEnemySprite());
         baseFireWaitTime = baseFireWaitTime + Random.Range(minFireRateTime, maxFireRateTime);
+        InvokeRepeating("Launch", 4f, 3f);
 
     }
 
@@ -88,18 +89,23 @@ public class enemy : MonoBehaviour
         if(Time.time > baseFireWaitTime)
         {
             baseFireWaitTime = baseFireWaitTime + Random.Range(minFireRateTime, maxFireRateTime);
-            Instantiate(enemyFire, transform.position, Quaternion.identity);
+            //Instantiate(enemyFire, transform.position, Quaternion.identity);
         }
+    }
+
+    void Launch()
+    {
+        Instantiate(enemyFire, transform.position, Quaternion.identity);
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.gameObject.tag == "Player")
+        if(col.gameObject.CompareTag("Player"))
         {
             //soundmanager.Instance.PlayOneShot(soundmanager.Instance.playerdeath);
             col.GetComponent<SpriteRenderer>().sprite = playerdeathImage;
             Destroy(gameObject);
-            DestroyObject(col.gameObject, .05f); //.05f
+            Destroy(col.gameObject, .05f); //.05f
 
         }
     }
