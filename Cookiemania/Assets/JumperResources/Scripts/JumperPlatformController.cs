@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class JumperPlatformController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    #region variables
     [SerializeField]
     private float timeToRemove = 1.5f;
     [SerializeField]
@@ -12,32 +12,35 @@ public class JumperPlatformController : MonoBehaviour
     [SerializeField]
     private bool isStartingPlatform = false;
 
+    [HideInInspector]
+    public JumperEnemyController enemyChild = null;
+    [HideInInspector]
+    public float previousLedgeDirection = 0.0f;
+
     private bool notFlashing = true;
     private Renderer rend = null;
     private Collider2D coll = null;
+    #endregion
 
+    #region startup
     void Awake()
     {
         coll = GetComponent<Collider2D>();
         rend = GetComponent<Renderer>();
     }
+    #endregion
 
-    void Start()
-    {
-        
-    }
+    #region publicFunctions
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void Remove()
+    public void Remove(bool immediately = false)
     {
         if (!isStartingPlatform && notFlashing)
         {
             StartCoroutine(FlashThenKill());
+        }
+        else if(immediately)
+        {
+            
         }
         else
         {
@@ -47,6 +50,7 @@ public class JumperPlatformController : MonoBehaviour
 
     IEnumerator FlashThenKill()
     {
+        if (enemyChild != null) { enemyChild.PlatformDestroyed(timeToRemove, previousLedgeDirection); }
         notFlashing = false;
         int timer = (int)(timeToRemove / flashPeriod);
         for (int i = 0; i < 5; i++)
@@ -57,7 +61,7 @@ public class JumperPlatformController : MonoBehaviour
             yield return new WaitForSeconds(flashPeriod);
         }
         //this could be changed to recycling the object
-        rend.enabled = false;
-        coll.enabled = false;
+        Destroy(gameObject);
     }
+    #endregion
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +7,6 @@ public class JumperPickupController : MonoBehaviour
     // Start is called before the first frame update
     public float damage = 5.0f;
 
-    private GameObject playerRef;
     private Collider2D myCollider;
     private Rigidbody2D myRb;
     
@@ -16,7 +14,6 @@ public class JumperPickupController : MonoBehaviour
 
     void Start()
     {
-        playerRef = GameObject.FindWithTag("Player");
         myCollider = gameObject.GetComponent<Collider2D>();
         myRb = gameObject.GetComponent<Rigidbody2D>();
         myCollider.isTrigger = true;
@@ -52,7 +49,7 @@ public class JumperPickupController : MonoBehaviour
             JumperEnemyController script = collision.gameObject.GetComponent<JumperEnemyController>();
             if (script != null)
             {
-                if (script.destructable)
+                if (script.GetDestructable())
                 {
                     Destroy(collision.gameObject);
                     

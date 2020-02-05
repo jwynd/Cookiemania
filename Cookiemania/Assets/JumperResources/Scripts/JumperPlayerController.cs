@@ -20,13 +20,17 @@ using UnityEngine;
 //jump speed is too fast
 public class JumperPlayerController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    #region variables
     public float acceleration = 0.5f;
     public int maxJumps = 2;
+    public float jumpMultiplier = 1.3f;
+    
     public float jumpSpeed = 3.0f;
     public Vector2 throwStrength = new Vector2(4.0f, 4.0f);
     public float maxHealth = 5;
     public float falloffDistanceMax = 15f;
+
+    public float totalJumpStrength { get; private set; }
 
     protected Rigidbody2D rb;
     protected Vector2 velocity = Vector2.zero;
@@ -45,24 +49,30 @@ public class JumperPlayerController : MonoBehaviour
     protected bool haveItem = false;
     protected Rigidbody2D heldItemRB = null;
     protected float maxHeightReached = 0f;
+    protected JumperManager jm;
     protected JumperCameraController cameraScript;
-    private float movementDirection = 1;
-    private float pickupTimer = 0.0f;
-    private float pickupTimerMax = 0.1f;
-    private Color damagedColor = Color.red;
-    private Color defaultColor = Color.white;
+    protected float movementDirection = 1;
+    protected float pickupTimer = 0.0f;
+    protected float pickupTimerMax = 0.1f;
+    protected Color damagedColor = Color.red * Color.white;
+    protected Color defaultColor = Color.white;
+    #endregion
 
+    #region startup
     void Start()
     {
+        jm = JumperManager.Instance;
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = Vector2.zero;
         jumpCount = maxJumps;
         currentHealth = maxHealth;
-        cameraScript = GameObject.FindWithTag("MainCamera").GetComponent<JumperCameraController>();
+        cameraScript = jm.mainCamera.GetComponent<JumperCameraController>();
+        totalJumpStrength = jumpMultiplier * jumpSpeed + jumpSpeed * (1+jumpMultiplier);
     }
+    #endregion
 
-    // Update is called once per frame
-    private void Update()
+    #region update
+    protected void Update()
     {
         //baseline is previous velocity 
         //all my inputs that are done on a per frame basis 
@@ -74,7 +84,7 @@ public class JumperPlayerController : MonoBehaviour
         // Trap();
     }
 
-    private void CheckHeightForDeath()
+    protected void CheckHeightForDeath()
     {
         maxHeightReached = rb.position.y > maxHeightReached ? rb.position.y : maxHeightReached;
         if (rb.velocity.y < 0 && falloffDistanceMax < maxHeightReached - rb.position.y)
@@ -88,7 +98,33 @@ public class JumperPlayerController : MonoBehaviour
         }
     }
 
-    private bool PickupInput()
+    bool JumpInput()
+    {
+        //better way to set the velocity of the player
+
+        if (Input.GetButtonDown("Jump"))//&& jumpCooldown <= 0)
+        {
+            if (jumpCount > 1)
+            {
+                jumpCount--;
+                return true;
+                //rb.AddForce(new Vector2(0, maxJumpSpeed), ForceMode2D.Impulse);
+            }
+            else if (jumpCount > 0)
+            {
+
+                jumpCount--;
+                return true;
+                //rb.AddForce(new Vector2(0, maxJumpSpeed/1.7f), ForceMode2D.Impulse);
+            }
+        }
+        return jumped;
+        // float yvel = rb.velocity.y;
+        // rb.velocity = new Vector2(Input.GetAxis("Horizontal") * acceleration, rb.velocity.y);// = Input.GetAxis("Horizontal") * acceleration * Time.deltaTime;
+
+    }
+
+    protected bool PickupInput()
     {
         if (Input.GetButtonDown("Pickup")) 
         {
@@ -102,7 +138,20 @@ public class JumperPlayerController : MonoBehaviour
         return pickup;
     }
 
-    private void HorizontalInput()
+    #endregion
+
+    #region fixedUpdate
+
+    protected void FixedUpdate()
+    {
+        HorizontalInput();
+        Movement();
+        ThrowItem();
+        Timers();
+        ResetInput();
+    }
+
+    protected void HorizontalInput()
     {
         velocity.x = rb.velocity.x;
         //can disable or enable arial controls by checking jumpcount
@@ -117,7 +166,7 @@ public class JumperPlayerController : MonoBehaviour
         }
     }
 
-    private void HorizontalInputHelper(float maneuverability, bool inAir)
+    protected void HorizontalInputHelper(float maneuverability, bool inAir)
     {
         float inputAccel = Input.GetAxis("Horizontal") * maneuverability * acceleration;
         if (inputAccel > 0)
@@ -149,22 +198,32 @@ public class JumperPlayerController : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    protected void Movement()
     {
-        HorizontalInput();
-        Movement();
-        ThrowItem();
-        Timers();
-        ResetInput();
+        //changing the direction of the throw to the last direction moved
+
+
+        if (jumped)
+        {
+            rb.velocity = new Vector2(velocity.x, jumpSpeed * (jumpCount + jumpMultiplier));
+
+            //rb.AddForce(new Vector2(0, jumpSpeed * (jumpCount+1.3f)), ForceMode2D.Impulse);
+        }
+        else
+        {
+            rb.velocity = new Vector2(velocity.x, rb.velocity.y);
+        }
+        // float vely = rb.velocity.y;
+        //  rb.velocity = new Vector2(velocity.x, vely);
     }
 
-    private void ResetInput()
+    protected void ResetInput()
     {
        // if (pickupTimer == 0) { pickup = false; }           
         jumped = false;
     }
 
-    private void ThrowItem()
+    protected void ThrowItem()
     {
         if (pickup && haveItem)
         {
@@ -179,27 +238,10 @@ public class JumperPlayerController : MonoBehaviour
         }
     }
 
-    private void Movement()
-    {
-        //changing the direction of the throw to the last direction moved
-        
-
-        if (jumped)
-        {
-            rb.velocity = new Vector2(velocity.x, jumpSpeed * (jumpCount+1.3f));
-            
-            //rb.AddForce(new Vector2(0, jumpSpeed * (jumpCount+1.3f)), ForceMode2D.Impulse);
-        }
-        else
-        {
-            rb.velocity = new Vector2(velocity.x, rb.velocity.y);
-        }
-       // float vely = rb.velocity.y;
-      //  rb.velocity = new Vector2(velocity.x, vely);
-    }
+    
 
     //to be run in fixed update
-    private void Timers()
+    protected void Timers()
     {
         //if (damageTimer > 0)
       //  {
@@ -214,38 +256,10 @@ public class JumperPlayerController : MonoBehaviour
 
     }
 
-    private void Trap()
-    {
-        print("unimplemented, set trap");
-    }
+    #endregion
 
-    bool JumpInput()
-    {
-        //better way to set the velocity of the player
-        
-        if (Input.GetButtonDown("Jump") )//&& jumpCooldown <= 0)
-        {
-            if (jumpCount > 1)
-            {
-                jumpCount--;
-                return true;
-                //rb.AddForce(new Vector2(0, maxJumpSpeed), ForceMode2D.Impulse);
-            }
-            else if (jumpCount > 0)
-            {
-                
-                jumpCount--;
-                return true;
-                //rb.AddForce(new Vector2(0, maxJumpSpeed/1.7f), ForceMode2D.Impulse);
-            }
-        }
-        return jumped;
-       // float yvel = rb.velocity.y;
-       // rb.velocity = new Vector2(Input.GetAxis("Horizontal") * acceleration, rb.velocity.y);// = Input.GetAxis("Horizontal") * acceleration * Time.deltaTime;
-
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    #region collision
+    protected void OnCollisionEnter2D(Collision2D collision)
     {
         //platform first cuz we constantly hitting platforms
         if (collision.gameObject.CompareTag("Platform"))
@@ -287,7 +301,7 @@ public class JumperPlayerController : MonoBehaviour
          */
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    protected void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Pickup"))
         {
@@ -312,7 +326,7 @@ public class JumperPlayerController : MonoBehaviour
         }
     }
 
-    private void TakesDamage(GameObject collision)
+    protected void TakesDamage(GameObject collision)
     {
         //requires damage and destroyable parameters in obstacle controller
         if (damageTimer <= 0)
@@ -327,7 +341,7 @@ public class JumperPlayerController : MonoBehaviour
                 JumperEnemyController enemyControl = collision.GetComponent<JumperEnemyController>();
                 if (enemyControl != null)
                 {
-                    DamageHelper(enemyControl.damage);
+                    DamageHelper(enemyControl.GetDamage());
                     
                 }
             }
@@ -336,7 +350,7 @@ public class JumperPlayerController : MonoBehaviour
     }
     
 
-    private void DamageHelper(float damage)
+    protected void DamageHelper(float damage)
     {
         Debug.Log("ow");
         currentHealth -= damage;
@@ -367,4 +381,14 @@ public class JumperPlayerController : MonoBehaviour
         }
         damageTimer = 0;
     }
+
+    #endregion
+
+    #region stubs
+    protected void Trap()
+    {
+        print("unimplemented, set trap");
+    }
+    #endregion
+
 }

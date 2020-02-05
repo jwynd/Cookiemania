@@ -145,3 +145,5 @@ MonoBehaviour:
   destructable: 1
   health: 5
   damage: 2
+  speed: 0.2
+  maxVelocity: 5
