@@ -14,8 +14,7 @@ public class JumperPlatformController : MonoBehaviour
 
     [HideInInspector]
     public JumperEnemyController enemyChild = null;
-    [HideInInspector]
-    public float previousLedgeDirection = 0.0f;
+
 
     private bool notFlashing = true;
     private Renderer rend = null;
@@ -31,6 +30,15 @@ public class JumperPlatformController : MonoBehaviour
     #endregion
 
     #region publicFunctions
+
+    //left x position = .x, right x position = .z, y center position = .y 
+    public Vector3 GetHorizontalBounds()
+    {
+        Vector3 bounds = transform.position;
+        bounds.z = bounds.x + rend.bounds.extents.x;
+        bounds.x -= rend.bounds.extents.x;
+        return bounds;
+    }
 
     public void Remove(bool immediately = false)
     {
@@ -50,10 +58,10 @@ public class JumperPlatformController : MonoBehaviour
 
     IEnumerator FlashThenKill()
     {
-        if (enemyChild != null) { enemyChild.PlatformDestroyed(timeToRemove, previousLedgeDirection); }
+        if (enemyChild != null) { enemyChild.PlatformDestroyed(timeToRemove); }
         notFlashing = false;
         int timer = (int)(timeToRemove / flashPeriod);
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < timer; i++)
         {
             rend.material.color = Color.gray;
             yield return new WaitForSeconds(flashPeriod);

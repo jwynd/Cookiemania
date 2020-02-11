@@ -23,12 +23,15 @@ public class JumperPlayerController : MonoBehaviour
     #region variables
     public float acceleration = 0.5f;
     public int maxJumps = 2;
-    public float jumpMultiplier = 1.3f;
+    public float jumpMultiplier = 2f;
     
-    public float jumpSpeed = 3.0f;
+    public float jumpSpeed = 3.5f;
     public Vector2 throwStrength = new Vector2(4.0f, 4.0f);
     public float maxHealth = 5;
     public float falloffDistanceMax = 15f;
+
+    public float flashTime = 0.15f;
+    public float damageTimerMax = 1.5f;
 
     public float totalJumpStrength { get; private set; }
 
@@ -38,7 +41,7 @@ public class JumperPlayerController : MonoBehaviour
     protected float damageTimer = 0;
     protected float jumpCooldown = 0;
     protected float jumpCooldownMax = 0.25f;
-    protected float damageTimerMax = 1.5f;
+    
     protected float currentHealth;
     protected bool jumped = false;
 
@@ -52,10 +55,10 @@ public class JumperPlayerController : MonoBehaviour
     protected JumperManager jm;
     protected JumperCameraController cameraScript;
     protected float movementDirection = 1;
-    protected float pickupTimer = 0.0f;
-    protected float pickupTimerMax = 0.1f;
+
     protected Color damagedColor = Color.red * Color.white;
     protected Color defaultColor = Color.white;
+    private bool throwStuff;
     #endregion
 
     #region startup
@@ -79,7 +82,7 @@ public class JumperPlayerController : MonoBehaviour
         //need top be in update
         
         jumped = JumpInput();
-        pickup = PickupInput();
+        ItemInput();
         CheckHeightForDeath();
         // Trap();
     }
@@ -124,18 +127,20 @@ public class JumperPlayerController : MonoBehaviour
 
     }
 
-    protected bool PickupInput()
+    protected void ItemInput()
     {
-        if (Input.GetButtonDown("Pickup")) 
+        if (Input.GetAxis("Pickup") > 0) 
         {
-            if (pickup && !haveItem)
-            {
-                pickupTimer = pickupTimerMax;
-            }
-            return true;
-
+            pickup = true;
         }
-        return pickup;
+        else
+        {
+            pickup = false;
+        }
+        if (Input.GetButtonDown("Throw"))
+        {
+            throwStuff = true;
+        }
     }
 
     #endregion
@@ -206,8 +211,8 @@ public class JumperPlayerController : MonoBehaviour
         if (jumped)
         {
             rb.velocity = new Vector2(velocity.x, jumpSpeed * (jumpCount + jumpMultiplier));
-
-            //rb.AddForce(new Vector2(0, jumpSpeed * (jumpCount+1.3f)), ForceMode2D.Impulse);
+            
+            //rb.AddForce(new Vector2(0, jumpSpeed * (jumpCount+jumpMultiplier)), ForceMode2D.Impulse);
         }
         else
         {
@@ -225,17 +230,16 @@ public class JumperPlayerController : MonoBehaviour
 
     protected void ThrowItem()
     {
-        if (pickup && haveItem)
+        if (throwStuff && haveItem)
         {
-            pickup = false;
             haveItem = false;
             Debug.Log("threw item");
             Vector2 throwTemp = throwStrength;
             throwTemp.x *= movementDirection;
             throwTemp.x += velocity.x * 0.3f;
             heldItemRB.gameObject.GetComponent<JumperPickupController>().Thrown(throwTemp);
-           // throwStrength.x = Mathf.Abs(throwStrength.x);
         }
+        throwStuff = false;
     }
 
     
@@ -248,14 +252,17 @@ public class JumperPlayerController : MonoBehaviour
             //cant go below 0
        //     damageTimer = Mathf.Max(0, damageTimer - Time.fixedDeltaTime);
        // } 
-        if (pickupTimer > 0)
-        {
-            pickupTimer = Mathf.Max(0, pickupTimer - Time.fixedDeltaTime);
-            if (pickupTimer <= 0) { pickup = false; }
-        }
 
     }
 
+    #endregion
+
+    #region public
+    public void PickupDestroyed()
+    {
+        heldItemRB = null;
+        haveItem = false;
+    }
     #endregion
 
     #region collision
@@ -317,12 +324,10 @@ public class JumperPlayerController : MonoBehaviour
                 haveItem = true;
             }        
         }
-        else if (collision.gameObject.CompareTag("Obstacle"))
+        else if (collision.gameObject.CompareTag("Obstacle") || collision.gameObject.CompareTag("Enemy"))
         {
             //does the damage to the player or something           
-
             TakesDamage(collision.gameObject);
-
         }
     }
 
@@ -371,13 +376,14 @@ public class JumperPlayerController : MonoBehaviour
     IEnumerator Flasher()
     {
         damageTimer = damageTimerMax;
+        int interval = (int)( damageTimerMax / flashTime);
         Renderer rend = GetComponent<Renderer>();
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < interval; i++)
         {
             rend.material.color = damagedColor;
-            yield return new WaitForSeconds(.1f);
+            yield return new WaitForSeconds(flashTime / 2);
             rend.material.color = defaultColor;
-            yield return new WaitForSeconds(.1f);
+            yield return new WaitForSeconds(flashTime / 2);
         }
         damageTimer = 0;
     }

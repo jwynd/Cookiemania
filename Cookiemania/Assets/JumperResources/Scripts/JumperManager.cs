@@ -6,8 +6,22 @@ public class JumperManager : MonoBehaviour
 {
 
     #region variables
-    [Tooltip("This game object will be copied to create platforms")]
-    public GameObject platform;
+    [System.Serializable]
+    public class Prefabs
+    {
+        [Tooltip("Spawnable object prefabs")]
+        public GameObject platform = null;
+        [Tooltip("Weighted possibility to spawn (relative to other objects weights.) Prefabs in the middle of " +
+            "the array are more likely due to using pseudo normal distribution.")]
+        [Range(0.01f, 1.0f)]
+        public float weight = 0.1f;
+        [HideInInspector]
+        public float probability = 0f;
+    }
+
+    [SerializeField]
+    private Prefabs[] platformPrefabs = null;
+
     [Tooltip("How high the player can jump, used for determining how far platforms can be placed")]
     public float jumpHeight = 5.0f;
     [Tooltip("How far to either side from the offset position a platform can spawn")]
@@ -25,6 +39,8 @@ public class JumperManager : MonoBehaviour
     private float difficulty = 1.0f;
 
     private int max;
+    private float weightRange = 0.0f;
+
     public GameObject mainCamera { get; private set; }
 
     public GameObject player { get; private set; }
@@ -46,13 +62,23 @@ public class JumperManager : MonoBehaviour
         {
             Instance = this;
         }
+        weightRange = 0;
+        foreach (var fab in platformPrefabs)
+        {
+            fab.probability = fab.weight + weightRange;
+            weightRange += fab.weight;
+        }
 
     }
 
-    
-    void OnValidate(){
-        if(transform.childCount != 0){
+
+    void OnValidate() {
+        if (transform.childCount != 0) {
             Debug.LogError("Ensure Spawner has no children");
+        }
+        if (platformPrefabs == null)
+        {
+            Debug.LogError("no spawnables set");
         }
     }
 
@@ -63,13 +89,13 @@ public class JumperManager : MonoBehaviour
         trigger = FindObjectOfType<JumperPlatformTrigger>().gameObject;
         player = FindObjectOfType<JumperPlayerController>().gameObject;
         mainCamera = FindObjectOfType<JumperCameraController>().gameObject;
-        if (!trigger || !player || !mainCamera) 
+        if (!trigger || !player || !mainCamera || platformPrefabs.Length == 0) 
         { 
             Debug.LogError("need a player, trigger and camera with appropriate scripts" +
                 " instantiated in the scene"); 
         }
-        GameObject g = Instantiate(platform, transform.position, Quaternion.identity);
-        minHeightIncrease = player.GetComponent<Collider2D>().bounds.extents.y * 2 + g.GetComponent<Collider2D>().bounds.extents.y * 2;
+        GameObject g = Instantiate(platformPrefabs[0].platform, transform.position, Quaternion.identity);
+        minHeightIncrease = player.GetComponent<Renderer>().bounds.size.y * 2 + g.GetComponent<Renderer>().bounds.size.y * 2;
         Destroy(g);
         max  = (int)(density * 1.5);
         offset = player.transform.position.x;
@@ -77,19 +103,35 @@ public class JumperManager : MonoBehaviour
         BuildSection();
     }
 
+    private GameObject Roulette()
+    {
+        //the 0 possibility is caught on startup
+        if (platformPrefabs.Length < 2) { return platformPrefabs[0].platform; }
+        float random = Random.Range(0, weightRange/2) + Random.Range(0, weightRange/2);
+        foreach (var fab in platformPrefabs)
+        {
+            if (random < fab.probability)
+            {
+                return fab.platform;
+            }
+        }
+        return platformPrefabs[platformPrefabs.Length - 1].platform;
+    }
+
     #endregion
 
     #region publicFunctions
 
-    public void BuildSection(){
-        Vector3 pos = new Vector3(offset, height, 0);
+    public void BuildSection()
+    {
+        difficulty += 0.3f;
         for (int i = 0; i < density; ++i){
-            float xprev = pos.x;
-            pos = new Vector3(Random.Range(offset-width, offset+width), Random.Range(height+minHeightIncrease, height+jumpHeight), 0);
+            float randomx = Random.Range(offset - width, offset + width);
+            float randomy = Random.Range(height + minHeightIncrease, height + jumpHeight);
+            Vector3 pos = new Vector3(randomx, randomy, 0);
             offset = pos.x;
             height = pos.y;
-            GameObject g = Instantiate(platform, pos, Quaternion.Euler(0, 0, rotation));
-            g.GetComponent<JumperPlatformController>().previousLedgeDirection = pos.x - xprev > 0 ? 1 : -1;
+            GameObject g = Instantiate(Roulette(), pos, Quaternion.Euler(0, 0, rotation));
             g.transform.parent = transform;
             g.transform.SetAsFirstSibling();
             if (i == density - 3) trigger.transform.position = pos;
@@ -102,5 +144,19 @@ public class JumperManager : MonoBehaviour
         return difficulty;
     }
 
+    //credit: https://forum.unity.com/threads/re-map-a-number-from-one-range-to-another.119437/
+    //maps from old range to new range
+    //not safe if oldmin and oldmax are the same values
+    public static float Map(float value, float oldMin, float oldMax, float newMin, float newMax)
+    {
+        float map = value - oldMin;
+        map /= oldMax - oldMin;
+        map *= newMax - newMin;
+        map += newMin;
+        return map;
+    }
+
     #endregion
+
+
 }

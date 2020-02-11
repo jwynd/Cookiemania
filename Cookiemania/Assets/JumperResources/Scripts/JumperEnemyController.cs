@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +15,8 @@ public class JumperEnemyController : MonoBehaviour
     private float speed = 3.0f;
     [SerializeField]
     private float maxVelocity = 5.0f;
+    [SerializeField]
+    private Vector2 jump = new Vector2(2f, 4f);
 
     //usage. once player gets 15 units above this object, kill it
     private float originalHeight;
@@ -24,7 +25,7 @@ public class JumperEnemyController : MonoBehaviour
     private float direction = 1;
     private Rigidbody2D rb;
     private JumperManager jm;
-    private bool fallingToMyDeath = false;
+    private bool jumpToMyDeath = false;
     #endregion
 
     #region startup
@@ -32,25 +33,28 @@ public class JumperEnemyController : MonoBehaviour
     {
         jm = JumperManager.Instance;
         rb = GetComponent<Rigidbody2D>();
-        transform.parent.GetComponent<JumperPlatformController>().enemyChild = this;
-        float parentXBound = GetComponentInParent<Collider2D>().bounds.extents.x;
-        float xBound = GetComponent<Collider2D>().bounds.extents.x;
+        JumperPlatformController dad = transform.parent.GetComponent<JumperPlatformController>();
+        dad.enemyChild = this;
         float diff = jm.GetDifficultyMultiplier();
         damage *= diff;
         health *= diff;
         speed *= diff;
         originalHeight = transform.position.y;
         rb.velocity = Vector2.zero;
-
-        //get info from parent, set parent child to this, then 
-        parentLeft = transform.parent.position.x  - (parentXBound + xBound);
-        parentRight = parentLeft + (parentXBound + xBound) * 2;
+        rb.isKinematic = true;
+        rb.gravityScale = 0;
+        Vector3 pBounds = dad.GetHorizontalBounds();
+        parentLeft = pBounds.x;
+        parentRight = pBounds.z;
         Debug.Log(parentLeft + " to " + parentRight);
         if (transform.parent.position.x < transform.position.x)
         {
             direction = -1;
+            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
         }
         transform.parent = null;
+        transform.position = new Vector2(Random.Range(parentLeft, parentRight), transform.position.y);
+
     }
     #endregion
 
@@ -64,10 +68,26 @@ public class JumperEnemyController : MonoBehaviour
 
     private void UpdateHelper()
     {
-        if (!fallingToMyDeath)
+        if (!jumpToMyDeath)
         {
             CheckBounds();
             Walk();
+        }
+        else
+        {
+            Walk();
+            Jump();
+        }
+    }
+
+    private void Jump()
+    {
+        if ((direction < 0 && rb.position.x < parentLeft) || (direction > 0 && rb.position.x > parentRight))
+        {
+            rb.isKinematic = false;
+            rb.gravityScale = 1;
+            rb.AddForce(new Vector2(jump.x * direction, jump.y), ForceMode2D.Impulse);
+            direction = 0;
         }
     }
 
@@ -111,25 +131,21 @@ public class JumperEnemyController : MonoBehaviour
         return destructable;
     }
 
-    public void PlatformDestroyed(float timer, float jumpDirection)
+    public void PlatformDestroyed(float timer)
     {
-        StartCoroutine(PlatformDestroyedHelper(timer, jumpDirection));
+        StartCoroutine(PlatformDestroyedHelper(timer));
     }
     #endregion
 
     #region coroutine
-    private IEnumerator PlatformDestroyedHelper(float timer, float jumpDirection)
+    private IEnumerator PlatformDestroyedHelper(float timer)
     {
-        JumpOff(jumpDirection);
-        yield return new WaitForSeconds(timer);
+        yield return new WaitForSeconds(timer / 4);
+        jumpToMyDeath = true;
+        yield return new WaitForSeconds(timer * 3 / 4);
         Destroy(gameObject);
     }
 
-    private void JumpOff(float direction)
-    {
-        fallingToMyDeath = true;
-        //moves to the edge of the ledge and jumps off
-    }
 
     #endregion
 }

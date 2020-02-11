@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4924203214720030482}
   - component: {fileID: 2627876212615343079}
-  - component: {fileID: 3107760376397775163}
   - component: {fileID: 6892990557881327403}
   - component: {fileID: 7240351483836542595}
+  - component: {fileID: 2518038965417871725}
   m_Layer: 8
   m_Name: JumperPinkEnemy
   m_TagString: Enemy
@@ -83,32 +83,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &3107760376397775163
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6066617287731359766}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.0065944716, y: -0.018664096}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.32}
-    newSize: {x: 0.32, y: 0.32}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.17931907, y: 0.2826718}
-  m_EdgeRadius: 0
 --- !u!50 &6892990557881327403
 Rigidbody2D:
   serializedVersion: 4
@@ -147,3 +121,20 @@ MonoBehaviour:
   damage: 2
   speed: 0.2
   maxVelocity: 5
+  jump: {x: 2, y: 4}
+--- !u!70 &2518038965417871725
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6066617287731359766}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0021982193, y: -0.018664122}
+  m_Size: {x: 0.1705265, y: 0.28267178}
+  m_Direction: 0

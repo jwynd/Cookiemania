@@ -14,6 +14,6 @@ public class JumperPlatformTrigger : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        gen.BuildSection();
+        if (other.gameObject.CompareTag("Player")) { gen.BuildSection(); }
     }
 }

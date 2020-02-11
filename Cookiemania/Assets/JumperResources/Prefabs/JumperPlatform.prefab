@@ -26,13 +26,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8552561703256424470}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.17, y: -4.3, z: 0}
-  m_LocalScale: {x: 0.51684004, y: 0.8202767, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2470613282563711199
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -95,18 +95,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.009607315, y: 0.1007576}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.77, y: 2.38}
+    oldSize: {x: 5.84, y: 1.77}
     newSize: {x: 1.77, y: 2.38}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.77, y: 2.38}
+  m_Size: {x: 5.823845, y: 1.4300022}
   m_EdgeRadius: 0
 --- !u!114 &5769490489735045119
 MonoBehaviour:
@@ -120,3 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 714d41a275a56764e94c5c79fc19356c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeToRemove: 1.5
+  flashPeriod: 0.25
+  isStartingPlatform: 0
+  enemyChild: {fileID: 0}
