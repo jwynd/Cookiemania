@@ -10,9 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8878463891309630306}
   - component: {fileID: 7172680816543582653}
-  m_Layer: 0
+  - component: {fileID: 1654609194611781054}
+  - component: {fileID: 219211151917827533}
+  m_Layer: 13
   m_Name: E2
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81,3 +83,52 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1654609194611781054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180341776261850307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db62bda4aaf566a4891d166d7b3c83e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  rigidBody: {fileID: 0}
+  startingImage: {fileID: 6690153140086037541, guid: 9602e3d91879a97489b64b8514aada9b,
+    type: 3}
+  altImage: {fileID: 4424962381780117069, guid: 9602e3d91879a97489b64b8514aada9b,
+    type: 3}
+  secBeforeSpriteChange: 0.5
+  enemyFire: {fileID: 2563172658485870358, guid: 5a69331d05bc70745912030e5e4fa5c5,
+    type: 3}
+  minFireRateTime: 0.3
+  maxFireRateTime: 3
+  baseFireWaitTime: 5
+  playerdeathImage: {fileID: 8463096131581357343, guid: 9602e3d91879a97489b64b8514aada9b,
+    type: 3}
+  Player: {fileID: 0}
+  moveSpeed: 5
+--- !u!50 &219211151917827533
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180341776261850307}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0.000001
+  m_Material: {fileID: 0}
+  m_Interpolate: 1
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4

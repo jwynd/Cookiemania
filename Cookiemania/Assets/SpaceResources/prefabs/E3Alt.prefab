@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5465262416940186484}
   - component: {fileID: 3722399676547314515}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: E3Alt
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

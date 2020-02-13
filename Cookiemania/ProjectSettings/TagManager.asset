@@ -15,6 +15,7 @@ TagManager:
   - fire
   - shield
   - wall
+  - treasure
   layers:
   - Default
   - TransparentFX

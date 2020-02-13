@@ -15,50 +15,30 @@ public class enemy : MonoBehaviour
     public float maxFireRateTime = 3.0f;
     public float baseFireWaitTime = 5.0f;
     public Sprite playerdeathImage;
+    private Transform target;
+    public Transform Player;
+    private Vector2 movement;
+    public float moveSpeed = 5;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        Player = GameObject.FindGameObjectWithTag("treasure").GetComponent<Transform>();
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.velocity = new Vector2(1, 0) * speed;
         spriteRenderer = GetComponent<SpriteRenderer>();
         StartCoroutine(changeEnemySprite());
         baseFireWaitTime = baseFireWaitTime + Random.Range(minFireRateTime, maxFireRateTime);
         InvokeRepeating("Launch", 4f, 3f);
-
+       // target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
-    // Turn in Opposite direction
-    void Turn(int direction)
-    {
-        Vector2 newVelocity = rigidBody.velocity;
-        newVelocity.x = speed * direction;
-        rigidBody.velocity = newVelocity;
-    }
-
-    //Move down after hitting wall
-    void MoveDown()
-    {
-        Vector2 position = transform.position;
-        position.y -= 1;
-        transform.position = position;
-    }
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-       if(col.gameObject.name == "LeftWall")
-        {
-            Turn(1);
-            MoveDown();
-        } 
 
-       if(col.gameObject.name == "RightWall")
-        {
-            Turn(-1);
-            MoveDown();
-        }
-
-        if (col.gameObject.name == "playerfire")
+        if (col.gameObject.CompareTag("playerfire"))
         {
             // soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemydeath);
             Destroy(gameObject);
@@ -84,9 +64,18 @@ public class enemy : MonoBehaviour
            }
        }
 
+    void Update()
+    {
+        Vector3 direction = Player.position - transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        rigidBody.rotation = angle;
+        direction.Normalize();
+        movement = direction;
+    }
     private void FixedUpdate()
     {
-        if(Time.time > baseFireWaitTime)
+        moveCharacter(movement);
+        if (Time.time > baseFireWaitTime)
         {
             baseFireWaitTime = baseFireWaitTime + Random.Range(minFireRateTime, maxFireRateTime);
             //Instantiate(enemyFire, transform.position, Quaternion.identity);
@@ -108,5 +97,10 @@ public class enemy : MonoBehaviour
             Destroy(col.gameObject, .05f); //.05f
 
         }
+    }
+
+    void moveCharacter(Vector2 direction)
+    {
+        rigidBody.MovePosition((Vector2)transform.position + (direction * moveSpeed * Time.deltaTime));
     }
 }
