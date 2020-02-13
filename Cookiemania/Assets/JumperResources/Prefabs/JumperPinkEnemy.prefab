@@ -121,7 +121,7 @@ MonoBehaviour:
   damage: 1.5
   pointValue: 20
   speed: 0.2
-  maxVelocity: 5
+  maxVelocity: 3
   jump: {x: 2, y: 4}
 --- !u!70 &2518038965417871725
 CapsuleCollider2D:

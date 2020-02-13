@@ -9,7 +9,8 @@ public class JumperObstacleController : JumperPlatformAttachables
     private float speed = 3.0f;
     [SerializeField]
     private float maxVelocity = 5.0f;
-
+    [SerializeField]
+    private float rotationSpeed = 3.0f;
 
     private float parentLeft;
     private float parentRight;
@@ -44,7 +45,7 @@ public class JumperObstacleController : JumperPlatformAttachables
         parentBottom = pBounds.y;
         Debug.Log(parentLeft + " to " + parentRight);
         transform.parent = null;
-        transform.position = new Vector2(Random.Range(parentLeft, parentRight), transform.position.y);
+        transform.position = new Vector2(UnityEngine.Random.Range(parentLeft, parentRight), transform.position.y);
 
     }
     #endregion
@@ -56,7 +57,10 @@ public class JumperObstacleController : JumperPlatformAttachables
     {
         CheckBounds();
         TraversePlatform();
+        Spin();
     }
+
+    
 
     private void CheckBounds()
     {
@@ -90,6 +94,11 @@ public class JumperObstacleController : JumperPlatformAttachables
             direction = -1;
             ydirection = 0;
         }
+    }
+
+    private void Spin()
+    {
+        transform.Rotate(new Vector3(0, 0, -rotationSpeed));
     }
 
     private void TraversePlatform()
