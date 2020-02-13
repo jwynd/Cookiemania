@@ -41,11 +41,11 @@ public class JumperManager : MonoBehaviour
     private int max;
     private float weightRange = 0.0f;
 
-    public GameObject mainCamera { get; private set; }
+    public JumperCameraController mainCamera { get; private set; }
 
-    public GameObject player { get; private set; }
+    public JumperPlayerController player { get; private set; }
 
-    public GameObject trigger { get; private set; }
+    public JumperPlatformTrigger trigger { get; private set; }
 
     public static JumperManager Instance { get; private set; }
 
@@ -76,27 +76,30 @@ public class JumperManager : MonoBehaviour
         if (transform.childCount != 0) {
             Debug.LogError("Ensure Spawner has no children");
         }
-        if (platformPrefabs == null)
-        {
-            Debug.LogError("no spawnables set");
-        }
     }
 
 
 
     void Start()
     {
-        trigger = FindObjectOfType<JumperPlatformTrigger>().gameObject;
-        player = FindObjectOfType<JumperPlayerController>().gameObject;
-        mainCamera = FindObjectOfType<JumperCameraController>().gameObject;
+        trigger = FindObjectOfType<JumperPlatformTrigger>().gameObject.GetComponent<JumperPlatformTrigger>();
+        player = FindObjectOfType<JumperPlayerController>().gameObject.GetComponent<JumperPlayerController>();
+        mainCamera = FindObjectOfType<JumperCameraController>().gameObject.GetComponent<JumperCameraController>();
         if (!trigger || !player || !mainCamera || platformPrefabs.Length == 0) 
         { 
             Debug.LogError("need a player, trigger and camera with appropriate scripts" +
                 " instantiated in the scene"); 
         }
+        if (platformPrefabs[0].platform == null)
+        {
+            Debug.LogError("Platforms should not be null references");
+        }
         GameObject g = Instantiate(platformPrefabs[0].platform, transform.position, Quaternion.identity);
-        minHeightIncrease = player.GetComponent<Renderer>().bounds.size.y * 2 + g.GetComponent<Renderer>().bounds.size.y * 2;
+        minHeightIncrease = player.gameObject.GetComponent<Renderer>().bounds.size.y * 2 + g.GetComponent<Renderer>().bounds.size.y * 2;
         Destroy(g);
+        jumpHeight = player.GetJumpStrength() / 3;
+        width = player.GetMaxVelocity() * 2.5f;
+        Debug.Log(width);
         max  = (int)(density * 1.5);
         offset = player.transform.position.x;
         height = player.transform.position.y;
@@ -156,7 +159,22 @@ public class JumperManager : MonoBehaviour
         return map;
     }
 
-    #endregion
+    public static IEnumerator FlashThenKill(GameObject selfReference, float totalTime, float flashInterval, JumperPlatformAttachables killableChild = null)
+    {
+        if (killableChild != null) { killableChild.PlatformDestroyed(totalTime, flashInterval); }
+        int timer = (int)(totalTime / flashInterval);
+        Renderer rend = selfReference.GetComponent<Renderer>();
+        for (int i = 0; i < timer; i++)
+        {
+            rend.material.color = Color.gray;
+            yield return new WaitForSeconds(flashInterval);
+            rend.material.color = Color.white;
+            yield return new WaitForSeconds(flashInterval);
+        }
+        //this could be changed to recycling the object
+        Destroy(selfReference.gameObject);
+    }
+        #endregion
 
 
-}
+    }

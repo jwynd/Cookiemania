@@ -13,18 +13,15 @@ public class JumperPlatformController : MonoBehaviour
     private bool isStartingPlatform = false;
 
     [HideInInspector]
-    public JumperEnemyController enemyChild = null;
-
+    public JumperPlatformAttachables enemyChild = null;
 
     private bool notFlashing = true;
     private Renderer rend = null;
-    private Collider2D coll = null;
     #endregion
 
     #region startup
     void Awake()
     {
-        coll = GetComponent<Collider2D>();
         rend = GetComponent<Renderer>();
     }
     #endregion
@@ -40,11 +37,21 @@ public class JumperPlatformController : MonoBehaviour
         return bounds;
     }
 
+    //upper y in z, lower y bound in y, x center position in x
+    public Vector3 GetVerticalBounds()
+    {
+        Vector3 bounds = transform.position;
+        bounds.z = bounds.y + rend.bounds.extents.y;
+        bounds.y -= rend.bounds.extents.y;
+        return bounds;
+    }
+
     public void Remove(bool immediately = false)
     {
         if (!isStartingPlatform && notFlashing)
         {
-            StartCoroutine(FlashThenKill());
+            notFlashing = false;
+            StartCoroutine(JumperManager.FlashThenKill(gameObject, timeToRemove, flashPeriod, enemyChild));
         }
         else if(immediately)
         {
@@ -56,20 +63,5 @@ public class JumperPlatformController : MonoBehaviour
         }
     }
 
-    IEnumerator FlashThenKill()
-    {
-        if (enemyChild != null) { enemyChild.PlatformDestroyed(timeToRemove); }
-        notFlashing = false;
-        int timer = (int)(timeToRemove / flashPeriod);
-        for (int i = 0; i < timer; i++)
-        {
-            rend.material.color = Color.gray;
-            yield return new WaitForSeconds(flashPeriod);
-            rend.material.color = Color.white;
-            yield return new WaitForSeconds(flashPeriod);
-        }
-        //this could be changed to recycling the object
-        Destroy(gameObject);
-    }
     #endregion
 }

@@ -62,6 +62,10 @@ public class JumperPlayerController : MonoBehaviour
     #endregion
 
     #region startup
+    private void Awake()
+    {
+        totalJumpStrength = jumpMultiplier * jumpSpeed + jumpSpeed * (1 + jumpMultiplier);
+    }
     void Start()
     {
         jm = JumperManager.Instance;
@@ -263,6 +267,17 @@ public class JumperPlayerController : MonoBehaviour
         heldItemRB = null;
         haveItem = false;
     }
+
+    public float GetJumpStrength()
+    {
+        return totalJumpStrength;
+    }
+
+    public float GetMaxVelocity()
+    {
+        return maxSpeed;
+    }
+
     #endregion
 
     #region collision

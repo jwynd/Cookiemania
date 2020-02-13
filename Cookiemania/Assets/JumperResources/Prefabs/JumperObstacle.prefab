@@ -142,4 +142,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc81e740413206843bc6e0f724c055c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
+  destructable: 0
+  health: 0
+  damage: 2.5
+  pointValue: 15
+  speed: 3
+  maxVelocity: 5
+  jump: {x: 2, y: 4}

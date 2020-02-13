@@ -2,15 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JumperEnemyController : MonoBehaviour
+public class JumperEnemyController : JumperPlatformAttachables
 {
     #region variables
-    [SerializeField]
-    private bool destructable = true;
-    [SerializeField]
-    private float health = 5f;
-    [SerializeField]
-    private float damage = 2.0f;
     [SerializeField]
     private float speed = 3.0f;
     [SerializeField]
@@ -18,13 +12,10 @@ public class JumperEnemyController : MonoBehaviour
     [SerializeField]
     private Vector2 jump = new Vector2(2f, 4f);
 
-    //usage. once player gets 15 units above this object, kill it
-    private float originalHeight;
     private float parentLeft;
     private float parentRight;
     private float direction = 1;
     private Rigidbody2D rb;
-    private JumperManager jm;
     private bool jumpToMyDeath = false;
     #endregion
 
@@ -39,7 +30,6 @@ public class JumperEnemyController : MonoBehaviour
         damage *= diff;
         health *= diff;
         speed *= diff;
-        originalHeight = transform.position.y;
         rb.velocity = Vector2.zero;
         rb.isKinematic = true;
         rb.gravityScale = 0;
@@ -115,23 +105,17 @@ public class JumperEnemyController : MonoBehaviour
     #endregion
 
     #region public
-    public void TakesDamage(float damage)
+    public override void TakesDamage(float damage)
     {
         health -= damage;
-        if (health <= 0) { Destroy(gameObject); }
+        if (health <= 0)
+        {
+            StartCoroutine(JumperManager.FlashThenKill(gameObject, 0.5f, 0.1f));
+        }
     }
     
-    public float GetDamage()
-    {
-        return damage;
-    }
 
-    public bool GetDestructable()
-    {
-        return destructable;
-    }
-
-    public void PlatformDestroyed(float timer)
+    public override void PlatformDestroyed(float timer, float flashPeriod)
     {
         StartCoroutine(PlatformDestroyedHelper(timer));
     }
@@ -145,7 +129,5 @@ public class JumperEnemyController : MonoBehaviour
         yield return new WaitForSeconds(timer * 3 / 4);
         Destroy(gameObject);
     }
-
-
     #endregion
 }

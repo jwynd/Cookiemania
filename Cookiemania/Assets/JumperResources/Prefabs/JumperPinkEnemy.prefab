@@ -118,7 +118,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destructable: 1
   health: 5
-  damage: 2
+  damage: 1.5
+  pointValue: 20
   speed: 0.2
   maxVelocity: 5
   jump: {x: 2, y: 4}
