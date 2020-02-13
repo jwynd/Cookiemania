@@ -19,6 +19,7 @@ public class JumperManager : MonoBehaviour
         public float probability = 0f;
     }
 
+    
     [SerializeField]
     private Prefabs[] platformPrefabs = null;
 
@@ -30,13 +31,17 @@ public class JumperManager : MonoBehaviour
     public float minHeightIncrease = 0.0f;
     [Tooltip("Number of platforms per section")]
     public int density = 10;
+    [Tooltip("Starting difficulty of the level")]
+    public float startingDifficulty = 1.0f;
+    [Tooltip("How much difficulty increases every time a region is built")]
+    public float difficultyIncrement = 0.3f;
     [Tooltip("The rotation of the game object on the Z axis")]
     [Range(0.0f, 360.0f)]
     public float rotation = 0.0f;
 
     private float offset;
     private float height;
-    private float difficulty = 1.0f;
+    
 
     private int max;
     private float weightRange = 0.0f;
@@ -127,7 +132,7 @@ public class JumperManager : MonoBehaviour
 
     public void BuildSection()
     {
-        difficulty += 0.3f;
+        startingDifficulty += difficultyIncrement;
         for (int i = 0; i < density; ++i){
             float randomx = Random.Range(offset - width, offset + width);
             float randomy = Random.Range(height + minHeightIncrease, height + jumpHeight);
@@ -144,7 +149,7 @@ public class JumperManager : MonoBehaviour
 
     public float GetDifficultyMultiplier()
     {
-        return difficulty;
+        return startingDifficulty;
     }
 
     //credit: https://forum.unity.com/threads/re-map-a-number-from-one-range-to-another.119437/

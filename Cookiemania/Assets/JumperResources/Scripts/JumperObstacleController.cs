@@ -32,6 +32,7 @@ public class JumperObstacleController : JumperPlatformAttachables
         damage *= diff;
         health *= diff;
         speed *= diff;
+        maxVelocity *= diff;
         rb.velocity = Vector2.zero;
         //takes collisions, doesnt initiate
         rb.isKinematic = true;

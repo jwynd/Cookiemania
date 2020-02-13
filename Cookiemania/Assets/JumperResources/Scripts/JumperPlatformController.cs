@@ -55,7 +55,7 @@ public class JumperPlatformController : MonoBehaviour
         }
         else if(immediately)
         {
-            
+            StartCoroutine(JumperManager.FlashThenKill(gameObject, 0.1f, 0.1f, enemyChild));
         }
         else
         {

@@ -30,6 +30,7 @@ public class JumperEnemyController : JumperPlatformAttachables
         damage *= diff;
         health *= diff;
         speed *= diff;
+        maxVelocity *= diff;
         rb.velocity = Vector2.zero;
         rb.isKinematic = true;
         rb.gravityScale = 0;
