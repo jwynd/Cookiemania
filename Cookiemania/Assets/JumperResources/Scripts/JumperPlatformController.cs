@@ -46,6 +46,15 @@ public class JumperPlatformController : MonoBehaviour
         return bounds;
     }
 
+    //ensures child ALWAYS destroyed when this is destroyed. gotta make sure ya know
+    public void OnDestroy()
+    {
+        if (enemyChild != null)
+        {
+            Destroy(enemyChild);
+        }
+    }
+
     public void Remove(bool immediately = false)
     {
         if (!isStartingPlatform && notFlashing)

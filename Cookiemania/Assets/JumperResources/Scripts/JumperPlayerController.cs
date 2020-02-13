@@ -53,7 +53,6 @@ public class JumperPlayerController : MonoBehaviour
     protected Rigidbody2D heldItemRB = null;
     protected float maxHeightReached = 0f;
     protected JumperManager jm;
-    protected JumperCameraController cameraScript;
     protected float movementDirection = 1;
 
     protected Color damagedColor = Color.red * Color.white;
@@ -73,7 +72,6 @@ public class JumperPlayerController : MonoBehaviour
         rb.velocity = Vector2.zero;
         jumpCount = maxJumps;
         currentHealth = maxHealth;
-        cameraScript = jm.mainCamera.GetComponent<JumperCameraController>();
         totalJumpStrength = jumpMultiplier * jumpSpeed + jumpSpeed * (1+jumpMultiplier);
     }
     #endregion
@@ -87,22 +85,53 @@ public class JumperPlayerController : MonoBehaviour
         
         jumped = JumpInput();
         ItemInput();
-        CheckHeightForDeath();
+        AttemptToEndGame();
         // Trap();
     }
 
-    protected void CheckHeightForDeath()
+    private void AttemptToEndGame()
+    {
+        bool success;
+        if (CheckHeightForDeath())
+        {
+            success = false;
+            EndGame(success);
+        }
+        if (CheckHeightForGoal())
+        {
+            success = true;
+            EndGame(success);
+        }
+    }
+
+    private bool CheckHeightForGoal()
+    {
+        return maxHeightReached > jm.GetHeightGoal();
+    }
+
+    private void EndGame(bool success)
+    {
+        if (success)
+        {
+            JumperUIManager.Instance.GoodEnd();
+        }
+        else
+        { 
+            JumperUIManager.Instance.BadEnd();
+            Destroy(gameObject);
+        }
+        
+    }
+
+    protected bool CheckHeightForDeath()
     {
         maxHeightReached = rb.position.y > maxHeightReached ? rb.position.y : maxHeightReached;
         if (rb.velocity.y < 0 && falloffDistanceMax < maxHeightReached - rb.position.y)
         {
-            if (cameraScript != null)
-            {
-                //this method also triggers scene changing
-                cameraScript.PlayerDestroyed();
-            }
-            Destroy(gameObject);
+            return true;
+            
         }
+        return false;
     }
 
     bool JumpInput()
@@ -378,10 +407,10 @@ public class JumperPlayerController : MonoBehaviour
         if (currentHealth <= 0)
         {
             //change scene cuz we ded
-            if (cameraScript != null)
+            if (jm.mainCamera != null)
             {
                 //this method also triggers scene changing
-                cameraScript.PlayerDestroyed();
+                jm.mainCamera.PlayerDestroyed();
             }
             Destroy(gameObject);
         }

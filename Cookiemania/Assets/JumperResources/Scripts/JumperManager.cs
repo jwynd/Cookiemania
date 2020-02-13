@@ -35,6 +35,8 @@ public class JumperManager : MonoBehaviour
     public float startingDifficulty = 1.0f;
     [Tooltip("How much difficulty increases every time a region is built")]
     public float difficultyIncrement = 0.3f;
+    [Tooltip("Height to finish the level")]
+    public float heightGoal = 100f;
     [Tooltip("The rotation of the game object on the Z axis")]
     [Range(0.0f, 360.0f)]
     public float rotation = 0.0f;
@@ -73,7 +75,9 @@ public class JumperManager : MonoBehaviour
             fab.probability = fab.weight + weightRange;
             weightRange += fab.weight;
         }
-
+        trigger = FindObjectOfType<JumperPlatformTrigger>().gameObject.GetComponent<JumperPlatformTrigger>();
+        player = FindObjectOfType<JumperPlayerController>().gameObject.GetComponent<JumperPlayerController>();
+        mainCamera = FindObjectOfType<JumperCameraController>().gameObject.GetComponent<JumperCameraController>();
     }
 
 
@@ -87,9 +91,7 @@ public class JumperManager : MonoBehaviour
 
     void Start()
     {
-        trigger = FindObjectOfType<JumperPlatformTrigger>().gameObject.GetComponent<JumperPlatformTrigger>();
-        player = FindObjectOfType<JumperPlayerController>().gameObject.GetComponent<JumperPlayerController>();
-        mainCamera = FindObjectOfType<JumperCameraController>().gameObject.GetComponent<JumperCameraController>();
+        
         if (!trigger || !player || !mainCamera || platformPrefabs.Length == 0) 
         { 
             Debug.LogError("need a player, trigger and camera with appropriate scripts" +
@@ -151,6 +153,13 @@ public class JumperManager : MonoBehaviour
     {
         return startingDifficulty;
     }
+
+    public float GetHeightGoal()
+    {
+        return heightGoal;
+    }
+
+    
 
     //credit: https://forum.unity.com/threads/re-map-a-number-from-one-range-to-another.119437/
     //maps from old range to new range
