@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class playerfire : MonoBehaviour
+public class shield : MonoBehaviour
 {
-    public float speed = 5;
     private Rigidbody2D rigidBody;
-    public Sprite EExplosionImage;
     public Transform Player;
+    public Sprite EExplosionImage;
 
     // Start is called before the first frame update
     void Start()
@@ -15,8 +14,8 @@ public class playerfire : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("treasure").GetComponent<Transform>();
         Vector3 direction = transform.position - Player.position;
         rigidBody = GetComponent<Rigidbody2D>();
-        rigidBody.velocity = direction * speed;
-    } 
+        
+    }
 
     // Update is called once per frame
     private void OnTriggerEnter2D(Collider2D col)
@@ -33,12 +32,19 @@ public class playerfire : MonoBehaviour
 
         }
 
-        if (col.gameObject.CompareTag("shield")) 
+        if (col.gameObject.CompareTag("playerfire"))
         {
-            Destroy (gameObject);
+            Destroy(gameObject);
             Destroy(col.gameObject);
         }
-        
+
+        if (col.gameObject.CompareTag("Enemyfire"))
+        {
+            Destroy(gameObject);
+            Destroy(col.gameObject);
+        }
+
+
     }
     void OnBecomeInvisible()
     {
