@@ -118,7 +118,6 @@ public class JumperPlayerController : MonoBehaviour
         else
         { 
             JumperUIManager.Instance.BadEnd();
-            Destroy(gameObject);
         }
         
     }
@@ -307,6 +306,16 @@ public class JumperPlayerController : MonoBehaviour
         return maxSpeed;
     }
 
+    public float GetMaxHealth()
+    {
+        return maxHealth;
+    }
+
+    public float GetCurrentHealth()
+    {
+        return currentHealth;
+    }
+
     #endregion
 
     #region collision
@@ -404,16 +413,14 @@ public class JumperPlayerController : MonoBehaviour
         Debug.Log("ow");
         currentHealth -= damage;
         StartCoroutine(Flasher());
+        //player destruction handled elsewhere
+        /*
+         
         if (currentHealth <= 0)
         {
-            //change scene cuz we ded
-            if (jm.mainCamera != null)
-            {
-                //this method also triggers scene changing
-                jm.mainCamera.PlayerDestroyed();
-            }
             Destroy(gameObject);
         }
+        */
     }
 
     //credit: https://answers.unity.com/questions/838194/make-your-player-flash-when-hit.html

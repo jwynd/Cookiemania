@@ -6,11 +6,13 @@ using UnityEngine;
 public class JumperUIManager : MonoBehaviour
 {
     #region variables
-    public UnityEngine.UI.Slider slider;
+    public UnityEngine.UI.Slider heightSlider;
+    public UnityEngine.UI.Slider healthSlider;
     public float timeToNextScene = 1.0f;
 
     public static JumperUIManager Instance { get; private set; }
 
+    private bool gameRunning = true;
     private JumperManager jm;
     private General_LevelTransition levelController;
 
@@ -37,22 +39,40 @@ public class JumperUIManager : MonoBehaviour
     void Start()
     {
         jm = JumperManager.Instance;
-        slider.minValue = jm.player.transform.position.y;
-        slider.maxValue = jm.GetHeightGoal();
+        heightSlider.minValue = jm.player.transform.position.y;
+        heightSlider.maxValue = jm.GetHeightGoal();
+        healthSlider.minValue = 0;
+        healthSlider.maxValue = jm.player.GetMaxHealth();
     }
     #endregion
 
     // Update is called once per frame
     void Update()
     {
+        //check if player alive
         if (jm.player != null)
         {
-            slider.value = jm.player.transform.position.y;
+            heightSlider.value = jm.player.transform.position.y;
+            healthSlider.value = jm.player.GetCurrentHealth();
+            if (heightSlider.value >= heightSlider.maxValue)
+            {
+                GoodEnd();
+            }
+            if (healthSlider.value <= healthSlider.minValue)
+            {
+                BadEnd();
+            }
+        }
+        else if (gameRunning)
+        {
+            BadEnd();
         }
     }
     #region public
     public void GoodEnd()
     {
+        gameRunning = false;
+
         jm.mainCamera.PlayerDestroyed();
         //gotta do my transition here
         //then i can destroy my player
@@ -67,13 +87,13 @@ public class JumperUIManager : MonoBehaviour
     }
     public void BadEnd()
     {
-        if (jm.mainCamera != null)
-        {
-            //this method also triggers scene changing
-            jm.mainCamera.PlayerDestroyed();
-            StartCoroutine(TransitionScene(timeToNextScene));
-        }
+        gameRunning = false;
+        //this method also triggers scene changing
+        jm.mainCamera.PlayerDestroyed();
+        StartCoroutine(TransitionScene(timeToNextScene));
+        
         Destroy(jm.player.gameObject);
+        healthSlider.value = healthSlider.minValue;
     }
     #endregion
 
