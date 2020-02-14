@@ -58,11 +58,12 @@ public class JumperUIManager : MonoBehaviour
             {
                 GoodEnd();
             }
-            if (healthSlider.value <= healthSlider.minValue)
+            else if (healthSlider.value <= healthSlider.minValue)
             {
                 BadEnd();
             }
         }
+        //game running and player is gone, badend
         else if (gameRunning)
         {
             BadEnd();
@@ -91,8 +92,7 @@ public class JumperUIManager : MonoBehaviour
         //this method also triggers scene changing
         jm.mainCamera.PlayerDestroyed();
         StartCoroutine(TransitionScene(timeToNextScene));
-        
-        Destroy(jm.player.gameObject);
+        if (jm.player != null) { Destroy(jm.player.gameObject); }
         healthSlider.value = healthSlider.minValue;
     }
     #endregion
