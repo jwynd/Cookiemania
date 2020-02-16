@@ -54,7 +54,7 @@ public class JumperPlayerController : MonoBehaviour
     protected float maxHeightReached = 0f;
     protected JumperManager jm;
     protected float movementDirection = 1;
-
+    protected Vector3 originalScale;
     protected Color damagedColor = Color.red * Color.white;
     protected Color defaultColor = Color.white;
     private bool throwStuff;
@@ -64,15 +64,15 @@ public class JumperPlayerController : MonoBehaviour
     private void Awake()
     {
         totalJumpStrength = jumpMultiplier * jumpSpeed + jumpSpeed * (1 + jumpMultiplier);
-    }
-    void Start()
-    {
-        jm = JumperManager.Instance;
+        originalScale = transform.localScale;
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = Vector2.zero;
         jumpCount = maxJumps;
         currentHealth = maxHealth;
-        totalJumpStrength = jumpMultiplier * jumpSpeed + jumpSpeed * (1+jumpMultiplier);
+    }
+    void Start()
+    {
+        jm = JumperManager.Instance;
     }
     #endregion
 
@@ -250,6 +250,8 @@ public class JumperPlayerController : MonoBehaviour
         {
             rb.velocity = new Vector2(velocity.x, rb.velocity.y);
         }
+        transform.localScale = new Vector3(originalScale.x * movementDirection, originalScale.y, originalScale.z);
+
         // float vely = rb.velocity.y;
         //  rb.velocity = new Vector2(velocity.x, vely);
     }
