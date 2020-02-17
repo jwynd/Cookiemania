@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6845973269452864303}
   - component: {fileID: 826711010817931759}
   m_Layer: 0
-  m_Name: JumperSpawner
+  m_Name: JumperManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,12 +43,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9480ca0067bb254a81426e71ec351fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platform: {fileID: 8552561703256424470, guid: aac8ee0ac77d8494b85b09cd37d4f7c1,
-    type: 3}
+  platformPrefabs:
+  - platform: {fileID: 3987228348188153383, guid: 5a016c1074bc4f549bf90dfe89614fba,
+      type: 3}
+    weight: 0.587
+    probability: 0
+  - platform: {fileID: 8552561703256424470, guid: aac8ee0ac77d8494b85b09cd37d4f7c1,
+      type: 3}
+    weight: 0.903
+    probability: 0
+  - platform: {fileID: 637888742533752541, guid: cc54fb576a91e744088e172ffe38cd33,
+      type: 3}
+    weight: 0.271
+    probability: 0
+  - platform: {fileID: 2042707450985415420, guid: 487bf4f22b7476b49b0286556c5e8af7,
+      type: 3}
+    weight: 0.304
+    probability: 0
   jumpHeight: 2.5
-  height: -3
-  width: 10
-  offset: 0
+  width: 20
   minHeightIncrease: 0
   density: 20
-  rotation: 90
+  startingDifficulty: 1
+  difficultyIncrement: 0.3
+  heightGoal: 100
+  rotation: 0
