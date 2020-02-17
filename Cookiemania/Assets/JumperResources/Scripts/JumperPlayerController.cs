@@ -52,6 +52,7 @@ public class JumperPlayerController : MonoBehaviour
     protected bool haveItem = false;
     protected Rigidbody2D heldItemRB = null;
     protected float maxHeightReached = 0f;
+    protected float points = 0f;
     protected JumperManager jm;
     protected float movementDirection = 1;
     protected Vector3 originalScale;
@@ -91,16 +92,15 @@ public class JumperPlayerController : MonoBehaviour
 
     private void AttemptToEndGame()
     {
-        bool success;
+        UpdateHeight();
         if (CheckHeightForDeath())
         {
-            success = false;
-            EndGame(success);
+            //bool for if it was a good ending
+            JumperUIManager.Instance.End(false);
         }
         if (CheckHeightForGoal())
         {
-            success = true;
-            EndGame(success);
+            JumperUIManager.Instance.End(true);
         }
     }
 
@@ -109,28 +109,14 @@ public class JumperPlayerController : MonoBehaviour
         return maxHeightReached > jm.GetHeightGoal();
     }
 
-    private void EndGame(bool success)
-    {
-        if (success)
-        {
-            JumperUIManager.Instance.GoodEnd();
-        }
-        else
-        { 
-            JumperUIManager.Instance.BadEnd();
-        }
-        
-    }
-
     protected bool CheckHeightForDeath()
     {
+        return rb.velocity.y < 0 && falloffDistanceMax < maxHeightReached - rb.position.y;  
+    }
+
+    protected void UpdateHeight()
+    {
         maxHeightReached = rb.position.y > maxHeightReached ? rb.position.y : maxHeightReached;
-        if (rb.velocity.y < 0 && falloffDistanceMax < maxHeightReached - rb.position.y)
-        {
-            return true;
-            
-        }
-        return false;
     }
 
     bool JumpInput()
@@ -318,6 +304,16 @@ public class JumperPlayerController : MonoBehaviour
         return currentHealth;
     }
 
+    public void GivePoints(float p)
+    {
+        points += Mathf.Abs(p);
+    }
+
+    public float GetCoinsCollected()
+    {
+        return points + maxHeightReached;
+    }
+
     #endregion
 
     #region collision
@@ -416,13 +412,6 @@ public class JumperPlayerController : MonoBehaviour
         currentHealth -= damage;
         StartCoroutine(Flasher());
         //player destruction handled elsewhere
-        /*
-         
-        if (currentHealth <= 0)
-        {
-            Destroy(gameObject);
-        }
-        */
     }
 
     //credit: https://answers.unity.com/questions/838194/make-your-player-flash-when-hit.html

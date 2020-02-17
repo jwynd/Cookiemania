@@ -5,17 +5,23 @@ using UnityEngine;
 public class JumperPickupController : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float damage = 5.0f;
     [SerializeField]
-    private float explosionTimer = 0.75f;
+    protected float damage = 5.0f;
+    [SerializeField]
+    protected float explosionTimer = 0.75f;
+    [SerializeField]
+    protected int explosionFlashCount = 3;
+    [SerializeField]
+    protected int explosionFrames = 5;
+    [SerializeField]
+    protected float explosionSize = 3f;
 
-    private Collider2D myCollider;
-    private Rigidbody2D myRb;
-    private float parentLeft;
-    private float parentRight;
-    
+    protected Collider2D myCollider;
+    protected Rigidbody2D myRb;
+    protected float parentLeft;
+    protected float parentRight;
 
-    void Start()
+    protected void Start()
     {
         myCollider = gameObject.GetComponent<Collider2D>();
         myRb = gameObject.GetComponent<Rigidbody2D>();
@@ -30,11 +36,11 @@ public class JumperPickupController : MonoBehaviour
         //get info from parent, set parent child to this, then 
         parentLeft = pBounds.x;
         parentRight = pBounds.z;
-        transform.position = new Vector2(UnityEngine.Random.Range(parentLeft, parentRight), transform.position.y);
+        transform.position = new Vector2(Random.Range(parentLeft, parentRight), transform.position.y);
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    protected void FixedUpdate()
     {
 
     }
@@ -55,16 +61,22 @@ public class JumperPickupController : MonoBehaviour
         StartCoroutine(Explode());
     }
 
-    private IEnumerator Explode()
+    protected IEnumerator Explode()
     {
         yield return new WaitForSeconds(explosionTimer);
-        transform.localScale *= 3;
-        GetComponent<BoxCollider2D>().size *= 3;
-        yield return new WaitForSeconds(Time.fixedDeltaTime * 5);
+        for (int i = 0; i < explosionFlashCount; i++)
+        {
+            transform.localScale *= explosionSize;
+            GetComponent<BoxCollider2D>().size *= explosionSize;
+            yield return new WaitForSeconds(Time.fixedDeltaTime * explosionFrames);
+            transform.localScale /= explosionSize;
+            GetComponent<BoxCollider2D>().size /= explosionSize;
+            yield return new WaitForSeconds(Time.fixedDeltaTime * explosionFrames);
+        }
         Destroy(gameObject);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {           
@@ -89,28 +101,19 @@ public class JumperPickupController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Obstacle"))
         {
-            //we'll just say all obstacles can be immediately destroyed
-            //currently destroys obstacles it runs into even when held
-            //obviously if this spawns and touches an obstacle even before the player 
-            //picks it up, itll destroy it
-
-            RemoveFromParent();
-            Destroy(collision.gameObject);
-            Destroy(gameObject);
-
+            CollisionHelper(collision.gameObject);
         }
         else if (collision.gameObject.CompareTag("Enemy"))
         {
             CollisionHelper(collision.gameObject);
-
         }
     }
 
-    private void RemoveFromParent()
+    protected void RemoveFromParent()
     {
         if (transform.parent != null)
         {
@@ -121,23 +124,14 @@ public class JumperPickupController : MonoBehaviour
         }
     }
 
-    private void CollisionHelper(GameObject collided)
+    protected void CollisionHelper(GameObject collided)
     {
-        JumperEnemyController script = collided.GetComponent<JumperEnemyController>();
+        JumperPlatformAttachables script = collided.GetComponent<JumperPlatformAttachables>();
         if (script != null)
         {
-            if (script.GetDestructable())
-            {
-                Destroy(collided.gameObject);
-
-            }
-            // i imagine there'd be other options at some point, like if its not destructable
-            //then maybe it gives a ton of points and destroys this object, or it just does some 
-            //damage to it
-            else
+            if (!script.IsIndestructable())
             {
                 script.TakesDamage(damage);
-
             }
             RemoveFromParent();
             Destroy(gameObject);

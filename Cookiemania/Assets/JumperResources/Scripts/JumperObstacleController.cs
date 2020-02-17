@@ -6,10 +6,6 @@ public class JumperObstacleController : JumperPlatformAttachables
 {
     #region variables
     [SerializeField]
-    private float speed = 3.0f;
-    [SerializeField]
-    private float maxVelocity = 5.0f;
-    [SerializeField]
     private float rotationSpeed = 3.0f;
 
     private float parentLeft;
@@ -22,15 +18,16 @@ public class JumperObstacleController : JumperPlatformAttachables
     #endregion
 
     #region startup
-    void Start()
+    protected override void Start()
     {
-        jm = JumperManager.Instance;
+        base.Start();
         rb = GetComponent<Rigidbody2D>();
         JumperPlatformController dad = transform.parent.GetComponent<JumperPlatformController>();
         dad.enemyChild = this;
         float diff = jm.GetDifficultyMultiplier();
         damage *= diff;
-        health *= diff;
+        maxHealth *= diff;
+        currentHealth = maxHealth;
         speed *= diff;
         maxVelocity *= diff;
         rb.velocity = Vector2.zero;
@@ -110,20 +107,18 @@ public class JumperObstacleController : JumperPlatformAttachables
 
     #endregion
 
+
     #region public
-    public override void TakesDamage(float damage)
-    {
-        health -= damage;
-        if (health <= 0) 
-        {
-            StartCoroutine(JumperManager.FlashThenKill(gameObject, 0.5f, 0.1f));
-        }
-    }
 
 
     public override void PlatformDestroyed(float totalTime, float flashInterval)
     {
         StartCoroutine(JumperManager.FlashThenKill(gameObject, totalTime, flashInterval));
+    }
+
+    public override void Remove()
+    {
+        StartCoroutine(JumperManager.FlashThenKill(gameObject, 0.5f, 0.1f));
     }
     #endregion
 

@@ -8,13 +8,18 @@ public class JumperUIManager : MonoBehaviour
     #region variables
     public UnityEngine.UI.Slider heightSlider;
     public UnityEngine.UI.Slider healthSlider;
+    public GameObject endscreenCamera;
+    public GameObject endscreenCanvas;
     public float timeToNextScene = 1.0f;
 
     public static JumperUIManager Instance { get; private set; }
 
+    private const string sceneName = "Jumper";
     private bool gameRunning = true;
+    private int coinsCollected = 0;
     private JumperManager jm;
     private General_LevelTransition levelController;
+    private JumperUIText scoreText;
 
     #endregion
 
@@ -29,6 +34,9 @@ public class JumperUIManager : MonoBehaviour
         {
             Instance = this;
         }
+        endscreenCamera.GetComponent<Camera>().enabled = false;
+        endscreenCamera.GetComponent<AudioListener>().enabled = false;
+        scoreText = GetComponent<JumperUIText>();
         GameObject levelC = GameObject.Find("LevelController");
         if (levelC != null)
         {
@@ -50,62 +58,64 @@ public class JumperUIManager : MonoBehaviour
     void Update()
     {
         //check if player alive
-        if (jm.player != null)
+        if (gameRunning && jm.player != null)
         {
             heightSlider.value = jm.player.transform.position.y;
             healthSlider.value = jm.player.GetCurrentHealth();
+            coinsCollected = (int)jm.player.GetCoinsCollected();
+            scoreText.UpdateText(coinsCollected.ToString());
             if (heightSlider.value >= heightSlider.maxValue)
             {
-                GoodEnd();
+                End(true);
             }
             else if (healthSlider.value <= healthSlider.minValue)
             {
-                BadEnd();
+                End(false);
             }
         }
         //game running and player is gone, badend
         else if (gameRunning)
         {
-            BadEnd();
+            End(false);
         }
     }
     #region public
-    public void GoodEnd()
+    public void End(bool isGood)
     {
         gameRunning = false;
-
         jm.mainCamera.PlayerDestroyed();
-        //gotta do my transition here
-        //then i can destroy my player
-        //and maybe the platforms
-
+        coinsCollected = (int)jm.player.GetCoinsCollected();
+        //if this throws an error, need to stop whatever destroyed the player before this function
         Destroy(jm.player.gameObject);
-
-        StartCoroutine(TransitionScene(timeToNextScene));
-
-        //transition screen to something else
-        //dont need to destroy stuff but could?
+        StartCoroutine(SwitchCamera(timeToNextScene, isGood));
     }
-    public void BadEnd()
-    {
-        gameRunning = false;
-        //this method also triggers scene changing
-        jm.mainCamera.PlayerDestroyed();
-        StartCoroutine(TransitionScene(timeToNextScene));
-        if (jm.player != null) { Destroy(jm.player.gameObject); }
-        healthSlider.value = healthSlider.minValue;
-    }
-    #endregion
 
-    #region coroutines
-    private IEnumerator TransitionScene(float timer)
+    public void Retry()
     {
-        yield return new WaitForSeconds(timer);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+    }
+
+    public void ReturnToDesktop()
+    {
         if (levelController)
         {
             levelController.returnDesktop();
         }
         Debug.LogWarning("No level transition object in game");
+    }
+    #endregion
+
+    #region coroutines
+    private IEnumerator SwitchCamera(float timer, bool isGoodEnd)
+    {
+        yield return new WaitForSeconds(timer);
+        JumperEndscreen endUI = endscreenCanvas.GetComponent<JumperEndscreen>();
+        endUI.UpdateText(coinsCollected.ToString());
+
+        GetComponent<Canvas>().worldCamera.enabled = false;
+        GetComponent<Canvas>().worldCamera.GetComponent<AudioListener>().enabled = false;
+        endscreenCamera.GetComponent<Camera>().enabled = true;
+        endscreenCamera.GetComponent<AudioListener>().enabled = true;
     }
     #endregion
 }

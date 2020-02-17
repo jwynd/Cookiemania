@@ -5,10 +5,7 @@ using UnityEngine;
 public class JumperEnemyController : JumperPlatformAttachables
 {
     #region variables
-    [SerializeField]
-    private float speed = 3.0f;
-    [SerializeField]
-    private float maxVelocity = 5.0f;
+    
     [SerializeField]
     private Vector2 jump = new Vector2(2f, 4f);
 
@@ -20,15 +17,16 @@ public class JumperEnemyController : JumperPlatformAttachables
     #endregion
 
     #region startup
-    void Start()
+    protected override void Start()
     {
-        jm = JumperManager.Instance;
+        base.Start();
         rb = GetComponent<Rigidbody2D>();
         JumperPlatformController dad = transform.parent.GetComponent<JumperPlatformController>();
         dad.enemyChild = this;
         float diff = jm.GetDifficultyMultiplier();
         damage *= diff;
-        health *= diff;
+        maxHealth *= diff;
+        currentHealth = maxHealth;
         speed *= diff;
         maxVelocity *= diff;
         rb.velocity = Vector2.zero;
@@ -37,7 +35,6 @@ public class JumperEnemyController : JumperPlatformAttachables
         Vector3 pBounds = dad.GetHorizontalBounds();
         parentLeft = pBounds.x;
         parentRight = pBounds.z;
-        Debug.Log(parentLeft + " to " + parentRight);
         if (transform.parent.position.x < transform.position.x)
         {
             direction = -1;
@@ -106,15 +103,10 @@ public class JumperEnemyController : JumperPlatformAttachables
     #endregion
 
     #region public
-    public override void TakesDamage(float damage)
+    public override void Remove()
     {
-        health -= damage;
-        if (health <= 0)
-        {
-            StartCoroutine(JumperManager.FlashThenKill(gameObject, 0.5f, 0.1f));
-        }
+        StartCoroutine(JumperManager.FlashThenKill(gameObject, 0.5f, 0.1f));
     }
-    
 
     public override void PlatformDestroyed(float timer, float flashPeriod)
     {
@@ -128,7 +120,7 @@ public class JumperEnemyController : JumperPlatformAttachables
         yield return new WaitForSeconds(timer / 4);
         jumpToMyDeath = true;
         yield return new WaitForSeconds(timer * 3 / 4);
-        Destroy(gameObject);
+        Remove();
     }
     #endregion
 }

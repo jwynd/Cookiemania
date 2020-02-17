@@ -17,7 +17,7 @@ public abstract class JumperUIText : MonoBehaviour
     #region privateOverwritables
     protected virtual void Start()
     {
-        textRef = GetComponent<TextMeshProUGUI>();
+        textRef = textRef.GetComponent<TextMeshProUGUI>();
     }
     //default is constant then changing text, very basic, all subject to change
     protected virtual void SetText()
