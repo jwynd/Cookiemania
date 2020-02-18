@@ -638,7 +638,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ecf49133036a3864c99fdc92f000dce2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a8acd0f70d03b3640bb694d6e4a5b61d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -661,7 +661,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AspectMode: 4
-  m_AspectRatio: 1
+  m_AspectRatio: 1.334202
 --- !u!1 &7308237537704373444
 GameObject:
   m_ObjectHideFlags: 0
@@ -778,8 +778,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textRef: {fileID: 7308237536563328103}
-  constantText: 'Game Over<br>you made '
-  changingText: 0
+  constantText: 
+  changingText: Game Over<br>you made 0
   constantTextPart2: ' coins'
 --- !u!1 &7613098258991153552
 GameObject:

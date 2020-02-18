@@ -20,6 +20,7 @@ public class JumperPickupController : MonoBehaviour
     protected Rigidbody2D myRb;
     protected float parentLeft;
     protected float parentRight;
+    private bool exploding;
 
     protected void Start()
     {
@@ -63,6 +64,7 @@ public class JumperPickupController : MonoBehaviour
 
     protected IEnumerator Explode()
     {
+        exploding = true;
         yield return new WaitForSeconds(explosionTimer);
         for (int i = 0; i < explosionFlashCount; i++)
         {
@@ -133,8 +135,11 @@ public class JumperPickupController : MonoBehaviour
             {
                 script.TakesDamage(damage);
             }
-            RemoveFromParent();
-            Destroy(gameObject);
+            if (!exploding)
+            {
+                RemoveFromParent();
+                Destroy(gameObject);
+            } 
         }
     }
 }

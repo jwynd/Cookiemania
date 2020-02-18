@@ -486,7 +486,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -67.52, y: 25}
+  m_AnchoredPosition: {x: -67.51999, y: 25}
   m_SizeDelta: {x: 135.04, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9176062764783981481
@@ -788,7 +788,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -69.85, y: 105}
+  m_AnchoredPosition: {x: -69.850006, y: 105}
   m_SizeDelta: {x: 139.7, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9176062765263873746
@@ -1267,6 +1267,7 @@ MonoBehaviour:
   endscreenCamera: {fileID: 0}
   endscreenCanvas: {fileID: 0}
   timeToNextScene: 1
+  maxFallDistance: 15
 --- !u!114 &1083541489
 MonoBehaviour:
   m_ObjectHideFlags: 0

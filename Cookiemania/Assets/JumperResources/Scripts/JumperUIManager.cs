@@ -11,15 +11,16 @@ public class JumperUIManager : MonoBehaviour
     public GameObject endscreenCamera;
     public GameObject endscreenCanvas;
     public float timeToNextScene = 1.0f;
-
+    public float maxFallDistance = 15f;
     public static JumperUIManager Instance { get; private set; }
 
     private const string sceneName = "Jumper";
-    private bool gameRunning = true;
+    private bool endingGame = false;
     private int coinsCollected = 0;
     private JumperManager jm;
     private General_LevelTransition levelController;
     private JumperUIText scoreText;
+    private float maxHeightReached;
 
     #endregion
 
@@ -49,6 +50,7 @@ public class JumperUIManager : MonoBehaviour
         jm = JumperManager.Instance;
         heightSlider.minValue = jm.player.transform.position.y;
         heightSlider.maxValue = jm.GetHeightGoal();
+        maxHeightReached = jm.player.transform.position.y;
         healthSlider.minValue = 0;
         healthSlider.maxValue = jm.player.GetMaxHealth();
     }
@@ -58,35 +60,20 @@ public class JumperUIManager : MonoBehaviour
     void Update()
     {
         //check if player alive
-        if (gameRunning && jm.player != null)
+        if (jm.player != null)
         {
             heightSlider.value = jm.player.transform.position.y;
             healthSlider.value = jm.player.GetCurrentHealth();
             coinsCollected = (int)jm.player.GetCoinsCollected();
             scoreText.UpdateText(coinsCollected.ToString());
-            if (heightSlider.value >= heightSlider.maxValue)
-            {
-                End(true);
-            }
-            else if (healthSlider.value <= healthSlider.minValue)
-            {
-                End(false);
-            }
-        }
-        //game running and player is gone, badend
-        else if (gameRunning)
-        {
-            End(false);
         }
     }
     #region public
     public void End(bool isGood)
     {
-        gameRunning = false;
-        jm.mainCamera.PlayerDestroyed();
-        coinsCollected = (int)jm.player.GetCoinsCollected();
-        //if this throws an error, need to stop whatever destroyed the player before this function
-        Destroy(jm.player.gameObject);
+        //ensuring this only gets run once
+        if (endingGame) { return; }
+        endingGame = true;   
         StartCoroutine(SwitchCamera(timeToNextScene, isGood));
     }
 
@@ -109,8 +96,21 @@ public class JumperUIManager : MonoBehaviour
     private IEnumerator SwitchCamera(float timer, bool isGoodEnd)
     {
         yield return new WaitForSeconds(timer);
-        JumperEndscreen endUI = endscreenCanvas.GetComponent<JumperEndscreen>();
-        endUI.UpdateText(coinsCollected.ToString());
+        jm.mainCamera.PlayerDestroyed();
+        coinsCollected = (int)jm.player.GetCoinsCollected();
+        //if this throws an error, need to stop whatever destroyed the player before this function
+        Destroy(jm.player.gameObject);
+        JumperTextAdvanced endUI = endscreenCanvas.GetComponent<JumperTextAdvanced>();
+        if (isGoodEnd)
+        {
+            coinsCollected += (int)JumperManager.Instance.GetLevelReward();
+            endUI.UpdateText("LEVEL COMPLETE!<br>you made " + coinsCollected.ToString());
+
+        }
+        else
+        {
+            endUI.UpdateText("Game Over<br>you made " + coinsCollected.ToString());
+        }
 
         GetComponent<Canvas>().worldCamera.enabled = false;
         GetComponent<Canvas>().worldCamera.GetComponent<AudioListener>().enabled = false;

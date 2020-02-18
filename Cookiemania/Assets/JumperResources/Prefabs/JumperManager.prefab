@@ -66,5 +66,7 @@ MonoBehaviour:
   density: 20
   startingDifficulty: 1
   difficultyIncrement: 0.3
-  heightGoal: 100
+  levelReward: 40
+  heightGoal: 140
+  maxFallDistance: 15
   rotation: 0

@@ -14,6 +14,7 @@ public class JumperEnemyController : JumperPlatformAttachables
     private float direction = 1;
     private Rigidbody2D rb;
     private bool jumpToMyDeath = false;
+    private Animator anim;
     #endregion
 
     #region startup
@@ -21,6 +22,7 @@ public class JumperEnemyController : JumperPlatformAttachables
     {
         base.Start();
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
         JumperPlatformController dad = transform.parent.GetComponent<JumperPlatformController>();
         dad.enemyChild = this;
         float diff = jm.GetDifficultyMultiplier();
@@ -76,6 +78,7 @@ public class JumperEnemyController : JumperPlatformAttachables
             rb.gravityScale = 1;
             rb.AddForce(new Vector2(jump.x * direction, jump.y), ForceMode2D.Impulse);
             direction = 0;
+            if (anim != null) { anim.SetTrigger("Jump"); }
         }
     }
 

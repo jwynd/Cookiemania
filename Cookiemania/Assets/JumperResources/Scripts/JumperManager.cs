@@ -35,15 +35,19 @@ public class JumperManager : MonoBehaviour
     public float startingDifficulty = 1.0f;
     [Tooltip("How much difficulty increases every time a region is built")]
     public float difficultyIncrement = 0.3f;
+    [Tooltip("Bonus for beating the level")]
+    public float levelReward = 40f;
     [Tooltip("Height to finish the level")]
     public float heightGoal = 100f;
+    [Tooltip("Maximum height player can fall")]
+    public float maxFallDistance = 15f;
     [Tooltip("The rotation of the game object on the Z axis")]
     [Range(0.0f, 360.0f)]
     public float rotation = 0.0f;
 
     private float offset;
     private float height;
-    
+    private float maxHeightReached;
 
     private int max;
     private float weightRange = 0.0f;
@@ -78,6 +82,7 @@ public class JumperManager : MonoBehaviour
         trigger = FindObjectOfType<JumperPlatformTrigger>().gameObject.GetComponent<JumperPlatformTrigger>();
         player = FindObjectOfType<JumperPlayerController>().gameObject.GetComponent<JumperPlayerController>();
         mainCamera = FindObjectOfType<JumperCameraController>().gameObject.GetComponent<JumperCameraController>();
+        
     }
 
 
@@ -110,6 +115,7 @@ public class JumperManager : MonoBehaviour
         max  = (int)(density * 1.5);
         offset = player.transform.position.x;
         height = player.transform.position.y;
+        maxHeightReached = player.transform.position.y;
         BuildSection();
     }
 
@@ -128,6 +134,28 @@ public class JumperManager : MonoBehaviour
         return platformPrefabs[platformPrefabs.Length - 1].platform;
     }
 
+    #endregion
+
+    #region update
+    private void Update()
+    {
+        if (player == null) { return; }
+        float heightRightNow = player.transform.position.y;
+        maxHeightReached = heightRightNow > maxHeightReached ? heightRightNow : maxHeightReached;
+        if (heightRightNow >= heightGoal)
+        {
+            JumperUIManager.Instance.End(true);
+        }
+        //not checking for health in update, will just run end on player death
+        //else if (player.GetCurrentHealth() <= 0)
+        //{
+         //   JumperUIManager.Instance.End(false);
+        //}
+        else if (maxHeightReached - maxFallDistance >= heightRightNow)
+        {
+            JumperUIManager.Instance.End(false);
+        }
+    }
     #endregion
 
     #region publicFunctions
@@ -159,7 +187,10 @@ public class JumperManager : MonoBehaviour
         return heightGoal;
     }
 
-    
+    public float GetLevelReward()
+    {
+        return levelReward;
+    }
 
     //credit: https://forum.unity.com/threads/re-map-a-number-from-one-range-to-another.119437/
     //maps from old range to new range

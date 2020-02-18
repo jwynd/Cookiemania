@@ -26,17 +26,22 @@ public class JumperPlayerController : MonoBehaviour
     public float jumpMultiplier = 2f;
     
     public float jumpSpeed = 3.5f;
+    public LayerMask groundLayer;
     public Vector2 throwStrength = new Vector2(4.0f, 4.0f);
     public float maxHealth = 5;
     public float falloffDistanceMax = 15f;
 
     public float flashTime = 0.15f;
     public float damageTimerMax = 1.5f;
-
+    public AudioClip jumpSound;
+    public JumperSelfDestruct jumpParticles;
     public float totalJumpStrength { get; private set; }
+    
 
     protected Rigidbody2D rb;
+    protected Renderer rend;
     protected Vector2 velocity = Vector2.zero;
+    private bool grounded = true;
     protected int jumpCount;
     protected float damageTimer = 0;
     protected float jumpCooldown = 0;
@@ -51,6 +56,7 @@ public class JumperPlayerController : MonoBehaviour
     protected float normalManeuverability = 1;
     protected bool haveItem = false;
     protected Rigidbody2D heldItemRB = null;
+    protected AudioSource audioPlayer = null;
     protected float maxHeightReached = 0f;
     protected float points = 0f;
     protected JumperManager jm;
@@ -59,6 +65,7 @@ public class JumperPlayerController : MonoBehaviour
     protected Color damagedColor = Color.red * Color.white;
     protected Color defaultColor = Color.white;
     private bool throwStuff;
+    private bool canAirJump = true;
     #endregion
 
     #region startup
@@ -67,6 +74,8 @@ public class JumperPlayerController : MonoBehaviour
         totalJumpStrength = jumpMultiplier * jumpSpeed + jumpSpeed * (1 + jumpMultiplier);
         originalScale = transform.localScale;
         rb = GetComponent<Rigidbody2D>();
+        audioPlayer = GetComponent<AudioSource>();
+        rend = GetComponent<Renderer>();
         rb.velocity = Vector2.zero;
         jumpCount = maxJumps;
         currentHealth = maxHealth;
@@ -86,43 +95,19 @@ public class JumperPlayerController : MonoBehaviour
         
         jumped = JumpInput();
         ItemInput();
-        AttemptToEndGame();
+        HeightCheck();
         // Trap();
     }
 
-    private void AttemptToEndGame()
+    void HeightCheck()
     {
-        UpdateHeight();
-        if (CheckHeightForDeath())
-        {
-            //bool for if it was a good ending
-            JumperUIManager.Instance.End(false);
-        }
-        if (CheckHeightForGoal())
-        {
-            JumperUIManager.Instance.End(true);
-        }
-    }
-
-    private bool CheckHeightForGoal()
-    {
-        return maxHeightReached > jm.GetHeightGoal();
-    }
-
-    protected bool CheckHeightForDeath()
-    {
-        return rb.velocity.y < 0 && falloffDistanceMax < maxHeightReached - rb.position.y;  
-    }
-
-    protected void UpdateHeight()
-    {
-        maxHeightReached = rb.position.y > maxHeightReached ? rb.position.y : maxHeightReached;
+        maxHeightReached = transform.position.y > maxHeightReached ? transform.position.y : maxHeightReached;
     }
 
     bool JumpInput()
     {
         //better way to set the velocity of the player
-
+        /*
         if (Input.GetButtonDown("Jump"))//&& jumpCooldown <= 0)
         {
             if (jumpCount > 1)
@@ -140,8 +125,16 @@ public class JumperPlayerController : MonoBehaviour
             }
         }
         return jumped;
-        // float yvel = rb.velocity.y;
-        // rb.velocity = new Vector2(Input.GetAxis("Horizontal") * acceleration, rb.velocity.y);// = Input.GetAxis("Horizontal") * acceleration * Time.deltaTime;
+        */
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            if (grounded || canAirJump)
+            {
+                return true;
+            }
+        }
+        return jumped;
 
     }
 
@@ -167,19 +160,33 @@ public class JumperPlayerController : MonoBehaviour
 
     protected void FixedUpdate()
     {
+        CheckGrounded();
         HorizontalInput();
         Movement();
         ThrowItem();
         Timers();
-        ResetInput();
+    }
+
+    private void CheckGrounded()
+    {
+        float offset = rend.bounds.extents.x;
+        float yoffset = rend.bounds.extents.y * 1.02f;
+        grounded = Physics2D.OverlapArea(new Vector2(transform.position.x - offset, transform.position.y - yoffset), 
+            new Vector2(transform.position.x + offset, transform.position.y - yoffset + 0.01f), groundLayer);
+        if (grounded)
+        {
+            canAirJump = true;
+        }
     }
 
     protected void HorizontalInput()
     {
         velocity.x = rb.velocity.x;
         //can disable or enable arial controls by checking jumpcount
-        if (jumpCount == maxJumps || jumped)
+        //if (jumpCount == maxJumps || jumped)
+        if (grounded && !jumped)
         {
+            
             HorizontalInputHelper(normalManeuverability, false);
         }
         //in air speeds are lowered
@@ -228,25 +235,36 @@ public class JumperPlayerController : MonoBehaviour
 
         if (jumped)
         {
-            rb.velocity = new Vector2(velocity.x, jumpSpeed * (jumpCount + jumpMultiplier));
-            
-            //rb.AddForce(new Vector2(0, jumpSpeed * (jumpCount+jumpMultiplier)), ForceMode2D.Impulse);
+            SpawnJumpParticles();
+            audioPlayer.clip = jumpSound;
+            audioPlayer.Play();
+            if (grounded)
+            {
+                grounded = false;
+                rb.velocity = new Vector2(velocity.x, jumpSpeed * (1 + jumpMultiplier));
+            }
+            else
+            {
+                canAirJump = false;
+                rb.velocity = new Vector2(velocity.x, jumpSpeed * jumpMultiplier);
+            }
         }
         else
         {
             rb.velocity = new Vector2(velocity.x, rb.velocity.y);
         }
-        transform.localScale = new Vector3(originalScale.x * movementDirection, originalScale.y, originalScale.z);
-
-        // float vely = rb.velocity.y;
-        //  rb.velocity = new Vector2(velocity.x, vely);
-    }
-
-    protected void ResetInput()
-    {
-       // if (pickupTimer == 0) { pickup = false; }           
         jumped = false;
+        grounded = false;
+        transform.localScale = new Vector3(originalScale.x * movementDirection, originalScale.y, originalScale.z);
     }
+
+    private void SpawnJumpParticles()
+    {
+        Vector3 jpPos = transform.position;
+        jpPos.y -= rend.bounds.extents.y;
+        Instantiate(jumpParticles, transform.position, Quaternion.identity);
+    }
+
 
     protected void ThrowItem()
     {
@@ -319,44 +337,15 @@ public class JumperPlayerController : MonoBehaviour
     #region collision
     protected void OnCollisionEnter2D(Collision2D collision)
     {
-        //platform first cuz we constantly hitting platforms
         if (collision.gameObject.CompareTag("Platform"))
         {
-            //resetting the jumpcount on collision with platforms
-            /*
-            float x = collision.gameObject.GetComponent<SpriteRenderer>().bounds.size.x / 2;
-            if (collision.transform.position.y < transform.position.y)
-            {
-                //check if midpoint of object is in x bounds of platform
-                //probably would work much better if it checked the actual bounds
-                //of the object against the bounds of the platform
-                if (collision.transform.position.x + x > transform.position.x &&
-                    collision.transform.position.x - x < transform.position.x)
-                {
-                    jumpCount = maxJumps;
-                }
-            }
-            */
-            //the below method allows wall jumps sometimes, kinda jank, but less buggy if you're 
-            //cool with wall jumps
-            if (transform.position.y > collision.transform.position.y)
-            {
-                jumpCount = maxJumps;
-                collision.gameObject.GetComponent<JumperPlatformController>().Remove();
-            }
-            
+            JumperPlatformController check = collision.gameObject.GetComponent<JumperPlatformController>();
+            if (check != null) { check.Remove(); }
         }
-        else if (collision.gameObject.CompareTag("Enemy")) 
+        else if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Obstacle"))
         {
             TakesDamage(collision.gameObject);
         }
-
-        /*
-         * if (collision.gameObject.CompareTag("WorldSides"))
-        {
-            rb.velocity = new Vector2(0, rb.velocity.y);
-        }
-         */
     }
 
     protected void OnTriggerStay2D(Collider2D collision)
@@ -387,30 +376,23 @@ public class JumperPlayerController : MonoBehaviour
         //requires damage and destroyable parameters in obstacle controller
         if (damageTimer <= 0)
         {
-            JumperObstacleController obsControl = collision.GetComponent<JumperObstacleController>();
+            JumperPlatformAttachables obsControl = collision.GetComponent<JumperPlatformAttachables>();
             if (obsControl != null)
             {
                 DamageHelper(obsControl.GetDamage());
-            }
-            else
-            {
-                JumperEnemyController enemyControl = collision.GetComponent<JumperEnemyController>();
-                if (enemyControl != null)
-                {
-                    DamageHelper(enemyControl.GetDamage());
-                    
-                }
-            }
-            
+            } 
         }
     }
     
 
     protected void DamageHelper(float damage)
     {
-        Debug.Log("ow");
         currentHealth -= damage;
         StartCoroutine(Flasher());
+        if (currentHealth < 0)
+        {
+            JumperUIManager.Instance.End(false);
+        }
         //player destruction handled elsewhere
     }
 
