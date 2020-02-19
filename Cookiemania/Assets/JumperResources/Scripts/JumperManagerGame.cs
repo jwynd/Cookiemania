@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -54,6 +55,9 @@ public class JumperManagerGame : MonoBehaviour
     public string groundTag = "Platform";
     [Tooltip("Important game tag, ensure this is added to the tags list")]
     public string collectiblesTag = "Pickup";
+    
+    //game manager always tagged with game controller
+    private const string myTag = "GameController";
 
     private float offset;
     private float height;
@@ -96,26 +100,46 @@ public class JumperManagerGame : MonoBehaviour
     }
 
 
-    void OnValidate() {
-        if (transform.childCount != 0) {
+    void OnValidate() 
+    {
+        if (transform.childCount != 0)
+        {
             Debug.LogError("Ensure Spawner has no children");
         }
     }
 
-
-
-    void Start()
+    private void ValidationChecks()
     {
-        
-        if (!trigger || !player || !mainCamera || platformPrefabs.Length == 0) 
-        { 
+        if (!trigger || !player || !mainCamera || platformPrefabs.Length == 0)
+        {
             Debug.LogError("need a player, trigger and camera with appropriate scripts" +
-                " instantiated in the scene"); 
+                " instantiated in the scene");
         }
         if (platformPrefabs[0].platform == null)
         {
             Debug.LogError("Platforms should not be null references");
         }
+        gameObject.tag = myTag;
+        TagExists(playerTag);
+        TagExists(groundTag);
+        TagExists(enemyTag);
+        TagExists(obstacleTag);
+        TagExists(collectiblesTag);
+        gameObject.tag = myTag;
+    }
+
+    private void TagExists(string tag)
+    {
+        gameObject.tag = tag;
+        if (gameObject.CompareTag(myTag))
+        {
+            Debug.LogError("All tags submitted to game manager must exist");
+        }
+    }
+
+    void Start()
+    {
+        ValidationChecks();
         GameObject g = Instantiate(platformPrefabs[0].platform, transform.position, Quaternion.identity);
         minHeightIncrease = player.gameObject.GetComponent<Renderer>().bounds.size.y * 2 + g.GetComponent<Renderer>().bounds.size.y * 2;
         Destroy(g);
@@ -133,7 +157,7 @@ public class JumperManagerGame : MonoBehaviour
     {
         //the 0 possibility is caught on startup
         if (platformPrefabs.Length < 2) { return platformPrefabs[0].platform; }
-        float random = Random.Range(0, weightRange/2) + Random.Range(0, weightRange/2);
+        float random = UnityEngine.Random.Range(0, weightRange/2) + UnityEngine.Random.Range(0, weightRange/2);
         foreach (var fab in platformPrefabs)
         {
             if (random < fab.probability)
@@ -174,8 +198,8 @@ public class JumperManagerGame : MonoBehaviour
     {
         startingDifficulty += difficultyIncrement;
         for (int i = 0; i < density; ++i){
-            float randomx = Random.Range(offset - width, offset + width);
-            float randomy = Random.Range(height + minHeightIncrease, height + jumpHeight);
+            float randomx = UnityEngine.Random.Range(offset - width, offset + width);
+            float randomy = UnityEngine.Random.Range(height + minHeightIncrease, height + jumpHeight);
             Vector3 pos = new Vector3(randomx, randomy, 0);
             offset = pos.x;
             height = pos.y;
@@ -254,6 +278,8 @@ public class JumperManagerGame : MonoBehaviour
         //this could be changed to recycling the object
         Destroy(selfReference.gameObject);
     }
+
+    
         #endregion
 
 
