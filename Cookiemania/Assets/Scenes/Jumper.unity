@@ -958,6 +958,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: JumperManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6845973269452864297, guid: 97c37d740f218ae4abebbf038c44dbe5,
+        type: 3}
+      propertyPath: m_TagString
+      value: GameController
+      objectReference: {fileID: 0}
     - target: {fileID: 6845973269452864303, guid: 97c37d740f218ae4abebbf038c44dbe5,
         type: 3}
       propertyPath: m_LocalPosition.x
