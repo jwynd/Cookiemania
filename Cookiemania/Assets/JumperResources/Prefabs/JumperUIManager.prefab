@@ -40,8 +40,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1559121376921666343}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7a1665794e2434479c6e2eb7077d23a, type: 3}
+  m_Script: {fileID: 11500000, guid: 286ec745d4708e2459b161fb012146c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 0}
-  timeToNextScene: 0
+  heightSlider: {fileID: 0}
+  healthSlider: {fileID: 0}
+  endscreenCamera: {fileID: 0}
+  endscreenCanvas: {fileID: 0}
+  timeToNextScene: 1
+  maxFallDistance: 15

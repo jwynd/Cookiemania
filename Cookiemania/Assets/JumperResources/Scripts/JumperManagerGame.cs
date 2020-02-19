@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JumperManager : MonoBehaviour
+public class JumperManagerGame : MonoBehaviour
 {
 
     #region variables
@@ -44,6 +44,16 @@ public class JumperManager : MonoBehaviour
     [Tooltip("The rotation of the game object on the Z axis")]
     [Range(0.0f, 360.0f)]
     public float rotation = 0.0f;
+    [Tooltip("Important game tag, ensure this is added to the tags list")]
+    public string playerTag = "Player";
+    [Tooltip("Important game tag, ensure this is added to the tags list")]
+    public string enemyTag = "Enemy";
+    [Tooltip("Important game tag, ensure this is added to the tags list")]
+    public string obstacleTag = "Obstacle";
+    [Tooltip("Important game tag, ensure this is added to the tags list")]
+    public string groundTag = "Platform";
+    [Tooltip("Important game tag, ensure this is added to the tags list")]
+    public string collectiblesTag = "Pickup";
 
     private float offset;
     private float height;
@@ -58,7 +68,7 @@ public class JumperManager : MonoBehaviour
 
     public JumperPlatformTrigger trigger { get; private set; }
 
-    public static JumperManager Instance { get; private set; }
+    public static JumperManagerGame Instance { get; private set; }
 
     #endregion
 
@@ -144,7 +154,7 @@ public class JumperManager : MonoBehaviour
         maxHeightReached = heightRightNow > maxHeightReached ? heightRightNow : maxHeightReached;
         if (heightRightNow >= heightGoal)
         {
-            JumperUIManager.Instance.End(true);
+            JumperManagerUI.Instance.End(true);
         }
         //not checking for health in update, will just run end on player death
         //else if (player.GetCurrentHealth() <= 0)
@@ -153,7 +163,7 @@ public class JumperManager : MonoBehaviour
         //}
         else if (maxHeightReached - maxFallDistance >= heightRightNow)
         {
-            JumperUIManager.Instance.End(false);
+            JumperManagerUI.Instance.End(false);
         }
     }
     #endregion
@@ -192,6 +202,31 @@ public class JumperManager : MonoBehaviour
         return levelReward;
     }
 
+    public string GetPlayerTag()
+    {
+        return playerTag; 
+    }
+
+    public string GetEnemyTag()
+    {
+        return enemyTag;
+    }
+
+    public string GetObstacleTag()
+    {
+        return obstacleTag;
+    }
+
+    public string GetGroundTag()
+    {
+        return groundTag;
+    }
+
+    public string GetCollectiblesTag()
+    {
+        return collectiblesTag;
+    }
+
     //credit: https://forum.unity.com/threads/re-map-a-number-from-one-range-to-another.119437/
     //maps from old range to new range
     //not safe if oldmin and oldmax are the same values
@@ -204,7 +239,7 @@ public class JumperManager : MonoBehaviour
         return map;
     }
 
-    public static IEnumerator FlashThenKill(GameObject selfReference, float totalTime, float flashInterval, JumperPlatformAttachables killableChild = null)
+    public static IEnumerator FlashThenKill(GameObject selfReference, float totalTime, float flashInterval, JumperGeneralThreat killableChild = null)
     {
         if (killableChild != null) { killableChild.PlatformDestroyed(totalTime, flashInterval); }
         int timer = (int)(totalTime / flashInterval);

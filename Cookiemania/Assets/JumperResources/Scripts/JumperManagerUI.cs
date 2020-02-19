@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JumperUIManager : MonoBehaviour
+public class JumperManagerUI : MonoBehaviour
 {
     #region variables
     public UnityEngine.UI.Slider heightSlider;
@@ -12,14 +12,14 @@ public class JumperUIManager : MonoBehaviour
     public GameObject endscreenCanvas;
     public float timeToNextScene = 1.0f;
     public float maxFallDistance = 15f;
-    public static JumperUIManager Instance { get; private set; }
+    public static JumperManagerUI Instance { get; private set; }
 
     private const string sceneName = "Jumper";
     private bool endingGame = false;
     private int coinsCollected = 0;
-    private JumperManager jm;
+    private JumperManagerGame jm;
     private General_LevelTransition levelController;
-    private JumperUIText scoreText;
+    private JumperGeneralText scoreText;
     private float maxHeightReached;
 
     #endregion
@@ -37,7 +37,7 @@ public class JumperUIManager : MonoBehaviour
         }
         endscreenCamera.GetComponent<Camera>().enabled = false;
         endscreenCamera.GetComponent<AudioListener>().enabled = false;
-        scoreText = GetComponent<JumperUIText>();
+        scoreText = GetComponent<JumperGeneralText>();
         GameObject levelC = GameObject.Find("LevelController");
         if (levelC != null)
         {
@@ -47,7 +47,7 @@ public class JumperUIManager : MonoBehaviour
 
     void Start()
     {
-        jm = JumperManager.Instance;
+        jm = JumperManagerGame.Instance;
         heightSlider.minValue = jm.player.transform.position.y;
         heightSlider.maxValue = jm.GetHeightGoal();
         maxHeightReached = jm.player.transform.position.y;
@@ -103,7 +103,7 @@ public class JumperUIManager : MonoBehaviour
         JumperTextAdvanced endUI = endscreenCanvas.GetComponent<JumperTextAdvanced>();
         if (isGoodEnd)
         {
-            coinsCollected += (int)JumperManager.Instance.GetLevelReward();
+            coinsCollected += (int)JumperManagerGame.Instance.GetLevelReward();
             endUI.UpdateText("LEVEL COMPLETE!<br>you made " + coinsCollected.ToString());
 
         }

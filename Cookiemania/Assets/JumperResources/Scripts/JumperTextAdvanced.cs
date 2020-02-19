@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JumperTextAdvanced : JumperUIText
+public class JumperTextAdvanced : JumperGeneralText
 {
     [SerializeField]
     protected string constantTextPart2;

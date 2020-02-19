@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JumperEnemyController : JumperPlatformAttachables
+public class JumperEnemyController : JumperGeneralThreat
 {
     #region variables
     
@@ -29,7 +29,7 @@ public class JumperEnemyController : JumperPlatformAttachables
         damage *= diff;
         maxHealth *= diff;
         currentHealth = maxHealth;
-        speed *= diff;
+        acceleration *= diff;
         maxVelocity *= diff;
         rb.velocity = Vector2.zero;
         rb.isKinematic = true;
@@ -100,7 +100,7 @@ public class JumperEnemyController : JumperPlatformAttachables
 
     private void Walk()
     { 
-        rb.velocity = new Vector2(Mathf.Clamp(direction * speed + rb.velocity.x, -maxVelocity, maxVelocity), rb.velocity.y);
+        rb.velocity = new Vector2(Mathf.Clamp(direction * acceleration + rb.velocity.x, -maxVelocity, maxVelocity), rb.velocity.y);
     }
 
     #endregion
@@ -108,7 +108,7 @@ public class JumperEnemyController : JumperPlatformAttachables
     #region public
     public override void Remove()
     {
-        StartCoroutine(JumperManager.FlashThenKill(gameObject, 0.5f, 0.1f));
+        StartCoroutine(JumperManagerGame.FlashThenKill(gameObject, 0.5f, 0.1f));
     }
 
     public override void PlatformDestroyed(float timer, float flashPeriod)

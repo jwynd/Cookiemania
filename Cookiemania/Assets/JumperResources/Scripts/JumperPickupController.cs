@@ -2,13 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JumperPickupController : MonoBehaviour
+public class JumperPickupController : JumperGeneralPickup
 {
     // Start is called before the first frame update
-    [SerializeField]
-    protected float damage = 5.0f;
-    [SerializeField]
-    protected float explosionTimer = 0.75f;
     [SerializeField]
     protected int explosionFlashCount = 3;
     [SerializeField]
@@ -16,22 +12,15 @@ public class JumperPickupController : MonoBehaviour
     [SerializeField]
     protected float explosionSize = 3f;
 
-    protected Collider2D myCollider;
-    protected Rigidbody2D myRb;
     protected float parentLeft;
     protected float parentRight;
-    private bool exploding;
+    protected bool exploding;
 
-    protected void Start()
+    protected override void Start()
     {
-        myCollider = gameObject.GetComponent<Collider2D>();
-        myRb = gameObject.GetComponent<Rigidbody2D>();
-        myCollider.isTrigger = true;
-        myRb.isKinematic = true;
-        myRb.gravityScale = 0;
+        base.Start();
         //change this to x when we switch sprites lol
         JumperPlatformController dad = transform.parent.GetComponent<JumperPlatformController>();
-
         Vector3 pBounds = dad.GetHorizontalBounds();
 
         //get info from parent, set parent child to this, then 
@@ -39,14 +28,6 @@ public class JumperPickupController : MonoBehaviour
         parentRight = pBounds.z;
         transform.position = new Vector2(Random.Range(parentLeft, parentRight), transform.position.y);
     }
-
-    // Update is called once per frame
-    protected void FixedUpdate()
-    {
-
-    }
-
-
 
     //unparent, then activate gravity, kinematics and enable normal collisions
     //would probably want an animation that shows the trap/bomb is active now
@@ -128,13 +109,10 @@ public class JumperPickupController : MonoBehaviour
 
     protected void CollisionHelper(GameObject collided)
     {
-        JumperPlatformAttachables script = collided.GetComponent<JumperPlatformAttachables>();
+        JumperGeneralThreat script = collided.GetComponent<JumperGeneralThreat>();
         if (script != null)
         {
-            if (!script.IsIndestructable())
-            {
-                script.TakesDamage(damage);
-            }
+            script.TakesDamage(damage);
             if (!exploding)
             {
                 RemoveFromParent();

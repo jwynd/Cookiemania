@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JumperObstacleController : JumperPlatformAttachables
+public class JumperObstacleController : JumperGeneralThreat
 {
     #region variables
     [SerializeField]
@@ -28,7 +28,7 @@ public class JumperObstacleController : JumperPlatformAttachables
         damage *= diff;
         maxHealth *= diff;
         currentHealth = maxHealth;
-        speed *= diff;
+        acceleration *= diff;
         maxVelocity *= diff;
         rb.velocity = Vector2.zero;
         //takes collisions, doesnt initiate
@@ -46,6 +46,12 @@ public class JumperObstacleController : JumperPlatformAttachables
         transform.position = new Vector2(UnityEngine.Random.Range(parentLeft, parentRight), transform.position.y);
 
     }
+
+    protected override string SetTag()
+    {
+        return jm.GetObstacleTag();
+    }
+
     #endregion
 
     #region fixedUpdate
@@ -101,8 +107,8 @@ public class JumperObstacleController : JumperPlatformAttachables
 
     private void TraversePlatform()
     {
-        rb.velocity = new Vector2(Mathf.Clamp(direction * speed + rb.velocity.x, -maxVelocity, maxVelocity), 
-            Mathf.Clamp(ydirection * speed + rb.velocity.y, -maxVelocity, maxVelocity));
+        rb.velocity = new Vector2(Mathf.Clamp(direction * acceleration + rb.velocity.x, -maxVelocity, maxVelocity), 
+            Mathf.Clamp(ydirection * acceleration + rb.velocity.y, -maxVelocity, maxVelocity));
     }
 
     #endregion
@@ -113,12 +119,12 @@ public class JumperObstacleController : JumperPlatformAttachables
 
     public override void PlatformDestroyed(float totalTime, float flashInterval)
     {
-        StartCoroutine(JumperManager.FlashThenKill(gameObject, totalTime, flashInterval));
+        StartCoroutine(JumperManagerGame.FlashThenKill(gameObject, totalTime, flashInterval));
     }
 
     public override void Remove()
     {
-        StartCoroutine(JumperManager.FlashThenKill(gameObject, 0.5f, 0.1f));
+        StartCoroutine(JumperManagerGame.FlashThenKill(gameObject, 0.5f, 0.1f));
     }
     #endregion
 

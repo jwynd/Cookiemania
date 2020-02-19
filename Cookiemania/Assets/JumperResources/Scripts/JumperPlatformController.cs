@@ -13,7 +13,7 @@ public class JumperPlatformController : MonoBehaviour
     private bool isStartingPlatform = false;
 
     [HideInInspector]
-    public JumperPlatformAttachables enemyChild = null;
+    public JumperGeneralThreat enemyChild = null;
 
     private bool notFlashing = true;
     private Renderer rend = null;
@@ -23,6 +23,11 @@ public class JumperPlatformController : MonoBehaviour
     void Awake()
     {
         rend = GetComponent<Renderer>();
+    }
+
+    private void Start()
+    {
+        gameObject.tag = JumperManagerGame.Instance.GetGroundTag();
     }
     #endregion
 
@@ -60,11 +65,11 @@ public class JumperPlatformController : MonoBehaviour
         if (!isStartingPlatform && notFlashing)
         {
             notFlashing = false;
-            StartCoroutine(JumperManager.FlashThenKill(gameObject, timeToRemove, flashPeriod, enemyChild));
+            StartCoroutine(JumperManagerGame.FlashThenKill(gameObject, timeToRemove, flashPeriod, enemyChild));
         }
         else if(immediately)
         {
-            StartCoroutine(JumperManager.FlashThenKill(gameObject, 0.1f, 0.1f, enemyChild));
+            StartCoroutine(JumperManagerGame.FlashThenKill(gameObject, 0.1f, 0.1f, enemyChild));
         }
         else
         {

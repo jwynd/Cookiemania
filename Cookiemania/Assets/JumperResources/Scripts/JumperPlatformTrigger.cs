@@ -5,11 +5,11 @@ using UnityEngine;
 public class JumperPlatformTrigger : MonoBehaviour
 {
 
-    public JumperManager gen;
+    public JumperManagerGame gen;
 
     private void Start()
     {
-        gen = JumperManager.Instance;
+        gen = JumperManagerGame.Instance;
     }
 
     void OnTriggerEnter2D(Collider2D other)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public abstract class JumperUIText : MonoBehaviour
+public abstract class JumperGeneralText : MonoBehaviour
 {
     #region variables
     [SerializeField]

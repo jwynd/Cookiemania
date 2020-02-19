@@ -5,6 +5,7 @@ using UnityEngine;
 
 /*
  * REQUIRED AXES : "Pickup" mapped to something... like j?
+ * "Throw" mapped to something else
  */
 
 
@@ -22,26 +23,31 @@ public class JumperPlayerController : MonoBehaviour
 {
     #region variables
     public float acceleration = 0.5f;
-    public int maxJumps = 2;
     public float jumpMultiplier = 2f;
     
     public float jumpSpeed = 3.5f;
     public LayerMask groundLayer;
     public Vector2 throwStrength = new Vector2(4.0f, 4.0f);
     public float maxHealth = 5;
-    public float falloffDistanceMax = 15f;
-
     public float flashTime = 0.15f;
     public float damageTimerMax = 1.5f;
     public AudioClip jumpSound;
     public JumperSelfDestruct jumpParticles;
+    [Tooltip("Axis for left and right movements")]
+    public string horizontalAxis = "Pickup";
+    [Tooltip("Axis for jumping")]
+    public string jumpAxis = "Pickup";
+    [Tooltip("Axis for picking up items")]
+    public string pickupAxis = "Pickup";
+    [Tooltip("Axis for throwing items")]
+    public string throwAxis = "Throw";
     public float totalJumpStrength { get; private set; }
     
 
     protected Rigidbody2D rb;
     protected Renderer rend;
     protected Vector2 velocity = Vector2.zero;
-    private bool grounded = true;
+    protected bool grounded = true;
     protected int jumpCount;
     protected float damageTimer = 0;
     protected float jumpCooldown = 0;
@@ -59,7 +65,7 @@ public class JumperPlayerController : MonoBehaviour
     protected AudioSource audioPlayer = null;
     protected float maxHeightReached = 0f;
     protected float points = 0f;
-    protected JumperManager jm;
+    protected JumperManagerGame jm;
     protected float movementDirection = 1;
     protected Vector3 originalScale;
     protected Color damagedColor = Color.red * Color.white;
@@ -77,12 +83,11 @@ public class JumperPlayerController : MonoBehaviour
         audioPlayer = GetComponent<AudioSource>();
         rend = GetComponent<Renderer>();
         rb.velocity = Vector2.zero;
-        jumpCount = maxJumps;
         currentHealth = maxHealth;
     }
     void Start()
     {
-        jm = JumperManager.Instance;
+        jm = JumperManagerGame.Instance;
     }
     #endregion
 
@@ -93,18 +98,12 @@ public class JumperPlayerController : MonoBehaviour
         //all my inputs that are done on a per frame basis 
         //need top be in update
         
-        jumped = JumpInput();
-        ItemInput();
-        HeightCheck();
+        jumped = JumpInput(jumpAxis);
+        ItemInput(pickupAxis, throwAxis);
         // Trap();
     }
 
-    void HeightCheck()
-    {
-        maxHeightReached = transform.position.y > maxHeightReached ? transform.position.y : maxHeightReached;
-    }
-
-    bool JumpInput()
+    bool JumpInput(string jump)
     {
         //better way to set the velocity of the player
         /*
@@ -127,7 +126,7 @@ public class JumperPlayerController : MonoBehaviour
         return jumped;
         */
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown(jump))
         {
             if (grounded || canAirJump)
             {
@@ -138,9 +137,9 @@ public class JumperPlayerController : MonoBehaviour
 
     }
 
-    protected void ItemInput()
+    protected void ItemInput(string pickupAx, string throwAx)
     {
-        if (Input.GetAxis("Pickup") > 0) 
+        if (Input.GetAxis(pickupAx) > 0) 
         {
             pickup = true;
         }
@@ -148,7 +147,7 @@ public class JumperPlayerController : MonoBehaviour
         {
             pickup = false;
         }
-        if (Input.GetButtonDown("Throw"))
+        if (Input.GetButtonDown(throwAx))
         {
             throwStuff = true;
         }
@@ -160,11 +159,18 @@ public class JumperPlayerController : MonoBehaviour
 
     protected void FixedUpdate()
     {
+        UpdateHeight();
         CheckGrounded();
-        HorizontalInput();
+        HorizontalInput(horizontalAxis);
         Movement();
         ThrowItem();
+        //currently, no timers in fixed update
         Timers();
+    }
+
+    void UpdateHeight()
+    {
+        maxHeightReached = transform.position.y > maxHeightReached ? transform.position.y : maxHeightReached;
     }
 
     private void CheckGrounded()
@@ -179,7 +185,7 @@ public class JumperPlayerController : MonoBehaviour
         }
     }
 
-    protected void HorizontalInput()
+    protected void HorizontalInput(string axis)
     {
         velocity.x = rb.velocity.x;
         //can disable or enable arial controls by checking jumpcount
@@ -187,18 +193,18 @@ public class JumperPlayerController : MonoBehaviour
         if (grounded && !jumped)
         {
             
-            HorizontalInputHelper(normalManeuverability, false);
+            HorizontalInputHelper(axis, normalManeuverability, false);
         }
         //in air speeds are lowered
         else
         {
-            HorizontalInputHelper(arialManeuverability, true);
+            HorizontalInputHelper(axis, arialManeuverability, true);
         }
     }
 
-    protected void HorizontalInputHelper(float maneuverability, bool inAir)
+    protected void HorizontalInputHelper(string axis, float maneuverability, bool inAir)
     {
-        float inputAccel = Input.GetAxis("Horizontal") * maneuverability * acceleration;
+        float inputAccel = Input.GetAxis(axis) * maneuverability * acceleration;
         if (inputAccel > 0)
         {
             velocity.x = Mathf.Min(inputAccel + velocity.x, maxSpeed);
@@ -262,6 +268,7 @@ public class JumperPlayerController : MonoBehaviour
     {
         Vector3 jpPos = transform.position;
         jpPos.y -= rend.bounds.extents.y;
+        //the jump particles handle its own animation and auto destruction
         Instantiate(jumpParticles, transform.position, Quaternion.identity);
     }
 
@@ -274,7 +281,12 @@ public class JumperPlayerController : MonoBehaviour
             Debug.Log("threw item");
             Vector2 throwTemp = throwStrength;
             throwTemp.x *= movementDirection;
-            throwTemp.x += velocity.x * 0.3f;
+            //check if velocity and movement direction are both positive/both negative
+            //no need to add if velocity is 0 ofc
+            if (velocity.x * movementDirection > 0)
+            {
+                throwTemp.x += velocity.x * 0.3f;
+            }
             heldItemRB.gameObject.GetComponent<JumperPickupController>().Thrown(throwTemp);
         }
         throwStuff = false;
@@ -376,7 +388,7 @@ public class JumperPlayerController : MonoBehaviour
         //requires damage and destroyable parameters in obstacle controller
         if (damageTimer <= 0)
         {
-            JumperPlatformAttachables obsControl = collision.GetComponent<JumperPlatformAttachables>();
+            JumperGeneralThreat obsControl = collision.GetComponent<JumperGeneralThreat>();
             if (obsControl != null)
             {
                 DamageHelper(obsControl.GetDamage());
@@ -387,11 +399,11 @@ public class JumperPlayerController : MonoBehaviour
 
     protected void DamageHelper(float damage)
     {
-        currentHealth -= damage;
+        currentHealth -= Mathf.Abs(damage);
         StartCoroutine(Flasher());
         if (currentHealth < 0)
         {
-            JumperUIManager.Instance.End(false);
+            JumperManagerUI.Instance.End(false);
         }
         //player destruction handled elsewhere
     }

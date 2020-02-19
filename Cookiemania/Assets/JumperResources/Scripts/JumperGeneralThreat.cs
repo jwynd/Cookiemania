@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class JumperPlatformAttachables : MonoBehaviour
+public abstract class JumperGeneralThreat : MonoBehaviour
 {
     #region variables
     [SerializeField]
-    protected float speed = 3.0f;
+    protected float acceleration = 3.0f;
     [SerializeField]
     protected float maxVelocity = 5.0f;
     [SerializeField]
@@ -18,7 +18,7 @@ public abstract class JumperPlatformAttachables : MonoBehaviour
     [SerializeField]
     protected float maxHealth;
     protected float currentHealth;
-    protected JumperManager jm;
+    protected JumperManagerGame jm;
     #endregion
     #region startup
     protected virtual void Awake()
@@ -27,13 +27,17 @@ public abstract class JumperPlatformAttachables : MonoBehaviour
     }
     protected virtual void Start()
     {
-        jm = JumperManager.Instance;
+        jm = JumperManagerGame.Instance;
+        //change if obstacle
+        gameObject.tag = SetTag();
     }
+    protected virtual string SetTag() { return jm.GetEnemyTag(); }
+
     #endregion
     #region public
     public virtual void TakesDamage(float dmg)
     {
-        if (!IsIndestructable()) { currentHealth -= dmg; }        
+        if (!IsIndestructable()) { currentHealth -= Mathf.Abs(dmg); }        
         if (currentHealth <= 0)
         {
             jm.player.GivePoints(pointValue);
