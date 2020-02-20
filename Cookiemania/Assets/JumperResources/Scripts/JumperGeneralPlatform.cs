@@ -24,7 +24,7 @@ public class JumperGeneralPlatform : MonoBehaviour
     #endregion
 
     #region startup
-    protected void Awake()
+    protected virtual void Awake()
     {
         rend = GetComponent<Renderer>();
     }

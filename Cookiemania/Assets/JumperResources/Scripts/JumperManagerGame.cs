@@ -68,12 +68,11 @@ public class JumperManagerGame : MonoBehaviour
 
     private int max;
     private float weightRange = 0.0f;
+    private float checkAgainstPosition;
 
     public JumperCameraController mainCamera { get; private set; }
 
     public JumperPlayerController player { get; private set; }
-
-    public JumperPlatformTrigger trigger { get; private set; }
 
     public static JumperManagerGame Instance { get; private set; }
 
@@ -96,7 +95,6 @@ public class JumperManagerGame : MonoBehaviour
             fab.probability = fab.weight + weightRange;
             weightRange += fab.weight;
         }
-        trigger = FindObjectOfType<JumperPlatformTrigger>().gameObject.GetComponent<JumperPlatformTrigger>();
         player = FindObjectOfType<JumperPlayerController>().gameObject.GetComponent<JumperPlayerController>();
         mainCamera = FindObjectOfType<JumperCameraController>().gameObject.GetComponent<JumperCameraController>();
         heightGoal *= startingDifficulty;
@@ -113,9 +111,9 @@ public class JumperManagerGame : MonoBehaviour
 
     private void ValidationChecks()
     {
-        if (!trigger || !player || !mainCamera || platformPrefabs.Length == 0)
+        if (!player || !mainCamera || platformPrefabs.Length == 0)
         {
-            Debug.LogError("need a player, trigger and camera with appropriate scripts" +
+            Debug.LogError("need a player, platform prefabs and camera with appropriate scripts" +
                 " instantiated in the scene");
         }
         if (platformPrefabs[0].platform == null)
@@ -193,6 +191,10 @@ public class JumperManagerGame : MonoBehaviour
         {
             JumperManagerUI.Instance.End(false, false);
         }
+        if (heightRightNow > checkAgainstPosition)
+        {
+            BuildSection();
+        }
     }
     #endregion
 
@@ -227,7 +229,10 @@ public class JumperManagerGame : MonoBehaviour
             canPlaceAboveLast = g.GetComponent<JumperGeneralPlatform>().CanPlacePlatformsAbove();
             g.transform.parent = transform;
             g.transform.SetAsFirstSibling();
-            if (i == density - 3) trigger.transform.position = pos;
+            if (i == density - 3)
+            {
+                checkAgainstPosition = pos.y;
+            }
             if(transform.childCount > max) transform.GetChild(transform.childCount-1).gameObject.GetComponent<JumperGeneralPlatform>().Remove();
         }
     }

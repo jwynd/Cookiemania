@@ -371,8 +371,6 @@ public class JumperPlayerController : MonoBehaviour
         Debug.Log("Bounce called");
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.AddForce(new Vector2(0, bounceStrength * jumpSpeed), ForceMode2D.Impulse);
-        grounded = false;
-        canAirJump = false;
     }
 
     #endregion

@@ -76,12 +76,17 @@ public class JumperEnemyController : JumperGeneralThreat
             CheckBounds();
             Walk();
         }
+        else if (jm.player == null)
+        {
+            Destroy(gameObject);
+        }
         else
         {
             float playerx = RunToPlayer();
             /*
              * default is walk then jump
              */
+            CheckBounds();
             Walk();
             JumpToPlayer(playerx);
             //Jump();

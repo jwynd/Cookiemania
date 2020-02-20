@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8057584048784276309}
   - component: {fileID: 1901665485959505364}
   - component: {fileID: 7044595296360876071}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: JumperTrampoline
   m_TagString: Platform
   m_Icon: {fileID: 0}

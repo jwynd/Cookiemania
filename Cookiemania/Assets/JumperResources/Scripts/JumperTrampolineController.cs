@@ -9,13 +9,19 @@ public class JumperTrampolineController : JumperGeneralPlatform
 
     private string playerTag;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        GetComponent<Collider2D>().isTrigger = true;
+    }
+
     protected override void Start()
     {
         base.Start();
         playerTag = jm.GetPlayerTag();
     }
-    
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag(playerTag))
         {
