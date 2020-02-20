@@ -50,5 +50,6 @@ public abstract class JumperGeneralThreat : MonoBehaviour
     public abstract void PlatformDestroyed(float totalTime, float flashPeriod);
     public virtual float GetPointValue() { return pointValue; }
     public virtual void Remove(bool isImmediate = true) { Destroy(gameObject); }
+    public virtual void RemoveOnDamage() { return; }
     #endregion
 }

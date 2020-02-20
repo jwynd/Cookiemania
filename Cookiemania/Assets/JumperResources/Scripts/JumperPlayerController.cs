@@ -434,7 +434,9 @@ public class JumperPlayerController : MonoBehaviour
             if (obsControl != null)
             {
                 DamageHelper(obsControl.GetDamage());
-            } 
+            }
+            obsControl.RemoveOnDamage();
+
         }
     }
     
