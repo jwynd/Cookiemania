@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4790512461018026976}
   - component: {fileID: 4790512461018026977}
   - component: {fileID: 2253716481641927315}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: JumperPickup
   m_TagString: Pickup
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.016600728, y: -0.03316474}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -107,7 +107,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.56, y: 2.56}
+  m_Size: {x: 4.4523935, y: 4.6825194}
   m_EdgeRadius: 0
 --- !u!50 &4790512461018026977
 Rigidbody2D:

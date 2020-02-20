@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7240351483836542595}
   - component: {fileID: 2518038965417871725}
   - component: {fileID: 4095345495257838182}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: JumperPinkEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
