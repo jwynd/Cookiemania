@@ -22,7 +22,7 @@ public class JumperObstacleController : JumperGeneralThreat
     {
         base.Start();
         rb = GetComponent<Rigidbody2D>();
-        JumperPlatformController dad = transform.parent.GetComponent<JumperPlatformController>();
+        JumperGeneralPlatform dad = transform.parent.GetComponent<JumperGeneralPlatform>();
         dad.enemyChild = this;
         float diff = jm.GetDifficultyMultiplier();
         damage *= diff;

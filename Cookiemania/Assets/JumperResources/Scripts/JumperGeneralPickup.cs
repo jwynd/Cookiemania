@@ -7,7 +7,7 @@ public abstract class JumperGeneralPickup : MonoBehaviour
     #region variables
     [Tooltip("For pickups that deal damage")]
     [SerializeField]
-    protected float damage = 5.0f;
+    protected float damage = 25.0f;
     [SerializeField]
     protected float explosionTimer = 0.75f;
     [Tooltip("For pickups that give points")]
@@ -38,7 +38,7 @@ public abstract class JumperGeneralPickup : MonoBehaviour
     #endregion
 
     #region noOverride
-    protected bool IsAutomaticPickup()
+    public bool IsAutomaticPickup()
     {
         return automaticallyPickup;
     }

@@ -120,8 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acceleration: 0.5
-  jumpMultiplier: 2
-  jumpSpeed: 3.5
+  jumpSpeed: 10
+  airJumpSpeed: 6.5
   groundLayer:
     serializedVersion: 2
     m_Bits: 1024

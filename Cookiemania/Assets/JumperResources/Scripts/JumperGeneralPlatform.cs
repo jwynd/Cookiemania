@@ -2,32 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JumperPlatformController : MonoBehaviour
+
+//this general class is instantiatable
+public class JumperGeneralPlatform : MonoBehaviour
 {
     #region variables
     [SerializeField]
-    private float timeToRemove = 1.5f;
+    protected float timeToRemove = 1.5f;
     [SerializeField]
-    private float flashPeriod = 0.25f;
-    [SerializeField]
-    private bool isStartingPlatform = false;
+    protected float flashPeriod = 0.25f;
 
     [HideInInspector]
     public JumperGeneralThreat enemyChild = null;
 
-    private bool notFlashing = true;
-    private Renderer rend = null;
+    [SerializeField]
+    protected bool placePlatformsAbove = true;
+
+    protected JumperManagerGame jm;
+    protected bool notFlashing = true;
+    protected Renderer rend = null;
     #endregion
 
     #region startup
-    void Awake()
+    protected void Awake()
     {
         rend = GetComponent<Renderer>();
     }
 
-    private void Start()
+    protected virtual void Start()
     {
-        gameObject.tag = JumperManagerGame.Instance.GetGroundTag();
+        jm = JumperManagerGame.Instance;
+        gameObject.tag = jm.GetGroundTag();
     }
     #endregion
 
@@ -51,6 +56,11 @@ public class JumperPlatformController : MonoBehaviour
         return bounds;
     }
 
+    public bool CanPlacePlatformsAbove()
+    {
+        return placePlatformsAbove;
+    }
+
     //ensures child ALWAYS destroyed when this is destroyed. gotta make sure ya know
     public void OnDestroy()
     {
@@ -60,22 +70,17 @@ public class JumperPlatformController : MonoBehaviour
         }
     }
 
-    public void Remove(bool immediately = false)
+    public virtual void Remove(bool immediately = false)
     {
-        if (!isStartingPlatform && notFlashing)
+        if (notFlashing)
         {
             notFlashing = false;
             StartCoroutine(JumperManagerGame.FlashThenKill(gameObject, timeToRemove, flashPeriod, enemyChild));
         }
-        else if(immediately)
+        else if (immediately)
         {
             StartCoroutine(JumperManagerGame.FlashThenKill(gameObject, 0.1f, 0.1f, enemyChild));
         }
-        else
-        {
-            isStartingPlatform = false;
-        }
     }
-
     #endregion
 }

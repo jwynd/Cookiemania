@@ -20,7 +20,7 @@ public class JumperPickupController : JumperGeneralPickup
     {
         base.Start();
         //change this to x when we switch sprites lol
-        JumperPlatformController dad = transform.parent.GetComponent<JumperPlatformController>();
+        JumperGeneralPlatform dad = transform.parent.GetComponent<JumperGeneralPlatform>();
         Vector3 pBounds = dad.GetHorizontalBounds();
 
         //get info from parent, set parent child to this, then 
