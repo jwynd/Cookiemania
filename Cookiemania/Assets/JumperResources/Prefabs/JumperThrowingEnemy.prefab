@@ -193,8 +193,9 @@ MonoBehaviour:
   buffer: 1
   projectile: {fileID: 6469018665996307373, guid: 90288c5d2af419743ab69234f2b0406c,
     type: 3}
-  verticalThrowStrength: 3
+  verticalThrowStrength: 4
+  horizontalThrowStrengthMax: 3
   projectileReadyPosition: {fileID: 5151693214585652727}
-  engageDistance: 12
+  engageDistance: 10
   fireDelay: 2
   rearmDelay: 1

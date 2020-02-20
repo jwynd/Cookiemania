@@ -97,11 +97,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acceleration: 3
   maxVelocity: 5
-  damage: 0
-  pointValue: 0
+  damage: 2
+  pointValue: 10
   indestructable: 0
-  maxHealth: 0
+  maxHealth: 1
   rotationSpeed: 6
+  rotateBackwards: 1
   lifeTime: 2
 --- !u!61 &5453683902464608161
 BoxCollider2D:

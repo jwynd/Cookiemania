@@ -271,11 +271,11 @@ public class JumperPlayerController : MonoBehaviour
                 rb.velocity = new Vector2(velocity.x, 0);
                 rb.AddForce(new Vector2(0, airJumpSpeed), ForceMode2D.Impulse);
             }
-            else
-            {
-                canAirJump = false;
-                //the jump punish lol
-            }
+            //else
+            //{
+                //canAirJump = false;
+                //the jump punish lol, imma just disable
+            //}
         }
         else
         {
@@ -371,6 +371,7 @@ public class JumperPlayerController : MonoBehaviour
         Debug.Log("Bounce called");
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.AddForce(new Vector2(0, bounceStrength * jumpSpeed), ForceMode2D.Impulse);
+        canAirJump = true;
     }
 
     #endregion
@@ -461,6 +462,7 @@ public class JumperPlayerController : MonoBehaviour
         throwAxis = dummyAxis;
         rb.gravityScale = 0;
         rb.velocity = Vector2.zero;
+        rb.isKinematic = true;
     }
 
     public void RunDeathSequence()

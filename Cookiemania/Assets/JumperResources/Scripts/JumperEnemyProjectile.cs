@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class JumperEnemyProjectile : JumperGeneralThreat
 {   
+    [Range(0, 45)]
     [SerializeField]
     protected float rotationSpeed = 3.0f;
+
+    [SerializeField]
+    protected bool rotateBackwards = true;
     [SerializeField]
     protected float lifeTime = 2.0f;
 
@@ -21,6 +25,7 @@ public class JumperEnemyProjectile : JumperGeneralThreat
         coll.enabled = false;
         coll.isTrigger = true;
         rb.gravityScale = 0;
+        if (rotateBackwards) { rotationSpeed *= -1; }
     }
 
     protected void FixedUpdate()

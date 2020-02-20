@@ -14,6 +14,9 @@ public class JumperThrowingEnemy : JumperGeneralThreat
     [SerializeField]
     protected float verticalThrowStrength = 6.0f;
 
+    [SerializeField]
+    protected float horizontalThrowStrengthMax = 2.0f;
+
     [Tooltip("This should be a child gameobject in the ready position when the character is facing right, will swap sides" +
         " when character is facing left")]
     [SerializeField]
@@ -36,6 +39,7 @@ public class JumperThrowingEnemy : JumperGeneralThreat
     protected bool projectileCoroutineCalled = true;
     protected JumperEnemyProjectile instantiatedProjectile = null;
     protected Vector2 throwStrength = Vector2.zero;
+    protected Vector2 currentPlayerPos = Vector2.zero;
     protected float throwDirection = 0.0f;
     protected Rigidbody2D rb;
     protected Vector3 originalScale;
@@ -73,6 +77,7 @@ public class JumperThrowingEnemy : JumperGeneralThreat
             direction = -1;
             transform.localScale = new Vector3(-originalScale.x, originalScale.y, originalScale.z);
         }
+        throwDirection = direction;
         transform.parent = null;
         transform.position = new Vector2(Random.Range(parentLeft, parentRight), transform.position.y);
         StartCoroutine(ReadyProjectile());
@@ -80,7 +85,6 @@ public class JumperThrowingEnemy : JumperGeneralThreat
     #endregion
 
     #region fixedUpdate
-    // Update is called once per frame
     protected void FixedUpdate()
     {
         UpdateHelper();
@@ -88,20 +92,25 @@ public class JumperThrowingEnemy : JumperGeneralThreat
 
     protected void UpdateHelper()
     {
-        if (jm.player == null)
+        if (playerTransform == null)
         {
             Destroy(gameObject);
         }
-        else if (PlayerNearby())
+        else
+        {
+            //this actually has to go in an else lol
+            currentPlayerPos = playerTransform.position;
+        }
+        if (!projectileCoroutineCalled)
+        {
+            StartCoroutine(ReadyProjectile());
+        }
+        if (PlayerNearby())
         {
             RunToPlayer();
             CheckBoundsTrackingPlayer();
             Walk();
-            if (!projectileCoroutineCalled)
-            {
-                StartCoroutine(ReadyProjectile());
-            }
-            else if (projectileReadied)
+            if (projectileReadied)
             {
                 ThrowProjectile();
             }
@@ -111,13 +120,15 @@ public class JumperThrowingEnemy : JumperGeneralThreat
             CheckBounds();
             Walk();
         }
+        
+        
     }
 
     protected void ThrowProjectile()
     {
         
         instantiatedProjectile.transform.parent = null;
-        throwStrength.x = Mathf.Abs(playerTransform.position.x - transform.position.x) * throwDirection;
+        throwStrength.x = Mathf.Min(Mathf.Abs(currentPlayerPos.x - transform.position.x), horizontalThrowStrengthMax) * throwDirection;
         instantiatedProjectile.ThrowProjectile(throwStrength);
         instantiatedProjectile = null;
         projectileReadied = false;
@@ -126,7 +137,7 @@ public class JumperThrowingEnemy : JumperGeneralThreat
 
     protected bool PlayerNearby()
     {
-        return Vector2.Distance(transform.position, playerTransform.position) < engageDistance;   
+        return Vector2.Distance(transform.position, currentPlayerPos) < engageDistance;   
     }
 
     protected void CheckBounds()
@@ -167,7 +178,7 @@ public class JumperThrowingEnemy : JumperGeneralThreat
 
     protected float RunToPlayer()
     {
-        float playerX = playerTransform.position.x;
+        float playerX = currentPlayerPos.x;
         //sprint speed hehe
         maxVelocity = originalMaxVelocity * 1.5f;
 
@@ -227,7 +238,7 @@ public class JumperThrowingEnemy : JumperGeneralThreat
         Vector3 newLocalPos = projectileReadyPosition.position;
         instantiatedProjectile.transform.position = newLocalPos;
         newLocalPos = instantiatedProjectile.transform.localScale;
-        instantiatedProjectile.transform.localScale = new Vector3(newLocalPos.x * direction, newLocalPos.y, newLocalPos.z);
+        instantiatedProjectile.transform.localScale = new Vector3(newLocalPos.x * throwDirection, newLocalPos.y, newLocalPos.z);
     }
     #endregion
 }
