@@ -20,9 +20,13 @@ public class JumperManagerGame : MonoBehaviour
         public float probability = 0f;
     }
 
+
     
     [SerializeField]
     private Prefabs[] platformPrefabs = null;
+
+    [SerializeField]
+    private JumperSemiPermanentPlatforms exitPlatform = null;
 
     [Tooltip("How high the player can jump, used for determining how far platforms can be placed")]
     public float jumpHeight = 5.0f;
@@ -65,7 +69,7 @@ public class JumperManagerGame : MonoBehaviour
     private float maxHeightReached;
     private bool canPlaceAboveLast = true;
     private float firstPrefabWidth = 0f;
-
+    private bool haveBuiltExit = false;
     private int max;
     private float weightRange = 0.0f;
     private float checkAgainstPosition;
@@ -178,50 +182,70 @@ public class JumperManagerGame : MonoBehaviour
         if (player == null) { return; }
         float heightRightNow = player.transform.position.y;
         maxHeightReached = heightRightNow > maxHeightReached ? heightRightNow : maxHeightReached;
-        if (heightRightNow >= heightGoal)
-        {
-            JumperManagerUI.Instance.End(true);
-        }
         //not checking for health in update, will just run end on player death
         //else if (player.GetCurrentHealth() <= 0)
         //{
          //   JumperUIManager.Instance.End(false);
         //}
-        else if (maxHeightReached - maxFallDistance >= heightRightNow)
+        if (maxHeightReached - maxFallDistance >= heightRightNow)
         {
             JumperManagerUI.Instance.End(false, false);
         }
         if (heightRightNow > checkAgainstPosition)
-        {
+        { 
             BuildSection();
         }
     }
+
+    private void AttemptToBuildExit()
+    {
+        if (haveBuiltExit) { return; }
+        float randomx = BuildHelper();
+        float randomy = UnityEngine.Random.Range(height + minHeightIncrease, height + jumpHeight);
+        Vector3 pos = new Vector3(randomx, randomy, 0);
+        Instantiate(exitPlatform, pos, Quaternion.Euler(0, 0, rotation));
+        haveBuiltExit = true;
+    }
+
+    private float BuildHelper()
+    {
+        float ran;
+        if (canPlaceAboveLast)
+        {
+            ran = UnityEngine.Random.Range(offset - width, offset + width);
+        }
+        else
+        {
+            ran = UnityEngine.Random.Range(0, 1);
+            if (ran > 0.5f)
+            {
+                ran = UnityEngine.Random.Range(offset + firstPrefabWidth, offset + width);
+            }
+            else
+            {
+                ran = UnityEngine.Random.Range(offset - width, offset - firstPrefabWidth);
+            }
+        }
+        return ran;
+    }
+
     #endregion
 
     #region publicFunctions
 
     public void BuildSection()
     {
+        if (haveBuiltExit) { return; }
         startingDifficulty += difficultyIncrement;
-        for (int i = 0; i < density; ++i){
-            float randomx;
-            if (canPlaceAboveLast)
-            {
-                randomx = UnityEngine.Random.Range(offset - width, offset + width);
-            }
-            else
-            {
-                randomx = UnityEngine.Random.Range(0, 1);
-                if (randomx > 0.5f)
-                {
-                    randomx = UnityEngine.Random.Range(offset + firstPrefabWidth, offset + width);
-                }
-                else
-                {
-                    randomx = UnityEngine.Random.Range(offset - width, offset - firstPrefabWidth);
-                }
-            }
+        for (int i = 0; i < density; ++i)
+        {
             float randomy = UnityEngine.Random.Range(height + minHeightIncrease, height + jumpHeight);
+            if (randomy >= heightGoal)
+            {
+                AttemptToBuildExit();
+                break;
+            }
+            float randomx = BuildHelper();
             Vector3 pos = new Vector3(randomx, randomy, 0);
             offset = pos.x;
             height = pos.y;

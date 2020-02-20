@@ -2,18 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JumperStartingPlatform : JumperGeneralPlatform
+public class JumperSemiPermanentPlatforms : JumperGeneralPlatform
 {
     #region variables
     [SerializeField]
-    private float playerHeightToKill = 15f;
-    private bool isStartingPlatform = true;
+    protected float playerHeightToRemoveThis = 15f;
+    [SerializeField]
+    protected bool neverRemove = false;
+    protected bool removeCheck = true;
+    
     #endregion
 
     #region overrides
     public override void Remove(bool immediately = false)
     {
-        if (!isStartingPlatform && notFlashing)
+        if (neverRemove) { return; }
+        if (!removeCheck && notFlashing)
         {
             notFlashing = false;
             StartCoroutine(JumperManagerGame.FlashThenKill(gameObject, timeToRemove, flashPeriod, enemyChild));
@@ -24,15 +28,19 @@ public class JumperStartingPlatform : JumperGeneralPlatform
         }
         else
         {
-            isStartingPlatform = false;
+            removeCheck = false;
         }
     }
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
-        if (jm.GetMaxHeightReached() > playerHeightToKill)
+        if (!neverRemove)
         {
-            Destroy(gameObject);
+            if (jm.GetMaxHeightReached() > playerHeightToRemoveThis)
+            {
+                Destroy(gameObject);
+            }
         }
+        
     }
     #endregion
 }

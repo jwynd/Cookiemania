@@ -86,10 +86,25 @@ public class JumperEnemyController : JumperGeneralThreat
             /*
              * default is walk then jump
              */
-            CheckBounds();
+            CheckBoundsTrackingPlayer();
+
             Walk();
             JumpToPlayer(playerx);
             //Jump();
+        }
+    }
+
+    protected void CheckBoundsTrackingPlayer()
+    {
+        if (direction <= 0 && rb.position.x < parentLeft)
+        {
+            direction = 0;
+            rb.velocity = Vector2.zero;
+        }
+        else if (direction >= 0 && rb.position.x > parentRight)
+        {
+            direction = 0;
+            rb.velocity = Vector2.zero;
         }
     }
 
@@ -150,8 +165,7 @@ public class JumperEnemyController : JumperGeneralThreat
         float playerX = jm.player.transform.position.x;
         //sprint speed hehe
         maxVelocity = originalMaxVelocity * 1.5f;
-        if (direction != 0)
-        {
+
             if (rb.position.x > playerX + buffer)
             {
                 direction = -1;
@@ -162,7 +176,7 @@ public class JumperEnemyController : JumperGeneralThreat
                 direction = 1;
                 transform.localScale = new Vector3(originalScale.x, originalScale.y, originalScale.z);
             }
-        }
+
         return playerX;
     }
 

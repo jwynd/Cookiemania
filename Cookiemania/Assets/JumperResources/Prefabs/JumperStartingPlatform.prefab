@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7936963835408178327}
   - component: {fileID: 2595456332259667942}
   m_Layer: 10
-  m_Name: Barrel (2)
+  m_Name: JumperStartingPlatform
   m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,7 +95,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.009607315, y: 0.1007576}
+  m_Offset: {x: 0.009607315, y: 0.4247322}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -106,7 +106,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.823845, y: 1.4300022}
+  m_Size: {x: 5.823845, y: 0.782053}
   m_EdgeRadius: 0
 --- !u!114 &2595456332259667942
 MonoBehaviour:
@@ -123,3 +123,6 @@ MonoBehaviour:
   timeToRemove: 1.5
   flashPeriod: 0.25
   enemyChild: {fileID: 0}
+  placePlatformsAbove: 1
+  playerHeightToRemoveThis: 15
+  neverRemove: 0

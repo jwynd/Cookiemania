@@ -64,6 +64,12 @@ MonoBehaviour:
       type: 3}
     weight: 0.674
     probability: 0
+  - platform: {fileID: 7095647266122237542, guid: daaf91a083b83f740844f40d96ecef9a,
+      type: 3}
+    weight: 0.495
+    probability: 0
+  exitPlatform: {fileID: 4423854033441122629, guid: e57e91b6f70b8ec4ba5ebc1b1c8c9e49,
+    type: 3}
   jumpHeight: 5
   width: 10
   minHeightIncrease: 0

@@ -6,12 +6,15 @@ public class JumperPickupController : JumperGeneralPickup
 {
     // Start is called before the first frame update
     [SerializeField]
+    protected float explosionTimer = 0.75f;
+    [SerializeField]
     protected int explosionFlashCount = 3;
     [SerializeField]
     protected int explosionFrames = 5;
     [SerializeField]
     protected float explosionSize = 3f;
 
+    protected Rigidbody2D myRb;
     protected string enemyTag;
     protected string obstacleTag;
     protected float parentLeft;
@@ -21,6 +24,9 @@ public class JumperPickupController : JumperGeneralPickup
     protected override void Awake()
     {
         base.Awake();
+        myRb = GetComponent<Rigidbody2D>();
+        myRb.isKinematic = true;
+        myRb.gravityScale = 0;
         enemyTag = JumperManagerGame.Instance.GetEnemyTag();
         obstacleTag = JumperManagerGame.Instance.GetObstacleTag();
     }

@@ -8,8 +8,7 @@ public abstract class JumperGeneralPickup : MonoBehaviour
     [Tooltip("For pickups that deal damage")]
     [SerializeField]
     protected float damage = 25.0f;
-    [SerializeField]
-    protected float explosionTimer = 0.75f;
+    
     [Tooltip("For pickups that give points")]
     [SerializeField]
     protected float pointsOnPickup = 5f;
@@ -18,17 +17,14 @@ public abstract class JumperGeneralPickup : MonoBehaviour
 
 
     protected Collider2D myCollider;
-    protected Rigidbody2D myRb;
+    
     #endregion
 
     #region overridable
     protected virtual void Awake()
     {
         myCollider = GetComponent<Collider2D>();
-        myRb = GetComponent<Rigidbody2D>();
-        myCollider.isTrigger = true;
-        myRb.isKinematic = true;
-        myRb.gravityScale = 0;
+        myCollider.isTrigger = true;      
     }
 
     protected virtual void Start()
