@@ -74,6 +74,7 @@ public class JumperManagerUI : MonoBehaviour
         //ensuring this only gets run once
         if (endingGame) { return; }
         jm.mainCamera.ZoomIn();
+        jm.mainCamera.PlayerDestroyed();
         endingGame = true;
         if (!isGood && runSequence) 
             jm.player.RunDeathSequence();
@@ -101,7 +102,6 @@ public class JumperManagerUI : MonoBehaviour
     private IEnumerator SwitchCamera(float timer, bool isGoodEnd)
     {
         yield return new WaitForSeconds(timer);
-        jm.mainCamera.PlayerDestroyed();
         coinsCollected = (int)jm.player.GetCoinsCollected();
         //if this throws an error, need to stop whatever destroyed the player before this function
         Destroy(jm.player.gameObject);

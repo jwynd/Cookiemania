@@ -25,11 +25,9 @@ public class JumperTrampolineController : JumperGeneralPlatform
     {
         if (collision.gameObject.CompareTag(playerTag))
         {
-            if (collision.gameObject.transform.position.y + collision.gameObject.GetComponent<Renderer>().bounds.extents.y >=
-                transform.position.y + rend.bounds.extents.y)
-            {
-                collision.gameObject.GetComponent<JumperPlayerController>().BouncePlayer(bounceMultiplier);
-            }
+            //this is trigger, so dont' need to check height
+            collision.gameObject.GetComponent<JumperPlayerController>().BouncePlayer(bounceMultiplier);
+            
         }
 
     }
