@@ -49,6 +49,6 @@ public abstract class JumperGeneralThreat : MonoBehaviour
     //probably a coroutine implementation
     public abstract void PlatformDestroyed(float totalTime, float flashPeriod);
     public virtual float GetPointValue() { return pointValue; }
-    public virtual void Remove() { Destroy(gameObject); }
+    public virtual void Remove(bool isImmediate = true) { Destroy(gameObject); }
     #endregion
 }

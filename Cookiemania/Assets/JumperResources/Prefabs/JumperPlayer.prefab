@@ -125,7 +125,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 1024
-  throwStrength: {x: 4, y: 4}
+  throwStrength: {x: 8, y: 8}
   maxHealth: 5
   flashTime: 0.15
   damageTimerMax: 1.5
@@ -136,6 +136,7 @@ MonoBehaviour:
   jumpAxis: Jump
   pickupAxis: Pickup
   throwAxis: Throw
+  dummyAxis: Dummy
 --- !u!70 &1793148104149608238
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

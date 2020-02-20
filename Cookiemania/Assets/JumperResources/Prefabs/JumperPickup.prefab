@@ -142,3 +142,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4b28c1c230b3d4aa1a37149754393e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 15
+  explosionTimer: 0.75
+  pointsOnPickup: 5
+  automaticallyPickup: 0
+  explosionFlashCount: 3
+  explosionFrames: 5
+  explosionSize: 8

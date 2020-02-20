@@ -122,8 +122,14 @@ public class JumperObstacleController : JumperGeneralThreat
         StartCoroutine(JumperManagerGame.FlashThenKill(gameObject, totalTime, flashInterval));
     }
 
-    public override void Remove()
+    public override void Remove(bool isImmediate)
     {
+        rb.isKinematic = true;
+        if (isImmediate)
+        {
+            StartCoroutine(JumperManagerGame.FlashThenKill(gameObject, 0.05f, 0.05f));
+
+        }
         StartCoroutine(JumperManagerGame.FlashThenKill(gameObject, 0.5f, 0.1f));
     }
     #endregion

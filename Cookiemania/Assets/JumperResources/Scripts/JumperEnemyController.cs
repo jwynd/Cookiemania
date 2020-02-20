@@ -167,8 +167,13 @@ public class JumperEnemyController : JumperGeneralThreat
     #endregion
 
     #region public
-    public override void Remove()
+    public override void Remove(bool isImmediate = false)
     {
+        rb.isKinematic = true;
+        if (isImmediate)
+        {
+            StartCoroutine(JumperManagerGame.FlashThenKill(gameObject, 0.05f, 0.05f));
+        }
         StartCoroutine(JumperManagerGame.FlashThenKill(gameObject, 0.5f, 0.1f));
     }
 

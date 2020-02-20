@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 826711010817931759}
   m_Layer: 0
   m_Name: JumperManager
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60,6 +60,10 @@ MonoBehaviour:
       type: 3}
     weight: 0.595
     probability: 0
+  - platform: {fileID: 7739518868798799298, guid: e58f8d79e5ed8e743a3424413f3d1b0d,
+      type: 3}
+    weight: 0.674
+    probability: 0
   jumpHeight: 5
   width: 10
   minHeightIncrease: 0
@@ -68,7 +72,7 @@ MonoBehaviour:
   difficultyIncrement: 0.3
   levelReward: 40
   heightGoal: 100
-  maxFallDistance: 15
+  maxFallDistance: 20
   rotation: 0
   playerTag: Player
   enemyTag: Enemy
