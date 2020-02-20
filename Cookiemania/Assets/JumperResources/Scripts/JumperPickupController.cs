@@ -18,6 +18,12 @@ public class JumperPickupController : JumperGeneralPickup
     protected float parentRight;
     protected bool exploding;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        enemyTag = JumperManagerGame.Instance.GetEnemyTag();
+        obstacleTag = JumperManagerGame.Instance.GetObstacleTag();
+    }
     protected override void Start()
     {
         base.Start();
@@ -29,8 +35,7 @@ public class JumperPickupController : JumperGeneralPickup
         parentLeft = pBounds.x;
         parentRight = pBounds.z;
         transform.position = new Vector2(Random.Range(parentLeft, parentRight), transform.position.y);
-        enemyTag = JumperManagerGame.Instance.GetEnemyTag();
-        obstacleTag = JumperManagerGame.Instance.GetObstacleTag();
+        
 
     }
 

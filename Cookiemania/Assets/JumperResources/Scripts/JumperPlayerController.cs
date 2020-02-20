@@ -444,9 +444,11 @@ public class JumperPlayerController : MonoBehaviour
 
     protected void DamageHelper(float damage)
     {
-        currentHealth -= Mathf.Abs(damage);
+        //when damage is too high, gets reduced to 90% of players max hp
+        float sanitizedDamage = Mathf.Min(Mathf.Abs(damage), maxHealth);
+        currentHealth -= sanitizedDamage;
         StartCoroutine(Flasher());
-        if (currentHealth < 0)
+        if (currentHealth <= 0)
         {
             JumperManagerUI.Instance.End(false);
         }
