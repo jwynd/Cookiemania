@@ -114,8 +114,8 @@ public class JumperEnemyController : JumperGeneralThreat
             rb.isKinematic = false;
             GetComponent<Collider2D>().isTrigger = false;
             rb.gravityScale = 1;
-            rb.velocity = new Vector2(rb.velocity.x, 0);
-            rb.AddForce(new Vector2(0, jump.y), ForceMode2D.Impulse);
+            rb.velocity = Vector2.zero;
+            rb.AddForce(new Vector2(maxVelocity * direction, jump.y), ForceMode2D.Impulse);
             direction = 0;
             if (anim != null) { anim.SetTrigger("Jump"); }
         }
@@ -181,9 +181,9 @@ public class JumperEnemyController : JumperGeneralThreat
     #region coroutine
     private IEnumerator PlatformDestroyedHelper(float timer)
     {
-        yield return new WaitForSeconds(timer / 4);
+        yield return new WaitForSeconds(timer / 10);
         jumpToMyDeath = true;
-        yield return new WaitForSeconds(timer * 3 / 4);
+        yield return new WaitForSeconds(timer * 9 / 10);
         Remove();
     }
     #endregion

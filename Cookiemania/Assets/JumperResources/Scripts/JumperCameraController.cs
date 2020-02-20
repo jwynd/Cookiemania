@@ -15,9 +15,9 @@ public class JumperCameraController : MonoBehaviour
     public Vector2 lookAhead = new Vector2(2.0f, 1.0f); 
     public Vector2 catchUpSpeed = new Vector2(1.0f, 10.0f);
     public float buffer = 1.0f;
-    private Vector2 targetPos = Vector2.zero;
+    public float zoomSpeed = 1.0f;
 
-    public BoxCollider2D cameraBounds;
+    private Vector2 targetPos = Vector2.zero;
 
 
 
@@ -90,11 +90,26 @@ public class JumperCameraController : MonoBehaviour
         rb.velocity = velocity;
     }
 
+    public void ZoomIn(float targetCameraSize = 3f)
+    {
+        StartCoroutine(ZoomCamera(targetCameraSize));
+    }
+
     public void PlayerDestroyed()
     {
         isFollowing = false;
         playerRB = null;
         rb.velocity = Vector2.zero;
+    }
+
+    private IEnumerator ZoomCamera(float targetSize)
+    {
+        Camera myCam = GetComponent<Camera>();
+        while (myCam.orthographicSize > targetSize)
+        {
+            yield return new WaitForSeconds(Time.fixedDeltaTime);
+            myCam.orthographicSize = Mathf.MoveTowards(myCam.orthographicSize, targetSize, zoomSpeed * Time.fixedDeltaTime);
+        }
     }
 
 

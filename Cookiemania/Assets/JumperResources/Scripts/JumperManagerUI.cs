@@ -10,7 +10,7 @@ public class JumperManagerUI : MonoBehaviour
     public UnityEngine.UI.Slider healthSlider;
     public GameObject endscreenCamera;
     public GameObject endscreenCanvas;
-    public float timeToNextScene = 1.0f;
+    public float timeToNextScene = 2.5f;
     public float maxFallDistance = 15f;
     public static JumperManagerUI Instance { get; private set; }
 
@@ -73,6 +73,7 @@ public class JumperManagerUI : MonoBehaviour
     {
         //ensuring this only gets run once
         if (endingGame) { return; }
+        jm.mainCamera.ZoomIn();
         endingGame = true;
         if (!isGood && runSequence) 
             jm.player.RunDeathSequence();

@@ -331,7 +331,7 @@ MonoBehaviour:
   lookAhead: {x: 2.5, y: 1}
   catchUpSpeed: {x: 2, y: 3}
   buffer: 0.5
-  cameraBounds: {fileID: 0}
+  zoomSpeed: 1
   isFollowing: 1
 --- !u!50 &671950058
 Rigidbody2D:

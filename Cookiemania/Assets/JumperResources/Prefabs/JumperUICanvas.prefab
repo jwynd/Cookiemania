@@ -1266,7 +1266,7 @@ MonoBehaviour:
   healthSlider: {fileID: 9176062765672800013}
   endscreenCamera: {fileID: 0}
   endscreenCanvas: {fileID: 0}
-  timeToNextScene: 1
+  timeToNextScene: 2.5
   maxFallDistance: 15
 --- !u!114 &1083541489
 MonoBehaviour:
