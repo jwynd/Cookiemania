@@ -15,9 +15,11 @@ public class JumperEnemyController : JumperGeneralThreat
     protected float parentLeft;
     protected float parentRight;
     protected float direction = 1;
+    protected float jumpDirection = 1;
     protected float originalMaxVelocity;
     protected Rigidbody2D rb;
     protected bool jumpToMyDeath = false;
+    protected bool hasJumped = false;
     protected Vector3 originalScale;
     protected Animator anim;
     
@@ -57,7 +59,7 @@ public class JumperEnemyController : JumperGeneralThreat
         }
         transform.parent = null;
         transform.position = new Vector2(Random.Range(parentLeft, parentRight), transform.position.y);
-
+        jumpDirection = direction;
     }
     #endregion
 
@@ -80,17 +82,12 @@ public class JumperEnemyController : JumperGeneralThreat
         {
             Destroy(gameObject);
         }
-        else
+        else if (!hasJumped)
         {
             float playerx = RunToPlayer();
-            /*
-             * default is walk then jump
-             */
             CheckBoundsTrackingPlayer();
-
             Walk();
             JumpToPlayer(playerx);
-            //Jump();
         }
     }
 
@@ -121,12 +118,13 @@ public class JumperEnemyController : JumperGeneralThreat
 
     protected void JumpToPlayer(float playerx)
     {
-        if (Mathf.Abs(playerx - rb.position.x) < 2f && direction != 0)
+        if (Mathf.Abs(playerx - rb.position.x) < 2.5f && !hasJumped)
         {
             GetComponent<Collider2D>().isTrigger = false;
             JumpHelper();
             rb.velocity = Vector2.zero;
             rb.AddForce(new Vector2(maxVelocity * direction, jump.y), ForceMode2D.Impulse);
+            hasJumped = true;
             direction = 0;
         }
     }
@@ -144,14 +142,18 @@ public class JumperEnemyController : JumperGeneralThreat
         {
             rb.velocity = Vector2.zero;
             direction = 1;
+
             transform.localScale = new Vector3(originalScale.x, originalScale.y, originalScale.z);
         }
         else if (direction > 0 && rb.position.x > parentRight)
         {
             rb.velocity = Vector2.zero;
             direction = -1;
+
             transform.localScale = new Vector3(-originalScale.x, originalScale.y, originalScale.z);
         }
+        jumpDirection = direction;
+
     }
 
     protected void Walk()
@@ -165,17 +167,17 @@ public class JumperEnemyController : JumperGeneralThreat
         float playerX = jm.player.transform.position.x;
         //sprint speed hehe
         maxVelocity = originalMaxVelocity * 1.5f;
-
-            if (rb.position.x > playerX + buffer)
-            {
-                direction = -1;
-                transform.localScale = new Vector3(-originalScale.x, originalScale.y, originalScale.z);
-            }
-            else if (rb.position.x + buffer < playerX)
-            {
-                direction = 1;
-                transform.localScale = new Vector3(originalScale.x, originalScale.y, originalScale.z);
-            }
+        if (rb.position.x > playerX + buffer)
+        {
+            direction = -1;
+            transform.localScale = new Vector3(-originalScale.x, originalScale.y, originalScale.z);
+        }
+        else if (rb.position.x + buffer < playerX)
+        {
+            direction = 1;
+            transform.localScale = new Vector3(originalScale.x, originalScale.y, originalScale.z);
+        }
+        jumpDirection = direction;
 
         return playerX;
     }
