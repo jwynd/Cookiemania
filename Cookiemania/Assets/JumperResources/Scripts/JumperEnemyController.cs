@@ -10,7 +10,15 @@ public class JumperEnemyController : JumperGeneralThreat
     protected Vector2 jump = new Vector2(2f, 4f);
 
     [SerializeField]
+    protected float jumpDelay = 0.75f;
+
+    [SerializeField]
+    protected LayerMask groundLayer;
+
+    [SerializeField]
     protected float buffer = 1f;
+
+    
 
     protected float parentLeft;
     protected float parentRight;
@@ -85,7 +93,7 @@ public class JumperEnemyController : JumperGeneralThreat
         else if (!hasJumped)
         {
             float playerx = RunToPlayer();
-            CheckBoundsTrackingPlayer();
+           // CheckBoundsTrackingPlayer();
             Walk();
             JumpToPlayer(playerx);
         }
@@ -118,13 +126,13 @@ public class JumperEnemyController : JumperGeneralThreat
 
     protected void JumpToPlayer(float playerx)
     {
-        if (Mathf.Abs(playerx - rb.position.x) < 2.5f && !hasJumped)
+        if (Mathf.Abs(playerx - rb.position.x) < 2.5f || (direction < 0 && rb.position.x < parentLeft) || (direction > 0 && rb.position.x > parentRight))
         {
-            GetComponent<Collider2D>().isTrigger = false;
             JumpHelper();
             rb.velocity = Vector2.zero;
             rb.AddForce(new Vector2(maxVelocity * direction, jump.y), ForceMode2D.Impulse);
             hasJumped = true;
+          //  StartCoroutine(RejumpDelay());
             direction = 0;
         }
     }
@@ -204,10 +212,20 @@ public class JumperEnemyController : JumperGeneralThreat
     #region coroutine
     protected IEnumerator PlatformDestroyedHelper(float timer)
     {
-        yield return new WaitForSeconds(timer / 10);
+        yield return new WaitForSeconds(timer / 5);
         jumpToMyDeath = true;
-        yield return new WaitForSeconds(timer * 9 / 10);
+        yield return new WaitForSeconds(timer * 4 / 5);
         Remove();
+    }
+
+    protected IEnumerator RejumpDelay()
+    {
+        yield return new WaitForSeconds(jumpDelay);
+        Renderer rend = GetComponent<Renderer>();
+        float offset = rend.bounds.extents.x;
+        float yoffset = rend.bounds.extents.y * 1.02f;
+        hasJumped = !Physics2D.OverlapArea(new Vector2(transform.position.x - offset, transform.position.y - yoffset),
+            new Vector2(transform.position.x + offset, transform.position.y - yoffset + 0.01f), groundLayer);
     }
     #endregion
 }

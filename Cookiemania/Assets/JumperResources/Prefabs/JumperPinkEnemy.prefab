@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7240351483836542595}
   - component: {fileID: 2518038965417871725}
   - component: {fileID: 4095345495257838182}
-  m_Layer: 17
+  m_Layer: 0
   m_Name: JumperPinkEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -125,6 +125,10 @@ MonoBehaviour:
   indestructable: 0
   maxHealth: 4
   jump: {x: 2, y: 4}
+  jumpDelay: 0.75
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   buffer: 1
 --- !u!70 &2518038965417871725
 CapsuleCollider2D:
