@@ -10,7 +10,7 @@ public class JumperManagerUI : MonoBehaviour
     public UnityEngine.UI.Slider healthSlider;
     public GameObject endscreenCamera;
     public GameObject endscreenCanvas;
-    public float timeToNextScene = 1.0f;
+    public float timeToNextScene = 2.5f;
     public float maxFallDistance = 15f;
     public static JumperManagerUI Instance { get; private set; }
 
@@ -69,11 +69,17 @@ public class JumperManagerUI : MonoBehaviour
         }
     }
     #region public
-    public void End(bool isGood)
+    public void End(bool isGood, bool runSequence = true)
     {
         //ensuring this only gets run once
         if (endingGame) { return; }
-        endingGame = true;   
+        jm.mainCamera.ZoomIn();
+        jm.mainCamera.PlayerDestroyed();
+        endingGame = true;
+        if (!isGood && runSequence) 
+            jm.player.RunDeathSequence();
+        else if (runSequence)
+            jm.player.RunVictorySequence();
         StartCoroutine(SwitchCamera(timeToNextScene, isGood));
     }
 
@@ -96,7 +102,6 @@ public class JumperManagerUI : MonoBehaviour
     private IEnumerator SwitchCamera(float timer, bool isGoodEnd)
     {
         yield return new WaitForSeconds(timer);
-        jm.mainCamera.PlayerDestroyed();
         coinsCollected = (int)jm.player.GetCoinsCollected();
         //if this throws an error, need to stop whatever destroyed the player before this function
         Destroy(jm.player.gameObject);

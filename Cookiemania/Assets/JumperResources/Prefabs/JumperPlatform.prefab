@@ -117,10 +117,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8552561703256424470}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 714d41a275a56764e94c5c79fc19356c, type: 3}
+  m_Script: {fileID: 11500000, guid: 20b9691b5e069ee4fb07572254db205a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   timeToRemove: 1.5
   flashPeriod: 0.25
-  isStartingPlatform: 0
   enemyChild: {fileID: 0}

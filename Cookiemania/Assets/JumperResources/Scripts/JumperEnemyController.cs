@@ -7,23 +7,36 @@ public class JumperEnemyController : JumperGeneralThreat
     #region variables
     
     [SerializeField]
-    private Vector2 jump = new Vector2(2f, 4f);
+    protected Vector2 jump = new Vector2(2f, 4f);
 
-    private float parentLeft;
-    private float parentRight;
-    private float direction = 1;
-    private Rigidbody2D rb;
-    private bool jumpToMyDeath = false;
-    private Animator anim;
+    [SerializeField]
+    protected float buffer = 1f;
+
+    protected float parentLeft;
+    protected float parentRight;
+    protected float direction = 1;
+    protected float originalMaxVelocity;
+    protected Rigidbody2D rb;
+    protected bool jumpToMyDeath = false;
+    protected Vector3 originalScale;
+    protected Animator anim;
+    
     #endregion
 
     #region startup
+    protected override void Awake()
+    {
+        base.Awake();
+        originalScale = transform.localScale;
+        originalMaxVelocity = maxVelocity;
+    }
+
     protected override void Start()
     {
         base.Start();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        JumperPlatformController dad = transform.parent.GetComponent<JumperPlatformController>();
+        JumperGeneralPlatform dad = transform.parent.GetComponent<JumperGeneralPlatform>();
         dad.enemyChild = this;
         float diff = jm.GetDifficultyMultiplier();
         damage *= diff;
@@ -40,7 +53,7 @@ public class JumperEnemyController : JumperGeneralThreat
         if (transform.parent.position.x < transform.position.x)
         {
             direction = -1;
-            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+            transform.localScale = new Vector3(-originalScale.x, originalScale.y, originalScale.z);
         }
         transform.parent = null;
         transform.position = new Vector2(Random.Range(parentLeft, parentRight), transform.position.y);
@@ -51,63 +64,132 @@ public class JumperEnemyController : JumperGeneralThreat
     #region fixedUpdate
 
     // Update is called once per frame
-    void FixedUpdate()
+    protected void FixedUpdate()
     {
         UpdateHelper();              
     }
 
-    private void UpdateHelper()
+    protected void UpdateHelper()
     {
         if (!jumpToMyDeath)
         {
             CheckBounds();
             Walk();
         }
+        else if (jm.player == null)
+        {
+            Destroy(gameObject);
+        }
         else
         {
+            float playerx = RunToPlayer();
+            /*
+             * default is walk then jump
+             */
+            CheckBoundsTrackingPlayer();
+
             Walk();
-            Jump();
+            JumpToPlayer(playerx);
+            //Jump();
         }
     }
 
-    private void Jump()
+    protected void CheckBoundsTrackingPlayer()
     {
+        if (direction <= 0 && rb.position.x < parentLeft)
+        {
+            direction = 0;
+            rb.velocity = Vector2.zero;
+        }
+        else if (direction >= 0 && rb.position.x > parentRight)
+        {
+            direction = 0;
+            rb.velocity = Vector2.zero;
+        }
+    }
+
+    protected void Jump()
+    {
+        //disabled when direction == 0
         if ((direction < 0 && rb.position.x < parentLeft) || (direction > 0 && rb.position.x > parentRight))
         {
-            rb.isKinematic = false;
-            rb.gravityScale = 1;
-            rb.AddForce(new Vector2(jump.x * direction, jump.y), ForceMode2D.Impulse);
-            direction = 0;
-            if (anim != null) { anim.SetTrigger("Jump"); }
+            JumpHelper();
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+            rb.AddForce(new Vector2(0, jump.y), ForceMode2D.Impulse);
         }
     }
 
-    private void CheckBounds()
+    protected void JumpToPlayer(float playerx)
+    {
+        if (Mathf.Abs(playerx - rb.position.x) < 2f && direction != 0)
+        {
+            GetComponent<Collider2D>().isTrigger = false;
+            JumpHelper();
+            rb.velocity = Vector2.zero;
+            rb.AddForce(new Vector2(maxVelocity * direction, jump.y), ForceMode2D.Impulse);
+            direction = 0;
+        }
+    }
+
+    private void JumpHelper()
+    {
+        rb.isKinematic = false;
+        rb.gravityScale = 1;
+        if (anim != null) { anim.SetTrigger("Jump"); }
+    }
+
+    protected void CheckBounds()
     {
         if (direction < 0 && rb.position.x < parentLeft)
         {
             rb.velocity = Vector2.zero;
             direction = 1;
-            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+            transform.localScale = new Vector3(originalScale.x, originalScale.y, originalScale.z);
         }
         else if (direction > 0 && rb.position.x > parentRight)
         {
             rb.velocity = Vector2.zero;
             direction = -1;
-            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+            transform.localScale = new Vector3(-originalScale.x, originalScale.y, originalScale.z);
         }
     }
 
-    private void Walk()
+    protected void Walk()
     { 
+        //direction set to 0 disables this
         rb.velocity = new Vector2(Mathf.Clamp(direction * acceleration + rb.velocity.x, -maxVelocity, maxVelocity), rb.velocity.y);
+    }
+
+    protected float RunToPlayer()
+    {
+        float playerX = jm.player.transform.position.x;
+        //sprint speed hehe
+        maxVelocity = originalMaxVelocity * 1.5f;
+
+            if (rb.position.x > playerX + buffer)
+            {
+                direction = -1;
+                transform.localScale = new Vector3(-originalScale.x, originalScale.y, originalScale.z);
+            }
+            else if (rb.position.x + buffer < playerX)
+            {
+                direction = 1;
+                transform.localScale = new Vector3(originalScale.x, originalScale.y, originalScale.z);
+            }
+
+        return playerX;
     }
 
     #endregion
 
     #region public
-    public override void Remove()
+    public override void Remove(bool isImmediate = false)
     {
+        rb.isKinematic = true;
+        if (isImmediate)
+        {
+            StartCoroutine(JumperManagerGame.FlashThenKill(gameObject, 0.05f, 0.05f));
+        }
         StartCoroutine(JumperManagerGame.FlashThenKill(gameObject, 0.5f, 0.1f));
     }
 
@@ -118,11 +200,11 @@ public class JumperEnemyController : JumperGeneralThreat
     #endregion
 
     #region coroutine
-    private IEnumerator PlatformDestroyedHelper(float timer)
+    protected IEnumerator PlatformDestroyedHelper(float timer)
     {
-        yield return new WaitForSeconds(timer / 4);
+        yield return new WaitForSeconds(timer / 10);
         jumpToMyDeath = true;
-        yield return new WaitForSeconds(timer * 3 / 4);
+        yield return new WaitForSeconds(timer * 9 / 10);
         Remove();
     }
     #endregion

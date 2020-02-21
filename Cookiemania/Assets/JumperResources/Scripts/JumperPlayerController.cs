@@ -23,9 +23,8 @@ public class JumperPlayerController : MonoBehaviour
 {
     #region variables
     public float acceleration = 0.5f;
-    public float jumpMultiplier = 2f;
-    
-    public float jumpSpeed = 3.5f;
+    public float jumpSpeed = 9f;
+    public float airJumpSpeed = 6f;
     public LayerMask groundLayer;
     public Vector2 throwStrength = new Vector2(4.0f, 4.0f);
     public float maxHealth = 5;
@@ -34,15 +33,15 @@ public class JumperPlayerController : MonoBehaviour
     public AudioClip jumpSound;
     public JumperSelfDestruct jumpParticles;
     [Tooltip("Axis for left and right movements")]
-    public string horizontalAxis = "Pickup";
+    public string horizontalAxis = "Horizontal";
     [Tooltip("Axis for jumping")]
-    public string jumpAxis = "Pickup";
+    public string jumpAxis = "Jump";
     [Tooltip("Axis for picking up items")]
     public string pickupAxis = "Pickup";
     [Tooltip("Axis for throwing items")]
     public string throwAxis = "Throw";
-    public float totalJumpStrength { get; private set; }
-    
+    [Tooltip("EMPTY INPUT axis, should still exist but no keys mapped to it")]
+    public string dummyAxis = "Dummy";
 
     protected Rigidbody2D rb;
     protected Renderer rend;
@@ -70,14 +69,19 @@ public class JumperPlayerController : MonoBehaviour
     protected Vector3 originalScale;
     protected Color damagedColor = Color.red * Color.white;
     protected Color defaultColor = Color.white;
-    private bool throwStuff;
-    private bool canAirJump = true;
+    protected bool throwStuff;
+    protected bool canAirJump = true;
+    protected string groundTag;
+    protected string enemyTag;
+    protected string obstacleTag;
+    protected string collectiblesTag;
+    protected string myTag;
+
     #endregion
 
     #region startup
     private void Awake()
     {
-        totalJumpStrength = jumpMultiplier * jumpSpeed + jumpSpeed * (1 + jumpMultiplier);
         originalScale = transform.localScale;
         rb = GetComponent<Rigidbody2D>();
         audioPlayer = GetComponent<AudioSource>();
@@ -88,6 +92,17 @@ public class JumperPlayerController : MonoBehaviour
     void Start()
     {
         jm = JumperManagerGame.Instance;
+        GetTags();
+    }
+
+    void GetTags()
+    {
+        groundTag = jm.GetGroundTag();
+        myTag = jm.GetPlayerTag();
+        collectiblesTag = jm.GetCollectiblesTag();
+        enemyTag = jm.GetEnemyTag();
+        obstacleTag = jm.GetObstacleTag();
+        gameObject.tag = myTag;
     }
     #endregion
 
@@ -247,13 +262,20 @@ public class JumperPlayerController : MonoBehaviour
             if (grounded)
             {
                 grounded = false;
-                rb.velocity = new Vector2(velocity.x, jumpSpeed * (1 + jumpMultiplier));
+                rb.velocity = new Vector2(velocity.x, 0);
+                rb.AddForce(new Vector2(0, jumpSpeed), ForceMode2D.Impulse);
             }
-            else
+            else if (rb.velocity.y < jumpSpeed)
             {
                 canAirJump = false;
-                rb.velocity = new Vector2(velocity.x, jumpSpeed * jumpMultiplier);
+                rb.velocity = new Vector2(velocity.x, 0);
+                rb.AddForce(new Vector2(0, airJumpSpeed), ForceMode2D.Impulse);
             }
+            //else
+            //{
+                //canAirJump = false;
+                //the jump punish lol, imma just disable
+            //}
         }
         else
         {
@@ -316,7 +338,7 @@ public class JumperPlayerController : MonoBehaviour
 
     public float GetJumpStrength()
     {
-        return totalJumpStrength;
+        return jumpSpeed;
     }
 
     public float GetMaxVelocity()
@@ -344,17 +366,32 @@ public class JumperPlayerController : MonoBehaviour
         return points + maxHeightReached;
     }
 
+    public void BouncePlayer(float bounceStrength)
+    {
+        Debug.Log("Bounce called");
+        rb.velocity = new Vector2(rb.velocity.x, 0);
+        rb.AddForce(new Vector2(0, bounceStrength * jumpSpeed), ForceMode2D.Impulse);
+        canAirJump = true;
+    }
+
     #endregion
 
     #region collision
     protected void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Platform"))
+        if (collision.gameObject.CompareTag(groundTag))
         {
-            JumperPlatformController check = collision.gameObject.GetComponent<JumperPlatformController>();
-            if (check != null) { check.Remove(); }
+            JumperGeneralPlatform check = collision.gameObject.GetComponent<JumperGeneralPlatform>();
+            if (check != null) 
+            {
+                if (collision.gameObject.transform.position.y + collision.gameObject.GetComponent<Renderer>().bounds.extents.y <
+                transform.position.y + rend.bounds.extents.y)
+                {
+                    check.Remove();
+                }
+            }
         }
-        else if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Obstacle"))
+        else if (collision.gameObject.CompareTag(enemyTag) || collision.gameObject.CompareTag(obstacleTag))
         {
             TakesDamage(collision.gameObject);
         }
@@ -362,9 +399,15 @@ public class JumperPlayerController : MonoBehaviour
 
     protected void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Pickup"))
+        if (collision.gameObject.CompareTag(collectiblesTag))
         {
-            if (pickup && !haveItem)
+            JumperGeneralPickup pu = collision.gameObject.GetComponent<JumperGeneralPickup>();
+            if (pu.IsAutomaticPickup())
+            {
+                //blah blah do stuff for picking up the item
+                Debug.Log("picked up " + pu.name);
+            }
+            else if (pickup && !haveItem)
             {
                 //gonna parent the held item to the player then put it in the held item position
                 //modified by the size of the object in future
@@ -376,7 +419,7 @@ public class JumperPlayerController : MonoBehaviour
                 haveItem = true;
             }        
         }
-        else if (collision.gameObject.CompareTag("Obstacle") || collision.gameObject.CompareTag("Enemy"))
+        else if (collision.gameObject.CompareTag(obstacleTag) || collision.gameObject.CompareTag(enemyTag))
         {
             //does the damage to the player or something           
             TakesDamage(collision.gameObject);
@@ -392,20 +435,66 @@ public class JumperPlayerController : MonoBehaviour
             if (obsControl != null)
             {
                 DamageHelper(obsControl.GetDamage());
-            } 
+            }
+            obsControl.RemoveOnDamage();
+
         }
     }
     
 
     protected void DamageHelper(float damage)
     {
-        currentHealth -= Mathf.Abs(damage);
+        //when damage is too high, gets reduced to 90% of players max hp
+        float sanitizedDamage = Mathf.Min(Mathf.Abs(damage), maxHealth);
+        currentHealth -= sanitizedDamage;
         StartCoroutine(Flasher());
-        if (currentHealth < 0)
+        if (currentHealth <= 0)
         {
             JumperManagerUI.Instance.End(false);
         }
         //player destruction handled elsewhere
+    }
+    
+    //yikes, permanent disability right here
+    protected void DisablePlayerMovement()
+    {
+        horizontalAxis = dummyAxis;
+        jumpAxis = dummyAxis;
+        pickupAxis = dummyAxis;
+        throwAxis = dummyAxis;
+        rb.gravityScale = 0;
+        rb.velocity = Vector2.zero;
+        rb.isKinematic = true;
+    }
+
+    public void RunDeathSequence()
+    {
+        //okay this function removes all input ability from player
+        //disables gravity
+        //stops them from moving
+        //and uhhh kills em
+        DisablePlayerMovement();
+        DeathAnimation();
+    }
+
+    //TODO get a death animation
+    private void DeathAnimation()
+    {
+        return;
+    }
+
+    public void RunVictorySequence()
+    {
+        //this function also removes ability to input 
+        //but a victory animation instead
+        DisablePlayerMovement();
+        DanceAnimation();
+    }
+
+    //TODO get a dance animation
+    private void DanceAnimation()
+    {
+        return;
     }
 
     //credit: https://answers.unity.com/questions/838194/make-your-player-flash-when-hit.html

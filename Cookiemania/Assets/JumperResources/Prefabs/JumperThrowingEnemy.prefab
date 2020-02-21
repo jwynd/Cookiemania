@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2669534710687519257
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5151693214585652727}
+  m_Layer: 0
+  m_Name: ReadyPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5151693214585652727
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2669534710687519257}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.05, y: -0.03, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4924203214720030482}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6066617287731359766
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,11 +41,11 @@ GameObject:
   - component: {fileID: 4924203214720030482}
   - component: {fileID: 2627876212615343079}
   - component: {fileID: 6892990557881327403}
-  - component: {fileID: 7240351483836542595}
   - component: {fileID: 2518038965417871725}
   - component: {fileID: 4095345495257838182}
+  - component: {fileID: 3441298881574499968}
   m_Layer: 0
-  m_Name: JumperPinkEnemy
+  m_Name: JumperThrowingEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +61,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.51, y: -3.81, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
-  m_Children: []
+  m_Children:
+  - {fileID: 5151693214585652727}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -75,7 +106,7 @@ SpriteRenderer:
   m_SortingOrder: 1
   m_Sprite: {fileID: 1218939323123148936, guid: 5298f3f51a525da40953e07eb72b7a19,
     type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.21226418, g: 0.48547846, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -106,26 +137,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &7240351483836542595
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6066617287731359766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec5607df4f44ed040840245e6b7c47d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  acceleration: 3
-  maxVelocity: 3
-  damage: 1.5
-  pointValue: 20
-  indestructable: 0
-  maxHealth: 4
-  jump: {x: 2, y: 4}
-  buffer: 1
 --- !u!70 &2518038965417871725
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -161,3 +172,30 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3441298881574499968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6066617287731359766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cb972b2525dd664c8345a009ea0942a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  acceleration: 0.3
+  maxVelocity: 1
+  damage: 0.75
+  pointValue: 30
+  indestructable: 0
+  maxHealth: 4
+  buffer: 1
+  projectile: {fileID: 6469018665996307373, guid: 90288c5d2af419743ab69234f2b0406c,
+    type: 3}
+  verticalThrowStrength: 4
+  horizontalThrowStrengthMax: 3
+  projectileReadyPosition: {fileID: 5151693214585652727}
+  engageDistance: 10
+  fireDelay: 2
+  rearmDelay: 1

@@ -25,7 +25,7 @@ TagManager:
   - UI
   - 
   - 
-  - PlayerCollision
+  - PlayerCollisionOnly
   - Player
   - Platforms
   - NoPlayerCollisions

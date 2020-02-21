@@ -20,9 +20,13 @@ public class JumperManagerGame : MonoBehaviour
         public float probability = 0f;
     }
 
+
     
     [SerializeField]
     private Prefabs[] platformPrefabs = null;
+
+    [SerializeField]
+    private JumperSemiPermanentPlatforms exitPlatform = null;
 
     [Tooltip("How high the player can jump, used for determining how far platforms can be placed")]
     public float jumpHeight = 5.0f;
@@ -32,6 +36,7 @@ public class JumperManagerGame : MonoBehaviour
     public float minHeightIncrease = 0.0f;
     [Tooltip("Number of platforms per section")]
     public int density = 10;
+    [Range(1f, 45f)]
     [Tooltip("Starting difficulty of the level")]
     public float startingDifficulty = 1.0f;
     [Tooltip("How much difficulty increases every time a region is built")]
@@ -62,15 +67,16 @@ public class JumperManagerGame : MonoBehaviour
     private float offset;
     private float height;
     private float maxHeightReached;
-
+    private bool canPlaceAboveLast = true;
+    private float firstPrefabWidth = 0f;
+    private bool haveBuiltExit = false;
     private int max;
     private float weightRange = 0.0f;
+    private float checkAgainstPosition;
 
     public JumperCameraController mainCamera { get; private set; }
 
     public JumperPlayerController player { get; private set; }
-
-    public JumperPlatformTrigger trigger { get; private set; }
 
     public static JumperManagerGame Instance { get; private set; }
 
@@ -93,10 +99,9 @@ public class JumperManagerGame : MonoBehaviour
             fab.probability = fab.weight + weightRange;
             weightRange += fab.weight;
         }
-        trigger = FindObjectOfType<JumperPlatformTrigger>().gameObject.GetComponent<JumperPlatformTrigger>();
         player = FindObjectOfType<JumperPlayerController>().gameObject.GetComponent<JumperPlayerController>();
         mainCamera = FindObjectOfType<JumperCameraController>().gameObject.GetComponent<JumperCameraController>();
-        
+        heightGoal *= startingDifficulty;
     }
 
 
@@ -110,9 +115,9 @@ public class JumperManagerGame : MonoBehaviour
 
     private void ValidationChecks()
     {
-        if (!trigger || !player || !mainCamera || platformPrefabs.Length == 0)
+        if (!player || !mainCamera || platformPrefabs.Length == 0)
         {
-            Debug.LogError("need a player, trigger and camera with appropriate scripts" +
+            Debug.LogError("need a player, platform prefabs and camera with appropriate scripts" +
                 " instantiated in the scene");
         }
         if (platformPrefabs[0].platform == null)
@@ -141,7 +146,8 @@ public class JumperManagerGame : MonoBehaviour
     {
         ValidationChecks();
         GameObject g = Instantiate(platformPrefabs[0].platform, transform.position, Quaternion.identity);
-        minHeightIncrease = player.gameObject.GetComponent<Renderer>().bounds.size.y * 2 + g.GetComponent<Renderer>().bounds.size.y * 2;
+        firstPrefabWidth = g.GetComponent<Renderer>().bounds.size.x;
+        minHeightIncrease = player.gameObject.GetComponent<Renderer>().bounds.size.y + g.GetComponent<Renderer>().bounds.size.y;
         Destroy(g);
         jumpHeight = player.GetJumpStrength() / 3;
         width = player.GetMaxVelocity() * 2.5f;
@@ -171,43 +177,87 @@ public class JumperManagerGame : MonoBehaviour
     #endregion
 
     #region update
-    private void Update()
+    private void FixedUpdate()
     {
         if (player == null) { return; }
         float heightRightNow = player.transform.position.y;
         maxHeightReached = heightRightNow > maxHeightReached ? heightRightNow : maxHeightReached;
-        if (heightRightNow >= heightGoal)
-        {
-            JumperManagerUI.Instance.End(true);
-        }
         //not checking for health in update, will just run end on player death
         //else if (player.GetCurrentHealth() <= 0)
         //{
          //   JumperUIManager.Instance.End(false);
         //}
-        else if (maxHeightReached - maxFallDistance >= heightRightNow)
+        if (maxHeightReached - maxFallDistance >= heightRightNow)
         {
-            JumperManagerUI.Instance.End(false);
+            JumperManagerUI.Instance.End(false, false);
+        }
+        if (heightRightNow > checkAgainstPosition)
+        { 
+            BuildSection();
         }
     }
+
+    private void AttemptToBuildExit()
+    {
+        if (haveBuiltExit) { return; }
+        float randomx = BuildHelper();
+        float randomy = UnityEngine.Random.Range(height + minHeightIncrease, height + jumpHeight);
+        Vector3 pos = new Vector3(randomx, randomy, 0);
+        Instantiate(exitPlatform, pos, Quaternion.Euler(0, 0, rotation));
+        haveBuiltExit = true;
+    }
+
+    private float BuildHelper()
+    {
+        float ran;
+        if (canPlaceAboveLast)
+        {
+            ran = UnityEngine.Random.Range(offset - width, offset + width);
+        }
+        else
+        {
+            ran = UnityEngine.Random.Range(0, 1);
+            if (ran > 0.5f)
+            {
+                ran = UnityEngine.Random.Range(offset + firstPrefabWidth, offset + width);
+            }
+            else
+            {
+                ran = UnityEngine.Random.Range(offset - width, offset - firstPrefabWidth);
+            }
+        }
+        return ran;
+    }
+
     #endregion
 
     #region publicFunctions
 
     public void BuildSection()
     {
+        if (haveBuiltExit) { return; }
         startingDifficulty += difficultyIncrement;
-        for (int i = 0; i < density; ++i){
-            float randomx = UnityEngine.Random.Range(offset - width, offset + width);
+        for (int i = 0; i < density; ++i)
+        {
             float randomy = UnityEngine.Random.Range(height + minHeightIncrease, height + jumpHeight);
+            if (randomy >= heightGoal)
+            {
+                AttemptToBuildExit();
+                break;
+            }
+            float randomx = BuildHelper();
             Vector3 pos = new Vector3(randomx, randomy, 0);
             offset = pos.x;
             height = pos.y;
             GameObject g = Instantiate(Roulette(), pos, Quaternion.Euler(0, 0, rotation));
+            canPlaceAboveLast = g.GetComponent<JumperGeneralPlatform>().CanPlacePlatformsAbove();
             g.transform.parent = transform;
             g.transform.SetAsFirstSibling();
-            if (i == density - 3) trigger.transform.position = pos;
-            if(transform.childCount > max) transform.GetChild(transform.childCount-1).gameObject.GetComponent<JumperPlatformController>().Remove();
+            if (i == density - 3)
+            {
+                checkAgainstPosition = pos.y;
+            }
+            if(transform.childCount > max) transform.GetChild(transform.childCount-1).gameObject.GetComponent<JumperGeneralPlatform>().Remove();
         }
     }
 
@@ -219,6 +269,11 @@ public class JumperManagerGame : MonoBehaviour
     public float GetHeightGoal()
     {
         return heightGoal;
+    }
+
+    public float GetMaxHeightReached()
+    {
+        return maxHeightReached;
     }
 
     public float GetLevelReward()
