@@ -195,7 +195,7 @@ public class JumperEnemyController : JumperGeneralThreat
     #region public
     public override void Remove(bool isImmediate = false)
     {
-        rb.isKinematic = true;
+        GetComponent<Collider2D>().enabled = false;
         if (isImmediate)
         {
             StartCoroutine(JumperManagerGame.FlashThenKill(gameObject, 0.05f, 0.05f));
