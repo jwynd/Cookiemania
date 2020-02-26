@@ -22,9 +22,10 @@ using UnityEngine;
 public class JumperPlayerController : MonoBehaviour
 {
     #region variables
-    public float acceleration = 0.5f;
-    public float jumpSpeed = 9f;
-    public float airJumpSpeed = 6f;
+    public float acceleration = 1f;
+    public float maxSpeed = 5.5f;
+    public float jumpSpeed = 7.5f;
+    public float airJumpSpeed = 5.5f;
     public LayerMask groundLayer;
     public Vector2 throwStrength = new Vector2(4.0f, 4.0f);
     public float maxHealth = 5;
@@ -56,7 +57,7 @@ public class JumperPlayerController : MonoBehaviour
     protected bool jumped = false;
 
     protected bool pickup = false;
-    protected float maxSpeed = 5.5f;
+    
     protected float arialManeuverability = 0.5f;
     protected float normalManeuverability = 1;
     protected bool haveItem = false;
@@ -80,7 +81,7 @@ public class JumperPlayerController : MonoBehaviour
     #endregion
 
     #region startup
-    private void Awake()
+    protected void Awake()
     {
         originalScale = transform.localScale;
         rb = GetComponent<Rigidbody2D>();
@@ -92,6 +93,9 @@ public class JumperPlayerController : MonoBehaviour
     void Start()
     {
         jm = JumperManagerGame.Instance;
+        rb.gravityScale = jm.GetAlteredGravity();
+        jumpSpeed *= rb.gravityScale;
+        airJumpSpeed *= rb.gravityScale;
         GetTags();
     }
 
@@ -120,27 +124,6 @@ public class JumperPlayerController : MonoBehaviour
 
     bool JumpInput(string jump)
     {
-        //better way to set the velocity of the player
-        /*
-        if (Input.GetButtonDown("Jump"))//&& jumpCooldown <= 0)
-        {
-            if (jumpCount > 1)
-            {
-                jumpCount--;
-                return true;
-                //rb.AddForce(new Vector2(0, maxJumpSpeed), ForceMode2D.Impulse);
-            }
-            else if (jumpCount > 0)
-            {
-
-                jumpCount--;
-                return true;
-                //rb.AddForce(new Vector2(0, maxJumpSpeed/1.7f), ForceMode2D.Impulse);
-            }
-        }
-        return jumped;
-        */
-
         if (Input.GetButtonDown(jump))
         {
             if (grounded || canAirJump)
@@ -149,7 +132,6 @@ public class JumperPlayerController : MonoBehaviour
             }
         }
         return jumped;
-
     }
 
     protected void ItemInput(string pickupAx, string throwAx)
@@ -179,7 +161,7 @@ public class JumperPlayerController : MonoBehaviour
         HorizontalInput(horizontalAxis);
         Movement();
         ThrowItem();
-        //currently, no timers in fixed update
+        //currently, no timers on character
         Timers();
     }
 
@@ -206,8 +188,7 @@ public class JumperPlayerController : MonoBehaviour
         //can disable or enable arial controls by checking jumpcount
         //if (jumpCount == maxJumps || jumped)
         if (grounded && !jumped)
-        {
-            
+        {           
             HorizontalInputHelper(axis, normalManeuverability, false);
         }
         //in air speeds are lowered
@@ -319,12 +300,6 @@ public class JumperPlayerController : MonoBehaviour
     //to be run in fixed update
     protected void Timers()
     {
-        //if (damageTimer > 0)
-      //  {
-            //cant go below 0
-       //     damageTimer = Mathf.Max(0, damageTimer - Time.fixedDeltaTime);
-       // } 
-
     }
 
     #endregion

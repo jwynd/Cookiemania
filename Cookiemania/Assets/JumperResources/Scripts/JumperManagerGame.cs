@@ -60,7 +60,8 @@ public class JumperManagerGame : MonoBehaviour
     public string groundTag = "Platform";
     [Tooltip("Important game tag, ensure this is added to the tags list")]
     public string collectiblesTag = "Pickup";
-    
+    public float alteredGravity = 2f;
+
     //game manager always tagged with game controller
     private const string myTag = "GameController";
 
@@ -304,6 +305,11 @@ public class JumperManagerGame : MonoBehaviour
     public string GetCollectiblesTag()
     {
         return collectiblesTag;
+    }
+
+    public float GetAlteredGravity()
+    {
+        return alteredGravity;
     }
 
     //credit: https://forum.unity.com/threads/re-map-a-number-from-one-range-to-another.119437/

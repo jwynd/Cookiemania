@@ -85,3 +85,4 @@ MonoBehaviour:
   obstacleTag: Obstacle
   groundTag: Platform
   collectiblesTag: Pickup
+  alteredGravity: 2
