@@ -111,7 +111,7 @@ MonoBehaviour:
   playerdeathImage: {fileID: 8463096131581357343, guid: 9602e3d91879a97489b64b8514aada9b,
     type: 3}
   Player: {fileID: 0}
-  moveSpeed: 5
+  moveSpeed: 2
 --- !u!50 &4992746470104006924
 Rigidbody2D:
   serializedVersion: 4
