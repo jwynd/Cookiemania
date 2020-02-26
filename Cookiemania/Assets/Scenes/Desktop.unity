@@ -723,7 +723,7 @@ GameObject:
   - component: {fileID: 465540755}
   - component: {fileID: 465540754}
   m_Layer: 5
-  m_Name: Email
+  m_Name: EmailButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1021,9 +1021,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b7d92a50af7f7f40a50ce2e1961d13e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextEmailPosition: {x: 0, y: 170, z: 0}
+  nextEmailPosition: {x: 0, y: 150, z: 0}
   emailPrefab: {fileID: 1920807308}
-  offset: 30
+  offset: 50
 --- !u!4 &571996238
 Transform:
   m_ObjectHideFlags: 0
@@ -1282,7 +1282,7 @@ GameObject:
   - component: {fileID: 733111616}
   - component: {fileID: 733111615}
   m_Layer: 5
-  m_Name: Analytics
+  m_Name: AnalyticsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1411,7 +1411,7 @@ GameObject:
   - component: {fileID: 791384872}
   - component: {fileID: 791384871}
   m_Layer: 5
-  m_Name: Website
+  m_Name: WebsiteButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2572,6 +2572,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1419960845}
   - component: {fileID: 1419960846}
+  - component: {fileID: 1419960847}
   m_Layer: 0
   m_Name: Email
   m_TagString: DeactivateOnLoad
@@ -2611,6 +2612,19 @@ MonoBehaviour:
   otherTabs:
   - {fileID: 1319970853}
   - {fileID: 1365991720}
+--- !u!114 &1419960847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1419960844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92b9f8412dd2c7443a9b88ffabc5249c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  match: {fileID: 1600980793}
 --- !u!1 &1554690648
 GameObject:
   m_ObjectHideFlags: 0
@@ -2699,6 +2713,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1554690648}
   m_CullTransparentMesh: 0
+--- !u!1 &1600980793
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1600980794}
+  m_Layer: 5
+  m_Name: EmailsParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1600980794
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600980793}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1271120761}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1627251726
 GameObject:
   m_ObjectHideFlags: 0

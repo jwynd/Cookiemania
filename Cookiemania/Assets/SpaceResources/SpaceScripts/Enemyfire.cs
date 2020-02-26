@@ -37,6 +37,12 @@ public class Enemyfire : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+       
+        if (col.gameObject.CompareTag("fire"))
+        {
+            Destroy(this.gameObject);
+            Destroy(col.gameObject);
+        }
 
     }
     void OnBecomeInvisible()

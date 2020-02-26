@@ -10,6 +10,7 @@ public class Desktop_EmailController : MonoBehaviour
     public Vector3 nextEmailPosition;
     public GameObject emailPrefab;
     public float offset;
+    private GameObject emailsParent;
     private static List<GameObject> emails = new List<GameObject>();
 
     void OnValidate(){
@@ -26,6 +27,7 @@ public class Desktop_EmailController : MonoBehaviour
           Destroy(this);
         }
         Instance = this;
+        emailsParent = GameObject.Find("Canvas/EmailsParent");
         emailPrefab.SetActive(false);
     }
 
@@ -34,6 +36,7 @@ public class Desktop_EmailController : MonoBehaviour
         e.transform.GetChild(0).gameObject.GetComponent<Text>().text = subject;
         e.GetComponent<General_Email>().bodyText = body;
         e.GetComponent<RectTransform>().position = nextEmailPosition;
+        e.transform.SetParent(emailsParent.transform, false);
         e.SetActive(true);
         emails.Add(e);
         nextEmailPosition = new Vector3(nextEmailPosition.x, nextEmailPosition.y - offset, nextEmailPosition.z);
