@@ -44,6 +44,12 @@ public class enemy : MonoBehaviour
             Destroy(gameObject);
         }
 
+        if (col.gameObject.CompareTag("shield"))
+        {
+            // soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemydeath);
+            Destroy(gameObject);
+        }
+
         if (col.gameObject.CompareTag("Player"))
         {
             //soundmanager.Instance.PlayOneShot(soundmanager.Instance.playerdeath);

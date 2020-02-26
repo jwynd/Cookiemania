@@ -13,6 +13,7 @@ public class shield : MonoBehaviour
     {
         Player = GameObject.FindGameObjectWithTag("treasure").GetComponent<Transform>();
         Vector3 direction = transform.position - Player.position;
+        transform.Translate(direction * 1.5f);
         rigidBody = GetComponent<Rigidbody2D>();
         
     }
