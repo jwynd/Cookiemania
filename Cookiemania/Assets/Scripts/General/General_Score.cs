@@ -5,10 +5,18 @@ using UnityEngine.UI;
 
 public class General_Score : MonoBehaviour
 {
+    public static General_Score Instance;
     [HideInInspector] public int money = 100;
     [HideInInspector] public int trust = 0;
     private Text text;
     private Image image;
+
+    void Awake(){
+        if(Instance != null && Instance != this){
+            Destroy(this);
+        }
+        Instance = this;
+    }
     // Start is called before the first frame update
     void Start()
     {
