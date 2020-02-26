@@ -16,7 +16,7 @@ public class JumperCameraController : MonoBehaviour
     public Vector2 catchUpSpeed = new Vector2(1.0f, 10.0f);
     public float buffer = 1.0f;
     public float zoomSpeed = 1.0f;
-
+    public float acquireTargetSpeed = 3.0f;
     private Vector2 targetPos = Vector2.zero;
 
 
@@ -95,11 +95,28 @@ public class JumperCameraController : MonoBehaviour
         StartCoroutine(ZoomCamera(targetCameraSize));
     }
 
+    public void ZoomInToTarget(Transform t, float targetCameraSize = 3f)
+    {
+        StartCoroutine(ZoomCameraToTarget(t, targetCameraSize));
+    }
+
     public void PlayerDestroyed()
     {
         isFollowing = false;
         playerRB = null;
         rb.velocity = Vector2.zero;
+    }
+
+    private IEnumerator ZoomCameraToTarget(Transform t, float size)
+    {
+        Camera myCam = GetComponent<Camera>();
+        PlayerDestroyed();
+        while (myCam.orthographicSize > size && rb.position != (Vector2)t.position)
+        {          
+            myCam.orthographicSize = Mathf.MoveTowards(myCam.orthographicSize, size, zoomSpeed * Time.fixedDeltaTime);
+            rb.position = Vector2.MoveTowards(rb.position, t.position, acquireTargetSpeed * Time.fixedDeltaTime);
+            yield return new WaitForSeconds(Time.fixedDeltaTime);
+        }
     }
 
     private IEnumerator ZoomCamera(float targetSize)
@@ -111,8 +128,4 @@ public class JumperCameraController : MonoBehaviour
             myCam.orthographicSize = Mathf.MoveTowards(myCam.orthographicSize, targetSize, zoomSpeed * Time.fixedDeltaTime);
         }
     }
-
-
-
-
 }

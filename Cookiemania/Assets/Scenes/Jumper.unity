@@ -332,6 +332,7 @@ MonoBehaviour:
   catchUpSpeed: {x: 2, y: 3}
   buffer: 0.5
   zoomSpeed: 1
+  acquireTargetSpeed: 3
   isFollowing: 1
 --- !u!50 &671950058
 Rigidbody2D:

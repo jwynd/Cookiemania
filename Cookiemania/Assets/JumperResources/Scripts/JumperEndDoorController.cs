@@ -8,6 +8,8 @@ public class JumperEndDoorController : JumperGeneralPickup
     protected float controlSpeed = 1.0f;
     [SerializeField]
     protected Sprite openedDoor = null;
+
+    protected Sprite closedDoor;
     protected string playerTag;
     protected bool runOnce = false;
 
@@ -15,6 +17,7 @@ public class JumperEndDoorController : JumperGeneralPickup
     protected override void Awake()
     {
         base.Awake();
+        closedDoor = GetComponent<SpriteRenderer>().sprite;
         playerTag = JumperManagerGame.Instance.GetPlayerTag();
     }
 
@@ -25,14 +28,14 @@ public class JumperEndDoorController : JumperGeneralPickup
         {
             //take control of player to walk through door during end
             runOnce = true;
-            OpenDoor();
             StartCoroutine(PlayerWalkThroughDoor(collision.gameObject));
-            JumperManagerUI.Instance.End(true);
+            JumperManagerUI.Instance.End(true, true, transform);
         }
     }
 
     protected IEnumerator PlayerWalkThroughDoor(GameObject pc)
     {
+        GetComponent<SpriteRenderer>().sprite = openedDoor;
         while (transform.position != pc.transform.position)
         {
             pc.transform.position = Vector3.MoveTowards(pc.transform.position, transform.position, controlSpeed * Time.fixedDeltaTime);
@@ -40,11 +43,6 @@ public class JumperEndDoorController : JumperGeneralPickup
         }
         yield return new WaitForSeconds(0.05f);
         pc.GetComponent<Renderer>().enabled = false;
-    }
-
-    protected void OpenDoor()
-    {
-        //opened door better not be null yo
-        GetComponent<SpriteRenderer>().sprite = openedDoor;
+        GetComponent<SpriteRenderer>().sprite = closedDoor;
     }
 }

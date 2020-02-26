@@ -10,14 +10,24 @@ public class JumperEnemyController : JumperGeneralThreat
     protected Vector2 jump = new Vector2(2f, 4f);
 
     [SerializeField]
+    protected float jumpDelay = 0.75f;
+
+    [SerializeField]
+    protected LayerMask groundLayer;
+
+    [SerializeField]
     protected float buffer = 1f;
+
+    
 
     protected float parentLeft;
     protected float parentRight;
     protected float direction = 1;
+    protected float jumpDirection = 1;
     protected float originalMaxVelocity;
     protected Rigidbody2D rb;
     protected bool jumpToMyDeath = false;
+    protected bool hasJumped = false;
     protected Vector3 originalScale;
     protected Animator anim;
     
@@ -57,7 +67,7 @@ public class JumperEnemyController : JumperGeneralThreat
         }
         transform.parent = null;
         transform.position = new Vector2(Random.Range(parentLeft, parentRight), transform.position.y);
-
+        jumpDirection = direction;
     }
     #endregion
 
@@ -80,17 +90,12 @@ public class JumperEnemyController : JumperGeneralThreat
         {
             Destroy(gameObject);
         }
-        else
+        else if (!hasJumped)
         {
             float playerx = RunToPlayer();
-            /*
-             * default is walk then jump
-             */
-            CheckBoundsTrackingPlayer();
-
+           // CheckBoundsTrackingPlayer();
             Walk();
             JumpToPlayer(playerx);
-            //Jump();
         }
     }
 
@@ -121,12 +126,13 @@ public class JumperEnemyController : JumperGeneralThreat
 
     protected void JumpToPlayer(float playerx)
     {
-        if (Mathf.Abs(playerx - rb.position.x) < 2f && direction != 0)
+        if (Mathf.Abs(playerx - rb.position.x) < 2.5f || (direction < 0 && rb.position.x < parentLeft) || (direction > 0 && rb.position.x > parentRight))
         {
-            GetComponent<Collider2D>().isTrigger = false;
             JumpHelper();
             rb.velocity = Vector2.zero;
             rb.AddForce(new Vector2(maxVelocity * direction, jump.y), ForceMode2D.Impulse);
+            hasJumped = true;
+          //  StartCoroutine(RejumpDelay());
             direction = 0;
         }
     }
@@ -144,14 +150,18 @@ public class JumperEnemyController : JumperGeneralThreat
         {
             rb.velocity = Vector2.zero;
             direction = 1;
+
             transform.localScale = new Vector3(originalScale.x, originalScale.y, originalScale.z);
         }
         else if (direction > 0 && rb.position.x > parentRight)
         {
             rb.velocity = Vector2.zero;
             direction = -1;
+
             transform.localScale = new Vector3(-originalScale.x, originalScale.y, originalScale.z);
         }
+        jumpDirection = direction;
+
     }
 
     protected void Walk()
@@ -165,17 +175,17 @@ public class JumperEnemyController : JumperGeneralThreat
         float playerX = jm.player.transform.position.x;
         //sprint speed hehe
         maxVelocity = originalMaxVelocity * 1.5f;
-
-            if (rb.position.x > playerX + buffer)
-            {
-                direction = -1;
-                transform.localScale = new Vector3(-originalScale.x, originalScale.y, originalScale.z);
-            }
-            else if (rb.position.x + buffer < playerX)
-            {
-                direction = 1;
-                transform.localScale = new Vector3(originalScale.x, originalScale.y, originalScale.z);
-            }
+        if (rb.position.x > playerX + buffer)
+        {
+            direction = -1;
+            transform.localScale = new Vector3(-originalScale.x, originalScale.y, originalScale.z);
+        }
+        else if (rb.position.x + buffer < playerX)
+        {
+            direction = 1;
+            transform.localScale = new Vector3(originalScale.x, originalScale.y, originalScale.z);
+        }
+        jumpDirection = direction;
 
         return playerX;
     }
@@ -185,7 +195,7 @@ public class JumperEnemyController : JumperGeneralThreat
     #region public
     public override void Remove(bool isImmediate = false)
     {
-        rb.isKinematic = true;
+        GetComponent<Collider2D>().enabled = false;
         if (isImmediate)
         {
             StartCoroutine(JumperManagerGame.FlashThenKill(gameObject, 0.05f, 0.05f));
@@ -202,10 +212,20 @@ public class JumperEnemyController : JumperGeneralThreat
     #region coroutine
     protected IEnumerator PlatformDestroyedHelper(float timer)
     {
-        yield return new WaitForSeconds(timer / 10);
+        yield return new WaitForSeconds(timer / 5);
         jumpToMyDeath = true;
-        yield return new WaitForSeconds(timer * 9 / 10);
+        yield return new WaitForSeconds(timer * 4 / 5);
         Remove();
+    }
+
+    protected IEnumerator RejumpDelay()
+    {
+        yield return new WaitForSeconds(jumpDelay);
+        Renderer rend = GetComponent<Renderer>();
+        float offset = rend.bounds.extents.x;
+        float yoffset = rend.bounds.extents.y * 1.02f;
+        hasJumped = !Physics2D.OverlapArea(new Vector2(transform.position.x - offset, transform.position.y - yoffset),
+            new Vector2(transform.position.x + offset, transform.position.y - yoffset + 0.01f), groundLayer);
     }
     #endregion
 }

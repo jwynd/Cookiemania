@@ -181,17 +181,16 @@ public class JumperThrowingEnemy : JumperGeneralThreat
         float playerX = currentPlayerPos.x;
         //sprint speed hehe
         maxVelocity = originalMaxVelocity * 1.5f;
-
-            if (rb.position.x > playerX + buffer)
-            {
-                direction = -1;
-                transform.localScale = new Vector3(-originalScale.x, originalScale.y, originalScale.z);
-            }
-            else if (rb.position.x + buffer < playerX)
-            {
-                direction = 1;
-                transform.localScale = new Vector3(originalScale.x, originalScale.y, originalScale.z);
-            }
+        if (rb.position.x > playerX + buffer)
+        {
+            direction = -1;
+            transform.localScale = new Vector3(-originalScale.x, originalScale.y, originalScale.z);
+        }
+        else if (rb.position.x + buffer < playerX)
+        {
+            direction = 1;
+            transform.localScale = new Vector3(originalScale.x, originalScale.y, originalScale.z);
+        }
         throwDirection = direction;
 
         return playerX;
@@ -202,7 +201,7 @@ public class JumperThrowingEnemy : JumperGeneralThreat
     #region public
     public override void Remove(bool isImmediate = false)
     {
-        rb.isKinematic = true;
+        GetComponent<Collider2D>().enabled = false;
         if (isImmediate)
         {
             StartCoroutine(JumperManagerGame.FlashThenKill(gameObject, 0.05f, 0.05f));

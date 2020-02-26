@@ -69,17 +69,25 @@ public class JumperManagerUI : MonoBehaviour
         }
     }
     #region public
-    public void End(bool isGood, bool runSequence = true)
+    public void End(bool isGood, bool runSequence = true, Transform target = null)
     {
         //ensuring this only gets run once
         if (endingGame) { return; }
-        jm.mainCamera.ZoomIn();
+        
         jm.mainCamera.PlayerDestroyed();
         endingGame = true;
         if (!isGood && runSequence) 
             jm.player.RunDeathSequence();
         else if (runSequence)
             jm.player.RunVictorySequence();
+        if (target != null)
+        {
+            jm.mainCamera.ZoomInToTarget(target);
+        }
+        else
+        {
+            jm.mainCamera.ZoomIn();
+        }
         StartCoroutine(SwitchCamera(timeToNextScene, isGood));
     }
 
