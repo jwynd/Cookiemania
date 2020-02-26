@@ -38,10 +38,19 @@ public class enemy : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D col)
     {
 
-        if (col.gameObject.CompareTag("playerfire"))
+        if (col.gameObject.CompareTag("fire"))
         {
             // soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemydeath);
             Destroy(gameObject);
+        }
+
+        if (col.gameObject.CompareTag("Player"))
+        {
+            //soundmanager.Instance.PlayOneShot(soundmanager.Instance.playerdeath);
+            col.gameObject.GetComponent<SpriteRenderer>().sprite = playerdeathImage;
+            Destroy(gameObject);
+            Destroy(col.gameObject, .02f); //.05f
+
         }
     }
        public IEnumerator changeEnemySprite()
@@ -97,6 +106,7 @@ public class enemy : MonoBehaviour
             Destroy(col.gameObject, .05f); //.05f
 
         }
+
     }
 
     void moveCharacter(Vector2 direction)

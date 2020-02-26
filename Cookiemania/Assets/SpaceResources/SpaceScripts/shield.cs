@@ -28,7 +28,7 @@ public class shield : MonoBehaviour
 
             col.GetComponent<SpriteRenderer>().sprite = EExplosionImage;
             Destroy(gameObject);
-            Destroy(col.gameObject, 0.5f); //DestroyObject(col.gameObject, 0.5f)
+            Destroy(col.gameObject, 0.2f); //DestroyObject(col.gameObject, 0.5f)
 
         }
 
@@ -63,6 +63,6 @@ public class shield : MonoBehaviour
 
     private void Update()
     {
-        Destroy(this.gameObject, 1.5f);
+        Destroy(this.gameObject, 2f);
     }
 }
