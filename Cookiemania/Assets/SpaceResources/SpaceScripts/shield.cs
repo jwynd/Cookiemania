@@ -33,13 +33,13 @@ public class shield : MonoBehaviour
 
         }
 
-        if (col.gameObject.CompareTag("playerfire"))
+        if (col.gameObject.CompareTag("fire"))
         {
             Destroy(gameObject);
             Destroy(col.gameObject);
         }
 
-        if (col.gameObject.CompareTag("Enemyfire"))
+        if (col.gameObject.CompareTag("enemyfire"))
         {
             Destroy(gameObject);
             Destroy(col.gameObject);

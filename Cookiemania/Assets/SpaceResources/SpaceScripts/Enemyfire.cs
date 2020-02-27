@@ -6,14 +6,18 @@ public class Enemyfire : MonoBehaviour
 {
     private Rigidbody2D rigidBody;
 
-    public float speed = 5;
+    public float speed = 3;
+    public Transform enemy;
 
     public Sprite PExplosionImage;
     // Start is called before the first frame update
     void Start()
     {
+
+        enemy = GameObject.FindGameObjectWithTag("treasure").GetComponent<Transform>();
+        Vector3 direction = enemy.position - transform.position;
         rigidBody = GetComponent<Rigidbody2D>();
-        rigidBody.velocity = Vector2.down * speed;
+        rigidBody.velocity = direction * speed;
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -47,11 +51,11 @@ public class Enemyfire : MonoBehaviour
     }
     void OnBecomeInvisible()
     {
-        GameObject.Destroy(this.gameObject);
+        Destroy(this.gameObject);
     }
     // Update is called once per frame
     void Update()
     {
-        Destroy(this.gameObject, 1.5f);
+        Destroy(this.gameObject, 3.5f);
     }
 }

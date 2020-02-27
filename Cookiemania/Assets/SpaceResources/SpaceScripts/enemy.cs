@@ -18,7 +18,7 @@ public class enemy : MonoBehaviour
     private Transform target;
     public Transform Player;
     private Vector2 movement;
-    public float moveSpeed = 5;
+    public float moveSpeed = 1.5f;
 
 
     // Start is called before the first frame update
