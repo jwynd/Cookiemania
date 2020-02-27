@@ -50,6 +50,7 @@ public class JumperManagerGame : MonoBehaviour
     [Tooltip("The rotation of the game object on the Z axis")]
     [Range(0.0f, 360.0f)]
     public float rotation = 0.0f;
+    public float alteredGravity = 2f;
     [Tooltip("Important game tag, ensure this is added to the tags list")]
     public string playerTag = "Player";
     [Tooltip("Important game tag, ensure this is added to the tags list")]
@@ -60,7 +61,7 @@ public class JumperManagerGame : MonoBehaviour
     public string groundTag = "Platform";
     [Tooltip("Important game tag, ensure this is added to the tags list")]
     public string collectiblesTag = "Pickup";
-    public float alteredGravity = 2f;
+    public bool runTutorial = true;
 
     //game manager always tagged with game controller
     private const string myTag = "GameController";
@@ -310,6 +311,11 @@ public class JumperManagerGame : MonoBehaviour
     public float GetAlteredGravity()
     {
         return alteredGravity;
+    }
+
+    public bool IsRunningTutorial()
+    {
+        return runTutorial;
     }
 
     //credit: https://forum.unity.com/threads/re-map-a-number-from-one-range-to-another.119437/

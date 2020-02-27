@@ -80,9 +80,10 @@ MonoBehaviour:
   heightGoal: 100
   maxFallDistance: 20
   rotation: 0
+  alteredGravity: 2
   playerTag: Player
   enemyTag: Enemy
   obstacleTag: Obstacle
   groundTag: Platform
   collectiblesTag: Pickup
-  alteredGravity: 2
+  runTutorial: 1

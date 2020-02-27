@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
+using TMPro;
+using System;
 
 public class JumperManagerUI : MonoBehaviour
 {
@@ -11,7 +11,11 @@ public class JumperManagerUI : MonoBehaviour
     public GameObject endscreenCamera;
     public GameObject endscreenCanvas;
     public float timeToNextScene = 2.5f;
-    public float maxFallDistance = 15f;
+    public TextMeshProUGUI scoreRef;
+    public TextMeshProUGUI tutorialRef;
+   
+
+
     public static JumperManagerUI Instance { get; private set; }
 
     private const string sceneName = "Jumper";
@@ -20,7 +24,14 @@ public class JumperManagerUI : MonoBehaviour
     private JumperManagerGame jm;
     private General_LevelTransition levelController;
     private JumperGeneralText scoreText;
-    private float maxHeightReached;
+    private JumperGeneralText tutorialText;
+    private bool tutorialActive = false;
+    private bool needNextLine;
+    private JumperStoryFramework storyfw;
+    private bool listeningToAxis;
+    private string axis;
+    private float tutorialTimer;
+    private float minTutorialTimer = 0.35f;
 
     #endregion
 
@@ -37,23 +48,34 @@ public class JumperManagerUI : MonoBehaviour
         }
         endscreenCamera.GetComponent<Camera>().enabled = false;
         endscreenCamera.GetComponent<AudioListener>().enabled = false;
-        scoreText = GetComponent<JumperGeneralText>();
+        scoreText = scoreRef.gameObject.GetComponent<JumperGeneralText>();
+
+        tutorialText = tutorialRef.gameObject.GetComponent<JumperGeneralText>();
         GameObject levelC = GameObject.Find("LevelController");
         if (levelC != null)
         {
             levelController = GameObject.Find("LevelController").GetComponent<General_LevelTransition>();
         }
+        
     }
 
+   
     void Start()
     {
         jm = JumperManagerGame.Instance;
+        storyfw = JumperStoryFramework.Instance;
+        if (jm.IsRunningTutorial())
+        {
+            tutorialActive = true;
+            needNextLine = true;
+            tutorialTimer = 0f;
+        }
         heightSlider.minValue = jm.player.transform.position.y;
         heightSlider.maxValue = jm.GetHeightGoal();
-        maxHeightReached = jm.player.transform.position.y;
         healthSlider.minValue = 0;
         healthSlider.maxValue = jm.player.GetMaxHealth();
     }
+
     #endregion
 
     // Update is called once per frame
@@ -66,6 +88,62 @@ public class JumperManagerUI : MonoBehaviour
             healthSlider.value = jm.player.GetCurrentHealth();
             coinsCollected = (int)jm.player.GetCoinsCollected();
             scoreText.UpdateText(coinsCollected.ToString());
+        }
+        TutorialUpdate();
+    }
+
+    protected void TutorialUpdate()
+    {
+        if (!tutorialActive)
+        {
+            return;
+        }
+        if (needNextLine)
+        {
+            needNextLine = false;
+            System.Tuple<string, string> textNAxis = storyfw.GetNextTutorialLine();
+            if (textNAxis == null)
+            {
+                tutorialActive = false;
+                tutorialText.UpdateText("");
+                return;
+            }
+            else if (storyfw.IsAnAxis(textNAxis.Item2))
+            {
+                listeningToAxis = true;
+                axis = textNAxis.Item2;
+            }
+            else
+            {
+                listeningToAxis = false;
+                tutorialTimer = float.Parse(textNAxis.Item2);
+                Debug.Log(tutorialTimer.ToString());
+            }
+            tutorialText.UpdateText(textNAxis.Item1);
+        }
+        else if (listeningToAxis)
+        {
+            if (axis == jm.player.GetPickupAxis())
+            {
+                if (jm.player.HasThrowable())
+                {
+                    listeningToAxis = false;
+                    tutorialTimer = minTutorialTimer;
+                }
+            }
+            else if (Input.GetAxis(axis) != 0)
+            {
+                listeningToAxis = false;
+                tutorialTimer = minTutorialTimer;
+            }
+        }
+        else
+        {
+            tutorialTimer -= Time.deltaTime;
+            if (tutorialTimer < 0)
+            {
+                needNextLine = true;
+            }
         }
     }
     #region public

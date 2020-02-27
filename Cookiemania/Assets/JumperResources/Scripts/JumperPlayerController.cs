@@ -33,16 +33,21 @@ public class JumperPlayerController : MonoBehaviour
     public float damageTimerMax = 1.5f;
     public AudioClip jumpSound;
     public JumperSelfDestruct jumpParticles;
+    [SerializeField]
     [Tooltip("Axis for left and right movements")]
-    public string horizontalAxis = "Horizontal";
+    protected string horizontalAxis = "Horizontal";
+    [SerializeField]
     [Tooltip("Axis for jumping")]
-    public string jumpAxis = "Jump";
+    protected string jumpAxis = "Jump";
+    [SerializeField]
     [Tooltip("Axis for picking up items")]
-    public string pickupAxis = "Pickup";
+    protected string pickupAxis = "Pickup";
+    [SerializeField]
     [Tooltip("Axis for throwing items")]
-    public string throwAxis = "Throw";
+    protected string throwAxis = "Throw";
+    [SerializeField]
     [Tooltip("EMPTY INPUT axis, should still exist but no keys mapped to it")]
-    public string dummyAxis = "Dummy";
+    protected string dummyAxis = "Dummy";
 
     protected Rigidbody2D rb;
     protected Renderer rend;
@@ -339,6 +344,32 @@ public class JumperPlayerController : MonoBehaviour
     public float GetCoinsCollected()
     {
         return points + maxHeightReached;
+    }
+
+    public string GetHorizontalAxis()
+    {
+        return horizontalAxis;
+    }
+    public string GetJumpAxis()
+    {
+        return jumpAxis;
+    }
+    public string GetPickupAxis()
+    {
+        return pickupAxis;
+    }
+    public string GetThrowAxis()
+    {
+        return throwAxis;
+    }
+    public string GetDummyAxis()
+    {
+        return dummyAxis;
+    }
+
+    public bool HasThrowable()
+    {
+        return haveItem;
     }
 
     public void BouncePlayer(float bounceStrength)

@@ -1,0 +1,22 @@
+//game UI texts, TUTORIAL marks it as a tutorial line, END as a post game line
+//can extend this to debug lines too
+//dont use ":" in your lines
+//cs creates hashtables from this text file to display on screen
+//uses html tags normally, things like <Horizontal> are input axes
+//second column tells what should be replaced in the <REPLACE> command
+//and also what array position and the requirements to go to next command
+//second number for non input required lines is the timer til the text is replaced
+//by the next text line
+//ANYTHING IN BRACKETS THAT ISNT AN HTML SUBSCRIPT NEEDS TO BE IN THE CS
+//current axes used: Horizontal Jump Pickup Throw
+TUTORIAL:<Horizontal>:press <REPLACE_NEGATIVE> to go left and <REPLACE_POSITIVE> to go right
+TUTORIAL:<Jump>:now press <REPLACE_POSITIVE> to jump
+TUTORIAL:3:watch out!<br>platforms fall apart after jumping onto them
+TUTORIAL:3:but to progress, you gotta jump!
+TUTORIAL:<Pickup>:press <REPLACE_POSITIVE> to pickup bombs!
+TUTORIAL:<Throw>:if you have a bomb, you can press <REPLACE_POSITIVE> to throw that bomb
+//when tutorial lines completed tutorial object should replace itself
+//both good and bad should map to the number of coins made in the level
+//AND which array position to place/retrieve the line in
+END:<good>:LEVEL COMPLETE!<br>you made <REPLACE_POSITIVE> coins
+END:<bad>:Game Over...<br>you made <REPLACE_POSITIVE> coins
