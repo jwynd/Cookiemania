@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class Desktop_EmailController : MonoBehaviour
 {
@@ -31,7 +32,7 @@ public class Desktop_EmailController : MonoBehaviour
         emailPrefab.SetActive(false);
     }
 
-    public void spawnEmail(string subject, string body){
+    public void spawnEmail(string subject, string body, string[] responses, UnityAction[] responseActions){
         GameObject e = Instantiate(emailPrefab, Vector3.zero, Quaternion.identity);
         e.transform.GetChild(0).gameObject.GetComponent<Text>().text = subject;
         e.GetComponent<General_Email>().bodyText = body;
@@ -43,9 +44,9 @@ public class Desktop_EmailController : MonoBehaviour
     }
 
     // for testing purposes only
-    void Update(){
-        if(Input.GetKeyDown(KeyCode.Space)){
-          spawnEmail("Test Email", "This is a test");
-        }
-    }
+    // void Update(){
+    //     if(Input.GetKeyDown(KeyCode.Space)){
+    //       spawnEmail("Test Email", "This is a test");
+    //     }
+    // }
 }

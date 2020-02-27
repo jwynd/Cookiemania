@@ -4,28 +4,30 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class Email_Example : MonoBehaviour
+public class Email : MonoBehaviour
 {
-    public static Email_Example Instance;
-    public delegate void response();
+    private GameObject[] g_enable;
+    private GameObject[] g_disable;
+    private GameObject source;
+    
     void Awake(){
-        if(Instance != null && Instance != this){
-            Destroy(this);
-        }
-        Instance = this;
         gameObject.SetActive(false);
     }
-    public void formatEmail(GameObject[] disable, GameObject[] enable, string[] names, response[] rs){
+
+    public void formatEmail(GameObject spawner, GameObject[] disable, GameObject[] enable, string[] names, UnityAction[] rs){
         foreach(GameObject d in disable){
             d.SetActive(false);
         }
         foreach(GameObject e in enable){
             e.SetActive(true);
         }
+        g_enable = disable;
+        g_disable = enable;
+        source = spawner;
         formatResponse(names, rs);
     }
 
-    public void formatResponse(string[] names, response[] rs){
+    public void formatResponse(string[] names, UnityAction[] rs){
         // format response based on length of rs
         float yOffset = -80.0f;
         Button[] Buttons = new Button[rs.Length];
@@ -44,7 +46,22 @@ public class Email_Example : MonoBehaviour
             txt.text = names[i];
             yOffset -= 20.0f;
             Buttons[i] = g.AddComponent<Button>();
-            Buttons[i].onClick.AddListener((UnityAction)rs[i]);
+            Buttons[i].onClick.AddListener(rs[i]);
+            Buttons[i].onClick.AddListener(respondAndDelete);
         }
+    }
+
+    void OnDestroy(){
+        foreach(GameObject g in g_enable){
+            g.SetActive(true);
+        }
+        foreach(GameObject g in g_disable){
+            g.SetActive(false);
+        }
+        Destroy(source);
+    }
+    
+    private void respondAndDelete(){
+        Destroy(this.gameObject);
     }
 }

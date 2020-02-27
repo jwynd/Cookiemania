@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Email_Click : MonoBehaviour
 {
     public GameObject[] disable;
     public GameObject[] enable;
+    public Email email;
     private void adjustMoney(){
         General_Score.Instance.money += 10;
     }
@@ -16,9 +18,14 @@ public class Email_Click : MonoBehaviour
         adjustMoney();
         adjustTrust();
     }
+    
+    void Awake(){
+
+    }
+
     void OnMouseDown(){
         // Debug.Log("Clicked");
-        Email_Example.Instance.formatEmail(disable, enable,new string[] {"Money", "Trust", "Both"} ,new Email_Example.response[] {adjustMoney, adjustTrust, adjustBoth});
+        email.formatEmail(this.gameObject, disable, enable,new string[] {"Money", "Trust", "Both"} ,new UnityAction[] {adjustMoney, adjustTrust, adjustBoth});
     }
     
     void OnDestroy(){
