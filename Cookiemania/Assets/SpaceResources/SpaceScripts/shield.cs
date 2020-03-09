@@ -15,7 +15,8 @@ public class shield : MonoBehaviour
         Vector3 direction = transform.position - Player.position;
         transform.Translate(direction * 1.5f);
         rigidBody = GetComponent<Rigidbody2D>();
-        
+        rigidBody.velocity = direction;
+
     }
 
     // Update is called once per frame
