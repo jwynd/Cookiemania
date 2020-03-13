@@ -3,7 +3,13 @@ guid: 84817bcfa76673f4ab3a3ae3b70ad391
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - enemyfire: {fileID: 8300000, guid: 9e65b74df09c77645a5c69b1a15f53f8, type: 3}
+  - playerfire: {fileID: 8300000, guid: 9e65b74df09c77645a5c69b1a15f53f8, type: 3}
+  - enemydies: {fileID: 8300000, guid: 1ddccc92273be5945a2a6e8e26a0efc2, type: 3}
+  - playerdies: {fileID: 8300000, guid: 63371e452f2655d4fa817da24b1ae406, type: 3}
+  - loseheart: {fileID: 8300000, guid: 19c62f9448e05ea4788ba975b7ab9fda, type: 3}
+  - shield: {fileID: 8300000, guid: 4977ac49e1b807c41ba25c93bcbc2396, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

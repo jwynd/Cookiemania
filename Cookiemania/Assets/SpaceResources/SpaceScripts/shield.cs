@@ -25,7 +25,7 @@ public class shield : MonoBehaviour
 
         if (col.gameObject.CompareTag("Enemy"))
         {
-            //SoundManager.Instance.PlayOneShot(SoundManager.Instance.enemydeath);
+            soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemydies);
             increaseTextUIScore();
 
             col.GetComponent<SpriteRenderer>().sprite = EExplosionImage;
@@ -34,11 +34,11 @@ public class shield : MonoBehaviour
 
         }
 
-        if (col.gameObject.CompareTag("fire"))
+        /*if (col.gameObject.CompareTag("fire"))
         {
             Destroy(gameObject);
             Destroy(col.gameObject);
-        }
+        }*/
 
         if (col.gameObject.CompareTag("enemyfire"))
         {

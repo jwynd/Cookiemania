@@ -24,10 +24,16 @@ public class Enemyfire : MonoBehaviour
     {
         if(col.gameObject.CompareTag("Player"))
         {
-            //SoundManager.Instance.PlayOneShot(SoundManager.Instance.playerdeath);
-            col.GetComponent<SpriteRenderer>().sprite = PExplosionImage;
-            Destroy(this.gameObject);
-            Destroy(col.gameObject, 0.5f); //0.5f
+            soundmanager.Instance.PlayOneShot(soundmanager.Instance.loseheart);
+            col.gameObject.GetComponent<health>().takedamage();
+            int lives = col.gameObject.GetComponent<health>().lives;
+            if (lives <= 0)
+            {
+                soundmanager.Instance.PlayOneShot(soundmanager.Instance.playerdies);
+                col.gameObject.GetComponent<SpriteRenderer>().sprite = PExplosionImage;
+                Destroy(gameObject);
+                Destroy(col.gameObject, .05f); //.05f
+            }
 
         }
 
