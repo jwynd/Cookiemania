@@ -124,4 +124,4 @@ MonoBehaviour:
   flashPeriod: 0.25
   enemyChild: {fileID: 0}
   placePlatformsAbove: 0
-  bounceMultiplier: 2
+  bounceMultiplier: 1.5

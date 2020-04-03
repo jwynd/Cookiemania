@@ -27,11 +27,12 @@ public class player : MonoBehaviour
         {
             
             Instantiate(theplayerfire, transform.position, Quaternion.identity);
-            //SoundManager.Instance.PlayOneShot(SoundManager.Instance.playerfire);
+            soundmanager.Instance.PlayOneShot(soundmanager.Instance.playerfire);
         }
         if (Input.GetButtonDown("Fire2"))
         {
             Instantiate(theplayershield, transform.position, Quaternion.identity);
+            soundmanager.Instance.PlayOneShot(soundmanager.Instance.shield);
         }
     }
 

@@ -96,7 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65cac50a502c604fb6e02123db8069a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
+  speed: 0.3
+  enemy: {fileID: 0}
   PExplosionImage: {fileID: 0}
 --- !u!61 &-7581135007724980892
 BoxCollider2D:
@@ -157,6 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65cac50a502c604fb6e02123db8069a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 0.3
+  enemy: {fileID: 0}
   PExplosionImage: {fileID: 8463096131581357343, guid: 9602e3d91879a97489b64b8514aada9b,
     type: 3}

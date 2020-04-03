@@ -4,9 +4,19 @@ using UnityEngine;
 
 public class soundmanager : MonoBehaviour
 {
+    // Holds the single instance of the SoundManager that 
+    // you can access from any script
     public static soundmanager Instance = null;
+
+    // All sound effects in the game
     public AudioClip enemyfire;
     public AudioClip playerfire;
+    public AudioClip enemydies;
+    public AudioClip playerdies;
+    public AudioClip loseheart;
+    public AudioClip shield;
+    public AudioClip gainlife;
+
     //continue for audio files
 
     private AudioSource soundEffectAudio;
@@ -25,6 +35,7 @@ public class soundmanager : MonoBehaviour
         soundEffectAudio = theSource;
     }
 
+    // Other GameObjects can call this to play sounds// Other GameObjects can call this to play sounds
     public void PlayOneShot(AudioClip clip)
     {
         soundEffectAudio.PlayOneShot(clip);

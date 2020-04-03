@@ -43,6 +43,13 @@ public class JumperEndDoorController : JumperGeneralPickup
         }
         yield return new WaitForSeconds(0.05f);
         pc.GetComponent<Renderer>().enabled = false;
+        foreach(Transform child in pc.GetComponentsInChildren<Transform>()) {
+            Renderer childRend = child.GetComponent<Renderer>();
+            if (childRend != null)
+            {
+                childRend.enabled = false;
+            }
+        }
         GetComponent<SpriteRenderer>().sprite = closedDoor;
     }
 }

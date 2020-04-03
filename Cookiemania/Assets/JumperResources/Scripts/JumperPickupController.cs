@@ -49,18 +49,18 @@ public class JumperPickupController : JumperGeneralPickup
     //would probably want an animation that shows the trap/bomb is active now
     public void Thrown(Vector2 strength)
     {
-
+        RemoveFromParent();
         transform.parent = null;
         myRb.isKinematic = false;
         myRb.gravityScale = 1;
         myRb.AddForce(strength, ForceMode2D.Impulse);
-        RemoveFromParent();
         StartCoroutine(Explode());
     }
 
     protected IEnumerator Explode()
     {
         exploding = true;
+
         yield return new WaitForSeconds(explosionTimer);
         for (int i = 0; i < explosionFlashCount; i++)
         {
@@ -71,7 +71,7 @@ public class JumperPickupController : JumperGeneralPickup
             GetComponent<BoxCollider2D>().size /= explosionSize;
             yield return new WaitForSeconds(Time.fixedDeltaTime * explosionFrames);
         }
-        Destroy(gameObject);
+        Remove();
     }
 
 
@@ -102,9 +102,14 @@ public class JumperPickupController : JumperGeneralPickup
             script.TakesDamage(damage);
             if (!exploding)
             {
-                RemoveFromParent();
-                Destroy(gameObject);
+                Remove();
             } 
         }
+    }
+
+    protected void Remove()
+    {
+        RemoveFromParent();
+        Destroy(gameObject);
     }
 }

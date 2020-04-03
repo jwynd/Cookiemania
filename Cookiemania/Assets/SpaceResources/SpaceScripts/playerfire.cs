@@ -8,11 +8,13 @@ public class playerfire : MonoBehaviour
     private Rigidbody2D rigidBody;
     public Sprite EExplosionImage;
     public Transform Player;
+    public GameObject user;
 
     // Start is called before the first frame update
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("treasure").GetComponent<Transform>();
+        user = GameObject.FindGameObjectWithTag("Player");
         Vector3 direction = transform.position - Player.position;
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.velocity = direction * speed;
@@ -24,7 +26,7 @@ public class playerfire : MonoBehaviour
 
         if (col.gameObject.CompareTag("Enemy"))
         {
-            //SoundManager.Instance.PlayOneShot(SoundManager.Instance.enemydeath);
+            soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemydies);
             increaseTextUIScore();
 
             col.GetComponent<SpriteRenderer>().sprite = EExplosionImage;
@@ -33,11 +35,11 @@ public class playerfire : MonoBehaviour
 
         }
 
-        if (col.gameObject.CompareTag("shield")) 
+       /* if (col.gameObject.CompareTag("shield")) 
         {
             Destroy (gameObject);
             Destroy(col.gameObject);
-        }
+        } */
         
     }
     void OnBecomeInvisible()
@@ -51,6 +53,12 @@ public class playerfire : MonoBehaviour
         int score = int.Parse(textUIComp.text);
 
         score += 10;
+
+        if(score%100 == 0)
+        {
+            soundmanager.Instance.PlayOneShot(soundmanager.Instance.gainlife);
+            user.gameObject.GetComponent<health>().gainlife();
+        }
 
         textUIComp.text = score.ToString();
     }

@@ -15,7 +15,8 @@ public class shield : MonoBehaviour
         Vector3 direction = transform.position - Player.position;
         transform.Translate(direction * 1.5f);
         rigidBody = GetComponent<Rigidbody2D>();
-        
+        rigidBody.velocity = direction;
+
     }
 
     // Update is called once per frame
@@ -24,7 +25,7 @@ public class shield : MonoBehaviour
 
         if (col.gameObject.CompareTag("Enemy"))
         {
-            //SoundManager.Instance.PlayOneShot(SoundManager.Instance.enemydeath);
+            soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemydies);
             increaseTextUIScore();
 
             col.GetComponent<SpriteRenderer>().sprite = EExplosionImage;
@@ -33,13 +34,13 @@ public class shield : MonoBehaviour
 
         }
 
-        if (col.gameObject.CompareTag("playerfire"))
+        /*if (col.gameObject.CompareTag("fire"))
         {
             Destroy(gameObject);
             Destroy(col.gameObject);
-        }
+        }*/
 
-        if (col.gameObject.CompareTag("Enemyfire"))
+        if (col.gameObject.CompareTag("enemyfire"))
         {
             Destroy(gameObject);
             Destroy(col.gameObject);

@@ -18,7 +18,7 @@ public class enemy : MonoBehaviour
     private Transform target;
     public Transform Player;
     private Vector2 movement;
-    public float moveSpeed = 5;
+    public float moveSpeed = 1.5f;
 
 
     // Start is called before the first frame update
@@ -40,22 +40,35 @@ public class enemy : MonoBehaviour
 
         if (col.gameObject.CompareTag("fire"))
         {
-            // soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemydeath);
+            soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemydies);
             Destroy(gameObject);
         }
 
         if (col.gameObject.CompareTag("shield"))
         {
-            // soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemydeath);
+            soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemydies);
             Destroy(gameObject);
         }
 
         if (col.gameObject.CompareTag("Player"))
         {
-            //soundmanager.Instance.PlayOneShot(soundmanager.Instance.playerdeath);
-            col.gameObject.GetComponent<SpriteRenderer>().sprite = playerdeathImage;
-            Destroy(gameObject);
-            Destroy(col.gameObject, .02f); //.05f
+            int lives = col.gameObject.GetComponent<health>().lives;
+            if(lives > 1)
+            {
+                soundmanager.Instance.PlayOneShot(soundmanager.Instance.loseheart);
+                col.gameObject.GetComponent<health>().takedamage();
+                lives = col.gameObject.GetComponent<health>().lives;
+            } else if(lives == 1) {
+                col.gameObject.GetComponent<health>().takedamage();
+                lives = col.gameObject.GetComponent<health>().lives;
+            }
+            if(lives <= 0)
+            {
+                soundmanager.Instance.PlayOneShot(soundmanager.Instance.playerdies);
+                col.gameObject.GetComponent<SpriteRenderer>().sprite = playerdeathImage;
+                Destroy(gameObject);
+                Destroy(col.gameObject, .05f); //.05f
+            }
 
         }
     }
