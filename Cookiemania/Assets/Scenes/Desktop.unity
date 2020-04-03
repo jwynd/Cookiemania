@@ -361,7 +361,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &166601617
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1021,9 +1021,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b7d92a50af7f7f40a50ce2e1961d13e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextEmailPosition: {x: 0, y: 150, z: 0}
-  emailPrefab: {fileID: 1920807308}
-  offset: 50
+  nextEmailPosition: {x: 0, y: 3.5, z: 0}
+  newEmail: {fileID: 2825502208743759406, guid: 049e1386224751847a2eeb2903312531,
+    type: 3}
+  emailLiteral: {fileID: 4724453509402067863, guid: 45133264a7d377542b3961a63fd7ca1a,
+    type: 3}
+  offset: 1.1
+  disableOnEmailClick:
+  - {fileID: 110672778}
+  - {fileID: 791384869}
+  - {fileID: 733111613}
+  - {fileID: 465540752}
+  - {fileID: 176589705}
+  - {fileID: 1419960844}
+  enableOnEmailClick: []
 --- !u!4 &571996238
 Transform:
   m_ObjectHideFlags: 0
@@ -1851,7 +1862,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &981484547
 Transform:
   m_ObjectHideFlags: 0
@@ -1936,6 +1947,10 @@ MonoBehaviour:
   - {fileID: 532302299}
   enable:
   - {fileID: 166601616}
+  email: {fileID: 0}
+  names: []
+  subject: 
+  body: 
 --- !u!61 &981484550
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2111,6 +2126,7 @@ RectTransform:
   - {fileID: 465540753}
   - {fileID: 176589706}
   - {fileID: 166601617}
+  - {fileID: 1600980794}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2741,7 +2757,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1271120761}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
