@@ -78,7 +78,7 @@ public class Desktop_EmailController : MonoBehaviour
 
     // for testing purposes only
     void Update(){
-        if(Input.GetKeyDown(KeyCode.Space)){
+        if(Input.GetKeyDown(KeyCode.E)){
           spawnEmail("Test Email", "This is a test", new string[] {"Money", "Trust", "Both"}, new UnityAction[] {money, trust, both});
         }
     }
