@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemy : MonoBehaviour
+public class Boss : MonoBehaviour
 {
     public float speed = 10;
     public Rigidbody2D rigidBody;
@@ -19,19 +19,21 @@ public class enemy : MonoBehaviour
     public Transform Player;
     private Vector2 movement;
     public float moveSpeed = 1.5f;
+    public Transform[] moveSpots;
+    private int randomSpot;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        Player = GameObject.FindGameObjectWithTag("treasure").GetComponent<Transform>();
-        rigidBody = GetComponent<Rigidbody2D>();
-        rigidBody.velocity = new Vector2(1, 0) * speed;
+        //Player = GameObject.FindGameObjectWithTag("treasure").GetComponent<Transform>();
+       // rigidBody = GetComponent<Rigidbody2D>();
+        //rigidBody.velocity = new Vector2(1, 0) * speed;
         spriteRenderer = GetComponent<SpriteRenderer>();
         StartCoroutine(changeEnemySprite());
         baseFireWaitTime = baseFireWaitTime + Random.Range(minFireRateTime, maxFireRateTime);
         InvokeRepeating("Launch", 4f, 3f);
-       // target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        // target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
 
@@ -53,16 +55,18 @@ public class enemy : MonoBehaviour
         if (col.gameObject.CompareTag("Player"))
         {
             int lives = col.gameObject.GetComponent<health>().lives;
-            if(lives > 1)
+            if (lives > 1)
             {
                 soundmanager.Instance.PlayOneShot(soundmanager.Instance.loseheart);
                 col.gameObject.GetComponent<health>().takedamage();
                 lives = col.gameObject.GetComponent<health>().lives;
-            } else if(lives == 1) {
+            }
+            else if (lives == 1)
+            {
                 col.gameObject.GetComponent<health>().takedamage();
                 lives = col.gameObject.GetComponent<health>().lives;
             }
-            if(lives <= 0)
+            if (lives <= 0)
             {
                 soundmanager.Instance.PlayOneShot(soundmanager.Instance.playerdies);
                 col.gameObject.GetComponent<SpriteRenderer>().sprite = playerdeathImage;
@@ -72,25 +76,25 @@ public class enemy : MonoBehaviour
 
         }
     }
-       public IEnumerator changeEnemySprite()
-       {
-           while (true)
-           {
-               if(spriteRenderer.sprite == startingImage)
-               {
-                   spriteRenderer.sprite = altImage;
-                  // soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemysound);
+    public IEnumerator changeEnemySprite()
+    {
+        while (true)
+        {
+            if (spriteRenderer.sprite == startingImage)
+            {
+                spriteRenderer.sprite = altImage;
+                // soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemysound);
 
-               }
-               else
-               {
-                   spriteRenderer.sprite = startingImage;
-                  // soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemysound2);
-               }
+            }
+            else
+            {
+                spriteRenderer.sprite = startingImage;
+                // soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemysound2);
+            }
 
-               yield return new WaitForSeconds(secBeforeSpriteChange);
-           }
-       }
+            yield return new WaitForSeconds(secBeforeSpriteChange);
+        }
+    }
 
     void Update()
     {
