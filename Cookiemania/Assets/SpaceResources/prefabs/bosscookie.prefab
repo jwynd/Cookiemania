@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7119240787336071503}
   - component: {fileID: 821822048942803417}
   - component: {fileID: 7763739697342531195}
-  m_Layer: 13
+  m_Layer: 17
   m_Name: bosscookie
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -112,6 +112,7 @@ MonoBehaviour:
     type: 3}
   Player: {fileID: 0}
   moveSpeed: 1.5
+  startwaitTime: 0
 --- !u!61 &821822048942803417
 BoxCollider2D:
   m_ObjectHideFlags: 0

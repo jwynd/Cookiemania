@@ -9,7 +9,7 @@ public class BossSpawn : MonoBehaviour
     List<GameObject> Enemies = new List<GameObject>();
     float randX;
     Vector2 whereToSpawn;
-    float spawning = 5f;
+    float spawning = 30f;
 
     // Start is called before the first frame update
     void Start()

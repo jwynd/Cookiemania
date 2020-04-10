@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
-    public float speed = 10;
+    private float speed = 15;
     public Rigidbody2D rigidBody;
     public Sprite startingImage;
     public Sprite altImage;
@@ -18,22 +18,39 @@ public class Boss : MonoBehaviour
     private Transform target;
     public Transform Player;
     private Vector2 movement;
-    public float moveSpeed = 1.5f;
-    public Transform[] moveSpots;
+    public float moveSpeed = 3f;
+    List<Transform> moveSpots = new List<Transform>();
     private int randomSpot;
+    private float waitTime;
+    public float startwaitTime;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        //Player = GameObject.FindGameObjectWithTag("treasure").GetComponent<Transform>();
-       // rigidBody = GetComponent<Rigidbody2D>();
+        Player = GameObject.FindGameObjectWithTag("treasure").GetComponent<Transform>();
+        rigidBody = GetComponent<Rigidbody2D>();
         //rigidBody.velocity = new Vector2(1, 0) * speed;
         spriteRenderer = GetComponent<SpriteRenderer>();
         StartCoroutine(changeEnemySprite());
         baseFireWaitTime = baseFireWaitTime + Random.Range(minFireRateTime, maxFireRateTime);
         InvokeRepeating("Launch", 4f, 3f);
         // target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        moveSpots.Add(GameObject.Find("MoveSpot").transform);
+        moveSpots.Add(GameObject.Find("MoveSpot1").transform);
+        moveSpots.Add(GameObject.Find("MoveSpot2").transform);
+        moveSpots.Add(GameObject.Find("MoveSpot3").transform);
+        moveSpots.Add(GameObject.Find("MoveSpot4").transform);
+        moveSpots.Add(GameObject.Find("MoveSpot5").transform);
+        moveSpots.Add(GameObject.Find("MoveSpot6").transform);
+        moveSpots.Add(GameObject.Find("MoveSpot7").transform);
+        moveSpots.Add(GameObject.Find("MoveSpot8").transform);
+        moveSpots.Add(GameObject.Find("MoveSpot9").transform);
+        moveSpots.Add(GameObject.Find("MoveSpot10").transform);
+        moveSpots.Add(GameObject.Find("MoveSpot11").transform);
+        moveSpots.Add(GameObject.Find("MoveSpot12").transform);
+
+        randomSpot = Random.Range(0, moveSpots.Count);
     }
 
 
@@ -98,11 +115,25 @@ public class Boss : MonoBehaviour
 
     void Update()
     {
-        Vector3 direction = Player.position - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        rigidBody.rotation = angle;
-        direction.Normalize();
-        movement = direction;
+        //Vector3 direction = Player.position - transform.position;
+        //loat angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        //rigidBody.rotation = angle;
+        //direction.Normalize();
+        //movement = direction;
+
+        transform.position = Vector2.MoveTowards(transform.position, moveSpots[randomSpot].position, moveSpeed * Time.deltaTime);
+        if(Vector2.Distance(transform.position, moveSpots[randomSpot].position) < 0.2f)
+        {
+            if(waitTime <= 0)
+            {
+                randomSpot = Random.Range(0, moveSpots.Count);
+                waitTime = startwaitTime;
+            }
+            else
+            {
+                waitTime -= Time.deltaTime;
+            }
+        }
     }
     private void FixedUpdate()
     {
