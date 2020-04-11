@@ -19,6 +19,7 @@ using UnityEngine;
 
 //doesnt like jumping, wants full arial control, everythings too fast
 //jump speed is too fast
+[RequireComponent(typeof(JumperInputComponent))]
 public class JumperPlayerController : MonoBehaviour
 {
     #region variables
@@ -39,6 +40,8 @@ public class JumperPlayerController : MonoBehaviour
     [SerializeField]
     [Tooltip("Axis for jumping")]
     protected string jumpAxis = "Jump";
+    
+    
     [SerializeField]
     [Tooltip("Axis for picking up items")]
     protected string pickupAxis = "Pickup";
@@ -49,6 +52,17 @@ public class JumperPlayerController : MonoBehaviour
     [Tooltip("EMPTY INPUT axis, should still exist but no keys mapped to it")]
     protected string dummyAxis = "Dummy";
 
+    protected JumperInputComponent input = null;
+
+    //allowing other objects to listen to player's inputs
+    public JumperInputComponent Input
+    {
+        get
+        {
+            return input;
+        }
+    }
+
     protected Rigidbody2D rb;
     protected Renderer rend;
     protected Vector2 velocity = Vector2.zero;
@@ -58,12 +72,13 @@ public class JumperPlayerController : MonoBehaviour
     protected float jumpCooldown = 0;
     protected float jumpCooldownMax = 0.25f;
     
+    
     protected float currentHealth;
     protected bool jumped = false;
 
     protected bool pickup = false;
     
-    protected float arialManeuverability = 0.5f;
+    protected float aerialManeuverability = 0.5f;
     protected float normalManeuverability = 1;
     protected bool haveItem = false;
     protected Rigidbody2D heldItemRB = null;
@@ -82,6 +97,7 @@ public class JumperPlayerController : MonoBehaviour
     protected string obstacleTag;
     protected string collectiblesTag;
     protected string myTag;
+    protected float horizontalInput = 0f;
 
     #endregion
 
@@ -92,10 +108,11 @@ public class JumperPlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         audioPlayer = GetComponent<AudioSource>();
         rend = GetComponent<Renderer>();
+        RebindInputController();
         rb.velocity = Vector2.zero;
         currentHealth = maxHealth;
     }
-    void Start()
+    protected void Start()
     {
         jm = JumperManagerGame.Instance;
         rb.gravityScale = jm.GetAlteredGravity();
@@ -104,7 +121,7 @@ public class JumperPlayerController : MonoBehaviour
         GetTags();
     }
 
-    void GetTags()
+    protected void GetTags()
     {
         groundTag = jm.GetGroundTag();
         myTag = jm.GetPlayerTag();
@@ -120,16 +137,51 @@ public class JumperPlayerController : MonoBehaviour
     {
         //baseline is previous velocity 
         //all my inputs that are done on a per frame basis 
-        //need top be in update
-        
-        jumped = JumpInput(jumpAxis);
-        ItemInput(pickupAxis, throwAxis);
-        // Trap();
+        //need to be in update
+        GetInputs();
     }
 
-    bool JumpInput(string jump)
+    protected void GetInputs()
     {
-        if (Input.GetButtonDown(jump))
+        jumped = JumpInput(input.Jump);
+        pickup = input.Pickup > 0f;
+        throwStuff = input.Throw > 0f ? true : throwStuff;
+        horizontalInput = input.Horizontal;
+    }
+
+    protected void ResetInputForCollisions()
+    {
+        pickup = false;
+    }
+
+    protected void ResetInputForFixedUpdate()
+    {
+        jumped = false;
+        throwStuff = false;
+        horizontalInput = 0f;
+    }
+
+    //match up disables to the enables in enable player movement
+    protected void DisablePlayerInput(bool stopMovement = true)
+    {
+        rb.gravityScale = stopMovement ? 0 : rb.gravityScale;
+        rb.velocity = stopMovement ? Vector2.zero : rb.velocity;
+        rb.isKinematic = true;
+        ResetInputForFixedUpdate();
+        ResetInputForCollisions();
+        enabled = false;
+    }
+
+    public void EnablePlayerInput()
+    {
+        rb.gravityScale = jm.GetAlteredGravity();
+        rb.isKinematic = false;
+        enabled = true;
+    }
+
+    bool JumpInput(float inputVal)
+    {
+        if (inputVal > 0f)
         {
             if (grounded || canAirJump)
             {
@@ -139,22 +191,6 @@ public class JumperPlayerController : MonoBehaviour
         return jumped;
     }
 
-    protected void ItemInput(string pickupAx, string throwAx)
-    {
-        if (Input.GetAxis(pickupAx) > 0) 
-        {
-            pickup = true;
-        }
-        else
-        {
-            pickup = false;
-        }
-        if (Input.GetButtonDown(throwAx))
-        {
-            throwStuff = true;
-        }
-    }
-
     #endregion
 
     #region fixedUpdate
@@ -162,12 +198,18 @@ public class JumperPlayerController : MonoBehaviour
     protected void FixedUpdate()
     {
         UpdateHeight();
-        CheckGrounded();
-        HorizontalInput(horizontalAxis);
+        UpdateJumpCapability();
         Movement();
         ThrowItem();
         //currently, no timers on character
         Timers();
+        ResetInputForFixedUpdate();
+    }
+
+    protected void UpdateJumpCapability()
+    {
+        grounded = IsGrounded();
+        canAirJump = grounded ? true : canAirJump;
     }
 
     void UpdateHeight()
@@ -175,112 +217,102 @@ public class JumperPlayerController : MonoBehaviour
         maxHeightReached = transform.position.y > maxHeightReached ? transform.position.y : maxHeightReached;
     }
 
-    private void CheckGrounded()
+    //this function requires the collider be the same size as the renderer or smaller
+    protected bool IsGrounded()
     {
         float offset = rend.bounds.extents.x;
         float yoffset = rend.bounds.extents.y * 1.02f;
-        grounded = Physics2D.OverlapArea(new Vector2(transform.position.x - offset, transform.position.y - yoffset), 
+        return Physics2D.OverlapArea(new Vector2(transform.position.x - offset, transform.position.y - yoffset), 
             new Vector2(transform.position.x + offset, transform.position.y - yoffset + 0.01f), groundLayer);
-        if (grounded)
-        {
-            canAirJump = true;
-        }
     }
 
-    protected void HorizontalInput(string axis)
+    protected float HorizontalMovement()
     {
-        velocity.x = rb.velocity.x;
-        //can disable or enable arial controls by checking jumpcount
-        //if (jumpCount == maxJumps || jumped)
-        if (grounded && !jumped)
-        {           
-            HorizontalInputHelper(axis, normalManeuverability, false);
-        }
-        //in air speeds are lowered
-        else
-        {
-            HorizontalInputHelper(axis, arialManeuverability, true);
-        }
+        float tempManeuver = !grounded || jumped ? aerialManeuverability : normalManeuverability;
+        return HorizontalMovementHelper(rb.velocity.x, horizontalInput, tempManeuver, !grounded || jumped);
     }
 
-    protected void HorizontalInputHelper(string axis, float maneuverability, bool inAir)
+    protected float HorizontalMovementHelper(float currentV, float direction, float maneuverability, bool inAir)
     {
-        float inputAccel = Input.GetAxis(axis) * maneuverability * acceleration;
+        float inputAccel = direction * maneuverability * acceleration;
         if (inputAccel > 0)
         {
-            velocity.x = Mathf.Min(inputAccel + velocity.x, maxSpeed);
+            currentV = Mathf.Min(inputAccel + currentV, maxSpeed);
             movementDirection = 1;
         }
         else if (inputAccel < 0)
         {
-            velocity.x = Mathf.Max(inputAccel + velocity.x, -maxSpeed);
+            currentV = Mathf.Max(inputAccel + currentV, -maxSpeed);
             movementDirection = -1;
         }
         //lower their velocity if they're on the ground and not going forward or back
         else if (inputAccel == 0 && !inAir)
         {
-            float sign = Mathf.Abs(velocity.x);
-            if (Mathf.Abs(velocity.x) < acceleration)
-            {
-                velocity.x = 0;
-            }
-            else
-            {
-                //only gets to here if abs(velocity.x) is greater than a non-negative value
-                //cant div by zero
-                sign /= velocity.x;
-                velocity.x += (-sign * maneuverability * acceleration);
-            }
-            
+            currentV = ApplyFriction(currentV, maneuverability);
         }
+        transform.localScale = new Vector3(originalScale.x * movementDirection, originalScale.y, originalScale.z);
+        return currentV;
+    }
+
+    protected float ApplyFriction(float currentV, float maneuverability)
+    {
+        float sign = Mathf.Abs(currentV);
+        if (Mathf.Abs(currentV) < acceleration)
+        {
+            currentV = 0;
+        }
+        else
+        {
+            //only gets to here if abs(velocity.x) is greater than a non-negative value
+            //cant div by zero
+            sign /= currentV;
+            currentV += (-sign * maneuverability * acceleration);
+        }
+        return currentV;
     }
 
     protected void Movement()
     {
         //changing the direction of the throw to the last direction moved
-
-
-        if (jumped)
-        {
-            SpawnJumpParticles();
-            audioPlayer.clip = jumpSound;
-            audioPlayer.Play();
-            if (grounded)
-            {
-                grounded = false;
-                rb.velocity = new Vector2(velocity.x, 0);
-                rb.AddForce(new Vector2(0, jumpSpeed), ForceMode2D.Impulse);
-            }
-            else if (rb.velocity.y < jumpSpeed)
-            {
-                canAirJump = false;
-                rb.velocity = new Vector2(velocity.x, 0);
-                rb.AddForce(new Vector2(0, airJumpSpeed), ForceMode2D.Impulse);
-            }
-            //else
-            //{
-                //canAirJump = false;
-                //the jump punish lol, imma just disable
-            //}
-        }
-        else
-        {
-            rb.velocity = new Vector2(velocity.x, rb.velocity.y);
-        }
-        jumped = false;
-        grounded = false;
-        transform.localScale = new Vector3(originalScale.x * movementDirection, originalScale.y, originalScale.z);
+        float horizontal = HorizontalMovement();
+        if (jumped) { Jump(horizontal); }
+        else { rb.velocity = new Vector2(horizontal, rb.velocity.y); }        
     }
 
-    private void SpawnJumpParticles()
+    protected void Jump(float horizontal)
     {
+        SpawnJumpParticles();
+        audioPlayer.clip = jumpSound;
+        audioPlayer.Play();
+        if (grounded)
+        {
+            JumpHelper(horizontal, jumpSpeed);
+        }
+        //air jump only procs when our jump speed has slowed down enough
+        else if (rb.velocity.y < jumpSpeed)
+        {
+            //this is a physics bool, needs to be reset by physics functions
+            JumpHelper(horizontal, airJumpSpeed);
+            canAirJump = false;
+        }
+    }
+
+    protected void JumpHelper(float horizontalSpeed, float verticalSpeed)
+    {
+        rb.velocity = new Vector2(horizontalSpeed, 0);
+        rb.AddForce(new Vector2(0, verticalSpeed), ForceMode2D.Impulse);
+    }
+
+    protected void SpawnJumpParticles()
+    {
+        //spawn at my feet :)
         Vector3 jpPos = transform.position;
         jpPos.y -= rend.bounds.extents.y;
         //the jump particles handle its own animation and auto destruction
         Instantiate(jumpParticles, transform.position, Quaternion.identity);
     }
 
-
+    //run after movement
     protected void ThrowItem()
     {
         if (throwStuff && haveItem)
@@ -291,9 +323,9 @@ public class JumperPlayerController : MonoBehaviour
             throwTemp.x *= movementDirection;
             //check if velocity and movement direction are both positive/both negative
             //no need to add if velocity is 0 ofc
-            if (velocity.x * movementDirection > 0)
+            if (rb.velocity.x * movementDirection > 0)
             {
-                throwTemp.x += velocity.x * 0.3f;
+                throwTemp.x += rb.velocity.x * 0.3f;
             }
             heldItemRB.gameObject.GetComponent<JumperPickupController>().Thrown(throwTemp);
         }
@@ -372,13 +404,23 @@ public class JumperPlayerController : MonoBehaviour
         return haveItem;
     }
 
+    public void RebindInputController()
+    {
+        input = GetComponent<JumperInputComponent>();
+        if (input == null)
+        {
+            input = gameObject.AddComponent<JumperInputKeyboard>();
+        }
+    }
+
     public void BouncePlayer(float bounceStrength)
     {
         Debug.Log("Bounce called");
-        rb.velocity = new Vector2(rb.velocity.x, 0);
-        rb.AddForce(new Vector2(0, bounceStrength * jumpSpeed), ForceMode2D.Impulse);
+        JumpHelper(rb.velocity.x, bounceStrength * jumpSpeed);
         canAirJump = true;
     }
+
+
 
     #endregion
 
@@ -461,17 +503,7 @@ public class JumperPlayerController : MonoBehaviour
         //player destruction handled elsewhere
     }
     
-    //yikes, permanent disability right here
-    protected void DisablePlayerMovement()
-    {
-        horizontalAxis = dummyAxis;
-        jumpAxis = dummyAxis;
-        pickupAxis = dummyAxis;
-        throwAxis = dummyAxis;
-        rb.gravityScale = 0;
-        rb.velocity = Vector2.zero;
-        rb.isKinematic = true;
-    }
+    
 
     public void RunDeathSequence()
     {
@@ -479,12 +511,12 @@ public class JumperPlayerController : MonoBehaviour
         //disables gravity
         //stops them from moving
         //and uhhh kills em
-        DisablePlayerMovement();
+        DisablePlayerInput();
         DeathAnimation();
     }
 
     //TODO get a death animation
-    private void DeathAnimation()
+    protected void DeathAnimation()
     {
         return;
     }
@@ -493,12 +525,12 @@ public class JumperPlayerController : MonoBehaviour
     {
         //this function also removes ability to input 
         //but a victory animation instead
-        DisablePlayerMovement();
+        DisablePlayerInput();
         DanceAnimation();
     }
 
     //TODO get a dance animation
-    private void DanceAnimation()
+    protected void DanceAnimation()
     {
         return;
     }

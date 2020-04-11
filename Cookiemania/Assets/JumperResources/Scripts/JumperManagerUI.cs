@@ -70,10 +70,10 @@ public class JumperManagerUI : MonoBehaviour
             needNextLine = true;
             tutorialTimer = 0f;
         }
-        heightSlider.minValue = jm.player.transform.position.y;
+        heightSlider.minValue = jm.Player.transform.position.y;
         heightSlider.maxValue = jm.GetHeightGoal();
         healthSlider.minValue = 0;
-        healthSlider.maxValue = jm.player.GetMaxHealth();
+        healthSlider.maxValue = jm.Player.GetMaxHealth();
     }
 
     #endregion
@@ -82,11 +82,11 @@ public class JumperManagerUI : MonoBehaviour
     void Update()
     {
         //check if player alive
-        if (jm.player != null)
+        if (jm.Player != null)
         {
-            heightSlider.value = jm.player.transform.position.y;
-            healthSlider.value = jm.player.GetCurrentHealth();
-            coinsCollected = (int)jm.player.GetCoinsCollected();
+            heightSlider.value = jm.Player.transform.position.y;
+            healthSlider.value = jm.Player.GetCurrentHealth();
+            coinsCollected = (int)jm.Player.GetCoinsCollected();
             scoreText.UpdateText(coinsCollected.ToString());
         }
         TutorialUpdate();
@@ -120,22 +120,10 @@ public class JumperManagerUI : MonoBehaviour
                 Debug.Log(tutorialTimer.ToString());
             }
             tutorialText.UpdateText(textNAxis.Item1);
-        }
-        else if (listeningToAxis)
+        }  
+        if (listeningToAxis)
         {
-            if (axis == jm.player.GetPickupAxis())
-            {
-                if (jm.player.HasThrowable())
-                {
-                    listeningToAxis = false;
-                    tutorialTimer = minTutorialTimer;
-                }
-            }
-            else if (Input.GetAxis(axis) != 0)
-            {
-                listeningToAxis = false;
-                tutorialTimer = minTutorialTimer;
-            }
+            CheckPlayerInput(axis);
         }
         else
         {
@@ -146,25 +134,64 @@ public class JumperManagerUI : MonoBehaviour
             }
         }
     }
+
+    private void CheckPlayerInput(string axis)
+    {
+        
+        //switch did not work ??
+        if (axis == nameof(jm.Player.Input.Horizontal))
+        {
+            if (jm.Player.Input.Horizontal != 0)
+            {
+                listeningToAxis = false;
+                tutorialTimer = minTutorialTimer;
+            }       
+        }
+        //should only be checking this when we have an item to throw tbh
+        else if (axis == nameof(jm.Player.Input.Throw))
+        {
+            if (jm.Player.Input.Throw != 0)
+            {
+                listeningToAxis = false;
+                tutorialTimer = minTutorialTimer;
+            }
+        }
+        else if (axis == nameof(jm.Player.Input.Jump))
+        {
+            if (jm.Player.Input.Jump != 0)
+            {
+                listeningToAxis = false;
+                tutorialTimer = minTutorialTimer;
+            }
+        }
+        else if (axis == nameof(jm.Player.Input.Pickup))
+        {
+            if (jm.Player.HasThrowable())
+            {
+                listeningToAxis = false;
+                tutorialTimer = minTutorialTimer;
+            }
+        }
+    }
     #region public
     public void End(bool isGood, bool runSequence = true, Transform target = null)
     {
         //ensuring this only gets run once
         if (endingGame) { return; }
         
-        jm.mainCamera.PlayerDestroyed();
+        jm.MainCam.PlayerDestroyed();
         endingGame = true;
         if (!isGood && runSequence) 
-            jm.player.RunDeathSequence();
+            jm.Player.RunDeathSequence();
         else if (runSequence)
-            jm.player.RunVictorySequence();
+            jm.Player.RunVictorySequence();
         if (target != null)
         {
-            jm.mainCamera.ZoomInToTarget(target);
+            jm.MainCam.ZoomInToTarget(target);
         }
         else
         {
-            jm.mainCamera.ZoomIn();
+            jm.MainCam.ZoomIn();
         }
         StartCoroutine(SwitchCamera(timeToNextScene, isGood));
     }
@@ -188,9 +215,9 @@ public class JumperManagerUI : MonoBehaviour
     private IEnumerator SwitchCamera(float timer, bool isGoodEnd)
     {
         yield return new WaitForSeconds(timer);
-        coinsCollected = (int)jm.player.GetCoinsCollected();
+        coinsCollected = (int)jm.Player.GetCoinsCollected();
         //if this throws an error, need to stop whatever destroyed the player before this function
-        Destroy(jm.player.gameObject);
+        Destroy(jm.Player.gameObject);
         JumperTextAdvanced endUI = endscreenCanvas.GetComponent<JumperTextAdvanced>();
         if (isGoodEnd)
         {

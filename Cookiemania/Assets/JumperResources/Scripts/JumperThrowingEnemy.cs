@@ -62,7 +62,7 @@ public class JumperThrowingEnemy : JumperGeneralThreat
         base.Start();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        playerTransform = jm.player.transform;
+        playerTransform = jm.Player.transform;
         JumperGeneralPlatform dad = transform.parent.GetComponent<JumperGeneralPlatform>();
         dad.enemyChild = this;
         float diff = jm.GetDifficultyMultiplier();

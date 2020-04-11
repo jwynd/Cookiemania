@@ -40,7 +40,7 @@ public abstract class JumperGeneralThreat : MonoBehaviour
         if (!IsIndestructable()) { currentHealth -= Mathf.Abs(dmg); }        
         if (currentHealth <= 0)
         {
-            jm.player.GivePoints(pointValue);
+            jm.Player.GivePoints(pointValue);
             Remove();
         }
     }

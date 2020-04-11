@@ -86,7 +86,7 @@ public class JumperEnemyController : JumperGeneralThreat
             CheckBounds();
             Walk();
         }
-        else if (jm.player == null)
+        else if (jm.Player == null)
         {
             Destroy(gameObject);
         }
@@ -172,7 +172,7 @@ public class JumperEnemyController : JumperGeneralThreat
 
     protected float RunToPlayer()
     {
-        float playerX = jm.player.transform.position.x;
+        float playerX = jm.Player.transform.position.x;
         //sprint speed hehe
         maxVelocity = originalMaxVelocity * 1.5f;
         if (rb.position.x > playerX + buffer)

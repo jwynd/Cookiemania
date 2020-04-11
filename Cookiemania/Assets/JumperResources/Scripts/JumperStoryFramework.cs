@@ -8,17 +8,29 @@ public class JumperStoryFramework : MonoBehaviour
 {
     #region variables
 
+    //all these definers need to be 2+ characters
+    const string commentDefiner = "//";
+    const string tutorialDefiner = "TUTORIAL";
+    const string endDefiner = "END";
+    const string replacePosDefiner = "<REPLACE_POSITIVE>";
+    const string replaceNegDefiner = "<REPLACE_NEGATIVE>";
+    const int minimumLineLength = 3;
+    const int sectionCount = 3;
+    //if theres an axis marker, theres also an ending axis marker, which gets disposed of
+    const char axisMarker = '<';
+
     [SerializeField]
     [Tooltip("Requires full path e.g. Assets/Resources/UI/my_text_file.txt")]
     protected string UITextsName = "Assets/JumperResources/UI/JumperUILines.txt";
 
-    protected HashSet<string> axisNameList;
     //first entry is the text to display, second is the axis the jumpermanagerui is looking for
     protected Queue<System.Tuple<string, string>> tutorialStrings;
     protected Queue<System.Tuple<string, string>> endgameStrings;
     protected Dictionary<string, System.Tuple<string, string>> inputReplacers;
-    protected char axisMarker = '<';
+
     protected JumperManagerGame jm;
+
+
     public static JumperStoryFramework Instance { get; private set; }
 
     #endregion
@@ -34,36 +46,26 @@ public class JumperStoryFramework : MonoBehaviour
         else
         {
             Instance = this;
-        }  
+        }
     }
 
     void Start()
     {
         jm = JumperManagerGame.Instance;
-        PopulateAxisSet(jm.player.GetComponent<JumperPlayerController>());
         PopulateInputReplacers(out inputReplacers);
         //want to populate even if we dont use the tutorial
         ReadInTexts(out tutorialStrings, out endgameStrings);
-    }
-
-    private void PopulateAxisSet(JumperPlayerController jp)
-    {
-        axisNameList = new HashSet<string> { jp.GetHorizontalAxis(), jp.GetJumpAxis(), jp.GetPickupAxis(), jp.GetThrowAxis() };
+        //once all the texts are finished, disable
+        enabled = false;
     }
 
     private void PopulateInputReplacers(out Dictionary<string, System.Tuple<string, string>> inputReplacers)
     {
         inputReplacers = new Dictionary<string, System.Tuple<string, string>>();
-        //want to always have 4 buttons, labeled statically, if "" no button defined for that action
-        //maps to 0-3 ----> positive, negative, alt positive, alt negative
-        //if buttons are more than 4, multiple axes with same name, use modulo 4 for repeats of pos/neg/altpos/altneg
-        //use modulo 2 to get all repeat options for positive and negatives
-        Dictionary<string, string[]> buttons;
-
-        GetKeysFromAxis(axisNameList, out buttons);
-        foreach (string key in buttons.Keys)
+        GetKeysFromInputController(out Dictionary<string, System.Tuple<List<string>, List<string>>> temp);
+        foreach (string key in temp.Keys)
         {
-            PullPositiveNegativeButtons(buttons[key], out string positive, out string negative);
+            AddOrs(temp[key], out string positive, out string negative);
             //Debug.Log(positive);
             //Debug.Log(negative);
             inputReplacers.Add("<" + key + ">", new System.Tuple<string, string>(positive, negative));
@@ -71,120 +73,34 @@ public class JumperStoryFramework : MonoBehaviour
     }
 
     //puts all positive options into a string, each separated by " or ", same with negative options 
-    private void PullPositiveNegativeButtons(string[] v, out string positive, out string negative)
+    private void AddOrs(System.Tuple<List<string>, List<string>> keys, out string positive, out string negative)
     {
-        positive = "";
-        negative = "";
-        string button = v[0];
-        if (button != "")
-        {
-            positive += PullPositiveOrNegativeHelper(button);
-        }
-        button = v[1];
-        if (button != "")
-        {
-            negative += PullPositiveOrNegativeHelper(button);
-        }
-        for (int i = 2; i < v.Length; i++)
-        {
-            button = v[i];
-            if (button == "")
-                continue;
-            if (i % 2 == 1)
-            {
-                negative += " or " + PullPositiveOrNegativeHelper(button);
-            }
-            else
-            {
-                positive += " or " + PullPositiveOrNegativeHelper(button);
-            }
-        }
+        OrHelper(keys, out positive);
+        OrHelper(keys, out negative);
     }
 
-    //optional --> puts quotes around single letter input button descriptions
-    private string PullPositiveOrNegativeHelper(string button)
+    private static void OrHelper(System.Tuple<List<string>, List<string>> keys, out string ordKeys)
     {
-        if (button.Length == 1)
+        string init = " or ";
+        ordKeys = "";
+        foreach (var key in keys.Item1)
         {
-            return "\"" + button + "\"";
+            ordKeys += init;
+            ordKeys += key;
         }
-        else
-        {
-            return button;
-        }
+        ordKeys = ordKeys.Remove(0, init.Length);
     }
 
-    //credit : https://stackoverflow.com/questions/40231499/how-do-i-get-the-keycode-currently-assigned-to-the-input-manager
-    //order of buttons is ---> positive, negative, alt positive, alt negative
-    private void GetKeysFromAxis(HashSet<string> axisName, out Dictionary<string, string[]> buttons)
+    private void GetKeysFromInputController(out Dictionary<string, System.Tuple<List<string>, List<string>>> buttons)
     {
-        var inputManager = UnityEditor.AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/InputManager.asset")[0];
-        UnityEditor.SerializedObject obj = new UnityEditor.SerializedObject(inputManager);
-        UnityEditor.SerializedProperty axisArray = obj.FindProperty("m_Axes");
-        buttons = new Dictionary<string, string[]>();
-        if (axisArray.arraySize < axisName.Count)
-            Debug.LogWarning("Not enough axes");
-
-        for (int i = 0; i < axisArray.arraySize; ++i)
-        {
-            string[] buttonCandidates = new string[4];
-            int offset = 0;
-            var axis = axisArray.GetArrayElementAtIndex(i);
-            var name = axis.displayName;      //axis.displayName  "Horizontal"  string
-            if (!axisName.Contains(name)) //only looking for specific axes
-            {
-                continue;
-            }
-            if (buttons.ContainsKey(name)) //only want one entry per key
-            {
-                offset += buttons[name].Length;
-                AssignToArray(buttons[name], 4, out buttonCandidates);
-            }
-            axis.Next(true);   //axis.displayName      "Name"  string
-            axis.Next(false);      //axis.displayName  "Descriptive Name"  string
-            axis.Next(false);      //axis.displayName  "Descriptive Negative Name" string
-            axis.Next(false);      //axis.displayName  "Negative Button"   string
-            buttonCandidates[1 + offset] = axis.stringValue;
-            axis.Next(false);      //axis.displayName  "Positive Button"   string
-            buttonCandidates[0 + offset] = axis.stringValue;
-            axis.Next(false);      //axis.displayName  "Positive Button"   string
-            buttonCandidates[3 + offset] = axis.stringValue;
-            axis.Next(false);      //axis.displayName  "Positive Button"   string
-            buttonCandidates[2 + offset] = axis.stringValue;
-            // Debug.Log(name);
-            // Debug.Log(buttonCandidates[0] + " " + buttonCandidates[1] + " " + buttonCandidates[2] + " " + buttonCandidates[3]);
-            if (offset != 0)
-            {
-                buttons[name] = buttonCandidates;
-                //Debug.Log("added new stuff: " + buttonCandidates[4] + " " + buttonCandidates[5] + " " + buttonCandidates[6] + " " + buttonCandidates[7]);
-            }
-            else
-            {
-                buttons.Add(name, buttonCandidates);
-            }
-        }
+        buttons = jm.Player.Input.AxesToKeys;
     }
 
-    private void AssignToArray(string[] v, int extraSize, out string[] buttonCandidates)
-    {
-        buttonCandidates = new string[v.Length + extraSize];
-        for (int i = 0; i < v.Length; i++)
-        {
-            buttonCandidates[i] = v[i];
-        }
-    }
 
     private void ReadInTexts(out Queue<System.Tuple<string, string>> tutorial, out Queue<System.Tuple<string, string>> ending)
     {
         StreamReader sr = File.OpenText(UITextsName);
         string line;
-        int sectionCount = 3;
-        //all these definers need to be 2+ characters
-        string commentDefiner = "//";
-        string tutorialDefiner = "TUTORIAL";
-        string endDefiner = "END";
-        string replacePosDefine = "<REPLACE_POSITIVE>";
-        string replaceNegDefine = "<REPLACE_NEGATIVE>";
         //second string is the axis game should look for, for this object OR a string timer (need to convert to float)
         tutorial = new Queue<System.Tuple<string, string>>();
         ending = new Queue<System.Tuple<string, string>>();
@@ -195,25 +111,24 @@ public class JumperStoryFramework : MonoBehaviour
             {
                 section.Trim();
             }
-            //dispose of lines without all the sections defined
-            if (sections.Length < sectionCount)
+            //dispose of commented lines
+            if (Equals(sections[0].Substring(0, commentDefiner.Length), commentDefiner))
+            {
+                continue;
+            }
+            //dispose of lines without exact number of sections
+            if (sections.Length != sectionCount)
             {
                 continue;
             }
             //no empty bs
-            if (sections[0].Length < 2 || sections[1] == "" || sections[2] == "")
+            if (sections[0].Length < (minimumLineLength - 1) || sections[1] == "" || sections[2] == "")
             {
                 continue;
             }
-            //dispose of commented lines
-            if (Equals(sections[0].Substring(0, 2), commentDefiner))
-            {
-                continue;
-            }
-            //TODO need to parse the damn thing
             if (sections[0] == tutorialDefiner)
             {
-                tutorial.Enqueue(StaticVariableReplacements(sections, replacePosDefine, replaceNegDefine));
+                tutorial.Enqueue(StaticVariableReplacements(sections, replacePosDefiner, replaceNegDefiner));
             }
             else if (sections[0] == endDefiner)
             {
@@ -272,12 +187,6 @@ public class JumperStoryFramework : MonoBehaviour
 
     #endregion
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     //offloads line to whatever calls it, does not keep the line after this
 
     //order is, first string is the display string, second is the axis to listen to
@@ -298,22 +207,14 @@ public class JumperStoryFramework : MonoBehaviour
         }
         if (axis[0] == axisMarker)
         {
-            axis = axis.Substring(1, axis.Length - 2);          
+            return axis.Substring(1, axis.Length - 2);          
         }
         return axis;
-        /*
-        if (axisNameList.Contains(axis))
-        {
-            return axis;
-        }
-        Debug.Log("Axis " + axis + " not in axis list, hopefully a float");
-        return axis;
-        */
     }
 
     //should attempt to use as a timer if not an axis
     public bool IsAnAxis(string axis)
     {
-        return axisNameList.Contains(axis);
+        return jm.Player.Input.Axes.Contains(axis);
     }
 }

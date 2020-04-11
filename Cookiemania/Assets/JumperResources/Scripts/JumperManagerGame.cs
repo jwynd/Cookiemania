@@ -50,6 +50,7 @@ public class JumperManagerGame : MonoBehaviour
     [Range(0.0f, 360.0f)]
     public float rotation = 0.0f;
     public float alteredGravity = 2f;
+    public float bounceHeightMultiplier = 3f;
     [Tooltip("Important game tag, ensure this is added to the tags list")]
     public string playerTag = "Player";
     [Tooltip("Important game tag, ensure this is added to the tags list")]
@@ -76,9 +77,9 @@ public class JumperManagerGame : MonoBehaviour
     private float weightRange = 0.0f;
     private float checkAgainstPosition;
 
-    public JumperCameraController mainCamera { get; private set; }
+    public JumperCameraController MainCam { get; private set; }
 
-    public JumperPlayerController player { get; private set; }
+    public JumperPlayerController Player { get; private set; }
 
     public static JumperManagerGame Instance { get; private set; }
 
@@ -101,8 +102,8 @@ public class JumperManagerGame : MonoBehaviour
             fab.probability = fab.weight + weightRange;
             weightRange += fab.weight;
         }
-        player = FindObjectOfType<JumperPlayerController>().gameObject.GetComponent<JumperPlayerController>();
-        mainCamera = FindObjectOfType<JumperCameraController>().gameObject.GetComponent<JumperCameraController>();
+        Player = FindObjectOfType<JumperPlayerController>().gameObject.GetComponent<JumperPlayerController>();
+        MainCam = FindObjectOfType<JumperCameraController>().gameObject.GetComponent<JumperCameraController>();
         heightGoal *= startingDifficulty;
     }
 
@@ -117,7 +118,7 @@ public class JumperManagerGame : MonoBehaviour
 
     private void ValidationChecks()
     {
-        if (!player || !mainCamera || platformPrefabs.Length == 0)
+        if (!Player || !MainCam || platformPrefabs.Length == 0)
         {
             Debug.LogError("need a player, platform prefabs and camera with appropriate scripts" +
                 " instantiated in the scene");
@@ -149,15 +150,15 @@ public class JumperManagerGame : MonoBehaviour
         ValidationChecks();
         GameObject g = Instantiate(platformPrefabs[0].platform, transform.position, Quaternion.identity);
         firstPrefabWidth = g.GetComponent<Renderer>().bounds.size.x;
-        minHeightIncrease = player.gameObject.GetComponent<Renderer>().bounds.size.y * 2.5f + g.GetComponent<Renderer>().bounds.size.y;
+        minHeightIncrease = Player.gameObject.GetComponent<Renderer>().bounds.size.y * 3.5f + g.GetComponent<Renderer>().bounds.size.y;
         Destroy(g);
-        jumpHeight = player.GetJumpStrength() / 3;
-        width = player.GetMaxVelocity() * 2.5f;
+        jumpHeight = Player.GetJumpStrength() / 3;
+        width = Player.GetMaxVelocity() * 2.5f;
         Debug.Log(width);
         max  = (int)(density * 1.5);
-        offset = player.transform.position.x;
-        height = player.transform.position.y;
-        maxHeightReached = player.transform.position.y;
+        offset = Player.transform.position.x;
+        height = Player.transform.position.y;
+        maxHeightReached = Player.transform.position.y;
         BuildSection();
     }
 
@@ -181,8 +182,8 @@ public class JumperManagerGame : MonoBehaviour
     #region update
     private void FixedUpdate()
     {
-        if (player == null) { return; }
-        float heightRightNow = player.transform.position.y;
+        if (Player == null) { return; }
+        float heightRightNow = Player.transform.position.y;
         maxHeightReached = heightRightNow > maxHeightReached ? heightRightNow : maxHeightReached;
         //not checking for health in update, will just run end on player death
         //else if (player.GetCurrentHealth() <= 0)
@@ -241,7 +242,8 @@ public class JumperManagerGame : MonoBehaviour
         startingDifficulty += difficultyIncrement;
         for (int i = 0; i < density; ++i)
         {
-            float randomy = UnityEngine.Random.Range(height + minHeightIncrease, height + jumpHeight);
+            float randomy = canPlaceAboveLast ? UnityEngine.Random.Range(height + minHeightIncrease, height + jumpHeight) :
+                UnityEngine.Random.Range(height + (minHeightIncrease * bounceHeightMultiplier), height + (jumpHeight * bounceHeightMultiplier));
             if (randomy >= heightGoal)
             {
                 AttemptToBuildExit();
