@@ -8,15 +8,15 @@ using UnityEngine.Events;
 public class Desktop_EmailController : MonoBehaviour
 {
     public static Desktop_EmailController Instance;
-    public Vector3 nextEmailPosition;
+    public Transform[] emailPositions;
     public GameObject newEmail;
     public GameObject emailLiteral;
-    public float offset;
     public GameObject[] disableOnEmailClick;
     public GameObject[] enableOnEmailClick;
     private GameObject emailsParent;
     private static List<GameObject> emails = new List<GameObject>();
-    private Vector3 originalEmailPos;
+    private int spotIndex = 0;
+    private bool[] occupied;
 
     void OnValidate(){
         Assert.IsNotNull(newEmail);
@@ -33,15 +33,24 @@ public class Desktop_EmailController : MonoBehaviour
         }
         Instance = this;
         emailsParent = GameObject.Find("Email");
-        originalEmailPos = nextEmailPosition;
+        occupied = new bool[emailPositions.Length];
+        for(int i = 0; i < occupied.Length; ++i) occupied[i] = false;
     }
 
     public void spawnEmail(string subject, string body, string[] responseNames, UnityAction[] responseActions){
-        GameObject e = Instantiate(newEmail, nextEmailPosition, Quaternion.identity);
-        e.transform.SetParent(emailsParent.transform, false);
-        e.SetActive(true);
-        emails.Add(e);
-        nextEmailPosition = new Vector3(nextEmailPosition.x, nextEmailPosition.y - offset, nextEmailPosition.z);
+        GameObject e; // this will be the new email
+        if(spotIndex < emailPositions.Length){
+            e = Instantiate(newEmail, new Vector3(emailPositions[spotIndex].position.x, emailPositions[spotIndex].position.y, emailPositions[spotIndex].position.z), Quaternion.identity);
+            e.transform.SetParent(emailsParent.transform, false);
+            e.SetActive(true);
+            emails.Add(e);
+            occupied[spotIndex] = true;
+        } else {
+            e = Instantiate(newEmail, Vector3.zero, Quaternion.identity);
+            e.transform.SetParent(emailsParent.transform, false);
+            e.SetActive(false);
+            emails.Add(e);
+        }
         Email_Click ec = e.GetComponent<Email_Click>();
         ec.disable = disableOnEmailClick;
         ec.enable = enableOnEmailClick;
@@ -55,11 +64,10 @@ public class Desktop_EmailController : MonoBehaviour
     // this function should be called in Email_Clicks onDestroy
     public void reorderEmails(){
       // Debug.LogError("Reorder emails is not implemented");
-      nextEmailPosition = originalEmailPos;
       foreach(GameObject e in emails){
         if(e == null) continue;
-        e.transform.position = nextEmailPosition;
-        nextEmailPosition = new Vector3(nextEmailPosition.x, nextEmailPosition.y - offset, nextEmailPosition.z);
+        // e.transform.position = nextEmailPosition;
+        // nextEmailPosition = new Vector3(nextEmailPosition.x, nextEmailPosition.y - offset, nextEmailPosition.z);
       }
     }
 
