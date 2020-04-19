@@ -110,6 +110,8 @@ public class PauseMenu : MonoBehaviour
     public void Pause()
     {
         Time.timeScale = 0;
+        markedButton = -1;
+        Up();
         menuActive = true;
         ActivateChildren(menuActive);
     }
