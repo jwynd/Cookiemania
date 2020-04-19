@@ -8,10 +8,23 @@ public class General_LevelTransition : MonoBehaviour
 {
     public Dropdown LevelSelect; // Reference to the level select dropdown menu
     public GameObject[] DisableOnLevelChange; // List of desktop objects that should be disabled when in minigame
+    public GameObject pauseMenuPrefab;
     private string loadedScene = null; // contains the name of the currently loaded minigame
+    public General_LevelTransition Instance { get; protected set; }
+
+    private void Awake()
+    {
+        if (Instance && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        Instance = this;
+    }
 
     // in start we will add a listener so that we can call transition when a new entry is selected
-    void start(){
+    //this isnt working, which is good cuz it double loads the scene
+    void start()
+    {
         LevelSelect.onValueChanged.AddListener(delegate {
             transition(LevelSelect);
         });
@@ -53,6 +66,7 @@ public class General_LevelTransition : MonoBehaviour
         }
         SceneManager.LoadScene(sceneName, LoadSceneMode.Additive); // load the new scene additively
         loadedScene = sceneName; // set the loaded scene to a non-null value
+        Instantiate(pauseMenuPrefab);
     }
 
     // called when exiting a minigame and returning to the desktop
@@ -74,8 +88,10 @@ public class General_LevelTransition : MonoBehaviour
     // contains temporary controls to return to desktop, remove in final version
     void Update(){
         if(loadedScene == null) return;
+        /*
         if(Input.GetKeyDown(KeyCode.Escape)){
             returnDesktop();
         }
+        */
     }
 }

@@ -38,14 +38,11 @@ public class JumperManagerUI : MonoBehaviour
     #region startup
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        if (Instance && Instance != this)
         {
             Destroy(gameObject);
         }
-        else
-        {
-            Instance = this;
-        }
+        Instance = this;
         endscreenCamera.GetComponent<Camera>().enabled = false;
         endscreenCamera.GetComponent<AudioListener>().enabled = false;
         scoreText = scoreRef.gameObject.GetComponent<JumperGeneralText>();
@@ -54,7 +51,7 @@ public class JumperManagerUI : MonoBehaviour
         GameObject levelC = GameObject.Find("LevelController");
         if (levelC != null)
         {
-            levelController = GameObject.Find("LevelController").GetComponent<General_LevelTransition>();
+            levelController = levelC.GetComponent<General_LevelTransition>();
         }
         
     }

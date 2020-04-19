@@ -41,31 +41,22 @@ public class JumperInputKeyboard : JumperInputComponent
 
     protected override float HorizontalInput()
     {
-        float value = 0f;
-        foreach(var key in leftKeys)
-        {
-            if (Input.GetKey(key)) { value--; break; }
-        }
-        foreach(var key in rightKeys)
-        {
-            if (Input.GetKey(key)) { value++; break; }
-        }
-        return value;
+        return General_Input.GetKey(rightKeys, leftKeys);
     }
 
     protected override float JumpInput()
     {
-        return KeyDown(jumpKeys);
+        return General_Input.GetKeyDown(jumpKeys);
     }
 
     protected override float ThrowInput()
     {
-        return KeyDown(throwKeys);
+        return General_Input.GetKeyDown(throwKeys);
     }
 
     protected override float PickupInput()
     {
-        return Key(pickupKeys);
+        return General_Input.GetKey(pickupKeys);
     }
 
     protected override void StringifyKeys(string axis, bool isPositive, out List<string> keys)

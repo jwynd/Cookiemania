@@ -8,18 +8,17 @@ using UnityEngine;
 //attach to the player object and remove other instances of jumper input component already on it
 //trying to ensure execution is before player
 [DefaultExecutionOrder(-100)]
-public abstract class JumperInputComponent : MonoBehaviour
+public abstract class JumperInputComponent : General_Input
 {
 
     #region public functions
     //keys are the nameof the axes the input component uses (Horizontal, Jump etc)
     //contains values that are tuples of lists tuple items: item1 = positive, item2 = negative
     public Dictionary<string, System.Tuple<List<string>, List<string>>> AxesToKeys { get { return axesDictionary; } }
-    public List<string> Axes { get { return axes; } }
-    public float Horizontal { get { return horizontal; } }
-    public float Jump { get { return jump; } }
-    public float Pickup { get { return pickup; } }
-    public float Throw { get { return thrown; } }
+    public float Horizontal { get { return HorizontalInput(); } }
+    public float Jump { get { return JumpInput(); } }
+    public float Pickup { get { return PickupInput(); } }
+    public float Throw { get { return ThrowInput(); } }
     //the names of the positive/negative keys
     public virtual List<string> HorizontalPositiveKeys { get { return leftKeyStrings; } }
     public virtual List<string> HorizontalNegativeKeys { get { return rightKeyStrings; } }
@@ -44,7 +43,7 @@ public abstract class JumperInputComponent : MonoBehaviour
 
     #region protected variables
 
-    protected List<string> axes = new List<string>();
+
     protected Dictionary<string, System.Tuple<List<string>, List<string>>> axesDictionary = 
         new Dictionary<string, System.Tuple<List<string>, List<string>>>();
     protected float horizontal = 0f;
@@ -78,19 +77,9 @@ public abstract class JumperInputComponent : MonoBehaviour
 
     #region virtuals
 
-    protected virtual void Awake()
+    protected override void Awake()
     {
-        PropertyInfo[] infos = GetType().GetProperties();
-        //Debug.Log(infos[0].PropertyType.ToString());
-        //Debug.Log(nameof(Horizontal));
-        foreach (var info in infos)
-        {
-            if (info.PropertyType.Equals(typeof(float)))
-            {
-                //Debug.Log(info.Name);
-                axes.Add(info.Name);
-            }
-        }
+        base.Awake();
         StringifyKeys(nameof(Horizontal), true, out rightKeyStrings);
         StringifyKeys(nameof(Horizontal), false, out leftKeyStrings);
         StringifyKeys(nameof(Jump), true, out jumpKeyStrings);
@@ -116,12 +105,32 @@ public abstract class JumperInputComponent : MonoBehaviour
         */
     }
 
-    protected virtual void Update()
+    protected override void SetAxesDelegates()
     {
-        horizontal = HorizontalInput();
-        jump = JumpInput();
-        pickup = PickupInput();
-        thrown = ThrowInput();
+        axisReturnDelegates = new List<System.Func<float>>(axes.Count);
+        for(int i = 0; i < Axes.Count; i++)
+        {
+            axisReturnDelegates.Add(null);
+            var axis = Axes[i];
+            switch (axis)
+            {
+                case nameof(Horizontal):
+                    axisReturnDelegates[i] = HorizontalInput;
+                    break;
+                case nameof(Jump):
+                    axisReturnDelegates[i] = JumpInput;
+                    break;
+                case nameof(Pickup):
+                    axisReturnDelegates[i] = PickupInput;
+                    break;
+                case nameof(Throw):
+                    axisReturnDelegates[i] = ThrowInput;
+                    break;
+                default:
+                    Debug.LogWarning("Unsupported axis for jumper input");
+                    break;
+            }
+        }
     }
 
     protected virtual void CreateAxesToKeysDictionary(out Dictionary<string, System.Tuple<List<string>, List<string>>> dict)

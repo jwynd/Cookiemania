@@ -1021,12 +1021,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b7d92a50af7f7f40a50ce2e1961d13e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextEmailPosition: {x: 0, y: 3.5, z: 0}
+  emailPositions: []
   newEmail: {fileID: 2825502208743759406, guid: 049e1386224751847a2eeb2903312531,
     type: 3}
   emailLiteral: {fileID: 4724453509402067863, guid: 45133264a7d377542b3961a63fd7ca1a,
     type: 3}
-  offset: 1.1
   disableOnEmailClick:
   - {fileID: 110672778}
   - {fileID: 791384869}
@@ -2016,6 +2015,8 @@ MonoBehaviour:
   - {fileID: 791384869}
   - {fileID: 110672778}
   - {fileID: 890766272}
+  pauseMenuPrefab: {fileID: 2278994227077606159, guid: 3a058260763cc9c4baa513865946a2e2,
+    type: 3}
 --- !u!4 &1233017395
 Transform:
   m_ObjectHideFlags: 0
@@ -3097,7 +3098,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4a13e3d877ead942ac1b377f3bd6b81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bodyText: 'ERROR: DEFAULT TEXT!!!'
 --- !u!114 &1920807310
 MonoBehaviour:
   m_ObjectHideFlags: 0

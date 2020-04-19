@@ -143,6 +143,11 @@ public class JumperPlayerController : MonoBehaviour
 
     protected void GetInputs()
     {
+        if (Time.timeScale == 0)
+        {
+            jumped = false;
+            return;
+        }
         jumped = JumpInput(input.Jump);
         pickup = input.Pickup > 0f;
         throwStuff = input.Throw > 0f ? true : throwStuff;
