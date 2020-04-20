@@ -147,7 +147,9 @@ public class Boss : MonoBehaviour
 
     void Launch()
     {
-        Instantiate(enemyFire, transform.position, Quaternion.identity);
+        GameObject go = Instantiate(enemyFire, transform.position, Quaternion.identity);
+        go.transform.parent = transform;
+        go.transform.parent = null;
     }
 
     private void OnTriggerEnter2D(Collider2D col)
