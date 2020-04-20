@@ -9,6 +9,10 @@ public class rotate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Time.timeScale == 0)
+        {
+            return;
+        }
         if (Input.GetKey("q"))
             //print ("q key was pressed");
             this.transform.Rotate(Vector3.forward * rotatespeed);

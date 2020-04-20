@@ -19,6 +19,10 @@ public class player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Time.timeScale == 0)
+        {
+            return;
+        }
         Vector3 direction = transform.position - Player.position;
         //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         //rigidBody.rotation = angle;
