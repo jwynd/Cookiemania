@@ -14,7 +14,7 @@ public class General_LevelTransition : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance && Instance != this)
+        if (Instance != null && Instance.GetInstanceID() != GetInstanceID())
         {
             Destroy(gameObject);
         }
