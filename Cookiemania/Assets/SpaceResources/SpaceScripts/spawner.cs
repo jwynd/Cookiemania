@@ -33,7 +33,9 @@ public class spawner : MonoBehaviour
             nextSpawn = Time.time + spawnRate;
             randX = Random.Range(-14.4f, 14.4f);
             whereToSpawn = new Vector2(randX, transform.position.y);
-            Instantiate((Enemies[Random.Range(0, Enemies.Count)]), whereToSpawn, Quaternion.identity);
+            GameObject eTemp = Instantiate((Enemies[Random.Range(0, Enemies.Count)]), transform);
+            eTemp.transform.position = whereToSpawn;
+            eTemp.transform.rotation = Quaternion.identity;
         }
     }
 }

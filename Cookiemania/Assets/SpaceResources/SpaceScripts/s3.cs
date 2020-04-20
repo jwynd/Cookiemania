@@ -33,7 +33,9 @@ public class s3 : MonoBehaviour
             nextSpawn = Time.time + spawnRate;
             randY = Random.Range(-5f, 5f);
             whereToSpawn = new Vector2(transform.position.x, randY);
-            Instantiate((Enemies[Random.Range(0, Enemies.Count)]), whereToSpawn, Quaternion.identity);
+            GameObject eTemp = Instantiate((Enemies[Random.Range(0, Enemies.Count)]), transform);
+            eTemp.transform.position = whereToSpawn;
+            eTemp.transform.rotation = Quaternion.identity;
         }
     }
 }

@@ -38,6 +38,10 @@ public class player : MonoBehaviour
 
     void OnDestroy()
     {
-        GameObject.Find("LevelController").GetComponent<General_LevelTransition>().returnDesktop();
+        GameObject temp = GameObject.Find("LevelController");
+        if (temp)
+        {
+            temp.GetComponent<General_LevelTransition>().returnDesktop();
+        }
     }
 }

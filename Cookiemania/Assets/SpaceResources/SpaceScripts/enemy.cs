@@ -112,7 +112,10 @@ public class enemy : MonoBehaviour
 
     void Launch()
     {
-        Instantiate(enemyFire, transform.position, Quaternion.identity);
+        GameObject go = Instantiate(enemyFire, transform);
+        go.transform.rotation = Quaternion.identity;
+        go.transform.parent = null;
+        go.transform.localScale = enemyFire.transform.localScale;
     }
 
     private void OnTriggerEnter2D(Collider2D col)

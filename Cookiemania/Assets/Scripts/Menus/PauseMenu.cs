@@ -24,15 +24,9 @@ public class PauseMenu : MonoBehaviour
     protected float normalTimeScale;
     protected General_LevelTransition levelController;
 
-    public PauseMenu Instance { get; protected set; }
 
     private void Awake()
     {
-        if (Instance != null && Instance.GetInstanceID() != GetInstanceID())
-        {
-            Destroy(gameObject);
-        }
-        Instance = this;
         normalTimeScale = Time.timeScale;
         Resume();
     }
@@ -140,7 +134,6 @@ public class PauseMenu : MonoBehaviour
         Resume();
         if (levelController)
         {
-            Destroy(gameObject);
             levelController.returnDesktop();
         }
         Debug.LogWarning("No level transition object in game");
