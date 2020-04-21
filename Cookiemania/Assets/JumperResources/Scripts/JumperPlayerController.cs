@@ -98,7 +98,7 @@ public class JumperPlayerController : MonoBehaviour
     protected string collectiblesTag;
     protected string myTag;
     protected float horizontalInput = 0f;
-
+    protected float originalJumpSpeed;
     #endregion
 
     #region startup
@@ -111,6 +111,7 @@ public class JumperPlayerController : MonoBehaviour
         RebindInputController();
         rb.velocity = Vector2.zero;
         currentHealth = maxHealth;
+        originalJumpSpeed = jumpSpeed;
     }
     protected void Start()
     {
@@ -356,6 +357,11 @@ public class JumperPlayerController : MonoBehaviour
     public float GetJumpStrength()
     {
         return jumpSpeed;
+    }
+
+    public float GetOriginalJumpStrength()
+    {
+        return originalJumpSpeed;
     }
 
     public float GetMaxVelocity()

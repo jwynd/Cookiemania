@@ -7,6 +7,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2470613282563711199, guid: aac8ee0ac77d8494b85b09cd37d4f7c1,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ad8d117902b2d7646943de250d06e9f3,
+        type: 3}
     - target: {fileID: 7021541821841218255, guid: aac8ee0ac77d8494b85b09cd37d4f7c1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -65,7 +71,7 @@ PrefabInstance:
     - target: {fileID: 8552561703256424470, guid: aac8ee0ac77d8494b85b09cd37d4f7c1,
         type: 3}
       propertyPath: m_Name
-      value: JumperPlatform
+      value: JumperPlatform Variant 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aac8ee0ac77d8494b85b09cd37d4f7c1, type: 3}

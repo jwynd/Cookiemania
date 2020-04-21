@@ -28,8 +28,6 @@ public class JumperManagerGame : MonoBehaviour
     [SerializeField]
     private JumperSemiPermanentPlatforms exitPlatform = null;
 
-    [Tooltip("How high the player can jump, used for determining how far platforms can be placed")]
-    public float jumpHeight = 5.0f;
     [Tooltip("How far to either side from the offset position a platform can spawn")]
     public float width = 10.0f;
 
@@ -76,6 +74,7 @@ public class JumperManagerGame : MonoBehaviour
     private int max;
     private float weightRange = 0.0f;
     private float checkAgainstPosition;
+    private float jumpHeight;
 
     public JumperCameraController MainCam { get; private set; }
 
@@ -150,9 +149,9 @@ public class JumperManagerGame : MonoBehaviour
         ValidationChecks();
         GameObject g = Instantiate(platformPrefabs[0].platform, transform.position, Quaternion.identity);
         firstPrefabWidth = g.GetComponent<Renderer>().bounds.size.x;
-        minHeightIncrease = Player.gameObject.GetComponent<Renderer>().bounds.size.y * 3.5f + g.GetComponent<Renderer>().bounds.size.y;
+        minHeightIncrease = Player.gameObject.GetComponent<Renderer>().bounds.size.y * 2f + g.GetComponent<Renderer>().bounds.size.y;
         Destroy(g);
-        jumpHeight = Player.GetJumpStrength() / 3;
+        jumpHeight = ( Player.GetOriginalJumpStrength() * alteredGravity ) / 3;
         width = Player.GetMaxVelocity() * 2.5f;
         Debug.Log(width);
         max  = (int)(density * 1.5);
@@ -219,7 +218,7 @@ public class JumperManagerGame : MonoBehaviour
         }
         else
         {
-            ran = UnityEngine.Random.Range(0, 1);
+            ran = UnityEngine.Random.Range(0f, 1f);
             if (ran > 0.5f)
             {
                 ran = UnityEngine.Random.Range(offset + firstPrefabWidth, offset + width);

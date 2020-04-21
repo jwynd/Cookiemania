@@ -70,7 +70,6 @@ MonoBehaviour:
     probability: 0
   exitPlatform: {fileID: 4423854033441122629, guid: e57e91b6f70b8ec4ba5ebc1b1c8c9e49,
     type: 3}
-  jumpHeight: 5
   width: 10
   density: 10
   startingDifficulty: 1
@@ -80,7 +79,7 @@ MonoBehaviour:
   maxFallDistance: 20
   rotation: 0
   alteredGravity: 2
-  bounceHeightMultiplier: 2
+  bounceHeightMultiplier: 1.5
   playerTag: Player
   enemyTag: Enemy
   obstacleTag: Obstacle
