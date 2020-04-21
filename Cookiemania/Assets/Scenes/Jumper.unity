@@ -1265,16 +1265,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 826711010817931759, guid: 97c37d740f218ae4abebbf038c44dbe5,
-        type: 3}
-      propertyPath: jumpHeight
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 826711010817931759, guid: 97c37d740f218ae4abebbf038c44dbe5,
-        type: 3}
-      propertyPath: bounceHeightMultiplier
-      value: 1.5
-      objectReference: {fileID: 0}
     - target: {fileID: 6845973269452864297, guid: 97c37d740f218ae4abebbf038c44dbe5,
         type: 3}
       propertyPath: m_Name
@@ -1362,11 +1352,6 @@ PrefabInstance:
     - target: {fileID: 7308237536714955000, guid: 0c625fb9141b872498b1256a4c9916b4,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7308237536714955000, guid: 0c625fb9141b872498b1256a4c9916b4,
-        type: 3}
-      propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7308237537704373440, guid: 0c625fb9141b872498b1256a4c9916b4,
