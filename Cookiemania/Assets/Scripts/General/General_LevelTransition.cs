@@ -9,78 +9,89 @@ public class General_LevelTransition : MonoBehaviour
     public Dropdown LevelSelect; // Reference to the level select dropdown menu
     public GameObject[] DisableOnLevelChange; // List of desktop objects that should be disabled when in minigame
     public GameObject pauseMenuPrefab;
-    private GameObject gamePauseMenu;
     private string loadedScene = null; // contains the name of the currently loaded minigame
     public General_LevelTransition Instance { get; protected set; }
+    public Animator transitioning;
+    private float transitionTime = 3f;
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        if (Instance && Instance != this)
         {
             Destroy(gameObject);
         }
         Instance = this;
-        gamePauseMenu = Instantiate(pauseMenuPrefab);
-        gamePauseMenu.SetActive(false);
     }
 
     // in start we will add a listener so that we can call transition when a new entry is selected
     //this isnt working, which is good cuz it double loads the scene
     void start()
     {
+        SceneTransition(1);
         LevelSelect.onValueChanged.AddListener(delegate {
             transition(LevelSelect);
         });
     }
-    
+
     // switch over the possible selections
-    public void transition(Dropdown target){
-        switch(target.value){
+    public void transition(Dropdown target)
+    {
+        switch (target.value)
+        {
             case 0:
+                SceneTransition(2);
                 returnDesktop();
                 break;
             case 1:
+                SceneTransition(2);
                 leaveDesktop("Jumper");
                 break;
             case 2:
+                SceneTransition(2);
                 leaveDesktop("Spacemini");
                 break;
             case 3:
-                #if UNITY_EDITOR
+#if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;
-                #else
+#else
                 Application.Quit();
-                #endif
+#endif
                 break;
             default:
                 Debug.LogError("General_LevelTransition: Selection not recognized"); // print error message
-                #if UNITY_EDITOR // we only kick the user out in the editor
+#if UNITY_EDITOR // we only kick the user out in the editor
                 UnityEditor.EditorApplication.isPlaying = false; // kick user out of session
-                #endif
+#endif
                 break;
 
         }
     }
 
     // called when opening a new minigame, accepts a scene name
-    private void leaveDesktop(string sceneName){
-        foreach(GameObject g in DisableOnLevelChange){ // first disable unneeded objects in desktop
+    private void leaveDesktop(string sceneName)
+    {
+        foreach (GameObject g in DisableOnLevelChange)
+        { // first disable unneeded objects in desktop
             g.SetActive(false);
         }
+        
         SceneManager.LoadScene(sceneName, LoadSceneMode.Additive); // load the new scene additively
         loadedScene = sceneName; // set the loaded scene to a non-null value
-        gamePauseMenu.SetActive(true);
+        Instantiate(pauseMenuPrefab);
     }
 
     // called when exiting a minigame and returning to the desktop
-    public void returnDesktop(){
-        if(loadedScene == null) return; // if loadedScene is null then we are not in a mini-game
-        foreach(GameObject g in DisableOnLevelChange){
-            if(g.tag == "DeactivateOnLoad") continue; // we don't want everything in desktop active at once
+    public void returnDesktop()
+    {
+
+        if (loadedScene == null) return; // if loadedScene is null then we are not in a mini-game
+        foreach (GameObject g in DisableOnLevelChange)
+        {
+            if (g.tag == "DeactivateOnLoad") continue; // we don't want everything in desktop active at once
             g.SetActive(true);
         }
-        gamePauseMenu.SetActive(false);
         // this operation is asynchronous, there is no guaruntee that it will finish running before execution continues
+        
         SceneManager.UnloadSceneAsync(loadedScene);
         // If bugs arise, try commenting above, and uncommenting below
         // AsyncOperation async = SceneManger.UnloadSceneAsync(loadedScene);
@@ -88,10 +99,51 @@ public class General_LevelTransition : MonoBehaviour
         loadedScene = null;
         LevelSelect.value = 0;
     }
+    // Calls and wraps the function to play animation for scene transition
+    public void SceneTransition(int version)
+    {
+        StartCoroutine(LoadTransition(version));
+    }
+    IEnumerator LoadTransition(int version)
+    {
+        if (version == 1)
+        {
+            transitioning.SetTrigger("Start");
+            yield return new WaitForSeconds(transitionTime);
+            //ideally we would load the scene here
+            transitioning.ResetTrigger("Start");
+
+        }
+        else if(version == 2)
+        {
+            transitioning.SetBool("ExitScene", true);
+            yield return new WaitForSeconds(transitionTime-2f);
+            //ideally we would load the scene here
+            transitioning.SetBool("ExitScene", false);
+        }
+        else if (version == 3)
+        {
+            yield return new WaitForSeconds(transitionTime);
+            //ideally we would load the scene here
+            transitioning.SetBool("ExitScene", false);
+        }
+
+    }
+
+    IEnumerator wait()
+    {
+            yield return new WaitForSeconds(3);
+
+    }
 
     // contains temporary controls to return to desktop, remove in final version
-    void Update(){
-        if(loadedScene == null) return;
+    void Update()
+    {
+        if (loadedScene == null)
+        {
+          
+            return;
+        }
         /*
         if(Input.GetKeyDown(KeyCode.Escape)){
             returnDesktop();

@@ -44,9 +44,21 @@ public class player : MonoBehaviour
         }
     }
 
+    public void wait()
+    {
+        StartCoroutine(waiting());
+    }
+    IEnumerator waiting()
+    {
+        yield return new WaitForSeconds(3);
+
+    }
+
     void OnDestroy()
     {
         GameObject temp = GameObject.Find("LevelController");
+        temp.GetComponent<General_LevelTransition>().SceneTransition(2);
+       
         if (temp)
         {
             temp.GetComponent<General_LevelTransition>().returnDesktop();
