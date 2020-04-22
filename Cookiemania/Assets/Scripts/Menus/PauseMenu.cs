@@ -75,36 +75,31 @@ public class PauseMenu : MonoBehaviour
 
     private void CheckMenuInputs()
     {
+        //only one input per frame
+        var vert = input.Vertical;
         if (input.Resume > 0f)
         {
             Resume();
-            return;
         }
-        if (input.Exit > 0)
+        else if (input.Exit > 0)
         {
             Exit();
-            return;
         }
-        if (input.Settings > 0f)
+        else if (input.Settings > 0f)
         {
             Settings();
-            return;
         }
-        var vert = input.Vertical;
-        if (vert > 0)
+        else if (vert > 0)
         {
             Up();
-            return;
         }
-        if (vert < 0)
+        else if (vert < 0)
         {
             Down();
-            return;
         }
-        if (input.Enter > 0)
+        else if (input.Enter > 0)
         {
             Enter();
-            return;
         }
     }
 

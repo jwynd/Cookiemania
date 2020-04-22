@@ -12,9 +12,9 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField]
     protected bool dontDestroy = false;
 
-    // Update is called once per frame
-    
-    void Awake(){
+
+    void Awake()
+    {
         Slider[] sliders = GetComponentsInChildren<Slider>();
         // 10^(mixerval / 20) = sliderval
         float musicVolume;
