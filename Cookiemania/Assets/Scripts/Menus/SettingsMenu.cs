@@ -13,13 +13,8 @@ public class SettingsMenu : MonoBehaviour
     protected bool dontDestroy = false;
 
     // Update is called once per frame
-
-    void Awake()
-    {
-        // mainMixer = Resources.Load("Master") as AudioMixer;
-        // if(mainMixer == null){
-        //     Debug.LogError("Audio Mixer not found");
-        // }
+    
+    void Awake(){
         Slider[] sliders = GetComponentsInChildren<Slider>();
         // 10^(mixerval / 20) = sliderval
         float musicVolume;
