@@ -1,15 +1,18 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 //this is required but abstract classes can't be added
 //so manual adding will be required
 //[RequireComponent(typeof(General_Input))]
+
+using static General_Utilities.Children;
+
 public class PauseMenu : MonoBehaviour
 {
+    [SerializeField]
+    protected GameObject settingsPrefab;
     [SerializeField]
     protected General_InputMenu input;
     [SerializeField]
@@ -23,12 +26,27 @@ public class PauseMenu : MonoBehaviour
     protected bool menuActive = false;
     protected float normalTimeScale;
     protected General_LevelTransition levelController;
+    protected SettingsMenu settings;
 
 
     private void Awake()
     {
         normalTimeScale = Time.timeScale;
+        SetupSettings();
         Resume();
+    }
+
+    private void SetupSettings()
+    {
+        settings = settingsPrefab.GetComponent<SettingsMenu>();
+        settings.enableOnDestroy = new List<MonoBehaviour> { this };
+        List<GameObject> addToActivate = new List<GameObject>();
+        foreach (Transform child in myPanel.transform)
+        {
+            addToActivate.Add(child.gameObject);
+        }
+        settings.activateOnDestroy = addToActivate;
+        settingsPrefab.SetActive(false);
     }
 
     private void Start()
@@ -37,15 +55,6 @@ public class PauseMenu : MonoBehaviour
         if (levelC != null)
         {
             levelController = levelC.GetComponent<General_LevelTransition>();
-        }
-    }
-
-    protected void ActivateChildren(bool active)
-    {
-        myPanel.SetActive(active);
-        foreach (var but in myChildButtons)
-        {
-            but.gameObject.SetActive(active);
         }
     }
 
@@ -114,19 +123,24 @@ public class PauseMenu : MonoBehaviour
         markedButton = -1;
         Up();
         menuActive = true;
-        ActivateChildren(menuActive);
+        transform.SetActiveChildren(menuActive);
+        settingsPrefab.SetActive(false);
     }
 
     public void Resume()
     {
         menuActive = false;
-        ActivateChildren(menuActive);
+        settingsPrefab.SetActive(false);
+        transform.SetActiveChildren(menuActive);
         Time.timeScale = normalTimeScale;
     }
 
     public void Settings()
     {
-
+        myPanel.transform.SetActiveChildren(false);
+        enabled = false;
+        settings.enabled = true;
+        settingsPrefab.SetActive(true);
     }
 
     public void Exit()
@@ -165,5 +179,10 @@ public class PauseMenu : MonoBehaviour
                                                        myChildButtons[markedButton].transform.position.y,
                                                        markerObj.transform.position.z);
         }
+    }
+
+    private void OnEnable()
+    {
+        settings.enabled = false;
     }
 }

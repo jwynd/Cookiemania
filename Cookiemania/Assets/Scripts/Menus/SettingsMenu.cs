@@ -6,11 +6,16 @@ using UnityEngine;
 
 public class SettingsMenu : MonoBehaviour
 {
-    public GameObject[] activateOnDestroy;
+    public List<GameObject> activateOnDestroy;
+    public List<MonoBehaviour> enableOnDestroy;
     public AudioMixer mainMixer;
+    [SerializeField]
+    protected bool dontDestroy = false;
+
     // Update is called once per frame
-    
-    void Awake(){
+
+    void Awake()
+    {
         // mainMixer = Resources.Load("Master") as AudioMixer;
         // if(mainMixer == null){
         //     Debug.LogError("Audio Mixer not found");
@@ -25,24 +30,50 @@ public class SettingsMenu : MonoBehaviour
         sliders[1].value = Mathf.Pow(10, (sfxVolume / 20));
     }
 
-    public void SetSFXVolume(float sfxSliderVal){
+    public void SetSFXVolume(float sfxSliderVal)
+    {
         mainMixer.SetFloat("sfxVolume", Mathf.Log10(sfxSliderVal) * 20);
     }
-    
-    public void SetMusicVolume(float musicSliderVal){
+
+    public void SetMusicVolume(float musicSliderVal)
+    {
         mainMixer.SetFloat("musicVolume", Mathf.Log10(musicSliderVal) * 20);
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape)){
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (dontDestroy)
+            {
+                enabled = false;
+                gameObject.SetActive(false);
+                return;
+            }
             Destroy(this.gameObject);
         }
     }
 
-    void OnDestroy(){
-        foreach(GameObject g in activateOnDestroy){
+    void OnDestroy()
+    {
+        if (enabled)
+            ReactivateObjects();
+    }
+
+    private void ReactivateObjects()
+    {
+        foreach (GameObject g in activateOnDestroy)
+        {
             g.SetActive(true);
         }
+        foreach (MonoBehaviour g in enableOnDestroy)
+        {
+            g.enabled = true;
+        }
+    }
+
+    private void OnDisable()
+    {
+        ReactivateObjects();
     }
 }
