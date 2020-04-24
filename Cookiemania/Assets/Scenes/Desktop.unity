@@ -2092,6 +2092,8 @@ MonoBehaviour:
   pauseMenuPrefab: {fileID: 2278994227077606159, guid: 3a058260763cc9c4baa513865946a2e2,
     type: 3}
   transitioning: {fileID: 1928359017}
+  animEnter: {fileID: 0}
+  animExit: {fileID: 0}
 --- !u!4 &1233017395
 Transform:
   m_ObjectHideFlags: 0
@@ -3363,6 +3365,7 @@ GameObject:
   - component: {fileID: 1928359019}
   - component: {fileID: 1928359018}
   - component: {fileID: 1928359017}
+  - component: {fileID: 1928359020}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -3445,6 +3448,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1928359015}
   m_CullTransparentMesh: 0
+--- !u!223 &1928359020
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1928359015}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 1
+  m_TargetDisplay: 0
 --- !u!1 &1985272434
 GameObject:
   m_ObjectHideFlags: 0

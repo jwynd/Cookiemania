@@ -14,6 +14,9 @@ public class General_LevelTransition : MonoBehaviour
     public General_LevelTransition Instance { get; protected set; }
     public Animator transitioning;
     private float transitionTime = 3f;
+    protected float normalTimeScale;
+    public AnimationClip animEnter;
+    public AnimationClip animExit;
 
     private void Awake()
     {
@@ -43,14 +46,17 @@ public class General_LevelTransition : MonoBehaviour
         {
             case 0:
                 SceneTransition(2);
+                StartCoroutine("wait");
                 returnDesktop();
                 break;
             case 1:
                 SceneTransition(2);
+                StartCoroutine("wait");
                 leaveDesktop("Jumper");
                 break;
             case 2:
                 SceneTransition(2);
+                StartCoroutine("wait");
                 leaveDesktop("Spacemini");
                 break;
             case 3:
@@ -111,31 +117,46 @@ public class General_LevelTransition : MonoBehaviour
     {
         if (version == 1)
         {
+            normalTimeScale = Time.timeScale;
+            //Time.timeScale = 0;
+            gamePauseMenu.SetActive(false);
             transitioning.SetTrigger("Start");
-            yield return new WaitForSeconds(transitionTime);
+            
             //ideally we would load the scene here
             transitioning.ResetTrigger("Start");
+            StartCoroutine("wait");
+            // Time.timeScale = normalTimeScale;
 
         }
         else if(version == 2)
         {
+            normalTimeScale = Time.timeScale;
+           // Time.timeScale = 0;
+            gamePauseMenu.SetActive(false);
             transitioning.SetBool("ExitScene", true);
-            yield return new WaitForSeconds(transitionTime-2f);
+            yield return new WaitForSeconds(1);
             //ideally we would load the scene here
             transitioning.SetBool("ExitScene", false);
+            StartCoroutine("wait");
+            //Time.timeScale = normalTimeScale;
         }
         else if (version == 3)
         {
-            yield return new WaitForSeconds(transitionTime);
+            normalTimeScale = Time.timeScale;
+            //Time.timeScale = 0;
+            gamePauseMenu.SetActive(false);
+            yield return new WaitForSeconds(1);
             //ideally we would load the scene here
             transitioning.SetBool("ExitScene", false);
+            yield return new WaitForSeconds(1);
+            //Time.timeScale = normalTimeScale;
         }
 
     }
 
     IEnumerator wait()
     {
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(8);
 
     }
 
