@@ -329,8 +329,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caecdc831a8fc8f44a0894ec1b1aedd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookAhead: {x: 2.5, y: 1}
-  catchUpSpeed: {x: 2, y: 3}
+  lookAhead: {x: 0, y: 1}
+  catchUpSpeed: {x: 1.5, y: 2.5}
   buffer: 0.5
   zoomSpeed: 1
   acquireTargetSpeed: 3
@@ -1352,6 +1352,11 @@ PrefabInstance:
     - target: {fileID: 7308237536714955000, guid: 0c625fb9141b872498b1256a4c9916b4,
         type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308237536714955000, guid: 0c625fb9141b872498b1256a4c9916b4,
+        type: 3}
+      propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7308237537704373440, guid: 0c625fb9141b872498b1256a4c9916b4,

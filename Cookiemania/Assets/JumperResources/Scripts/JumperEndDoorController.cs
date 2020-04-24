@@ -8,6 +8,8 @@ public class JumperEndDoorController : JumperGeneralPickup
     protected float controlSpeed = 1.0f;
     [SerializeField]
     protected Sprite openedDoor = null;
+    [SerializeField]
+    protected GameObject bottomOfDoor = null;
 
     protected Sprite closedDoor;
     protected string playerTag;
@@ -36,12 +38,16 @@ public class JumperEndDoorController : JumperGeneralPickup
     protected IEnumerator PlayerWalkThroughDoor(GameObject pc)
     {
         GetComponent<SpriteRenderer>().sprite = openedDoor;
-        while (transform.position != pc.transform.position)
+        while (bottomOfDoor.transform.position != pc.transform.position)
         {
-            pc.transform.position = Vector3.MoveTowards(pc.transform.position, transform.position, controlSpeed * Time.fixedDeltaTime);
+            pc.transform.position = Vector3.MoveTowards(pc.transform.position, bottomOfDoor.transform.position, controlSpeed * Time.fixedDeltaTime);
             yield return new WaitForFixedUpdate();
+            if (pc == null)
+                break;
         }
         yield return new WaitForSeconds(0.05f);
+        if (pc == null)
+            yield break;
         pc.GetComponent<Renderer>().enabled = false;
         foreach(Transform child in pc.GetComponentsInChildren<Transform>()) {
             Renderer childRend = child.GetComponent<Renderer>();
