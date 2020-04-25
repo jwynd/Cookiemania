@@ -195,7 +195,14 @@ public class JumperManagerUI : MonoBehaviour
 
     public void Retry()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+        General_LevelTransition trans = General_LevelTransition.Instance;
+        if (!trans)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+            return;
+        }
+        trans.returnDesktop();
+        trans.leaveDesktop(sceneName);
     }
 
     public void ReturnToDesktop()

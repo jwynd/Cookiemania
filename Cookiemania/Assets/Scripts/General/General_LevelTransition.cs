@@ -11,7 +11,7 @@ public class General_LevelTransition : MonoBehaviour
     public GameObject pauseMenuPrefab;
     private GameObject gamePauseMenu;
     private string loadedScene = null; // contains the name of the currently loaded minigame
-    public General_LevelTransition Instance { get; protected set; }
+    public static General_LevelTransition Instance { get; protected set; }
     public Animator transitioning;
     private float transitionTime = 3f;
     protected float normalTimeScale;
@@ -77,7 +77,7 @@ public class General_LevelTransition : MonoBehaviour
     }
    
     // called when opening a new minigame, accepts a scene name
-    private void leaveDesktop(string sceneName)
+    public void leaveDesktop(string sceneName)
     {
         foreach (GameObject g in DisableOnLevelChange)
         { // first disable unneeded objects in desktop

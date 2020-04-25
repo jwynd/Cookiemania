@@ -51,11 +51,7 @@ public class PauseMenu : MonoBehaviour
 
     private void Start()
     {
-        GameObject levelC = GameObject.Find("LevelController");
-        if (levelC != null)
-        {
-            levelController = levelC.GetComponent<General_LevelTransition>();
-        }
+        General_LevelTransition levelController = General_LevelTransition.Instance;
     }
 
     private void Update()
