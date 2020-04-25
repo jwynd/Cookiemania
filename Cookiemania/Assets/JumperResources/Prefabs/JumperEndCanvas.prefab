@@ -362,8 +362,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 29125470496223545, guid: 033eec8b3faf40642b1b528004d0f8ad,
-          type: 3}
+      - m_Target: {fileID: 0}
         m_MethodName: Retry
         m_Mode: 1
         m_Arguments:
@@ -492,7 +491,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 29125470496223545, guid: 033eec8b3faf40642b1b528004d0f8ad,
+          type: 3}
         m_MethodName: ReturnToDesktop
         m_Mode: 1
         m_Arguments:
@@ -763,6 +763,7 @@ GameObject:
   - component: {fileID: 7308237537704373446}
   - component: {fileID: 7308237537704373447}
   - component: {fileID: 7308237537704373443}
+  - component: {fileID: 191621362}
   m_Layer: 5
   m_Name: JumperEndCanvas
   m_TagString: Untagged
@@ -806,7 +807,7 @@ Canvas:
   m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -870,6 +871,22 @@ MonoBehaviour:
   constantText: 
   changingText: Game Over<br>you made 0
   constantTextPart2: ' coins'
+--- !u!114 &191621362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7308237537704373444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eb4e481b05dc3a4fbbec16c6b4baec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dayPrefabs:
+  - {fileID: 3562330665372198327}
+  nightPrefabs:
+  - {fileID: 7308237536714955001}
 --- !u!1 &7613098258991153552
 GameObject:
   m_ObjectHideFlags: 0

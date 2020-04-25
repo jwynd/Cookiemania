@@ -464,7 +464,6 @@ public class JumperPlayerController : MonoBehaviour
             if (pu.IsAutomaticPickup())
             {
                 //blah blah do stuff for picking up the item
-                Debug.Log("picked up " + pu.name);
             }
             else if (pickup && !haveItem)
             {

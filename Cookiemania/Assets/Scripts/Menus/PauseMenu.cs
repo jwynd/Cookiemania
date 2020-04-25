@@ -51,7 +51,7 @@ public class PauseMenu : MonoBehaviour
 
     private void Start()
     {
-        General_LevelTransition levelController = General_LevelTransition.Instance;
+        levelController = General_LevelTransition.Instance;
     }
 
     private void Update()

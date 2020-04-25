@@ -48,11 +48,6 @@ public class JumperManagerUI : MonoBehaviour
         scoreText = scoreRef.gameObject.GetComponent<JumperGeneralText>();
 
         tutorialText = tutorialRef.gameObject.GetComponent<JumperGeneralText>();
-        GameObject levelC = GameObject.Find("LevelController");
-        if (levelC != null)
-        {
-            levelController = levelC.GetComponent<General_LevelTransition>();
-        }
         
     }
 
@@ -61,6 +56,7 @@ public class JumperManagerUI : MonoBehaviour
     {
         jm = JumperManagerGame.Instance;
         storyfw = JumperStoryFramework.Instance;
+        levelController = General_LevelTransition.Instance;
         if (jm.IsRunningTutorial())
         {
             tutorialActive = true;
@@ -196,20 +192,22 @@ public class JumperManagerUI : MonoBehaviour
     public void Retry()
     {
         General_LevelTransition trans = General_LevelTransition.Instance;
-        if (!trans)
+        if (trans)
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+            trans.returnDesktop();
+            trans.leaveDesktop(sceneName);
             return;
         }
-        trans.returnDesktop();
-        trans.leaveDesktop(sceneName);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
     }
 
     public void ReturnToDesktop()
     {
-        if (levelController)
+        General_LevelTransition trans = General_LevelTransition.Instance;
+        if (trans)
         {
-            levelController.returnDesktop();
+            trans.returnDesktop();
+            return;
         }
         Debug.LogWarning("No level transition object in game");
     }
