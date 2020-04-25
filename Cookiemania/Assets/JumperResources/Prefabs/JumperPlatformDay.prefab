@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1887133924701154446}
   - component: {fileID: 5769490489735045119}
   m_Layer: 10
-  m_Name: JumperPlatform
+  m_Name: JumperPlatformDay
   m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8987308c490b3f34c980ff4c69bdaffd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b6a2d196ba5ec404683819280e4b72d7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
