@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,11 +9,17 @@ public class JumperBackgroundController : MonoBehaviour
     protected List<GameObject> dayPrefabs;
     [SerializeField]
     protected List<GameObject> nightPrefabs;
+
     protected JumperManagerGame gm;
+
+    
+
+
     void Start()
     {
         gm = JumperManagerGame.Instance;
         SetNight(gm.Night);
+
     }
 
     private void SetNight(bool night)
@@ -25,11 +32,8 @@ public class JumperBackgroundController : MonoBehaviour
         {
             obj.SetActive(night);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         
     }
+
+
 }

@@ -74,7 +74,7 @@ public class JumperManagerGame : MonoBehaviour
     protected string collectiblesTag = "Pickup";
     public string CollectiblesTag { get { return collectiblesTag; } }
     public bool Tutorial { get; protected set; } = true;
-    public bool Night { get; protected set; } = true;
+    public bool Night { get; protected set; } = false;
 
     //game manager always tagged with game controller
     private const string myTag = "GameController";
