@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class JumperParallax : MonoBehaviour
 {
-    [Tooltip("Other deltas will be 2x then 3x this delta")]
-    [SerializeField]
-    protected Vector2 fastDeltas;
 
     [SerializeField]
     protected GameObject fastestDayLayer;
@@ -70,12 +67,11 @@ public class JumperParallax : MonoBehaviour
         //do nothing if camera hasnt moved
         var diff = (Vector2)followTarget.position - previousPosition;
         previousPosition = followTarget.position;
-        Debug.Log(diff.x + " " + diff.y);
         int i = 1;
         foreach( var layer in layers)
         {
-            layer.anchoredPosition = new Vector2(layer.anchoredPosition.x - i * diff.x, 
-                                                 layer.anchoredPosition.y - i * diff.y);
+            layer.anchoredPosition = new Vector2(layer.anchoredPosition.x - (i * diff.x) * movementIncrement, 
+                                                 layer.anchoredPosition.y - (i * diff.y) * movementIncrement);
             i++;
         }
     }
