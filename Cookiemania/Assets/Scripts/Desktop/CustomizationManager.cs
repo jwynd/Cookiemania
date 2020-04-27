@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Collections.Generic;
 using UnityEngine;
 
-using static UnityEngine.Debug;
+using static General_Utilities.ReflectionHelpers;
 
 public class CustomizationManager : MonoBehaviour
 {
@@ -88,52 +88,9 @@ public class CustomizationManager : MonoBehaviour
             Destroy(this);
         }
         Instance = this;
-        GetInfos();
+        myInfos = GetNullInfos(this);
         customizable = true;
     }
 
-    public static bool IsFullyInitialized(object propertyHolder, IEnumerable<PropertyInfo> list)
-    {
-        foreach (var info in list)
-        {
-            object b = null;
-            try
-            {
-                b = info.GetValue(propertyHolder);
-            }
-            catch
-            {
-                LogWarning("failed to get value, remove deprecated properties from list");
-            }
-            if (b == null)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private void GetInfos()
-    {
-        var temp = GetType().GetProperties();
-        foreach (var i in temp)
-        {
-            object b = null;
-            bool addThis = true;
-            try
-            {
-                b = i.GetValue(this);
-            }
-            catch
-            {
-                Log("get value not supported for component type " + i.PropertyType);
-                addThis = false;
-            }
-            if (addThis && b == null)
-            {
-                myInfos.Add(i);
-                Log(i);
-            }
-        }
-    }
+    
 }
