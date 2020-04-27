@@ -35,7 +35,6 @@ namespace General_Utilities
             foreach (var i in temp)
             {
                 object b = null;
-                bool addThis = true;
                 try
                 {
                     b = i.GetValue(objToGetPropertiesFrom);
@@ -43,9 +42,9 @@ namespace General_Utilities
                 catch
                 {
                     Debug.Log("get value not supported for component type " + i.PropertyType);
-                    addThis = false;
+                    continue;
                 }
-                if (addThis && b == null)
+                if (b == null)
                 {
                     infos.Add(i);
                 }
