@@ -22,7 +22,7 @@ public class CustomizationManager : MonoBehaviour
         if (!customizable) { return; }
 
         CompanyName = name;
-        Initialized = IsFullyInitialized(this, myInfos);
+        Initialized = PropertiesNonNull(this, myInfos);
     }
 
     public void SetCompanyMotto(string name)
@@ -30,7 +30,7 @@ public class CustomizationManager : MonoBehaviour
         if (!customizable) { return; }
 
         CompanyMotto = name;
-        Initialized = IsFullyInitialized(this, myInfos);
+        Initialized = PropertiesNonNull(this, myInfos);
 
     }
 
@@ -39,7 +39,7 @@ public class CustomizationManager : MonoBehaviour
         if (!customizable) { return; }
 
         CompanyDescription = name;
-        Initialized = IsFullyInitialized(this, myInfos);
+        Initialized = PropertiesNonNull(this, myInfos);
 
     }
 
@@ -48,7 +48,7 @@ public class CustomizationManager : MonoBehaviour
         if (!customizable) { return; }
 
         Icon = image;
-        Initialized = IsFullyInitialized(this, myInfos);
+        Initialized = PropertiesNonNull(this, myInfos);
 
     }
 
@@ -56,7 +56,7 @@ public class CustomizationManager : MonoBehaviour
     {
         if (!customizable) { return; }
         Picture1 = image;
-        Initialized = IsFullyInitialized(this, myInfos);
+        Initialized = PropertiesNonNull(this, myInfos);
     }
 
     public void SetPicture2(Sprite image)
@@ -64,7 +64,7 @@ public class CustomizationManager : MonoBehaviour
         if (!customizable) { return; }
 
         Picture2 = image;
-        Initialized = IsFullyInitialized(this, myInfos);
+        Initialized = PropertiesNonNull(this, myInfos);
 
     }
 
@@ -88,7 +88,7 @@ public class CustomizationManager : MonoBehaviour
             Destroy(this);
         }
         Instance = this;
-        myInfos = GetNullInfos(this);
+        myInfos = GetValidProperties(this);
         customizable = true;
     }
 

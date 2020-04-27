@@ -7,7 +7,7 @@ namespace General_Utilities
 {
     public static class ReflectionHelpers
     {
-        public static bool IsFullyInitialized(object propertyHolder, IEnumerable<PropertyInfo> list)
+        public static bool PropertiesNonNull(object propertyHolder, IEnumerable<PropertyInfo> list)
         {
             foreach (var info in list)
             {
@@ -19,6 +19,7 @@ namespace General_Utilities
                 catch
                 {
                     Debug.LogWarning("failed to get value, remove deprecated properties from list");
+                    continue;
                 }
                 if (b == null)
                 {
@@ -28,26 +29,22 @@ namespace General_Utilities
             return true;
         }
 
-        public static List<PropertyInfo> GetNullInfos(object objToGetPropertiesFrom)
+        public static List<PropertyInfo> GetValidProperties(object objToGetPropertiesFrom)
         {
             List<PropertyInfo> infos = new List<PropertyInfo>();
             var temp = objToGetPropertiesFrom.GetType().GetProperties();
             foreach (var i in temp)
             {
-                object b = null;
                 try
                 {
-                    b = i.GetValue(objToGetPropertiesFrom);
+                    object b = i.GetValue(objToGetPropertiesFrom);
                 }
                 catch
                 {
                     Debug.Log("get value not supported for component type " + i.PropertyType);
                     continue;
                 }
-                if (b == null)
-                {
-                    infos.Add(i);
-                }
+                infos.Add(i);
             }
             return infos;
         }
