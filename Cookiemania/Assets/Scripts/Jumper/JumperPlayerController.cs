@@ -461,6 +461,7 @@ public class JumperPlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag(collectiblesTag))
         {
             JumperGeneralPickup pu = collision.gameObject.GetComponent<JumperGeneralPickup>();
+            if (!pu) { return; }
             if (pu.IsAutomaticPickup())
             {
                 //blah blah do stuff for picking up the item

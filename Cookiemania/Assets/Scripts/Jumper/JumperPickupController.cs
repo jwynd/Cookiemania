@@ -53,14 +53,14 @@ public class JumperPickupController : JumperGeneralPickup
         transform.parent = null;
         myRb.isKinematic = false;
         myRb.gravityScale = 1;
+        gameObject.tag = "Untagged";
+        exploding = true;
         myRb.AddForce(strength, ForceMode2D.Impulse);
         StartCoroutine(Explode());
     }
 
     protected IEnumerator Explode()
     {
-        exploding = true;
-
         yield return new WaitForSeconds(explosionTimer);
         for (int i = 0; i < explosionFlashCount; i++)
         {
