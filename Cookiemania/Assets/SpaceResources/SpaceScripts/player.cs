@@ -61,7 +61,7 @@ public class player : MonoBehaviour
        
         if (temp)
         {
-            temp.GetComponent<General_LevelTransition>().returnDesktop();
+            temp.GetComponent<General_LevelTransition>().calling();
         }
     }
 }

@@ -139,7 +139,7 @@ public class PauseMenu : MonoBehaviour
         Resume();
         if (levelController)
         {
-            levelController.returnDesktop();
+            levelController.calling();
         }
         Debug.LogWarning("No level transition object in game");
     }

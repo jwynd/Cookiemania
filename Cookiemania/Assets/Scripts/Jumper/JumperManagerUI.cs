@@ -194,8 +194,8 @@ public class JumperManagerUI : MonoBehaviour
         General_LevelTransition trans = General_LevelTransition.Instance;
         if (trans)
         {
-            trans.returnDesktop();
-            trans.leaveDesktop(sceneName);
+            trans.calling();
+            trans.LDesk(sceneName);
             return;
         }
         UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
@@ -206,7 +206,7 @@ public class JumperManagerUI : MonoBehaviour
         General_LevelTransition trans = General_LevelTransition.Instance;
         if (trans)
         {
-            trans.returnDesktop();
+            trans.calling();
             return;
         }
         Debug.LogWarning("No level transition object in game");

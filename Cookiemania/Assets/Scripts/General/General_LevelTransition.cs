@@ -17,6 +17,8 @@ public class General_LevelTransition : MonoBehaviour
     protected float normalTimeScale;
     public AnimationClip animEnter;
     public AnimationClip animExit;
+   // public delegate void OnLevelTransiion();
+   // public event OnLevelTransiion onBegin;
 
     private void Awake()
     {
@@ -33,6 +35,7 @@ public class General_LevelTransition : MonoBehaviour
     //this isnt working, which is good cuz it double loads the scene
     void start()
     {
+        
         SceneTransition(1);
         LevelSelect.onValueChanged.AddListener(delegate {
             transition(LevelSelect);
@@ -45,19 +48,15 @@ public class General_LevelTransition : MonoBehaviour
         switch (target.value)
         {
             case 0:
-                SceneTransition(2);
-                StartCoroutine("wait");
-                returnDesktop();
+                StartCoroutine(returnDesktop());
                 break;
             case 1:
-                SceneTransition(2);
-                StartCoroutine("wait");
-                leaveDesktop("Jumper");
+                //StartCoroutine("wait");
+                StartCoroutine(leaveDesktop("Jumper"));
                 break;
             case 2:
-                SceneTransition(2);
-                StartCoroutine("wait");
-                leaveDesktop("Spacemini");
+               // StartCoroutine("wait");
+                StartCoroutine(leaveDesktop("Spacemini"));
                 break;
             case 3:
 #if UNITY_EDITOR
@@ -77,8 +76,10 @@ public class General_LevelTransition : MonoBehaviour
     }
    
     // called when opening a new minigame, accepts a scene name
-    public void leaveDesktop(string sceneName)
+    IEnumerator leaveDesktop(string sceneName)
     {
+        SceneTransition(2);
+        yield return StartCoroutine(wait());
         foreach (GameObject g in DisableOnLevelChange)
         { // first disable unneeded objects in desktop
             g.SetActive(false);
@@ -90,9 +91,11 @@ public class General_LevelTransition : MonoBehaviour
     }
 
     // called when exiting a minigame and returning to the desktop
-    public void returnDesktop()
+    IEnumerator returnDesktop()
     {
-        if (loadedScene == null) return; // if loadedScene is null then we are not in a mini-game
+        SceneTransition(2);
+        yield return StartCoroutine(wait());
+        if (loadedScene == null) yield break; // if loadedScene is null then we are not in a mini-game
         foreach (GameObject g in DisableOnLevelChange)
         {
             if (g.tag == "DeactivateOnLoad") continue; // we don't want everything in desktop active at once
@@ -101,9 +104,9 @@ public class General_LevelTransition : MonoBehaviour
         gamePauseMenu.SetActive(false);
         // this operation is asynchronous, there is no guaruntee that it will finish running before execution continues
         
-        SceneManager.UnloadSceneAsync(loadedScene);
+        //SceneManager.UnloadSceneAsync(loadedScene);
         // If bugs arise, try commenting above, and uncommenting below
-        // AsyncOperation async = SceneManger.UnloadSceneAsync(loadedScene);
+         AsyncOperation async = SceneManager.UnloadSceneAsync(loadedScene);
         // while(!async.isDone); // Lock the scene in busy wait
         loadedScene = null;
         LevelSelect.value = 0;
@@ -113,6 +116,8 @@ public class General_LevelTransition : MonoBehaviour
     {
         StartCoroutine(LoadTransition(version));
     }
+
+    //Handles the animation
     IEnumerator LoadTransition(int version)
     {
         if (version == 1)
@@ -134,10 +139,10 @@ public class General_LevelTransition : MonoBehaviour
            // Time.timeScale = 0;
             gamePauseMenu.SetActive(false);
             transitioning.SetBool("ExitScene", true);
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(2);
             //ideally we would load the scene here
             transitioning.SetBool("ExitScene", false);
-            StartCoroutine("wait");
+            yield return new WaitForSeconds(2);//StartCoroutine("wait");
             //Time.timeScale = normalTimeScale;
         }
         else if (version == 3)
@@ -153,13 +158,23 @@ public class General_LevelTransition : MonoBehaviour
         }
 
     }
-
+    // allows couroutines to pause for seconds
     IEnumerator wait()
     {
-            yield return new WaitForSeconds(8);
-
+            yield return new WaitForSeconds(2);
     }
 
+    //This function acts as a bypass for the coroutine return desktop in other scripts
+    public void calling()
+    {
+        StartCoroutine(returnDesktop());
+    }
+
+    //This function acts as a bypass for the coroutine leave desktop in other scripts
+    public void LDesk(string scenename)
+    {
+        StartCoroutine(leaveDesktop(scenename));
+    }
     // contains temporary controls to return to desktop, remove in final version
     void Update()
     {
