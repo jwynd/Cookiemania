@@ -463,7 +463,7 @@ GameObject:
   - component: {fileID: 1063847405}
   - component: {fileID: 1063847404}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: ErrPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4211,8 +4211,7 @@ MonoBehaviour:
   icon: {fileID: 25585222}
   picture1: {fileID: 5886773617913462346}
   picture2: {fileID: 8683856045785178124}
-  toDisableWhenActive:
-  - {fileID: 0}
+  toDisableWhenActive: []
   errPanel: {fileID: 1063847402}
 --- !u!1 &5503502296295246684
 GameObject:

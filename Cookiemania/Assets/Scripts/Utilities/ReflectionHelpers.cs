@@ -49,6 +49,22 @@ namespace General_Utilities
             return infos;
         }
 
+        //gives name and whatever the value should be of the other type
+        public static List<System.Tuple<string, T>> GetValidFields<T>(object obj)
+        {
+            List<PropertyInfo> infos = GetValidProperties(obj);
+            var toReturn = new List<System.Tuple<string, T>>();
+            foreach(var info in infos)
+            {
+                if (info.PropertyType == typeof(T))
+                {
+                    toReturn.Add(new System.Tuple<string, T>(info.Name, 
+                        (T)System.Convert.ChangeType(info.GetValue(obj), typeof(T))));
+                }
+            }
+            return toReturn;
+        }
+
     }
 
 }

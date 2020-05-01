@@ -55,6 +55,29 @@ public class CustomizationManager : MonoBehaviour
 
     }
 
+    //in order in the class declaration---> name, motto, description
+    public List<string> GetTexts()
+    {
+        var intermediate = GetValidFields<string>(this);
+        var toReturn = new List<string>();
+        foreach (var i in intermediate)
+        {
+            toReturn.Add(i.Item2);
+        }
+        return toReturn;
+    }
+
+    //also in order of class declaration---> icon, pic1, pic2
+    public List<Sprite> GetSprites()
+    {
+        var intermediate = GetValidFields<Sprite>(this);
+        var toReturn = new List<Sprite>();
+        foreach (var i in intermediate)
+        {
+            toReturn.Add(i.Item2);
+        }
+        return toReturn;
+    }
 
 
     public void CustomizationStart()
@@ -71,6 +94,7 @@ public class CustomizationManager : MonoBehaviour
     {
         if (PropertiesNonNull(this, myInfos))
         {
+            StopAllCoroutines();
             customizable = false;
             gameObject.SetActive(false);
             foreach (var item in toDisableWhenActive)
@@ -96,7 +120,6 @@ public class CustomizationManager : MonoBehaviour
             var mats = errPanel.GetComponent<Image>();
             fluc *= -1f;
             mats.color = new Color(mats.color.r, mats.color.r, mats.color.r, fluc + flucMid);
-
         }
         errPanel.SetActive(false);
     }
@@ -111,10 +134,10 @@ public class CustomizationManager : MonoBehaviour
             Destroy(this);
         }
         Instance = this;
+
         errPanel.SetActive(false);
         myInfos = GetValidProperties(this);
-        customizable = true;
-        CustomizationStart();
+        gameObject.SetActive(false);
     }
 
 
