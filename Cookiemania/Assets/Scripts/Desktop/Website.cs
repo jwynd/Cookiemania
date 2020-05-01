@@ -8,6 +8,8 @@ public class Website : MonoBehaviour
     protected GameObject websiteCustomizationPrefab = null;
     [SerializeField]
     protected GameObject websitePrefab = null;
+    [SerializeField]
+    protected List<GameObject> disableThese = new List<GameObject>();
 
     protected bool customizedOnce = false;
     protected GameObject websiteRef = null;
@@ -27,7 +29,9 @@ public class Website : MonoBehaviour
     {
         if (!customizedOnce)
         {
+            CustomizationManager.Instance.SetDisableObjects(disableThese);
             CustomizationManager.Instance.CustomizationStart();
+            customizedOnce = true;
         }
         else
         {

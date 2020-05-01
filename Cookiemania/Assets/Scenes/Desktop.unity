@@ -2547,6 +2547,8 @@ MonoBehaviour:
     type: 3}
   websitePrefab: {fileID: 5342728881649891416, guid: d9c6fed3f2242c54bb453f6f52267f46,
     type: 3}
+  disableThese:
+  - {fileID: 1271120757}
 --- !u!1 &1406980949
 GameObject:
   m_ObjectHideFlags: 0

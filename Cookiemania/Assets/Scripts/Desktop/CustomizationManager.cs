@@ -55,6 +55,11 @@ public class CustomizationManager : MonoBehaviour
 
     }
 
+    public void SetDisableObjects(List<GameObject> list)
+    {
+        toDisableWhenActive = list;
+    }
+
     //in order in the class declaration---> name, motto, description
     public List<string> GetTexts()
     {
