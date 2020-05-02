@@ -1,19 +1,31 @@
 ﻿using System.Collections;
 using System.Reflection;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 using static General_Utilities.ReflectionHelpers;
 
 public class CustomizationManager : MonoBehaviour
 {
+    [SerializeField]
+    protected Image icon = null;
+    [SerializeField]
+    protected Image picture1 = null;
+    [SerializeField]
+    protected Image picture2 = null;
+    [SerializeField]
+    protected List<GameObject> toDisableWhenActive = new List<GameObject>();
+    [SerializeField]
+    protected GameObject errPanel = null;
+
     public static CustomizationManager Instance { get; protected set; }
     public string CompanyName { get; protected set; } = null;
     public string CompanyMotto { get; protected set; } = null;
     public string CompanyDescription { get; protected set; } = null;
-    public Sprite Icon { get; protected set; } = null;
-    public Sprite Picture1 { get; protected set; } = null;
-    public Sprite Picture2 { get; protected set; } = null;
+    public Sprite Icon { get { return icon.sprite; } }
+    public Sprite Picture1 { get { return picture1.sprite; } }
+    public Sprite Picture2 { get { return picture2.sprite; } }
 
     public bool Initialized { get; protected set; } = false;
 
@@ -43,39 +55,78 @@ public class CustomizationManager : MonoBehaviour
 
     }
 
-    public void SetIcon(Sprite image)
+    public void SetDisableObjects(List<GameObject> list)
     {
-        if (!customizable) { return; }
-
-        Icon = image;
-        Initialized = PropertiesNonNull(this, myInfos);
-
+        toDisableWhenActive = list;
     }
 
-    public void SetPicture1(Sprite image)
+    //in order in the class declaration---> name, motto, description
+    public List<string> GetTexts()
     {
-        if (!customizable) { return; }
-        Picture1 = image;
-        Initialized = PropertiesNonNull(this, myInfos);
+        var intermediate = GetValidFields<string>(this);
+        var toReturn = new List<string>();
+        foreach (var i in intermediate)
+        {
+            toReturn.Add(i.Item2);
+        }
+        return toReturn;
     }
 
-    public void SetPicture2(Sprite image)
+    //also in order of class declaration---> icon, pic1, pic2
+    public List<Sprite> GetSprites()
     {
-        if (!customizable) { return; }
-
-        Picture2 = image;
-        Initialized = PropertiesNonNull(this, myInfos);
-
+        var intermediate = GetValidFields<Sprite>(this);
+        var toReturn = new List<Sprite>();
+        foreach (var i in intermediate)
+        {
+            toReturn.Add(i.Item2);
+        }
+        return toReturn;
     }
+
 
     public void CustomizationStart()
     {
         customizable = true;
+        gameObject.SetActive(true);
+        foreach (var item in toDisableWhenActive)
+        {
+            item.SetActive(false);
+        }
     }
 
     public void CustomizationFinished()
     {
-        customizable = false;
+        if (PropertiesNonNull(this, myInfos))
+        {
+            StopAllCoroutines();
+            customizable = false;
+            gameObject.SetActive(false);
+            foreach (var item in toDisableWhenActive)
+            {
+                item.SetActive(true);
+            }
+        }
+        else
+        {
+            StartCoroutine(Error());
+        }
+        //else return an error that not everything has been set
+    }
+
+    IEnumerator Error()
+    {
+        errPanel.SetActive(true);
+        float fluc = 0.25f;
+        float flucMid = 0.5f;
+        for (int i = 0; i < 5; i++)
+        {
+            yield return new WaitForSecondsRealtime(0.15f);
+            var mats = errPanel.GetComponent<Image>();
+            fluc *= -1f;
+            mats.color = new Color(mats.color.r, mats.color.r, mats.color.r, fluc + flucMid);
+        }
+        errPanel.SetActive(false);
     }
 
     protected List<PropertyInfo> myInfos = new List<PropertyInfo>();
@@ -88,9 +139,11 @@ public class CustomizationManager : MonoBehaviour
             Destroy(this);
         }
         Instance = this;
+
+        errPanel.SetActive(false);
         myInfos = GetValidProperties(this);
-        customizable = true;
+        gameObject.SetActive(false);
     }
 
-    
+
 }
