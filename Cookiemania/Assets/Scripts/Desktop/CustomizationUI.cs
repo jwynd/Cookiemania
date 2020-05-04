@@ -5,8 +5,9 @@ using UnityEngine.UI;
 using UnityEngine;
 
 using static General_Utilities.ReflectionHelpers;
+using System;
 
-public class CustomizationManager : MonoBehaviour
+public class CustomizationUI : MonoBehaviour
 {
     [SerializeField]
     protected Image icon = null;
@@ -18,8 +19,10 @@ public class CustomizationManager : MonoBehaviour
     protected List<GameObject> toDisableWhenActive = new List<GameObject>();
     [SerializeField]
     protected GameObject errPanel = null;
+    protected Canvas errorCanvas = null;
+    protected System.Action runOnEnd = null;
 
-    public static CustomizationManager Instance { get; protected set; }
+    public static CustomizationUI Instance { get; protected set; }
     public string CompanyName { get; protected set; } = null;
     public string CompanyMotto { get; protected set; } = null;
     public string CompanyDescription { get; protected set; } = null;
@@ -55,7 +58,7 @@ public class CustomizationManager : MonoBehaviour
 
     }
 
-    public void SetDisableObjects(List<GameObject> list)
+    public void SetDisableCanvases(List<GameObject> list)
     {
         toDisableWhenActive = list;
     }
@@ -67,6 +70,10 @@ public class CustomizationManager : MonoBehaviour
         var toReturn = new List<string>();
         foreach (var i in intermediate)
         {
+            //ignoring the tag/name, the default strings
+            if (i.Item1 == "tag" || i.Item1 == "name")
+                continue;
+            Debug.Log(i.Item1 + "   " + i.Item2);
             toReturn.Add(i.Item2);
         }
         return toReturn;
@@ -79,20 +86,17 @@ public class CustomizationManager : MonoBehaviour
         var toReturn = new List<Sprite>();
         foreach (var i in intermediate)
         {
+            
             toReturn.Add(i.Item2);
         }
         return toReturn;
     }
 
 
-    public void CustomizationStart()
+    public void CustomizationStart(System.Action runOnComplete = null)
     {
-        customizable = true;
-        gameObject.SetActive(true);
-        foreach (var item in toDisableWhenActive)
-        {
-            item.SetActive(false);
-        }
+        StateChangeHelper(true);
+        runOnEnd = runOnComplete;
     }
 
     public void CustomizationFinished()
@@ -100,12 +104,9 @@ public class CustomizationManager : MonoBehaviour
         if (PropertiesNonNull(this, myInfos))
         {
             StopAllCoroutines();
-            customizable = false;
-            gameObject.SetActive(false);
-            foreach (var item in toDisableWhenActive)
-            {
-                item.SetActive(true);
-            }
+            StateChangeHelper(false);
+            if (runOnEnd != null)
+                runOnEnd.Invoke();
         }
         else
         {
@@ -114,19 +115,36 @@ public class CustomizationManager : MonoBehaviour
         //else return an error that not everything has been set
     }
 
+    private void StateChangeHelper(bool enabled)
+    {
+        customizable = enabled;
+        GetComponent<Canvas>().enabled = enabled;
+        foreach (var item in toDisableWhenActive)
+        {
+            try
+            {
+                item.GetComponent<Canvas>().enabled = !enabled;
+            }
+            catch
+            {
+                Debug.LogError("disable target needs to be have a canvas");
+            }
+        }
+    }
+
     IEnumerator Error()
     {
-        errPanel.SetActive(true);
+        errorCanvas.enabled = true;
         float fluc = 0.25f;
         float flucMid = 0.5f;
         for (int i = 0; i < 5; i++)
         {
             yield return new WaitForSecondsRealtime(0.15f);
-            var mats = errPanel.GetComponent<Image>();
+            var mats = errPanel.GetComponentInChildren<Image>();
             fluc *= -1f;
             mats.color = new Color(mats.color.r, mats.color.r, mats.color.r, fluc + flucMid);
         }
-        errPanel.SetActive(false);
+        errorCanvas.enabled = false;
     }
 
     protected List<PropertyInfo> myInfos = new List<PropertyInfo>();
@@ -139,10 +157,9 @@ public class CustomizationManager : MonoBehaviour
             Destroy(this);
         }
         Instance = this;
-
-        errPanel.SetActive(false);
+        errorCanvas = errPanel.GetComponent<Canvas>();
+        errorCanvas.enabled = false;
         myInfos = GetValidProperties(this);
-        gameObject.SetActive(false);
     }
 
 

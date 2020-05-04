@@ -2121,7 +2121,7 @@ GameObject:
   - component: {fileID: 1271120759}
   - component: {fileID: 1271120758}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: TopCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2547,8 +2547,7 @@ MonoBehaviour:
     type: 3}
   websitePrefab: {fileID: 5342728881649891416, guid: d9c6fed3f2242c54bb453f6f52267f46,
     type: 3}
-  disableThese:
-  - {fileID: 1271120757}
+  disableTheseCanvases: []
 --- !u!1 &1406980949
 GameObject:
   m_ObjectHideFlags: 0

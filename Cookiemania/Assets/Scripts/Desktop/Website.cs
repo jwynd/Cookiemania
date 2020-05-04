@@ -8,34 +8,51 @@ public class Website : MonoBehaviour
     protected GameObject websiteCustomizationPrefab = null;
     [SerializeField]
     protected GameObject websitePrefab = null;
-    [SerializeField]
-    protected List<GameObject> disableThese = new List<GameObject>();
 
-    protected bool customizedOnce = false;
+    protected bool CustomizedOnce 
+    { 
+        get 
+        { 
+            if (CustomizationUI.Instance)
+                return CustomizationUI.Instance.Initialized;
+            return true;
+        } 
+    }
     protected GameObject websiteRef = null;
     protected GameObject websiteCustomizationRef = null;
+    protected Canvas websiteCanvas = null;
+    protected Canvas customizationCanvas = null;
 
     private void Awake()
     {
         websiteRef = Instantiate(websitePrefab);
         websiteCustomizationRef = Instantiate(websiteCustomizationPrefab);
-        websiteRef.transform.parent = transform;
-        websiteCustomizationRef.transform.parent = transform;
-        websiteRef.SetActive(false);
-        websiteCustomizationRef.SetActive(false);
+        //dont parent
+        websiteCanvas = websiteRef.GetComponent<Canvas>();
+        customizationCanvas = websiteCustomizationRef.GetComponent<Canvas>();
+        customizationCanvas.enabled = false;
+        websiteCanvas.enabled = false;
     }
 
     private void OnEnable()
     {
-        if (!customizedOnce)
+        if (!CustomizedOnce)
         {
-            CustomizationManager.Instance.SetDisableObjects(disableThese);
-            CustomizationManager.Instance.CustomizationStart();
-            customizedOnce = true;
+            CustomizationUI.Instance.SetDisableCanvases(new List<GameObject>
+                { websiteRef });
+            CustomizationUI.Instance.CustomizationStart(new System.Action 
+                (websiteRef.GetComponent<WebsiteUI>().SetUpFromCustomization));
         }
         else
         {
             //go to website instead
+            websiteCanvas.enabled = true;
         }
+    }
+
+    private void OnDisable()
+    {
+        customizationCanvas.enabled = false;
+        websiteCanvas.enabled = false;
     }
 }
