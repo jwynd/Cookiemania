@@ -209,7 +209,13 @@ public class JumperManagerUI : MonoBehaviour
             trans.calling();
             return;
         }
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
         Debug.LogWarning("No level transition object in game");
+
+        Application.Quit();
+#endif
     }
     #endregion
 
