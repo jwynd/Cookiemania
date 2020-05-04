@@ -56,7 +56,15 @@ public class WebsiteUI : MonoBehaviour
     {
         if (!CustomizationUI.Instance)
             return;
+        enabled = true;
         SetStrings(CustomizationUI.Instance.GetTexts());
         SetSprites(CustomizationUI.Instance.GetSprites());
+    }
+
+    public void StartCustomization()
+    {
+        CustomizationUI.Instance.CustomizationStart(new System.Action(SetUpFromCustomization));
+        //GetComponent<Canvas>().enabled = false;
+        //enabled = false;
     }
 }

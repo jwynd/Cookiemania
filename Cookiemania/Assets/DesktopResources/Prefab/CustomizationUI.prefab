@@ -3994,7 +3994,7 @@ MonoBehaviour:
   m_CharacterValidation: 0
   m_RegexValue: 
   m_GlobalPointSize: 32
-  m_CharacterLimit: 40
+  m_CharacterLimit: 50
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
@@ -6148,7 +6148,7 @@ MonoBehaviour:
   m_CharacterValidation: 0
   m_RegexValue: 
   m_GlobalPointSize: 24
-  m_CharacterLimit: 15
+  m_CharacterLimit: 24
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:

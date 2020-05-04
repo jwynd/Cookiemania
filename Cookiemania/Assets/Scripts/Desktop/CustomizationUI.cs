@@ -96,7 +96,8 @@ public class CustomizationUI : MonoBehaviour
     public void CustomizationStart(System.Action runOnComplete = null)
     {
         StateChangeHelper(true);
-        runOnEnd = runOnComplete;
+        if (runOnComplete != null)
+            runOnEnd = runOnComplete;
     }
 
     public void CustomizationFinished()
