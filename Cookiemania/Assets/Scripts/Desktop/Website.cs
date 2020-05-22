@@ -52,7 +52,9 @@ public class Website : MonoBehaviour
 
     private void OnDisable()
     {
-        customizationCanvas.enabled = false;
-        websiteCanvas.enabled = false;
+        if (customizationCanvas)
+            customizationCanvas.enabled = false;
+        if (websiteCanvas)
+            websiteCanvas.enabled = false;
     }
 }

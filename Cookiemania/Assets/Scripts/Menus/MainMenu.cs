@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public GameObject settingsPrefab;
-    public Animator transitioning;
+    public Animator transitioning = null;
 
     public void Play()
     {
-        SceneTransition(2);
+      //  SceneTransition(2);
         SceneManager.LoadScene("Desktop", LoadSceneMode.Single);
     }
 

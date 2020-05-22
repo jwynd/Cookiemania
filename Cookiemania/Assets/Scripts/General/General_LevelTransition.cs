@@ -175,18 +175,4 @@ public class General_LevelTransition : MonoBehaviour
     {
         StartCoroutine(leaveDesktop(scenename));
     }
-    // contains temporary controls to return to desktop, remove in final version
-    void Update()
-    {
-        if (loadedScene == null)
-        {
-          
-            return;
-        }
-        /*
-        if(Input.GetKeyDown(KeyCode.Escape)){
-            returnDesktop();
-        }
-        */
-    }
 }

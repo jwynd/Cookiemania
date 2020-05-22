@@ -505,6 +505,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settingsPrefab: {fileID: 4115704931409894043, guid: bd60292cfee3d1e4aaa62bed2c92fc50,
     type: 3}
+  transitioning: {fileID: 0}
 --- !u!4 &671989947
 Transform:
   m_ObjectHideFlags: 0
