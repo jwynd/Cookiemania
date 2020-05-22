@@ -1473,6 +1473,7 @@ MonoBehaviour:
   transitioning: {fileID: 1270418673}
   animEnter: {fileID: 7400000, guid: 1e991eb88f9bc9444be9f8ca1d889e8f, type: 2}
   animExit: {fileID: 7400000, guid: 6210b92d536c14945aa0b0b6333636ed, type: 2}
+  hometab: {fileID: 1319970853}
 --- !u!4 &1233017395
 Transform:
   m_ObjectHideFlags: 0
