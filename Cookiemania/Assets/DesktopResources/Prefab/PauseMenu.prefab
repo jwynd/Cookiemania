@@ -368,7 +368,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 2278994227013876077}
-  - {fileID: 7580294261540366719}
+  - {fileID: 5777967329204319194}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -396,7 +396,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 55
   m_TargetDisplay: 0
 --- !u!114 &2278994227077606157
 MonoBehaviour:
@@ -410,7 +410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -449,7 +449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baeea7940b1294144a22d9a76dd01b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settingsPrefab: {fileID: 7580294261540366694}
+  settingsPrefab: {fileID: 5777967329204319193}
   input: {fileID: 2278994227077606192}
   markerObj: {fileID: 2278994227914054424}
   myPanel: {fileID: 2278994227013876076}
@@ -1585,13 +1585,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd60292cfee3d1e4aaa62bed2c92fc50, type: 3}
---- !u!1 &7580294261540366694 stripped
+--- !u!1 &5777967329204319193 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4115704931409894043, guid: bd60292cfee3d1e4aaa62bed2c92fc50,
     type: 3}
   m_PrefabInstance: {fileID: 7580294261540366658}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &7580294261540366719 stripped
+--- !u!224 &5777967329204319194 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4115704931409894040, guid: bd60292cfee3d1e4aaa62bed2c92fc50,
     type: 3}

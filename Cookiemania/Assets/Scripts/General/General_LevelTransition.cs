@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class General_LevelTransition : MonoBehaviour
 {
     public Dropdown LevelSelect; // Reference to the level select dropdown menu
-    public GameObject[] DisableOnLevelChange; // List of desktop objects that should be disabled when in minigame
+    public List<GameObject> DisableOnLevelChange; // List of desktop objects that should be disabled when in minigame
     public GameObject pauseMenuPrefab;
     private GameObject gamePauseMenu;
     private string loadedScene = null; // contains the name of the currently loaded minigame
@@ -17,8 +17,9 @@ public class General_LevelTransition : MonoBehaviour
     protected float normalTimeScale;
     public AnimationClip animEnter;
     public AnimationClip animExit;
-   // public delegate void OnLevelTransiion();
-   // public event OnLevelTransiion onBegin;
+    public GameObject hometab;
+    // public delegate void OnLevelTransiion();
+    // public event OnLevelTransiion onBegin;
 
     private void Awake()
     {
@@ -28,16 +29,17 @@ public class General_LevelTransition : MonoBehaviour
         }
         Instance = this;
         gamePauseMenu = Instantiate(pauseMenuPrefab);
-        gamePauseMenu.SetActive(false);
+        //gamePauseMenu.SetActive(false);
     }
 
     // in start we will add a listener so that we can call transition when a new entry is selected
     //this isnt working, which is good cuz it double loads the scene
     void start()
     {
-        
+
         SceneTransition(1);
-        LevelSelect.onValueChanged.AddListener(delegate {
+        LevelSelect.onValueChanged.AddListener(delegate
+        {
             transition(LevelSelect);
         });
     }
@@ -55,7 +57,7 @@ public class General_LevelTransition : MonoBehaviour
                 StartCoroutine(leaveDesktop("Jumper"));
                 break;
             case 2:
-               // StartCoroutine("wait");
+                // StartCoroutine("wait");
                 StartCoroutine(leaveDesktop("Spacemini"));
                 break;
             case 3:
@@ -74,7 +76,12 @@ public class General_LevelTransition : MonoBehaviour
 
         }
     }
-   
+
+    public void ToMinigame(string scene)
+    {
+        StartCoroutine(leaveDesktop(scene));
+    }
+
     // called when opening a new minigame, accepts a scene name
     IEnumerator leaveDesktop(string sceneName)
     {
@@ -84,10 +91,10 @@ public class General_LevelTransition : MonoBehaviour
         { // first disable unneeded objects in desktop
             g.SetActive(false);
         }
-        
+
         SceneManager.LoadScene(sceneName, LoadSceneMode.Additive); // load the new scene additively
         loadedScene = sceneName; // set the loaded scene to a non-null value
-        gamePauseMenu.SetActive(true);
+        //gamePauseMenu.SetActive(true);
     }
 
     // called when exiting a minigame and returning to the desktop
@@ -98,18 +105,19 @@ public class General_LevelTransition : MonoBehaviour
         if (loadedScene == null) yield break; // if loadedScene is null then we are not in a mini-game
         foreach (GameObject g in DisableOnLevelChange)
         {
-            if (g.tag == "DeactivateOnLoad") continue; // we don't want everything in desktop active at once
+            if (g.CompareTag("DeactivateOnLoad")) continue; // we don't want everything in desktop active at once
             g.SetActive(true);
         }
-        gamePauseMenu.SetActive(false);
         // this operation is asynchronous, there is no guaruntee that it will finish running before execution continues
-        
+
         //SceneManager.UnloadSceneAsync(loadedScene);
         // If bugs arise, try commenting above, and uncommenting below
-         AsyncOperation async = SceneManager.UnloadSceneAsync(loadedScene);
+        AsyncOperation async = SceneManager.UnloadSceneAsync(loadedScene);
         // while(!async.isDone); // Lock the scene in busy wait
         loadedScene = null;
-        LevelSelect.value = 0;
+        if (LevelSelect)
+            LevelSelect.value = 0;
+        hometab.GetComponent<General_TabButton>().click();
     }
     // Calls and wraps the function to play animation for scene transition
     public void SceneTransition(int version)
@@ -126,17 +134,17 @@ public class General_LevelTransition : MonoBehaviour
             //Time.timeScale = 0;
             gamePauseMenu.SetActive(false);
             transitioning.SetTrigger("Start");
-            
+
             //ideally we would load the scene here
             transitioning.ResetTrigger("Start");
             StartCoroutine("wait");
             // Time.timeScale = normalTimeScale;
 
         }
-        else if(version == 2)
+        else if (version == 2)
         {
             normalTimeScale = Time.timeScale;
-           // Time.timeScale = 0;
+            // Time.timeScale = 0;
             gamePauseMenu.SetActive(false);
             transitioning.SetBool("ExitScene", true);
             yield return new WaitForSeconds(2);
@@ -161,12 +169,21 @@ public class General_LevelTransition : MonoBehaviour
     // allows couroutines to pause for seconds
     IEnumerator wait()
     {
-            yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(2);
+        gamePauseMenu.SetActive(true);
     }
 
     //This function acts as a bypass for the coroutine return desktop in other scripts
     public void calling()
     {
+        if (loadedScene == null)
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
+        }
         StartCoroutine(returnDesktop());
     }
 
