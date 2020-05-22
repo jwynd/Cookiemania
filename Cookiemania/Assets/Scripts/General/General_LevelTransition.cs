@@ -10,7 +10,7 @@ public class General_LevelTransition : MonoBehaviour
     public List<GameObject> DisableOnLevelChange; // List of desktop objects that should be disabled when in minigame
     public GameObject pauseMenuPrefab;
     private GameObject gamePauseMenu;
-    private string loadedScene = null; // contains the name of the currently loaded minigame
+    public string LoadedScene { get; protected set; } // contains the name of the currently loaded minigame
     public static General_LevelTransition Instance { get; protected set; }
     public Animator transitioning;
     private float transitionTime = 3f;
@@ -18,6 +18,7 @@ public class General_LevelTransition : MonoBehaviour
     public AnimationClip animEnter;
     public AnimationClip animExit;
     public GameObject hometab;
+
     // public delegate void OnLevelTransiion();
     // public event OnLevelTransiion onBegin;
 
@@ -93,16 +94,19 @@ public class General_LevelTransition : MonoBehaviour
         }
 
         SceneManager.LoadScene(sceneName, LoadSceneMode.Additive); // load the new scene additively
-        loadedScene = sceneName; // set the loaded scene to a non-null value
+        LoadedScene = sceneName; // set the loaded scene to a non-null value
+        Debug.Log("scene set " + LoadedScene);
+
         //gamePauseMenu.SetActive(true);
     }
 
     // called when exiting a minigame and returning to the desktop
     IEnumerator returnDesktop()
     {
+
         SceneTransition(2);
         yield return StartCoroutine(wait());
-        if (loadedScene == null) yield break; // if loadedScene is null then we are not in a mini-game
+        if (LoadedScene == null) yield break; // if loadedScene is null then we are not in a mini-game
         foreach (GameObject g in DisableOnLevelChange)
         {
             if (g.CompareTag("DeactivateOnLoad")) continue; // we don't want everything in desktop active at once
@@ -112,9 +116,9 @@ public class General_LevelTransition : MonoBehaviour
 
         //SceneManager.UnloadSceneAsync(loadedScene);
         // If bugs arise, try commenting above, and uncommenting below
-        AsyncOperation async = SceneManager.UnloadSceneAsync(loadedScene);
+        AsyncOperation async = SceneManager.UnloadSceneAsync(LoadedScene);
         // while(!async.isDone); // Lock the scene in busy wait
-        loadedScene = null;
+        LoadedScene = null;
         if (LevelSelect)
             LevelSelect.value = 0;
         hometab.GetComponent<General_TabButton>().click();
@@ -176,7 +180,8 @@ public class General_LevelTransition : MonoBehaviour
     //This function acts as a bypass for the coroutine return desktop in other scripts
     public void calling()
     {
-        if (loadedScene == null)
+        Debug.Log(LoadedScene);
+        if (LoadedScene == null)
         {
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;

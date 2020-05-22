@@ -51,17 +51,19 @@ public class player : MonoBehaviour
     IEnumerator waiting()
     {
         yield return new WaitForSeconds(3);
-
     }
 
     void OnDestroy()
     {
-        GameObject temp = GameObject.Find("LevelController");
-        temp.GetComponent<General_LevelTransition>().SceneTransition(2);
-       
-        if (temp)
+        if (!General_LevelTransition.Instance)
         {
-            temp.GetComponent<General_LevelTransition>().calling();
+            return;
         }
+        if (General_LevelTransition.Instance.LoadedScene == null)
+        {
+            return;
+        }
+        General_LevelTransition.Instance.SceneTransition(2);
+        General_LevelTransition.Instance.calling();
     }
 }
