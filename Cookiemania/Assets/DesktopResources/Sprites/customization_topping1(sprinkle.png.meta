@@ -1,0 +1,415 @@
+fileFormatVersion: 2
+guid: 6b571908af77bdb44adb69ed9d5ec305
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -14788544818649188
+    second: customization_topping1(sprinkle_0
+  - first:
+      213: -5548051639682800826
+    second: customization_topping1(sprinkle_1
+  - first:
+      213: 7284246518480597707
+    second: customization_topping1(sprinkle_2
+  - first:
+      213: 8055148238201747479
+    second: customization_topping1(sprinkle_3
+  - first:
+      213: 3642108659939234317
+    second: customization_topping1(sprinkle_4
+  - first:
+      213: 3244177450711353987
+    second: customization_topping1(sprinkle_5
+  - first:
+      213: 7607899358107192579
+    second: customization_topping1(sprinkle_6
+  - first:
+      213: -1614994746527802101
+    second: customization_topping1(sprinkle_7
+  - first:
+      213: -8866210665463896573
+    second: customization_topping1(sprinkle_8
+  - first:
+      213: -7909148163118170297
+    second: customization_topping1(sprinkle_9
+  - first:
+      213: 7735599550940143554
+    second: customization_topping1(sprinkle_10
+  - first:
+      213: 5088341083271095198
+    second: customization_topping1(sprinkle_11
+  - first:
+      213: -5298143313906111177
+    second: customization_topping1(sprinkle_12
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: customization_topping1(sprinkle_0
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 66
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c02c210e17bc4443afa279a70b3e725
+      internalID: -14788544818649188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_topping1(sprinkle_1
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 66
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84d3d4ea20bd89243bd9a35ea85abd18
+      internalID: -5548051639682800826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_topping1(sprinkle_2
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 66
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e453e5c506be92641a86aad0023ea3b1
+      internalID: 7284246518480597707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_topping1(sprinkle_3
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 15
+        width: 27
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdae3603d4f9c164ea9d347673f2b257
+      internalID: 8055148238201747479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_topping1(sprinkle_4
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 66
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2c9fd784db7f5840ba55a8dec98d325
+      internalID: 3642108659939234317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_topping1(sprinkle_5
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 66
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf08d169d70799345a3271c2b15605b2
+      internalID: 3244177450711353987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_topping1(sprinkle_6
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 66
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 461fc69089759da47840f124d17b25dd
+      internalID: 7607899358107192579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_topping1(sprinkle_7
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 66
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f240ee663c23aed43bd40f97c9778cce
+      internalID: -1614994746527802101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_topping1(sprinkle_8
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 66
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c80cea4a3456d64b93408acda4c1fcd
+      internalID: -8866210665463896573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_topping1(sprinkle_9
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 67
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40805eacad39aa2448828ff60b861c9b
+      internalID: -7909148163118170297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_topping1(sprinkle_10
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 67
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d88a35950ab22d84ba89abda44ff217f
+      internalID: 7735599550940143554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_topping1(sprinkle_11
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 15
+        width: 15
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d91510c8c24772040899807b0e04b580
+      internalID: 5088341083271095198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_topping1(sprinkle_12
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 67
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d43563b305364f4abe2a3f8ec588dbc
+      internalID: -5298143313906111177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,367 @@
+fileFormatVersion: 2
+guid: ffa70ccc3efabcb4996d3d9db1cdd338
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8815594480416458836
+    second: customization_bowtie(bottom-head)_0
+  - first:
+      213: -863154694276209826
+    second: customization_bowtie(bottom-head)_1
+  - first:
+      213: 2540812460809446119
+    second: customization_bowtie(bottom-head)_2
+  - first:
+      213: -5924878148859623259
+    second: customization_bowtie(bottom-head)_3
+  - first:
+      213: 3186374772152786314
+    second: customization_bowtie(bottom-head)_4
+  - first:
+      213: 5601198799931255915
+    second: customization_bowtie(bottom-head)_5
+  - first:
+      213: -9170222781703404090
+    second: customization_bowtie(bottom-head)_6
+  - first:
+      213: 6795824656279121899
+    second: customization_bowtie(bottom-head)_7
+  - first:
+      213: -6902888896330247898
+    second: customization_bowtie(bottom-head)_8
+  - first:
+      213: -8001786904514833795
+    second: customization_bowtie(bottom-head)_9
+  - first:
+      213: 8142753297263693534
+    second: customization_bowtie(bottom-head)_10
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: customization_bowtie(bottom-head)_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 60
+        width: 6
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a4cf31b1465cdf49a33e62208b4a254
+      internalID: 8815594480416458836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_bowtie(bottom-head)_1
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 60
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e351365d14f571945bbe660c545a8bd5
+      internalID: -863154694276209826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_bowtie(bottom-head)_2
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 60
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97311fb481017c44e8689f18e65d10c0
+      internalID: 2540812460809446119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_bowtie(bottom-head)_3
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 60
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6b428587136b3540a835c073b147c59
+      internalID: -5924878148859623259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_bowtie(bottom-head)_4
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 60
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec56201344c72b049a914c4496f10e23
+      internalID: 3186374772152786314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_bowtie(bottom-head)_5
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 59
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d635994655a8ed479e302f2a0b764e4
+      internalID: 5601198799931255915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_bowtie(bottom-head)_6
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 59
+        width: 9
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc51c736e135cdb43abcadbae15c1c7a
+      internalID: -9170222781703404090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_bowtie(bottom-head)_7
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 59
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20d82714997bc484db5924ac89db55ba
+      internalID: 6795824656279121899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_bowtie(bottom-head)_8
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 59
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18073c601d5ed844eb4cdbd57a48e7f7
+      internalID: -6902888896330247898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_bowtie(bottom-head)_9
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 17
+        width: 11
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95319839b68ee6d44b1621cd870342ba
+      internalID: -8001786904514833795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_bowtie(bottom-head)_10
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 17
+        width: 4
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f33cc0a335a57b943ab65aabedcda33f
+      internalID: 8142753297263693534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

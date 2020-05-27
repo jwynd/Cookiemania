@@ -1,0 +1,415 @@
+fileFormatVersion: 2
+guid: da88558d848bb2f4dbb3bd82a7e6a2ee
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4841416924109428682
+    second: customization_eyeshape2_0
+  - first:
+      213: 7286646898412888089
+    second: customization_eyeshape2_1
+  - first:
+      213: 6371967117614959601
+    second: customization_eyeshape2_2
+  - first:
+      213: -1510207119141523893
+    second: customization_eyeshape2_3
+  - first:
+      213: -1223579124670555430
+    second: customization_eyeshape2_4
+  - first:
+      213: 3598995477382642539
+    second: customization_eyeshape2_5
+  - first:
+      213: 2927176291006828921
+    second: customization_eyeshape2_6
+  - first:
+      213: 3499643733639596859
+    second: customization_eyeshape2_7
+  - first:
+      213: -1386605609260010855
+    second: customization_eyeshape2_8
+  - first:
+      213: -753072972027475244
+    second: customization_eyeshape2_9
+  - first:
+      213: 2825181679740556921
+    second: customization_eyeshape2_10
+  - first:
+      213: 3928712291315916027
+    second: customization_eyeshape2_11
+  - first:
+      213: -2022801895357763315
+    second: customization_eyeshape2_12
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: customization_eyeshape2_0
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 51
+        width: 14
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a70ef272437a1343b80d514dbb5a82d
+      internalID: 4841416924109428682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_eyeshape2_1
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 67
+        width: 6
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a89c58cea4254c44f8b3155570e209fa
+      internalID: 7286646898412888089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_eyeshape2_2
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 67
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6ef449e56baeb14abf24d6c3c5710e0
+      internalID: 6371967117614959601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_eyeshape2_3
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 67
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12a23ad2c615426469aba9b731149811
+      internalID: -1510207119141523893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_eyeshape2_4
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 67
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efc68e34c7bf45f4ba6246e4a9d33986
+      internalID: -1223579124670555430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_eyeshape2_5
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 67
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5d52fc0a800bd341a3f41da2a1d8544
+      internalID: 3598995477382642539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_eyeshape2_6
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 66
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44ea0f7e8d397c642836517276fcedba
+      internalID: 2927176291006828921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_eyeshape2_7
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 66
+        width: 9
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85f9a469bc9791f47b31116797c67657
+      internalID: 3499643733639596859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_eyeshape2_8
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 24
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53c526b8d3c6fec478b6f9b95fafa42a
+      internalID: -1386605609260010855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_eyeshape2_9
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 66
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d79fc3834392b843adbb85840aebadf
+      internalID: -753072972027475244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_eyeshape2_10
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 7
+        width: 29
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c893552e296a48b4899e24448220e75e
+      internalID: 2825181679740556921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_eyeshape2_11
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 24
+        width: 17
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 391e5138c315e5d40a2dd8ab69eab18e
+      internalID: 3928712291315916027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_eyeshape2_12
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 26
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f93e0ddb7fadc8f41a4fe1b49cc75ef5
+      internalID: -2022801895357763315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

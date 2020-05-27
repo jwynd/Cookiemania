@@ -1,0 +1,463 @@
+fileFormatVersion: 2
+guid: 91843bc962e484d4eb679a9767e83e9d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1862337399783467832
+    second: customization_topping2(frosting)_0
+  - first:
+      213: 877305289492581820
+    second: customization_topping2(frosting)_1
+  - first:
+      213: 6230050562033086539
+    second: customization_topping2(frosting)_2
+  - first:
+      213: -6798407869211955817
+    second: customization_topping2(frosting)_3
+  - first:
+      213: -6756274088465661080
+    second: customization_topping2(frosting)_4
+  - first:
+      213: 643605283886474916
+    second: customization_topping2(frosting)_5
+  - first:
+      213: 5325503424218764167
+    second: customization_topping2(frosting)_6
+  - first:
+      213: 5397832644241745193
+    second: customization_topping2(frosting)_7
+  - first:
+      213: 6988145238908693581
+    second: customization_topping2(frosting)_8
+  - first:
+      213: -7697880597836720314
+    second: customization_topping2(frosting)_9
+  - first:
+      213: 7850304642901849069
+    second: customization_topping2(frosting)_10
+  - first:
+      213: 499447315827359004
+    second: customization_topping2(frosting)_11
+  - first:
+      213: -8310397308764704104
+    second: customization_topping2(frosting)_12
+  - first:
+      213: -7920137352453987759
+    second: customization_topping2(frosting)_13
+  - first:
+      213: -442030530230507886
+    second: customization_topping2(frosting)_14
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: customization_topping2(frosting)_0
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 66
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 302661e4e3c7ac141937ba09c0d587c1
+      internalID: 1862337399783467832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_topping2(frosting)_1
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 66
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f16e0d4870899e479ca324d104bd822
+      internalID: 877305289492581820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_topping2(frosting)_2
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 66
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 028bd19d91aed234385becf6965e44a8
+      internalID: 6230050562033086539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_topping2(frosting)_3
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 66
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e190951ebcc8dc4e8f883e425e2e3fb
+      internalID: -6798407869211955817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_topping2(frosting)_4
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 66
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85098957d14770a4c8e6161ef40f8343
+      internalID: -6756274088465661080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_topping2(frosting)_5
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 66
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba125fbc8d8e09645aa21fab0ce65308
+      internalID: 643605283886474916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_topping2(frosting)_6
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 66
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fafb2c142c8dbfc4dbae5d0a750ef463
+      internalID: 5325503424218764167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_topping2(frosting)_7
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 66
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31e36bca0b3e89c43a07766e6fb4251a
+      internalID: 5397832644241745193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_topping2(frosting)_8
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 66
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 603032de7cff796409048533dc33b5e7
+      internalID: 6988145238908693581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_topping2(frosting)_9
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 67
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d8d1be7e8bd52e45a5942f392e33d4e
+      internalID: -7697880597836720314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_topping2(frosting)_10
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 67
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 029e70cc06b3d0a469296e8ae5bf5d6f
+      internalID: 7850304642901849069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_topping2(frosting)_11
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 67
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a145f8de5798e442ae626ea3769de80
+      internalID: 499447315827359004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_topping2(frosting)_12
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 67
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50e35bd1d5b34ea40b4e72f49405476e
+      internalID: -8310397308764704104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_topping2(frosting)_13
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 15
+        width: 25
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15d3d7e7b4be813488c44ed3fb52c27b
+      internalID: -7920137352453987759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_topping2(frosting)_14
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 13
+        width: 8
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c5655bc684fcab4fa81f1cceefee4b6
+      internalID: -442030530230507886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

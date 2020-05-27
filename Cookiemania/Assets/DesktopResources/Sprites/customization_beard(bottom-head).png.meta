@@ -1,0 +1,415 @@
+fileFormatVersion: 2
+guid: b32f805f63a0fcb4da3abc918ff75b04
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -425591834997036199
+    second: customization_beard(bottom-head)_0
+  - first:
+      213: -5557291505589657467
+    second: customization_beard(bottom-head)_1
+  - first:
+      213: 8097892100293800177
+    second: customization_beard(bottom-head)_2
+  - first:
+      213: 6494796262653032099
+    second: customization_beard(bottom-head)_3
+  - first:
+      213: 4396477271163554691
+    second: customization_beard(bottom-head)_4
+  - first:
+      213: -7887597263322814010
+    second: customization_beard(bottom-head)_5
+  - first:
+      213: 5327412167748689511
+    second: customization_beard(bottom-head)_6
+  - first:
+      213: 1090404182952184047
+    second: customization_beard(bottom-head)_7
+  - first:
+      213: 7240138706670040291
+    second: customization_beard(bottom-head)_8
+  - first:
+      213: -2994160934590784533
+    second: customization_beard(bottom-head)_9
+  - first:
+      213: -8215122687642775070
+    second: customization_beard(bottom-head)_10
+  - first:
+      213: 1674127613376053104
+    second: customization_beard(bottom-head)_11
+  - first:
+      213: 4488659511361841679
+    second: customization_beard(bottom-head)_12
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: customization_beard(bottom-head)_0
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 51
+        width: 14
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bcbc06ddc12c5e4d950aee12c9e141a
+      internalID: -425591834997036199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_beard(bottom-head)_1
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 67
+        width: 6
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cedabe921cd713c43b90e217ca1b5970
+      internalID: -5557291505589657467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_beard(bottom-head)_2
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 67
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13913d90c73a883438fd86b15e75d443
+      internalID: 8097892100293800177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_beard(bottom-head)_3
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 67
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8217ad2275d4a4a4ba0d537732eb565c
+      internalID: 6494796262653032099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_beard(bottom-head)_4
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 67
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43f264fc726874a498a96afc1d120ee6
+      internalID: 4396477271163554691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_beard(bottom-head)_5
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 67
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 494919f6e4eebce4d9593196dd3bdbd6
+      internalID: -7887597263322814010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_beard(bottom-head)_6
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 66
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7f9470d7692957448202582a9d7eafd
+      internalID: 5327412167748689511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_beard(bottom-head)_7
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 66
+        width: 9
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65a096af677e79a4589b7ea56f690fc2
+      internalID: 1090404182952184047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_beard(bottom-head)_8
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 66
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74ffda7fa1ebbed478b91d817c9539e9
+      internalID: 7240138706670040291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_beard(bottom-head)_9
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 66
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba1bfb2724460a7468b4c52ab9d5da64
+      internalID: -2994160934590784533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_beard(bottom-head)_10
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 7
+        width: 29
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 403474e4c66639847b251c19c444b62d
+      internalID: -8215122687642775070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_beard(bottom-head)_11
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 16
+        width: 17
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3046e5233a337094ea1b6c0aaee6be16
+      internalID: 1674127613376053104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: customization_beard(bottom-head)_12
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 16
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 100df94dffd09ea428980d6b78eacc99
+      internalID: 4488659511361841679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
