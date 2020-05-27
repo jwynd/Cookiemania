@@ -44,6 +44,17 @@ public class CharacterContentManager : MonoBehaviour
     int botindex = 0;
     int eyeindex = 0;
     int browindex = 0;
+
+    private void Start()
+    {
+        ApplyCustom(AppearanceDetails.BODY, 0);
+        ApplyCustom(AppearanceDetails.TOPPINGS, 0);
+        ApplyCustom(AppearanceDetails.TOPACCESSORY, 0);
+        ApplyCustom(AppearanceDetails.MIDDLEACCESSORY, 0);
+        ApplyCustom(AppearanceDetails.BOTTOMACCESSORY, 0);
+        ApplyCustom(AppearanceDetails.EYESHAPE, 0);
+        ApplyCustom(AppearanceDetails.EYEBROWSHAPE, 0);
+    }
     public void bodyup()
     {
         if (bodyindex < bodys.Length - 1)
