@@ -274,6 +274,7 @@ public class CharacterContentManager : MonoBehaviour
 
     public void cancel()
     {
+        Debug.Log("closed");
         panel.SetActive(false);
     }
 

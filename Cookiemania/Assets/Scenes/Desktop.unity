@@ -2268,17 +2268,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6701636067176835546, guid: 8541eca58d6582944a19e81fec296263,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 6014735682439777422, guid: 8541eca58d6582944a19e81fec296263,
-        type: 3}
-    - target: {fileID: 6701636067176835546, guid: 8541eca58d6582944a19e81fec296263,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: dialoguebox
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8541eca58d6582944a19e81fec296263, type: 3}
 --- !u!1 &1920807308
