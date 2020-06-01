@@ -15,20 +15,21 @@ public class CharacterContentManager : MonoBehaviour
         EYEBROWSHAPE
     }
 
-    [SerializeField] private GameObject[] bodys;
-    [SerializeField] private Transform bodyAnchor;
-    [SerializeField] private GameObject[] toppings;
-    [SerializeField] private Transform ToppingAnchor;
-    [SerializeField] private GameObject[] TAccess;
-    [SerializeField] private Transform TopAnchor;
-    [SerializeField] private GameObject[] MAccess;
-    [SerializeField] private Transform MidAnchor;
-    [SerializeField] private GameObject[] BAccess;
-    [SerializeField] private Transform BotAnchor;
-    [SerializeField] private GameObject[] Eyes;
-    [SerializeField] private Transform EyeAnchor;
-    [SerializeField] private GameObject[] Eyebrows;
-    [SerializeField] private Transform BrowAnchor;
+    [SerializeField] private GameObject[] bodys = null;
+    [SerializeField] private Transform bodyAnchor = null;
+    [SerializeField] private GameObject[] toppings = null;
+    [SerializeField] private Transform ToppingAnchor = null;
+    [SerializeField] private GameObject[] TAccess = null;
+    [SerializeField] private Transform TopAnchor = null;
+    [SerializeField] private GameObject[] MAccess = null;
+    [SerializeField] private Transform MidAnchor = null;
+    [SerializeField] private GameObject[] BAccess = null;
+    [SerializeField] private Transform BotAnchor = null;
+    [SerializeField] private GameObject[] Eyes = null;
+    [SerializeField] private Transform EyeAnchor = null;
+    [SerializeField] private GameObject[] Eyebrows = null;
+    [SerializeField] private Transform BrowAnchor = null;
+    [SerializeField] private GameObject newChara = null;
     GameObject activebody;
     GameObject activeTopping;
     GameObject activeTop;
@@ -36,6 +37,10 @@ public class CharacterContentManager : MonoBehaviour
     GameObject activeBot;
     GameObject activeEye;
     GameObject activeBrow;
+
+    public GameObject characterSprite { get; protected set; }
+    public static CharacterContentManager Instance { get; protected set; }
+    [SerializeField] private GameObject panel;
 
     int bodyindex = 0;
     int toppingindex = 0;
@@ -45,6 +50,15 @@ public class CharacterContentManager : MonoBehaviour
     int eyeindex = 0;
     int browindex = 0;
 
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        Instance = this;
+        
+    }
     private void Start()
     {
         ApplyCustom(AppearanceDetails.BODY, 0);
@@ -54,6 +68,13 @@ public class CharacterContentManager : MonoBehaviour
         ApplyCustom(AppearanceDetails.BOTTOMACCESSORY, 0);
         ApplyCustom(AppearanceDetails.EYESHAPE, 0);
         ApplyCustom(AppearanceDetails.EYEBROWSHAPE, 0);
+        panel.SetActive(false);
+        var temp = panel.GetComponent<ConfimationUI>();
+        temp.SetCancel(cancel);
+        temp.SetConfirm(confirm);
+        characterSprite = Instantiate(newChara);
+        characterSprite.SetActive(false);
+
     }
     public void bodyup()
     {
@@ -66,9 +87,9 @@ public class CharacterContentManager : MonoBehaviour
 
     public void bodydown()
     {
-        if(bodyindex > 0)
+        if (bodyindex > 0)
             bodyindex--;
-        else 
+        else
             bodyindex = bodys.Length - 1;
         ApplyCustom(AppearanceDetails.BODY, bodyindex);
     }
@@ -182,7 +203,7 @@ public class CharacterContentManager : MonoBehaviour
         switch (detail)
         {
             case AppearanceDetails.BODY:
-                if(activebody != null)
+                if (activebody != null)
                 {
                     GameObject.Destroy(activebody);
                 }
@@ -190,7 +211,7 @@ public class CharacterContentManager : MonoBehaviour
                 activebody.transform.SetParent(bodyAnchor);
                 activebody.transform.ResetTransform();
                 break;
-            
+
             case AppearanceDetails.TOPPINGS:
                 if (activeTopping != null)
                 {
@@ -200,7 +221,7 @@ public class CharacterContentManager : MonoBehaviour
                 activeTopping.transform.SetParent(ToppingAnchor);
                 activeTopping.transform.ResetTransform();
                 break;
-           
+
             case AppearanceDetails.TOPACCESSORY:
                 if (activeTop != null)
                 {
@@ -242,6 +263,34 @@ public class CharacterContentManager : MonoBehaviour
                 break;
 
         }
+       
     }
+
+    public void dialoguebox()
+    {
+        Debug.Log("dialogue");
+        panel.SetActive(true); 
+    }
+
+    public void cancel()
+    {
+        panel.SetActive(false);
+    }
+
+    public void confirm()
+    {
+        //to do reconstruct character
+        gameObject.SetActive(false);
+        var temp = characterSprite.GetComponent<characterPrefab>();
+        temp.bodys.sprite = bodys[bodyindex].GetComponent<UnityEngine.UI.Image>().sprite;
+        temp.toppings.sprite = toppings[toppingindex].GetComponent<UnityEngine.UI.Image>().sprite;
+        temp.top.sprite = TAccess[topindex].GetComponent<UnityEngine.UI.Image>().sprite;
+        temp.middle.sprite = MAccess[midindex].GetComponent<UnityEngine.UI.Image>().sprite;
+        temp.bottom.sprite = BAccess[botindex].GetComponent<UnityEngine.UI.Image>().sprite;
+        temp.eyes.sprite = Eyes[eyeindex].GetComponent<UnityEngine.UI.Image>().sprite;
+        //temp.Eyebrows.sprite = Eyebrows[browindex].GetComponent<UnityEngine.UI.Image>().sprite;
+
+    }
+
 
 }
