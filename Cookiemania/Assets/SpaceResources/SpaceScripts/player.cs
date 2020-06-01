@@ -10,6 +10,10 @@ public class player : MonoBehaviour
     public Rigidbody2D rigidBody;
     public Transform Player;
 
+    private void Start()
+    {
+        
+    }
     private void FixedUpdate()
     {
         //float horzmove = Input.GetAxisRaw("Horizontal");

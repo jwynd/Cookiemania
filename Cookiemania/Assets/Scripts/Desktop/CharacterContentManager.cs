@@ -40,7 +40,9 @@ public class CharacterContentManager : MonoBehaviour
 
     public GameObject characterSprite { get; protected set; }
     public static CharacterContentManager Instance { get; protected set; }
+    public string characterName { get; protected set; } = null;
     [SerializeField] private GameObject panel;
+    [SerializeField] private GameObject panelName;
 
     int bodyindex = 0;
     int toppingindex = 0;
@@ -74,6 +76,7 @@ public class CharacterContentManager : MonoBehaviour
         temp.SetConfirm(confirm);
         characterSprite = Instantiate(newChara);
         characterSprite.SetActive(false);
+        panelName.SetActive(false);
 
     }
     public void bodyup()
@@ -268,6 +271,11 @@ public class CharacterContentManager : MonoBehaviour
 
     public void dialoguebox()
     {
+        if(characterName == null)
+        {
+            panelName.SetActive(true);
+            return;
+        }
         Debug.Log("dialogue");
         panel.SetActive(true); 
     }
@@ -290,7 +298,26 @@ public class CharacterContentManager : MonoBehaviour
         temp.bottom.sprite = BAccess[botindex].GetComponent<UnityEngine.UI.Image>().sprite;
         temp.eyes.sprite = Eyes[eyeindex].GetComponent<UnityEngine.UI.Image>().sprite;
         //temp.Eyebrows.sprite = Eyebrows[browindex].GetComponent<UnityEngine.UI.Image>().sprite;
+        temp.name = characterName;
+        foreach(Transform child in temp.transform)
+        {
+            child.localPosition = new Vector3(child.localPosition.x, child.localPosition.y, 0);
+            foreach(Transform grandchild in child.transform)
+            {
+                grandchild.localPosition = new Vector3(grandchild.localPosition.x, grandchild.localPosition.y, 0);
+            }
+        }
+    }
 
+    public void okay()
+    {
+        panelName.SetActive(false);
+    }
+
+    public void SetName(string name)
+    {
+        characterName = name;
+       
     }
 
 
