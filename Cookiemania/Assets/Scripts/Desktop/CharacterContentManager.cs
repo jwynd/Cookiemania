@@ -271,7 +271,7 @@ public class CharacterContentManager : MonoBehaviour
 
     public void dialoguebox()
     {
-        if(characterName == null)
+        if(characterName == null || characterName.Length < 2)
         {
             panelName.SetActive(true);
             return;
