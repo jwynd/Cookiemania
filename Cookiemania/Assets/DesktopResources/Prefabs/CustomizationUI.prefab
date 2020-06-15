@@ -1254,7 +1254,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter text...
+  m_text: "Enter company motto...\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d2b927f2a185e554091aa389d12ce347, type: 2}
   m_sharedMaterial: {fileID: -7865273506847581104, guid: d2b927f2a185e554091aa389d12ce347,
@@ -1290,7 +1290,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 2
-  m_textAlignment: 257
+  m_textAlignment: 514
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -2575,7 +2575,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter text...
+  m_text: "Enter company name...\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d2b927f2a185e554091aa389d12ce347, type: 2}
   m_sharedMaterial: {fileID: -7865273506847581104, guid: d2b927f2a185e554091aa389d12ce347,
@@ -2585,7 +2585,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 2133996082
+    rgba: 2147483647
   m_fontColor: {r: 1, g: 1, b: 1, a: 0.5}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -5730,7 +5730,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter text...
+  m_text: "Enter company description...\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d2b927f2a185e554091aa389d12ce347, type: 2}
   m_sharedMaterial: {fileID: -7865273506847581104, guid: d2b927f2a185e554091aa389d12ce347,
@@ -5766,7 +5766,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 2
-  m_textAlignment: 257
+  m_textAlignment: 514
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
