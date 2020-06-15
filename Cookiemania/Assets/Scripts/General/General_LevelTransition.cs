@@ -18,6 +18,7 @@ public class General_LevelTransition : MonoBehaviour
     public AnimationClip animEnter;
     public AnimationClip animExit;
     public GameObject hometab;
+    private bool loadingMinigame = false;
 
     // public delegate void OnLevelTransiion();
     // public event OnLevelTransiion onBegin;
@@ -80,6 +81,9 @@ public class General_LevelTransition : MonoBehaviour
 
     public void ToMinigame(string scene)
     {
+        if (loadingMinigame)
+            return;
+        loadingMinigame = true;
         StartCoroutine(leaveDesktop(scene));
     }
 
@@ -96,7 +100,7 @@ public class General_LevelTransition : MonoBehaviour
         SceneManager.LoadScene(sceneName, LoadSceneMode.Additive); // load the new scene additively
         LoadedScene = sceneName; // set the loaded scene to a non-null value
         Debug.Log("scene set " + LoadedScene);
-
+        loadingMinigame = false;
         //gamePauseMenu.SetActive(true);
     }
 

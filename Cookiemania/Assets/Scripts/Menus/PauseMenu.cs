@@ -28,9 +28,16 @@ public class PauseMenu : MonoBehaviour
     protected General_LevelTransition levelController;
     protected SettingsMenu settings;
 
+    public static PauseMenu Instance { get; protected set; }
 
     private void Awake()
     {
+        if (Instance && Instance != this)
+        {
+            Destroy(this);
+            return;
+        }
+        Instance = this;
         normalTimeScale = Time.timeScale;
         SetupSettings();
         Resume();

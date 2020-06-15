@@ -55,6 +55,7 @@ public class Minigame : MonoBehaviour
     private void Start()
     {
         General_LevelTransition.Instance.DisableOnLevelChange.Add(minigameRef);
+        minigameCanvas.transform.SetParent(SiteCanvas.Instance.transform);
     }
 
     private void OnEnable()

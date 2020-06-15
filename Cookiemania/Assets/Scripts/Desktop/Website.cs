@@ -34,6 +34,11 @@ public class Website : MonoBehaviour
         websiteCanvas.enabled = false;
     }
 
+    private void Start()
+    {
+        websiteCanvas.transform.SetParent(SiteCanvas.Instance.transform);
+    }
+
     private void OnEnable()
     {
         if (!CustomizedOnce)
