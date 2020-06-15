@@ -9,6 +9,7 @@ public class SettingsMenu : MonoBehaviour
     public List<GameObject> activateOnDestroy;
     public List<MonoBehaviour> enableOnDestroy;
     public AudioMixer mainMixer;
+
     [SerializeField]
     protected bool dontDestroy = false;
 
@@ -35,17 +36,22 @@ public class SettingsMenu : MonoBehaviour
         mainMixer.SetFloat("musicVolume", Mathf.Log10(musicSliderVal) * 20);
     }
 
+    public void Return()
+    {
+        if (dontDestroy)
+        {
+            enabled = false;
+            gameObject.SetActive(false);
+            return;
+        }
+        Destroy(this.gameObject);
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (dontDestroy)
-            {
-                enabled = false;
-                gameObject.SetActive(false);
-                return;
-            }
-            Destroy(this.gameObject);
+            Return();
         }
     }
 

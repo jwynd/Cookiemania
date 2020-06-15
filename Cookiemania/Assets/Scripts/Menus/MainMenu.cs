@@ -26,8 +26,7 @@ public class MainMenu : MonoBehaviour
         }
         // needed to spawn the pause menu
         GameObject s = Instantiate(settingsPrefab);
-        s.transform.parent = c;
-        s.transform.position = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0);
+        s.transform.SetParent(c, false);
         s.GetComponent<SettingsMenu>().activateOnDestroy = g;
         s.SetActive(true);
     }
