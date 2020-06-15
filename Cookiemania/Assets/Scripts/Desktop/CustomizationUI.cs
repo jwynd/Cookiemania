@@ -102,16 +102,20 @@ public class CustomizationUI : MonoBehaviour
 
     public void CustomizationFinished()
     {
-        if (PropertiesNonNull(this, myInfos))
+        if (!PropertiesNonNull(this, myInfos))
+        {
+            StartCoroutine(Error());
+        }
+        else if (CompanyName.Length < 2 || CompanyMotto.Length < 2 || CompanyDescription.Length < 2)
+        {
+            StartCoroutine(Error());
+        }
+        else
         {
             StopAllCoroutines();
             StateChangeHelper(false);
             if (runOnEnd != null)
                 runOnEnd.Invoke();
-        }
-        else
-        {
-            StartCoroutine(Error());
         }
         //else return an error that not everything has been set
     }
