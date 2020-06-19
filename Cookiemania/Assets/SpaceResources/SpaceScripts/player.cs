@@ -59,15 +59,6 @@ public class player : MonoBehaviour
 
     void OnDestroy()
     {
-        if (!General_LevelTransition.Instance)
-        {
-            return;
-        }
-        if (General_LevelTransition.Instance.LoadedScene == null)
-        {
-            return;
-        }
-        General_LevelTransition.Instance.SceneTransition(2);
-        General_LevelTransition.Instance.calling();
+        FindObjectOfType<spaceManager>().EndGame();
     }
 }
