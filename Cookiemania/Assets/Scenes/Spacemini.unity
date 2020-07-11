@@ -1027,10 +1027,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20e44a3305184c046ae7c5b146e45f4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 4086521198673791118, guid: cba06509d7c9cef40858e949fcec3964, type: 3}
-  enemy2: {fileID: 1180341776261850307, guid: a0eeb081ba097dd49a07dce0db865984, type: 3}
-  enemy3: {fileID: 965991013764075437, guid: f39cb32168b18ad4587e1dac94364b57, type: 3}
-  enemy4: {fileID: 7279470366700741127, guid: ea764eb20226c3f4180dea93e32ed27a, type: 3}
+  enemy: {fileID: 8706619386830073998, guid: 34056b25a4d921e4282fb94cb83c3ddb, type: 3}
+  enemy2: {fileID: 8706619386830073998, guid: 34056b25a4d921e4282fb94cb83c3ddb, type: 3}
+  enemy3: {fileID: 8706619386830073998, guid: 34056b25a4d921e4282fb94cb83c3ddb, type: 3}
+  enemy4: {fileID: 8706619386830073998, guid: 34056b25a4d921e4282fb94cb83c3ddb, type: 3}
   spawnRate: 4
 --- !u!4 &588272799
 Transform:
@@ -1225,10 +1225,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 316bab2e03125bb4b9ce65b368a5bace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 4086521198673791118, guid: cba06509d7c9cef40858e949fcec3964, type: 3}
-  enemy2: {fileID: 1180341776261850307, guid: a0eeb081ba097dd49a07dce0db865984, type: 3}
-  enemy3: {fileID: 965991013764075437, guid: f39cb32168b18ad4587e1dac94364b57, type: 3}
-  enemy4: {fileID: 7279470366700741127, guid: ea764eb20226c3f4180dea93e32ed27a, type: 3}
+  enemy: {fileID: 8706619386830073998, guid: 34056b25a4d921e4282fb94cb83c3ddb, type: 3}
+  enemy2: {fileID: 8706619386830073998, guid: 34056b25a4d921e4282fb94cb83c3ddb, type: 3}
+  enemy3: {fileID: 8706619386830073998, guid: 34056b25a4d921e4282fb94cb83c3ddb, type: 3}
+  enemy4: {fileID: 8706619386830073998, guid: 34056b25a4d921e4282fb94cb83c3ddb, type: 3}
   spawnRate: 6
 --- !u!4 &763917099
 Transform:
@@ -2134,10 +2134,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 316bab2e03125bb4b9ce65b368a5bace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 4086521198673791118, guid: cba06509d7c9cef40858e949fcec3964, type: 3}
-  enemy2: {fileID: 1180341776261850307, guid: a0eeb081ba097dd49a07dce0db865984, type: 3}
-  enemy3: {fileID: 965991013764075437, guid: f39cb32168b18ad4587e1dac94364b57, type: 3}
-  enemy4: {fileID: 7279470366700741127, guid: ea764eb20226c3f4180dea93e32ed27a, type: 3}
+  enemy: {fileID: 8706619386830073998, guid: 34056b25a4d921e4282fb94cb83c3ddb, type: 3}
+  enemy2: {fileID: 8706619386830073998, guid: 34056b25a4d921e4282fb94cb83c3ddb, type: 3}
+  enemy3: {fileID: 8706619386830073998, guid: 34056b25a4d921e4282fb94cb83c3ddb, type: 3}
+  enemy4: {fileID: 8706619386830073998, guid: 34056b25a4d921e4282fb94cb83c3ddb, type: 3}
   spawnRate: 8
 --- !u!4 &1551143591
 Transform:
