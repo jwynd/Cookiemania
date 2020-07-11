@@ -916,6 +916,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 14887603, guid: 9d3a5fbb070fba9479490f450dd22e7d, type: 3}
+      propertyPath: speed
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 14887606, guid: 9d3a5fbb070fba9479490f450dd22e7d, type: 3}
       propertyPath: hearts.Array.data[0]
       value: 
