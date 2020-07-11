@@ -41,7 +41,7 @@ public class player : MonoBehaviour
         }
         if (Input.GetButtonDown("Fire2"))
         {
-            GameObject go = Instantiate(theplayerfire, transform.position, Quaternion.identity);
+            GameObject go = Instantiate(theplayershield, transform.position, Quaternion.identity);
             go.transform.parent = transform;
             go.transform.parent = null;
             soundmanager.Instance.PlayOneShot(soundmanager.Instance.shield);
