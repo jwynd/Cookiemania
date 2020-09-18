@@ -836,6 +836,7 @@ MonoBehaviour:
   charImage: {fileID: 8925409354301216975}
   charName: {fileID: 8925409353184024518}
   dialogueLine: {fileID: 8925409353296224134}
+  textDelay: 0.11
   useTestMode: 1
   testSprites:
   - {fileID: 8328981943380202991, guid: 128e9fe8e8d5dec4f957c5240c83e355, type: 3}

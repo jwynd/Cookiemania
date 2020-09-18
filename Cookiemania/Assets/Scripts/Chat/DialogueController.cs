@@ -7,9 +7,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-
-
-
 // Basic use --> event system will pass a list of lines that the dialogue system is to use
 //
 // and will continue to spit out next piece of dialogue on click until complete. Calls
@@ -29,12 +26,14 @@ public class DialogueController : MonoBehaviour
     public Image charImage = null;
     public TMP_Text charName = null;
     public TMP_Text dialogueLine = null;
+    [Range(0.001f, 0.3f)]
+    public float textDelay = 0.01f;
     public bool useTestMode = false;
     public List<Tuple<string, string>> testLines = new List<Tuple<string, string>> {
         new Tuple<string, string>("char_1", "line one"),
-        new Tuple<string, string>("char_1", "line two"),
-        new Tuple<string, string>("char_2", "line three"),
-        new Tuple<string, string>("char_1", "line four"),
+        new Tuple<string, string>("char_1", "line two is a lot longer than line one"),
+        new Tuple<string, string>("char_2", "line three is also pretty long but ya know?"),
+        new Tuple<string, string>("char_1", "line four isn't"),
     };
     public Sprite[] testSprites;
     public string[] testDisplayNames;
@@ -53,7 +52,11 @@ public class DialogueController : MonoBehaviour
 
     private Dictionary<string, Tuple<string, Sprite>> charDictionary = null;
     private List<Tuple<string, string>> lines = null;
-    private bool stillDisplayingText;
+    private bool stillDisplayingText = false;
+    private bool fastDisplayingText = false;
+    private IEnumerator textDisplayer;
+    private IEnumerator fastTextDisplayer;
+    private Tuple<string, string> currentLine;
 
     public void Initialize(
         List<Tuple<string, string>> dialogueLines,
@@ -79,11 +82,31 @@ public class DialogueController : MonoBehaviour
         myCanvas.enabled = true;
     }
 
+    private IEnumerator TextDisplayer(string fullText, float delay, int startLetter = 0)
+    {
+        stillDisplayingText = true;
+        for(int i = startLetter; i <= fullText.Length; i++)
+        {
+            dialogueLine.text = fullText.Substring(0, i);
+            yield return new WaitForSecondsRealtime(delay);
+        }
+        stillDisplayingText = false;
+        fastDisplayingText = false;
+    }
+
     public void DisplayNextDialogue()
     {
         if (stillDisplayingText)
         {
-            // dramatically increase lineDisplaySpeed
+            if (!fastDisplayingText)
+            {
+                StopCoroutine(textDisplayer);
+                fastTextDisplayer = TextDisplayer(currentLine.Item2, textDelay * 0.2f, dialogueLine.text.Length);
+                fastDisplayingText = true;
+                stillDisplayingText = true;
+                StartCoroutine(fastTextDisplayer);
+            }
+            return;
         }
         if (lines.Count < 1)
         {
@@ -91,24 +114,26 @@ public class DialogueController : MonoBehaviour
             runOnComplete.Invoke();
             return;
         }
-        Tuple<string, string> line = lines.PopFront();
-        if (line.Item2.Length > CharacterMax)
+        currentLine = lines.PopFront();
+        if (currentLine.Item2.Length > CharacterMax)
         {
             Debug.LogError("Next line is too long: " + 
-                line.Item2.Length + " with max of " + CharacterMax);
+                currentLine.Item2.Length + " with max of " + CharacterMax);
             return;
         }
-        if (charDictionary.TryGetValue(line.Item1, out Tuple<string, Sprite> charInfo))
+        if (charDictionary.TryGetValue(currentLine.Item1, out Tuple<string, Sprite> charInfo))
         {
             charName.text = charInfo.Item1;
             charImage.sprite = charInfo.Item2;
             // need to slowly display dialogue in async fn
             // will also want to set and unset the stillDisplayingText bool
-            dialogueLine.text = line.Item2;
+            textDisplayer = TextDisplayer(currentLine.Item2, textDelay);
+            StartCoroutine(textDisplayer);
+            //dialogueLine.text = line.Item2;
         }
         else
         {
-            Debug.LogError("Character name: " + line.Item1 + " not found in dict");
+            Debug.LogError("Character name: " + currentLine.Item1 + " not found in dict");
         }
     }
 
