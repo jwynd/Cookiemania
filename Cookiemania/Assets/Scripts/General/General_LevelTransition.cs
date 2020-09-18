@@ -23,6 +23,7 @@ public class General_LevelTransition : MonoBehaviour
     // public delegate void OnLevelTransiion();
     // public event OnLevelTransiion onBegin;
 
+
     private void Awake()
     {
         if (Instance != null && Instance != this)

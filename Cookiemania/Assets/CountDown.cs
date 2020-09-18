@@ -13,7 +13,7 @@ public class CountDown : MonoBehaviour
     private bool count = true;
     private float hold;
     private float holds;
-    bool easy = false;
+    bool easy = true;
     bool medium = false;
     bool hard = false;
 
@@ -28,6 +28,10 @@ public class CountDown : MonoBehaviour
         } else if (hard == true)
         {
             mainTimer = 300f;
+        }
+        else
+        {
+            mainTimer = 10f;
         }
         timer = mainTimer;
         hold = 3;
