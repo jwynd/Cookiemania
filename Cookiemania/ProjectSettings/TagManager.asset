@@ -16,6 +16,7 @@ TagManager:
   - shield
   - wall
   - treasure
+  - Congratulations
   layers:
   - Default
   - TransparentFX

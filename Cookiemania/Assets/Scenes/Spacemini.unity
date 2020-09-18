@@ -673,6 +673,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 418407497}
   m_CullTransparentMesh: 0
+--- !u!1 &422676147 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5989427524142611238, guid: eae8cfe790a9ae641bf92a4de7acc666,
+    type: 3}
+  m_PrefabInstance: {fileID: 2481039595877601904}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &422676151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 422676147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3da61f31dbad5ff49b36b5fcfe627dc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &437967062
 GameObject:
   m_ObjectHideFlags: 0
@@ -2247,6 +2265,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0be2444550f3a54bb2d626d1102284a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1639920201 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7394395173352058610, guid: 5374a6ac1add0514f905e5187762c589,
+    type: 3}
+  m_PrefabInstance: {fileID: 284351754701092402}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1639920205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639920201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ef303c79563f1d4e80e6a7bad9ca78d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1725266181
 GameObject:
   m_ObjectHideFlags: 0
@@ -2654,9 +2690,19 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: leaveGame
       objectReference: {fileID: 0}
+    - target: {fileID: 5989427524142611236, guid: eae8cfe790a9ae641bf92a4de7acc666,
+        type: 3}
+      propertyPath: m_textAlignment
+      value: 514
+      objectReference: {fileID: 0}
     - target: {fileID: 5989427524142611238, guid: eae8cfe790a9ae641bf92a4de7acc666,
         type: 3}
       propertyPath: m_Name
+      value: Congratulations
+      objectReference: {fileID: 0}
+    - target: {fileID: 5989427524142611238, guid: eae8cfe790a9ae641bf92a4de7acc666,
+        type: 3}
+      propertyPath: m_TagString
       value: Congratulations
       objectReference: {fileID: 0}
     - target: {fileID: 5989427524594948025, guid: eae8cfe790a9ae641bf92a4de7acc666,
