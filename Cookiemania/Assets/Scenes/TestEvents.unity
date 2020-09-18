@@ -276,6 +276,43 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8925409353296224134, guid: 32a48f350cf840b459ed53a6de5dfcf4,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925409353296224134, guid: 32a48f350cf840b459ed53a6de5dfcf4,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925409353296224134, guid: 32a48f350cf840b459ed53a6de5dfcf4,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925409353296224134, guid: 32a48f350cf840b459ed53a6de5dfcf4,
+        type: 3}
+      propertyPath: m_text
+      value: 'Dialogue goes here up to two lines only so a max word letter count of
+        96 must be enforced but now we have a lot omoasid fpaosi napsofin aspodfi
+        aspod fihaspofd ihaspod fihaspodfihaspdofihaspodfiahspdofiashdpfoiasj '
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925409353296224134, guid: 32a48f350cf840b459ed53a6de5dfcf4,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 214
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925409353296224134, guid: 32a48f350cf840b459ed53a6de5dfcf4,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 33
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925409353296224134, guid: 32a48f350cf840b459ed53a6de5dfcf4,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 33
+      objectReference: {fileID: 0}
     - target: {fileID: 8925409354437239824, guid: 32a48f350cf840b459ed53a6de5dfcf4,
         type: 3}
       propertyPath: m_Name
@@ -385,6 +422,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925409354437239835, guid: 32a48f350cf840b459ed53a6de5dfcf4,
+        type: 3}
+      propertyPath: textDelay
+      value: 0.044
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32a48f350cf840b459ed53a6de5dfcf4, type: 3}
