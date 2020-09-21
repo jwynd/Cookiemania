@@ -10,6 +10,7 @@ public class playerfire : MonoBehaviour
     public Transform Player;
     public GameObject user;
     public static int moneylevel;
+
     
 
     // Start is called before the first frame update

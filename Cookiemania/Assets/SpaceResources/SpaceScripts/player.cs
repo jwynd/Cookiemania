@@ -8,7 +8,8 @@ public class player : MonoBehaviour
     public GameObject theplayerfire;
     public GameObject theplayershield;
     public Rigidbody2D rigidBody;
-    public Transform Player;
+    public Transform Player, direct1, direct2;
+    public static int bulletlevel = 0;
 
     private void Start()
     {
@@ -37,6 +38,11 @@ public class player : MonoBehaviour
             GameObject go = Instantiate(theplayerfire, transform.position, Quaternion.identity);
             go.transform.parent = transform;
             go.transform.parent = null;
+            if (bulletlevel > 0)
+            {
+                GameObject goo = Instantiate(theplayerfire, direct1.position, Quaternion.identity);
+                GameObject gooo = Instantiate(theplayerfire, direct2.position, Quaternion.identity);
+            }
             soundmanager.Instance.PlayOneShot(soundmanager.Instance.playerfire);
         }
         if (Input.GetButtonDown("Fire2"))
