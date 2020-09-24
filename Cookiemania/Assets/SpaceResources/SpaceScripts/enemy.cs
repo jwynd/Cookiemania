@@ -44,11 +44,18 @@ public class enemy : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (col.gameObject.CompareTag("shield"))
+        if (col.gameObject.CompareTag("pierce"))
         {
             soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemydies);
             Destroy(gameObject);
         }
+
+        //if (col.gameObject.CompareTag("shield"))
+        //{
+        //    soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemydies);
+        //    Destroy(gameObject);
+            
+       // }
 
         if (col.gameObject.CompareTag("Player"))
         {
@@ -150,4 +157,6 @@ public class enemy : MonoBehaviour
     {
         rigidBody.MovePosition((Vector2)transform.position + (direction * moveSpeed * Time.deltaTime));
     }
+
+
 }

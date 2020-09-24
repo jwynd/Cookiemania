@@ -6,10 +6,12 @@ public class player : MonoBehaviour
 {
     public float speed = 20;
     public GameObject theplayerfire;
+    public GameObject piercebullet;
     public GameObject theplayershield;
     public Rigidbody2D rigidBody;
     public Transform Player, direct1, direct2, direct3, direct4;
     public static int bulletlevel = 0;
+    public static int bulletpiercelvl = 0;
 
     private void Start()
     {
@@ -34,20 +36,45 @@ public class player : MonoBehaviour
         //direction.Normalize();
         if (Input.GetButtonDown("Jump"))
         {
-            
-            GameObject go = Instantiate(theplayerfire, transform.position, Quaternion.identity);
-            go.transform.parent = transform;
-            go.transform.parent = null;
-            if (bulletlevel == 1)
+            if (bulletpiercelvl >= 1) //if the bullet pierce is upgraded the main bullet will be pierce
             {
-                GameObject d1 = Instantiate(theplayerfire, direct1.position, Quaternion.identity);
-                GameObject d2 = Instantiate(theplayerfire, direct2.position, Quaternion.identity);
-            } else if (bulletlevel == 2)
+                GameObject go = Instantiate(piercebullet, transform.position, transform.rotation);
+            }
+            else // fire regular bullet
             {
-                GameObject d1 = Instantiate(theplayerfire, direct1.position, Quaternion.identity);
-                GameObject d2 = Instantiate(theplayerfire, direct2.position, Quaternion.identity);
-                GameObject d3 = Instantiate(theplayerfire, direct3.position, Quaternion.identity);
-                GameObject d4 = Instantiate(theplayerfire, direct4.position, Quaternion.identity);
+                GameObject go = Instantiate(theplayerfire, transform.position, Quaternion.identity);
+                go.transform.parent = transform;
+                go.transform.parent = null;
+            }
+
+            if (bulletlevel == 1)// if bullet level is one shoot a spread of 3 bullets (add 2 bullets)
+            {
+                if (bulletpiercelvl >= 2)// check for piercing bullets
+                {
+                    GameObject d1 = Instantiate(piercebullet, direct1.position, transform.rotation);
+                    GameObject d2 = Instantiate(piercebullet, direct2.position, transform.rotation);
+                }
+                else
+                {
+                    GameObject d1 = Instantiate(theplayerfire, direct1.position, Quaternion.identity);
+                    GameObject d2 = Instantiate(theplayerfire, direct2.position, Quaternion.identity);
+                }
+            } else if (bulletlevel == 2) // checks spread level
+            {
+                if (bulletpiercelvl >= 2) // checkfor pierce !! change to 3 if 3rd level
+                {
+                    GameObject d1 = Instantiate(piercebullet, direct1.position, transform.rotation);
+                    GameObject d2 = Instantiate(piercebullet, direct2.position, transform.rotation);
+                    GameObject d3 = Instantiate(piercebullet, direct3.position, transform.rotation);
+                    GameObject d4 = Instantiate(piercebullet, direct4.position, transform.rotation);
+                }
+                else
+                {
+                    GameObject d1 = Instantiate(theplayerfire, direct1.position, Quaternion.identity);
+                    GameObject d2 = Instantiate(theplayerfire, direct2.position, Quaternion.identity);
+                    GameObject d3 = Instantiate(theplayerfire, direct3.position, Quaternion.identity);
+                    GameObject d4 = Instantiate(theplayerfire, direct4.position, Quaternion.identity);
+                }
             }
             soundmanager.Instance.PlayOneShot(soundmanager.Instance.playerfire);
         }

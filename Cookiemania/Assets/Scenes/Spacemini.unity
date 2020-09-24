@@ -984,6 +984,11 @@ PrefabInstance:
       propertyPath: direct4
       value: 
       objectReference: {fileID: 423090423}
+    - target: {fileID: 14887603, guid: 9d3a5fbb070fba9479490f450dd22e7d, type: 3}
+      propertyPath: piercebullet
+      value: 
+      objectReference: {fileID: 8083187436933270508, guid: ab27bdf3a38f7b045b4ae0566b8a8578,
+        type: 3}
     - target: {fileID: 14887606, guid: 9d3a5fbb070fba9479490f450dd22e7d, type: 3}
       propertyPath: hearts.Array.data[0]
       value: 
@@ -1803,7 +1808,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: cfd1e937c275e4883b741654e285c62d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1822,12 +1827,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 947132494}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.014, y: 0.072, z: 9.65}
-  m_LocalScale: {x: 0.68905604, y: 0.49083024, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.014007568, y: 0.072006226, z: 0}
+  m_LocalScale: {x: 0.68905604, y: 0.49083027, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1017156368
 GameObject:
@@ -2746,7 +2751,7 @@ PrefabInstance:
     - target: {fileID: 7394395174224279127, guid: 5374a6ac1add0514f905e5187762c589,
         type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 7394395174224279127, guid: 5374a6ac1add0514f905e5187762c589,
         type: 3}
@@ -2911,7 +2916,7 @@ PrefabInstance:
     - target: {fileID: 5989427525685912451, guid: eae8cfe790a9ae641bf92a4de7acc666,
         type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5989427525685912451, guid: eae8cfe790a9ae641bf92a4de7acc666,
         type: 3}

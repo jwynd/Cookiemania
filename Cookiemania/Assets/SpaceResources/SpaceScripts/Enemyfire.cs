@@ -40,7 +40,7 @@ public class Enemyfire : MonoBehaviour
         if (col.gameObject.CompareTag("shield")) 
          {
              Destroy(this.gameObject);
-             Destroy(col.gameObject);
+            // Destroy(col.gameObject);
          }
 
         if (col.gameObject.CompareTag("wall"))
@@ -53,6 +53,10 @@ public class Enemyfire : MonoBehaviour
             Destroy(this.gameObject);
             Destroy(col.gameObject);
         }
+        if (col.gameObject.CompareTag("pierce"))
+        {
+            Destroy(this.gameObject);
+        }
 
     }
     void OnBecomeInvisible()
@@ -64,4 +68,5 @@ public class Enemyfire : MonoBehaviour
     {
         Destroy(this.gameObject, 3.5f);
     }
+
 }

@@ -7,6 +7,8 @@ public class shield : MonoBehaviour
     private Rigidbody2D rigidBody;
     public Transform Player;
     public Sprite EExplosionImage;
+    public static int shieldhitlvl = 0;
+    int hit;
 
     // Start is called before the first frame update
     void Start()
@@ -16,11 +18,12 @@ public class shield : MonoBehaviour
         transform.Translate(direction * 1.5f);
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.velocity = direction;
+        hit = 0;
 
     }
 
     // Update is called once per frame
-    private void OnTriggerEnter2D(Collider2D col)
+    private void OnCollisionEnter2D(Collision2D col)
     {
 
         if (col.gameObject.CompareTag("Enemy"))
@@ -28,10 +31,23 @@ public class shield : MonoBehaviour
             soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemydies);
             increaseTextUIScore();
 
-            col.GetComponent<SpriteRenderer>().sprite = EExplosionImage;
-            Destroy(gameObject);
+            col.gameObject.GetComponent<SpriteRenderer>().sprite = EExplosionImage;
             Destroy(col.gameObject, 0.2f); //DestroyObject(col.gameObject, 0.5f)
-
+            hit += 1;
+            Debug.Log("enemy hit");
+            if (shieldhitlvl == 0)
+            {
+                Destroy(gameObject);
+                Debug.Log("enemy hit destroy 0");
+            } else if (shieldhitlvl == 1 && hit >= 2)
+            {
+                Destroy(gameObject);
+                Debug.Log("enemy hit destroy 1");
+            } else if (shieldhitlvl == 2 && hit >= 3)
+            {
+                Destroy(gameObject);
+                Debug.Log("enemy hit destroy 2");
+            }
         }
 
         /*if (col.gameObject.CompareTag("fire"))
@@ -39,32 +55,80 @@ public class shield : MonoBehaviour
             Destroy(gameObject);
             Destroy(col.gameObject);
         }*/
-
+    }
+    private void OnTriggerEnter2D(Collider2D col)
+    {
         if (col.gameObject.CompareTag("enemyfire"))
         {
-            Destroy(gameObject);
             Destroy(col.gameObject);
+            hit += 1;
+            Debug.Log("fire hit");
+            if (shieldhitlvl == 0)
+            {
+                Destroy(gameObject);
+            }
+            else if (shieldhitlvl == 1 && hit >= 2)
+            {
+                Destroy(gameObject);
+                Debug.Log("hit lvl 1");
+            }
+            else if (shieldhitlvl == 2 && hit >= 3)
+            {
+                Destroy(gameObject);
+                Debug.Log("hit lvl 2");
+            }
         }
-
-
     }
+    
     void OnBecomeInvisible()
     {
         Destroy(gameObject);
     }
 
-    void increaseTextUIScore()
+    public void increaseTextUIScore()
     {
         var textUIComp = GameObject.Find("Score").GetComponent<Text>();
         int score = int.Parse(textUIComp.text);
 
-        score += 10;
+        if (playerfire.moneylevel == 1)
+        {
+            score += 3;
+            winmessage.coins = score;
+            losemessage.Lcoins = score / 2;
+        }
+        else if (playerfire.moneylevel == 2)
+        {
+            score += 6;
+            winmessage.coins = score;
+            losemessage.Lcoins = score / 2;
+        }
+        else if (playerfire.moneylevel == 3)
+        {
+            score += 10;
+            winmessage.coins = score;
+            losemessage.Lcoins = score / 2;
+        }
+        else
+        {
+            score += 1;
+            winmessage.coins = score;
+            losemessage.Lcoins = score / 2;
+        }
 
         textUIComp.text = score.ToString();
     }
-
+    
     private void Update()
     {
-        Destroy(this.gameObject, 2f);
+        if (shieldhitlvl == 0)
+        {
+            Destroy(this.gameObject, 5f);
+        } else if(shieldhitlvl == 1)
+        {
+            Destroy(this.gameObject, 8f);
+        } else if(shieldhitlvl == 2)
+        {
+            Destroy(this.gameObject, 12f);
+        }
     }
 }

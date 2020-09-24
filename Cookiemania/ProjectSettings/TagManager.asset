@@ -17,6 +17,7 @@ TagManager:
   - wall
   - treasure
   - Congratulations
+  - pierce
   layers:
   - Default
   - TransparentFX
