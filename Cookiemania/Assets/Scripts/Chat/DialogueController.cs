@@ -45,7 +45,7 @@ public class DialogueController : MonoBehaviour
     };
     [HideInInspector]
     public delegate void OnComplete();
-    public OnComplete runOnComplete = null;
+    private OnComplete runOnComplete = null;
     // the current max the DialogueController can use
     [HideInInspector]
     public int CharacterMax { get; private set; } = 96;
@@ -146,6 +146,7 @@ public class DialogueController : MonoBehaviour
         }
         myCanvas.enabled = false;
         // waiting until explicit initialization if not in testing mode
+#if UNITY_EDITOR
         if (useTestMode) 
         {
             testCharDictionary["char_1"] =
@@ -156,4 +157,5 @@ public class DialogueController : MonoBehaviour
                 testCharDictionary);
         }
     }
+#endif
 }
