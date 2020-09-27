@@ -119,7 +119,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3172995347204464320}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5054959157324896871}
+        m_MethodName: ChoiceThree
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2292158818904788906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,7 +304,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 26
   m_TargetDisplay: 0
 --- !u!114 &4270993083851989900
 MonoBehaviour:
@@ -354,11 +365,13 @@ MonoBehaviour:
   choice2: {fileID: 7229013732310173046}
   choice3: {fileID: 3968636543976706533}
   choice4: {fileID: 2473942962587618056}
-  useTestMode: 0
-  testCharImage: {fileID: 0}
-  testCharName: 
-  testChoicePrompt: 
-  testChoices: []
+  useTestMode: 1
+  testCharImage: {fileID: 21300000, guid: 9f8e03ac43b138d47ac66004c1b38881, type: 3}
+  testCharName: Bruh
+  testChoicePrompt: Whatchu doing?
+  testChoices:
+  - alpha
+  - omega
 --- !u!1 &1928810913875369309
 GameObject:
   m_ObjectHideFlags: 0
@@ -634,7 +647,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2178089164624567896}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5054959157324896871}
+        m_MethodName: ChoiceOne
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2305384517783122808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1413,7 +1437,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 283.16998, y: 0}
   m_SizeDelta: {x: 0, y: 51.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2429263184454245635
@@ -1494,7 +1518,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4484378932270776436}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5054959157324896871}
+        m_MethodName: ChoiceFour
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3779632402063206462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1653,7 +1688,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6714321612071908720}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5054959157324896871}
+        m_MethodName: ChoiceTwo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7726175022511269533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1809,56 +1855,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DialogueBox
-      objectReference: {fileID: 0}
-    - target: {fileID: 8843202141590804026, guid: e3b8b2143dbb3534f98c190281b3c604,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 8843202141590804026, guid: e3b8b2143dbb3534f98c190281b3c604,
-        type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 19
-      objectReference: {fileID: 0}
-    - target: {fileID: 8843202141590804026, guid: e3b8b2143dbb3534f98c190281b3c604,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 19
-      objectReference: {fileID: 0}
-    - target: {fileID: 8843202141590804026, guid: e3b8b2143dbb3534f98c190281b3c604,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8843202141590804026, guid: e3b8b2143dbb3534f98c190281b3c604,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8843202141736558202, guid: e3b8b2143dbb3534f98c190281b3c604,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 8843202141736558202, guid: e3b8b2143dbb3534f98c190281b3c604,
-        type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8843202141736558202, guid: e3b8b2143dbb3534f98c190281b3c604,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8843202141736558202, guid: e3b8b2143dbb3534f98c190281b3c604,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8843202141736558202, guid: e3b8b2143dbb3534f98c190281b3c604,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3b8b2143dbb3534f98c190281b3c604, type: 3}

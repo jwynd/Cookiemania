@@ -1,0 +1,99 @@
+# comments are designated with leading '#'
+# key words are surrounded by '<' and '>'
+# the triggering event (why an event starts) is a key word followed
+# by the amount the game state must reach, so far: money, day, morality
+# can also be a preceding event --> if an event is triggered by another 
+# event ending, would be <end event_name> if triggered by another event
+# starting, would be <start event_name> BUT using start should be a silent
+# event (no dialogue, e.g. an invisible quest that the player doesn't know
+# is happening) and end of course can be silent or whatever
+
+# key words: event, choices, branch 1 (replace 1 with other numbers for 
+# other choices), choice end, branch end, event end
+
+# how to setup choice structure: 
+# choice end comes after all the dialogue branches
+# get tied back up for an event and branch end comes after each branches dialogue
+# has ended (this allows e.g. branch 1 to have unique dialogue and also show branch 2's 
+# dialogue after branch 1 dialogue is completed if branch 1 doesn't use the branch end key 
+# word)
+# event end exits the dialogue tree
+
+# overall structure example --> event, trigger, dialogue, choice, branches, dialogue,
+# choice, branches, branches, end
+
+# each dialogue block needs to be preceeded by a character keyword, separate dialogue bubbles
+# are given to each line e.g.
+# <chip>
+# hello, how are you?
+# fine i hope?
+# # Hello, how are you? and fine i hope? go in separate bubbles even though they'd fit in 
+# # one line. Chat bubble limit is about 140 letters, so break up the monologues a bit.
+
+<event test>
+
+<day 0>
+
+<boss>
+Well hello there.
+<chip>
+ah man i hate this guy.
+<boss>
+Shup up, Chip.
+<chip>
+psh.
+
+<choices>
+# this will NOT use the most recently used speaker
+# so if no speaker is designated for the choice prompt, this wont have 
+# a character name or sprite involved
+
+<chip>
+Beat this guy up?
+
+<branch 1>
+<morality 15>
+<money 0>
+yes
+
+<branch 2>
+<morality -25>
+<money 2000>
+no way
+
+<branch_start 1>
+<boss>
+oh uh what are you guys doing?
+please... 
+.              .                  .
+<narrator>
+what... why would you do this?
+<trigger bad_ending 1>
+
+# event end is necessary here to immediately escape the rest of 
+# the dialogue that happens after choice end
+
+# trigger bad_ending will immediately start the bad_ending event
+# which is a special event for the event system to do other things
+# the number is the designation which could have specific text specified
+# in the bad_ending 1 event, wherever that is
+
+<event_end>
+
+<branch_start 2>
+<chip>
+Fine, have it your way.
+._.
+Just watch your back, mate.
+
+# branch end is unnecessary here, but you can put it if you want
+
+<choice_end>
+
+<player>
+
+# you can use italic, bold, underline html tags if you want
+
+<i>Man</i> I'm hungry, I should get back to work
+
+<event_end>

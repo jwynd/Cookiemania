@@ -391,7 +391,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 25
   m_TargetDisplay: 0
 --- !u!114 &8925409354437239830
 MonoBehaviour:
@@ -448,7 +448,7 @@ MonoBehaviour:
   charImage: {fileID: 8925409354301216975}
   charName: {fileID: 8925409353184024518}
   dialogueLine: {fileID: 8925409353296224134}
-  textDelay: 0.11
+  textDelay: 0.044
   useTestMode: 1
   testSprites:
   - {fileID: 8328981943380202991, guid: 128e9fe8e8d5dec4f957c5240c83e355, type: 3}
@@ -572,6 +572,43 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DialogueBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 8843202141590804026, guid: e3b8b2143dbb3534f98c190281b3c604,
+        type: 3}
+      propertyPath: m_text
+      value: 'Dialogue goes here up to two lines only so a max word letter count of
+        96 must be enforced but now we have a lot omoasid fpaosi napsofin aspodfi
+        aspod fihaspofd ihaspod fihaspodfihaspdofihaspodfiahspdofiashdpfoiasj '
+      objectReference: {fileID: 0}
+    - target: {fileID: 8843202141590804026, guid: e3b8b2143dbb3534f98c190281b3c604,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 8843202141590804026, guid: e3b8b2143dbb3534f98c190281b3c604,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 8843202141590804026, guid: e3b8b2143dbb3534f98c190281b3c604,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 214
+      objectReference: {fileID: 0}
+    - target: {fileID: 8843202141590804026, guid: e3b8b2143dbb3534f98c190281b3c604,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 33
+      objectReference: {fileID: 0}
+    - target: {fileID: 8843202141590804026, guid: e3b8b2143dbb3534f98c190281b3c604,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 33
+      objectReference: {fileID: 0}
+    - target: {fileID: 8843202141590804026, guid: e3b8b2143dbb3534f98c190281b3c604,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3b8b2143dbb3534f98c190281b3c604, type: 3}

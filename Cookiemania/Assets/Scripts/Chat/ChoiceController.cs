@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,25 +10,38 @@ public class ChoiceController : MonoBehaviour
     // supports 2-4 choices, runs a callback function with argument 
     // as to selected choice (1,2,3 or 4)
     // disables self on callback
-    public Canvas myCanvas = null;
-    public Image charImage = null;
-    public TMP_Text charName = null;
-    public TMP_Text dialogueLine = null;
-    public Button choice1 = null;
-    public Button choice2 = null;
-    public Button choice3 = null;
-    public Button choice4 = null;
-    public bool useTestMode = false;
-    public Sprite testCharImage = null;
-    public string testCharName = "";
-    public string testChoicePrompt = "";
-    public List<string> testChoices = new List<string>();
-
-    private List<Button> choiceButtons = new List<Button>();
+    [SerializeField]
+    private Canvas myCanvas = null;
+    [SerializeField]
+    private Image charImage = null;
+    [SerializeField]
+    private TMP_Text charName = null;
+    [SerializeField]
+    private TMP_Text dialogueLine = null;
+    [SerializeField]
+    private Button choice1 = null;
+    [SerializeField]
+    private Button choice2 = null;
+    [SerializeField]
+    private Button choice3 = null;
+    [SerializeField]
+    private Button choice4 = null;
+    [SerializeField]
+    private bool useTestMode = false;
+    [SerializeField]
+    private Sprite testCharImage = null;
+    [SerializeField]
+    private string testCharName = "";
+    [SerializeField]
+    private string testChoicePrompt = "";
+    [SerializeField]
+    private List<string> testChoices = new List<string>();
 
     [HideInInspector]
     public delegate void OnComplete(int choiceNumber);
     private OnComplete runOnComplete = null;
+
+    private List<Button> choiceButtons = new List<Button>();
 
     void Start()
     {
@@ -51,10 +62,10 @@ public class ChoiceController : MonoBehaviour
     private void EnableObjects(bool enable)
     {
         myCanvas.enabled = enable;
-        choice1.enabled = enable;
-        choice2.enabled = enable;
-        choice3.enabled = enable;
-        choice4.enabled = enable;
+        choice1.gameObject.SetActive(enable);
+        choice2.gameObject.SetActive(enable);
+        choice3.gameObject.SetActive(enable);
+        choice4.gameObject.SetActive(enable);
     }
 
     public void Initialize(string cName, Sprite cImage, 
@@ -69,10 +80,11 @@ public class ChoiceController : MonoBehaviour
         {
             choiceButtons[i].GetComponentInChildren<TMP_Text>().
                 text = choices[i];
-            choiceButtons[i].enabled = true;
+            choiceButtons[i].gameObject.SetActive(true);
         }
         myCanvas.enabled = true;
     }
+
     private void EndChoice(int v)
     {
         EnableObjects(false);

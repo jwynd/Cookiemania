@@ -22,22 +22,32 @@ public class DialogueController : MonoBehaviour
     // and a dictionary of 
     // character name keys to -> tuple items -> display name, sprite
     // dictionary should be maintained in event manager script
-    public Canvas myCanvas = null;
-    public Image charImage = null;
-    public TMP_Text charName = null;
-    public TMP_Text dialogueLine = null;
+    [SerializeField]
+    private Canvas myCanvas = null;
+    [SerializeField]
+    private Image charImage = null;
+    [SerializeField]
+    private TMP_Text charName = null;
+    [SerializeField]
+    private TMP_Text dialogueLine = null;
     [Range(0.001f, 0.3f)]
-    public float textDelay = 0.01f;
-    public bool useTestMode = false;
-    public List<Tuple<string, string>> testLines = new List<Tuple<string, string>> {
+    [SerializeField]
+    private float textDelay = 0.01f;
+    [SerializeField]
+    private bool useTestMode = false;
+    [SerializeField]
+    private List<Tuple<string, string>> testLines = new List<Tuple<string, string>> {
         new Tuple<string, string>("char_1", "line one"),
         new Tuple<string, string>("char_1", "line two is a lot longer than line one"),
         new Tuple<string, string>("char_2", "line three is also pretty long but ya know?"),
         new Tuple<string, string>("char_1", "line four isn't"),
     };
-    public Sprite[] testSprites;
-    public string[] testDisplayNames;
-    public Dictionary<string, Tuple<string, Sprite>> testCharDictionary =
+    [SerializeField]
+    private Sprite[] testSprites;
+    [SerializeField]
+    private string[] testDisplayNames;
+    [SerializeField]
+    private Dictionary<string, Tuple<string, Sprite>> testCharDictionary =
         new Dictionary<string, Tuple<string, Sprite>>()
     {
             { "char_1", new Tuple<string, Sprite>("Bob", null) },
@@ -48,7 +58,7 @@ public class DialogueController : MonoBehaviour
     private OnComplete runOnComplete = null;
     // the current max the DialogueController can use
     [HideInInspector]
-    public int CharacterMax { get; private set; } = 96;
+    public int CharacterMax { get; private set; } = 140;
 
     private Dictionary<string, Tuple<string, Sprite>> charDictionary = null;
     private List<Tuple<string, string>> lines = null;
