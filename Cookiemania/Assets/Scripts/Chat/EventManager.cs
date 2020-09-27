@@ -18,13 +18,22 @@ public class EventManager : MonoBehaviour
         { "choices_end", BaseKeyword.ChoiceEnd },
         { "branch_end", BaseKeyword.BranchEnd },
         { "branches_end", BaseKeyword.BranchEnd },
+        { "branch_start", BaseKeyword.BranchStart },
+        { "branches_start", BaseKeyword.BranchStart },
     };
 
+    // need to perform validity checks to ensure trigger_keywords + base_keywords don't have
+    // overlapping keywords e.g. "end" can't be a keyword in both dictionaries
+    // will also need to check character's unique names also don't overlap with either of these
+    // dictionaries keywords
     public readonly Dictionary<string, TriggerKeyword> TRIGGER_KEYWORDS = new Dictionary<string, TriggerKeyword>{
         { "end" , TriggerKeyword.EventEnd },
+        { "ends" , TriggerKeyword.EventEnd },
         { "start" , TriggerKeyword.EventStart },
+        { "starts" , TriggerKeyword.EventStart },
         { "money" , TriggerKeyword.Money },
         { "day" , TriggerKeyword.Day },
+        { "days" , TriggerKeyword.Day },
         { "morality" , TriggerKeyword.Morality },
         { "direct", TriggerKeyword.DirectTrigger },
     };
@@ -36,7 +45,8 @@ public class EventManager : MonoBehaviour
         Branch,
         EventEnd,
         ChoiceEnd,
-        BranchEnd
+        BranchEnd,
+        BranchStart,
     }
 
     public enum TriggerKeyword
