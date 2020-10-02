@@ -1,17 +1,16 @@
 ﻿using General_Utilities;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Xml.Schema;
 using UnityEngine;
 
 public class EventManager : MonoBehaviour
 {
     private const char commentKeyword = '#';
     private const char dialogueKeyword = '>';
-    public readonly Dictionary<string, BaseKeyword> BASE_KEYWORDS = new Dictionary<string, BaseKeyword>{
+    public readonly Dictionary<string, BaseKeyword> BASE_KEYWORDS = 
+        new Dictionary<string, BaseKeyword>
+    {
         { "event" , BaseKeyword.Event },
         { "events", BaseKeyword.Event },
         { "choice", BaseKeyword.Choice },
@@ -31,7 +30,11 @@ public class EventManager : MonoBehaviour
     };
     
     // reads second word after trigger to figure out what to do next
-    public readonly Dictionary<string, TriggerKeyword> TRIGGER_KEYWORDS = new Dictionary<string, TriggerKeyword>{
+    // if trigger trigger then event doesnt listen for anything and is called 
+    // by other events only
+    public readonly Dictionary<string, TriggerKeyword> TRIGGER_KEYWORDS = 
+        new Dictionary<string, TriggerKeyword>
+    {
         { "end" , TriggerKeyword.EventEnd },
         { "ends" , TriggerKeyword.EventEnd },
         { "start" , TriggerKeyword.EventStart },
@@ -44,7 +47,8 @@ public class EventManager : MonoBehaviour
     };
 
     // reads second word after reward
-    public readonly Dictionary<string, RewardKeyword> REWARD_KEYWORDS = new Dictionary<string, RewardKeyword>
+    public readonly Dictionary<string, RewardKeyword> REWARD_KEYWORDS = 
+        new Dictionary<string, RewardKeyword>
     {
         { "morality" , RewardKeyword.Morality },
         { "money" , RewardKeyword.Money },
@@ -177,6 +181,8 @@ public class EventManager : MonoBehaviour
     public class EventInfo
     {
         public Tuple<TriggerKeyword, int> triggeringAction;
+        // set it to false when event runs and direct trigger was not used
+        public bool eventListening = true;
         public List<DialogueInfo> dialogues;
         public List<ChoiceInfo> choices;
         // the tuple is --> true means its just a dialogue, false is a choice
@@ -255,9 +261,10 @@ public class EventManager : MonoBehaviour
         ReadInFiles(eventTextFiles);
     }
 
-    // Update is called once per frame
     void Update()
     {
-
+        // need to check for triggers when morality / days / money changes NOT
+        // in update loop ---> should be entirely unnecessary
+        // so obv use c#'s event
     }
 }
