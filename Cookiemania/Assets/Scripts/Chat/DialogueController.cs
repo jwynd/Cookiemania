@@ -70,7 +70,7 @@ public class DialogueController : MonoBehaviour
 
     public void Initialize(
         List<Tuple<string, string>> dialogueLines,
-        OnComplete onComplete, 
+        OnComplete onComplete,
         Dictionary<string, Tuple<string, Sprite>> characterDictionary = null)
     {
         // deep copy so we can pop without ruining data in event system

@@ -24,76 +24,75 @@
 
 # each dialogue block needs to be preceeded by a character keyword, separate dialogue bubbles
 # are given to each line e.g.
-# <chip>
-# hello, how are you?
-# fine i hope?
+# chip
+# > hello, how are you?
+# > fine i hope?
 # # Hello, how are you? and fine i hope? go in separate bubbles even though they'd fit in 
 # # one line. Chat bubble limit is about 140 letters, so break up the monologues a bit.
 
-<event test>
+event test
 
-<day 0>
+day 0
 
-<boss>
-Well hello there.
-<chip>
-ah man i hate this guy.
-<boss>
-Shup up, Chip.
-<chip>
-psh.
+boss
+> Well hello there.
+chip
+> ah man i hate this guy.
+boss
+> Shup up, Chip.
+chip
+> psh.
 
-<choices>
+choices
 # this will NOT use the most recently used speaker
 # so if no speaker is designated for the choice prompt, this wont have 
 # a character name or sprite involved
 
-<chip>
+chip
 Beat this guy up?
 
-<branch 1>
-<morality 15>
-<money 0>
-yes
+branch 1
+reward morality 15
+reward money 0
+> yes
 
-<branch 2>
-<morality -25>
-<money 2000>
-no way
+branch 2
+reward morality -25
+reward money 2000
+> no way
 
-<branch_start 1>
-<boss>
-oh uh what are you guys doing?
-please... 
-.              .                  .
-<narrator>
-what... why would you do this?
-<trigger bad_ending 1>
+branch_start 1
+boss
+> oh uh what are you guys doing?
+> please... 
+> .              .                  .
+
+narrator
+> what... why would you do this?
+trigger bad_ending_1
 
 # event end is necessary here to immediately escape the rest of 
 # the dialogue that happens after choice end
 
-# trigger bad_ending will immediately start the bad_ending event
-# which is a special event for the event system to do other things
-# the number is the designation which could have specific text specified
-# in the bad_ending 1 event, wherever that is
+# trigger bad_ending_1 will immediately start the bad_ending_1 event
+# this event needs to be registered at some point in this file / another file
 
-<event_end>
+event_end
 
-<branch_start 2>
-<chip>
-Fine, have it your way.
-._.
-Just watch your back, mate.
+branch_start 2
+chip
+> Fine, have it your way.
+> ._.
+> Just watch your back, mate.
 
 # branch end is unnecessary here, but you can put it if you want
 
-<choice_end>
+choice_end
 
-<player>
+player
 
 # you can use italic, bold, underline html tags if you want
 
-<i>Man</i> I'm hungry, I should get back to work
+> <i>Man</i> I'm hungry, I should get back to work
 
-<event_end>
+event_end
