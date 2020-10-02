@@ -112,20 +112,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70d5cb5be8e74824e88f68eb79926918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  choiceLimit: 4
   dialoguePrefab: {fileID: 8925409354437239824, guid: 32a48f350cf840b459ed53a6de5dfcf4,
     type: 3}
   choicePrefab: {fileID: 1186898498511883088, guid: d7ffa288839a14c4eb038cff4480be5f,
     type: 3}
   eventTextFiles:
   - {fileID: 4900000, guid: 17e502865fb663b44baa678514dac8e8, type: 3}
-  characterDictionary:
-  - sprite: {fileID: 2825181679740556921, guid: da88558d848bb2f4dbb3bd82a7e6a2ee,
-      type: 3}
+  characterList:
+  - sprite: {fileID: 21300000, guid: 9f8e03ac43b138d47ac66004c1b38881, type: 3}
+    displayName: Boss
+    uniqueName: boss
+  - sprite: {fileID: 21300000, guid: 959ec98076d53a24ca489df5e2ee1d82, type: 3}
     displayName: Chip
     uniqueName: chip
-  - sprite: {fileID: 21300000, guid: 89533e8391b7cc24e93d52c3128e8342, type: 3}
-    displayName: The Boss
-    uniqueName: boss
 --- !u!1 &7804471702581176749
 GameObject:
   m_ObjectHideFlags: 0

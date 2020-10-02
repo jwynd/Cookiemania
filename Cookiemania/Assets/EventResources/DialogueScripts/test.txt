@@ -32,7 +32,7 @@
 
 event test
 
-day 0
+trigger day 0
 
 boss
 > Well hello there.
@@ -48,8 +48,10 @@ choices
 # so if no speaker is designated for the choice prompt, this wont have 
 # a character name or sprite involved
 
+# btw choices can only be one line long
+
 chip
-Beat this guy up?
+> Beat this guy up?
 
 branch 1
 reward morality 15
@@ -61,6 +63,8 @@ reward morality -25
 reward money 2000
 > no way
 
+choice_end
+
 branch_start 1
 boss
 > oh uh what are you guys doing?
@@ -71,13 +75,10 @@ narrator
 > what... why would you do this?
 trigger bad_ending_1
 
-# event end is necessary here to immediately escape the rest of 
-# the dialogue that happens after choice end
+event_end_early
 
-# trigger bad_ending_1 will immediately start the bad_ending_1 event
-# this event needs to be registered at some point in this file / another file
-
-event_end
+# event end early is necessary here to immediately escape the rest of 
+# the dialogue that happens after this branch is hit
 
 branch_start 2
 chip
@@ -85,9 +86,7 @@ chip
 > ._.
 > Just watch your back, mate.
 
-# branch end is unnecessary here, but you can put it if you want
-
-choice_end
+branch_end
 
 player
 
