@@ -11,7 +11,7 @@ public class losemessage : MonoBehaviour
     {
         text = "Game Over!\n You made " + Lcoins.ToString() + " coins!";
         gameObject.GetComponent<TMPro.TextMeshProUGUI>().text = text;
-
+        PlayerData.Player.money += Lcoins;
     }
 
     // Update is called once per frame

@@ -49,7 +49,7 @@ public class pierce : MonoBehaviour
         var textUIComp = GameObject.Find("Score").GetComponent<Text>();
         int score = int.Parse(textUIComp.text);
 
-        if (playerfire.moneylevel == 1)
+        if (PlayerData.Player.incomelvl == 1)
         {
             score += 3;
             winmessage.coins = score;
@@ -60,7 +60,7 @@ public class pierce : MonoBehaviour
                 user.gameObject.GetComponent<health>().gainlife();
             }
         }
-        else if (playerfire.moneylevel == 2)
+        else if (PlayerData.Player.incomelvl == 2)
         {
             score += 6;
             winmessage.coins = score;
@@ -71,7 +71,7 @@ public class pierce : MonoBehaviour
                 user.gameObject.GetComponent<health>().gainlife();
             }
         }
-        else if (playerfire.moneylevel == 3)
+        else if (PlayerData.Player.incomelvl == 3)
         {
             score += 10;
             winmessage.coins = score;

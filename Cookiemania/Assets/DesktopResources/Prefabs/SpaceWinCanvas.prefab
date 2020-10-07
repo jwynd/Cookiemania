@@ -416,7 +416,6 @@ GameObject:
   - component: {fileID: 5989427525685912453}
   - component: {fileID: 5989427525685912452}
   - component: {fileID: 5989427525685912448}
-  - component: {fileID: 3923387100976916401}
   m_Layer: 5
   m_Name: SpaceWinCanvas
   m_TagString: Untagged
@@ -523,22 +522,6 @@ MonoBehaviour:
   constantText: 
   changingText: Game Over<br>you made 0
   constantTextPart2: ' coins'
---- !u!114 &3923387100976916401
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5989427525685912455}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0eb4e481b05dc3a4fbbec16c6b4baec4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dayPrefabs:
-  - {fileID: 0}
-  nightPrefabs:
-  - {fileID: 5989427524594948026}
 --- !u!1 &6905569982628744915
 GameObject:
   m_ObjectHideFlags: 0

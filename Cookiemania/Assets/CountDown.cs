@@ -13,19 +13,21 @@ public class CountDown : MonoBehaviour
     private bool count = true;
     private float hold;
     private float holds;
-    bool easy = true;
-    bool medium = false;
-    bool hard = false;
+    private int dificulty = 0;
 
     private void Start()
     {
-        if (easy == true)
+        if (PlayerData.Player != null)
+        {
+            dificulty = PlayerData.Player.spacelvl;
+        }
+        if (dificulty == 0)
         {
             mainTimer = 60f;
-        } else if (medium == true)
+        } else if (dificulty == 1)
         {
             mainTimer = 180f;
-        } else if (hard == true)
+        } else if (dificulty == 2)
         {
             mainTimer = 300f;
         }
@@ -56,15 +58,20 @@ public class CountDown : MonoBehaviour
             {
                 uiText2.text = holds.ToString();
             }
-            
-            
+
+
         }
-        else if (timer <= 0.0f)
+        else if (timer <= 0.0f && timer > -1)
         {
             count = false;
             uiText.text = "0.00";
             timer = 0.0f;
             FindObjectOfType<spaceManager>().winGame();
+            timer = -2f;
+        }
+        else
+        {
+            Debug.Log("Space Game is Won");
         }
     }
 }

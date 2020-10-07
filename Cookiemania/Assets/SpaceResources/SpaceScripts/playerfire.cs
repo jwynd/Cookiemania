@@ -9,14 +9,15 @@ public class playerfire : MonoBehaviour
     public Sprite EExplosionImage;
     public Transform Player;
     public GameObject user;
-    public static int moneylevel;
-
-    
+    private int ilevel = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        if(PlayerData.Player != null)
+        {
+            ilevel = PlayerData.Player.incomelvl;
+        }
         Player = GameObject.FindGameObjectWithTag("treasure").GetComponent<Transform>();
         user = GameObject.FindGameObjectWithTag("Player");
         Vector3 direction = transform.position - Player.position;
@@ -56,7 +57,7 @@ public class playerfire : MonoBehaviour
         var textUIComp = GameObject.Find("Score").GetComponent<Text>();
         int score = int.Parse(textUIComp.text);
         
-        if(moneylevel == 1)
+        if(ilevel == 1)
         {
             score += 3;
             winmessage.coins = score;
@@ -66,7 +67,7 @@ public class playerfire : MonoBehaviour
                 soundmanager.Instance.PlayOneShot(soundmanager.Instance.gainlife);
                 user.gameObject.GetComponent<health>().gainlife();
             }
-        } else if ( moneylevel == 2)
+        } else if (ilevel == 2)
         {
             score += 6;
             winmessage.coins = score;
@@ -76,7 +77,7 @@ public class playerfire : MonoBehaviour
                 soundmanager.Instance.PlayOneShot(soundmanager.Instance.gainlife);
                 user.gameObject.GetComponent<health>().gainlife();
             }
-        } else if (moneylevel == 3)
+        } else if (ilevel == 3)
         {
             score += 10;
             winmessage.coins = score;
@@ -91,6 +92,11 @@ public class playerfire : MonoBehaviour
             score += 1;
             winmessage.coins = score;
             losemessage.Lcoins = score / 2;
+            if (score % 10 == 0)
+            {
+                soundmanager.Instance.PlayOneShot(soundmanager.Instance.gainlife);
+                user.gameObject.GetComponent<health>().gainlife();
+            }
         }
 
         textUIComp.text = score.ToString();

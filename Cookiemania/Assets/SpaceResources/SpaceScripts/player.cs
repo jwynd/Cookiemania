@@ -15,8 +15,17 @@ public class player : MonoBehaviour
 
     private void Start()
     {
-        
-    }
+      if (PlayerData.Player != null)
+        {
+            Debug.Log("This is a full game playthrough PlayerData is Active");
+            bulletlevel = PlayerData.Player.GunSpread;
+            bulletpiercelvl = PlayerData.Player.Pierce;
+        }
+      else
+        {
+            Debug.Log("This is a direct space scene playthrough PlayerData is inactive");
+        }
+}
     private void FixedUpdate()
     {
         //float horzmove = Input.GetAxisRaw("Horizontal");
