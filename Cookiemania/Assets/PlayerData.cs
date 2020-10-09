@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,9 +15,11 @@ public class PlayerData : MonoBehaviour
     //player data that tracks values of player money to their chosen global upgrades
     public int spacelvl = 0; //Game Dificulty
     public int money = 0;
+    private int _money = 0;
     public int incomelvl = 0;
     public int healthlvl = 0;
     public int shoplvl = 0; //progression in game
+    private int _shoplvl = 0;
 
     //shop tier level (dependent on how many times and upgrade was selected)
     public int SpaceUpgradelvl = 0; //for shop tier management
@@ -34,11 +37,18 @@ public class PlayerData : MonoBehaviour
 
 
     //Game progress
-    public int month = 1; //refers to section of game vs actual month number in game. Ranges 1-5 will increase after x weeks.
     public int week = 0; // increases after every minigame
+    private int _week = 0;
     public int morality = 0; //can go positive or negative
+    private int _morality = 0;
 
     //List of dialogue choices to track
+
+    //Event stuff
+    public event EventHandler OnWeekChanged;
+    public event EventHandler OnMoralityChanged;
+    public event EventHandler OnShopLvlChanged;
+    public event EventHandler OnMoneyChanged;
     private void Awake()
     {
         if(Player != null)
@@ -54,10 +64,25 @@ public class PlayerData : MonoBehaviour
 
     private void Update()
     {
-        if (week > 12)
+        if(_week != week)
         {
-            month += 1;
-            week = 0;
+            _week = week;
+            if (OnWeekChanged != null) OnWeekChanged(this, EventArgs.Empty);
         }
+        if(_morality != morality)
+        {
+            _morality = morality;
+            if (OnMoralityChanged != null) OnMoralityChanged(this, EventArgs.Empty);
+        }
+        if(_money != money)
+        {
+            _money = money;
+            if (OnMoneyChanged != null) OnMoneyChanged(this, EventArgs.Empty);
+        }
+        if(_shoplvl != shoplvl)
+        {
+            if (OnShopLvlChanged != null) OnShopLvlChanged(this, EventArgs.Empty);
+        }
+        
     }
 }
