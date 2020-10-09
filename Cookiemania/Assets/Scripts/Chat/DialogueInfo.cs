@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using static ScriptConstants;
 
 [Serializable]
 public class DialogueInfo
@@ -13,7 +14,7 @@ public class DialogueInfo
     public Dictionary<string, Tuple<string, Sprite>> characterDictionary;
     // rewards given on completion of the ENTIRE dialogue
     // rewards not given mid dialogue
-    public List<Tuple<ScriptConstants.RewardKeyword, int>> rewards;
+    public List<Tuple<RewardKeyword, int>> rewards;
     public string nextEvent;
     public string uniqueName;
 
@@ -23,12 +24,12 @@ public class DialogueInfo
         Dictionary<string, Tuple<string, Sprite>> characterDictionary,
         string nextEvent = "",
         List<Tuple<string, string>> dialogues = null,
-        List<Tuple<ScriptConstants.RewardKeyword, int>> rewards = null)
+        List<Tuple<RewardKeyword, int>> rewards = null)
     {
         this.dialogues = dialogues != null ?
             dialogues : new List<Tuple<string, string>>();
         this.rewards = rewards != null ?
-            rewards : new List<Tuple<ScriptConstants.RewardKeyword, int>>();
+            rewards : new List<Tuple<RewardKeyword, int>>();
         this.runOnComplete = runOnComplete;
         this.characterDictionary = characterDictionary;
         this.nextEvent = nextEvent;

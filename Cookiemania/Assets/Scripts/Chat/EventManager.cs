@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static ScriptConstants;
 
 public class EventManager : MonoBehaviour
 {
@@ -70,7 +71,7 @@ public class EventManager : MonoBehaviour
 
                 // this first one needs to be lowercased and trimmed
                 trimmedText[0] = trimmedText.First().ToLowerInvariant().Trim();
-                if (trimmedText.First()[0] == ScriptConstants.DIALOGUE)
+                if (trimmedText.First()[0] == DIALOGUE)
                 {
                     // only unset this when we hit the choice_end or branch_start keywords
                     if (insideChoice)
@@ -91,8 +92,8 @@ public class EventManager : MonoBehaviour
                 }
 
                 var keywordMatch = trimmedText.First();
-                if (ScriptConstants.BASE_KEYWORDS.TryGetValue(
-                    keywordMatch, out ScriptConstants.BaseKeyword keyword))
+                if (BASE_KEYWORDS.TryGetValue(
+                    keywordMatch, out BaseKeyword keyword))
                 {
                     ResolveKeyword(keyword, trimmedText, ref eInfo,
                         ref lastCharacterDesignated, ref insideChoice, 
@@ -115,14 +116,14 @@ public class EventManager : MonoBehaviour
                         "keywords, comment, dialogue " +
                         "or any known character unique names. Is this dialogue/ a " +
                         "choice and missing the keyword " +
-                        ScriptConstants.DIALOGUE.ToString() + " ?");
+                        DIALOGUE.ToString() + " ?");
                 }
             }
         }
 
     }
 
-    private void ResolveKeyword(ScriptConstants.BaseKeyword value, List<string> trimmedText, 
+    private void ResolveKeyword(BaseKeyword value, List<string> trimmedText, 
         ref EventInfo eInfo, ref CharacterInfo lastCharacterDesignated, 
         ref bool insideChoice, ref bool insideBranchDeclaration)
     {
@@ -130,7 +131,7 @@ public class EventManager : MonoBehaviour
         switch (value)
         {
             // required, denotes the start of an event and its UNIQUE name
-            case ScriptConstants.BaseKeyword.Event:
+            case BaseKeyword.Event:
                 if (trimmedText.Count < 2)
                 {
                     throw new Exception("event needs a name on declaration line");
@@ -146,39 +147,40 @@ public class EventManager : MonoBehaviour
                 break;
             // not required, just allows a branch to escape an event asap
             // makes the most recent branch point to "end" as next
-            case ScriptConstants.BaseKeyword.EventEarlyEnd:
+            case BaseKeyword.EventEarlyEnd:
                 var earlyEnds = eInfo.GetLastChoice().choiceHasEarlyEnd;
                 earlyEnds[earlyEnds.Count - 1] = true;
                 break;
             // required, denotes the end of an event
-            case ScriptConstants.BaseKeyword.EventEnd:
+            case BaseKeyword.EventEnd:
                 if (eventDictionary.ContainsKey(eInfo.UniqueName))
                 {
                     throw new Exception("cannot add duplicate event name to event " +
                         "dictionary: " + eInfo.UniqueName);
                 }
                 eventDictionary.Add(eInfo.UniqueName, eInfo);
-                eInfo.PrintInformation();
+                var key = eInfo.UniqueName;
                 eInfo = null;
+                eventDictionary[key].PrintInformation();
                 break;
-            case ScriptConstants.BaseKeyword.Choice:
+            case BaseKeyword.Choice:
                 insideChoice = true;
                 eInfo.AddChoice(new ChoiceInfo(eInfo.BranchID.ToString()));
                 break;
             // required after branch declaration of 
-            case ScriptConstants.BaseKeyword.ChoiceEnd:
+            case BaseKeyword.ChoiceEnd:
                 ChoiceDeclarationComplete(ref insideChoice, eInfo);
                 break;
             // declares a branch in a choice, different from branch start which is the start
             // of a branch's specific dialogue
-            case ScriptConstants.BaseKeyword.Branch:
+            case BaseKeyword.Branch:
                 ChoiceInfo infoToModify = eInfo.GetLastChoice();
                 infoToModify.choices.Add("");
                 infoToModify.choiceHasEarlyEnd.Add(false);
-                infoToModify.rewards.Add(new List<Tuple<ScriptConstants.RewardKeyword, int>>());
+                infoToModify.rewards.Add(new List<Tuple<RewardKeyword, int>>());
                 insideBranchDeclaration = true;
                 break;
-            case ScriptConstants.BaseKeyword.BranchStart:
+            case BaseKeyword.BranchStart:
                 insideBranchDeclaration = false;
                 if (insideChoice)
                 {
@@ -188,15 +190,15 @@ public class EventManager : MonoBehaviour
                     () => { }, characterDictionary));
                 break;
             // end of a branch's dialogue not the end of its declaration
-            case ScriptConstants.BaseKeyword.BranchEnd:
+            case BaseKeyword.BranchEnd:
                 break;
             // the reward for choosing a specific choice
-            case ScriptConstants.BaseKeyword.Reward:
+            case BaseKeyword.Reward:
                 break;
-            case ScriptConstants.BaseKeyword.Trigger:
+            case BaseKeyword.Trigger:
                 break;
             // immediately adds reward on branch being played
-            case ScriptConstants.BaseKeyword.EventReward:
+            case BaseKeyword.EventReward:
                 break;
             default:
                 throw new NotSupportedException("BaseKeyword does not yet support this");
@@ -219,7 +221,7 @@ public class EventManager : MonoBehaviour
         {
             return true;
         }
-        if (trimmedText.First()[0] == ScriptConstants.COMMENT)
+        if (trimmedText.First()[0] == COMMENT)
         {
             return true;
         }

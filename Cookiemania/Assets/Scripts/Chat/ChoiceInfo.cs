@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using static ScriptConstants;
 
 [Serializable]
 public class ChoiceInfo
@@ -17,8 +18,8 @@ public class ChoiceInfo
     // next line fills in text for declaration
     // reward lines fill in the reward list
     public List<string> choices = new List<string>();
-    public List<List<Tuple<ScriptConstants.RewardKeyword, int>>> rewards =
-        new List<List<Tuple<ScriptConstants.RewardKeyword, int>>>();
+    public List<List<Tuple<RewardKeyword, int>>> rewards =
+        new List<List<Tuple<RewardKeyword, int>>>();
     public List<bool> choiceHasEarlyEnd = new List<bool>();
     public Dictionary<int, string> choiceNumberToNextEvent =
         new Dictionary<int, string>();
@@ -35,7 +36,7 @@ public class ChoiceInfo
     {
         choices.Add(dialogueLine);
         choiceHasEarlyEnd.Add(earlyExit);
-        rewards.Add(new List<Tuple<ScriptConstants.RewardKeyword, int>>());
+        rewards.Add(new List<Tuple<RewardKeyword, int>>());
         choiceNumberToNextEvent.Add(choices.Count, "");
     }
 
@@ -49,7 +50,7 @@ public class ChoiceInfo
     }
 
     public ChoiceInfo(Sprite charImage, string charName, string choicePrompt,
-        List<string> choices, List<List<Tuple<ScriptConstants.RewardKeyword, int>>> rewards,
+        List<string> choices, List<List<Tuple<RewardKeyword, int>>> rewards,
         List<bool> choiceHasEarlyEnd,
         EventManager.OnChoiceComplete onComplete, int choiceLimit = 4)
     {
@@ -69,7 +70,7 @@ public class ChoiceInfo
         this.choicePrompt = choicePrompt;
         this.onComplete = onComplete;
         this.choices = new List<string>();
-        this.rewards = new List<List<Tuple<ScriptConstants.RewardKeyword, int>>>();
+        this.rewards = new List<List<Tuple<RewardKeyword, int>>>();
         this.choiceHasEarlyEnd = new List<bool>();
         foreach (var choice in choices)
         {
