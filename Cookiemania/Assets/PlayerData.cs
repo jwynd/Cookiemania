@@ -12,6 +12,16 @@ public class PlayerData : MonoBehaviour
     /// Reference with PlayerData.Player.x
     /// </summary>
     public static PlayerData Player;
+
+    public class IntegerEventArgs : EventArgs
+    {   
+        public int Amount { get; private set; } = 0;
+        public IntegerEventArgs(int amt)
+        {
+            Amount = amt;
+        }
+    }
+
     //player data that tracks values of player money to their chosen global upgrades
     public int spacelvl = 0; //Game Dificulty
     public int money = 0;
@@ -37,16 +47,17 @@ public class PlayerData : MonoBehaviour
 
 
     //Game progress
-    public int week { get { return week; }
-    set
-        {
-            if (value <= week)
+    public int week { 
+        get { return week; }
+        set
             {
-                return;
+                if (value <= week)
+                {
+                    return;
+                }
+                week = value;
+                OnWeekChanged(this, new IntegerEventArgs(week));
             }
-            week = value;
-            //OnWeekChanged(this, week);
-        }
     }
     private int _week = 0;
     public int morality = 0; //can go positive or negative
