@@ -15,6 +15,8 @@ public class ChoiceController : MonoBehaviour
     [SerializeField]
     private Image charImage = null;
     [SerializeField]
+    private Image bgImage = null;
+    [SerializeField]
     private TMP_Text charName = null;
     [SerializeField]
     private TMP_Text dialogueLine = null;
@@ -33,6 +35,8 @@ public class ChoiceController : MonoBehaviour
     [SerializeField]
     private string testCharName = "";
     [SerializeField]
+    private Sprite testBG;
+    [SerializeField]
     private string testChoicePrompt = "";
     [SerializeField]
     private List<string> testChoices = new List<string>();
@@ -42,9 +46,11 @@ public class ChoiceController : MonoBehaviour
     private OnComplete runOnComplete = null;
 
     private List<Button> choiceButtons = new List<Button>();
+    private float originalAlpha;
 
     void Start()
     {
+        originalAlpha = bgImage.color.a;
         choiceButtons.Add(choice1);
         choiceButtons.Add(choice2);
         choiceButtons.Add(choice3);
@@ -54,7 +60,8 @@ public class ChoiceController : MonoBehaviour
         if (useTestMode)
         {
             Initialize(testCharName, testCharImage, testChoicePrompt, testChoices,
-                (int v) => Debug.Log("test complete, " + v + " was selected"));
+                (int v) => Debug.Log("test complete, " + v + " was selected"),
+                testBG);
         }
 #endif
     }
@@ -69,13 +76,18 @@ public class ChoiceController : MonoBehaviour
     }
 
     public void Initialize(string cName, Sprite cImage, 
-        string choicePrompt, List<string> choices, OnComplete onComplete)
+        string choicePrompt, List<string> choices, OnComplete onComplete, 
+        Sprite background = null)
     {
         EnableObjects(false);
         charName.text = cName;
         charImage.sprite = cImage;
         dialogueLine.text = choicePrompt;
         runOnComplete = onComplete;
+        bgImage.sprite = background;
+        bgImage.color = bgImage.sprite == null ?
+                new Color(bgImage.color.r, bgImage.color.r, bgImage.color.r, 0) :
+                new Color(bgImage.color.r, bgImage.color.r, bgImage.color.r, originalAlpha);
         for (int i = 0; i < choices.Count; i++)
         {
             choiceButtons[i].GetComponentInChildren<TMP_Text>().

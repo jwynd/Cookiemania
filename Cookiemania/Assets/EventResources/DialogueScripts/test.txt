@@ -30,6 +30,7 @@
 # # Hello, how are you? and fine i hope? go in separate bubbles even though they'd fit in 
 # # one line. Chat bubble limit is about 140 letters, so break up the monologues a bit.
 
+# case insensitive name btw
 event test
 
 trigger day 0
@@ -54,14 +55,20 @@ chip
 > Beat this guy up?
 
 branch 1
-reward morality 15
-reward money 0
+reward morality -25
+reward money 2000
 > yes
 
 branch 2
-reward morality -25
-reward money 2000
-> no way
+
+reward morality 15
+reward money 0
+> no thanks...
+
+branch 3
+reward morality 15
+reward money 0
+> what? no!
 
 choice_end
 
@@ -80,7 +87,7 @@ event_end_early
 # event end early is necessary here to immediately escape the rest of 
 # the dialogue that happens after this branch is hit
 
-branch_start 2
+branch_start 2 3
 chip
 > Fine, have it your way.
 > ._.
