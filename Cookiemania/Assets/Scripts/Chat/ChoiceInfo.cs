@@ -20,6 +20,7 @@ public class ChoiceInfo
     public List<List<Tuple<RewardKeyword, int>>> Rewards =
         new List<List<Tuple<RewardKeyword, int>>>();
     public List<bool> ChoiceEarlyExits = new List<bool>();
+    // key: index of choice in Choices, value: its dialogue's branch name
     public Dictionary<int, string> ChoiceDialogueDictionary =
         new Dictionary<int, string>();
     public EventManager.OnChoiceComplete RunOnComplete;

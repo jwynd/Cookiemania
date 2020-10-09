@@ -37,7 +37,17 @@ public class PlayerData : MonoBehaviour
 
 
     //Game progress
-    public int week = 0; // increases after every minigame
+    public int week { get { return week; }
+    set
+        {
+            if (value <= week)
+            {
+                return;
+            }
+            week = value;
+            //OnWeekChanged(this, week);
+        }
+    }
     private int _week = 0;
     public int morality = 0; //can go positive or negative
     private int _morality = 0;

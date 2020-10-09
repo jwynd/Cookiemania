@@ -33,7 +33,7 @@
 # case insensitive name btw
 event test
 
-trigger day 0
+trigger week 1
 
 boss
 > Well hello there.
@@ -85,8 +85,10 @@ trigger bad_ending_1
 event_end_early
 
 # event end early is necessary here to immediately escape the rest of 
-# the dialogue that happens after this branch is hit
+# the dialogue that happens after the branches are concluded
 
+# multiple branches can have the same start point
+# but partial dialogues cannot be shared (yet?)
 branch_start 2 3
 chip
 > Fine, have it your way.
@@ -100,5 +102,15 @@ player
 # you can use italic, bold, underline html tags if you want
 
 > <i>Man</i> I'm hungry, I should get back to work
+
+event_end
+
+event test_2
+
+trigger level 2
+
+chip
+> You're really moving up in the world!
+> Good Job!
 
 event_end
