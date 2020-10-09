@@ -24,12 +24,30 @@ public class PlayerData : MonoBehaviour
 
     //player data that tracks values of player money to their chosen global upgrades
     public int spacelvl = 0; //Game Dificulty
-    public int money = 0;
-    private int _money = 0;
     public int incomelvl = 0;
     public int healthlvl = 0;
-    public int shoplvl = 0; //progression in game
-    private int _shoplvl = 0;
+    public int money
+    {
+        get { return money; }
+        set
+        {
+                money = value;
+                OnMoneyChanged(this, new IntegerEventArgs(money));
+        }
+    }
+    public int shoplvl //Follows progression of player and shop access
+    {
+        get { return shoplvl; }
+        set
+        {
+            if(value <= shoplvl)
+            {
+                return;
+            }
+            shoplvl = value;
+            OnShopLvlChanged(this, new IntegerEventArgs(shoplvl));
+        }
+    }
 
     //shop tier level (dependent on how many times and upgrade was selected)
     public int SpaceUpgradelvl = 0; //for shop tier management
@@ -60,9 +78,15 @@ public class PlayerData : MonoBehaviour
             OnWeekChanged(this, new IntegerEventArgs(week));
         }
     }
-    private int _week = 0;
-    public int morality = 0; //can go positive or negative
-    private int _morality = 0;
+    public int morality
+    {
+        get { return morality; }
+        set
+        {
+            morality = value;
+            OnMoralityChanged(this, new IntegerEventArgs(morality));
+        }
+    }
 
     //List of dialogue choices to track
 
@@ -86,25 +110,6 @@ public class PlayerData : MonoBehaviour
 
     private void Update()
     {
-        if (_week != week)
-        {
-            _week = week;
-            if (OnWeekChanged != null) OnWeekChanged(this, EventArgs.Empty);
-        }
-        if (_morality != morality)
-        {
-            _morality = morality;
-            if (OnMoralityChanged != null) OnMoralityChanged(this, EventArgs.Empty);
-        }
-        if (_money != money)
-        {
-            _money = money;
-            if (OnMoneyChanged != null) OnMoneyChanged(this, EventArgs.Empty);
-        }
-        if (_shoplvl != shoplvl)
-        {
-            if (OnShopLvlChanged != null) OnShopLvlChanged(this, EventArgs.Empty);
-        }
 
     }
 }
