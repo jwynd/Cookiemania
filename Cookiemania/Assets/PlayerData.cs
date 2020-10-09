@@ -20,6 +20,7 @@ public class PlayerData : MonoBehaviour
 
     //shop tier level (dependent on how many times and upgrade was selected)
     public int SpaceUpgradelvl = 0; //for shop tier management
+    public int TimesPlayedSpace = 0; //A counter for times playing the space game
 
     //Space minigame flags go here
     public int GunSpread = 0;
@@ -29,10 +30,15 @@ public class PlayerData : MonoBehaviour
     public int invulnerability = 0;
 
     //Marketing minigame flags will go here
+    public int TimesPlayedMarketing = 0; //A counter for times playing the marketing game
 
 
     //Game progress
-    public int month = 1; //refers to section of game vs actual month number in game. Ranges 1-5
+    public int month = 1; //refers to section of game vs actual month number in game. Ranges 1-5 will increase after x weeks.
+    public int week = 0; // increases after every minigame
+    public int morality = 0; //can go positive or negative
+
+    //List of dialogue choices to track
     private void Awake()
     {
         if(Player != null)
