@@ -194,6 +194,29 @@ public class EventManager : MonoBehaviour
                 break;
             // the reward for choosing a specific choice
             case BaseKeyword.Reward:
+                // need to look at next two words -> next one needs to be a reward keyword
+                // last word needs to be an integer amount to be claimed for the reward
+                if (!insideChoice)
+                {
+                    throw new Exception("can only provide normal rewards inside a choice" +
+                        " declaration");
+                }
+                if (trimmedText.Count < 3)
+                {
+                    throw new Exception("reward command must specify the reward type and amount");
+                }
+                var rewardKey = trimmedText[1].ToLowerInvariant().Trim();
+                if (REWARD_KEYWORDS.TryGetValue(rewardKey, out RewardKeyword rewardType))
+                {
+                    // failure is desired if it doesnt work
+                    var rewardAmount = int.Parse(trimmedText[2].ToLowerInvariant().Trim());
+                    eInfo.GetLastChoice().AddReward(rewardType, rewardAmount);
+                }
+                else
+                {
+                    throw new Exception(
+                        "reward key given is not in reward dictionary: " + rewardKey);
+                }
                 break;
             case BaseKeyword.Trigger:
                 break;
