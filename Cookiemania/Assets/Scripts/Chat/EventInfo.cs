@@ -9,10 +9,10 @@ public class EventInfo
     public const string LAST_BRANCH = "end";
     public const string FIRST_BRANCH = "first";
 
-    public Tuple<ScriptConstants.TriggerKeyword, int> triggeringAction;
+    public Tuple<ScriptConstants.TriggerKeyword, int> TriggeringAction;
     public string UniqueName { get; private set; }
     // set it to false when event runs and direct trigger was not used
-    public bool eventListening = true;
+    public bool EventListening = true;
 
     public int BranchID
     {
@@ -23,7 +23,7 @@ public class EventInfo
     // NOTE: the OnComplete for each choices / dialogues should be 
     // starting an event with a string in the branchingDictionary
     // 
-    public Dictionary<string, Tuple<bool, int>> branchingDictionary =
+    public Dictionary<string, Tuple<bool, int>> BranchingDictionary =
         new Dictionary<string, Tuple<bool, int>>();
 
     private List<DialogueInfo> Dialogues = new List<DialogueInfo>();
@@ -56,20 +56,20 @@ public class EventInfo
         return Dialogues.Last();
     }
 
+    // will be using this to track parsing implementation progression
     public void PrintInformation()
     {
-        Debug.Log(string.Join(" ", branchingDictionary.Keys));
-        Debug.Log(string.Join(" ", branchingDictionary.Values));
+        Debug.Log(string.Join(" ", BranchingDictionary));
         foreach (var dialogue in Dialogues)
         {
-            Debug.Log(dialogue.uniqueName);
-            Debug.Log(string.Join(" ", dialogue.dialogues));
+            Debug.Log(dialogue.UniqueName);
+            Debug.Log(string.Join(" ", dialogue.Dialogues));
         }
         foreach (var choice in Choices)
         {
-            Debug.Log(choice.uniqueName);
-            Debug.Log(choice.choicePrompt);
-            Debug.Log(string.Join(" ", choice.choices));
+            Debug.Log(choice.UniqueName);
+            Debug.Log(choice.Prompt);
+            Debug.Log(string.Join(" ", choice.Choices));
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using static ScriptConstants;
@@ -9,44 +8,44 @@ public class ChoiceInfo
 {
     // need to register selected choices to the choices made list on the global variable
     // tracker
-    public string uniqueName;
-    public Sprite charImage;
-    public string charName;
-    public string choicePrompt;
+    public string UniqueName;
+    public Sprite CharacterImage;
+    public string CharacterName;
+    public string Prompt;
     // on each branch 1 etc declaration makes a new choice with empty string
     // and a new list of specific rewards in the rewards list
     // next line fills in text for declaration
     // reward lines fill in the reward list
-    public List<string> choices = new List<string>();
-    public List<List<Tuple<RewardKeyword, int>>> rewards =
+    public List<string> Choices = new List<string>();
+    public List<List<Tuple<RewardKeyword, int>>> Rewards =
         new List<List<Tuple<RewardKeyword, int>>>();
-    public List<bool> choiceHasEarlyEnd = new List<bool>();
-    public Dictionary<int, string> choiceNumberToNextEvent =
+    public List<bool> ChoiceEarlyExits = new List<bool>();
+    public Dictionary<int, string> ChoiceDialogueDictionary =
         new Dictionary<int, string>();
-    public EventManager.OnChoiceComplete onComplete;
+    public EventManager.OnChoiceComplete RunOnComplete;
 
     public ChoiceInfo(string uniqueName)
     {
-        charName = "";
-        choicePrompt = "";
-        this.uniqueName = uniqueName;
+        CharacterName = "";
+        Prompt = "";
+        this.UniqueName = uniqueName;
     }
 
     public void AddChoice(string dialogueLine, bool earlyExit = false)
     {
-        choices.Add(dialogueLine);
-        choiceHasEarlyEnd.Add(earlyExit);
-        rewards.Add(new List<Tuple<RewardKeyword, int>>());
-        choiceNumberToNextEvent.Add(choices.Count, "");
+        Choices.Add(dialogueLine);
+        ChoiceEarlyExits.Add(earlyExit);
+        Rewards.Add(new List<Tuple<RewardKeyword, int>>());
+        ChoiceDialogueDictionary.Add(Choices.Count, "");
     }
 
     public bool IsFilledOut()
     {
         // may need to check for having an oncomplete and 
         // for having a next event?
-        return charImage != null && charName != "" &&
-            choicePrompt != "" && choices.Count >= 1 &&
-            rewards.Count >= 1;
+        return CharacterImage != null && CharacterName != "" &&
+            Prompt != "" && Choices.Count >= 1 &&
+            Rewards.Count >= 1;
     }
 
     public ChoiceInfo(Sprite charImage, string charName, string choicePrompt,
@@ -65,24 +64,24 @@ public class ChoiceInfo
                 "nothing is desired");
             return;
         }
-        this.charImage = charImage;
-        this.charName = charName;
-        this.choicePrompt = choicePrompt;
-        this.onComplete = onComplete;
-        this.choices = new List<string>();
-        this.rewards = new List<List<Tuple<RewardKeyword, int>>>();
-        this.choiceHasEarlyEnd = new List<bool>();
+        this.CharacterImage = charImage;
+        this.CharacterName = charName;
+        this.Prompt = choicePrompt;
+        this.RunOnComplete = onComplete;
+        this.Choices = new List<string>();
+        this.Rewards = new List<List<Tuple<RewardKeyword, int>>>();
+        this.ChoiceEarlyExits = new List<bool>();
         foreach (var choice in choices)
         {
-            this.choices.Add(choice);
+            this.Choices.Add(choice);
         }
         foreach (var earlyEnd in choiceHasEarlyEnd)
         {
-            this.choiceHasEarlyEnd.Add(earlyEnd);
+            this.ChoiceEarlyExits.Add(earlyEnd);
         }
         foreach (var reward in rewards)
         {
-            this.rewards.Add(reward);
+            this.Rewards.Add(reward);
         }
     }
 }

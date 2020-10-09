@@ -81,7 +81,7 @@ public class EventManager : MonoBehaviour
                         // if that string is not "" throw an error cuz choices only get 
                         // one line of text.
                         //throw new NotImplementedException();
-                        eInfo.GetLastChoice().choicePrompt = ExtractDialogue(trimmedText);
+                        eInfo.GetLastChoice().Prompt = ExtractDialogue(trimmedText);
                     }
                     else
                     {
@@ -104,8 +104,8 @@ public class EventManager : MonoBehaviour
                 {
                     if (insideChoice)
                     {
-                        eInfo.GetLastChoice().charImage = lastCharacterDesignated.Sprite;
-                        eInfo.GetLastChoice().charName = lastCharacterDesignated.DisplayName;
+                        eInfo.GetLastChoice().CharacterImage = lastCharacterDesignated.Sprite;
+                        eInfo.GetLastChoice().CharacterName = lastCharacterDesignated.DisplayName;
                     }
                     continue;
                 }
@@ -142,13 +142,13 @@ public class EventManager : MonoBehaviour
                     () => { }, characterDictionary);
                 // adding a default dialogue to event info for first dialogue
                 eInfo.AddDialogue(dInfo);
-                eInfo.branchingDictionary.Add(EventInfo.FIRST_BRANCH,
+                eInfo.BranchingDictionary.Add(EventInfo.FIRST_BRANCH,
                     new Tuple<bool, int>(true, 0));
                 break;
             // not required, just allows a branch to escape an event asap
             // makes the most recent branch point to "end" as next
             case BaseKeyword.EventEarlyEnd:
-                var earlyEnds = eInfo.GetLastChoice().choiceHasEarlyEnd;
+                var earlyEnds = eInfo.GetLastChoice().ChoiceEarlyExits;
                 earlyEnds[earlyEnds.Count - 1] = true;
                 break;
             // required, denotes the end of an event
@@ -175,9 +175,9 @@ public class EventManager : MonoBehaviour
             // of a branch's specific dialogue
             case BaseKeyword.Branch:
                 ChoiceInfo infoToModify = eInfo.GetLastChoice();
-                infoToModify.choices.Add("");
-                infoToModify.choiceHasEarlyEnd.Add(false);
-                infoToModify.rewards.Add(new List<Tuple<RewardKeyword, int>>());
+                infoToModify.Choices.Add("");
+                infoToModify.ChoiceEarlyExits.Add(false);
+                infoToModify.Rewards.Add(new List<Tuple<RewardKeyword, int>>());
                 insideBranchDeclaration = true;
                 break;
             case BaseKeyword.BranchStart:
@@ -211,7 +211,7 @@ public class EventManager : MonoBehaviour
         if (!eInfo.GetLastChoice().IsFilledOut())
         {
             throw new NotImplementedException("choice not completely filled out with prompt: " +
-                eInfo.GetLastChoice().choicePrompt);
+                eInfo.GetLastChoice().Prompt);
         }
     }
 

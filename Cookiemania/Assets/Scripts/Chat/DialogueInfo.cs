@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System;
+﻿using System;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,14 +8,14 @@ using static ScriptConstants;
 public class DialogueInfo
 {
     // item 1 is the characters unique name, item 2 is their line
-    public List<Tuple<string, string>> dialogues;
-    public EventManager.OnComplete runOnComplete;
-    public Dictionary<string, Tuple<string, Sprite>> characterDictionary;
+    public List<Tuple<string, string>> Dialogues;
+    public EventManager.OnComplete RunOnComplete;
+    public Dictionary<string, Tuple<string, Sprite>> CharacterDictionary;
     // rewards given on completion of the ENTIRE dialogue
     // rewards not given mid dialogue
-    public List<Tuple<RewardKeyword, int>> rewards;
-    public string nextEvent;
-    public string uniqueName;
+    public List<Tuple<RewardKeyword, int>> Rewards;
+    public string NextBranch;
+    public string UniqueName;
 
     public DialogueInfo(
         string uniqueName,
@@ -26,14 +25,14 @@ public class DialogueInfo
         List<Tuple<string, string>> dialogues = null,
         List<Tuple<RewardKeyword, int>> rewards = null)
     {
-        this.dialogues = dialogues != null ?
+        this.Dialogues = dialogues != null ?
             dialogues : new List<Tuple<string, string>>();
-        this.rewards = rewards != null ?
+        this.Rewards = rewards != null ?
             rewards : new List<Tuple<RewardKeyword, int>>();
-        this.runOnComplete = runOnComplete;
-        this.characterDictionary = characterDictionary;
-        this.nextEvent = nextEvent;
-        this.uniqueName = uniqueName;
+        this.RunOnComplete = runOnComplete;
+        this.CharacterDictionary = characterDictionary;
+        this.NextBranch = nextEvent;
+        this.UniqueName = uniqueName;
     }
 
     // if no unique name is given, argument will be provided as most recent talking
@@ -42,8 +41,8 @@ public class DialogueInfo
     {
         if (charUniqueName == "")
         {
-            charUniqueName = dialogues.Last().Item1;
+            charUniqueName = Dialogues.Last().Item1;
         }
-        dialogues.Add(new Tuple<string, string>(charUniqueName, dialogue));
+        Dialogues.Add(new Tuple<string, string>(charUniqueName, dialogue));
     }
 }
