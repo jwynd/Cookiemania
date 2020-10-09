@@ -51,4 +51,13 @@ public class PlayerData : MonoBehaviour
         }
         DontDestroyOnLoad(this);
     }
+
+    private void Update()
+    {
+        if (week > 12)
+        {
+            month += 1;
+            week = 0;
+        }
+    }
 }
