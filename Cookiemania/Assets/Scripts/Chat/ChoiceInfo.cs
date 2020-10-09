@@ -40,6 +40,18 @@ public class ChoiceInfo
         ChoiceDialogueDictionary.Add(Choices.Count, "");
     }
 
+    public void AddReward(RewardKeyword keyword, int amount, int specificIndex = -1)
+    {
+        var index = specificIndex < 0 ? Rewards.Count - 1 : specificIndex;
+        if (index >= Rewards.Count || index < 0)
+        {
+            throw new Exception(
+                "cannot add reward at :" + index + " in choice: " + UniqueName);
+        }
+        Rewards[index].Add(
+            new Tuple<RewardKeyword, int>(keyword, amount));
+    }
+
     public bool IsFilledOut()
     {
         // may need to check for having an oncomplete and 

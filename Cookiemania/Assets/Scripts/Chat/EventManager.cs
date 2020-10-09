@@ -90,37 +90,43 @@ public class EventManager : MonoBehaviour
                     }
                     continue;
                 }
-
-                var keywordMatch = trimmedText.First();
-                if (BASE_KEYWORDS.TryGetValue(
-                    keywordMatch, out BaseKeyword keyword))
-                {
-                    ResolveKeyword(keyword, trimmedText, ref eInfo,
-                        ref lastCharacterDesignated, ref insideChoice, 
-                        ref insideBranchDeclaration);
-                }
-                else if (charInfoDictionary.TryGetValue(keywordMatch, 
-                    out lastCharacterDesignated))
-                {
-                    if (insideChoice)
-                    {
-                        eInfo.GetLastChoice().CharacterImage = lastCharacterDesignated.Sprite;
-                        eInfo.GetLastChoice().CharacterName = lastCharacterDesignated.DisplayName;
-                    }
-                    continue;
-                }
-                else
-                {
-                    Debug.Log(string.Join(" ", charInfoDictionary.Keys));
-                    throw new Exception(keywordMatch + " did not match any base " +
-                        "keywords, comment, dialogue " +
-                        "or any known character unique names. Is this dialogue/ a " +
-                        "choice and missing the keyword " +
-                        DIALOGUE.ToString() + " ?");
-                }
+                ParsePossibleKeyword(ref lastCharacterDesignated, ref insideChoice, 
+                    ref insideBranchDeclaration, ref eInfo, trimmedText);
             }
         }
 
+    }
+
+    private void ParsePossibleKeyword(ref CharacterInfo lastCharacterDesignated, 
+        ref bool insideChoice, ref bool insideBranchDeclaration, 
+        ref EventInfo eInfo, List<string> trimmedText)
+    {
+        var keywordMatch = trimmedText.First();
+        if (BASE_KEYWORDS.TryGetValue(
+            keywordMatch, out BaseKeyword keyword))
+        {
+            ResolveKeyword(keyword, trimmedText, ref eInfo,
+                ref lastCharacterDesignated, ref insideChoice,
+                ref insideBranchDeclaration);
+        }
+        else if (charInfoDictionary.TryGetValue(keywordMatch,
+            out lastCharacterDesignated))
+        {
+            if (insideChoice)
+            {
+                eInfo.GetLastChoice().CharacterImage = lastCharacterDesignated.Sprite;
+                eInfo.GetLastChoice().CharacterName = lastCharacterDesignated.DisplayName;
+            }
+        }
+        else
+        {
+            Debug.Log(string.Join(" ", charInfoDictionary.Keys));
+            throw new Exception(keywordMatch + " did not match any base " +
+                "keywords, comment, dialogue " +
+                "or any known character unique names. Is this dialogue/ a " +
+                "choice and missing the keyword " +
+                DIALOGUE.ToString() + " ?");
+        }
     }
 
     private void ResolveKeyword(BaseKeyword value, List<string> trimmedText, 
@@ -132,18 +138,7 @@ public class EventManager : MonoBehaviour
         {
             // required, denotes the start of an event and its UNIQUE name
             case BaseKeyword.Event:
-                if (trimmedText.Count < 2)
-                {
-                    throw new Exception("event needs a name on declaration line");
-                }
-                eInfo = new EventInfo(trimmedText[1].ToLowerInvariant().Trim());
-                Debug.Log(eInfo.UniqueName);
-                dInfo = new DialogueInfo(eInfo.BranchID.ToString(),
-                    () => { }, characterDictionary);
-                // adding a default dialogue to event info for first dialogue
-                eInfo.AddDialogue(dInfo);
-                eInfo.BranchingDictionary.Add(EventInfo.FIRST_BRANCH,
-                    new Tuple<bool, int>(true, 0));
+                EventCreation(trimmedText, out eInfo, out dInfo);
                 break;
             // not required, just allows a branch to escape an event asap
             // makes the most recent branch point to "end" as next
@@ -153,15 +148,7 @@ public class EventManager : MonoBehaviour
                 break;
             // required, denotes the end of an event
             case BaseKeyword.EventEnd:
-                if (eventDictionary.ContainsKey(eInfo.UniqueName))
-                {
-                    throw new Exception("cannot add duplicate event name to event " +
-                        "dictionary: " + eInfo.UniqueName);
-                }
-                eventDictionary.Add(eInfo.UniqueName, eInfo);
-                var key = eInfo.UniqueName;
-                eInfo = null;
-                eventDictionary[key].PrintInformation();
+                eInfo = EventComplete(eInfo);
                 break;
             case BaseKeyword.Choice:
                 insideChoice = true;
@@ -174,26 +161,19 @@ public class EventManager : MonoBehaviour
             // declares a branch in a choice, different from branch start which is the start
             // of a branch's specific dialogue
             case BaseKeyword.Branch:
-                ChoiceInfo infoToModify = eInfo.GetLastChoice();
-                infoToModify.Choices.Add("");
-                infoToModify.ChoiceEarlyExits.Add(false);
-                infoToModify.Rewards.Add(new List<Tuple<RewardKeyword, int>>());
-                insideBranchDeclaration = true;
+                insideBranchDeclaration = CreateBranch(eInfo);
                 break;
             case BaseKeyword.BranchStart:
-                insideBranchDeclaration = false;
-                if (insideChoice)
-                {
-                    ChoiceDeclarationComplete(ref insideChoice, eInfo);
-                }
-                eInfo.AddDialogue(new DialogueInfo(eInfo.BranchID.ToString(),
-                    () => { }, characterDictionary));
+                insideBranchDeclaration = CreateChoiceBranch(eInfo, ref insideChoice);
                 break;
             // end of a branch's dialogue not the end of its declaration
             case BaseKeyword.BranchEnd:
                 break;
             // the reward for choosing a specific choice
             case BaseKeyword.Reward:
+                // need to look at next two words -> next one needs to be a reward keyword
+                // last word needs to be an integer amount to be claimed for the reward
+                AddRewardToChoice(trimmedText, eInfo, insideChoice);
                 break;
             case BaseKeyword.Trigger:
                 break;
@@ -203,6 +183,86 @@ public class EventManager : MonoBehaviour
             default:
                 throw new NotSupportedException("BaseKeyword does not yet support this");
         }
+    }
+
+    private static void AddRewardToChoice(List<string> trimmedText, 
+        EventInfo eInfo, bool insideChoice)
+    {
+        if (!insideChoice)
+        {
+            throw new Exception("can only provide normal rewards inside a choice" +
+                " declaration");
+        }
+        if (trimmedText.Count < 3)
+        {
+            throw new Exception("reward command must specify the reward type and amount");
+        }
+        var rewardKey = trimmedText[1].ToLowerInvariant().Trim();
+        if (REWARD_KEYWORDS.TryGetValue(rewardKey, out RewardKeyword rewardType))
+        {
+            // failure is desired if it doesnt work
+            var rewardAmount = int.Parse(trimmedText[2].ToLowerInvariant().Trim());
+            eInfo.GetLastChoice().AddReward(rewardType, rewardAmount);
+        }
+        else
+        {
+            throw new Exception(
+                "reward key given is not in reward dictionary: " + rewardKey);
+        }
+    }
+
+    private bool CreateChoiceBranch(EventInfo eInfo, ref bool insideChoice)
+    {
+        bool insideBranchDeclaration = false;
+        if (insideChoice)
+        {
+            ChoiceDeclarationComplete(ref insideChoice, eInfo);
+        }
+        eInfo.AddDialogue(new DialogueInfo(eInfo.BranchID.ToString(),
+            () => { }, characterDictionary));
+        return insideBranchDeclaration;
+    }
+
+    private static bool CreateBranch(EventInfo eInfo)
+    {
+        bool insideBranchDeclaration;
+        ChoiceInfo infoToModify = eInfo.GetLastChoice();
+        infoToModify.Choices.Add("");
+        infoToModify.ChoiceEarlyExits.Add(false);
+        infoToModify.Rewards.Add(new List<Tuple<RewardKeyword, int>>());
+        insideBranchDeclaration = true;
+        return insideBranchDeclaration;
+    }
+
+    private EventInfo EventComplete(EventInfo eInfo)
+    {
+        if (eventDictionary.ContainsKey(eInfo.UniqueName))
+        {
+            throw new Exception("cannot add duplicate event name to event " +
+                "dictionary: " + eInfo.UniqueName);
+        }
+        eventDictionary.Add(eInfo.UniqueName, eInfo);
+        var key = eInfo.UniqueName;
+        eInfo = null;
+        eventDictionary[key].PrintInformation();
+        return eInfo;
+    }
+
+    private void EventCreation(List<string> trimmedText, 
+        out EventInfo eInfo, out DialogueInfo dInfo)
+    {
+        if (trimmedText.Count < 2)
+        {
+            throw new Exception("event needs a name on declaration line");
+        }
+        eInfo = new EventInfo(trimmedText[1].ToLowerInvariant().Trim());
+        Debug.Log(eInfo.UniqueName);
+        dInfo = new DialogueInfo(eInfo.BranchID.ToString(),
+            () => { }, characterDictionary);
+        // adding a default dialogue to event info for first dialogue
+        eInfo.AddDialogue(dInfo);
+        eInfo.BranchingDictionary.Add(EventInfo.FIRST_BRANCH,
+            new Tuple<bool, int>(true, 0));
     }
 
     private void ChoiceDeclarationComplete(ref bool insideChoice, EventInfo eInfo)
