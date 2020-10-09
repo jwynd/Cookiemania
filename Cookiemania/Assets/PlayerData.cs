@@ -16,6 +16,7 @@ public class PlayerData : MonoBehaviour
     public int money = 0;
     public int incomelvl = 0;
     public int healthlvl = 0;
+    public int shoplvl = 0; //progression in game
 
     //shop tier level (dependent on how many times and upgrade was selected)
     public int SpaceUpgradelvl = 0; //for shop tier management

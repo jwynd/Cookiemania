@@ -18,6 +18,12 @@ TagManager:
   - treasure
   - Congratulations
   - pierce
+  - Analyze
+  - SHealth
+  - SWidth
+  - Pierce
+  - Spread
+  - Iframes
   layers:
   - Default
   - TransparentFX
