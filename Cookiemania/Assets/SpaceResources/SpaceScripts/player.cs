@@ -51,7 +51,7 @@ public class player : MonoBehaviour
             }
             else // fire regular bullet
             {
-                GameObject go = Instantiate(theplayerfire, transform.position, Quaternion.identity);
+                GameObject go = Instantiate(theplayerfire, transform.position, transform.rotation);
                 go.transform.parent = transform;
                 go.transform.parent = null;
             }
@@ -65,8 +65,8 @@ public class player : MonoBehaviour
                 }
                 else
                 {
-                    GameObject d1 = Instantiate(theplayerfire, direct1.position, Quaternion.identity);
-                    GameObject d2 = Instantiate(theplayerfire, direct2.position, Quaternion.identity);
+                    GameObject d1 = Instantiate(theplayerfire, direct1.position, transform.rotation);
+                    GameObject d2 = Instantiate(theplayerfire, direct2.position, transform.rotation);
                 }
             } else if (bulletlevel == 2) // checks spread level
             {
@@ -79,10 +79,10 @@ public class player : MonoBehaviour
                 }
                 else
                 {
-                    GameObject d1 = Instantiate(theplayerfire, direct1.position, Quaternion.identity);
-                    GameObject d2 = Instantiate(theplayerfire, direct2.position, Quaternion.identity);
-                    GameObject d3 = Instantiate(theplayerfire, direct3.position, Quaternion.identity);
-                    GameObject d4 = Instantiate(theplayerfire, direct4.position, Quaternion.identity);
+                    GameObject d1 = Instantiate(theplayerfire, direct1.position, transform.rotation);
+                    GameObject d2 = Instantiate(theplayerfire, direct2.position, transform.rotation);
+                    GameObject d3 = Instantiate(theplayerfire, direct3.position, transform.rotation);
+                    GameObject d4 = Instantiate(theplayerfire, direct4.position, transform.rotation);
                 }
             }
             soundmanager.Instance.PlayOneShot(soundmanager.Instance.playerfire);

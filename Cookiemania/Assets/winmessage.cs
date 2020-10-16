@@ -11,7 +11,10 @@ public class winmessage : MonoBehaviour
     {
         text = "Congratulations!\n You made " + coins.ToString() + " coins!";
         gameObject.GetComponent<TMPro.TextMeshProUGUI>().text = text;
-        PlayerData.Player.money += coins;
+        if (PlayerData.Player != null)
+        {
+            PlayerData.Player.money += coins;
+        }
 
     }
 
