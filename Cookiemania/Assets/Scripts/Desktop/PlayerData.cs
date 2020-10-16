@@ -31,17 +31,17 @@ public class PlayerData : MonoBehaviour
     public int spacelvl = 0; //Game Dificulty
     public int incomelvl = 0;
     public int healthlvl = 0;
-    public int _money = 0;
+    private int _money = 0;
     public int money
     {
         get { return _money; }
         set
         {
             _money = value;
-            OnMoneyChanged(this, new IntegerEventArgs(_money));
+            OnMoneyChanged?.Invoke(this, new IntegerEventArgs(value));
         }
     }
-    public int _shoplvl;
+    private int _shoplvl;
     public int shoplvl //Follows progression of player and shop access
     {
         get { return _shoplvl; }
@@ -52,7 +52,7 @@ public class PlayerData : MonoBehaviour
                 return;
             }
             _shoplvl = value;
-            OnShopLvlChanged(this, new IntegerEventArgs(_shoplvl));
+            OnShopLvlChanged?.Invoke(this, new IntegerEventArgs(value));
         }
     }
 
@@ -72,7 +72,7 @@ public class PlayerData : MonoBehaviour
 
 
     //Game progress
-    public int _week;
+    private int _week;
     public int week
     {
         get { return _week; }
@@ -83,18 +83,18 @@ public class PlayerData : MonoBehaviour
                 return;
             }
             _week = value;
-            OnWeekChanged(this, new IntegerEventArgs(_week));
+            OnWeekChanged?.Invoke(this, new IntegerEventArgs(value));
         }
     }
 
-    public int _morality;
+    private int _morality;
     public int morality
     {
         get { return _morality; }
         set
         {
             _morality = value;
-            OnMoralityChanged(this, new IntegerEventArgs(_morality));
+            OnMoralityChanged?.Invoke(this, new IntegerEventArgs(value));
         }
     }
 
@@ -102,19 +102,13 @@ public class PlayerData : MonoBehaviour
 
     private void Awake()
     {
-        if (Player != null)
+        if (Player != null && Player != this)
         {
-            GameObject.Destroy(Player);
+            Destroy(Player);
         }
         else
         {
             Player = this;
         }
-        DontDestroyOnLoad(this);
-    }
-
-    private void Update()
-    {
-
     }
 }

@@ -12,7 +12,7 @@ public class ShopButtons : MonoBehaviour
 
     private void Start()
     {
-        if (PlayerData.Player._money >= cost && PlayerData.Player._shoplvl >= lvlReq && PlayerData.Player.SpaceUpgradelvl >= lvlReq && purchased == false)
+        if (PlayerData.Player.money >= cost && PlayerData.Player.shoplvl >= lvlReq && PlayerData.Player.SpaceUpgradelvl >= lvlReq && purchased == false)
         {
             gameObject.GetComponent<Image>().color = Color.yellow;
         }
@@ -27,7 +27,7 @@ public class ShopButtons : MonoBehaviour
     }
     public void Buy()
     {
-        if (PlayerData.Player._money >= cost && PlayerData.Player._shoplvl >= lvlReq && PlayerData.Player.SpaceUpgradelvl >= lvlReq && purchased == false)
+        if (PlayerData.Player.money >= cost && PlayerData.Player.shoplvl >= lvlReq && PlayerData.Player.SpaceUpgradelvl >= lvlReq && purchased == false)
         {
             PlayerData.Player.money -= cost;
             checkGlobal();
