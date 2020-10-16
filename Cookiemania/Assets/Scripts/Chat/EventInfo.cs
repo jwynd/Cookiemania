@@ -11,8 +11,15 @@ public class EventInfo
 
     public Tuple<ScriptConstants.TriggerKeyword, int> TriggeringAction;
     public string UniqueName { get; private set; }
-    // set it to false when event runs and direct trigger was not used
+    // set it to false when event runs first time
     public bool EventListening = true;
+    // these events should all need the dialogue box stuff, but if they dont
+    // when the event runs, they'll just trigger the eventcompletereward and exit
+    public bool RequiresDialogueControl = true;
+
+    // add to playerdata on event complete regardless of choices made
+    // if there is no neutral reward associate your rewards with the choices obv
+    public List<Tuple<ScriptConstants.RewardKeyword, int>> EventCompleteReward;
 
     public int BranchID
     {
@@ -54,6 +61,24 @@ public class EventInfo
     public DialogueInfo GetLastDialogue()
     {
         return Dialogues.Last();
+    }
+
+    public ChoiceInfo GetChoice(int index)
+    {
+        if (index >= Choices.Count)
+        {
+            throw new IndexOutOfRangeException();
+        }
+        return Choices[index];
+    }
+
+    public DialogueInfo GetDialogue(int index)
+    {
+        if (index >= Dialogues.Count)
+        {
+            throw new IndexOutOfRangeException();
+        }
+        return Dialogues[index];
     }
 
     // will be using this to track parsing implementation progression

@@ -58,7 +58,7 @@ public class DialogueController : MonoBehaviour
             { "char_2", new Tuple<string, Sprite>("Frank", null) },
     };
     [HideInInspector]
-    public delegate void OnComplete();
+    public delegate void OnComplete(string nextEvent);
     private OnComplete runOnComplete = null;
     // the current max the DialogueController can use
     [HideInInspector]
@@ -69,6 +69,7 @@ public class DialogueController : MonoBehaviour
     // whenever background is null, dont change; when background is a new sprite
     // change it
     private List<Sprite> backgrounds = null;
+    private string nextEvent = "";
     private bool stillDisplayingText = false;
     private bool fastDisplayingText = false;
     private IEnumerator textDisplayer;
@@ -76,9 +77,15 @@ public class DialogueController : MonoBehaviour
     private Tuple<string, string> currentLine;
     private float originalAlpha;
 
+    public void InitDictionaryOnly(Dictionary<string, Tuple<string, Sprite>> charDict)
+    {
+        charDictionary = charDict;
+    }
+
     public void Initialize(
         List<Tuple<string, string>> dialogueLines,
         OnComplete onComplete,
+        string nextEvent,
         List<Sprite> backgroundChanges = null,
         Dictionary<string, Tuple<string, Sprite>> characterDictionary = null)
     {
@@ -86,6 +93,7 @@ public class DialogueController : MonoBehaviour
         lines = dialogueLines.ConvertAll(
             pair => new Tuple<string, string>(pair.Item1, pair.Item2));
         backgrounds = backgroundChanges.ConvertAll(bg => bg);
+        this.nextEvent = nextEvent;
         runOnComplete = onComplete;
         if (characterDictionary != null)
         {
@@ -99,8 +107,8 @@ public class DialogueController : MonoBehaviour
             return;
         }
         bgImage.sprite = null;
-        DisplayNextDialogue();
         myCanvas.enabled = true;
+        DisplayNextDialogue();
     }
 
     private IEnumerator TextDisplayer(string fullText, float delay, int startLetter = 0)
@@ -132,7 +140,7 @@ public class DialogueController : MonoBehaviour
         if (lines.Count < 1)
         {
             myCanvas.enabled = false;
-            runOnComplete.Invoke();
+            runOnComplete.Invoke(nextEvent);
             return;
         }
         currentLine = lines.PopFront();
@@ -169,7 +177,7 @@ public class DialogueController : MonoBehaviour
         }
     }
 
-    void Start()
+    private void Awake()
     {
         if (myCanvas == null)
         {
@@ -180,15 +188,17 @@ public class DialogueController : MonoBehaviour
         myCanvas.enabled = false;
         // waiting until explicit initialization if not in testing mode
 #if UNITY_EDITOR
-        if (useTestMode) 
+        if (useTestMode)
         {
             testCharDictionary["char_1"] =
                 new Tuple<string, Sprite>(testDisplayNames[0], testSprites[0]);
             testCharDictionary["char_2"] =
                 new Tuple<string, Sprite>(testDisplayNames[1], testSprites[1]);
-            Initialize(testLines, () => Debug.Log("test complete"), testBGs, 
-                testCharDictionary);
+            Initialize(testLines,
+                (string next) => Debug.Log("test complete, next branch is: " + next),
+                "last", testBGs, testCharDictionary);
         }
-    }
 #endif
+    }
+
 }

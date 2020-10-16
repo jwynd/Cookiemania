@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -524,7 +524,7 @@ MonoBehaviour:
   charName: {fileID: 8925409353184024518}
   dialogueLine: {fileID: 8925409353296224134}
   textDelay: 0.044
-  useTestMode: 1
+  useTestMode: 0
   testSprites:
   - {fileID: 8328981943380202991, guid: 128e9fe8e8d5dec4f957c5240c83e355, type: 3}
   - {fileID: 21300000, guid: 89533e8391b7cc24e93d52c3128e8342, type: 3}
@@ -689,6 +689,32 @@ PrefabInstance:
       propertyPath: m_textInfo.lineCount
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8843202141736558202, guid: e3b8b2143dbb3534f98c190281b3c604,
+        type: 3}
+      propertyPath: m_text
+      value: Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 8843202141736558202, guid: e3b8b2143dbb3534f98c190281b3c604,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8843202141736558202, guid: e3b8b2143dbb3534f98c190281b3c604,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8843202141736558202, guid: e3b8b2143dbb3534f98c190281b3c604,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8843202142728049011, guid: e3b8b2143dbb3534f98c190281b3c604,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9f8e03ac43b138d47ac66004c1b38881,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3b8b2143dbb3534f98c190281b3c604, type: 3}
 --- !u!224 &1247423606094286210 stripped

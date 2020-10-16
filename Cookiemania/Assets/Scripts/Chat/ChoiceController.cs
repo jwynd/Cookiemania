@@ -66,19 +66,24 @@ public class ChoiceController : MonoBehaviour
     [SerializeField]
     private List<RewardListStandIn> testRewards = 
         new List<RewardListStandIn>();
+    [SerializeField]
+    private List<string> testNextBranches = 
+        new List<string>();
 
     private List<List<Tuple<ScriptConstants.RewardKeyword, int>>> rewards = 
         new List<List<Tuple<ScriptConstants.RewardKeyword, int>>>();
+    private List<string> nextBranches = 
+        new List<string>();
 
     [HideInInspector]
-    public delegate void OnComplete(int choiceNumber, 
+    public delegate void OnComplete(string nextBranch, int choiceNumber, 
         List<Tuple<ScriptConstants.RewardKeyword, int>> rewardList );
     private OnComplete runOnComplete = null;
 
     private List<Button> choiceButtons = new List<Button>();
     private float originalAlpha;
 
-    void Start()
+    void Awake()
     {
         originalAlpha = bgImage.color.a;
         choiceButtons.Add(choice1);
@@ -101,10 +106,10 @@ public class ChoiceController : MonoBehaviour
                 altTestRewards.Add(altInnerList);
             }
             Initialize(testCharName, testCharImage, testChoicePrompt, testChoices,
-                altTestRewards, 
-                (int v, List<Tuple<ScriptConstants.RewardKeyword, int>> rewards) => 
+                altTestRewards, testNextBranches, 
+                (string nextB, int v, List<Tuple<ScriptConstants.RewardKeyword, int>> rewards) => 
                     Debug.Log("test complete, " + v + " was selected, with rewards " + 
-                    string.Join(" ", rewards)),
+                    string.Join(" ", rewards) + "\nnext branch is: " + nextB),
                 testBG);
         }
 #endif
@@ -121,10 +126,13 @@ public class ChoiceController : MonoBehaviour
 
     public void Initialize(string cName, Sprite cImage, 
         string choicePrompt, List<string> choices, 
-        List<List<Tuple<ScriptConstants.RewardKeyword, int>>> rewards, OnComplete onComplete, 
+        List<List<Tuple<ScriptConstants.RewardKeyword, int>>> rewards, 
+        List<string> nextEvents,
+        OnComplete onComplete, 
         Sprite background = null)
     {
-        if (choices.Count != rewards.Count)
+        if (choices.Count != rewards.Count ||
+            choices.Count != nextEvents.Count)
         {
             throw new Exception("rewards list and choices list must be same size");
         }
@@ -134,10 +142,12 @@ public class ChoiceController : MonoBehaviour
         dialogueLine.text = choicePrompt;
         runOnComplete = onComplete;
         bgImage.sprite = background;
+        // not manipulating this data :> shallow copy
         foreach (var item in rewards)
         {
             this.rewards.Add(item);
         }
+        this.nextBranches = nextEvents;
         bgImage.color = bgImage.sprite == null ?
                 new Color(bgImage.color.r, bgImage.color.r, bgImage.color.r, 0) :
                 new Color(bgImage.color.r, bgImage.color.r, bgImage.color.r, originalAlpha);
@@ -153,7 +163,7 @@ public class ChoiceController : MonoBehaviour
     private void EndChoice(int v)
     {
         EnableObjects(false);
-        runOnComplete.Invoke(v, rewards[v - 1]);
+        runOnComplete.Invoke(nextBranches[v - 1], v, rewards[v - 1]);
     }
 
     // not great, but it was easier to give every button its own callback fn

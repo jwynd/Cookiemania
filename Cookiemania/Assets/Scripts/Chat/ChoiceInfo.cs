@@ -20,10 +20,18 @@ public class ChoiceInfo
     public List<List<Tuple<RewardKeyword, int>>> Rewards =
         new List<List<Tuple<RewardKeyword, int>>>();
     public List<bool> ChoiceEarlyExits = new List<bool>();
+    // no need for the dictionary, can just list them -> is obvious 
+    // as soon as choice declaration is finished -> should name by (#branch_ID)_(#choice)
+    // so the third choice in an event (which is the 16th actual branch) would have the
+    // branches 16_1 , 16_2 , 16_3 
+    // and if any of the branches have an early exit associated with it
+    // would want to put that in the branch's dialogue that next is early_exit
+    public List<string> NextBranches = new List<string>();
+    public Sprite Background = null;
     // key: index of choice in Choices, value: its dialogue's branch name
     public Dictionary<int, string> ChoiceDialogueDictionary =
         new Dictionary<int, string>();
-    public EventManager.OnChoiceComplete RunOnComplete;
+    public ChoiceController.OnComplete RunOnComplete;
 
     public ChoiceInfo(string uniqueName)
     {
@@ -64,7 +72,7 @@ public class ChoiceInfo
     public ChoiceInfo(Sprite charImage, string charName, string choicePrompt,
         List<string> choices, List<List<Tuple<RewardKeyword, int>>> rewards,
         List<bool> choiceHasEarlyEnd,
-        EventManager.OnChoiceComplete onComplete, int choiceLimit = 4)
+        ChoiceController.OnComplete onComplete, int choiceLimit = 4)
     {
         if (choices.Count > choiceLimit)
         {

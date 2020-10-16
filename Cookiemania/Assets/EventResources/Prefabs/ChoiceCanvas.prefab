@@ -367,7 +367,7 @@ MonoBehaviour:
   choice2: {fileID: 7229013732310173046}
   choice3: {fileID: 3968636543976706533}
   choice4: {fileID: 2473942962587618056}
-  useTestMode: 1
+  useTestMode: 0
   testCharImage: {fileID: 21300000, guid: 9f8e03ac43b138d47ac66004c1b38881, type: 3}
   testCharName: Bruh
   testBG: {fileID: 21300000, guid: a997bd7726693374a95a14006de52af5, type: 3}
@@ -384,6 +384,9 @@ MonoBehaviour:
       amount: 500
     - rewardType: 0
       amount: -15
+  testNextBranches:
+  - choice_1_1
+  - choice_1_2
 --- !u!1 &1928810913875369309
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,37 +2,36 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-using static ScriptConstants;
 
 [Serializable]
 public class DialogueInfo
 {
     // item 1 is the characters unique name, item 2 is their line
     public List<Tuple<string, string>> Dialogues;
-    public EventManager.OnComplete RunOnComplete;
+    public DialogueController.OnComplete RunOnComplete;
+    // should be handled by event manager with the init dictionary only fn
     public Dictionary<string, Tuple<string, Sprite>> CharacterDictionary;
-    // rewards given on completion of the ENTIRE dialogue
-    // rewards not given mid dialogue
-    public List<Tuple<RewardKeyword, int>> Rewards;
+    public List<Sprite> Backgrounds;
+
     public string NextBranch;
     public string UniqueName;
 
     public DialogueInfo(
         string uniqueName,
-        EventManager.OnComplete runOnComplete,
+        DialogueController.OnComplete runOnComplete,
         Dictionary<string, Tuple<string, Sprite>> characterDictionary,
         string nextEvent = "",
         List<Tuple<string, string>> dialogues = null,
-        List<Tuple<RewardKeyword, int>> rewards = null)
+        List<Sprite> backgrounds = null)
     {
         this.Dialogues = dialogues != null ?
             dialogues : new List<Tuple<string, string>>();
-        this.Rewards = rewards != null ?
-            rewards : new List<Tuple<RewardKeyword, int>>();
         this.RunOnComplete = runOnComplete;
         this.CharacterDictionary = characterDictionary;
         this.NextBranch = nextEvent;
         this.UniqueName = uniqueName;
+        this.Backgrounds = backgrounds != null ?
+            backgrounds : new List<Sprite>();
     }
 
     // if no unique name is given, argument will be provided as most recent talking
@@ -44,5 +43,23 @@ public class DialogueInfo
             charUniqueName = Dialogues.Last().Item1;
         }
         Dialogues.Add(new Tuple<string, string>(charUniqueName, dialogue));
+        while (Dialogues.Count < Backgrounds.Count)
+        {
+            Backgrounds.Add(null);
+        }
+    }
+
+    // obviously only one background per dialogue line
+    // so add background only effects most recent line of dialogue added
+    // so background should be defined before the line of dialogue
+    // exception is the first background added to a dialogueinfo
+    public void AddBackground(Sprite background)
+    {
+        if (Backgrounds.Count < 1)
+        {
+            Backgrounds.Add(background);
+            return;
+        }
+        Backgrounds[Backgrounds.Count - 1] = background;
     }
 }

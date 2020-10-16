@@ -7,11 +7,6 @@ using static ScriptConstants;
 
 public class EventManager : MonoBehaviour
 {
-    [HideInInspector]
-    public delegate void OnComplete();
-    [HideInInspector]
-    public delegate void OnChoiceComplete(int chosenValue);
-
     [SerializeField]
     private int choiceLimit = 4;
     [SerializeField]
@@ -19,18 +14,47 @@ public class EventManager : MonoBehaviour
     [SerializeField]
     private GameObject choicePrefab = null;
     [SerializeField]
+    private EventController eventController = null;
+    [SerializeField]
     [Tooltip("The text files that contain events to be registered")]
     private List<TextAsset> eventTextFiles = new List<TextAsset>();
     [SerializeField]
     private List<CharacterInfo> characterList = new List<CharacterInfo>();
+    [SerializeField]
+    private bool useTestMode = true;
     private Dictionary<string, Tuple<string, Sprite>> characterDictionary =
         new Dictionary<string, Tuple<string, Sprite>>();
     private Dictionary<string, CharacterInfo> charInfoDictionary = 
         new Dictionary<string, CharacterInfo>();
     private Dictionary<string, EventInfo> eventDictionary = 
         new Dictionary<string, EventInfo>();
+    //private Dictionary<string, EventController> activeEvents = new Dictionary<string, EventController>();
 
     public static EventManager Instance { get; private set; }
+
+    public GameObject DialoguePrefab { get; private set; }
+
+    public GameObject ChoicePrefab { get; private set; }
+
+    public void EventComplete(string eventName, List<Tuple<RewardKeyword, int>> rewards)
+    {
+        // if we have events queued up from triggers will want to 
+        // start them after distributing the rewards
+        DistributeRewards(rewards);
+    }
+
+    public void ChoiceMade(string eventName, int choiceNumber)
+    {
+        if (eventDictionary.TryGetValue(eventName, out EventInfo value)) 
+            Debug.LogWarning("need to track choices made on per event " +
+                "basis --> should be list of tuples, this one is ( " + eventName + ", " +
+                choiceNumber.ToString() + " )");
+    }
+
+    public void DistributeRewards(List<Tuple<RewardKeyword, int>> rewards)
+    {
+        Debug.LogWarning("need to add rewards for event completion");
+    }
 
     private void ReadInFiles(List<TextAsset> textAssets)
     {
@@ -180,6 +204,9 @@ public class EventManager : MonoBehaviour
             // immediately adds reward on branch being played
             case BaseKeyword.EventReward:
                 break;
+            case BaseKeyword.BackgroundChange:
+
+                break;
             default:
                 throw new NotSupportedException("BaseKeyword does not yet support this");
         }
@@ -219,7 +246,7 @@ public class EventManager : MonoBehaviour
             ChoiceDeclarationComplete(ref insideChoice, eInfo);
         }
         eInfo.AddDialogue(new DialogueInfo(eInfo.BranchID.ToString(),
-            () => { }, characterDictionary));
+            (string nextE) => { }, characterDictionary));
         return insideBranchDeclaration;
     }
 
@@ -258,7 +285,7 @@ public class EventManager : MonoBehaviour
         eInfo = new EventInfo(trimmedText[1].ToLowerInvariant().Trim());
         Debug.Log(eInfo.UniqueName);
         dInfo = new DialogueInfo(eInfo.BranchID.ToString(),
-            () => { }, characterDictionary);
+            (string nextE) => { }, characterDictionary);
         // adding a default dialogue to event info for first dialogue
         eInfo.AddDialogue(dInfo);
         eInfo.BranchingDictionary.Add(EventInfo.FIRST_BRANCH,
@@ -349,24 +376,34 @@ public class EventManager : MonoBehaviour
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
+            return;
         }
-        else
-        {
-            Instance = this;
-        }
-    }
-
-    void Start()
-    {
-        CreateCharDictionary(characterList, out characterDictionary, out charInfoDictionary);
+        Instance = this;
+        DialoguePrefab = Instantiate(dialoguePrefab);
+        ChoicePrefab = Instantiate(choicePrefab);
+        CreateCharDictionary(characterList,
+            out characterDictionary, out charInfoDictionary);
+        DialoguePrefab.GetComponent<DialogueController>().
+            InitDictionaryOnly(characterDictionary);
         ReadInFiles(eventTextFiles);
     }
 
-    
+    private void Start()
+    {
+
+#if UNITY_EDITOR
+        if (useTestMode)
+            eventController.RunEvent(eventDictionary.Values.First());
+#endif
+    }
+
     void Update()
     {
-        // need to check for triggers when morality / days / money changes NOT
-        // in update loop ---> should be entirely unnecessary
-        // so obv use c#'s event
+        // update will actually maybe wanna do something?
+        // will have to wait for event controller to give up control of 
+        // the dialogue box when we have events queued up
+        // but likely can just store a queue of events that are completely
+        // ready right now and run them when event controller calls event
+        // complete
     }
 }
