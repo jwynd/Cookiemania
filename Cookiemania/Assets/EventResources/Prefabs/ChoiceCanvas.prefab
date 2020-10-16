@@ -38,7 +38,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 283.16998, y: 0}
   m_SizeDelta: {x: 0, y: 51.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5332219815994303898
@@ -375,6 +375,15 @@ MonoBehaviour:
   testChoices:
   - alpha
   - omega
+  testRewards:
+  - rewards:
+    - rewardType: 0
+      amount: 100
+  - rewards:
+    - rewardType: 0
+      amount: 500
+    - rewardType: 0
+      amount: -15
 --- !u!1 &1928810913875369309
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,7 +651,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 283.16998, y: 0}
   m_SizeDelta: {x: 0, y: 51.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8707545593588761000
@@ -1241,7 +1250,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 283.16998, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6958590236162857334
@@ -1513,7 +1522,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 283.16998, y: 0}
   m_SizeDelta: {x: 0, y: 51.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2429263184454245635
@@ -1683,7 +1692,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 283.16998, y: 0}
   m_SizeDelta: {x: 0, y: 51.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3273369019309195436

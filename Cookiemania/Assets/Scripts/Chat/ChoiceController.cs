@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -40,9 +41,38 @@ public class ChoiceController : MonoBehaviour
     private string testChoicePrompt = "";
     [SerializeField]
     private List<string> testChoices = new List<string>();
+    [Serializable]
+    public class RewardTupleStandIn
+    {
+        public ScriptConstants.RewardKeyword rewardType;
+        public int amount;
+
+        public RewardTupleStandIn(ScriptConstants.RewardKeyword item1, int item2)
+        {
+            rewardType = item1;
+            amount = item2;
+        }
+    }
+    [Serializable]
+    public class RewardListStandIn
+    {
+        public List<RewardTupleStandIn> rewards = new List<RewardTupleStandIn>();
+        public RewardListStandIn(List<RewardTupleStandIn> items)
+        {
+            rewards = items;
+        }
+    }
+
+    [SerializeField]
+    private List<RewardListStandIn> testRewards = 
+        new List<RewardListStandIn>();
+
+    private List<List<Tuple<ScriptConstants.RewardKeyword, int>>> rewards = 
+        new List<List<Tuple<ScriptConstants.RewardKeyword, int>>>();
 
     [HideInInspector]
-    public delegate void OnComplete(int choiceNumber);
+    public delegate void OnComplete(int choiceNumber, 
+        List<Tuple<ScriptConstants.RewardKeyword, int>> rewardList );
     private OnComplete runOnComplete = null;
 
     private List<Button> choiceButtons = new List<Button>();
@@ -59,8 +89,22 @@ public class ChoiceController : MonoBehaviour
 #if UNITY_EDITOR
         if (useTestMode)
         {
+            var altTestRewards = new List<List<Tuple<ScriptConstants.RewardKeyword, int>>>();
+            foreach (var list in testRewards)
+            {
+                var altInnerList = new List<Tuple<ScriptConstants.RewardKeyword, int>>();
+                foreach (var tuple in list.rewards)
+                {
+                    altInnerList.Add(new Tuple<ScriptConstants.RewardKeyword, int>(
+                        tuple.rewardType, tuple.amount));
+                }
+                altTestRewards.Add(altInnerList);
+            }
             Initialize(testCharName, testCharImage, testChoicePrompt, testChoices,
-                (int v) => Debug.Log("test complete, " + v + " was selected"),
+                altTestRewards, 
+                (int v, List<Tuple<ScriptConstants.RewardKeyword, int>> rewards) => 
+                    Debug.Log("test complete, " + v + " was selected, with rewards " + 
+                    string.Join(" ", rewards)),
                 testBG);
         }
 #endif
@@ -76,15 +120,24 @@ public class ChoiceController : MonoBehaviour
     }
 
     public void Initialize(string cName, Sprite cImage, 
-        string choicePrompt, List<string> choices, OnComplete onComplete, 
+        string choicePrompt, List<string> choices, 
+        List<List<Tuple<ScriptConstants.RewardKeyword, int>>> rewards, OnComplete onComplete, 
         Sprite background = null)
     {
+        if (choices.Count != rewards.Count)
+        {
+            throw new Exception("rewards list and choices list must be same size");
+        }
         EnableObjects(false);
         charName.text = cName;
         charImage.sprite = cImage;
         dialogueLine.text = choicePrompt;
         runOnComplete = onComplete;
         bgImage.sprite = background;
+        foreach (var item in rewards)
+        {
+            this.rewards.Add(item);
+        }
         bgImage.color = bgImage.sprite == null ?
                 new Color(bgImage.color.r, bgImage.color.r, bgImage.color.r, 0) :
                 new Color(bgImage.color.r, bgImage.color.r, bgImage.color.r, originalAlpha);
@@ -100,7 +153,7 @@ public class ChoiceController : MonoBehaviour
     private void EndChoice(int v)
     {
         EnableObjects(false);
-        runOnComplete.Invoke(v);
+        runOnComplete.Invoke(v, rewards[v - 1]);
     }
 
     // not great, but it was easier to give every button its own callback fn
