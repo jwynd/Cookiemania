@@ -11,9 +11,12 @@ public class losemessage : MonoBehaviour
     {
         text = "Game Over!\n You made " + Lcoins.ToString() + " coins!";
         gameObject.GetComponent<TMPro.TextMeshProUGUI>().text = text;
-        if(PlayerData.Player != null)
+        if(PlayerData.Player)
         {
             PlayerData.Player.money += Lcoins;
+        } else
+        {
+            Debug.Log("player is null");
         }
         
     }

@@ -12,6 +12,11 @@ public class PlayerData : MonoBehaviour
     /// Reference with PlayerData.Player.x
     /// </summary>
     public static PlayerData Player;
+    //Event stuff
+    public event EventHandler OnWeekChanged;
+    public event EventHandler OnMoralityChanged;
+    public event EventHandler OnShopLvlChanged;
+    public event EventHandler OnMoneyChanged;
 
     public class IntegerEventArgs : EventArgs
     {
@@ -26,26 +31,28 @@ public class PlayerData : MonoBehaviour
     public int spacelvl = 0; //Game Dificulty
     public int incomelvl = 0;
     public int healthlvl = 0;
+    public int _money = 0;
     public int money
     {
-        get { return money; }
+        get { return _money; }
         set
         {
-                money = value;
-                OnMoneyChanged(this, new IntegerEventArgs(money));
+            _money = value;
+            OnMoneyChanged(this, new IntegerEventArgs(_money));
         }
     }
+    public int _shoplvl;
     public int shoplvl //Follows progression of player and shop access
     {
-        get { return shoplvl; }
+        get { return _shoplvl; }
         set
         {
-            if(value <= shoplvl)
+            if(value <= _shoplvl)
             {
                 return;
             }
-            shoplvl = value;
-            OnShopLvlChanged(this, new IntegerEventArgs(shoplvl));
+            _shoplvl = value;
+            OnShopLvlChanged(this, new IntegerEventArgs(_shoplvl));
         }
     }
 
@@ -65,36 +72,34 @@ public class PlayerData : MonoBehaviour
 
 
     //Game progress
+    public int _week;
     public int week
     {
-        get { return week; }
+        get { return _week; }
         set
         {
-            if (value <= week)
+            if (value <= _week)
             {
                 return;
             }
-            week = value;
-            OnWeekChanged(this, new IntegerEventArgs(week));
+            _week = value;
+            OnWeekChanged(this, new IntegerEventArgs(_week));
         }
     }
+
+    public int _morality;
     public int morality
     {
-        get { return morality; }
+        get { return _morality; }
         set
         {
-            morality = value;
-            OnMoralityChanged(this, new IntegerEventArgs(morality));
+            _morality = value;
+            OnMoralityChanged(this, new IntegerEventArgs(_morality));
         }
     }
 
     //List of dialogue choices to track
 
-    //Event stuff
-    public event EventHandler OnWeekChanged;
-    public event EventHandler OnMoralityChanged;
-    public event EventHandler OnShopLvlChanged;
-    public event EventHandler OnMoneyChanged;
     private void Awake()
     {
         if (Player != null)
