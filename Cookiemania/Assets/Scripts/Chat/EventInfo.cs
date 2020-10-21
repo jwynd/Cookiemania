@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityScript.Steps;
 
 [Serializable]
 public class EventInfo
@@ -11,6 +12,11 @@ public class EventInfo
 
     public Tuple<ScriptConstants.TriggerKeyword, int> TriggeringAction;
     public string UniqueName { get; private set; }
+    // this can only point to branches that are not dialogues inside of a 
+    // choice
+    // so normal dialogue branches and choice branches can get pointed to
+    public string MostRecentBranch { get; private set; }
+    public string MostRecentNormalDialogue { get; private set; }
     // set it to false when event runs first time
     public bool EventListening = true;
     // these events should all need the dialogue box stuff, but if they dont
@@ -19,7 +25,8 @@ public class EventInfo
 
     // add to playerdata on event complete regardless of choices made
     // if there is no neutral reward associate your rewards with the choices obv
-    public List<Tuple<ScriptConstants.RewardKeyword, int>> EventCompleteReward;
+    public List<Tuple<ScriptConstants.RewardKeyword, int>> EventCompleteReward = 
+       new List<Tuple<ScriptConstants.RewardKeyword, int>>();
 
     public int BranchID
     {
@@ -31,26 +38,69 @@ public class EventInfo
     // starting an event with a string in the branchingDictionary
     // 
     public Dictionary<string, Tuple<bool, int>> BranchingDictionary =
-        new Dictionary<string, Tuple<bool, int>>();
+       new Dictionary<string, Tuple<bool, int>>();
 
     private List<DialogueInfo> Dialogues = new List<DialogueInfo>();
     private List<ChoiceInfo> Choices = new List<ChoiceInfo>();
 
-    public EventInfo(string uniqueName)
+    public EventInfo(string uniqueName, 
+        Dictionary<string, Tuple<string, Sprite>> characterDictionary, 
+        bool hasDialogue = true)
     {
         UniqueName = uniqueName;
+        BranchID = 0;
+        if (hasDialogue)
+        {
+            var dInfo = new DialogueInfo(BranchID.ToString(),
+            (string nextE) => { }, characterDictionary);
+            // adding a default dialogue to event info for first dialogue
+            AddDialogue(dInfo);
+            BranchingDictionary.Add(FIRST_BRANCH,
+                new Tuple<bool, int>(true, 0));
+        }
     }
 
-    public void AddDialogue(DialogueInfo dInfo)
+    public void SetNextBranch(string precedingBranch, string nextBranch)
     {
+        if (BranchingDictionary.TryGetValue(precedingBranch, 
+            out Tuple<bool, int> parent))
+        {
+            if (parent.Item1)
+            {
+                var dialogue = Dialogues[parent.Item2];
+                dialogue.NextBranch = nextBranch;
+            }
+        }
+        else
+        {
+            Debug.Log(precedingBranch + " " + nextBranch);
+            throw new Exception("branch: " + precedingBranch + 
+                " not found in branching dictionary");
+        }
+    }
+
+    public void AddDialogue(DialogueInfo dInfo, 
+        bool isChoiceDialogueBranch = false)
+    {
+        //SetNextBranch(nextBranch, precedingBranch);
         Dialogues.Add(dInfo);
         BranchID++;
+        BranchingDictionary.Add(dInfo.UniqueName,
+            new Tuple<bool, int>(true, Dialogues.Count - 1));
+        if (!isChoiceDialogueBranch)
+        {
+            MostRecentBranch = dInfo.UniqueName;
+            MostRecentNormalDialogue = MostRecentBranch;
+        }
     }
 
     public void AddChoice(ChoiceInfo cInfo)
     {
         Choices.Add(cInfo);
         BranchID++;
+        BranchingDictionary.Add(cInfo.UniqueName,
+            new Tuple<bool, int>(false, Choices.Count - 1));
+        MostRecentBranch = cInfo.UniqueName;
     }
 
     public ChoiceInfo GetLastChoice()

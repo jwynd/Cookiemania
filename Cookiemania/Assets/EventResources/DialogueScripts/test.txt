@@ -70,8 +70,6 @@ reward morality 15
 reward money 0
 > what? no!
 
-choice_end
-
 branch_start 1
 boss
 > oh uh what are you guys doing?
@@ -96,6 +94,10 @@ chip
 > Just watch your back, mate.
 
 branch_end
+
+# this is required to let me know that all of the 
+# choice branches have been filled out
+choice_end
 
 player
 

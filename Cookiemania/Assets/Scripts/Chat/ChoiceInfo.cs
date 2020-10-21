@@ -8,10 +8,30 @@ public class ChoiceInfo
 {
     // need to register selected choices to the choices made list on the global variable
     // tracker
-    public string UniqueName;
-    public Sprite CharacterImage;
-    public string CharacterName;
-    public string Prompt;
+    public string UniqueName { get; private set; }
+
+    // these variables are only able to be set once, since they're set from a script
+
+    private Sprite _charImage = null;
+    public Sprite CharacterImage
+    {
+        get { return _charImage; }
+        set { if (_charImage == null) _charImage = value; }
+    }
+
+    private string _charName = "";
+    public string CharacterName 
+    {
+        get { return _charName; }
+        set { if (_charName == "") _charName = value; }
+    }
+
+    private string _prompt = "";
+    public string Prompt
+    {
+        get { return _prompt; }
+        set { if (_prompt == "") _prompt = value; }
+    }
     // on each branch 1 etc declaration makes a new choice with empty string
     // and a new list of specific rewards in the rewards list
     // next line fills in text for declaration
@@ -20,13 +40,6 @@ public class ChoiceInfo
     public List<List<Tuple<RewardKeyword, int>>> Rewards =
         new List<List<Tuple<RewardKeyword, int>>>();
     public List<bool> ChoiceEarlyExits = new List<bool>();
-    // no need for the dictionary, can just list them -> is obvious 
-    // as soon as choice declaration is finished -> should name by (#branch_ID)_(#choice)
-    // so the third choice in an event (which is the 16th actual branch) would have the
-    // branches 16_1 , 16_2 , 16_3 
-    // and if any of the branches have an early exit associated with it
-    // would want to put that in the branch's dialogue that next is early_exit
-    public List<string> NextBranches = new List<string>();
     public Sprite Background = null;
     // key: index of choice in Choices, value: its dialogue's branch name
     public Dictionary<int, string> ChoiceDialogueDictionary =
@@ -35,8 +48,6 @@ public class ChoiceInfo
 
     public ChoiceInfo(string uniqueName)
     {
-        CharacterName = "";
-        Prompt = "";
         this.UniqueName = uniqueName;
     }
 
@@ -45,7 +56,8 @@ public class ChoiceInfo
         Choices.Add(dialogueLine);
         ChoiceEarlyExits.Add(earlyExit);
         Rewards.Add(new List<Tuple<RewardKeyword, int>>());
-        ChoiceDialogueDictionary.Add(Choices.Count, "");
+        // shouldnt add here as we dont know the name of the choice yet
+        //ChoiceDialogueDictionary.Add(Choices.Count, "");
     }
 
     public void AddReward(RewardKeyword keyword, int amount, int specificIndex = -1)

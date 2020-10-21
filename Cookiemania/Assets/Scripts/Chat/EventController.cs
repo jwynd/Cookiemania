@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using static ScriptConstants;
+using System.Linq;
 
 // carries through all the sequences for a single event
 // should be triggered by an event manager
@@ -44,7 +45,7 @@ public class EventController : MonoBehaviour
         }
         else
         {
-            throw new Exception("branch: " + nextBranch + 
+            Debug.LogError("branch: " + nextBranch + 
                 " not found in triggered event " + info.UniqueName);
         }
     }
@@ -67,7 +68,7 @@ public class EventController : MonoBehaviour
             EventManager.Instance.ChoicePrefab.
                 GetComponent<ChoiceController>().Initialize(branch.CharacterName,
                 branch.CharacterImage, branch.Prompt, branch.Choices,
-                branch.Rewards, branch.NextBranches, onChoiceComplete,
+                branch.Rewards, branch.ChoiceDialogueDictionary.Values.ToList(), onChoiceComplete,
                 branch.Background);
         }
     }
