@@ -3,6 +3,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class ChoiceController : MonoBehaviour
 {
@@ -74,7 +75,9 @@ public class ChoiceController : MonoBehaviour
         new List<List<Tuple<ScriptConstants.RewardKeyword, int>>>();
     private List<string> nextBranches = 
         new List<string>();
-
+    // used to get actual choice made
+    private List<int> choiceOrderAlias =
+        new List<int>();
     [HideInInspector]
     public delegate void OnComplete(string nextBranch, int choiceNumber, 
         List<Tuple<ScriptConstants.RewardKeyword, int>> rewardList );
@@ -151,10 +154,15 @@ public class ChoiceController : MonoBehaviour
         bgImage.color = bgImage.sprite == null ?
                 new Color(bgImage.color.r, bgImage.color.r, bgImage.color.r, 0) :
                 new Color(bgImage.color.r, bgImage.color.r, bgImage.color.r, originalAlpha);
+        choiceOrderAlias = Enumerable.Range(0, choices.Count).ToList();
+        // shuffling list
+        System.Random rnd = new System.Random();
+        choiceOrderAlias = choiceOrderAlias.Select(x => new { value = x, order = rnd.Next() })
+            .OrderBy(x => x.order).Select(x => x.value).ToList();
         for (int i = 0; i < choices.Count; i++)
         {
             choiceButtons[i].GetComponentInChildren<TMP_Text>().
-                text = choices[i];
+                text = choices[choiceOrderAlias[i]];
             choiceButtons[i].gameObject.SetActive(true);
         }
         myCanvas.enabled = true;
@@ -163,25 +171,26 @@ public class ChoiceController : MonoBehaviour
     private void EndChoice(int v)
     {
         EnableObjects(false);
-        runOnComplete.Invoke(nextBranches[v - 1], v, rewards[v - 1]);
+        Debug.Log("selected choice #" + v.ToString());
+        runOnComplete.Invoke(nextBranches[v], v + 1, rewards[v]);
     }
 
     // not great, but it was easier to give every button its own callback fn
     public void ChoiceOne()
     {
-        EndChoice(1);
+        EndChoice(choiceOrderAlias[0]);
     }
 
     public void ChoiceTwo()
     {
-        EndChoice(2);
+        EndChoice(choiceOrderAlias[1]);
     }
     public void ChoiceThree()
     {
-        EndChoice(3);
+        EndChoice(choiceOrderAlias[2]);
     }
     public void ChoiceFour()
     {
-        EndChoice(4);
+        EndChoice(choiceOrderAlias[3]);
     }
 }

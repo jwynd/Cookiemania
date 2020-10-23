@@ -174,12 +174,11 @@ public class EventManager : MonoBehaviour
         ref bool insideChoice, ref bool insideChoiceBranchDialogue,
         List<string> choiceDialogueIndicesToWriteTo)
     {
-        DialogueInfo dInfo;
         switch (value)
         {
             // required, denotes the start of an event and its UNIQUE name
             case BaseKeyword.Event:
-                EventCreation(trimmedText, out eInfo, out dInfo);
+                EventCreation(trimmedText, out eInfo);
                 break;
             // not required, just allows a branch to escape an event asap
             // makes the most recent branch point to "end" as next
@@ -378,7 +377,7 @@ public class EventManager : MonoBehaviour
     }
 
     private void EventCreation(List<string> trimmedText, 
-        out EventInfo eInfo, out DialogueInfo dInfo)
+        out EventInfo eInfo)
     {
         if (trimmedText.Count < 2)
         {
@@ -386,7 +385,6 @@ public class EventManager : MonoBehaviour
         }
         eInfo = new EventInfo(trimmedText[1].ToLowerInvariant().Trim(), characterDictionary);
         Debug.Log(eInfo.UniqueName);
-        dInfo = eInfo.GetLastDialogue();
     }
 
     private void ChoiceDeclarationComplete(EventInfo eInfo)
