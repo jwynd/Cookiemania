@@ -8,18 +8,23 @@ public class player : MonoBehaviour
     public GameObject theplayerfire;
     public GameObject piercebullet;
     public GameObject theplayershield;
+    public GameObject theplayershield2;
+    public GameObject theplayershield3;
     public Rigidbody2D rigidBody;
-    public Transform Player, direct1, direct2, direct3, direct4;
+    public Transform Player, direct1, direct2, direct3, direct4, direct5;
     public static int bulletlevel = 0;
     public static int bulletpiercelvl = 0;
+    public static int shieldWidth = 0;
 
     private void Start()
     {
+        shieldWidth = 2;
       if (PlayerData.Player != null)
         {
             Debug.Log("This is a full game playthrough PlayerData is Active");
             bulletlevel = PlayerData.Player.GunSpread;
             bulletpiercelvl = PlayerData.Player.Pierce;
+            shieldWidth = PlayerData.Player.ShieldWidth;
         }
       else
         {
@@ -89,10 +94,30 @@ public class player : MonoBehaviour
         }
         if (Input.GetButtonDown("Fire2"))
         {
-            GameObject go = Instantiate(theplayershield, transform.position, Quaternion.identity);
-            go.transform.parent = transform;
-            go.transform.parent = null;
-            soundmanager.Instance.PlayOneShot(soundmanager.Instance.shield);
+            if (shieldWidth < 1)
+            {
+                GameObject go = Instantiate(theplayershield, transform.position, Quaternion.identity);
+                go.transform.parent = transform;
+                go.transform.parent = null;
+                soundmanager.Instance.PlayOneShot(soundmanager.Instance.shield);
+            } else if (shieldWidth == 1)
+            {
+                GameObject go = Instantiate(theplayershield2, transform.position, Quaternion.identity);
+                go.transform.parent = transform;
+                go.transform.parent = null;
+                soundmanager.Instance.PlayOneShot(soundmanager.Instance.shield);
+            } else if (shieldWidth == 2)
+            {
+                GameObject go = Instantiate(theplayershield3, direct5.position, Quaternion.identity);
+                go.transform.parent = transform;
+                go.transform.parent = null;
+                soundmanager.Instance.PlayOneShot(soundmanager.Instance.shield);
+            }
+            else
+            {
+                Debug.Log("ERROR");
+                Debug.Log(shieldWidth);
+            }
         }
     }
 
