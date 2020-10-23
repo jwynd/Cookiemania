@@ -107,6 +107,7 @@ choice_end
 player
 
 # you can use italic, bold, underline html tags if you want
+# is kinda bugged rn but i'll get it completely debugged pretty soon
 
 > <i>Man</i> I'm hungry, I should get back to work
 
