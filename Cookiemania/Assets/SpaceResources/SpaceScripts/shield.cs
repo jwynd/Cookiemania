@@ -93,7 +93,13 @@ public class shield : MonoBehaviour
     {
         var textUIComp = GameObject.Find("Score").GetComponent<Text>();
         int score = int.Parse(textUIComp.text);
-
+        if(PlayerData.Player == null)
+        {
+            score += 3;
+            winmessage.coins = score;
+            losemessage.Lcoins = score / 2;
+            Debug.Log("this is a remote instance of space mini");
+        } else { 
         if (PlayerData.Player.incomelvl == 1)
         {
             score += 3;
@@ -118,7 +124,7 @@ public class shield : MonoBehaviour
             winmessage.coins = score;
             losemessage.Lcoins = score / 2;
         }
-
+        }
         textUIComp.text = score.ToString();
     }
     

@@ -1,7 +1,121 @@
 fileFormatVersion: 2
 guid: a306c551d979b7148890a16ce88f4d71
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -6774406351914938636
+    second: NEW_deploying_shield-Sheet2_0
+  - first:
+      213: -7305994299968240679
+    second: NEW_deploying_shield-Sheet2_1
+  - first:
+      213: -8593142946509337779
+    second: NEW_deploying_shield-Sheet2_2
+  - first:
+      213: -3797704277008963102
+    second: NEW_deploying_shield-Sheet2_3
+  - first:
+      213: 539501514505770721
+    second: NEW_deploying_shield-Sheet2_4
+  - first:
+      213: -2332307896117482686
+    second: NEW_deploying_shield-Sheet2_5
+  - first:
+      213: -4811631056356037789
+    second: NEW_deploying_shield-Sheet2_6
+  - first:
+      213: -1796544337487772963
+    second: NEW_deploying_shield-Sheet2_7
+  - first:
+      213: -6642697860894155801
+    second: NEW_deploying_shield-Sheet2_8
+  - first:
+      213: -2287715519716113884
+    second: NEW_deploying_shield-Sheet2_9
+  - first:
+      213: 3985769435586257311
+    second: NEW_deploying_shield-Sheet2_10
+  - first:
+      213: 1473257039855090702
+    second: NEW_deploying_shield-Sheet2_11
+  - first:
+      213: -8184153244742149644
+    second: NEW_deploying_shield-Sheet2_12
+  - first:
+      213: -2171829865276531183
+    second: NEW_deploying_shield-Sheet2_13
+  - first:
+      213: -1347565686994160192
+    second: NEW_deploying_shield-Sheet2_14
+  - first:
+      213: -2298318639169040175
+    second: NEW_deploying_shield-Sheet2_15
+  - first:
+      213: 8693971063962221248
+    second: NEW_deploying_shield-Sheet2_16
+  - first:
+      213: 7740105891413922573
+    second: NEW_deploying_shield-Sheet2_17
+  - first:
+      213: -3650167989789763172
+    second: NEW_deploying_shield-Sheet2_18
+  - first:
+      213: -254943864760883993
+    second: NEW_deploying_shield-Sheet2_19
+  - first:
+      213: -4180407022559112757
+    second: NEW_deploying_shield-Sheet2_20
+  - first:
+      213: 7685299955279905012
+    second: NEW_deploying_shield-Sheet2_21
+  - first:
+      213: -8368802021862899951
+    second: NEW_deploying_shield-Sheet2_22
+  - first:
+      213: -3055740864613963195
+    second: NEW_deploying_shield-Sheet2_23
+  - first:
+      213: -8901800589821633452
+    second: NEW_deploying_shield-Sheet2_24
+  - first:
+      213: 6153437693313870775
+    second: NEW_deploying_shield-Sheet2_25
+  - first:
+      213: 584886491330004430
+    second: NEW_deploying_shield-Sheet2_26
+  - first:
+      213: 8594322472427278566
+    second: NEW_deploying_shield-Sheet2_27
+  - first:
+      213: -3015351791446938945
+    second: NEW_deploying_shield-Sheet2_28
+  - first:
+      213: -6462343361871227010
+    second: NEW_deploying_shield-Sheet2_29
+  - first:
+      213: -1090685961408576076
+    second: NEW_deploying_shield-Sheet2_30
+  - first:
+      213: -6002748258202287410
+    second: NEW_deploying_shield-Sheet2_31
+  - first:
+      213: -5960591101008500379
+    second: NEW_deploying_shield-Sheet2_32
+  - first:
+      213: -99683578302568846
+    second: NEW_deploying_shield-Sheet2_33
+  - first:
+      213: -3988221883998971856
+    second: NEW_deploying_shield-Sheet2_34
+  - first:
+      213: 2281666106550499909
+    second: NEW_deploying_shield-Sheet2_35
+  - first:
+      213: -7703626790193492608
+    second: NEW_deploying_shield-Sheet2_36
+  - first:
+      213: 1213608694074028348
+    second: NEW_deploying_shield-Sheet2_37
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -40,7 +154,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -70,9 +184,819 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_0
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 123
+        width: 19
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51e21f8ee13c7d24da57a83ad8a202aa
+      internalID: -6774406351914938636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_1
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 136
+        width: 14
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed16ca0e8cc99324cbfe62f896363b35
+      internalID: -7305994299968240679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_2
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 97
+        width: 48
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7de7f1205aa37244aa1c9e37e667f34
+      internalID: -8593142946509337779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_3
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 94
+        width: 57
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ce23ca2b53f0f447b70201fe8eb2084
+      internalID: -3797704277008963102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_4
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 94
+        width: 57
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d4980c0e47dec54abdeac6c9cf46fd3
+      internalID: 539501514505770721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_5
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 93
+        width: 58
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f463968dbcf7d914db664af47913eda9
+      internalID: -2332307896117482686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_6
+      rect:
+        serializedVersion: 2
+        x: 632
+        y: 93
+        width: 58
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf42ffab943ca5f47bff2375b1caef81
+      internalID: -4811631056356037789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_7
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 93
+        width: 70
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ae8efd7930fe8c49a483b8eb1e10076
+      internalID: -1796544337487772963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_8
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 93
+        width: 70
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9d1271f44044db469724b2800487e8b
+      internalID: -6642697860894155801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_9
+      rect:
+        serializedVersion: 2
+        x: 902
+        y: 123
+        width: 19
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1479b2ec45616dd4aa6b85ec7847008d
+      internalID: -2287715519716113884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_10
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 136
+        width: 14
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50639276acb13f64f941cb474ae50cf4
+      internalID: 3985769435586257311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_11
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 101
+        width: 29
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60cdfb5553c76a74cbc406d4da88cbaa
+      internalID: 1473257039855090702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_12
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 104
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d822b5680b511d4888512da689eaab6
+      internalID: -8184153244742149644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_13
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 97
+        width: 36
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00d6ddf308dea094e9ffa48a2f8d51a5
+      internalID: -2171829865276531183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_14
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 110
+        width: 9
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f53004d51b0de8d46875919ab55c0574
+      internalID: -1347565686994160192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_15
+      rect:
+        serializedVersion: 2
+        x: 901
+        y: 104
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e54fba837b14b241a2444e7bbebb2d0
+      internalID: -2298318639169040175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_16
+      rect:
+        serializedVersion: 2
+        x: 909
+        y: 97
+        width: 36
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ba4ef7e50f6f1341bb130b5a3bf7279
+      internalID: 8693971063962221248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_17
+      rect:
+        serializedVersion: 2
+        x: 940
+        y: 110
+        width: 9
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07fbfddd5dcaa8d4a8920676212cc84d
+      internalID: 7740105891413922573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_18
+      rect:
+        serializedVersion: 2
+        x: 1003
+        y: 101
+        width: 29
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87e4f3606e0a5434d87151ada8be3118
+      internalID: -3650167989789763172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_19
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 44
+        width: 19
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f15352cef2c65046a3063e508d5173e
+      internalID: -254943864760883993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_20
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 57
+        width: 14
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36b9d5f9ab279e7409b44f88f8e61be2
+      internalID: -4180407022559112757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_21
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 18
+        width: 48
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e38d303ccbe5a6b4e9709656775f6be2
+      internalID: 7685299955279905012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_22
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 15
+        width: 57
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b59e0bd7a8932b4fba0a14cf9a7404f
+      internalID: -8368802021862899951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_23
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 15
+        width: 57
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e9856a9b6d58ba449935de7821095a4
+      internalID: -3055740864613963195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_24
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 14
+        width: 58
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6535ff3592c115e48b5a78c4a402f432
+      internalID: -8901800589821633452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_25
+      rect:
+        serializedVersion: 2
+        x: 632
+        y: 14
+        width: 58
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78523d508d9324d41bd4a8782c8f049d
+      internalID: 6153437693313870775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_26
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 14
+        width: 70
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c90e3861592e16e4ab6533492ab6b425
+      internalID: 584886491330004430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_27
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 14
+        width: 70
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffdecfe894711c1498aaa20ff6245ed9
+      internalID: 8594322472427278566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_28
+      rect:
+        serializedVersion: 2
+        x: 902
+        y: 44
+        width: 19
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 231b39dfe9461ec4484eaf9665f9fcec
+      internalID: -3015351791446938945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_29
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 57
+        width: 14
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d3d8b2ea77abb445b4f8fd0f2d77f9b
+      internalID: -6462343361871227010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_30
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 23
+        width: 11
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9558a0d620eadbe47a20c6c514f81311
+      internalID: -1090685961408576076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_31
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 27
+        width: 9
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0399f7080193b214695945d5888a2e22
+      internalID: -6002748258202287410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_32
+      rect:
+        serializedVersion: 2
+        x: 901
+        y: 23
+        width: 11
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f1f85f2dc855264db294d54991d26a5
+      internalID: -5960591101008500379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_33
+      rect:
+        serializedVersion: 2
+        x: 940
+        y: 27
+        width: 9
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29daea29769a43d47a2a6b1967340d0b
+      internalID: -99683578302568846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_34
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 18
+        width: 7
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13904488f9822ea48a29301064d810f7
+      internalID: -3988221883998971856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_35
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 18
+        width: 15
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a993d2ac281857b4fa012ef5c6d7ad99
+      internalID: 2281666106550499909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_36
+      rect:
+        serializedVersion: 2
+        x: 918
+        y: 18
+        width: 7
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44090838c3165234bb451c37a129976a
+      internalID: -7703626790193492608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEW_deploying_shield-Sheet2_37
+      rect:
+        serializedVersion: 2
+        x: 926
+        y: 18
+        width: 15
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dadfbd76a8362bd4fa64ceb49418d2b9
+      internalID: 1213608694074028348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
