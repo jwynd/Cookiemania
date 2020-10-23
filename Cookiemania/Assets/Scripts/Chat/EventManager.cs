@@ -370,9 +370,7 @@ public class EventManager : MonoBehaviour
         eInfo.GetLastDialogue().NextBranch = EventInfo.LAST_BRANCH;
         eInfo.GetLastDialogue().ExitsEvent = true;
         eventDictionary.Add(eInfo.UniqueName, eInfo);
-        var key = eInfo.UniqueName;
         eInfo = null;
-        eventDictionary[key].PrintInformation();
         return eInfo;
     }
 
@@ -384,7 +382,6 @@ public class EventManager : MonoBehaviour
             throw new Exception("event needs a name on declaration line");
         }
         eInfo = new EventInfo(trimmedText[1].ToLowerInvariant().Trim(), characterDictionary);
-        Debug.Log(eInfo.UniqueName);
     }
 
     private void ChoiceDeclarationComplete(EventInfo eInfo)
@@ -402,7 +399,6 @@ public class EventManager : MonoBehaviour
             eInfo.AddDialogue(new DialogueInfo(eInfo.BranchID.ToString(),
                 (string nextE) => { }, characterDictionary));
             choice.AddChoiceDialogueName(i, eInfo.GetLastDialogue().UniqueName);
-            choice.PrintInformation();
         }
         
     }
@@ -492,7 +488,10 @@ public class EventManager : MonoBehaviour
     {
 #if UNITY_EDITOR
         if (useTestMode)
-            eventController.RunEvent(eventDictionary.Values.First());
+            foreach (var runnableEvent in eventDictionary.Values)
+            {
+                eventController.RunEvent(runnableEvent);
+            }
 #endif
     }
 

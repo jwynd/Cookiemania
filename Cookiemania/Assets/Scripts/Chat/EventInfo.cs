@@ -187,6 +187,7 @@ public class EventInfo
     // will be using this to track parsing implementation progression
     public void PrintInformation()
     {
+        Debug.Log("Event: " + UniqueName);
         Debug.Log(string.Join(" ", BranchingDictionary));
         foreach (var dialogue in Dialogues)
         {

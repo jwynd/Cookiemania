@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-
 using static ScriptConstants;
+using General_Utilities;
+using System.Collections;
 
 
 // carries through all the sequences for a single event
@@ -12,12 +13,14 @@ using static ScriptConstants;
 public class EventController : MonoBehaviour
 {
     private EventInfo info;
+    private List<EventInfo> eventQueue = new List<EventInfo>();
     // has some info that needs to be processed after the dialogue plays
     private DialogueInfo lastDialoguePlayed = null;
 
     public DialogueController.OnComplete onDialogueComplete;
 
     public ChoiceController.OnComplete onChoiceComplete;
+    private bool runningDialogueEvent;
 
     public void DialogueComplete(string nextBranch)
     {
@@ -43,6 +46,7 @@ public class EventController : MonoBehaviour
             // must be last
             if (lastDialoguePlayed.ExitsEvent)
             {
+                lastDialoguePlayed = null;
                 EventComplete();
                 return;
             }
@@ -97,6 +101,13 @@ public class EventController : MonoBehaviour
     public void RunEvent(EventInfo eventInfo)
     {
         // reference copy, we want to effect the original
+        
+        if (runningDialogueEvent)
+        {
+            eventQueue.Add(eventInfo);
+            return;
+        }
+        eventInfo.PrintInformation();
         info = eventInfo;
         info.EventListening = false;
         if (!info.RequiresDialogueControl)
@@ -104,6 +115,7 @@ public class EventController : MonoBehaviour
             EventComplete();
             return;
         }
+        runningDialogueEvent = true;
         NextBranch(EventInfo.FIRST_BRANCH);
     }
 
@@ -111,5 +123,10 @@ public class EventController : MonoBehaviour
     {
         EventManager.Instance.EventComplete(
             info.UniqueName, info.EventCompleteReward);
+        runningDialogueEvent = false;
+        if (eventQueue.Count > 0)
+        {
+            RunEvent(eventQueue.PopFront());
+        }
     }
 }
