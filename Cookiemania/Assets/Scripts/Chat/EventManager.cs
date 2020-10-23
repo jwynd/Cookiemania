@@ -2,8 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
 using UnityEngine;
+
 using static ScriptConstants;
 
 public class EventManager : MonoBehaviour
@@ -81,6 +81,7 @@ public class EventManager : MonoBehaviour
             CharacterInfo lastCharacterDesignated = null;
             bool insideChoice = false;
             bool insideChoiceBranchDialogue = false;
+            List<string> choiceDialogueIndicesToWriteTo = new List<string>();
             EventInfo eInfo = null;
             var texts = asset.text.Split('\n');
 
@@ -98,6 +99,7 @@ public class EventManager : MonoBehaviour
                 trimmedText[0] = trimmedText.First().ToLowerInvariant().Trim();
                 if (trimmedText.First()[0] == DIALOGUE)
                 {
+                    var textLine = ExtractDialogue(trimmedText);
                     // only unset this when we hit the choice_end or branch_start keywords
                     if (insideChoice && !insideChoiceBranchDialogue)
                     {
@@ -107,7 +109,6 @@ public class EventManager : MonoBehaviour
                         // one line of text.
                         //throw new NotImplementedException();
                         var choice = eInfo.GetLastChoice();
-                        var textLine = ExtractDialogue(trimmedText);
                         if (choice.Prompt == "")
                             choice.Prompt = textLine;
                         else
@@ -117,6 +118,8 @@ public class EventManager : MonoBehaviour
                     {
                         // need to make sure we fill the correct dialogue, not just 
                         // the most recent one
+                        eInfo.MultiDialogueWrite(choiceDialogueIndicesToWriteTo, textLine, 
+                            lastCharacterDesignated.UniqueName);
                     }
                     else
                     {
@@ -126,7 +129,8 @@ public class EventManager : MonoBehaviour
                     continue;
                 }
                 ParsePossibleKeyword(ref lastCharacterDesignated, ref insideChoice, 
-                    ref insideChoiceBranchDialogue, ref eInfo, trimmedText);
+                    ref insideChoiceBranchDialogue, ref eInfo, trimmedText,
+                    choiceDialogueIndicesToWriteTo);
             }
         }
 
@@ -134,7 +138,8 @@ public class EventManager : MonoBehaviour
 
     private void ParsePossibleKeyword(ref CharacterInfo lastCharacterDesignated, 
         ref bool insideChoice, ref bool insideBranchDeclaration, 
-        ref EventInfo eInfo, List<string> trimmedText)
+        ref EventInfo eInfo, List<string> trimmedText, 
+        List<string> choiceDialogueIndicesToWriteTo)
     {
         var keywordMatch = trimmedText.First();
         if (BASE_KEYWORDS.TryGetValue(
@@ -142,7 +147,7 @@ public class EventManager : MonoBehaviour
         {
             ResolveKeyword(keyword, trimmedText, ref eInfo,
                 ref lastCharacterDesignated, ref insideChoice,
-                ref insideBranchDeclaration);
+                ref insideBranchDeclaration, choiceDialogueIndicesToWriteTo);
         }
         else if (charInfoDictionary.TryGetValue(keywordMatch,
             out lastCharacterDesignated))
@@ -166,7 +171,8 @@ public class EventManager : MonoBehaviour
 
     private void ResolveKeyword(BaseKeyword value, List<string> trimmedText, 
         ref EventInfo eInfo, ref CharacterInfo lastCharacterDesignated, 
-        ref bool insideChoice, ref bool insideChoiceBranchDialogue)
+        ref bool insideChoice, ref bool insideChoiceBranchDialogue,
+        List<string> choiceDialogueIndicesToWriteTo)
     {
         DialogueInfo dInfo;
         switch (value)
@@ -178,18 +184,19 @@ public class EventManager : MonoBehaviour
             // not required, just allows a branch to escape an event asap
             // makes the most recent branch point to "end" as next
             case BaseKeyword.EventEarlyEnd:
-                var earlyEnds = eInfo.GetLastChoice().ChoiceEarlyExits;
-                earlyEnds[earlyEnds.Count - 1] = true;
+                AddEarlyExitsToDialogue(eInfo, insideChoice, choiceDialogueIndicesToWriteTo);
+                BranchEnd(ref insideChoice, ref insideChoiceBranchDialogue);
                 break;
             // required, denotes the end of an event
             case BaseKeyword.EventEnd:
-                eInfo = EventComplete(eInfo);
+                eInfo = EventCreationComplete(eInfo);
                 break;
             case BaseKeyword.Choice:
                 ChoiceCreation(eInfo, ref insideChoice);
                 break;
             // required after all choice branches have finished their dialogue
             case BaseKeyword.ChoiceEnd:
+                BranchEnd(ref insideChoice, ref insideChoiceBranchDialogue);
                 ChoiceComplete(eInfo, ref insideChoice, ref insideChoiceBranchDialogue);
                 break;
             // declares a branch in a choice, different from branch start which is the start
@@ -200,11 +207,12 @@ public class EventManager : MonoBehaviour
             case BaseKeyword.BranchStart:
                 // still need to tell the dialogue grabbing thing that we want to write 
                 // to a specific choice branch :d
-                CreateChoiceBranch(eInfo, ref insideChoice, ref insideChoiceBranchDialogue);
+                CreateChoiceBranch(eInfo, trimmedText, ref insideChoice, 
+                    ref insideChoiceBranchDialogue, choiceDialogueIndicesToWriteTo);
                 break;
             // end of a branch's dialogue not the end of its declaration
             case BaseKeyword.BranchEnd:
-                insideChoiceBranchDialogue = false;
+                BranchEnd(ref insideChoice, ref insideChoiceBranchDialogue);
                 break;
             // the reward for choosing a specific choice
             case BaseKeyword.Reward:
@@ -213,16 +221,47 @@ public class EventManager : MonoBehaviour
                 AddRewardToChoice(trimmedText, eInfo, insideChoice);
                 break;
             case BaseKeyword.Trigger:
+                AddTriggeredEventsToDialogue(eInfo, trimmedText, insideChoice, choiceDialogueIndicesToWriteTo);
                 break;
             // immediately adds reward on branch being played
             case BaseKeyword.EventReward:
                 break;
             case BaseKeyword.BackgroundChange:
-
                 break;
             default:
                 throw new NotSupportedException("BaseKeyword does not yet support this");
         }
+    }
+
+    private void AddEarlyExitsToDialogue(EventInfo eInfo, bool insideChoice, List<string> choiceDialogueIndicesToWriteTo)
+    {
+        if (insideChoice)
+            eInfo.MultiEarlyExitWrite(choiceDialogueIndicesToWriteTo);
+        else
+            eInfo.GetLastDialogue().ExitsEvent = true;
+    }
+
+    private void AddTriggeredEventsToDialogue(EventInfo eInfo, List<string> trimmedText, 
+        bool insideChoice, List<string> choiceDialogueIndicesToWriteTo)
+    {
+        var eventName = trimmedText[1].ToLowerInvariant().Trim();
+        if (insideChoice)
+        {
+            eInfo.MultiEventTriggerWrite(choiceDialogueIndicesToWriteTo, eventName);
+        }
+        else
+        {
+            // obviously the trigger needs a second word: the name of the event getting triggered
+            eInfo.GetLastDialogue().DirectlyTriggeredEvents.Add(eventName);
+        }
+
+    }
+
+    // placeholder in case this should do something at some point
+    // branchend keyword is no longer doing anything though
+    private static void BranchEnd(ref bool insideChoice, ref bool insideChoiceBranchDialogue)
+    {
+        return;
     }
 
     private void ChoiceCreation(EventInfo eInfo, ref bool insideChoice)
@@ -279,18 +318,38 @@ public class EventManager : MonoBehaviour
     }
 
     private void CreateChoiceBranch(EventInfo eInfo, 
-        ref bool insideChoice, ref bool insideChoiceBranchDialogue)
+        List<string> trimmedText,
+        ref bool insideChoice, ref bool insideChoiceBranchDialogue,
+        List<string> choiceDialogueIndicesToWriteTo)
     {
         // closes the choice declaration here
         if (!insideChoice)
         {
             throw new Exception("must be in a choice to create choice branches");
         }
-        insideChoice = true;
         // gets flipped to true for choice declaration completion as the next
         // dialogues must be the dialogues associated with this choice
         insideChoiceBranchDialogue = true;
         ChoiceDeclarationComplete(eInfo);
+
+        insideChoice = true;
+        trimmedText.PopFront();
+        choiceDialogueIndicesToWriteTo.Clear();
+        var choice = eInfo.GetLastChoice();
+        foreach (var str in trimmedText)
+        {
+            // actual index is 1 less
+            var index = int.Parse(str) - 1;
+            if (choice.ChoiceDialogueDictionary.TryGetValue(index, out string name))
+            {
+                choiceDialogueIndicesToWriteTo.Add(name);
+            }
+            else
+            {
+                throw new Exception(index + " not found in choice dictionary");
+            }
+        }
+
     }
 
     private static void CreateBranch(EventInfo eInfo,
@@ -302,13 +361,15 @@ public class EventManager : MonoBehaviour
         infoToModify.AddChoice("");
     }
 
-    private EventInfo EventComplete(EventInfo eInfo)
+    private EventInfo EventCreationComplete(EventInfo eInfo)
     {
         if (eventDictionary.ContainsKey(eInfo.UniqueName))
         {
             throw new Exception("cannot add duplicate event name to event " +
                 "dictionary: " + eInfo.UniqueName);
         }
+        eInfo.GetLastDialogue().NextBranch = EventInfo.LAST_BRANCH;
+        eInfo.GetLastDialogue().ExitsEvent = true;
         eventDictionary.Add(eInfo.UniqueName, eInfo);
         var key = eInfo.UniqueName;
         eInfo = null;
@@ -336,12 +397,16 @@ public class EventManager : MonoBehaviour
                 eInfo.GetLastChoice().Prompt);
         }
         var choice = eInfo.GetLastChoice();
+        if (choice.ChoiceDialogueDictionary.Keys.Count == choice.Choices.Count)
+            return;
         for (var i = 0; i < choice.Choices.Count; i++)
         {
             eInfo.AddDialogue(new DialogueInfo(eInfo.BranchID.ToString(),
                 (string nextE) => { }, characterDictionary));
-            choice.ChoiceDialogueDictionary[i] = eInfo.GetLastDialogue().UniqueName;
+            choice.AddChoiceDialogueName(i, eInfo.GetLastDialogue().UniqueName);
+            choice.PrintInformation();
         }
+        
     }
 
     private bool ReadInContinues(List<string> trimmedText)
@@ -380,16 +445,11 @@ public class EventManager : MonoBehaviour
 
     private static string ExtractDialogue(List<string> trimmedText)
     {
-        if (trimmedText[0].Length > 1)
-        {
+        if (trimmedText[0].Length > 1) 
             trimmedText[0].Substring(1);
-        }
-        else
-        {
+        else 
             trimmedText.PopFront();
-        }
-        var dialogueLine = string.Join(" ", trimmedText.ToArray());
-        return dialogueLine;
+        return string.Join(" ", trimmedText.ToArray());
     }
 
     private void CreateCharDictionary(List<CharacterInfo> characterList,
@@ -432,7 +492,6 @@ public class EventManager : MonoBehaviour
 
     private void Start()
     {
-
 #if UNITY_EDITOR
         if (useTestMode)
             eventController.RunEvent(eventDictionary.Values.First());

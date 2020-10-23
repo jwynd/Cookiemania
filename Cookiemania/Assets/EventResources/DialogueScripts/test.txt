@@ -54,18 +54,20 @@ choices
 chip
 > Beat this guy up?
 
-branch 1
+# these dont need numbers here, they are in order tho
+# and will need numbers for branch_start
+
+branch
 reward morality -25
 reward money 2000
 > yes
 
-branch 2
-
+branch
 reward morality 15
 reward money 0
 > no thanks...
 
-branch 3
+branch
 reward morality 15
 reward money 0
 > what? no!
@@ -78,6 +80,9 @@ boss
 
 narrator
 > what... why would you do this?
+
+# these will only trigger after all the dialogue is complete
+# iow all the dialogue til the next choice will play
 trigger bad_ending_1
 
 event_end_early
@@ -86,17 +91,17 @@ event_end_early
 # the dialogue that happens after the branches are concluded
 
 # multiple branches can have the same start point
-# but partial dialogues cannot be shared (yet?)
+# their number is the order they're declared in
 branch_start 2 3
 chip
 > Fine, have it your way.
 > ._.
 > Just watch your back, mate.
 
-branch_end
-
 # this is required to let me know that all of the 
 # choice branches have been filled out
+# choice branches can be not filled in if desired
+# dialogue will just continue to next point
 choice_end
 
 player

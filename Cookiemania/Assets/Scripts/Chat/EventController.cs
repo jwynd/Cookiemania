@@ -1,9 +1,10 @@
-﻿using System.Collections;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using static ScriptConstants;
 using System.Linq;
+
+using static ScriptConstants;
+
 
 // carries through all the sequences for a single event
 // should be triggered by an event manager
@@ -11,7 +12,8 @@ using System.Linq;
 public class EventController : MonoBehaviour
 {
     private EventInfo info;
-    //private bool inChoice = false;
+    // has some info that needs to be processed after the dialogue plays
+    private DialogueInfo lastDialoguePlayed = null;
 
     public DialogueController.OnComplete onDialogueComplete;
 
@@ -32,12 +34,20 @@ public class EventController : MonoBehaviour
 
     private void NextBranch(string nextBranch)
     {
-        Debug.Log("running branch " + nextBranch);
-        if (nextBranch == EventInfo.LAST_BRANCH)
+        if (lastDialoguePlayed != null)
         {
-            EventComplete();
-            return;
+            // run through the post dialogue wrap ups (e.g. early exits 
+            // and event triggers)
+            
+
+            // must be last
+            if (lastDialoguePlayed.ExitsEvent)
+            {
+                EventComplete();
+                return;
+            }
         }
+        lastDialoguePlayed = null;
         if (info.BranchingDictionary.TryGetValue(nextBranch,
             out Tuple<bool, int> branchTuple))
         {
@@ -55,21 +65,24 @@ public class EventController : MonoBehaviour
         if (branchTuple.Item1)
         {
             // is dialogue, activate the dialogue controller
-            var branch = info.GetDialogue(branchTuple.Item2);
+            lastDialoguePlayed = info.GetDialogue(branchTuple.Item2);
             // char dictionary is handled on event manager awake
             EventManager.Instance.DialoguePrefab.
-                GetComponent<DialogueController>().Initialize(branch.Dialogues,
-                onDialogueComplete, branch.NextBranch, branch.Backgrounds);
+                GetComponent<DialogueController>().Initialize(lastDialoguePlayed.Dialogues,
+                onDialogueComplete, lastDialoguePlayed.NextBranch, lastDialoguePlayed.Backgrounds);
+            // sequence actions to take after dialogue completes e.g. early exits
+
         }
         else
         {
             // is choice, activate the choice controller
-            var branch = info.GetChoice(branchTuple.Item2);
+            lastDialoguePlayed = null;
+            var choiceInfo = info.GetChoice(branchTuple.Item2);
             EventManager.Instance.ChoicePrefab.
-                GetComponent<ChoiceController>().Initialize(branch.CharacterName,
-                branch.CharacterImage, branch.Prompt, branch.Choices,
-                branch.Rewards, branch.ChoiceDialogueDictionary.Values.ToList(), onChoiceComplete,
-                branch.Background);
+                GetComponent<ChoiceController>().Initialize(choiceInfo.CharacterName,
+                choiceInfo.CharacterImage, choiceInfo.Prompt, choiceInfo.Choices,
+                choiceInfo.Rewards, choiceInfo.ChoiceDialogueDictionary.Values.ToList(), onChoiceComplete,
+                choiceInfo.Background);
         }
     }
 

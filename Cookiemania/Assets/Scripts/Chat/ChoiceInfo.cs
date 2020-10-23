@@ -39,11 +39,12 @@ public class ChoiceInfo
     public List<string> Choices = new List<string>();
     public List<List<Tuple<RewardKeyword, int>>> Rewards =
         new List<List<Tuple<RewardKeyword, int>>>();
-    public List<bool> ChoiceEarlyExits = new List<bool>();
     public Sprite Background = null;
     // key: index of choice in Choices, value: its dialogue's branch name
     public Dictionary<int, string> ChoiceDialogueDictionary =
         new Dictionary<int, string>();
+    public Dictionary<string, int> ChoiceReverseDictionary =
+        new Dictionary<string, int>();
     public ChoiceController.OnComplete RunOnComplete;
 
     public ChoiceInfo(string uniqueName)
@@ -51,10 +52,9 @@ public class ChoiceInfo
         this.UniqueName = uniqueName;
     }
 
-    public void AddChoice(string dialogueLine, bool earlyExit = false)
+    public void AddChoice(string dialogueLine)
     {
         Choices.Add(dialogueLine);
-        ChoiceEarlyExits.Add(earlyExit);
         Rewards.Add(new List<Tuple<RewardKeyword, int>>());
         // shouldnt add here as we dont know the name of the choice yet
         //ChoiceDialogueDictionary.Add(Choices.Count, "");
@@ -72,6 +72,16 @@ public class ChoiceInfo
             new Tuple<RewardKeyword, int>(keyword, amount));
     }
 
+    public void AddChoiceDialogueName(int index, string name)
+    {
+        //if (ChoiceDialogueDictionary.ContainsKey(index) ||
+        //    ChoiceReverseDictionary.ContainsKey(name))
+        //    throw new Exception("both name and index must be unique and only set once" +
+        //        " for choice dialogue dictionaries :" + index.ToString() + " " + name);
+        ChoiceDialogueDictionary.Add(index, name);
+        ChoiceReverseDictionary.Add(name, index);
+    }
+
     public bool IsFilledOut()
     {
         // may need to check for having an oncomplete and 
@@ -81,9 +91,20 @@ public class ChoiceInfo
             Rewards.Count >= 1;
     }
 
+    public void PrintInformation()
+    {
+        Debug.Log("Choice Name: " + UniqueName);
+        Debug.Log("Prompt: " + Prompt);
+        Debug.Log("Character Name: " + CharacterName);
+        Debug.Log("Choices:\n" + string.Join(", ", Choices));
+        Debug.Log("Rewards:\n");
+        foreach (var reward in Rewards)
+            Debug.Log(string.Join(", ", reward));
+        Debug.Log("Choice Branch Name Dictionary:\n" + string.Join(", ", ChoiceDialogueDictionary));
+    }
+
     public ChoiceInfo(Sprite charImage, string charName, string choicePrompt,
         List<string> choices, List<List<Tuple<RewardKeyword, int>>> rewards,
-        List<bool> choiceHasEarlyEnd,
         ChoiceController.OnComplete onComplete, int choiceLimit = 4)
     {
         if (choices.Count > choiceLimit)
@@ -103,14 +124,9 @@ public class ChoiceInfo
         this.RunOnComplete = onComplete;
         this.Choices = new List<string>();
         this.Rewards = new List<List<Tuple<RewardKeyword, int>>>();
-        this.ChoiceEarlyExits = new List<bool>();
         foreach (var choice in choices)
         {
             this.Choices.Add(choice);
-        }
-        foreach (var earlyEnd in choiceHasEarlyEnd)
-        {
-            this.ChoiceEarlyExits.Add(earlyEnd);
         }
         foreach (var reward in rewards)
         {

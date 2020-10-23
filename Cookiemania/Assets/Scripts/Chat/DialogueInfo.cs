@@ -12,7 +12,11 @@ public class DialogueInfo
     // should be handled by event manager with the init dictionary only fn
     public Dictionary<string, Tuple<string, Sprite>> CharacterDictionary;
     public List<Sprite> Backgrounds;
-
+    // if true this event will exit the event
+    public bool ExitsEvent = false;
+    // all the events that this dialogue sequence will immediately trigger
+    // in order of trigger
+    public HashSet<string> DirectlyTriggeredEvents = new HashSet<string>();
     public string NextBranch;
     public string UniqueName;
 

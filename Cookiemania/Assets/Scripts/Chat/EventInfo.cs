@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityScript.Steps;
 
 [Serializable]
 public class EventInfo
@@ -79,6 +78,58 @@ public class EventInfo
         }
     }
 
+    // write to multiple dialogues (for choice branches that should have the same dialogue
+    // result
+    public void MultiDialogueWrite(List<string> dialogueBranchNames, 
+        string dialogueLine, string characterName)
+    {
+        var dialogues = GetAllDialogues(dialogueBranchNames);
+        foreach (var dialogue in dialogues)
+        {
+            dialogue.AddDialogue(dialogueLine, characterName);
+        }
+    }
+
+    public void MultiEventTriggerWrite(List<string> dialogueBranchNames, string eventName)
+    {
+        var dialogues = GetAllDialogues(dialogueBranchNames);
+        foreach (var dialogue in dialogues)
+        {
+            dialogue.DirectlyTriggeredEvents.Add(eventName);
+        }
+    }
+
+    public void MultiEarlyExitWrite(List<string> dialogueBranchNames)
+    {
+        var dialogues = GetAllDialogues(dialogueBranchNames);
+        foreach (var dialogue in dialogues)
+        {
+            dialogue.ExitsEvent = true;
+        }
+    }
+
+    private List<DialogueInfo> GetAllDialogues(List<string> dialogueBranchNames)
+    {
+        List<DialogueInfo> dialogues = new List<DialogueInfo>();
+        foreach (var name in dialogueBranchNames)
+        {
+            if (BranchingDictionary.TryGetValue(name, out Tuple<bool, int> dictionaryTuple))
+            {
+                if (!dictionaryTuple.Item1)
+                {
+                    throw new Exception("name is not a dialogue: " + name);
+                }
+                var dialogue = GetDialogue(dictionaryTuple.Item2);
+                dialogues.Add(dialogue);
+            }
+            else
+            {
+                throw new Exception("name not found for multi-dialogue writing: " + name);
+            }
+        }
+        return dialogues;
+    }
+
     public void AddDialogue(DialogueInfo dInfo, 
         bool isChoiceDialogueBranch = false)
     {
@@ -115,18 +166,20 @@ public class EventInfo
 
     public ChoiceInfo GetChoice(int index)
     {
-        if (index >= Choices.Count)
+        if (index >= Choices.Count || index < 0)
         {
-            throw new IndexOutOfRangeException();
+            Debug.LogError("index not in range: " + 
+                index + ", Range: " + Choices.Count);
         }
         return Choices[index];
     }
 
     public DialogueInfo GetDialogue(int index)
     {
-        if (index >= Dialogues.Count)
+        if (index >= Dialogues.Count || index < 0)
         {
-            throw new IndexOutOfRangeException();
+            Debug.LogError("index not in range: " + 
+                index + ", Range: " + Dialogues.Count);
         }
         return Dialogues[index];
     }
@@ -142,9 +195,7 @@ public class EventInfo
         }
         foreach (var choice in Choices)
         {
-            Debug.Log(choice.UniqueName);
-            Debug.Log(choice.Prompt);
-            Debug.Log(string.Join(" ", choice.Choices));
+            choice.PrintInformation();
         }
     }
 }
