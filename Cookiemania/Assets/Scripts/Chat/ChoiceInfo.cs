@@ -9,6 +9,7 @@ public class ChoiceInfo
     // need to register selected choices to the choices made list on the global variable
     // tracker
     public string UniqueName { get; private set; }
+    public int ChoiceLimit { get; private set; }
 
     // these variables are only able to be set once, since they're set from a script
 
@@ -47,9 +48,10 @@ public class ChoiceInfo
         new Dictionary<string, int>();
     public ChoiceController.OnComplete RunOnComplete;
 
-    public ChoiceInfo(string uniqueName)
+    public ChoiceInfo(string uniqueName, int choiceLimit = 4)
     {
         this.UniqueName = uniqueName;
+        this.ChoiceLimit = choiceLimit;
     }
 
     public void AddChoice(string dialogueLine)
@@ -82,13 +84,13 @@ public class ChoiceInfo
         ChoiceReverseDictionary.Add(name, index);
     }
 
-    public bool IsFilledOut()
+    public bool IsFilledOutAndCorrect()
     {
         // may need to check for having an oncomplete and 
         // for having a next event?
         return CharacterImage != null && CharacterName != "" &&
             Prompt != "" && Choices.Count >= 1 &&
-            Rewards.Count >= 1;
+            Rewards.Count >= 1 && Choices.Count <= ChoiceLimit;
     }
 
     public void PrintInformation()

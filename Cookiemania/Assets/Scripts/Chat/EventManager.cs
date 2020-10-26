@@ -386,10 +386,10 @@ public class EventManager : MonoBehaviour
 
     private void ChoiceDeclarationComplete(EventInfo eInfo)
     {
-        if (!eInfo.GetLastChoice().IsFilledOut())
+        if (!eInfo.GetLastChoice().IsFilledOutAndCorrect())
         {
-            throw new NotImplementedException("choice not completely filled out with prompt: " +
-                eInfo.GetLastChoice().Prompt);
+            eInfo.GetLastChoice().PrintInformation();
+            throw new Exception("above choice not correctly filled out");
         }
         var choice = eInfo.GetLastChoice();
         if (choice.ChoiceDialogueDictionary.Keys.Count == choice.Choices.Count)
