@@ -217,11 +217,13 @@ public class ScriptConstants
     {
         parsingInfo.EventInfo.GetLastDialogue().NextBranch = EventInfo.LAST_BRANCH;
         parsingInfo.EventInfo.GetLastDialogue().ExitsEvent = true;
-        if (!EventManager.Instance.AddEvent(parsingInfo.EventInfo))
+        if (parsingInfo.EventInfos.ContainsKey(parsingInfo.EventInfo.UniqueName))
         {
             throw new Exception("cannot add duplicate event name to event " +
                 "dictionary: " + parsingInfo.EventInfo.UniqueName);
         }
+        parsingInfo.EventInfos.Add(parsingInfo.EventInfo.UniqueName, 
+            parsingInfo.EventInfo);
         parsingInfo.EventInfo = null;
     }
 

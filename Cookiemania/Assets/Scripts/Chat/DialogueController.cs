@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -64,7 +65,7 @@ public class DialogueController : MonoBehaviour
     [HideInInspector]
     public int CharacterMax { get; private set; } = 140;
 
-    private Dictionary<string, Tuple<string, Sprite>> charDictionary = null;
+    private ReadOnlyDictionary<string, Tuple<string, Sprite>> charDictionary;
     private List<Tuple<string, string>> lines = null;
     // whenever background is null, dont change; when background is a new sprite
     // change it
@@ -77,9 +78,10 @@ public class DialogueController : MonoBehaviour
     private Tuple<string, string> currentLine;
     private float originalAlpha;
 
-    public void InitDictionaryOnly(Dictionary<string, Tuple<string, Sprite>> charDict)
+    public void InitDictionaryOnly(ReadOnlyDictionary<string, Tuple<string, Sprite>> charDict)
     {
-        charDictionary = charDict;
+        charDictionary = new ReadOnlyDictionary<string, Tuple<string, Sprite>>
+                (charDict);
     }
 
     public void Initialize(
@@ -87,7 +89,7 @@ public class DialogueController : MonoBehaviour
         OnComplete onComplete,
         string nextEvent,
         List<Sprite> backgroundChanges = null,
-        Dictionary<string, Tuple<string, Sprite>> characterDictionary = null)
+        ReadOnlyDictionary<string, Tuple<string, Sprite>> characterDictionary = null)
     {
         // deep copy so we can pop without ruining data in event system
         lines = dialogueLines.ConvertAll(
@@ -99,7 +101,8 @@ public class DialogueController : MonoBehaviour
         {
             // sprite should be changeable by event system
             // during dialogue if desired
-            charDictionary = characterDictionary;
+            charDictionary = new ReadOnlyDictionary<string, Tuple<string, Sprite>>
+                (characterDictionary);
         }
         if (charDictionary == null)
         {
@@ -196,7 +199,8 @@ public class DialogueController : MonoBehaviour
                 new Tuple<string, Sprite>(testDisplayNames[1], testSprites[1]);
             Initialize(testLines,
                 (string next) => Debug.Log("test complete, next branch is: " + next),
-                "last", testBGs, testCharDictionary);
+                "last", testBGs, 
+                new ReadOnlyDictionary<string, Tuple<string, Sprite>>(testCharDictionary));
         }
 #endif
     }

@@ -1,6 +1,7 @@
 ﻿using General_Utilities;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using UnityEngine;
 
@@ -23,12 +24,11 @@ public class EventManager : MonoBehaviour
     private List<CharacterInfo> characterList = new List<CharacterInfo>();
     [SerializeField]
     private bool useTestMode = true;
-    private Dictionary<string, Tuple<string, Sprite>> characterDictionary =
-        new Dictionary<string, Tuple<string, Sprite>>();
-    private Dictionary<string, CharacterInfo> charInfoDictionary =
-        new Dictionary<string, CharacterInfo>();
-    private Dictionary<string, EventInfo> eventDictionary =
-        new Dictionary<string, EventInfo>();
+
+    // these dictionaries are only initialized
+    private ReadOnlyDictionary<string, Tuple<string, Sprite>> characterDictionary;
+    private ReadOnlyDictionary<string, CharacterInfo> charInfoDictionary;
+    private ReadOnlyDictionary<string, EventInfo> eventDictionary;
 
     public static EventManager Instance { get; private set; }
 
@@ -80,8 +80,6 @@ public class EventManager : MonoBehaviour
             throw new Exception("event " + eventName + " not found");
         }
     }
-
-
     
     // in case something outside the event system wants to trigger an event, or 
     // if the event controller wants to trigger an event
@@ -101,14 +99,6 @@ public class EventManager : MonoBehaviour
     public bool HasEvent(string eventName)
     {
         return eventDictionary.ContainsKey(eventName);
-    }
-
-    public bool AddEvent(EventInfo eventInfo)
-    {
-        if (HasEvent(eventInfo.UniqueName))
-            return false;
-        eventDictionary.Add(eventInfo.UniqueName, eventInfo);
-        return true;
     }
 
     public void DistributeRewards(List<Tuple<RewardKeyword, int>> rewards)
@@ -137,45 +127,49 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    private void ReadInFiles(List<TextAsset> textAssets)
+    private void ParseEventScripts(List<TextAsset> textAssets)
     {
         char[] toTrim = { '\t' };
+        EventParsingInfo parsingInfo = new EventParsingInfo();
         foreach (var asset in textAssets)
         {
-            EventParsingInfo parsingInfo = new EventParsingInfo();
             parsingInfo.MaxChoices = choiceLimit;
             foreach (var text in asset.text.Split('\n'))
             {
                 parsingInfo.TrimmedLine = text.Trim(toTrim).Split(' ').ToList();
-                if (ReadInContinues(parsingInfo.TrimmedLine))
+                if (SkipLine(parsingInfo.TrimmedLine))
                 {
                     continue;
                 }
                 ParseDialogueOrKeyword(ref parsingInfo, charInfoDictionary);
             }
         }
-
+        eventDictionary = new ReadOnlyDictionary<string, EventInfo>
+            (parsingInfo.EventInfos);
     }
 
+    // you could argue ref is unnecessary, but these are static methods
+    // and invokers need to understand that anything marked ref can 
+    // change when going through this function
     private static void ParseDialogueOrKeyword(ref EventParsingInfo parsingInfo, 
-        Dictionary<string, CharacterInfo> charDictionary)
+        ReadOnlyDictionary<string, CharacterInfo> charDictionary)
     {
         // this first one needs to be lowercased and trimmed
         parsingInfo.TrimmedLine[0] = 
             parsingInfo.TrimmedLine[0].ToLowerInvariant().Trim();
         if (parsingInfo.TrimmedLine[0][0] == DIALOGUE)
         {
-            ParseDialogueLine(ref parsingInfo);
+            ResolveDialogueLine(ref parsingInfo);
         }
         else
         {
-            ParsePossibleKeyword(ref parsingInfo, charDictionary);
+            ParseKeyword(ref parsingInfo, charDictionary);
         }
     }
 
-    private static void ParseDialogueLine(ref EventParsingInfo parsingInfo)
+    private static void ResolveDialogueLine(ref EventParsingInfo parsingInfo)
     {
-        var textLine = ExtractDialogue(parsingInfo.TrimmedLine);
+        var textLine = ExtractDialogue(ref parsingInfo.TrimmedLine);
         // if not in choice
         if (!parsingInfo.IsChoiceIsChoiceDialogue.Item1)
         {
@@ -204,25 +198,19 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    private static void ParsePossibleKeyword(ref EventParsingInfo parsingInfo, 
-        Dictionary<string, CharacterInfo> charDictionary)
+    private static void ParseKeyword(ref EventParsingInfo parsingInfo,
+        ReadOnlyDictionary<string, CharacterInfo> charDictionary)
     {
         var keywordMatch = parsingInfo.TrimmedLine.First();
         if (BASE_KEYWORDS.TryGetValue(
             keywordMatch, out BaseKeyword keyword))
         {
-            ResolveKeyword(keyword, ref parsingInfo);
+            ResolveBaseKeyword(ref parsingInfo, keyword);
         }
         else if (charDictionary.TryGetValue(keywordMatch,
             out parsingInfo.CharacterInfo))
         {
-            if (parsingInfo.IsChoiceIsChoiceDialogue.Item1)
-            {
-                parsingInfo.EventInfo.GetLastChoice().CharacterImage = 
-                    parsingInfo.CharacterInfo.Sprite;
-                parsingInfo.EventInfo.GetLastChoice().CharacterName = 
-                    parsingInfo.CharacterInfo.DisplayName;
-            }
+            ResolveCharacterKeyword(ref parsingInfo);
         }
         else
         {
@@ -235,7 +223,18 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    private static void ResolveKeyword(BaseKeyword baseKey, ref EventParsingInfo parsingInfo)
+    private static void ResolveCharacterKeyword(ref EventParsingInfo parsingInfo)
+    {
+        if (parsingInfo.IsChoiceIsChoiceDialogue.Item1)
+        {
+            parsingInfo.EventInfo.GetLastChoice().CharacterImage =
+                parsingInfo.CharacterInfo.Sprite;
+            parsingInfo.EventInfo.GetLastChoice().CharacterName =
+                parsingInfo.CharacterInfo.DisplayName;
+        }
+    }
+
+    private static void ResolveBaseKeyword(ref EventParsingInfo parsingInfo, BaseKeyword baseKey)
     {
         if (KeywordActions.TryGetValue(baseKey,
             out ActionRef<EventParsingInfo> value))
@@ -246,7 +245,7 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    private static bool ReadInContinues(List<string> trimmedText)
+    private static bool SkipLine(List<string> trimmedText)
     {
         if (trimmedText.Count < 1)
         {
@@ -276,7 +275,7 @@ public class EventManager : MonoBehaviour
         dInfo.AddDialogue(extractedDialogue, lastCharacterDesignated.UniqueName);
     }
 
-    private static string ExtractDialogue(List<string> trimmedText)
+    private static string ExtractDialogue(ref List<string> trimmedText)
     {
         if (trimmedText[0].Length > 1)
             trimmedText[0].Substring(1);
@@ -285,12 +284,10 @@ public class EventManager : MonoBehaviour
         return string.Join(" ", trimmedText.ToArray());
     }
 
-    private void CreateCharDictionary(List<CharacterInfo> characterList,
-        out Dictionary<string, Tuple<string, Sprite>> charDictionary,
-        out Dictionary<string, CharacterInfo> charInfoDictionary)
+    private void CreateCharDictionary(List<CharacterInfo> characterList)
     {
-        charDictionary = new Dictionary<string, Tuple<string, Sprite>>();
-        charInfoDictionary = new Dictionary<string, CharacterInfo>();
+        var charDictionary = new Dictionary<string, Tuple<string, Sprite>>();
+        var charInfoDictionary = new Dictionary<string, CharacterInfo>();
         foreach (var character in characterList)
         {
             character.UniqueName = character.UniqueName.ToLowerInvariant();
@@ -303,6 +300,10 @@ public class EventManager : MonoBehaviour
                 new Tuple<string, Sprite>(character.DisplayName, character.Sprite));
             charInfoDictionary.Add(character.UniqueName, character);
         }
+        this.characterDictionary = new ReadOnlyDictionary<string, Tuple<string, Sprite>>
+            (charDictionary);
+        this.charInfoDictionary = new ReadOnlyDictionary<string, CharacterInfo>
+            (charInfoDictionary);
     }
 
 
@@ -316,11 +317,10 @@ public class EventManager : MonoBehaviour
         Instance = this;
         DialoguePrefab = Instantiate(dialoguePrefab);
         ChoicePrefab = Instantiate(choicePrefab);
-        CreateCharDictionary(characterList,
-            out characterDictionary, out charInfoDictionary);
+        CreateCharDictionary(characterList);
         DialoguePrefab.GetComponent<DialogueController>().
             InitDictionaryOnly(characterDictionary);
-        ReadInFiles(eventTextFiles);
+        ParseEventScripts(eventTextFiles);
     }
 
     private void Start()
