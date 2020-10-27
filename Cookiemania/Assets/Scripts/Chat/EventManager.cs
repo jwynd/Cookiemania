@@ -80,92 +80,84 @@ public class EventManager : MonoBehaviour
         char[] toTrim = { '\t' };
         foreach (var asset in textAssets)
         {
-            CharacterInfo lastCharacterDesignated = null;
-            Tuple<bool, bool> choiceBools = new Tuple<bool, bool>(false, false);
-            List<string> choiceDialogueIndicesToWriteTo = new List<string>();
-            EventInfo eInfo = null;
-            var texts = asset.text.Split('\n');
+            EventParsingInfo parsingInfo = new EventParsingInfo();
 
             // will swap back to foreach loop if i dont end up needing the index
-            foreach (var text in texts)
+            foreach (var text in asset.text.Split('\n'))
             {
-                var trimmedText = text.Trim(toTrim).Split(' ').ToList();
-                if (ReadInContinues(trimmedText))
+                parsingInfo.TrimmedLine = text.Trim(toTrim).Split(' ').ToList();
+                if (ReadInContinues(parsingInfo.TrimmedLine))
                 {
                     continue;
                 }
-                DialogueOrKeyword(ref lastCharacterDesignated,
-                    choiceDialogueIndicesToWriteTo, ref eInfo, trimmedText,
-                    ref choiceBools);
+                ParseDialogueOrKeyword(ref parsingInfo);
             }
         }
 
     }
 
-    private void DialogueOrKeyword(ref CharacterInfo lastCharacterDesignated,
-        List<string> choiceDialogueIndicesToWriteTo, ref EventInfo eInfo,
-        List<string> trimmedText, ref Tuple<bool, bool> choiceBools)
+    private void ParseDialogueOrKeyword(ref EventParsingInfo parsingInfo)
     {
         // this first one needs to be lowercased and trimmed
-        trimmedText[0] = trimmedText.First().ToLowerInvariant().Trim();
-        if (trimmedText.First()[0] == DIALOGUE)
+        parsingInfo.TrimmedLine[0] = parsingInfo.TrimmedLine.First().ToLowerInvariant().Trim();
+        if (parsingInfo.TrimmedLine.First()[0] == DIALOGUE)
         {
-            ParseDialogueLine(lastCharacterDesignated, choiceDialogueIndicesToWriteTo,
-                eInfo, trimmedText, choiceBools);
+            ParseDialogueLine(ref parsingInfo);
         }
         else
         {
-            ParsePossibleKeyword(ref lastCharacterDesignated, ref eInfo, trimmedText,
-                choiceDialogueIndicesToWriteTo, ref choiceBools);
+            ParsePossibleKeyword(ref parsingInfo);
         }
     }
 
-    private void ParseDialogueLine(CharacterInfo lastCharacterDesignated,
-        List<string> choiceDialogueIndicesToWriteTo, EventInfo eInfo,
-        List<string> trimmedText, Tuple<bool, bool> choiceBools)
+    private void ParseDialogueLine(ref EventParsingInfo parsingInfo)
     {
-        var textLine = ExtractDialogue(trimmedText);
-        // only unset this when we hit the choice_end or branch_start keywords
-        if (choiceBools.Item1 && !choiceBools.Item2)
+        var textLine = ExtractDialogue(parsingInfo.TrimmedLine);
+        // if not in choice
+        if (!parsingInfo.IsChoiceIsChoiceDialogue.Item1)
         {
-            var choice = eInfo.GetLastChoice();
+            AddToDialogue(textLine, parsingInfo.CharacterInfo,
+                parsingInfo.EventInfo.GetLastDialogue());
+            return;
+        }
+        // if in choice declaration
+        if (!parsingInfo.IsChoiceIsChoiceDialogue.Item2)
+        {
+            var choice = parsingInfo.EventInfo.GetLastChoice();
             if (choice.Prompt == "")
                 choice.Prompt = textLine;
             else
                 choice.Choices[choice.Choices.Count - 1] = textLine;
         }
-        else if (choiceBools.Item1 && choiceBools.Item2)
+        // if in choice dialogue branch
+        else
         {
             // need to make sure we fill the correct dialogue, not just 
             // the most recent one
-            eInfo.MultiDialogueWrite(choiceDialogueIndicesToWriteTo, textLine,
-                lastCharacterDesignated.UniqueName);
-        }
-        else
-        {
-            AddToDialogue(trimmedText, lastCharacterDesignated,
-                eInfo.GetLastDialogue());
+            parsingInfo.EventInfo.MultiDialogueWrite(
+                parsingInfo.ChoiceDialoguesToMultiWrite, 
+                textLine,
+                parsingInfo.CharacterInfo.UniqueName);
         }
     }
 
-    private void ParsePossibleKeyword(ref CharacterInfo lastCharacterDesignated,
-        ref EventInfo eInfo, List<string> trimmedText,
-        List<string> choiceDialogueIndicesToWriteTo, ref Tuple<bool, bool> choiceBools)
+    private void ParsePossibleKeyword(ref EventParsingInfo parsingInfo)
     {
-        var keywordMatch = trimmedText.First();
+        var keywordMatch = parsingInfo.TrimmedLine.First();
         if (BASE_KEYWORDS.TryGetValue(
             keywordMatch, out BaseKeyword keyword))
         {
-            ResolveKeyword(keyword, trimmedText, ref eInfo,
-                choiceDialogueIndicesToWriteTo, ref choiceBools);
+            ResolveKeyword(keyword, ref parsingInfo);
         }
         else if (charInfoDictionary.TryGetValue(keywordMatch,
-            out lastCharacterDesignated))
+            out parsingInfo.CharacterInfo))
         {
-            if (choiceBools.Item1)
+            if (parsingInfo.IsChoiceIsChoiceDialogue.Item1)
             {
-                eInfo.GetLastChoice().CharacterImage = lastCharacterDesignated.Sprite;
-                eInfo.GetLastChoice().CharacterName = lastCharacterDesignated.DisplayName;
+                parsingInfo.EventInfo.GetLastChoice().CharacterImage = 
+                    parsingInfo.CharacterInfo.Sprite;
+                parsingInfo.EventInfo.GetLastChoice().CharacterName = 
+                    parsingInfo.CharacterInfo.DisplayName;
             }
         }
         else
@@ -179,14 +171,11 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    private void ResolveKeyword(BaseKeyword baseKey, List<string> trimmedText,
-        ref EventInfo eInfo, List<string> choiceBranches, 
-        ref Tuple<bool, bool> choiceBools)
+    private void ResolveKeyword(BaseKeyword baseKey, ref EventParsingInfo parsingInfo)
     {
         if (KeywordActions.TryGetValue(baseKey,
-            out ActionRef<EventInfo, List<string>, List<string>,
-            Tuple<bool, bool>> value))
-            value.Invoke(ref eInfo, ref trimmedText, ref choiceBranches, ref choiceBools);
+            out ActionRef<EventParsingInfo> value))
+            value.Invoke(ref parsingInfo);
         else
         {
             throw new NotSupportedException("the Action dictionary does not yet support this");
@@ -211,20 +200,16 @@ public class EventManager : MonoBehaviour
         return false;
     }
 
-    private void AddToDialogue(List<string> trimmedText,
+    private void AddToDialogue(string extractedDialogue,
         CharacterInfo lastCharacterDesignated,
-        DialogueInfo dInfo
-        )
+        DialogueInfo dInfo)
     {
         if (lastCharacterDesignated == null)
         {
             Debug.LogError("no character designated for dialogue");
             return;
         }
-        // remove that key character beginning if it was accidentally attached to 
-        // next word
-        string dialogueLine = ExtractDialogue(trimmedText);
-        dInfo.AddDialogue(dialogueLine, lastCharacterDesignated.UniqueName);
+        dInfo.AddDialogue(extractedDialogue, lastCharacterDesignated.UniqueName);
     }
 
     private static string ExtractDialogue(List<string> trimmedText)

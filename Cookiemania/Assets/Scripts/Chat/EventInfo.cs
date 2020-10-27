@@ -11,11 +11,7 @@ public class EventInfo
 
     public Tuple<ScriptConstants.TriggerKeyword, int> TriggeringAction;
     public string UniqueName { get; private set; }
-    // this can only point to branches that are not dialogues inside of a 
-    // choice
-    // so normal dialogue branches and choice branches can get pointed to
-    public string MostRecentBranch { get; private set; }
-    public string MostRecentNormalDialogue { get; private set; }
+
     // set it to false when event runs first time
     public bool EventListening = true;
     // these events should all need the dialogue box stuff, but if they dont
@@ -128,19 +124,13 @@ public class EventInfo
         return dialogues;
     }
 
-    public void AddDialogue(DialogueInfo dInfo, 
-        bool isChoiceDialogueBranch = false)
+    public void AddDialogue(DialogueInfo dInfo)
     {
         //SetNextBranch(nextBranch, precedingBranch);
         Dialogues.Add(dInfo);
         BranchID++;
         BranchingDictionary.Add(dInfo.UniqueName,
             new Tuple<bool, int>(true, Dialogues.Count - 1));
-        if (!isChoiceDialogueBranch)
-        {
-            MostRecentBranch = dInfo.UniqueName;
-            MostRecentNormalDialogue = MostRecentBranch;
-        }
     }
 
     public void AddChoice(ChoiceInfo cInfo)
@@ -149,7 +139,6 @@ public class EventInfo
         BranchID++;
         BranchingDictionary.Add(cInfo.UniqueName,
             new Tuple<bool, int>(false, Choices.Count - 1));
-        MostRecentBranch = cInfo.UniqueName;
     }
 
     public ChoiceInfo GetLastChoice()

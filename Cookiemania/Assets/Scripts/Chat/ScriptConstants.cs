@@ -106,82 +106,64 @@ public class ScriptConstants
         { "money" , RewardKeyword.Money },
     };
 
-    public delegate void ActionRef<T1, T2, T3, T4>(ref T1 arg1, ref T2 arg2, ref T3 arg3, ref T4 arg4);
+    public delegate void ActionRef<T1>(ref T1 arg1);
 
 
     // the choice bools (tuple bool) should be named (insideChoice, insideChoiceDialogueBranch)
-    public static readonly Dictionary<BaseKeyword, ActionRef<EventInfo, List<string>,
-        List<string>, Tuple<bool, bool>>> KeywordActions =
-        new Dictionary<BaseKeyword, ActionRef<EventInfo, List<string>,
-        List<string>, Tuple<bool, bool>>>
+    public static readonly Dictionary<BaseKeyword, ActionRef<EventParsingInfo>> KeywordActions =
+        new Dictionary<BaseKeyword, ActionRef<EventParsingInfo>>
         {
-            {BaseKeyword.BackgroundChange, new ActionRef<EventInfo, List<string>,
-                List<string>, Tuple<bool, bool>>(BackgroundChangeAction) },
-            {BaseKeyword.Branch, new ActionRef<EventInfo, List<string>,
-                List<string>, Tuple<bool, bool>>(BranchAction) },
-            {BaseKeyword.BranchEnd, new ActionRef<EventInfo, List<string>,
-                List<string>, Tuple<bool, bool>>(BranchEndAction) },
-            {BaseKeyword.BranchStart, new ActionRef<EventInfo, List<string>,
-                List<string>, Tuple<bool, bool>>(BranchStartAction) },
-            {BaseKeyword.Choice, new ActionRef<EventInfo, List<string>,
-                List<string>, Tuple<bool, bool>>(ChoiceAction) },
-            {BaseKeyword.ChoiceEnd,new ActionRef<EventInfo, List<string>,
-                List<string>, Tuple<bool, bool>>(ChoiceEndAction) },
-            {BaseKeyword.Event, new ActionRef<EventInfo, List<string>,
-                List<string>, Tuple<bool, bool>>(EventAction) },
-            {BaseKeyword.EventEarlyEnd, new ActionRef<EventInfo, List<string>,
-                List<string>, Tuple<bool, bool>>(EventEarlyEndAction) },
-            {BaseKeyword.EventEnd, new ActionRef<EventInfo, List<string>,
-                List<string>, Tuple<bool, bool>>(EventEndAction) },
-            {BaseKeyword.EventReward, new ActionRef<EventInfo, List<string>,
-                List<string>, Tuple<bool, bool>>(EventRewardAction) },
-            {BaseKeyword.Reward, new ActionRef<EventInfo, List<string>,
-                List<string>, Tuple<bool, bool>>(RewardAction) },
-            {BaseKeyword.Trigger, new ActionRef<EventInfo, List<string>,
-                List<string>, Tuple<bool, bool>>(TriggerAction) },
+            {BaseKeyword.BackgroundChange, new ActionRef<EventParsingInfo>(BackgroundChangeAction) },
+            {BaseKeyword.Branch, new ActionRef<EventParsingInfo>(BranchAction) },
+            {BaseKeyword.BranchEnd, new ActionRef<EventParsingInfo>(BranchEndAction) },
+            {BaseKeyword.BranchStart, new ActionRef<EventParsingInfo>(BranchStartAction) },
+            {BaseKeyword.Choice, new ActionRef<EventParsingInfo>(ChoiceAction) },
+            {BaseKeyword.ChoiceEnd, new ActionRef<EventParsingInfo>(ChoiceEndAction) },
+            {BaseKeyword.Event, new ActionRef<EventParsingInfo>(EventAction) },
+            {BaseKeyword.EventEarlyEnd, new ActionRef<EventParsingInfo>(EventEarlyEndAction) },
+            {BaseKeyword.EventEnd, new ActionRef<EventParsingInfo>(EventEndAction) },
+            {BaseKeyword.EventReward, new ActionRef<EventParsingInfo>(EventRewardAction) },
+            {BaseKeyword.Reward, new ActionRef<EventParsingInfo>(RewardAction) },
+            {BaseKeyword.Trigger, new ActionRef<EventParsingInfo>(TriggerAction) },
         };
 
     // item1 of choice bools is whether in choice, item2 is whether in a choice branch's dialogue
-    public static void BackgroundChangeAction(ref EventInfo eventInfo, ref List<string> line,
-        ref List<string> choiceBranches, ref Tuple<bool, bool> choiceBools)
+    public static void BackgroundChangeAction(ref EventParsingInfo parsingInfo)
     {
         throw new NotImplementedException();
     }
 
-    public static void BranchAction(ref EventInfo eventInfo, ref List<string> line,
-        ref List<string> choiceBranches, ref Tuple<bool, bool> choiceBools)
+    public static void BranchAction(ref EventParsingInfo parsingInfo)
     {
-        choiceBools = new Tuple<bool, bool>(true, false);
-        eventInfo.GetLastChoice().AddChoice("");
+        parsingInfo.IsChoiceIsChoiceDialogue = new Tuple<bool, bool>(true, false);
+        parsingInfo.EventInfo.GetLastChoice().AddChoice("");
     }
 
-    public static void BranchEndAction(ref EventInfo eventInfo, ref List<string> line,
-        ref List<string> choiceBranches, ref Tuple<bool, bool> choiceBools)
+    public static void BranchEndAction(ref EventParsingInfo parsingInfo)
     {
         return;
     }
 
-    public static void BranchStartAction(ref EventInfo eventInfo, ref List<string> line,
-        ref List<string> choiceBranches, ref Tuple<bool, bool> choiceBools)
+    public static void BranchStartAction(ref EventParsingInfo parsingInfo)
     {
-        if (!choiceBools.Item1)
+        if (!parsingInfo.IsChoiceIsChoiceDialogue.Item1)
         {
             throw new Exception("must be in a choice to create choice branches");
         }
         // gets flipped to true for choice declaration completion as the next
         // dialogues must be the dialogues associated with this choice
-        ChoiceDeclarationComplete(eventInfo);
-        choiceBools = new Tuple<bool, bool>(true, true);
-        line.PopFront();
-        choiceBranches.Clear();
-        var choice = eventInfo.GetLastChoice();
-        foreach (var str in line)
+        ChoiceDeclarationComplete(parsingInfo.EventInfo);
+        parsingInfo.IsChoiceIsChoiceDialogue = new Tuple<bool, bool>(true, true);
+        parsingInfo.TrimmedLine.PopFront();
+        parsingInfo.ChoiceDialoguesToMultiWrite.Clear();
+        var choice = parsingInfo.EventInfo.GetLastChoice();
+        foreach (var str in parsingInfo.TrimmedLine)
         {
             // actual index is 1 less
             var index = int.Parse(str) - 1;
             if (choice.ChoiceDialogueDictionary.TryGetValue(index, out string name))
             {
-                choiceBranches.Add(name);
+                parsingInfo.ChoiceDialoguesToMultiWrite.Add(name);
             }
             else
             {
@@ -190,116 +172,93 @@ public class ScriptConstants
         }
     }
 
-    public static void ChoiceAction(ref EventInfo eventInfo, ref List<string> line,
-        ref List<string> choiceBranches, ref Tuple<bool, bool> choiceBools)
+    public static void ChoiceAction(ref EventParsingInfo parsingInfo)
     {
-        choiceBools = new Tuple<bool, bool>(true, false);
-        eventInfo.AddChoice(new ChoiceInfo(eventInfo.BranchID.ToString()));
+        parsingInfo.IsChoiceIsChoiceDialogue = new Tuple<bool, bool>(true, false);
+        parsingInfo.EventInfo.AddChoice(new ChoiceInfo(parsingInfo.EventInfo.BranchID.ToString()));
         // need to add this choice's branch name to whatever the previous dialogue branch was
-        eventInfo.SetNextBranch(eventInfo.GetLastDialogue().UniqueName,
-            eventInfo.GetLastChoice().UniqueName);
+        parsingInfo.EventInfo.SetNextBranch(parsingInfo.EventInfo.GetLastDialogue().UniqueName,
+            parsingInfo.EventInfo.GetLastChoice().UniqueName);
     }
 
-    public static void ChoiceEndAction(ref EventInfo eventInfo, ref List<string> line,
-        ref List<string> choiceBranches, ref Tuple<bool, bool> choiceBools)
+    public static void ChoiceEndAction(ref EventParsingInfo parsingInfo)
     {
-        BranchEndAction(ref eventInfo, ref line, ref choiceBranches, ref choiceBools);
-        choiceBools = new Tuple<bool, bool>(false, false);
+        BranchEndAction(ref parsingInfo);
+        parsingInfo.IsChoiceIsChoiceDialogue = new Tuple<bool, bool>(false, false);
         // also create next dialogue here and point choices to that dialogue
-        var choice = eventInfo.GetLastChoice();
-        eventInfo.AddDialogue(new DialogueInfo(eventInfo.BranchID.ToString()));
-        var nextBranch = eventInfo.GetLastDialogue().UniqueName;
+        var choice = parsingInfo.EventInfo.GetLastChoice();
+        parsingInfo.EventInfo.AddDialogue(new DialogueInfo(parsingInfo.EventInfo.BranchID.ToString()));
+        var nextBranch = parsingInfo.EventInfo.GetLastDialogue().UniqueName;
         foreach (var ch in choice.ChoiceDialogueDictionary.Values)
         {
-            eventInfo.SetNextBranch(ch, nextBranch);
+            parsingInfo.EventInfo.SetNextBranch(ch, nextBranch);
         }
     }
 
-    public static void EventAction(ref EventInfo eventInfo, ref List<string> line,
-        ref List<string> choiceBranches, ref Tuple<bool, bool> choiceBools)
+    public static void EventAction(ref EventParsingInfo parsingInfo)
     {
-        if (line.Count < 2)
+        if (parsingInfo.TrimmedLine.Count < 2)
         {
-            throw new Exception("event needs a name on declaration line");
+            throw new Exception("event needs a name on declaration parsingInfo.TrimmedLine");
         }
-        eventInfo = new EventInfo(line[1].ToLowerInvariant().Trim());
+        parsingInfo.EventInfo = new EventInfo(parsingInfo.TrimmedLine[1].ToLowerInvariant().Trim());
     }
 
-    public static void EventEarlyEndAction(ref EventInfo eventInfo, ref List<string> line,
-        ref List<string> choiceBranches, ref Tuple<bool, bool> choiceBools)
+    public static void EventEarlyEndAction(ref EventParsingInfo parsingInfo)
     {
-        if (choiceBools.Item1)
-            eventInfo.MultiEarlyExitWrite(choiceBranches);
+        if (parsingInfo.IsChoiceIsChoiceDialogue.Item1)
+            parsingInfo.EventInfo.MultiEarlyExitWrite(parsingInfo.ChoiceDialoguesToMultiWrite);
         else
-            eventInfo.GetLastDialogue().ExitsEvent = true;
-        BranchEndAction(ref eventInfo, ref line, ref choiceBranches, ref choiceBools);
+            parsingInfo.EventInfo.GetLastDialogue().ExitsEvent = true;
+        BranchEndAction(ref parsingInfo);
     }
 
-    public static void EventEndAction(ref EventInfo eventInfo, ref List<string> line,
-        ref List<string> choiceBranches, ref Tuple<bool, bool> choiceBools)
+    public static void EventEndAction(ref EventParsingInfo parsingInfo)
     {
-        eventInfo.GetLastDialogue().NextBranch = EventInfo.LAST_BRANCH;
-        eventInfo.GetLastDialogue().ExitsEvent = true;
-        if (!EventManager.Instance.AddEvent(eventInfo))
+        parsingInfo.EventInfo.GetLastDialogue().NextBranch = EventInfo.LAST_BRANCH;
+        parsingInfo.EventInfo.GetLastDialogue().ExitsEvent = true;
+        if (!EventManager.Instance.AddEvent(parsingInfo.EventInfo))
         {
             throw new Exception("cannot add duplicate event name to event " +
-                "dictionary: " + eventInfo.UniqueName);
+                "dictionary: " + parsingInfo.EventInfo.UniqueName);
         }
-        eventInfo = null;
+        parsingInfo.EventInfo = null;
     }
 
-    public static void EventRewardAction(ref EventInfo eventInfo, ref List<string> line,
-        ref List<string> choiceBranches, ref Tuple<bool, bool> choiceBools)
+    public static void EventRewardAction(ref EventParsingInfo parsingInfo)
     {
-        if (choiceBools.Item1)
+        if (parsingInfo.IsChoiceIsChoiceDialogue.Item1)
         {
             throw new Exception("event complete rewards may not be declared inside a choice");
         }
-        eventInfo.EventCompleteReward.Add(GetRewardTuple(eventInfo, line));
+        parsingInfo.EventInfo.EventCompleteReward.Add(GetRewardTuple(parsingInfo.EventInfo, parsingInfo.TrimmedLine));
     }
 
-    public static void RewardAction(ref EventInfo eventInfo, ref List<string> line,
-        ref List<string> choiceBranches, ref Tuple<bool, bool> choiceBools)
+    public static void RewardAction(ref EventParsingInfo parsingInfo)
     {
-        if (!choiceBools.Item1)
+        if (!parsingInfo.IsChoiceIsChoiceDialogue.Item1)
         {
-            eventInfo.PrintInformation();
+            parsingInfo.EventInfo.PrintInformation();
             throw new Exception("can only provide normal rewards inside a choice" +
                 " declaration");
         }
-        var reward = GetRewardTuple(eventInfo, line);
-        eventInfo.GetLastChoice().AddReward(reward.Item1, reward.Item2);
+        var reward = GetRewardTuple(parsingInfo.EventInfo, parsingInfo.TrimmedLine);
+        parsingInfo.EventInfo.GetLastChoice().AddReward(reward.Item1, reward.Item2);
     }
 
-    private static Tuple<RewardKeyword, int> GetRewardTuple(EventInfo eventInfo, List<string> line)
-    {
-        if (line.Count < 3)
-        {
-            throw new Exception("reward command must specify the reward type and amount");
-        }
-        var rewardKey = line[1].ToLowerInvariant().Trim();
-        if (REWARD_KEYWORDS.TryGetValue(rewardKey, out RewardKeyword rewardType))
-        {
-            // failure is desired if it doesnt work
-            var rewardAmount = int.Parse(line[2].ToLowerInvariant().Trim());
-            return new Tuple<RewardKeyword, int>(rewardType, rewardAmount);
-        }
-        throw new Exception(
-            "reward key given is not in reward dictionary: " + rewardKey);
-    }
 
-    public static void TriggerAction(ref EventInfo eventInfo, ref List<string> line,
-        ref List<string> choiceBranches, ref Tuple<bool, bool> choiceBools)
+
+    public static void TriggerAction(ref EventParsingInfo parsingInfo)
     {
-        var eventName = line[1].ToLowerInvariant().Trim();
-        if (choiceBools.Item1)
+        var eventName = parsingInfo.TrimmedLine[1].ToLowerInvariant().Trim();
+        if (parsingInfo.IsChoiceIsChoiceDialogue.Item1)
         {
-            eventInfo.MultiEventTriggerWrite(choiceBranches, eventName);
+            parsingInfo.EventInfo.MultiEventTriggerWrite(parsingInfo.ChoiceDialoguesToMultiWrite, eventName);
         }
         else
         {
             // obviously the trigger needs a second word: the name of the event getting triggered
-            eventInfo.GetLastDialogue().DirectlyTriggeredEvents.Add(eventName);
+            parsingInfo.EventInfo.GetLastDialogue().DirectlyTriggeredEvents.Add(eventName);
         }
     }
 
@@ -318,6 +277,22 @@ public class ScriptConstants
             eventInfo.AddDialogue(new DialogueInfo(eventInfo.BranchID.ToString()));
             choice.AddChoiceDialogueName(i, eventInfo.GetLastDialogue().UniqueName);
         }
+    }
 
+    private static Tuple<RewardKeyword, int> GetRewardTuple(EventInfo eventInfo, List<string> line)
+    {
+        if (line.Count < 3)
+        {
+            throw new Exception("reward command must specify the reward type and amount");
+        }
+        var rewardKey = line[1].ToLowerInvariant().Trim();
+        if (REWARD_KEYWORDS.TryGetValue(rewardKey, out RewardKeyword rewardType))
+        {
+            // failure is desired if it doesnt work
+            var rewardAmount = int.Parse(line[2].ToLowerInvariant().Trim());
+            return new Tuple<RewardKeyword, int>(rewardType, rewardAmount);
+        }
+        throw new Exception(
+            "reward key given is not in reward dictionary: " + rewardKey);
     }
 }
