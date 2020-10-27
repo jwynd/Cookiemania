@@ -32,6 +32,8 @@
 
 # case insensitive name btw
 event test
+event_reward money 1000
+event_reward morality 0
 
 trigger week 1
 

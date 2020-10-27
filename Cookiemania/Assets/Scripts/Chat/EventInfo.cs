@@ -43,15 +43,13 @@ public class EventInfo
     private List<ChoiceInfo> Choices = new List<ChoiceInfo>();
 
     public EventInfo(string uniqueName, 
-        Dictionary<string, Tuple<string, Sprite>> characterDictionary, 
         bool hasDialogue = true)
     {
         UniqueName = uniqueName;
         BranchID = 0;
         if (hasDialogue)
         {
-            var dInfo = new DialogueInfo(BranchID.ToString(),
-            (string nextE) => { }, characterDictionary);
+            var dInfo = new DialogueInfo(BranchID.ToString());
             // adding a default dialogue to event info for first dialogue
             AddDialogue(dInfo);
             BranchingDictionary.Add(FIRST_BRANCH,
@@ -188,6 +186,7 @@ public class EventInfo
     public void PrintInformation()
     {
         Debug.Log("Event: " + UniqueName);
+        Debug.Log("Event completion rewards: " + string.Join(", ", EventCompleteReward));
         Debug.Log(string.Join(" ", BranchingDictionary));
         foreach (var dialogue in Dialogues)
         {

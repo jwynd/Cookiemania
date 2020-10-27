@@ -9,8 +9,7 @@ public class DialogueInfo
     // item 1 is the characters unique name, item 2 is their line
     public List<Tuple<string, string>> Dialogues;
     public DialogueController.OnComplete RunOnComplete;
-    // should be handled by event manager with the init dictionary only fn
-    public Dictionary<string, Tuple<string, Sprite>> CharacterDictionary;
+
     public List<Sprite> Backgrounds;
     // if true this event will exit the event
     public bool ExitsEvent = false;
@@ -22,8 +21,7 @@ public class DialogueInfo
 
     public DialogueInfo(
         string uniqueName,
-        DialogueController.OnComplete runOnComplete,
-        Dictionary<string, Tuple<string, Sprite>> characterDictionary,
+        DialogueController.OnComplete runOnComplete = null,
         string nextEvent = "",
         List<Tuple<string, string>> dialogues = null,
         List<Sprite> backgrounds = null)
@@ -31,7 +29,6 @@ public class DialogueInfo
         this.Dialogues = dialogues != null ?
             dialogues : new List<Tuple<string, string>>();
         this.RunOnComplete = runOnComplete;
-        this.CharacterDictionary = characterDictionary;
         this.NextBranch = nextEvent;
         this.UniqueName = uniqueName;
         this.Backgrounds = backgrounds != null ?

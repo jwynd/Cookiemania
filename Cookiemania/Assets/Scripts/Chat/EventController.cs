@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using static ScriptConstants;
-using General_Utilities;
-using System.Collections;
-
 
 // carries through all the sequences for a single event
 // should be triggered by an event manager
@@ -13,14 +10,14 @@ using System.Collections;
 public class EventController : MonoBehaviour
 {
     private EventInfo info;
-    private List<EventInfo> eventQueue = new List<EventInfo>();
+    private Queue<EventInfo> eventQueue = new Queue<EventInfo>();
     // has some info that needs to be processed after the dialogue plays
     private DialogueInfo lastDialoguePlayed = null;
 
     public DialogueController.OnComplete onDialogueComplete;
 
     public ChoiceController.OnComplete onChoiceComplete;
-    private bool runningDialogueEvent;
+    private bool runningDialogueEvent = false;
 
     public void DialogueComplete(string nextBranch)
     {
@@ -41,17 +38,17 @@ public class EventController : MonoBehaviour
         {
             // run through the post dialogue wrap ups (e.g. early exits 
             // and event triggers)
-            
 
-            // must be last
-            if (lastDialoguePlayed.ExitsEvent)
+
+            // this must be last
+            var shouldExit = lastDialoguePlayed.ExitsEvent;
+            lastDialoguePlayed = null;
+            if (shouldExit)
             {
-                lastDialoguePlayed = null;
                 EventComplete();
                 return;
             }
         }
-        lastDialoguePlayed = null;
         if (info.BranchingDictionary.TryGetValue(nextBranch,
             out Tuple<bool, int> branchTuple))
         {
@@ -74,8 +71,6 @@ public class EventController : MonoBehaviour
             EventManager.Instance.DialoguePrefab.
                 GetComponent<DialogueController>().Initialize(lastDialoguePlayed.Dialogues,
                 onDialogueComplete, lastDialoguePlayed.NextBranch, lastDialoguePlayed.Backgrounds);
-            // sequence actions to take after dialogue completes e.g. early exits
-
         }
         else
         {
@@ -104,10 +99,12 @@ public class EventController : MonoBehaviour
         
         if (runningDialogueEvent)
         {
-            eventQueue.Add(eventInfo);
+            eventQueue.Enqueue(eventInfo);
             return;
         }
+#if UNITY_EDITOR
         eventInfo.PrintInformation();
+#endif
         info = eventInfo;
         info.EventListening = false;
         if (!info.RequiresDialogueControl)
@@ -126,7 +123,7 @@ public class EventController : MonoBehaviour
         runningDialogueEvent = false;
         if (eventQueue.Count > 0)
         {
-            RunEvent(eventQueue.PopFront());
+            RunEvent(eventQueue.Dequeue());
         }
     }
 }
