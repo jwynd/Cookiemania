@@ -29,12 +29,6 @@ public class EventManager : MonoBehaviour
         new Dictionary<string, CharacterInfo>();
     private Dictionary<string, EventInfo> eventDictionary =
         new Dictionary<string, EventInfo>();
-    //private Dictionary<string, EventController> activeEvents = new Dictionary<string, EventController>();
-
-    // the arguments for action are: the current event info, the trimmed text, 
-    // the list of indices to write to and a tuple
-    // with the inChoice and inDialogueBranch for choice bools
-
 
     public static EventManager Instance { get; private set; }
 
@@ -44,8 +38,7 @@ public class EventManager : MonoBehaviour
 
     public void EventComplete(string eventName, List<Tuple<RewardKeyword, int>> rewards)
     {
-        // if we have events queued up from triggers will want to 
-        // start them after distributing the rewards
+        // not sure what else we'd do here
         DistributeRewards(rewards);
     }
 
@@ -55,6 +48,21 @@ public class EventManager : MonoBehaviour
             Debug.LogWarning("need to track choices made on per event " +
                 "basis --> should be list of tuples, this one is ( " + eventName + ", " +
                 choiceNumber.ToString() + " )");
+    }
+    
+    // in case something outside the event system wants to trigger an event, or 
+    // if the event controller wants to trigger an event
+    public bool TriggerEvent(string eventName)
+    {
+        if (eventDictionary.TryGetValue(eventName, out EventInfo eventInfo))
+        {
+            if (eventInfo.EventListening)
+            {
+                eventController.RunEvent(eventInfo);
+                return true;
+            }
+        }
+        return false;
     }
 
     public bool HasEvent(string eventName)
@@ -72,7 +80,28 @@ public class EventManager : MonoBehaviour
 
     public void DistributeRewards(List<Tuple<RewardKeyword, int>> rewards)
     {
-        Debug.LogWarning("need to add reward distribution");
+        if (PlayerData.Player == null)
+        {
+            Debug.LogError("player data must exist for reward distribution");
+            return;
+        }
+
+        foreach (var reward in rewards)
+        {
+            switch(reward.Item1)
+            {
+                case RewardKeyword.Money:
+                    PlayerData.Player.money += reward.Item2;
+                    break;
+                case RewardKeyword.Morality:
+                    PlayerData.Player.morality += reward.Item2;
+                    break;
+                default:
+                    Debug.LogError("unhandled reward keyword for reward" +
+                        " distribution: " + reward);
+                    break;
+            }
+        }
     }
 
     private void ReadInFiles(List<TextAsset> textAssets)
@@ -81,8 +110,6 @@ public class EventManager : MonoBehaviour
         foreach (var asset in textAssets)
         {
             EventParsingInfo parsingInfo = new EventParsingInfo();
-
-            // will swap back to foreach loop if i dont end up needing the index
             foreach (var text in asset.text.Split('\n'))
             {
                 parsingInfo.TrimmedLine = text.Trim(toTrim).Split(' ').ToList();
@@ -90,27 +117,29 @@ public class EventManager : MonoBehaviour
                 {
                     continue;
                 }
-                ParseDialogueOrKeyword(ref parsingInfo);
+                ParseDialogueOrKeyword(ref parsingInfo, charInfoDictionary);
             }
         }
 
     }
 
-    private void ParseDialogueOrKeyword(ref EventParsingInfo parsingInfo)
+    private static void ParseDialogueOrKeyword(ref EventParsingInfo parsingInfo, 
+        Dictionary<string, CharacterInfo> charDictionary)
     {
         // this first one needs to be lowercased and trimmed
-        parsingInfo.TrimmedLine[0] = parsingInfo.TrimmedLine.First().ToLowerInvariant().Trim();
-        if (parsingInfo.TrimmedLine.First()[0] == DIALOGUE)
+        parsingInfo.TrimmedLine[0] = 
+            parsingInfo.TrimmedLine[0].ToLowerInvariant().Trim();
+        if (parsingInfo.TrimmedLine[0][0] == DIALOGUE)
         {
             ParseDialogueLine(ref parsingInfo);
         }
         else
         {
-            ParsePossibleKeyword(ref parsingInfo);
+            ParsePossibleKeyword(ref parsingInfo, charDictionary);
         }
     }
 
-    private void ParseDialogueLine(ref EventParsingInfo parsingInfo)
+    private static void ParseDialogueLine(ref EventParsingInfo parsingInfo)
     {
         var textLine = ExtractDialogue(parsingInfo.TrimmedLine);
         // if not in choice
@@ -141,7 +170,8 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    private void ParsePossibleKeyword(ref EventParsingInfo parsingInfo)
+    private static void ParsePossibleKeyword(ref EventParsingInfo parsingInfo, 
+        Dictionary<string, CharacterInfo> charDictionary)
     {
         var keywordMatch = parsingInfo.TrimmedLine.First();
         if (BASE_KEYWORDS.TryGetValue(
@@ -149,7 +179,7 @@ public class EventManager : MonoBehaviour
         {
             ResolveKeyword(keyword, ref parsingInfo);
         }
-        else if (charInfoDictionary.TryGetValue(keywordMatch,
+        else if (charDictionary.TryGetValue(keywordMatch,
             out parsingInfo.CharacterInfo))
         {
             if (parsingInfo.IsChoiceIsChoiceDialogue.Item1)
@@ -162,7 +192,7 @@ public class EventManager : MonoBehaviour
         }
         else
         {
-            Debug.Log(string.Join(" ", charInfoDictionary.Keys));
+            Debug.Log(string.Join(" ", charDictionary.Keys));
             throw new Exception(keywordMatch + " did not match any base " +
                 "keywords, comment, dialogue " +
                 "or any known character unique names. Is this dialogue/ a " +
@@ -171,24 +201,24 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    private void ResolveKeyword(BaseKeyword baseKey, ref EventParsingInfo parsingInfo)
+    private static void ResolveKeyword(BaseKeyword baseKey, ref EventParsingInfo parsingInfo)
     {
         if (KeywordActions.TryGetValue(baseKey,
             out ActionRef<EventParsingInfo> value))
             value.Invoke(ref parsingInfo);
         else
         {
-            throw new NotSupportedException("the Action dictionary does not yet support this");
+            throw new NotSupportedException("the Action dictionary does not support this");
         }
     }
 
-    private bool ReadInContinues(List<string> trimmedText)
+    private static bool ReadInContinues(List<string> trimmedText)
     {
         if (trimmedText.Count < 1)
         {
             return true;
         }
-        if (trimmedText.First()[0] == COMMENT)
+        if (trimmedText[0][0] == COMMENT)
         {
             return true;
         }
@@ -200,7 +230,7 @@ public class EventManager : MonoBehaviour
         return false;
     }
 
-    private void AddToDialogue(string extractedDialogue,
+    private static void AddToDialogue(string extractedDialogue,
         CharacterInfo lastCharacterDesignated,
         DialogueInfo dInfo)
     {
@@ -268,15 +298,5 @@ public class EventManager : MonoBehaviour
                 eventController.RunEvent(runnableEvent);
             }
 #endif
-    }
-
-    void Update()
-    {
-        // update will actually maybe wanna do something?
-        // will have to wait for event controller to give up control of 
-        // the dialogue box when we have events queued up
-        // but likely can just store a queue of events that are completely
-        // ready right now and run them when event controller calls event
-        // complete
     }
 }

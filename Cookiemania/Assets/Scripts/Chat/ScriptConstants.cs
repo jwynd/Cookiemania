@@ -108,7 +108,6 @@ public class ScriptConstants
 
     public delegate void ActionRef<T1>(ref T1 arg1);
 
-
     // the choice bools (tuple bool) should be named (insideChoice, insideChoiceDialogueBranch)
     public static readonly Dictionary<BaseKeyword, ActionRef<EventParsingInfo>> KeywordActions =
         new Dictionary<BaseKeyword, ActionRef<EventParsingInfo>>

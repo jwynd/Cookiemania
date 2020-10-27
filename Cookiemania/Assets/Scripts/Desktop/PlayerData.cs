@@ -31,6 +31,7 @@ public class PlayerData : MonoBehaviour
     public int spacelvl = 0; //Game Dificulty
     public int incomelvl = 0;
     public int healthlvl = 0;
+    [SerializeField]
     private int _money = 0;
     public int money
     {
@@ -41,6 +42,7 @@ public class PlayerData : MonoBehaviour
             OnMoneyChanged?.Invoke(this, new IntegerEventArgs(value));
         }
     }
+    [SerializeField]
     private int _shoplvl;
     public int shoplvl //Follows progression of player and shop access
     {
@@ -72,6 +74,7 @@ public class PlayerData : MonoBehaviour
 
 
     //Game progress
+    [SerializeField]
     private int _week;
     public int week
     {
@@ -87,6 +90,7 @@ public class PlayerData : MonoBehaviour
         }
     }
 
+    [SerializeField]
     private int _morality;
     public int morality
     {
