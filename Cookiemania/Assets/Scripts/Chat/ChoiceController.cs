@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using System.Collections;
 
 public class ChoiceController : MonoBehaviour
 {
@@ -168,7 +169,7 @@ public class ChoiceController : MonoBehaviour
         choiceOrderAlias = Enumerable.Range(0, choices.Count).ToList();
         // shuffling list
         System.Random rnd = new System.Random();
-        choiceOrderAlias = choiceOrderAlias.Select(x => 
+        choiceOrderAlias = choiceOrderAlias.Select(x =>
             new { value = x, order = rnd.Next() })
             .OrderBy(x => x.order).Select(x => x.value).ToList();
         for (int i = 0; i < this.choices.Count; i++)
@@ -177,7 +178,30 @@ public class ChoiceController : MonoBehaviour
                 text = this.choices[choiceOrderAlias[i]];
             choiceButtons[i].gameObject.SetActive(true);
         }
+        StartCoroutine(UpdateCanvas());
+    }
+
+
+    // layout groups in unity are dumb af and need to be told to refresh for some 
+    // reason
+    private IEnumerator UpdateCanvas()
+    {
+        yield return new WaitForEndOfFrame();
+        // why is this necessary?
+        foreach (var comp in myCanvas.GetComponentsInChildren<VerticalLayoutGroup>())
+        {
+            comp.childScaleHeight = false;
+            comp.childScaleHeight = true;
+        }
+        // because it forces it to re-evaluate it seems
+        foreach (var comp in myCanvas.GetComponentsInChildren<HorizontalLayoutGroup>())
+        {
+            comp.childScaleHeight = false;
+            comp.childScaleHeight = true;
+        }
+        yield return new WaitForEndOfFrame();
         myCanvas.enabled = true;
+        Canvas.ForceUpdateCanvases();
     }
 
     private void EndChoice(int v)
