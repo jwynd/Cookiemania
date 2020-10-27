@@ -174,7 +174,8 @@ public class ScriptConstants
     public static void ChoiceAction(ref EventParsingInfo parsingInfo)
     {
         parsingInfo.IsChoiceIsChoiceDialogue = new Tuple<bool, bool>(true, false);
-        parsingInfo.EventInfo.AddChoice(new ChoiceInfo(parsingInfo.EventInfo.BranchID.ToString()));
+        parsingInfo.EventInfo.AddChoice(new ChoiceInfo(
+            parsingInfo.EventInfo.BranchID.ToString(), parsingInfo.MaxChoices));
         // need to add this choice's branch name to whatever the previous dialogue branch was
         parsingInfo.EventInfo.SetNextBranch(parsingInfo.EventInfo.GetLastDialogue().UniqueName,
             parsingInfo.EventInfo.GetLastChoice().UniqueName);

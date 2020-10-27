@@ -102,12 +102,23 @@ public class PlayerData : MonoBehaviour
         }
     }
 
-    // List of dialogue choices made
+    // dict of dialogue choices made
     // first item of each list is the name of the triggered event and choice number is meaningless
     // for that one (probably gonna set to -1)
     // if there are no choices made then the list will have just the event name
-    // all the choices will have the script choice number and the dialogue line associated with it
-    public List<List<Tuple<int, string>>> EventChoicesMade = new List<List<Tuple<int, string>>>();
+    // all the choices will have the script choice number and the prompt associated with it
+    public Dictionary<string, List<Tuple<string, string>>> EventChoicesMade = 
+       new Dictionary<string, List<Tuple<string, string>>>();
+
+    public void PrintChoicesMade()
+    {
+        foreach (var @event in EventChoicesMade.Keys)
+        {
+            Debug.Log(@event + " choices made: "
+                + string.Join(", ", EventChoicesMade[@event]));
+        }
+    }
+
     private void Awake()
     {
         if (Player != null && Player != this)

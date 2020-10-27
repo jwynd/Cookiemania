@@ -7,6 +7,7 @@ using System.Linq;
 
 public class ChoiceController : MonoBehaviour
 {
+    public const int MAX_CHOICES_SUPPORTED = 4;
     // the choice controller directly accepts the sprite, character name
     // dialogue and choices when initialize is run
     // supports 2-4 choices, runs a callback function with argument 
@@ -37,7 +38,7 @@ public class ChoiceController : MonoBehaviour
     [SerializeField]
     private string testCharName = "";
     [SerializeField]
-    private Sprite testBG;
+    private Sprite testBG = null;
     [SerializeField]
     private string testChoicePrompt = "";
     [SerializeField]
@@ -75,11 +76,14 @@ public class ChoiceController : MonoBehaviour
         new List<List<Tuple<ScriptConstants.RewardKeyword, int>>>();
     private List<string> nextBranches = 
         new List<string>();
+    // the choice texts
+    private List<string> choices = new List<string>();
     // used to get actual choice made
-    private List<int> choiceOrderAlias =
-        new List<int>();
+    private List<int> choiceOrderAlias = new List<int>();
     [HideInInspector]
-    public delegate void OnComplete(string nextBranch, int choiceNumber, 
+    public delegate void OnComplete(string nextBranch,
+        string choicePrompt, 
+        string choiceMade,
         List<Tuple<ScriptConstants.RewardKeyword, int>> rewardList );
     private OnComplete runOnComplete = null;
 
@@ -110,8 +114,8 @@ public class ChoiceController : MonoBehaviour
             }
             Initialize(testCharName, testCharImage, testChoicePrompt, testChoices,
                 altTestRewards, testNextBranches, 
-                (string nextB, int v, List<Tuple<ScriptConstants.RewardKeyword, int>> rewards) => 
-                    Debug.Log("test complete, " + v + " was selected, with rewards " + 
+                (string nextB, string v, string c, List<Tuple<ScriptConstants.RewardKeyword, int>> rewards) => 
+                    Debug.Log("test complete for choice: " + c + ", " + v + " was selected, with rewards " + 
                     string.Join(" ", rewards) + "\nnext branch is: " + nextB),
                 testBG);
         }
@@ -139,6 +143,12 @@ public class ChoiceController : MonoBehaviour
         {
             throw new Exception("rewards list and choices list must be same size");
         }
+
+        if (choices.Count > MAX_CHOICES_SUPPORTED)
+        {
+            throw new Exception("maximum amount of choices is " + MAX_CHOICES_SUPPORTED);
+        }
+
         EnableObjects(false);
         charName.text = cName;
         charImage.sprite = cImage;
@@ -151,18 +161,20 @@ public class ChoiceController : MonoBehaviour
             this.rewards.Add(item);
         }
         this.nextBranches = nextEvents;
+        this.choices = choices;
         bgImage.color = bgImage.sprite == null ?
                 new Color(bgImage.color.r, bgImage.color.r, bgImage.color.r, 0) :
                 new Color(bgImage.color.r, bgImage.color.r, bgImage.color.r, originalAlpha);
         choiceOrderAlias = Enumerable.Range(0, choices.Count).ToList();
         // shuffling list
         System.Random rnd = new System.Random();
-        choiceOrderAlias = choiceOrderAlias.Select(x => new { value = x, order = rnd.Next() })
+        choiceOrderAlias = choiceOrderAlias.Select(x => 
+            new { value = x, order = rnd.Next() })
             .OrderBy(x => x.order).Select(x => x.value).ToList();
-        for (int i = 0; i < choices.Count; i++)
+        for (int i = 0; i < this.choices.Count; i++)
         {
             choiceButtons[i].GetComponentInChildren<TMP_Text>().
-                text = choices[choiceOrderAlias[i]];
+                text = this.choices[choiceOrderAlias[i]];
             choiceButtons[i].gameObject.SetActive(true);
         }
         myCanvas.enabled = true;
@@ -172,7 +184,8 @@ public class ChoiceController : MonoBehaviour
     {
         EnableObjects(false);
         Debug.Log("selected choice #" + v.ToString());
-        runOnComplete.Invoke(nextBranches[v], v + 1, rewards[v]);
+        runOnComplete.Invoke(nextBranches[v],  
+            dialogueLine.text, choices[v], rewards[v]);
     }
 
     // not great, but it was easier to give every button its own callback fn

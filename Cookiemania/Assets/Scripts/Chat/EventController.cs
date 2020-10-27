@@ -24,10 +24,10 @@ public class EventController : MonoBehaviour
         NextBranch(nextBranch);
     }
 
-    public void ChoiceComplete(string nextBranch, int choiceNumber, 
-        List<Tuple<RewardKeyword, int>> rewards)
+    public void ChoiceComplete(string nextBranch, string choicePrompt, 
+        string choiceMade, List<Tuple<RewardKeyword, int>> rewards)
     {
-        EventManager.Instance.ChoiceMade(info.UniqueName, choiceNumber);
+        EventManager.Instance.ChoiceMade(info.UniqueName, choicePrompt, choiceMade);
         EventManager.Instance.DistributeRewards(rewards);
         NextBranch(nextBranch);
     }

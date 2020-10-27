@@ -12,6 +12,7 @@ public class EventParsingInfo
     public List<string> ChoiceDialoguesToMultiWrite = new List<string>();
     public EventInfo EventInfo = null;
     public List<string> TrimmedLine = new List<string>();
+    public int MaxChoices = 0;
     
     public EventParsingInfo()
     {

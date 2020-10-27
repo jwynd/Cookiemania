@@ -45,11 +45,11 @@ public class DialogueController : MonoBehaviour
         new Tuple<string, string>("char_1", "line four isn't"),
     };
     [SerializeField]
-    private Sprite[] testSprites;
+    private Sprite[] testSprites = null;
     [SerializeField]
-    private string[] testDisplayNames;
+    private string[] testDisplayNames = null;
     [SerializeField]
-    private List<Sprite> testBGs;
+    private List<Sprite> testBGs = new List<Sprite>();
     [SerializeField]
     private Dictionary<string, Tuple<string, Sprite>> testCharDictionary =
         new Dictionary<string, Tuple<string, Sprite>>()

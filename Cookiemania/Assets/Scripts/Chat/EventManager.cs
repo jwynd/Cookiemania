@@ -39,16 +39,49 @@ public class EventManager : MonoBehaviour
     public void EventComplete(string eventName, List<Tuple<RewardKeyword, int>> rewards)
     {
         // not sure what else we'd do here
+        if (PlayerData.Player == null)
+        {
+            Debug.LogError("player data must exist to complete events");
+            return;
+        }
+#if UNITY_EDITOR
+        if (useTestMode)
+            PlayerData.Player.PrintChoicesMade();
+#endif
         DistributeRewards(rewards);
     }
 
-    public void ChoiceMade(string eventName, int choiceNumber)
+    public void ChoiceMade(string eventName, string choicePrompt, string choiceMade)
     {
-        if (eventDictionary.TryGetValue(eventName, out EventInfo value))
-            Debug.LogWarning("need to track choices made on per event " +
-                "basis --> should be list of tuples, this one is ( " + eventName + ", " +
-                choiceNumber.ToString() + " )");
+        if (PlayerData.Player == null)
+        {
+            Debug.LogError("player data must exist to view choices");
+            return;
+        }
+
+        if (HasEvent(eventName))
+        {
+            if (PlayerData.Player.EventChoicesMade.TryGetValue(
+                eventName, out List<Tuple<string, string>> addTo))
+            {
+                addTo.Add(new Tuple<string, string>(choicePrompt, choiceMade));
+            }
+            else
+            {
+                var list = new List<Tuple<string, string>>
+                {
+                    new Tuple<string, string>(choicePrompt, choiceMade)
+                };
+                PlayerData.Player.EventChoicesMade.Add(eventName, list);
+            }
+        }
+        else
+        {
+            throw new Exception("event " + eventName + " not found");
+        }
     }
+
+
     
     // in case something outside the event system wants to trigger an event, or 
     // if the event controller wants to trigger an event
@@ -110,6 +143,7 @@ public class EventManager : MonoBehaviour
         foreach (var asset in textAssets)
         {
             EventParsingInfo parsingInfo = new EventParsingInfo();
+            parsingInfo.MaxChoices = choiceLimit;
             foreach (var text in asset.text.Split('\n'))
             {
                 parsingInfo.TrimmedLine = text.Trim(toTrim).Split(' ').ToList();
