@@ -154,7 +154,15 @@ MonoBehaviour:
   minFireRateTime: 0.3
   maxFireRateTime: 3
   baseFireWaitTime: 5
-  playerdeathImage: {fileID: -2885940107258461023, guid: 9602e3d91879a97489b64b8514aada9b,
+  playerdeathImage: {fileID: -4568620655595551830, guid: 20266f58562693e428758ed785e35b25,
+    type: 3}
+  playerdeath2: {fileID: 1160252235788339688, guid: 20266f58562693e428758ed785e35b25,
+    type: 3}
+  enemydeathimage1: {fileID: -1364717296050224179, guid: 35a2f3064db8b334fa14639a429bdc57,
+    type: 3}
+  enemydeathimage2: {fileID: 1371426059321981603, guid: 35a2f3064db8b334fa14639a429bdc57,
     type: 3}
   Player: {fileID: 0}
+  location1: {fileID: 0}
+  location2: {fileID: 0}
   moveSpeed: 1.5

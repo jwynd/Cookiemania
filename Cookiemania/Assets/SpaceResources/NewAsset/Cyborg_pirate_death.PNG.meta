@@ -1,0 +1,775 @@
+fileFormatVersion: 2
+guid: 35a2f3064db8b334fa14639a429bdc57
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4351619616711204511
+    second: Cyborg_pirate_death_0
+  - first:
+      213: -7876807861295111131
+    second: Cyborg_pirate_death_1
+  - first:
+      213: -2181828218856262727
+    second: Cyborg_pirate_death_2
+  - first:
+      213: 3182126127903452931
+    second: Cyborg_pirate_death_3
+  - first:
+      213: 4722310895090200839
+    second: Cyborg_pirate_death_4
+  - first:
+      213: -7122873401853739946
+    second: Cyborg_pirate_death_5
+  - first:
+      213: -3211294738851929351
+    second: Cyborg_pirate_death_6
+  - first:
+      213: 3597817705722028844
+    second: Cyborg_pirate_death_7
+  - first:
+      213: 7455397221259198961
+    second: Cyborg_pirate_death_8
+  - first:
+      213: 5141181073954850312
+    second: Cyborg_pirate_death_9
+  - first:
+      213: -3230091681867441574
+    second: Cyborg_pirate_death_10
+  - first:
+      213: 8940957635036842801
+    second: Cyborg_pirate_death_11
+  - first:
+      213: -6369406210469106774
+    second: Cyborg_pirate_death_12
+  - first:
+      213: 4340272075715971647
+    second: Cyborg_pirate_death_13
+  - first:
+      213: -5266185775495845576
+    second: Cyborg_pirate_death_14
+  - first:
+      213: 3629326414628981483
+    second: Cyborg_pirate_death_15
+  - first:
+      213: 6115269459257823717
+    second: Cyborg_pirate_death_16
+  - first:
+      213: -1848944100676717539
+    second: Cyborg_pirate_death_17
+  - first:
+      213: -4831409407773809068
+    second: Cyborg_pirate_death_18
+  - first:
+      213: 1279366069015372463
+    second: Cyborg_pirate_death_19
+  - first:
+      213: 8735757401332222920
+    second: Cyborg_pirate_death_20
+  - first:
+      213: -1364717296050224179
+    second: Cyborg_pirate_death_21
+  - first:
+      213: 6580095457230276245
+    second: Cyborg_pirate_death_22
+  - first:
+      213: -3479881975832220159
+    second: Cyborg_pirate_death_23
+  - first:
+      213: -9078102102936646840
+    second: Cyborg_pirate_death_24
+  - first:
+      213: 1371426059321981603
+    second: Cyborg_pirate_death_25
+  - first:
+      213: -7934742914997018989
+    second: Cyborg_pirate_death_26
+  - first:
+      213: 4670398909905190764
+    second: Cyborg_pirate_death_27
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Cyborg_pirate_death_0
+      rect:
+        serializedVersion: 2
+        x: 1135
+        y: 1018
+        width: 106
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d399cf8dbc697ce4181140c05e5bea18
+      internalID: 4351619616711204511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyborg_pirate_death_1
+      rect:
+        serializedVersion: 2
+        x: 1945
+        y: 1052
+        width: 37
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f949f1dd0b64e34d84f791f381b8c52
+      internalID: -7876807861295111131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyborg_pirate_death_2
+      rect:
+        serializedVersion: 2
+        x: 904
+        y: 971
+        width: 71
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b0a5519eae92e24bbd75f6fdb5f3809
+      internalID: -2181828218856262727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyborg_pirate_death_3
+      rect:
+        serializedVersion: 2
+        x: 1645
+        y: 1029
+        width: 35
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6847b2ec5461a504b98140febacc2edd
+      internalID: 3182126127903452931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyborg_pirate_death_4
+      rect:
+        serializedVersion: 2
+        x: 1703
+        y: 1018
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a33c55a7762ca5f4990b375a31f99c98
+      internalID: 4722310895090200839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyborg_pirate_death_5
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 541
+        width: 407
+        height: 412
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 5, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e73248c8b81576a4297cc0be42f0af6f
+      internalID: -7122873401853739946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyborg_pirate_death_6
+      rect:
+        serializedVersion: 2
+        x: 1008
+        y: 856
+        width: 59
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d46486e0698057741b3c84e0fe3be4ca
+      internalID: -3211294738851929351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyborg_pirate_death_7
+      rect:
+        serializedVersion: 2
+        x: 1159
+        y: 925
+        width: 35
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d1eb260a13df5743b7e017326e04551
+      internalID: 3597817705722028844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyborg_pirate_death_8
+      rect:
+        serializedVersion: 2
+        x: 1262
+        y: 889
+        width: 72
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2dff19f46409444591de4344992a660
+      internalID: 7455397221259198961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyborg_pirate_death_9
+      rect:
+        serializedVersion: 2
+        x: 2002
+        y: 934
+        width: 37
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19940725e986aa94098543c981b2f938
+      internalID: 5141181073954850312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyborg_pirate_death_10
+      rect:
+        serializedVersion: 2
+        x: 2061
+        y: 937
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52039dbe470db3e4fbd9e6038e889c95
+      internalID: -3230091681867441574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyborg_pirate_death_11
+      rect:
+        serializedVersion: 2
+        x: 893
+        y: 820
+        width: 70
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5b16d4fb8026d643a9a9f5a64dd3958
+      internalID: 8940957635036842801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyborg_pirate_death_12
+      rect:
+        serializedVersion: 2
+        x: 1111
+        y: 844
+        width: 49
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47ec3e008f1ab4645990fd715efbb4bf
+      internalID: -6369406210469106774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyborg_pirate_death_13
+      rect:
+        serializedVersion: 2
+        x: 1633
+        y: 820
+        width: 61
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9929c6d22e0f54541bb637ac96677d6f
+      internalID: 4340272075715971647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyborg_pirate_death_14
+      rect:
+        serializedVersion: 2
+        x: 1274
+        y: 819
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f525657675e1c994689c20c8f3e6d41b
+      internalID: -5266185775495845576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyborg_pirate_death_15
+      rect:
+        serializedVersion: 2
+        x: 2015
+        y: 820
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d92fedfcff0def249b08eef04e219720
+      internalID: 3629326414628981483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyborg_pirate_death_16
+      rect:
+        serializedVersion: 2
+        x: 904
+        y: 786
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e0b122a3f5dd1f418d51d06c44145b2
+      internalID: 6115269459257823717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyborg_pirate_death_17
+      rect:
+        serializedVersion: 2
+        x: 1054
+        y: 763
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fe01ab9d2e9ab74c9d8670cc8264f39
+      internalID: -1848944100676717539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyborg_pirate_death_18
+      rect:
+        serializedVersion: 2
+        x: 1204
+        y: 762
+        width: 73
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0f496f3feb88de4ca1ab9f0d7537173
+      internalID: -4831409407773809068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyborg_pirate_death_19
+      rect:
+        serializedVersion: 2
+        x: 1645
+        y: 786
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cda3d2135874a3541ad86204f4f3204f
+      internalID: 1279366069015372463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyborg_pirate_death_20
+      rect:
+        serializedVersion: 2
+        x: 1991
+        y: 786
+        width: 26
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: afd18c178ac8e1647b8eb9c5e7d82701
+      internalID: 8735757401332222920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyborg_pirate_death_21
+      rect:
+        serializedVersion: 2
+        x: 904
+        y: 541
+        width: 426
+        height: 544
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0e8e6c8d82d4824ca39a3684d1d14ba
+      internalID: -1364717296050224179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyborg_pirate_death_22
+      rect:
+        serializedVersion: 2
+        x: 1900
+        y: 740
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c38ee6bb0c38597438f7c3031a4118c9
+      internalID: 6580095457230276245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyborg_pirate_death_23
+      rect:
+        serializedVersion: 2
+        x: 1239
+        y: 624
+        width: 38
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d887b20d22022e4897250393f34105d
+      internalID: -3479881975832220159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyborg_pirate_death_24
+      rect:
+        serializedVersion: 2
+        x: 1772
+        y: 647
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a39ecdbd5ead9d244836d6c8ef8a0249
+      internalID: -9078102102936646840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyborg_pirate_death_25
+      rect:
+        serializedVersion: 2
+        x: 1633
+        y: 554
+        width: 407
+        height: 521
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9ce248030b078942b15d39f46bc5d2e
+      internalID: 1371426059321981603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyborg_pirate_death_26
+      rect:
+        serializedVersion: 2
+        x: 1691
+        y: 624
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f81ba03b6d49ce8438e527c27d27f47f
+      internalID: -7934742914997018989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyborg_pirate_death_27
+      rect:
+        serializedVersion: 2
+        x: 1992
+        y: 624
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ad49823825cccc4a9da0e441ec48281
+      internalID: 4670398909905190764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

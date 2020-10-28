@@ -15,9 +15,17 @@ public class enemy : MonoBehaviour
     public float maxFireRateTime = 3.0f;
     public float baseFireWaitTime = 5.0f;
     public Sprite playerdeathImage;
+    public Sprite playerdeath2;
+    public Sprite enemydeathimage1;
+    public Sprite enemydeathimage2;
     private Transform target;
     public Transform Player;
+    public Transform location1;
+    public Transform location2;
     private Vector2 movement;
+    private Vector2 movement2;
+    private Vector2 movement3;
+    private int rand;
     public float moveSpeed = 1.5f;
 
 
@@ -25,6 +33,8 @@ public class enemy : MonoBehaviour
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("treasure").GetComponent<Transform>();
+        location1 = GameObject.Find("location1").GetComponent<Transform>();
+        location2 = GameObject.Find("location2").GetComponent<Transform>();
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.velocity = new Vector2(1, 0) * speed;
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -40,12 +50,16 @@ public class enemy : MonoBehaviour
 
         if (col.gameObject.CompareTag("fire"))
         {
+            gameObject.GetComponent<SpriteRenderer>().sprite = enemydeathimage1;
+            gameObject.GetComponent<SpriteRenderer>().sprite = enemydeathimage2;
             soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemydies);
             Destroy(gameObject);
         }
 
         if (col.gameObject.CompareTag("pierce"))
         {
+            gameObject.GetComponent<SpriteRenderer>().sprite = enemydeathimage1;
+            gameObject.GetComponent<SpriteRenderer>().sprite = enemydeathimage2;
             soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemydies);
             Destroy(gameObject);
         }
@@ -73,6 +87,7 @@ public class enemy : MonoBehaviour
             {
                 soundmanager.Instance.PlayOneShot(soundmanager.Instance.playerdies);
                 col.gameObject.GetComponent<SpriteRenderer>().sprite = playerdeathImage;
+                col.gameObject.GetComponent<SpriteRenderer>().sprite = playerdeath2;
                 Destroy(gameObject);
                 Destroy(col.gameObject, .05f); //.05f
             }
@@ -102,14 +117,22 @@ public class enemy : MonoBehaviour
     void Update()
     {
         Vector3 direction = Player.position - transform.position;
+        Vector3 direction2 = location1.position - transform.position;
+        Vector3 direction3 = location2.position - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         rigidBody.rotation = angle;
         direction.Normalize();
+        direction2.Normalize();
+        direction3.Normalize();
         movement = direction;
+        movement2 = direction2;
+        movement3 = direction3;
+        rand = Random.Range(0, 100);
     }
     private void FixedUpdate()
     {
-        moveCharacter(movement);
+        Debug.Log("move character triggered");
+        moveCharacter(movement, movement2, movement3);
         if (Time.time > baseFireWaitTime)
         {
             baseFireWaitTime = baseFireWaitTime + Random.Range(minFireRateTime, maxFireRateTime);
@@ -145,6 +168,7 @@ public class enemy : MonoBehaviour
             {
                 soundmanager.Instance.PlayOneShot(soundmanager.Instance.playerdies);
                 col.gameObject.GetComponent<SpriteRenderer>().sprite = playerdeathImage;
+                col.gameObject.GetComponent<SpriteRenderer>().sprite = playerdeath2;
                 Destroy(gameObject);
                 Destroy(col.gameObject, .05f); //.05f
             }
@@ -153,9 +177,25 @@ public class enemy : MonoBehaviour
 
     }
 
-    void moveCharacter(Vector2 direction)
+    void moveCharacter(Vector2 direction, Vector2 direction2, Vector2 direction3)
     {
-        rigidBody.MovePosition((Vector2)transform.position + (direction * moveSpeed * Time.deltaTime));
+        if (GameObject.Find("lag") != null || GameObject.Find("bosscookie") != null)
+        {
+            Debug.Log("boss on screen");
+            if (rand >= 50)
+            {
+                rigidBody.MovePosition((Vector2)transform.position + (direction2 * moveSpeed * Time.deltaTime));
+            }
+            else
+            {
+                rigidBody.MovePosition((Vector2)transform.position + (direction3 * moveSpeed * Time.deltaTime));
+            }
+        }
+        else
+        {
+            Debug.Log("boss not on screen");
+            rigidBody.MovePosition((Vector2)transform.position + (direction * moveSpeed * Time.deltaTime));
+        }
     }
 
 
