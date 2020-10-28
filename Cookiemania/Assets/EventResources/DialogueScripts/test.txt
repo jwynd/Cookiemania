@@ -32,10 +32,18 @@
 
 # case insensitive name btw
 event test
+trigger week 1
+trigger money 0
+
+# all_triggers means it needs all triggers valid to proc event
+# one_trigger means it needs only one condition fulfilled to proc
+# event
+
+all_triggers
+one_trigger
+
 event_reward money 1000
 event_reward morality 0
-
-trigger week 1
 
 boss
 > Well hello there.
@@ -83,9 +91,11 @@ boss
 narrator
 > what... why would you do this?
 
-# these will only trigger after all the dialogue is complete
-# iow all the dialogue til the next choice will play
-trigger bad_ending_1
+# this directly triggers the event named bad_ending_1
+# will return an alert if there is no event named bad_ending_1
+# after all events have been parsed
+
+direct_trigger bad_ending_1
 
 event_end_early
 
@@ -122,5 +132,19 @@ trigger level 2
 chip
 > You're really moving up in the world!
 > Good Job!
+
+event_end
+
+event bad_ending_1
+# if no trigger is listed then the event will
+# only be triggered if some other event directly triggers
+# it
+
+narrator
+> You lose...
+
+# special event name that places the game over screen
+# under the dialogue
+direct_trigger game_over
 
 event_end

@@ -38,8 +38,10 @@ public class EventController : MonoBehaviour
         {
             // run through the post dialogue wrap ups (e.g. early exits 
             // and event triggers)
-
-
+            foreach(var eventName in lastDialoguePlayed.DirectlyTriggeredEvents)
+            {
+                EventManager.Instance.TriggerEvent(eventName);
+            }
             // this must be last
             var shouldExit = lastDialoguePlayed.ExitsEvent;
             lastDialoguePlayed = null;

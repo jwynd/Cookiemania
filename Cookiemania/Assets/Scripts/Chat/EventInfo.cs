@@ -2,14 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static ScriptConstants;
 
 [Serializable]
 public class EventInfo
 {
     public const string LAST_BRANCH = "end";
     public const string FIRST_BRANCH = "first";
+    
+    // conditions are always the first time the amount has been reached for 
+    // all trigger types
+    public List<Tuple<TriggerKeyword, int>> TriggeringConditions = 
+       new List<Tuple<TriggerKeyword, int>>();
 
-    public Tuple<ScriptConstants.TriggerKeyword, int> TriggeringAction;
+    // whether this event needs all triggering conditions
+    // to be reached or just one of them to proc
+    public bool AllTriggersNeeded = true;
     public string UniqueName { get; private set; }
 
     // set it to false when event runs first time
@@ -20,8 +28,8 @@ public class EventInfo
 
     // add to playerdata on event complete regardless of choices made
     // if there is no neutral reward associate your rewards with the choices obv
-    public List<Tuple<ScriptConstants.RewardKeyword, int>> EventCompleteReward = 
-       new List<Tuple<ScriptConstants.RewardKeyword, int>>();
+    public List<Tuple<RewardKeyword, int>> EventCompleteReward = 
+       new List<Tuple<RewardKeyword, int>>();
 
     public int BranchID
     {
@@ -102,7 +110,7 @@ public class EventInfo
         }
     }
 
-    private List<DialogueInfo> GetAllDialogues(List<string> dialogueBranchNames)
+    public List<DialogueInfo> GetAllDialogues(List<string> dialogueBranchNames, bool noExceptions = false)
     {
         List<DialogueInfo> dialogues = new List<DialogueInfo>();
         foreach (var name in dialogueBranchNames)
@@ -111,6 +119,10 @@ public class EventInfo
             {
                 if (!dictionaryTuple.Item1)
                 {
+                    if (noExceptions)
+                    {
+                        continue;
+                    }
                     throw new Exception("name is not a dialogue: " + name);
                 }
                 var dialogue = GetDialogue(dictionaryTuple.Item2);
@@ -118,6 +130,10 @@ public class EventInfo
             }
             else
             {
+                if (noExceptions)
+                {
+                    continue;
+                }
                 throw new Exception("name not found for multi-dialogue writing: " + name);
             }
         }

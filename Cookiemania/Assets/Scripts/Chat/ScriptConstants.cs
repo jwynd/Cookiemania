@@ -21,10 +21,16 @@ public class ScriptConstants
         ChoiceEnd,
         BranchEnd,
         BranchStart,
+        // how this event is triggered
         Trigger,
+        SingleTriggerCondition,
+        AllTriggerConditions,
         Reward,
         EventReward,
         BackgroundChange,
+        // e.g. a quest will directly trigger it and does not need to 
+        // be registered
+        DirectTrigger,
     }
 
     public enum TriggerKeyword
@@ -35,9 +41,10 @@ public class ScriptConstants
         UpgradeLevel,
         Week,
         Morality,
-        // e.g. a quest will directly trigger it and does not need to 
-        // be registered
-        DirectTrigger,
+
+        // will place the game over canvas underneath the dialogue of 
+        // the event
+        GameOver,
     }
 
     public enum RewardKeyword
@@ -69,6 +76,16 @@ public class ScriptConstants
         { "branch_start", BaseKeyword.BranchStart },
         { "branches_start", BaseKeyword.BranchStart },
         { "trigger", BaseKeyword.Trigger },
+        { "triggers", BaseKeyword.Trigger },
+        { "direct_trigger", BaseKeyword.DirectTrigger },
+        { "direct_triggers", BaseKeyword.DirectTrigger },
+        { "directly_triggers", BaseKeyword.DirectTrigger },
+        { "any_triggers", BaseKeyword.SingleTriggerCondition },
+        { "any_trigger", BaseKeyword.SingleTriggerCondition },
+        { "one_trigger", BaseKeyword.SingleTriggerCondition },
+        { "one_triggers", BaseKeyword.SingleTriggerCondition },
+        { "all_triggers", BaseKeyword.AllTriggerConditions },
+        { "all_trigger", BaseKeyword.AllTriggerConditions },
         { "reward", BaseKeyword.Reward },
         { "event_reward", BaseKeyword.EventReward },
         { "event_rewards", BaseKeyword.EventReward },
@@ -92,10 +109,11 @@ public class ScriptConstants
         { "weeks" , TriggerKeyword.Week },
         { "week" , TriggerKeyword.Week },
         { "morality" , TriggerKeyword.Morality },
-        { "trigger", TriggerKeyword.DirectTrigger },
         { "upgrade_level" , TriggerKeyword.UpgradeLevel },
         { "upgrade_lvl" , TriggerKeyword.UpgradeLevel },
         { "level" , TriggerKeyword.UpgradeLevel },
+        { "game_over", TriggerKeyword.GameOver },
+        { "games_over", TriggerKeyword.GameOver },
     };
 
     // reads second word after reward
@@ -118,18 +136,92 @@ public class ScriptConstants
             {BaseKeyword.BranchStart, new ActionRef<EventParsingInfo>(BranchStartAction) },
             {BaseKeyword.Choice, new ActionRef<EventParsingInfo>(ChoiceAction) },
             {BaseKeyword.ChoiceEnd, new ActionRef<EventParsingInfo>(ChoiceEndAction) },
+            {BaseKeyword.DirectTrigger, new ActionRef<EventParsingInfo>(DirectTriggerAction) },
             {BaseKeyword.Event, new ActionRef<EventParsingInfo>(EventAction) },
             {BaseKeyword.EventEarlyEnd, new ActionRef<EventParsingInfo>(EventEarlyEndAction) },
             {BaseKeyword.EventEnd, new ActionRef<EventParsingInfo>(EventEndAction) },
             {BaseKeyword.EventReward, new ActionRef<EventParsingInfo>(EventRewardAction) },
             {BaseKeyword.Reward, new ActionRef<EventParsingInfo>(RewardAction) },
             {BaseKeyword.Trigger, new ActionRef<EventParsingInfo>(TriggerAction) },
+            {BaseKeyword.SingleTriggerCondition, new ActionRef<EventParsingInfo>(SingleTriggerAction) },
+            {BaseKeyword.AllTriggerConditions, new ActionRef<EventParsingInfo>(AllTriggersAction) },
         };
+
+
+
+    public static readonly Dictionary<TriggerKeyword, ActionRef<EventParsingInfo>> TriggerKeywordActions =
+        new Dictionary<TriggerKeyword, ActionRef<EventParsingInfo>>
+        {
+            {TriggerKeyword.EventEnd, new ActionRef<EventParsingInfo>(EventEndTriggerAction) },
+            {TriggerKeyword.EventStart, new ActionRef<EventParsingInfo>(EventStartTriggerAction) },
+            {TriggerKeyword.Money, new ActionRef<EventParsingInfo>(MoneyTriggerAction) },
+            {TriggerKeyword.Morality, new ActionRef<EventParsingInfo>(MoralityTriggerAction) },
+            {TriggerKeyword.UpgradeLevel, new ActionRef<EventParsingInfo>(UpgradeLevelTriggerAction) },
+            {TriggerKeyword.Week, new ActionRef<EventParsingInfo>(WeekTriggerAction) },
+        };
+
+    private static void WeekTriggerAction(ref EventParsingInfo parsingInfo)
+    {
+        return;
+    }
+
+    private static void UpgradeLevelTriggerAction(ref EventParsingInfo parsingInfo)
+    {
+        return;
+    }
+
+    private static void MoralityTriggerAction(ref EventParsingInfo parsingInfo)
+    {
+        return;
+    }
+
+    private static void MoneyTriggerAction(ref EventParsingInfo parsingInfo)
+    {
+        return;
+    }
+
+    private static void EventStartTriggerAction(ref EventParsingInfo parsingInfo)
+    {
+        return;
+    }
+
+    private static void EventEndTriggerAction(ref EventParsingInfo parsingInfo)
+    {
+        return;
+    }
+
+    private static void DirectTriggerAction(ref EventParsingInfo parsingInfo)
+    {
+        if (parsingInfo.TrimmedLine.Count < 2)
+        {
+            throw new Exception("direct triggers must have name of event");
+        }
+        var eventName = parsingInfo.TrimmedLine[1].ToLowerInvariant().Trim();
+        if (parsingInfo.IsChoiceIsChoiceDialogue.Item1)
+        {
+            parsingInfo.EventInfo.MultiEventTriggerWrite(
+                parsingInfo.ChoiceDialoguesToMultiWrite, eventName);
+        }
+        else
+        {
+            parsingInfo.EventInfo.GetLastDialogue().DirectlyTriggeredEvents.Add(eventName);
+        }
+    }
 
     // item1 of choice bools is whether in choice, item2 is whether in a choice branch's dialogue
     public static void BackgroundChangeAction(ref EventParsingInfo parsingInfo)
     {
-        throw new NotImplementedException();
+        return;
+    }
+
+    private static void AllTriggersAction(ref EventParsingInfo arg1)
+    {
+        return;
+    }
+
+    private static void SingleTriggerAction(ref EventParsingInfo arg1)
+    {
+        return;
     }
 
     public static void BranchAction(ref EventParsingInfo parsingInfo)
@@ -252,15 +344,22 @@ public class ScriptConstants
 
     public static void TriggerAction(ref EventParsingInfo parsingInfo)
     {
-        var eventName = parsingInfo.TrimmedLine[1].ToLowerInvariant().Trim();
-        if (parsingInfo.IsChoiceIsChoiceDialogue.Item1)
+        var triggerKeyword = parsingInfo.TrimmedLine[1].ToLowerInvariant().Trim();
+        if (TRIGGER_KEYWORDS.TryGetValue(triggerKeyword, out TriggerKeyword trigger)) 
         {
-            parsingInfo.EventInfo.MultiEventTriggerWrite(parsingInfo.ChoiceDialoguesToMultiWrite, eventName);
+            if (TriggerKeywordActions.TryGetValue(trigger, out ActionRef<EventParsingInfo> action))
+            {
+                action.Invoke(ref parsingInfo);
+            }
+            else
+            {
+                throw new Exception("trigger keyword has no " +
+                    "associated action: " + trigger.ToString());
+            }
         }
         else
         {
-            // obviously the trigger needs a second word: the name of the event getting triggered
-            parsingInfo.EventInfo.GetLastDialogue().DirectlyTriggeredEvents.Add(eventName);
+            throw new Exception("trigger keyword not known: " + triggerKeyword);
         }
     }
 

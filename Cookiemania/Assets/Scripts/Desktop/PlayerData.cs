@@ -13,17 +13,19 @@ public class PlayerData : MonoBehaviour
     /// </summary>
     public static PlayerData Player;
     //Event stuff
-    public event EventHandler OnWeekChanged;
-    public event EventHandler OnMoralityChanged;
-    public event EventHandler OnShopLvlChanged;
-    public event EventHandler OnMoneyChanged;
+    public event EventHandler<IntegerEventArgs> OnWeekChanged;
+    public event EventHandler<IntegerEventArgs> OnMoralityChanged;
+    public event EventHandler<IntegerEventArgs> OnShopLvlChanged;
+    public event EventHandler<IntegerEventArgs> OnMoneyChanged;
 
     public class IntegerEventArgs : EventArgs
     {
         public int Amount { get; private set; } = 0;
-        public IntegerEventArgs(int amt)
+        public int PreviousAmount { get; private set; } = 0;
+        public IntegerEventArgs(int amt, int previousAmt)
         {
             Amount = amt;
+            PreviousAmount = previousAmt;
         }
     }
 
@@ -38,8 +40,10 @@ public class PlayerData : MonoBehaviour
         get { return _money; }
         set
         {
+            if (_money == value) return;
+            var previous = _money;
             _money = value;
-            OnMoneyChanged?.Invoke(this, new IntegerEventArgs(value));
+            OnMoneyChanged?.Invoke(this, new IntegerEventArgs(value, previous));
         }
     }
     [SerializeField]
@@ -49,12 +53,13 @@ public class PlayerData : MonoBehaviour
         get { return _shoplvl; }
         set
         {
-            if(value <= _shoplvl)
+            if (value <= _shoplvl)
             {
                 return;
             }
+            var previous = _shoplvl;
             _shoplvl = value;
-            OnShopLvlChanged?.Invoke(this, new IntegerEventArgs(value));
+            OnShopLvlChanged?.Invoke(this, new IntegerEventArgs(value, previous));
         }
     }
 
@@ -85,8 +90,9 @@ public class PlayerData : MonoBehaviour
             {
                 return;
             }
+            var previous = _week;
             _week = value;
-            OnWeekChanged?.Invoke(this, new IntegerEventArgs(value));
+            OnWeekChanged?.Invoke(this, new IntegerEventArgs(value, previous));
         }
     }
 
@@ -97,8 +103,10 @@ public class PlayerData : MonoBehaviour
         get { return _morality; }
         set
         {
+            if (_morality == value) return;
+            var previous = _morality;
             _morality = value;
-            OnMoralityChanged?.Invoke(this, new IntegerEventArgs(value));
+            OnMoralityChanged?.Invoke(this, new IntegerEventArgs(value, previous));
         }
     }
 
@@ -107,7 +115,7 @@ public class PlayerData : MonoBehaviour
     // for that one (probably gonna set to -1)
     // if there are no choices made then the list will have just the event name
     // all the choices will have the script choice number and the prompt associated with it
-    public Dictionary<string, List<Tuple<string, string>>> EventChoicesMade = 
+    public Dictionary<string, List<Tuple<string, string>>> EventChoicesMade =
        new Dictionary<string, List<Tuple<string, string>>>();
 
     public void PrintChoicesMade()
