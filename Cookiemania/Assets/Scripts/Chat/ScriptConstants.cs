@@ -51,6 +51,8 @@ public class ScriptConstants
     {
         Money,
         Morality,
+        Week,
+        ShopLevel,
     }
 
     // no uppercase letters in any of the keywords allowed
@@ -109,6 +111,8 @@ public class ScriptConstants
         { "weeks" , TriggerKeyword.Week },
         { "week" , TriggerKeyword.Week },
         { "morality" , TriggerKeyword.Morality },
+        { "shop_level" , TriggerKeyword.UpgradeLevel },
+        { "shop_lvl" , TriggerKeyword.UpgradeLevel },
         { "upgrade_level" , TriggerKeyword.UpgradeLevel },
         { "upgrade_lvl" , TriggerKeyword.UpgradeLevel },
         { "level" , TriggerKeyword.UpgradeLevel },
@@ -122,6 +126,11 @@ public class ScriptConstants
     {
         { "morality" , RewardKeyword.Morality },
         { "money" , RewardKeyword.Money },
+        { "week", RewardKeyword.Week },
+        { "shop_level" , RewardKeyword.ShopLevel },
+        { "shop_lvl" , RewardKeyword.ShopLevel },
+        { "upgrade_level" , RewardKeyword.ShopLevel },
+        { "upgrade_lvl" , RewardKeyword.ShopLevel },
     };
 
     public delegate void ActionRef<T1>(ref T1 arg1);

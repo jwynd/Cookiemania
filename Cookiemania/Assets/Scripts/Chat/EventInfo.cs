@@ -191,6 +191,8 @@ public class EventInfo
     public void PrintInformation()
     {
         Debug.Log("Event: " + UniqueName);
+        Debug.Log("Triggering Conditions: " + string.Join(", ", TriggeringConditions));
+        Debug.Log("All triggers needed? " + AllTriggersNeeded);
         Debug.Log("Event completion rewards: " + string.Join(", ", EventCompleteReward));
         Debug.Log(string.Join(" ", BranchingDictionary));
         foreach (var dialogue in Dialogues)

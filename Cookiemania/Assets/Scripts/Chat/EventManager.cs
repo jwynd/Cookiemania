@@ -124,6 +124,12 @@ public class EventManager : MonoBehaviour
                 case RewardKeyword.Morality:
                     PlayerData.Player.morality += reward.Item2;
                     break;
+                case RewardKeyword.ShopLevel:
+                    PlayerData.Player.shoplvl += reward.Item2;
+                    break;
+                case RewardKeyword.Week:
+                    PlayerData.Player.week += reward.Item2;
+                    break;
                 default:
                     Debug.LogError("unhandled reward keyword for reward" +
                         " distribution: " + reward);
@@ -379,15 +385,29 @@ public class EventManager : MonoBehaviour
         
         foreach (var @event in eventDictionary.Values)
         {
+            @event.PrintInformation();
             if (@event.EventListening)
             {
-                //if (@event.TriggeringConditions != null && listeningEvents.TryGetValue(
-                //    @event.TriggeringConditions.Item1, out SortedList<int, EventInfo> list)) 
-                //{
-                //    list.Add(@event.TriggeringConditions.Item2, @event);
-                //}
+                foreach (var trigger in @event.TriggeringConditions)
+                {
+                    if (listeningEvents.TryGetValue(
+                    trigger.Item1, out SortedList<int, EventInfo> list))
+                    {
+                        list.Add(trigger.Item2, @event);
+                    }
+                }
+                
             }
         }
+
+        PlayerData.Player.OnMoneyChanged +=
+            new EventHandler<PlayerData.IntegerEventArgs>(MoneyListener);
+        PlayerData.Player.OnMoralityChanged +=
+            new EventHandler<PlayerData.IntegerEventArgs>(MoralityListener);
+        PlayerData.Player.OnShopLvlChanged +=
+            new EventHandler<PlayerData.IntegerEventArgs>(ShopLvlListener);
+        PlayerData.Player.OnWeekChanged +=
+            new EventHandler<PlayerData.IntegerEventArgs>(WeekListener);
     }
 
     private void TestEventSorting()
@@ -404,6 +424,16 @@ public class EventManager : MonoBehaviour
             };
             e.TriggeringConditions.Add(new Tuple<TriggerKeyword, int>
                 (TriggerKeyword.Money, i));
+            if (i < 12)
+            {
+                e.TriggeringConditions.Add(new Tuple<TriggerKeyword, int>
+                (TriggerKeyword.Morality, 5));
+            }
+            else
+            {
+                e.TriggeringConditions.Add(new Tuple<TriggerKeyword, int>
+                (TriggerKeyword.Morality, 10));
+            }
             // need to reward something other than whats being tested 
             // so i can control the variables
             e.EventCompleteReward.Add(new Tuple<RewardKeyword, int>
@@ -411,36 +441,128 @@ public class EventManager : MonoBehaviour
             list.Add(i, e);
         }
         listeningEvents.Add(TriggerKeyword.Money, list);
-        PlayerData.Player.OnMoneyChanged += 
-            new EventHandler<PlayerData.IntegerEventArgs>(MoneyListener);
-        PlayerData.Player.money += -25;
+        PlayerData.Player.morality += 5;
+        PlayerData.Player.money += -22;
     }
 
     private void MoneyListener(object sender, PlayerData.IntegerEventArgs e)
     {
+        var keyword = TriggerKeyword.Money;
+        GenericListener(e, keyword);
+    }
+
+    private void ShopLvlListener(object sender, PlayerData.IntegerEventArgs e)
+    {
+        var keyword = TriggerKeyword.UpgradeLevel;
+        GenericListener(e, keyword);
+    }
+
+    private void MoralityListener(object sender, PlayerData.IntegerEventArgs e)
+    {
+        var keyword = TriggerKeyword.Morality;
+        GenericListener(e, keyword);
+    }
+
+    private void WeekListener(object sender, PlayerData.IntegerEventArgs e)
+    {
+        var keyword = TriggerKeyword.Week;
+        GenericListener(e, keyword);
+    }
+
+    private void GenericListener(PlayerData.IntegerEventArgs e, TriggerKeyword keyword)
+    {
         if (listeningEvents.TryGetValue(
-            TriggerKeyword.Money, out SortedList<int, EventInfo> list))
+                    keyword, out SortedList<int, EventInfo> list))
         {
             if (e.Amount == e.PreviousAmount) return;
-            List<KeyValuePair<int, EventInfo>> eventsToRun;
-            if (e.Amount > e.PreviousAmount)
+            List<KeyValuePair<int, EventInfo>> eventsToRun =
+                FilterEventList(list, e.Amount);
+            // need to filter based on the other triggering conditions IF
+            // this is all conditions met event
+            foreach (var eventInfo in eventsToRun)
             {
-                // we're increasing, sort in ascending order
-                // get anything greater than previous amount and 
-                // less than equal to amount
-                eventsToRun = list.Where(n => 
-                    n.Key > e.PreviousAmount && n.Key <= e.Amount).ToList();
-                eventsToRun.Sort(new Comparison<KeyValuePair<int, EventInfo>>
-                    ((x, y) => x.Key - y.Key));
+                if (ConfirmTriggered(eventInfo.Value))
+                {
+                    eventController.RunEvent(eventInfo.Value);
+                }
             }
-            else
-            {
-                eventsToRun = list.Where(n =>
-                    n.Key >= e.Amount && n.Key < e.PreviousAmount).ToList();
-                eventsToRun.Sort(new Comparison<KeyValuePair<int, EventInfo>>
-                    ((x, y) => y.Key - x.Key));
-            }
-            Debug.LogWarning(string.Join(", ", eventsToRun));
         }
+    }
+
+    // confirms triggering after checking that one 
+    // triggering condition has been met
+    private bool ConfirmTriggered(EventInfo eventInfo)
+    {
+        // since the base trigger already got confirmed
+        if (!eventInfo.AllTriggersNeeded)
+        {
+            return true;
+        }
+        foreach (var condition in eventInfo.TriggeringConditions)
+        {
+            int actualAmount;
+            // checking for failing, returning true if no fails
+            switch (condition.Item1)
+            {
+                case TriggerKeyword.Money:
+                    actualAmount = PlayerData.Player.money;
+                    break;
+                case TriggerKeyword.Morality:
+                    actualAmount = PlayerData.Player.morality;
+                    break;
+                case TriggerKeyword.UpgradeLevel:
+                    actualAmount = PlayerData.Player.shoplvl;
+                    break;
+                case TriggerKeyword.Week:
+                    actualAmount = PlayerData.Player.week;
+                    break;
+                default:
+                    continue;
+            }
+            if (IsTriggerFailed(condition.Item2, actualAmount))
+                return false;
+        }
+        return true;
+    }
+
+    private bool IsTriggerFailed(int conditionAmount, int actualAmount)
+    {
+        Debug.LogWarning(actualAmount + " " + conditionAmount + ": amounts");
+        if (conditionAmount >= 0)
+        {
+            if (conditionAmount <= actualAmount)
+                return false;
+        }
+        else if (conditionAmount >= actualAmount)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    private static List<KeyValuePair<int, EventInfo>> FilterEventList(
+        SortedList<int, EventInfo> list, 
+        int currentAmount, int previousOrZero = 0)
+    {
+        List<KeyValuePair<int, EventInfo>> eventsToRun;
+        if (currentAmount >= previousOrZero)
+        {
+            // we're increasing, sort in ascending order
+            // get anything greater than 0 and 
+            // less than or equal to amount
+            eventsToRun = list.Where(n =>
+                n.Key >= previousOrZero && n.Key <= currentAmount).ToList();
+            eventsToRun.Sort(new Comparison<KeyValuePair<int, EventInfo>>
+                ((x, y) => x.Key - y.Key));
+        }
+        else
+        {
+            // need to get events from amount to 0
+            eventsToRun = list.Where(n =>
+                n.Key >= currentAmount && n.Key <= previousOrZero).ToList();
+            eventsToRun.Sort(new Comparison<KeyValuePair<int, EventInfo>>
+                ((x, y) => y.Key - x.Key));
+        }
+        return eventsToRun;
     }
 }

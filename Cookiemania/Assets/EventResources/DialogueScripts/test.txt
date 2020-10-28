@@ -32,6 +32,9 @@
 
 # case insensitive name btw
 event test
+# these are always minimum thresholds
+# if negative need to reach a more/equal negative point to meet trigger condition
+# if positive need to reach a more/equal positive point to meet trigger condition
 trigger week 1
 trigger money 0
 
