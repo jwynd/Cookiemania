@@ -160,5 +160,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.3
   enemy: {fileID: 0}
-  PExplosionImage: {fileID: 8463096131581357343, guid: 9602e3d91879a97489b64b8514aada9b,
+  PExplosionImage: {fileID: -4568620655595551830, guid: 20266f58562693e428758ed785e35b25,
     type: 3}

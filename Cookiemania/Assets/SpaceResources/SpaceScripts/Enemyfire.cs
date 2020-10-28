@@ -10,6 +10,7 @@ public class Enemyfire : MonoBehaviour
     public Transform enemy;
 
     public Sprite PExplosionImage;
+    public Sprite E2;
     // Start is called before the first frame update
     void Start()
     {

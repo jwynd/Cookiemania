@@ -22,6 +22,8 @@ public class enemy : MonoBehaviour
     public Transform Player;
     public Transform location1;
     public Transform location2;
+    public GameObject pos1;
+    public GameObject pos2;
     private Vector2 movement;
     private Vector2 movement2;
     private Vector2 movement3;
@@ -33,8 +35,8 @@ public class enemy : MonoBehaviour
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("treasure").GetComponent<Transform>();
-        location1 = GameObject.Find("location1").GetComponent<Transform>();
-        location2 = GameObject.Find("location2").GetComponent<Transform>();
+        location1 = pos1.GetComponent<Transform>();
+        location2 = pos2.GetComponent<Transform>();
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.velocity = new Vector2(1, 0) * speed;
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -117,7 +119,7 @@ public class enemy : MonoBehaviour
     void Update()
     {
         Vector3 direction = Player.position - transform.position;
-        Vector3 direction2 = location1.position - transform.position;
+        Vector3 direction2 = transform.position - Player.position;
         Vector3 direction3 = location2.position - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         rigidBody.rotation = angle;
@@ -128,6 +130,7 @@ public class enemy : MonoBehaviour
         movement2 = direction2;
         movement3 = direction3;
         rand = Random.Range(0, 100);
+
     }
     private void FixedUpdate()
     {
@@ -179,11 +182,12 @@ public class enemy : MonoBehaviour
 
     void moveCharacter(Vector2 direction, Vector2 direction2, Vector2 direction3)
     {
-        if (GameObject.Find("lag") != null || GameObject.Find("bosscookie") != null)
+        if (GameObject.Find("lag(Clone)") != null || GameObject.Find("bosscookie(Clone)") != null)
         {
             Debug.Log("boss on screen");
-            if (rand >= 50)
+            if (true)
             {
+                //rigidBody.velocity = Vector3.zero;
                 rigidBody.MovePosition((Vector2)transform.position + (direction2 * moveSpeed * Time.deltaTime));
             }
             else

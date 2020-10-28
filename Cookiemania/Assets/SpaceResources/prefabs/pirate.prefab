@@ -165,4 +165,6 @@ MonoBehaviour:
   Player: {fileID: 0}
   location1: {fileID: 0}
   location2: {fileID: 0}
+  pos1: {fileID: 2101281234196067432, guid: 39283a503619dd541a5a9e26cd19e560, type: 3}
+  pos2: {fileID: 1712844284885222188, guid: 6c7055731fb63a941a7e623f1a957554, type: 3}
   moveSpeed: 1.5
