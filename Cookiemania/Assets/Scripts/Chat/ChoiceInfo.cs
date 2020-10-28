@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using static ScriptConstants;
+using static Parsing_Utilities;
 
 [Serializable]
 public class ChoiceInfo

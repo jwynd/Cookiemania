@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-public class ScriptConstants
+public static class Parsing_Utilities
 {
     public static char COMMENT = '#';
     public static char DIALOGUE = '>';
@@ -162,6 +162,10 @@ public class ScriptConstants
 
     private static void WeekTriggerAction(ref EventParsingInfo parsingInfo)
     {
+        if (parsingInfo.TrimmedLine.Count < 3)
+        {
+            throw new Exception("triggers must have name of an amount specified");
+        }
         var amt = int.Parse(parsingInfo.TrimmedLine[2].ToLowerInvariant().Trim());
         parsingInfo.EventInfo.TriggeringConditions.Add(
             new Tuple<TriggerKeyword, int>(TriggerKeyword.Week, amt));
@@ -169,6 +173,10 @@ public class ScriptConstants
 
     private static void UpgradeLevelTriggerAction(ref EventParsingInfo parsingInfo)
     {
+        if (parsingInfo.TrimmedLine.Count < 3)
+        {
+            throw new Exception("triggers must have name of an amount specified");
+        }
         var amt = int.Parse(parsingInfo.TrimmedLine[2].ToLowerInvariant().Trim());
         parsingInfo.EventInfo.TriggeringConditions.Add(
             new Tuple<TriggerKeyword, int>(TriggerKeyword.UpgradeLevel, amt));
@@ -176,6 +184,10 @@ public class ScriptConstants
 
     private static void MoralityTriggerAction(ref EventParsingInfo parsingInfo)
     {
+        if (parsingInfo.TrimmedLine.Count < 3)
+        {
+            throw new Exception("triggers must have name of an amount specified");
+        }
         var amt = int.Parse(parsingInfo.TrimmedLine[2].ToLowerInvariant().Trim());
         parsingInfo.EventInfo.TriggeringConditions.Add(
             new Tuple<TriggerKeyword, int>(TriggerKeyword.Morality, amt));
@@ -183,6 +195,10 @@ public class ScriptConstants
 
     private static void MoneyTriggerAction(ref EventParsingInfo parsingInfo)
     {
+        if (parsingInfo.TrimmedLine.Count < 3)
+        {
+            throw new Exception("triggers must have name of an amount specified");
+        }
         var amt = int.Parse(parsingInfo.TrimmedLine[2].ToLowerInvariant().Trim());
         parsingInfo.EventInfo.TriggeringConditions.Add(
             new Tuple<TriggerKeyword, int>(TriggerKeyword.Money, amt));
@@ -207,7 +223,7 @@ public class ScriptConstants
     }
 
     // item1 of choice bools is whether in choice, item2 is whether in a choice branch's dialogue
-    public static void BackgroundChangeAction(ref EventParsingInfo parsingInfo)
+    private static void BackgroundChangeAction(ref EventParsingInfo parsingInfo)
     {
         UnityEngine.Debug.LogError("background changing not implemented yet");
         return;
@@ -223,19 +239,19 @@ public class ScriptConstants
         parsingInfo.EventInfo.AllTriggersNeeded = false;
     }
 
-    public static void BranchAction(ref EventParsingInfo parsingInfo)
+    private static void BranchAction(ref EventParsingInfo parsingInfo)
     {
         parsingInfo.IsChoiceIsChoiceDialogue = new Tuple<bool, bool>(true, false);
         parsingInfo.EventInfo.GetLastChoice().AddChoice("");
     }
 
     // empty as currently intended
-    public static void BranchEndAction(ref EventParsingInfo parsingInfo)
+    private static void BranchEndAction(ref EventParsingInfo parsingInfo)
     {
         return;
     }
 
-    public static void BranchStartAction(ref EventParsingInfo parsingInfo)
+    private static void BranchStartAction(ref EventParsingInfo parsingInfo)
     {
         if (!parsingInfo.IsChoiceIsChoiceDialogue.Item1)
         {
@@ -263,7 +279,7 @@ public class ScriptConstants
         }
     }
 
-    public static void ChoiceAction(ref EventParsingInfo parsingInfo)
+    private static void ChoiceAction(ref EventParsingInfo parsingInfo)
     {
         parsingInfo.IsChoiceIsChoiceDialogue = new Tuple<bool, bool>(true, false);
         parsingInfo.EventInfo.AddChoice(new ChoiceInfo(
@@ -273,7 +289,7 @@ public class ScriptConstants
             parsingInfo.EventInfo.GetLastChoice().UniqueName);
     }
 
-    public static void ChoiceEndAction(ref EventParsingInfo parsingInfo)
+    private static void ChoiceEndAction(ref EventParsingInfo parsingInfo)
     {
         BranchEndAction(ref parsingInfo);
         parsingInfo.IsChoiceIsChoiceDialogue = new Tuple<bool, bool>(false, false);
@@ -287,7 +303,7 @@ public class ScriptConstants
         }
     }
 
-    public static void EventAction(ref EventParsingInfo parsingInfo)
+    private static void EventAction(ref EventParsingInfo parsingInfo)
     {
         if (parsingInfo.TrimmedLine.Count < 2)
         {
@@ -296,7 +312,7 @@ public class ScriptConstants
         parsingInfo.EventInfo = new EventInfo(parsingInfo.TrimmedLine[1].ToLowerInvariant().Trim());
     }
 
-    public static void EventEarlyEndAction(ref EventParsingInfo parsingInfo)
+    private static void EventEarlyEndAction(ref EventParsingInfo parsingInfo)
     {
         if (parsingInfo.IsChoiceIsChoiceDialogue.Item1)
             parsingInfo.EventInfo.MultiEarlyExitWrite(parsingInfo.ChoiceDialoguesToMultiWrite);
@@ -305,7 +321,7 @@ public class ScriptConstants
         BranchEndAction(ref parsingInfo);
     }
 
-    public static void EventEndAction(ref EventParsingInfo parsingInfo)
+    private static void EventEndAction(ref EventParsingInfo parsingInfo)
     {
         parsingInfo.EventInfo.GetLastDialogue().NextBranch = EventInfo.LAST_BRANCH;
         parsingInfo.EventInfo.GetLastDialogue().ExitsEvent = true;
@@ -319,16 +335,17 @@ public class ScriptConstants
         parsingInfo.EventInfo = null;
     }
 
-    public static void EventRewardAction(ref EventParsingInfo parsingInfo)
+    private static void EventRewardAction(ref EventParsingInfo parsingInfo)
     {
         if (parsingInfo.IsChoiceIsChoiceDialogue.Item1)
         {
             throw new Exception("event complete rewards may not be declared inside a choice");
         }
-        parsingInfo.EventInfo.EventCompleteReward.Add(GetRewardTuple(parsingInfo.EventInfo, parsingInfo.TrimmedLine));
+        parsingInfo.EventInfo.EventCompleteReward.Add(
+            GetRewardTuple(parsingInfo.TrimmedLine));
     }
 
-    public static void RewardAction(ref EventParsingInfo parsingInfo)
+    private static void RewardAction(ref EventParsingInfo parsingInfo)
     {
         if (!parsingInfo.IsChoiceIsChoiceDialogue.Item1)
         {
@@ -336,13 +353,13 @@ public class ScriptConstants
             throw new Exception("can only provide normal rewards inside a choice" +
                 " declaration");
         }
-        var reward = GetRewardTuple(parsingInfo.EventInfo, parsingInfo.TrimmedLine);
+        var reward = GetRewardTuple(parsingInfo.TrimmedLine);
         parsingInfo.EventInfo.GetLastChoice().AddReward(reward.Item1, reward.Item2);
     }
 
 
 
-    public static void TriggerAction(ref EventParsingInfo parsingInfo)
+    private static void TriggerAction(ref EventParsingInfo parsingInfo)
     {
         var triggerKeyword = parsingInfo.TrimmedLine[1].ToLowerInvariant().Trim();
         if (TRIGGER_KEYWORDS.TryGetValue(triggerKeyword, out TriggerKeyword trigger)) 
@@ -380,7 +397,7 @@ public class ScriptConstants
         }
     }
 
-    private static Tuple<RewardKeyword, int> GetRewardTuple(EventInfo eventInfo, List<string> line)
+    private static Tuple<RewardKeyword, int> GetRewardTuple(List<string> line)
     {
         if (line.Count < 3)
         {

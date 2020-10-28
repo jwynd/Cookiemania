@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using System.Linq;
 using System.Collections;
 
+using static Parsing_Utilities;
+
 public class ChoiceController : MonoBehaviour
 {
     public const int MAX_CHOICES_SUPPORTED = 4;
@@ -47,10 +49,10 @@ public class ChoiceController : MonoBehaviour
     [Serializable]
     public class RewardTupleStandIn
     {
-        public ScriptConstants.RewardKeyword rewardType;
+        public RewardKeyword rewardType;
         public int amount;
 
-        public RewardTupleStandIn(ScriptConstants.RewardKeyword item1, int item2)
+        public RewardTupleStandIn(RewardKeyword item1, int item2)
         {
             rewardType = item1;
             amount = item2;
@@ -73,8 +75,8 @@ public class ChoiceController : MonoBehaviour
     private List<string> testNextBranches = 
         new List<string>();
 
-    private List<List<Tuple<ScriptConstants.RewardKeyword, int>>> rewards = 
-        new List<List<Tuple<ScriptConstants.RewardKeyword, int>>>();
+    private List<List<Tuple<RewardKeyword, int>>> rewards = 
+        new List<List<Tuple<RewardKeyword, int>>>();
     private List<string> nextBranches = 
         new List<string>();
     // the choice texts
@@ -85,7 +87,7 @@ public class ChoiceController : MonoBehaviour
     public delegate void OnComplete(string nextBranch,
         string choicePrompt, 
         string choiceMade,
-        List<Tuple<ScriptConstants.RewardKeyword, int>> rewardList );
+        List<Tuple<RewardKeyword, int>> rewardList );
     private OnComplete runOnComplete = null;
 
     private List<Button> choiceButtons = new List<Button>();
@@ -102,20 +104,20 @@ public class ChoiceController : MonoBehaviour
 #if UNITY_EDITOR
         if (useTestMode)
         {
-            var altTestRewards = new List<List<Tuple<ScriptConstants.RewardKeyword, int>>>();
+            var altTestRewards = new List<List<Tuple<RewardKeyword, int>>>();
             foreach (var list in testRewards)
             {
-                var altInnerList = new List<Tuple<ScriptConstants.RewardKeyword, int>>();
+                var altInnerList = new List<Tuple<RewardKeyword, int>>();
                 foreach (var tuple in list.rewards)
                 {
-                    altInnerList.Add(new Tuple<ScriptConstants.RewardKeyword, int>(
+                    altInnerList.Add(new Tuple<RewardKeyword, int>(
                         tuple.rewardType, tuple.amount));
                 }
                 altTestRewards.Add(altInnerList);
             }
             Initialize(testCharName, testCharImage, testChoicePrompt, testChoices,
                 altTestRewards, testNextBranches, 
-                (string nextB, string v, string c, List<Tuple<ScriptConstants.RewardKeyword, int>> rewards) => 
+                (string nextB, string v, string c, List<Tuple<RewardKeyword, int>> rewards) => 
                     Debug.Log("test complete for choice: " + c + ", " + v + " was selected, with rewards " + 
                     string.Join(" ", rewards) + "\nnext branch is: " + nextB),
                 testBG);
@@ -134,7 +136,7 @@ public class ChoiceController : MonoBehaviour
 
     public void Initialize(string cName, Sprite cImage, 
         string choicePrompt, List<string> choices, 
-        List<List<Tuple<ScriptConstants.RewardKeyword, int>>> rewards, 
+        List<List<Tuple<RewardKeyword, int>>> rewards, 
         List<string> nextEvents,
         OnComplete onComplete, 
         Sprite background = null)

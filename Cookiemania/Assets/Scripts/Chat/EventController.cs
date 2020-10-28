@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using static ScriptConstants;
+using static Parsing_Utilities;
 
 // carries through all the sequences for a single event
 // should be triggered by an event manager

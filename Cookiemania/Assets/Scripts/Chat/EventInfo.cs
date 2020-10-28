@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static ScriptConstants;
+using static Parsing_Utilities;
 
 [Serializable]
 public class EventInfo
