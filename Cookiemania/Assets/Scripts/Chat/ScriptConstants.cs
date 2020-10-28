@@ -1,7 +1,6 @@
 ﻿using General_Utilities;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 public class ScriptConstants
 {
@@ -35,8 +34,6 @@ public class ScriptConstants
 
     public enum TriggerKeyword
     {
-        EventStart,
-        EventEnd,
         Money,
         UpgradeLevel,
         Week,
@@ -103,10 +100,6 @@ public class ScriptConstants
     public static readonly Dictionary<string, TriggerKeyword> TRIGGER_KEYWORDS =
         new Dictionary<string, TriggerKeyword>
     {
-        { "end" , TriggerKeyword.EventEnd },
-        { "ends" , TriggerKeyword.EventEnd },
-        { "start" , TriggerKeyword.EventStart },
-        { "starts" , TriggerKeyword.EventStart },
         { "money" , TriggerKeyword.Money },
         { "weeks" , TriggerKeyword.Week },
         { "week" , TriggerKeyword.Week },
@@ -161,8 +154,6 @@ public class ScriptConstants
     public static readonly Dictionary<TriggerKeyword, ActionRef<EventParsingInfo>> TriggerKeywordActions =
         new Dictionary<TriggerKeyword, ActionRef<EventParsingInfo>>
         {
-            {TriggerKeyword.EventEnd, new ActionRef<EventParsingInfo>(EventEndTriggerAction) },
-            {TriggerKeyword.EventStart, new ActionRef<EventParsingInfo>(EventStartTriggerAction) },
             {TriggerKeyword.Money, new ActionRef<EventParsingInfo>(MoneyTriggerAction) },
             {TriggerKeyword.Morality, new ActionRef<EventParsingInfo>(MoralityTriggerAction) },
             {TriggerKeyword.UpgradeLevel, new ActionRef<EventParsingInfo>(UpgradeLevelTriggerAction) },
@@ -171,32 +162,30 @@ public class ScriptConstants
 
     private static void WeekTriggerAction(ref EventParsingInfo parsingInfo)
     {
-        return;
+        var amt = int.Parse(parsingInfo.TrimmedLine[2].ToLowerInvariant().Trim());
+        parsingInfo.EventInfo.TriggeringConditions.Add(
+            new Tuple<TriggerKeyword, int>(TriggerKeyword.Week, amt));
     }
 
     private static void UpgradeLevelTriggerAction(ref EventParsingInfo parsingInfo)
     {
-        return;
+        var amt = int.Parse(parsingInfo.TrimmedLine[2].ToLowerInvariant().Trim());
+        parsingInfo.EventInfo.TriggeringConditions.Add(
+            new Tuple<TriggerKeyword, int>(TriggerKeyword.UpgradeLevel, amt));
     }
 
     private static void MoralityTriggerAction(ref EventParsingInfo parsingInfo)
     {
-        return;
+        var amt = int.Parse(parsingInfo.TrimmedLine[2].ToLowerInvariant().Trim());
+        parsingInfo.EventInfo.TriggeringConditions.Add(
+            new Tuple<TriggerKeyword, int>(TriggerKeyword.Morality, amt));
     }
 
     private static void MoneyTriggerAction(ref EventParsingInfo parsingInfo)
     {
-        return;
-    }
-
-    private static void EventStartTriggerAction(ref EventParsingInfo parsingInfo)
-    {
-        return;
-    }
-
-    private static void EventEndTriggerAction(ref EventParsingInfo parsingInfo)
-    {
-        return;
+        var amt = int.Parse(parsingInfo.TrimmedLine[2].ToLowerInvariant().Trim());
+        parsingInfo.EventInfo.TriggeringConditions.Add(
+            new Tuple<TriggerKeyword, int>(TriggerKeyword.Money, amt));
     }
 
     private static void DirectTriggerAction(ref EventParsingInfo parsingInfo)
@@ -220,17 +209,18 @@ public class ScriptConstants
     // item1 of choice bools is whether in choice, item2 is whether in a choice branch's dialogue
     public static void BackgroundChangeAction(ref EventParsingInfo parsingInfo)
     {
+        UnityEngine.Debug.LogError("background changing not implemented yet");
         return;
     }
 
-    private static void AllTriggersAction(ref EventParsingInfo arg1)
+    private static void AllTriggersAction(ref EventParsingInfo parsingInfo)
     {
-        return;
+        parsingInfo.EventInfo.AllTriggersNeeded = true;
     }
 
-    private static void SingleTriggerAction(ref EventParsingInfo arg1)
+    private static void SingleTriggerAction(ref EventParsingInfo parsingInfo)
     {
-        return;
+        parsingInfo.EventInfo.AllTriggersNeeded = false;
     }
 
     public static void BranchAction(ref EventParsingInfo parsingInfo)
@@ -239,6 +229,7 @@ public class ScriptConstants
         parsingInfo.EventInfo.GetLastChoice().AddChoice("");
     }
 
+    // empty as currently intended
     public static void BranchEndAction(ref EventParsingInfo parsingInfo)
     {
         return;

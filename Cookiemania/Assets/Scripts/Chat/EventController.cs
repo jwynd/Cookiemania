@@ -98,7 +98,8 @@ public class EventController : MonoBehaviour
     public void RunEvent(EventInfo eventInfo)
     {
         // reference copy, we want to effect the original
-        
+        if (!eventInfo.EventListening)
+            return;
         if (runningDialogueEvent)
         {
             eventQueue.Enqueue(eventInfo);

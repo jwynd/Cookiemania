@@ -385,18 +385,22 @@ public class EventManager : MonoBehaviour
         
         foreach (var @event in eventDictionary.Values)
         {
-            @event.PrintInformation();
             if (@event.EventListening)
             {
                 foreach (var trigger in @event.TriggeringConditions)
                 {
                     if (listeningEvents.TryGetValue(
-                    trigger.Item1, out SortedList<int, EventInfo> list))
+                        trigger.Item1, out SortedList<int, EventInfo> list))
                     {
                         list.Add(trigger.Item2, @event);
                     }
-                }
-                
+                    else
+                    {
+                        list = new SortedList<int, EventInfo>
+                            { { trigger.Item2, @event } };
+                        listeningEvents.Add(trigger.Item1, list);
+                    }
+                }  
             }
         }
 
@@ -472,7 +476,7 @@ public class EventManager : MonoBehaviour
     private void GenericListener(PlayerData.IntegerEventArgs e, TriggerKeyword keyword)
     {
         if (listeningEvents.TryGetValue(
-                    keyword, out SortedList<int, EventInfo> list))
+            keyword, out SortedList<int, EventInfo> list))
         {
             if (e.Amount == e.PreviousAmount) return;
             List<KeyValuePair<int, EventInfo>> eventsToRun =
@@ -527,7 +531,6 @@ public class EventManager : MonoBehaviour
 
     private bool IsTriggerFailed(int conditionAmount, int actualAmount)
     {
-        Debug.LogWarning(actualAmount + " " + conditionAmount + ": amounts");
         if (conditionAmount >= 0)
         {
             if (conditionAmount <= actualAmount)
