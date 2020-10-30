@@ -23,11 +23,14 @@ public class EventManager : MonoBehaviour
     [SerializeField]
     private List<CharacterInfo> characterList = new List<CharacterInfo>();
     [SerializeField]
+    private List<BackgroundInfo> backgroundList = new List<BackgroundInfo>();
+    [SerializeField]
     private bool useTestMode = true;
 
     // these dictionaries are only initialized
     private ReadOnlyDictionary<string, Tuple<string, Sprite>> characterDictionary;
     private ReadOnlyDictionary<string, CharacterInfo> charInfoDictionary;
+    private ReadOnlyDictionary<string, BackgroundInfo> backgroundDictionary;
     private ReadOnlyDictionary<string, EventInfo> eventDictionary;
 
     // mutable dictionary
@@ -118,10 +121,10 @@ public class EventManager : MonoBehaviour
             switch(reward.Item1)
             {
                 case RewardKeyword.Money:
-                    PlayerData.Player.money += reward.Item2;
+                    PlayerData.Player.AddMoney(reward.Item2);
                     break;
                 case RewardKeyword.Morality:
-                    PlayerData.Player.morality += reward.Item2;
+                    PlayerData.Player.AddMorality(reward.Item2);
                     break;
                 case RewardKeyword.ShopLevel:
                     PlayerData.Player.shoplvl += reward.Item2;
@@ -151,7 +154,8 @@ public class EventManager : MonoBehaviour
                 {
                     continue;
                 }
-                ParseDialogueOrKeyword(ref parsingInfo, charInfoDictionary);
+                ParseDialogueOrKeyword(ref parsingInfo, 
+                    charInfoDictionary, backgroundDictionary);
             }
         }
         eventDictionary = new ReadOnlyDictionary<string, EventInfo>
@@ -184,7 +188,8 @@ public class EventManager : MonoBehaviour
     // and invokers need to understand that anything marked ref can 
     // change when going through this function
     private static void ParseDialogueOrKeyword(ref EventParsingInfo parsingInfo, 
-        ReadOnlyDictionary<string, CharacterInfo> charDictionary)
+        ReadOnlyDictionary<string, CharacterInfo> charDictionary,
+        ReadOnlyDictionary<string, BackgroundInfo> bgDictionary)
     {
         // this first one needs to be lowercased and trimmed
         parsingInfo.TrimmedLine[0] = 
@@ -195,7 +200,7 @@ public class EventManager : MonoBehaviour
         }
         else
         {
-            ParseKeyword(ref parsingInfo, charDictionary);
+            ParseKeyword(ref parsingInfo, charDictionary, bgDictionary);
         }
     }
 
@@ -231,7 +236,8 @@ public class EventManager : MonoBehaviour
     }
 
     private static void ParseKeyword(ref EventParsingInfo parsingInfo,
-        ReadOnlyDictionary<string, CharacterInfo> charDictionary)
+        ReadOnlyDictionary<string, CharacterInfo> charDictionary, 
+        ReadOnlyDictionary<string, BackgroundInfo> bgDictionary)
     {
         var keywordMatch = parsingInfo.TrimmedLine.First();
         if (BASE_KEYWORDS.TryGetValue(
@@ -244,6 +250,11 @@ public class EventManager : MonoBehaviour
         {
             ResolveCharacterKeyword(ref parsingInfo);
         }
+        else if (bgDictionary.TryGetValue(keywordMatch,
+            out parsingInfo.BackgroundInfo)) 
+        {
+            ResolveBackgroundKeyword(ref parsingInfo);
+        }
         else
         {
             Debug.Log(string.Join(" ", charDictionary.Keys));
@@ -255,9 +266,17 @@ public class EventManager : MonoBehaviour
         }
     }
 
+    private static void ResolveBackgroundKeyword(ref EventParsingInfo parsingInfo)
+    {
+        throw new NotImplementedException();
+    }
+
+    // only works cuz parsingInfo.CharacterInfo already got set to the correct
+    // characterInfo, this is just making sure the choice gets it when needed
     private static void ResolveCharacterKeyword(ref EventParsingInfo parsingInfo)
     {
-        if (parsingInfo.IsChoiceIsChoiceDialogue.Item1)
+        if (parsingInfo.IsChoiceIsChoiceDialogue.Item1 && 
+            !parsingInfo.IsChoiceIsChoiceDialogue.Item2)
         {
             parsingInfo.EventInfo.GetLastChoice().CharacterImage =
                 parsingInfo.CharacterInfo.Sprite;
@@ -316,7 +335,7 @@ public class EventManager : MonoBehaviour
         return string.Join(" ", trimmedText.ToArray());
     }
 
-    private void CreateCharDictionary(List<CharacterInfo> characterList)
+    private void CreateCharDictionaries(List<CharacterInfo> characterList)
     {
         var charDictionary = new Dictionary<string, Tuple<string, Sprite>>();
         var charInfoDictionary = new Dictionary<string, CharacterInfo>();
@@ -349,10 +368,61 @@ public class EventManager : MonoBehaviour
         Instance = this;
         DialoguePrefab = Instantiate(dialoguePrefab);
         ChoicePrefab = Instantiate(choicePrefab);
-        CreateCharDictionary(characterList);
+        CreateCharDictionaries(characterList);
+        CreateBGDictionary(backgroundList);
+        VerifyNoOverlappingCommands(characterDictionary, backgroundDictionary);
         DialoguePrefab.GetComponent<DialogueController>().
             InitDictionaryOnly(characterDictionary);
         ParseEventScripts(eventTextFiles);
+    }
+
+    private static void VerifyNoOverlappingCommands(
+        ReadOnlyDictionary<string, Tuple<string, Sprite>> characterDictionary, 
+        ReadOnlyDictionary<string, BackgroundInfo> backgroundDictionary)
+    {
+        HashSet<string> checkHash = new HashSet<string>
+        {
+            // obviously cannot be equivalent to the 
+            // comment or dialogue keyword chars either
+            COMMENT.ToString(),
+            DIALOGUE.ToString()
+        };
+        VerifyNoOverlapLoop(characterDictionary, checkHash);
+        VerifyNoOverlapLoop(backgroundDictionary, checkHash);
+        VerifyNoOverlapLoop(new ReadOnlyDictionary
+            <string, BaseKeyword>(BASE_KEYWORDS), checkHash);
+    }
+
+    private static void VerifyNoOverlapLoop<T>(
+        ReadOnlyDictionary<string, T> backgroundDictionary, 
+        HashSet<string> checkHash)
+    {
+        foreach (var command in backgroundDictionary)
+        {
+            if (checkHash.Contains(command.Key))
+            {
+                throw new Exception("unique character names and backgrounds " +
+                    "must not overlap with each other, themselves or script command words" +
+                    ": " + command.Key);
+            }
+            checkHash.Add(command.Key);
+        }
+    }
+
+    private void CreateBGDictionary(List<BackgroundInfo> bgList)
+    {
+        var bgDictionary = new Dictionary<string, BackgroundInfo>();
+        foreach (var bgInfo in bgList)
+        {
+            if (bgDictionary.ContainsKey(bgInfo.UniqueName))
+            {
+                throw new Exception("backgrounds must have unique names: " +
+                    bgInfo.UniqueName);
+            }
+            bgDictionary.Add(bgInfo.UniqueName, bgInfo);
+        }
+        this.backgroundDictionary = new ReadOnlyDictionary<string, BackgroundInfo>
+            (bgDictionary);
     }
 
     private void Start()
@@ -560,6 +630,7 @@ public class EventManager : MonoBehaviour
         else
         {
             // need to get events from amount to 0
+            // sorts in opposite direction
             eventsToRun = list.Where(n =>
                 n.Key >= currentAmount && n.Key <= previousOrZero).ToList();
             eventsToRun.Sort(new Comparison<KeyValuePair<int, EventInfo>>

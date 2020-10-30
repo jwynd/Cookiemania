@@ -8,6 +8,7 @@ using UnityEngine;
 public class EventParsingInfo
 {
     public CharacterInfo CharacterInfo = null;
+    public BackgroundInfo BackgroundInfo = null;
     public Tuple<bool, bool> IsChoiceIsChoiceDialogue = 
        new Tuple<bool, bool>(false, false);
     public List<string> ChoiceDialoguesToMultiWrite = 

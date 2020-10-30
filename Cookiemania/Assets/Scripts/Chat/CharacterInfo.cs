@@ -13,6 +13,6 @@ public class CharacterInfo
     {
         this.Sprite = sprite;
         this.DisplayName = displayName;
-        this.UniqueName = uniqueName.ToLowerInvariant();
+        this.UniqueName = uniqueName.ToLowerInvariant().Trim();
     }
 }

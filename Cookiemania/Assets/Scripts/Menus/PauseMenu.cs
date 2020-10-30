@@ -1,11 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-//this is required but abstract classes can't be added
-//so manual adding will be required
-//[RequireComponent(typeof(General_Input))]
 
 using static General_Utilities.Children;
 
@@ -117,20 +112,38 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
-        Time.timeScale = 0;
+        // dont use menuactive over true here
+        PauseWithoutScreen();
         markedButton = -1;
         Up();
         menuActive = true;
-        transform.SetActiveChildren(menuActive);
+        transform.SetActiveChildren(true);
         settingsPrefab.SetActive(false);
+    }
+
+    public static float PauseWithoutScreen()
+    {
+        if (Time.timeScale <= 0)
+        {
+            return -1;
+        }
+        var currentScale = Time.timeScale;
+        Time.timeScale = 0;
+        return currentScale;
+    }
+
+    public static void ResumeWithoutScreen(float normalTimeScale)
+    {
+        Time.timeScale = normalTimeScale;
     }
 
     public void Resume()
     {
+        // dont use menuactive over false here
         menuActive = false;
         settingsPrefab.SetActive(false);
-        transform.SetActiveChildren(menuActive);
-        Time.timeScale = normalTimeScale;
+        transform.SetActiveChildren(false);
+        ResumeWithoutScreen(normalTimeScale);
     }
 
     public void Settings()
@@ -160,22 +173,25 @@ public class PauseMenu : MonoBehaviour
         if (t != markedButton)
         {
             //move marker up
-            markerObj.transform.position = new Vector3(markerObj.transform.position.x,
-                                                       myChildButtons[markedButton].transform.position.y,
-                                                       markerObj.transform.position.z);
+            markerObj.transform.position = new Vector3(
+                markerObj.transform.position.x,
+                myChildButtons[markedButton].transform.position.y,
+                markerObj.transform.position.z);
         }
     }
 
     protected void Down()
     {
         int t = markedButton;
-        markedButton = Mathf.Min(myChildButtons.Count - 1, markedButton + 1);
+        markedButton = Mathf.Min(
+            myChildButtons.Count - 1, markedButton + 1);
         if (t != markedButton)
         {
             //move marker down
-            markerObj.transform.position = new Vector3(markerObj.transform.position.x,
-                                                       myChildButtons[markedButton].transform.position.y,
-                                                       markerObj.transform.position.z);
+            markerObj.transform.position = new Vector3(
+                markerObj.transform.position.x,
+                myChildButtons[markedButton].transform.position.y,
+                markerObj.transform.position.z);
         }
     }
 

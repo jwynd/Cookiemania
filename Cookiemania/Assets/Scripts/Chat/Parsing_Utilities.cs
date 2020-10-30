@@ -149,8 +149,6 @@ public static class Parsing_Utilities
             {BaseKeyword.AllTriggerConditions, new ActionRef<EventParsingInfo>(AllTriggersAction) },
         };
 
-
-
     public static readonly Dictionary<TriggerKeyword, ActionRef<EventParsingInfo>> TriggerKeywordActions =
         new Dictionary<TriggerKeyword, ActionRef<EventParsingInfo>>
         {
@@ -307,7 +305,7 @@ public static class Parsing_Utilities
     {
         if (parsingInfo.TrimmedLine.Count < 2)
         {
-            throw new Exception("event needs a name on declaration parsingInfo.TrimmedLine");
+            throw new Exception("event needs a name on declaration line");
         }
         parsingInfo.EventInfo = new EventInfo(parsingInfo.TrimmedLine[1].ToLowerInvariant().Trim());
     }

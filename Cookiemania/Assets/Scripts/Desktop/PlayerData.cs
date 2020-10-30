@@ -127,6 +127,27 @@ public class PlayerData : MonoBehaviour
         }
     }
 
+    // increment specifically for buttons
+    public void IncrementWeek()
+    {
+        week += 1;
+    }
+
+    public void IncrementShopLvl()
+    {
+        shoplvl += 1;
+    }
+
+    public void AddMoney(int amount)
+    {
+        money += amount;
+    }
+
+    public void AddMorality(int amount)
+    {
+        morality += amount;
+    }
+
     private void Awake()
     {
         if (Player != null && Player != this)

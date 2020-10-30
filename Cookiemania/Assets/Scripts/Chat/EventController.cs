@@ -18,6 +18,7 @@ public class EventController : MonoBehaviour
 
     public ChoiceController.OnComplete onChoiceComplete;
     private bool runningDialogueEvent = false;
+    private float timeScale = 1f;
 
     public void DialogueComplete(string nextBranch)
     {
@@ -108,6 +109,8 @@ public class EventController : MonoBehaviour
 #if UNITY_EDITOR
         eventInfo.PrintInformation();
 #endif
+        var possibleScale = PauseMenu.PauseWithoutScreen();
+        timeScale = possibleScale > 0 ? possibleScale : timeScale;
         info = eventInfo;
         info.EventListening = false;
         if (!info.RequiresDialogueControl)
@@ -124,6 +127,7 @@ public class EventController : MonoBehaviour
         EventManager.Instance.EventComplete(
             info.UniqueName, info.EventCompleteReward);
         runningDialogueEvent = false;
+        PauseMenu.ResumeWithoutScreen(timeScale);
         if (eventQueue.Count > 0)
         {
             RunEvent(eventQueue.Dequeue());
