@@ -116,12 +116,14 @@ public class EventInfo
         }
     }
 
-    public List<DialogueInfo> GetAllDialogues(List<string> dialogueBranchNames, bool noExceptions = false)
+    public List<DialogueInfo> GetAllDialogues(List<string> dialogueBranchNames, 
+        bool noExceptions = false)
     {
         List<DialogueInfo> dialogues = new List<DialogueInfo>();
         foreach (var name in dialogueBranchNames)
         {
-            if (BranchingDictionary.TryGetValue(name, out Tuple<bool, int> dictionaryTuple))
+            if (BranchingDictionary.TryGetValue(name, 
+                out Tuple<bool, int> dictionaryTuple))
             {
                 if (!dictionaryTuple.Item1)
                 {
@@ -140,7 +142,8 @@ public class EventInfo
                 {
                     continue;
                 }
-                throw new Exception("name not found for multi-dialogue writing: " + name);
+                throw new Exception("name not found for " +
+                    "multi-dialogue writing: " + name);
             }
         }
         return dialogues;
