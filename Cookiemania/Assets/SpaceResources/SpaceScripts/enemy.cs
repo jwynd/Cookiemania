@@ -34,6 +34,7 @@ public class enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        rand = Random.Range(0, 100);
         Player = GameObject.FindGameObjectWithTag("treasure").GetComponent<Transform>();
         location1 = pos1.GetComponent<Transform>();
         location2 = pos2.GetComponent<Transform>();
@@ -129,7 +130,7 @@ public class enemy : MonoBehaviour
         movement = direction;
         movement2 = direction2;
         movement3 = direction3;
-        rand = Random.Range(0, 100);
+        
 
     }
     private void FixedUpdate()
@@ -184,21 +185,29 @@ public class enemy : MonoBehaviour
     {
         if (GameObject.Find("lag(Clone)") != null || GameObject.Find("bosscookie(Clone)") != null)
         {
+            GameObject.Find("space background").GetComponent<Renderer>().material.color = Color.Lerp(Color.white, Color.red, Mathf.PingPong(Time.time, 5));
             Debug.Log("boss on screen");
-            if (true)
+            if (rand >= 50)
             {
-                //rigidBody.velocity = Vector3.zero;
-                rigidBody.MovePosition((Vector2)transform.position + (direction2 * moveSpeed * Time.deltaTime));
+                rigidBody.velocity = Vector3.zero;
+                transform.position = Vector2.MoveTowards(transform.position, location1.position, moveSpeed * Time.deltaTime);
             }
             else
             {
-                rigidBody.MovePosition((Vector2)transform.position + (direction3 * moveSpeed * Time.deltaTime));
+                rigidBody.velocity = Vector3.zero;
+                transform.position = Vector2.MoveTowards(transform.position, location2.position, moveSpeed * Time.deltaTime);
             }
         }
         else
         {
+            if (GameObject.Find("space background").GetComponent<Renderer>().material.color != Color.white)
+            {
+                GameObject.Find("space background").GetComponent<Renderer>().material.color = Color.Lerp(Color.red, Color.white, Mathf.PingPong(Time.time, 10));
+            }
+            
             Debug.Log("boss not on screen");
             rigidBody.MovePosition((Vector2)transform.position + (direction * moveSpeed * Time.deltaTime));
+            GameObject.Find("space background").GetComponent<Renderer>().material.color = Color.white;
         }
     }
 
