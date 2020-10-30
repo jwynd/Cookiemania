@@ -37,12 +37,17 @@ public class DialogueInfo
 
     // if no unique name is given, argument will be provided as most recent talking
     // character
-    public void AddDialogue(string dialogue, string charUniqueName = "")
+    public void AddDialogue(string dialogue, string charUniqueName = "", Sprite bg = null)
     {
         if (charUniqueName == "")
         {
             charUniqueName = Dialogues.Last().Item1;
         }
+        if (bg != null)
+        {
+            Backgrounds.Add(bg);
+        }
+
         Dialogues.Add(new Tuple<string, string>(charUniqueName, dialogue));
         while (Dialogues.Count < Backgrounds.Count)
         {

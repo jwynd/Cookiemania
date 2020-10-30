@@ -76,7 +76,6 @@ public class DialogueController : MonoBehaviour
     private IEnumerator textDisplayer;
     private IEnumerator fastTextDisplayer;
     private Tuple<string, string> currentLine;
-    private float originalAlpha;
 
     public void InitDictionaryOnly(ReadOnlyDictionary<string, Tuple<string, Sprite>> charDict)
     {
@@ -157,7 +156,7 @@ public class DialogueController : MonoBehaviour
         }
         bgImage.color = bgImage.sprite == null ? 
                 new Color(bgImage.color.r, bgImage.color.r, bgImage.color.r, 0) :
-                new Color(bgImage.color.r, bgImage.color.r, bgImage.color.r, originalAlpha);
+                new Color(bgImage.color.r, bgImage.color.r, bgImage.color.r, 1);
         if (currentLine.Item2.Length > CharacterMax)
         {
             Debug.LogError("Next line is too long: " + 
@@ -187,7 +186,6 @@ public class DialogueController : MonoBehaviour
             Debug.LogError("Dialogue Controller: My canvas needs to be defined");
             return;
         }
-        originalAlpha = bgImage.color.a;
         myCanvas.enabled = false;
         // waiting until explicit initialization if not in testing mode
 #if UNITY_EDITOR

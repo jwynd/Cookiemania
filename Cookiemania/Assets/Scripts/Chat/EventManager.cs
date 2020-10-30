@@ -211,6 +211,7 @@ public class EventManager : MonoBehaviour
         if (!parsingInfo.IsChoiceIsChoiceDialogue.Item1)
         {
             AddToDialogue(textLine, parsingInfo.CharacterInfo,
+                parsingInfo.BackgroundInfo?.Background,
                 parsingInfo.EventInfo.GetLastDialogue());
             return;
         }
@@ -231,7 +232,8 @@ public class EventManager : MonoBehaviour
             parsingInfo.EventInfo.MultiDialogueWrite(
                 parsingInfo.ChoiceDialoguesToMultiWrite, 
                 textLine,
-                parsingInfo.CharacterInfo.UniqueName);
+                parsingInfo.CharacterInfo?.UniqueName, 
+                parsingInfo.BackgroundInfo?.Background);
         }
     }
 
@@ -246,14 +248,14 @@ public class EventManager : MonoBehaviour
             ResolveBaseKeyword(ref parsingInfo, keyword);
         }
         else if (charDictionary.TryGetValue(keywordMatch,
-            out parsingInfo.CharacterInfo))
+            out CharacterInfo cInfo))
         {
-            ResolveCharacterKeyword(ref parsingInfo);
+            ResolveCharacterKeyword(ref parsingInfo, cInfo);
         }
         else if (bgDictionary.TryGetValue(keywordMatch,
-            out parsingInfo.BackgroundInfo)) 
+            out BackgroundInfo bgInfo)) 
         {
-            ResolveBackgroundKeyword(ref parsingInfo);
+            ResolveBackgroundKeyword(ref parsingInfo, bgInfo);
         }
         else
         {
@@ -266,15 +268,23 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    private static void ResolveBackgroundKeyword(ref EventParsingInfo parsingInfo)
+    private static void ResolveBackgroundKeyword(ref EventParsingInfo parsingInfo, 
+        BackgroundInfo bgInfo)
     {
-        throw new NotImplementedException();
+        parsingInfo.BackgroundInfo = bgInfo;
+        if (parsingInfo.IsChoiceIsChoiceDialogue.Item1 &&
+            !parsingInfo.IsChoiceIsChoiceDialogue.Item2)
+        {
+            parsingInfo.EventInfo.GetLastChoice().Background =
+                parsingInfo.BackgroundInfo.Background;
+        }
+        
     }
 
-    // only works cuz parsingInfo.CharacterInfo already got set to the correct
-    // characterInfo, this is just making sure the choice gets it when needed
-    private static void ResolveCharacterKeyword(ref EventParsingInfo parsingInfo)
+    private static void ResolveCharacterKeyword(ref EventParsingInfo parsingInfo,
+        CharacterInfo cInfo)
     {
+        parsingInfo.CharacterInfo = cInfo;
         if (parsingInfo.IsChoiceIsChoiceDialogue.Item1 && 
             !parsingInfo.IsChoiceIsChoiceDialogue.Item2)
         {
@@ -316,6 +326,7 @@ public class EventManager : MonoBehaviour
 
     private static void AddToDialogue(string extractedDialogue,
         CharacterInfo lastCharacterDesignated,
+        Sprite background,
         DialogueInfo dInfo)
     {
         if (lastCharacterDesignated == null)
@@ -323,7 +334,8 @@ public class EventManager : MonoBehaviour
             Debug.LogError("no character designated for dialogue");
             return;
         }
-        dInfo.AddDialogue(extractedDialogue, lastCharacterDesignated.UniqueName);
+        dInfo.AddDialogue(extractedDialogue, lastCharacterDesignated.UniqueName,
+            background);
     }
 
     private static string ExtractDialogue(ref List<string> trimmedText)

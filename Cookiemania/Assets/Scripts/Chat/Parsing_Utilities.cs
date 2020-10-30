@@ -330,7 +330,7 @@ public static class Parsing_Utilities
         }
         parsingInfo.EventInfos.Add(parsingInfo.EventInfo.UniqueName, 
             parsingInfo.EventInfo);
-        parsingInfo.EventInfo = null;
+        parsingInfo.ResetForNextEvent();
     }
 
     private static void EventRewardAction(ref EventParsingInfo parsingInfo)

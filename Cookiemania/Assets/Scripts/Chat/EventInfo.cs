@@ -83,12 +83,18 @@ public class EventInfo
     // write to multiple dialogues (for choice branches that should have the same dialogue
     // result
     public void MultiDialogueWrite(List<string> dialogueBranchNames, 
-        string dialogueLine, string characterName)
+        string dialogueLine, string characterName, 
+        Sprite background = null)
     {
+        if (characterName == null || characterName == "")
+        {
+            throw new Exception("character name must be defined for multi branch" +
+                " dialogue writing");
+        }
         var dialogues = GetAllDialogues(dialogueBranchNames);
         foreach (var dialogue in dialogues)
         {
-            dialogue.AddDialogue(dialogueLine, characterName);
+            dialogue.AddDialogue(dialogueLine, characterName, background);
         }
     }
 

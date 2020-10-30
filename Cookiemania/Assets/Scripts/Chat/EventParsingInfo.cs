@@ -23,4 +23,15 @@ public class EventParsingInfo
     {
 
     }
+
+    public void ResetForNextEvent()
+    {
+        EventInfo = null;
+        CharacterInfo = null;
+        BackgroundInfo = null;
+        TrimmedLine.Clear();
+        ChoiceDialoguesToMultiWrite.Clear();
+        IsChoiceIsChoiceDialogue = new Tuple<bool, bool>(false, false);
+
+    }
 }

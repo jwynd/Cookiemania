@@ -48,16 +48,25 @@ one_trigger
 event_reward money 1000
 event_reward morality 0
 
+# can say what background to show by specifying
+# its unique name, like with characters
+# if background is a moving scene, still by name
+# but will want to use stage 0, stage 1 etc
+# to move the scene 
+
+default
 boss
 > Well hello there.
 chip
 > ah man i hate this guy.
 boss
-> Shup up, Chip.
+day
+> Shut up, Chip.
 chip
 > psh.
 
 choices
+day
 # this will NOT use the most recently used speaker
 # so if no speaker is designated for the choice prompt, this wont have 
 # a character name or sprite involved
@@ -108,9 +117,13 @@ event_end_early
 # multiple branches can have the same start point
 # their number is the order they're declared in
 branch_start 2 3
+
+default
+
 chip
 > Fine, have it your way.
 > ._.
+day
 > Just watch your back, mate.
 
 # this is required to let me know that all of the 
@@ -119,6 +132,7 @@ chip
 # dialogue will just continue to next point
 choice_end
 
+default
 player
 
 # you can use italic, bold, underline html tags if you want
@@ -132,6 +146,7 @@ event test_2
 
 trigger level 2
 
+day
 chip
 > You're really moving up in the world!
 > Good Job!
