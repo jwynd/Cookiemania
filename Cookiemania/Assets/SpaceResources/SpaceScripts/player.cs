@@ -18,7 +18,6 @@ public class player : MonoBehaviour
 
     private void Start()
     {
-        shieldWidth = 2;
       if (PlayerData.Player != null)
         {
             Debug.Log("This is a full game playthrough PlayerData is Active");

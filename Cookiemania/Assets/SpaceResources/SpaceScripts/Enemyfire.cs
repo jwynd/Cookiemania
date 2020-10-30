@@ -6,7 +6,7 @@ public class Enemyfire : MonoBehaviour
 {
     private Rigidbody2D rigidBody;
 
-    public float speed = 3;
+    public float speed = 2;
     public Transform enemy;
 
     public Sprite PExplosionImage;

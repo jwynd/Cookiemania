@@ -11,9 +11,9 @@ public class enemy : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public float secBeforeSpriteChange = .5f;
     public GameObject enemyFire;
-    public float minFireRateTime = .3f;
-    public float maxFireRateTime = 3.0f;
-    public float baseFireWaitTime = 5.0f;
+    public float minFireRateTime = 5.0f;
+    public float maxFireRateTime = 10.0f;
+    public static float baseFireWaitTime = 3f;
     public Sprite playerdeathImage;
     public Sprite playerdeath2;
     public Sprite enemydeathimage1;
@@ -43,7 +43,7 @@ public class enemy : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         StartCoroutine(changeEnemySprite());
         baseFireWaitTime = baseFireWaitTime + Random.Range(minFireRateTime, maxFireRateTime);
-        InvokeRepeating("Launch", 4f, 3f);
+        InvokeRepeating("Launch", 4f, baseFireWaitTime);
        // target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 

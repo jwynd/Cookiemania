@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2563172658485870358}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.848, y: -2.034, z: 0}
-  m_LocalScale: {x: 0.182, y: 0.132, z: 1}
+  m_LocalScale: {x: 0.35314637, y: 0.25612813, z: 1.9403647}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 9664a0f4829b154419b9de95c018e25b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9245283, g: 0.030526895, b: 0.030526895, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -99,6 +99,7 @@ MonoBehaviour:
   speed: 0.3
   enemy: {fileID: 0}
   PExplosionImage: {fileID: 0}
+  E2: {fileID: 0}
 --- !u!61 &-7581135007724980892
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -162,3 +163,4 @@ MonoBehaviour:
   enemy: {fileID: 0}
   PExplosionImage: {fileID: -4568620655595551830, guid: 20266f58562693e428758ed785e35b25,
     type: 3}
+  E2: {fileID: 0}
