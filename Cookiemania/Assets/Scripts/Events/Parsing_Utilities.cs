@@ -56,8 +56,31 @@ public static class Parsing_Utilities
     public enum TypeKeyword
     {
         Email,
+        // just the normal dialogue event and NOT
+        // a tutorial
         Dialogue,
         Reward,
+        // game tutorials, has specific triggering action e.g.
+        // specific minigame is opened or specific thing is 
+        // bought in the shop ?
+        Tutorial,
+    }
+
+    // what must be on screen for the tutorial to next pop up
+    // can queue up multiple tutorials
+    public enum TutorialKeyword
+    {
+        // none means it will immediately display
+        None,
+        // any minigame
+        Minigame,
+        SpaceMinigame,
+        JumpingMinigame,
+        // any desktop tab
+        Desktop,
+        EmailTab,
+        AnalyticsTab,
+        WebsiteTab,
     }
 
     // no uppercase letters in any of the keywords allowed
@@ -143,6 +166,26 @@ public static class Parsing_Utilities
             { "none", TypeKeyword.Reward },
         };
 
+    public static readonly Dictionary<string, TutorialKeyword> TUTORIAL_KEYWORDS =
+        new Dictionary<string, TutorialKeyword>
+        {
+            { "default", TutorialKeyword.None },
+            { "none", TutorialKeyword.None },
+            { "any", TutorialKeyword.None },
+            { "analytics", TutorialKeyword.AnalyticsTab },
+            { "analytics_tab", TutorialKeyword.AnalyticsTab },
+            { "desktop", TutorialKeyword.Desktop },
+            { "email", TutorialKeyword.EmailTab },
+            { "email_tab", TutorialKeyword.EmailTab },
+            { "jumper_minigame", TutorialKeyword.JumpingMinigame },
+            { "jumping_minigame", TutorialKeyword.JumpingMinigame },
+            { "jumper", TutorialKeyword.JumpingMinigame },
+            { "minigame", TutorialKeyword.Minigame },
+            { "space_minigame", TutorialKeyword.SpaceMinigame },
+            { "website", TutorialKeyword.WebsiteTab },
+            { "website_tab", TutorialKeyword.WebsiteTab },
+        };
+
     public delegate void ActionRef<T1>(ref T1 arg1);
 
     // the choice bools (tuple bool) should be named (insideChoice, insideChoiceDialogueBranch)
@@ -183,6 +226,59 @@ public static class Parsing_Utilities
             { TypeKeyword.Reward, new ActionRef<EventParsingInfo>(RewardTypeAction) },
         };
 
+    public static readonly Dictionary<TutorialKeyword, ActionRef<EventParsingInfo>> TutorialKeywordActions =
+       new Dictionary<TutorialKeyword, ActionRef<EventParsingInfo>>
+       {
+           { TutorialKeyword.AnalyticsTab, new ActionRef<EventParsingInfo>(AnalyticsTutorialAction) },
+           { TutorialKeyword.Desktop, new ActionRef<EventParsingInfo>(DesktopTutorialAction) },
+           { TutorialKeyword.EmailTab, new ActionRef<EventParsingInfo>(EmailTutorialAction) },
+           { TutorialKeyword.JumpingMinigame, new ActionRef<EventParsingInfo>(JumperTutorialAction) },
+           { TutorialKeyword.Minigame, new ActionRef<EventParsingInfo>(MinigameTutorialAction) },
+           { TutorialKeyword.None, new ActionRef<EventParsingInfo>(NoneTutorialAction) },
+           { TutorialKeyword.SpaceMinigame, new ActionRef<EventParsingInfo>(SpaceMinigameTutorialAction) },
+           { TutorialKeyword.WebsiteTab, new ActionRef<EventParsingInfo>(WebsiteTutorialAction) },
+       };
+
+    private static void WebsiteTutorialAction(ref EventParsingInfo parsingInfo)
+    {
+        throw new NotImplementedException();
+    }
+
+    private static void SpaceMinigameTutorialAction(ref EventParsingInfo parsingInfo)
+    {
+        throw new NotImplementedException();
+    }
+
+    private static void NoneTutorialAction(ref EventParsingInfo parsingInfo)
+    {
+        throw new NotImplementedException();
+    }
+
+    private static void MinigameTutorialAction(ref EventParsingInfo parsingInfo)
+    {
+        throw new NotImplementedException();
+    }
+
+    private static void JumperTutorialAction(ref EventParsingInfo parsingInfo)
+    {
+        throw new NotImplementedException();
+    }
+
+    private static void EmailTutorialAction(ref EventParsingInfo parsingInfo)
+    {
+        throw new NotImplementedException();
+    }
+
+    private static void DesktopTutorialAction(ref EventParsingInfo parsingInfo)
+    {
+        throw new NotImplementedException();
+    }
+
+    private static void AnalyticsTutorialAction(ref EventParsingInfo parsingInfo)
+    {
+        throw new NotImplementedException();
+    }
+
     private static void RewardTypeAction(ref EventParsingInfo parsingInfo)
     {
         throw new NotImplementedException();
@@ -198,48 +294,35 @@ public static class Parsing_Utilities
         throw new NotImplementedException();
     }
 
-    private static void WeekTriggerAction(ref EventParsingInfo parsingInfo)
+    private static void GenericTriggerAction(ref EventParsingInfo parsingInfo, TriggerKeyword type)
     {
         if (parsingInfo.TrimmedLine.Count < 3)
         {
             throw new Exception("triggers must have name of an amount specified");
         }
-        var amt = int.Parse(parsingInfo.TrimmedLine[2].ToLowerInvariant().Trim());
+        var amt = parsingInfo.GetParsedInt(2);
         parsingInfo.EventInfo.TriggeringConditions.Add(
-            new Tuple<TriggerKeyword, int>(TriggerKeyword.Week, amt));
+            new Tuple<TriggerKeyword, int>(type, amt));
+    }
+
+    private static void WeekTriggerAction(ref EventParsingInfo parsingInfo)
+    {
+        GenericTriggerAction(ref parsingInfo, TriggerKeyword.Week);
     }
 
     private static void UpgradeLevelTriggerAction(ref EventParsingInfo parsingInfo)
     {
-        if (parsingInfo.TrimmedLine.Count < 3)
-        {
-            throw new Exception("triggers must have name of an amount specified");
-        }
-        var amt = int.Parse(parsingInfo.TrimmedLine[2].ToLowerInvariant().Trim());
-        parsingInfo.EventInfo.TriggeringConditions.Add(
-            new Tuple<TriggerKeyword, int>(TriggerKeyword.UpgradeLevel, amt));
+        GenericTriggerAction(ref parsingInfo, TriggerKeyword.UpgradeLevel);
     }
 
     private static void MoralityTriggerAction(ref EventParsingInfo parsingInfo)
     {
-        if (parsingInfo.TrimmedLine.Count < 3)
-        {
-            throw new Exception("triggers must have name of an amount specified");
-        }
-        var amt = int.Parse(parsingInfo.TrimmedLine[2].ToLowerInvariant().Trim());
-        parsingInfo.EventInfo.TriggeringConditions.Add(
-            new Tuple<TriggerKeyword, int>(TriggerKeyword.Morality, amt));
+        GenericTriggerAction(ref parsingInfo, TriggerKeyword.Morality);
     }
 
     private static void MoneyTriggerAction(ref EventParsingInfo parsingInfo)
     {
-        if (parsingInfo.TrimmedLine.Count < 3)
-        {
-            throw new Exception("triggers must have name of an amount specified");
-        }
-        var amt = int.Parse(parsingInfo.TrimmedLine[2].ToLowerInvariant().Trim());
-        parsingInfo.EventInfo.TriggeringConditions.Add(
-            new Tuple<TriggerKeyword, int>(TriggerKeyword.Money, amt));
+        GenericTriggerAction(ref parsingInfo, TriggerKeyword.Money);
     }
 
     private static void DirectTriggerAction(ref EventParsingInfo parsingInfo)
@@ -248,7 +331,7 @@ public static class Parsing_Utilities
         {
             throw new Exception("direct triggers must have name of event");
         }
-        var eventName = parsingInfo.TrimmedLine[1].ToLowerInvariant().Trim();
+        var eventName = parsingInfo.GetLowercaseWord(1);
         if (parsingInfo.IsChoiceIsChoiceDialogue.Item1)
         {
             parsingInfo.EventInfo.MultiEventTriggerWrite(
@@ -256,7 +339,8 @@ public static class Parsing_Utilities
         }
         else
         {
-            parsingInfo.EventInfo.GetLastDialogue().DirectlyTriggeredEvents.Add(eventName);
+            parsingInfo.EventInfo.GetLastDialogue().
+                DirectlyTriggeredEvents.Add(eventName);
         }
     }
 
@@ -346,7 +430,7 @@ public static class Parsing_Utilities
         {
             throw new Exception("event needs a name on declaration line");
         }
-        parsingInfo.EventInfo = new EventInfo(parsingInfo.TrimmedLine[1].ToLowerInvariant().Trim());
+        parsingInfo.EventInfo = new EventInfo(parsingInfo.GetLowercaseWord(1));
     }
 
     private static void EventEarlyEndAction(ref EventParsingInfo parsingInfo)
@@ -379,7 +463,7 @@ public static class Parsing_Utilities
             throw new Exception("event complete rewards may not be declared inside a choice");
         }
         parsingInfo.EventInfo.EventCompleteReward.Add(
-            GetRewardTuple(parsingInfo.TrimmedLine));
+            GetRewardTuple(parsingInfo));
     }
 
     private static void RewardAction(ref EventParsingInfo parsingInfo)
@@ -390,13 +474,13 @@ public static class Parsing_Utilities
             throw new Exception("can only provide normal rewards inside a choice" +
                 " declaration");
         }
-        var reward = GetRewardTuple(parsingInfo.TrimmedLine);
+        var reward = GetRewardTuple(parsingInfo);
         parsingInfo.EventInfo.GetLastChoice().AddReward(reward.Item1, reward.Item2);
     }
 
     private static void TriggerAction(ref EventParsingInfo parsingInfo)
     {
-        var triggerKeyword = parsingInfo.TrimmedLine[1].ToLowerInvariant().Trim();
+        var triggerKeyword = parsingInfo.GetLowercaseWord(1);
         if (TRIGGER_KEYWORDS.TryGetValue(triggerKeyword, out TriggerKeyword trigger))
         {
             if (TriggerKeywordActions.TryGetValue(trigger, out ActionRef<EventParsingInfo> action))
@@ -432,17 +516,17 @@ public static class Parsing_Utilities
         }
     }
 
-    private static Tuple<RewardKeyword, int> GetRewardTuple(List<string> line)
+    private static Tuple<RewardKeyword, int> GetRewardTuple(EventParsingInfo parsingInfo)
     {
-        if (line.Count < 3)
+        if (parsingInfo.TrimmedLine.Count < 3)
         {
             throw new Exception("reward command must specify the reward type and amount");
         }
-        var rewardKey = line[1].ToLowerInvariant().Trim();
+        var rewardKey = parsingInfo.GetLowercaseWord(1);
         if (REWARD_KEYWORDS.TryGetValue(rewardKey, out RewardKeyword rewardType))
         {
             // failure is desired if it doesnt work
-            var rewardAmount = int.Parse(line[2].ToLowerInvariant().Trim());
+            var rewardAmount = parsingInfo.GetParsedInt(2);
             return new Tuple<RewardKeyword, int>(rewardType, rewardAmount);
         }
         throw new Exception(

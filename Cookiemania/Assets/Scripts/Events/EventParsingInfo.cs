@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,7 +30,27 @@ public class EventParsingInfo
         BackgroundInfo = null;
         TrimmedLine.Clear();
         ChoiceDialoguesToMultiWrite.Clear();
-        IsChoiceIsChoiceDialogue = new Tuple<bool, bool>(false, false);
+        IsChoiceIsChoiceDialogue = 
+            new Tuple<bool, bool>(false, false);
+    }
 
+    public string GetLowercaseWord(int index)
+    {
+        ThrowOnIndexFail(index);
+        return TrimmedLine[index].ToLowerInvariant().Trim();
+    }
+
+    public int GetParsedInt(int index)
+    {
+        return int.Parse(GetLowercaseWord(index));
+    }
+
+    private void ThrowOnIndexFail(int index)
+    {
+        if (index >= TrimmedLine.Count)
+        {
+            throw new Exception("retrieval index too high: " + index + " for line: "
+                + string.Join(", ", TrimmedLine));
+        }
     }
 }

@@ -113,7 +113,7 @@ public class EventController : MonoBehaviour
 #endif
         var possibleScale = PauseMenu.PauseWithoutScreen();
         timeScale = possibleScale > 0 ? possibleScale : timeScale;
-        RunEventByType(info);
+        RunEventByType(eventInfo);
     }
 
     private void RunEventByType(EventInfo eventInfo)
