@@ -46,6 +46,7 @@ public class ChoiceController : MonoBehaviour
     private string testChoicePrompt = "";
     [SerializeField]
     private List<string> testChoices = new List<string>();
+
     [Serializable]
     public class RewardTupleStandIn
     {
@@ -58,6 +59,7 @@ public class ChoiceController : MonoBehaviour
             amount = item2;
         }
     }
+
     [Serializable]
     public class RewardListStandIn
     {
@@ -132,6 +134,14 @@ public class ChoiceController : MonoBehaviour
         choice2.gameObject.SetActive(enable);
         choice3.gameObject.SetActive(enable);
         choice4.gameObject.SetActive(enable);
+    }
+
+    public void Initialize(ChoiceInfo choiceInfo, OnComplete onComplete)
+    {
+        Initialize(choiceInfo.CharacterName, choiceInfo.CharacterImage,
+            choiceInfo.Prompt, choiceInfo.Choices, choiceInfo.Rewards,
+            choiceInfo.ChoiceDialogueDictionary.Values.ToList(),
+            onComplete, choiceInfo.Background);
     }
 
     public void Initialize(string cName, Sprite cImage, 

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 using static Parsing_Utilities;
 
 // carries through all the sequences for a single event
@@ -72,8 +71,8 @@ public class EventController : MonoBehaviour
             lastDialoguePlayed = info.GetDialogue(branchTuple.Item2);
             // char dictionary is handled on event manager awake
             EventManager.Instance.DialoguePrefab.
-                GetComponent<DialogueController>().Initialize(lastDialoguePlayed.Dialogues,
-                onDialogueComplete, lastDialoguePlayed.NextBranch, lastDialoguePlayed.Backgrounds);
+                GetComponent<DialogueController>().Initialize(
+                lastDialoguePlayed, onDialogueComplete);
         }
         else
         {
@@ -81,10 +80,8 @@ public class EventController : MonoBehaviour
             lastDialoguePlayed = null;
             var choiceInfo = info.GetChoice(branchTuple.Item2);
             EventManager.Instance.ChoicePrefab.
-                GetComponent<ChoiceController>().Initialize(choiceInfo.CharacterName,
-                choiceInfo.CharacterImage, choiceInfo.Prompt, choiceInfo.Choices,
-                choiceInfo.Rewards, choiceInfo.ChoiceDialogueDictionary.Values.ToList(), onChoiceComplete,
-                choiceInfo.Background);
+                GetComponent<ChoiceController>().Initialize(
+                choiceInfo, onChoiceComplete);
         }
     }
 

@@ -83,6 +83,12 @@ public class DialogueController : MonoBehaviour
                 (charDict);
     }
 
+    public void Initialize(DialogueInfo dialogueInfo, OnComplete onComplete)
+    {
+        Initialize(dialogueInfo.Dialogues, onComplete, dialogueInfo.NextBranch,
+            dialogueInfo.Backgrounds);
+    }
+
     public void Initialize(
         List<Tuple<string, string>> dialogueLines,
         OnComplete onComplete,
