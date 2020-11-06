@@ -6,74 +6,74 @@ public static partial class Parsing_Utilities
 
     public delegate void ActionRef<T1>(ref T1 arg1);
 
-    public static void GenericTutorialAction(ref EventParsingInfo parsingInfo,
+    private static void GenericTutorialAction(ref EventParsingInfo parsingInfo,
     TutorialKeyword type)
     {
 
     }
 
-    public static void WebsiteTutorialAction(ref EventParsingInfo parsingInfo)
+    private static void WebsiteTutorialAction(ref EventParsingInfo parsingInfo)
     {
         throw new NotImplementedException();
     }
 
-    public static void SpaceMinigameTutorialAction(ref EventParsingInfo parsingInfo)
+    private static void SpaceMinigameTutorialAction(ref EventParsingInfo parsingInfo)
     {
         throw new NotImplementedException();
     }
 
-    public static void NoneTutorialAction(ref EventParsingInfo parsingInfo)
+    private static void NoneTutorialAction(ref EventParsingInfo parsingInfo)
     {
         throw new NotImplementedException();
     }
 
-    public static void MinigameTutorialAction(ref EventParsingInfo parsingInfo)
+    private static void MinigameTutorialAction(ref EventParsingInfo parsingInfo)
     {
         throw new NotImplementedException();
     }
 
-    public static void JumperTutorialAction(ref EventParsingInfo parsingInfo)
+    private static void JumperTutorialAction(ref EventParsingInfo parsingInfo)
     {
         throw new NotImplementedException();
     }
 
-    public static void EmailTutorialAction(ref EventParsingInfo parsingInfo)
+    private static void EmailTutorialAction(ref EventParsingInfo parsingInfo)
     {
         throw new NotImplementedException();
     }
 
-    public static void DesktopTutorialAction(ref EventParsingInfo parsingInfo)
+    private static void DesktopTutorialAction(ref EventParsingInfo parsingInfo)
     {
         throw new NotImplementedException();
     }
 
-    public static void AnalyticsTutorialAction(ref EventParsingInfo parsingInfo)
+    private static void AnalyticsTutorialAction(ref EventParsingInfo parsingInfo)
     {
         throw new NotImplementedException();
     }
 
-    public static void RewardTypeAction(ref EventParsingInfo parsingInfo)
+    private static void RewardTypeAction(ref EventParsingInfo parsingInfo)
     {
         parsingInfo.EventInfo.EventType = TypeKeyword.Reward;
     }
 
-    public static void TutorialTypeAction(ref EventParsingInfo parsingInfo)
+    private static void TutorialTypeAction(ref EventParsingInfo parsingInfo)
     {
         parsingInfo.EventInfo.EventType = TypeKeyword.Tutorial;
         // need to also get the tutorial start location
     }
 
-    public static void EmailTypeAction(ref EventParsingInfo parsingInfo)
+    private static void EmailTypeAction(ref EventParsingInfo parsingInfo)
     {
         parsingInfo.EventInfo.EventType = TypeKeyword.Email;
     }
 
-    public static void DialogueTypeAction(ref EventParsingInfo parsingInfo)
+    private static void DialogueTypeAction(ref EventParsingInfo parsingInfo)
     {
         parsingInfo.EventInfo.EventType = TypeKeyword.Dialogue;
     }
 
-    public static void GenericTriggerAction(ref EventParsingInfo parsingInfo, TriggerKeyword type)
+    private static void GenericTriggerAction(ref EventParsingInfo parsingInfo, TriggerKeyword type)
     {
         if (parsingInfo.TrimmedLine.Count < 3)
         {
@@ -84,27 +84,27 @@ public static partial class Parsing_Utilities
             new Tuple<TriggerKeyword, int>(type, amt));
     }
 
-    public static void WeekTriggerAction(ref EventParsingInfo parsingInfo)
+    private static void WeekTriggerAction(ref EventParsingInfo parsingInfo)
     {
         GenericTriggerAction(ref parsingInfo, TriggerKeyword.Week);
     }
 
-    public static void UpgradeLevelTriggerAction(ref EventParsingInfo parsingInfo)
+    private static void UpgradeLevelTriggerAction(ref EventParsingInfo parsingInfo)
     {
         GenericTriggerAction(ref parsingInfo, TriggerKeyword.UpgradeLevel);
     }
 
-    public static void MoralityTriggerAction(ref EventParsingInfo parsingInfo)
+    private static void MoralityTriggerAction(ref EventParsingInfo parsingInfo)
     {
         GenericTriggerAction(ref parsingInfo, TriggerKeyword.Morality);
     }
 
-    public static void MoneyTriggerAction(ref EventParsingInfo parsingInfo)
+    private static void MoneyTriggerAction(ref EventParsingInfo parsingInfo)
     {
         GenericTriggerAction(ref parsingInfo, TriggerKeyword.Money);
     }
 
-    public static void DirectTriggerAction(ref EventParsingInfo parsingInfo)
+    private static void DirectTriggerAction(ref EventParsingInfo parsingInfo)
     {
         if (parsingInfo.TrimmedLine.Count < 2)
         {
@@ -123,35 +123,35 @@ public static partial class Parsing_Utilities
         }
     }
 
-    public static void SetStageAction(ref EventParsingInfo parsingInfo)
+    private static void SetStageAction(ref EventParsingInfo parsingInfo)
     {
         UnityEngine.Debug.LogError("dynamic background changing not implemented yet");
         return;
     }
 
-    public static void AllTriggersAction(ref EventParsingInfo parsingInfo)
+    private static void AllTriggersAction(ref EventParsingInfo parsingInfo)
     {
         parsingInfo.EventInfo.AllTriggersNeeded = true;
     }
 
-    public static void SingleTriggerAction(ref EventParsingInfo parsingInfo)
+    private static void SingleTriggerAction(ref EventParsingInfo parsingInfo)
     {
         parsingInfo.EventInfo.AllTriggersNeeded = false;
     }
 
-    public static void BranchAction(ref EventParsingInfo parsingInfo)
+    private static void BranchAction(ref EventParsingInfo parsingInfo)
     {
         parsingInfo.IsChoiceIsChoiceDialogue = new Tuple<bool, bool>(true, false);
         parsingInfo.EventInfo.GetLastChoice().AddChoice("");
     }
 
     // empty as currently intended
-    public static void BranchEndAction(ref EventParsingInfo parsingInfo)
+    private static void BranchEndAction(ref EventParsingInfo parsingInfo)
     {
         return;
     }
 
-    public static void BranchStartAction(ref EventParsingInfo parsingInfo)
+    private static void BranchStartAction(ref EventParsingInfo parsingInfo)
     {
         if (!parsingInfo.IsChoiceIsChoiceDialogue.Item1)
         {
@@ -179,7 +179,7 @@ public static partial class Parsing_Utilities
         }
     }
 
-    public static void ChoiceAction(ref EventParsingInfo parsingInfo)
+    private static void ChoiceAction(ref EventParsingInfo parsingInfo)
     {
         parsingInfo.IsChoiceIsChoiceDialogue = new Tuple<bool, bool>(true, false);
         parsingInfo.EventInfo.AddChoice(new ChoiceInfo(
@@ -189,7 +189,7 @@ public static partial class Parsing_Utilities
             parsingInfo.EventInfo.GetLastChoice().UniqueName);
     }
 
-    public static void ChoiceEndAction(ref EventParsingInfo parsingInfo)
+    private static void ChoiceEndAction(ref EventParsingInfo parsingInfo)
     {
         BranchEndAction(ref parsingInfo);
         parsingInfo.IsChoiceIsChoiceDialogue = new Tuple<bool, bool>(false, false);
@@ -203,7 +203,7 @@ public static partial class Parsing_Utilities
         }
     }
 
-    public static void EventAction(ref EventParsingInfo parsingInfo)
+    private static void EventAction(ref EventParsingInfo parsingInfo)
     {
         if (parsingInfo.TrimmedLine.Count < 2)
         {
@@ -212,7 +212,7 @@ public static partial class Parsing_Utilities
         parsingInfo.EventInfo = new EventInfo(parsingInfo.GetLowercaseWord(1));
     }
 
-    public static void EventEarlyEndAction(ref EventParsingInfo parsingInfo)
+    private static void EventEarlyEndAction(ref EventParsingInfo parsingInfo)
     {
         if (parsingInfo.IsChoiceIsChoiceDialogue.Item1)
             parsingInfo.EventInfo.MultiEarlyExitWrite(parsingInfo.ChoiceDialoguesToMultiWrite);
@@ -221,7 +221,7 @@ public static partial class Parsing_Utilities
         BranchEndAction(ref parsingInfo);
     }
 
-    public static void EventEndAction(ref EventParsingInfo parsingInfo)
+    private static void EventEndAction(ref EventParsingInfo parsingInfo)
     {
         parsingInfo.EventInfo.GetLastDialogue().NextBranch = EventInfo.LAST_BRANCH;
         parsingInfo.EventInfo.GetLastDialogue().ExitsEvent = true;
@@ -235,7 +235,7 @@ public static partial class Parsing_Utilities
         parsingInfo.ResetForNextEvent();
     }
 
-    public static void EventRewardAction(ref EventParsingInfo parsingInfo)
+    private static void EventRewardAction(ref EventParsingInfo parsingInfo)
     {
         if (parsingInfo.IsChoiceIsChoiceDialogue.Item1)
         {
@@ -245,7 +245,7 @@ public static partial class Parsing_Utilities
             GetRewardTuple(parsingInfo));
     }
 
-    public static void RewardAction(ref EventParsingInfo parsingInfo)
+    private static void RewardAction(ref EventParsingInfo parsingInfo)
     {
         if (!parsingInfo.IsChoiceIsChoiceDialogue.Item1)
         {
@@ -257,7 +257,7 @@ public static partial class Parsing_Utilities
         parsingInfo.EventInfo.GetLastChoice().AddReward(reward.Item1, reward.Item2);
     }
 
-    public static void TriggerAction(ref EventParsingInfo parsingInfo)
+    private static void TriggerAction(ref EventParsingInfo parsingInfo)
     {
         var triggerKeyword = parsingInfo.GetLowercaseWord(1);
         if (TRIGGER_KEYWORDS.TryGetValue(triggerKeyword, out TriggerKeyword trigger))
@@ -278,7 +278,7 @@ public static partial class Parsing_Utilities
         }
     }
 
-    public static void ChoiceDeclarationComplete(EventInfo eventInfo)
+    private static void ChoiceDeclarationComplete(EventInfo eventInfo)
     {
         if (!eventInfo.GetLastChoice().IsFilledOutAndCorrect())
         {
@@ -295,7 +295,7 @@ public static partial class Parsing_Utilities
         }
     }
 
-    public static Tuple<RewardKeyword, int> GetRewardTuple(EventParsingInfo parsingInfo)
+    private static Tuple<RewardKeyword, int> GetRewardTuple(EventParsingInfo parsingInfo)
     {
         if (parsingInfo.TrimmedLine.Count < 3)
         {

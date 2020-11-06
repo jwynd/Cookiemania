@@ -2,7 +2,6 @@
 
 public static partial class Parsing_Utilities
 {
-    // the choice bools (tuple bool) should be named (insideChoice, insideChoiceDialogueBranch)
     public static readonly Dictionary<BaseKeyword, ActionRef<EventParsingInfo>> KeywordActions =
         new Dictionary<BaseKeyword, ActionRef<EventParsingInfo>>
         {
@@ -53,6 +52,4 @@ public static partial class Parsing_Utilities
            { TutorialKeyword.SpaceMinigame, new ActionRef<EventParsingInfo>(SpaceMinigameTutorialAction) },
            { TutorialKeyword.WebsiteTab, new ActionRef<EventParsingInfo>(WebsiteTutorialAction) },
        };
-
-
 }
