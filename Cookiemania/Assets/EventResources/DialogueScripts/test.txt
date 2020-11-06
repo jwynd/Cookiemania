@@ -166,3 +166,15 @@ narrator
 direct_trigger game_over
 
 event_end
+
+event test_3
+trigger week 2
+type email
+
+narrator
+subject Hey sport, heard you're not doing too hot...
+## all '>' lines will be placed in dialogue
+# ahhhhh i totally forgot to do keyword replacement in 
+# dialogue for the player
+# will need to be handled by dialogue / choice controllers
+> Dear player,

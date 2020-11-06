@@ -37,6 +37,8 @@ public class EventManager : MonoBehaviour
     private Dictionary<TriggerKeyword, SortedList<int, EventInfo>> listeningEvents = 
         new Dictionary<TriggerKeyword, SortedList<int, EventInfo>>();
 
+    private int dialogueCharacterLimit = 140;
+
     public static EventManager Instance { get; private set; }
 
     public GameObject DialoguePrefab { get; private set; }
@@ -154,7 +156,7 @@ public class EventManager : MonoBehaviour
                 {
                     continue;
                 }
-                ParseDialogueOrKeyword(ref parsingInfo, 
+                ParseDialogueOrKeyword(ref parsingInfo, dialogueCharacterLimit,
                     charInfoDictionary, backgroundDictionary);
             }
         }
@@ -188,6 +190,7 @@ public class EventManager : MonoBehaviour
     // and invokers need to understand that anything marked ref can 
     // change when going through this function
     private static void ParseDialogueOrKeyword(ref EventParsingInfo parsingInfo, 
+        int charLimit,
         ReadOnlyDictionary<string, CharacterInfo> charDictionary,
         ReadOnlyDictionary<string, BackgroundInfo> bgDictionary)
     {
@@ -196,7 +199,7 @@ public class EventManager : MonoBehaviour
             parsingInfo.TrimmedLine[0].ToLowerInvariant().Trim();
         if (parsingInfo.TrimmedLine[0][0] == DIALOGUE)
         {
-            ResolveDialogueLine(ref parsingInfo);
+            ResolveDialogueLine(ref parsingInfo, charLimit);
         }
         else
         {
@@ -204,9 +207,9 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    private static void ResolveDialogueLine(ref EventParsingInfo parsingInfo)
+    private static void ResolveDialogueLine(ref EventParsingInfo parsingInfo, int charLimit)
     {
-        var textLine = ExtractDialogue(ref parsingInfo.TrimmedLine);
+        var textLine = ExtractDialogue(ref parsingInfo.TrimmedLine, charLimit);
         // if not in choice
         if (!parsingInfo.IsChoiceIsChoiceDialogue.Item1)
         {
@@ -338,13 +341,18 @@ public class EventManager : MonoBehaviour
             background);
     }
 
-    private static string ExtractDialogue(ref List<string> trimmedText)
+    private static string ExtractDialogue(ref List<string> trimmedText, int charLimit)
     {
         if (trimmedText[0].Length > 1)
             trimmedText[0].Substring(1);
         else
             trimmedText.PopFront();
-        return string.Join(" ", trimmedText.ToArray());
+        var actualLine = string.Join(" ", trimmedText.ToArray());
+        if (actualLine.Length > charLimit)
+        {
+            throw new Exception("dialogue line is too long");
+        }
+        return actualLine;
     }
 
     private void CreateCharDictionaries(List<CharacterInfo> characterList)
@@ -383,8 +391,9 @@ public class EventManager : MonoBehaviour
         CreateCharDictionaries(characterList);
         CreateBGDictionary(backgroundList);
         VerifyNoOverlappingCommands(characterDictionary, backgroundDictionary);
-        DialoguePrefab.GetComponent<DialogueController>().
-            InitDictionaryOnly(characterDictionary);
+        var dController = dialoguePrefab.GetComponent<DialogueController>();
+        dialogueCharacterLimit = dController.CharacterMax;
+        dController.InitDictionaryOnly(characterDictionary);
         ParseEventScripts(eventTextFiles);
     }
 

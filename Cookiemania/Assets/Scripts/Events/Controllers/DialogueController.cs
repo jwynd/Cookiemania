@@ -138,7 +138,8 @@ public class DialogueController : MonoBehaviour
             if (!fastDisplayingText)
             {
                 StopCoroutine(textDisplayer);
-                fastTextDisplayer = TextDisplayer(currentLine.Item2, textDelay * 0.2f, dialogueLine.text.Length);
+                fastTextDisplayer = TextDisplayer(currentLine.Item2, textDelay * 0.2f, 
+                    dialogueLine.text.Length);
                 fastDisplayingText = true;
                 stillDisplayingText = true;
                 StartCoroutine(fastTextDisplayer);
@@ -152,6 +153,12 @@ public class DialogueController : MonoBehaviour
             return;
         }
         currentLine = lines.PopFront();
+        if (currentLine.Item2.Length > CharacterMax)
+        {
+            Debug.LogError("Next line is too long: " +
+                currentLine.Item2.Length + " with max of " + CharacterMax);
+            return;
+        }
         if (backgrounds.Count > 0)
         {
             Sprite currentBG = backgrounds.PopFront();
@@ -163,12 +170,7 @@ public class DialogueController : MonoBehaviour
         bgImage.color = bgImage.sprite == null ? 
                 new Color(bgImage.color.r, bgImage.color.r, bgImage.color.r, 0) :
                 new Color(bgImage.color.r, bgImage.color.r, bgImage.color.r, 1);
-        if (currentLine.Item2.Length > CharacterMax)
-        {
-            Debug.LogError("Next line is too long: " + 
-                currentLine.Item2.Length + " with max of " + CharacterMax);
-            return;
-        }
+        
         if (charDictionary.TryGetValue(currentLine.Item1, out Tuple<string, Sprite> charInfo))
         {
             charName.text = charInfo.Item1;
