@@ -32,6 +32,7 @@ public class EventInfo
     // and only one dialogue (still first) and at most one choice (linked
     // after the only dialogue)
     public TypeKeyword EventType = TypeKeyword.Dialogue;
+    public TutorialKeyword TutorialType = TutorialKeyword.None;
 
     // add to playerdata on event complete regardless of choices made
     // if there is no neutral reward associate your rewards with the choices obv

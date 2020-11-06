@@ -6,6 +6,7 @@ public static partial class Parsing_Utilities
         new Dictionary<BaseKeyword, ActionRef<EventParsingInfo>>
         {
             { BaseKeyword.Stage, new ActionRef<EventParsingInfo>(SetStageAction) },
+            { BaseKeyword.Type, new ActionRef<EventParsingInfo>(TypeAction) },
             { BaseKeyword.Branch, new ActionRef<EventParsingInfo>(BranchAction) },
             { BaseKeyword.BranchEnd, new ActionRef<EventParsingInfo>(BranchEndAction) },
             { BaseKeyword.BranchStart, new ActionRef<EventParsingInfo>(BranchStartAction) },

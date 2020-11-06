@@ -6,61 +6,87 @@ public static partial class Parsing_Utilities
 
     public delegate void ActionRef<T1>(ref T1 arg1);
 
-    private static void GenericTutorialAction(ref EventParsingInfo parsingInfo,
-    TutorialKeyword type)
-    {
-
-    }
-
     private static void WebsiteTutorialAction(ref EventParsingInfo parsingInfo)
     {
-        throw new NotImplementedException();
+        parsingInfo.EventInfo.TutorialType = TutorialKeyword.WebsiteTab;
     }
 
     private static void SpaceMinigameTutorialAction(ref EventParsingInfo parsingInfo)
     {
-        throw new NotImplementedException();
+        parsingInfo.EventInfo.TutorialType = TutorialKeyword.SpaceMinigame;
     }
 
     private static void NoneTutorialAction(ref EventParsingInfo parsingInfo)
     {
-        throw new NotImplementedException();
+        parsingInfo.EventInfo.TutorialType = TutorialKeyword.None;
     }
 
     private static void MinigameTutorialAction(ref EventParsingInfo parsingInfo)
     {
-        throw new NotImplementedException();
+        parsingInfo.EventInfo.TutorialType = TutorialKeyword.Minigame;
     }
 
     private static void JumperTutorialAction(ref EventParsingInfo parsingInfo)
     {
-        throw new NotImplementedException();
+        parsingInfo.EventInfo.TutorialType = TutorialKeyword.JumpingMinigame;
     }
 
     private static void EmailTutorialAction(ref EventParsingInfo parsingInfo)
     {
-        throw new NotImplementedException();
+        parsingInfo.EventInfo.TutorialType = TutorialKeyword.EmailTab;
     }
 
     private static void DesktopTutorialAction(ref EventParsingInfo parsingInfo)
     {
-        throw new NotImplementedException();
+        parsingInfo.EventInfo.TutorialType = TutorialKeyword.Desktop;
     }
 
     private static void AnalyticsTutorialAction(ref EventParsingInfo parsingInfo)
     {
-        throw new NotImplementedException();
-    }
-
-    private static void RewardTypeAction(ref EventParsingInfo parsingInfo)
-    {
-        parsingInfo.EventInfo.EventType = TypeKeyword.Reward;
+        parsingInfo.EventInfo.TutorialType = TutorialKeyword.AnalyticsTab;
     }
 
     private static void TutorialTypeAction(ref EventParsingInfo parsingInfo)
     {
         parsingInfo.EventInfo.EventType = TypeKeyword.Tutorial;
+        TutorialKeyword keyword;
+        if (parsingInfo.TrimmedLine.Count < 3)
+        {
+            keyword = TutorialKeyword.None;
+        }
         // need to also get the tutorial start location
+        else if (TUTORIAL_KEYWORDS.TryGetValue(
+            parsingInfo.GetLowercaseWord(2), out TutorialKeyword value))
+        {
+            keyword = value;
+        }
+        else
+        {
+            throw new Exception("tutorial keyword not found for "
+                + parsingInfo.GetLowercaseWord(2));
+        }
+        RunTutorialAction(ref parsingInfo, keyword);
+    }
+
+    private static void RunTutorialAction(
+        ref EventParsingInfo parsingInfo, 
+        TutorialKeyword keyword)
+    {
+        if (TutorialKeywordActions.TryGetValue(
+                       keyword, out ActionRef<EventParsingInfo> toRun))
+        {
+            toRun.Invoke(ref parsingInfo);
+        }
+        else
+        {
+            throw new Exception("an action not defined for: "
+                + keyword);
+        }
+    }
+
+    private static void RewardTypeAction(ref EventParsingInfo parsingInfo)
+    {
+        parsingInfo.EventInfo.EventType = TypeKeyword.Reward;
     }
 
     private static void EmailTypeAction(ref EventParsingInfo parsingInfo)
@@ -71,6 +97,40 @@ public static partial class Parsing_Utilities
     private static void DialogueTypeAction(ref EventParsingInfo parsingInfo)
     {
         parsingInfo.EventInfo.EventType = TypeKeyword.Dialogue;
+    }
+
+    private static void TypeAction(ref EventParsingInfo parsingInfo)
+    {
+        if (parsingInfo.TrimmedLine.Count < 2)
+        {
+            throw new Exception("event type declaration must have at least 2 words");
+        }
+        var type = parsingInfo.GetLowercaseWord(1);
+        if (TYPE_KEYWORDS.TryGetValue(
+            type, out TypeKeyword typeKeyword))
+        {
+            RunTypeAction(ref parsingInfo, typeKeyword);
+        }
+        else
+        {
+            throw new Exception("event type not found for input: " + type);
+        }
+    }
+
+    private static void RunTypeAction(
+        ref EventParsingInfo parsingInfo, 
+        TypeKeyword typeKeyword)
+    {
+        if (TypeKeywordActions.TryGetValue(
+            typeKeyword, out ActionRef<EventParsingInfo> action))
+        {
+            action.Invoke(ref parsingInfo);
+        }
+        else
+        {
+            throw new Exception("action not found for type: "
+                + typeKeyword);
+        }
     }
 
     private static void GenericTriggerAction(ref EventParsingInfo parsingInfo, TriggerKeyword type)
