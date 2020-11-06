@@ -10,6 +10,7 @@ public static class Parsing_Utilities
     public enum BaseKeyword
     {
         Event,
+        Type,
         Choice,
         Branch,
         EventEnd,
@@ -26,7 +27,7 @@ public static class Parsing_Utilities
         AllTriggerConditions,
         Reward,
         EventReward,
-        BackgroundChange,
+        Stage,
         // e.g. a quest will directly trigger it and does not need to 
         // be registered
         DirectTrigger,
@@ -52,12 +53,20 @@ public static class Parsing_Utilities
         ShopLevel,
     }
 
+    public enum TypeKeyword
+    {
+        Email,
+        Dialogue,
+        Reward,
+    }
+
     // no uppercase letters in any of the keywords allowed
     public static readonly Dictionary<string, BaseKeyword> BASE_KEYWORDS =
         new Dictionary<string, BaseKeyword>
     {
         { "event" , BaseKeyword.Event },
         { "events", BaseKeyword.Event },
+        { "type", BaseKeyword.Type },
         { "choice", BaseKeyword.Choice },
         { "choices", BaseKeyword.Choice },
         { "branch", BaseKeyword.Branch },
@@ -88,10 +97,8 @@ public static class Parsing_Utilities
         { "reward", BaseKeyword.Reward },
         { "event_reward", BaseKeyword.EventReward },
         { "event_rewards", BaseKeyword.EventReward },
-        { "background", BaseKeyword.BackgroundChange },
-        { "bg", BaseKeyword.BackgroundChange },
-        { "change_bg", BaseKeyword.BackgroundChange },
-        { "change_background", BaseKeyword.BackgroundChange },
+        { "stage", BaseKeyword.Stage },
+        { "set_stage", BaseKeyword.Stage },
     };
 
     // reads second word after trigger to figure out what to do next
@@ -116,15 +123,25 @@ public static class Parsing_Utilities
     // reads second word after reward
     public static readonly Dictionary<string, RewardKeyword> REWARD_KEYWORDS =
         new Dictionary<string, RewardKeyword>
-    {
-        { "morality" , RewardKeyword.Morality },
-        { "money" , RewardKeyword.Money },
-        { "week", RewardKeyword.Week },
-        { "shop_level" , RewardKeyword.ShopLevel },
-        { "shop_lvl" , RewardKeyword.ShopLevel },
-        { "upgrade_level" , RewardKeyword.ShopLevel },
-        { "upgrade_lvl" , RewardKeyword.ShopLevel },
-    };
+        {
+            { "morality" , RewardKeyword.Morality },
+            { "money" , RewardKeyword.Money },
+            { "week", RewardKeyword.Week },
+            { "shop_level" , RewardKeyword.ShopLevel },
+            { "shop_lvl" , RewardKeyword.ShopLevel },
+            { "upgrade_level" , RewardKeyword.ShopLevel },
+            { "upgrade_lvl" , RewardKeyword.ShopLevel },
+        };
+
+    public static readonly Dictionary<string, TypeKeyword> TYPE_KEYWORDS =
+        new Dictionary<string, TypeKeyword>
+        {
+            { "default", TypeKeyword.Dialogue },
+            { "dialogue", TypeKeyword.Dialogue },
+            { "email", TypeKeyword.Email },
+            { "reward", TypeKeyword.Reward },
+            { "none", TypeKeyword.Reward },
+        };
 
     public delegate void ActionRef<T1>(ref T1 arg1);
 
@@ -132,31 +149,54 @@ public static class Parsing_Utilities
     public static readonly Dictionary<BaseKeyword, ActionRef<EventParsingInfo>> KeywordActions =
         new Dictionary<BaseKeyword, ActionRef<EventParsingInfo>>
         {
-            {BaseKeyword.BackgroundChange, new ActionRef<EventParsingInfo>(BackgroundChangeAction) },
-            {BaseKeyword.Branch, new ActionRef<EventParsingInfo>(BranchAction) },
-            {BaseKeyword.BranchEnd, new ActionRef<EventParsingInfo>(BranchEndAction) },
-            {BaseKeyword.BranchStart, new ActionRef<EventParsingInfo>(BranchStartAction) },
-            {BaseKeyword.Choice, new ActionRef<EventParsingInfo>(ChoiceAction) },
-            {BaseKeyword.ChoiceEnd, new ActionRef<EventParsingInfo>(ChoiceEndAction) },
-            {BaseKeyword.DirectTrigger, new ActionRef<EventParsingInfo>(DirectTriggerAction) },
-            {BaseKeyword.Event, new ActionRef<EventParsingInfo>(EventAction) },
-            {BaseKeyword.EventEarlyEnd, new ActionRef<EventParsingInfo>(EventEarlyEndAction) },
-            {BaseKeyword.EventEnd, new ActionRef<EventParsingInfo>(EventEndAction) },
-            {BaseKeyword.EventReward, new ActionRef<EventParsingInfo>(EventRewardAction) },
-            {BaseKeyword.Reward, new ActionRef<EventParsingInfo>(RewardAction) },
-            {BaseKeyword.Trigger, new ActionRef<EventParsingInfo>(TriggerAction) },
-            {BaseKeyword.SingleTriggerCondition, new ActionRef<EventParsingInfo>(SingleTriggerAction) },
-            {BaseKeyword.AllTriggerConditions, new ActionRef<EventParsingInfo>(AllTriggersAction) },
+            { BaseKeyword.Stage, new ActionRef<EventParsingInfo>(SetStageAction) },
+            { BaseKeyword.Branch, new ActionRef<EventParsingInfo>(BranchAction) },
+            { BaseKeyword.BranchEnd, new ActionRef<EventParsingInfo>(BranchEndAction) },
+            { BaseKeyword.BranchStart, new ActionRef<EventParsingInfo>(BranchStartAction) },
+            { BaseKeyword.Choice, new ActionRef<EventParsingInfo>(ChoiceAction) },
+            { BaseKeyword.ChoiceEnd, new ActionRef<EventParsingInfo>(ChoiceEndAction) },
+            { BaseKeyword.DirectTrigger, new ActionRef<EventParsingInfo>(DirectTriggerAction) },
+            { BaseKeyword.Event, new ActionRef<EventParsingInfo>(EventAction) },
+            { BaseKeyword.EventEarlyEnd, new ActionRef<EventParsingInfo>(EventEarlyEndAction) },
+            { BaseKeyword.EventEnd, new ActionRef<EventParsingInfo>(EventEndAction) },
+            { BaseKeyword.EventReward, new ActionRef<EventParsingInfo>(EventRewardAction) },
+            { BaseKeyword.Reward, new ActionRef<EventParsingInfo>(RewardAction) },
+            { BaseKeyword.Trigger, new ActionRef<EventParsingInfo>(TriggerAction) },
+            { BaseKeyword.SingleTriggerCondition, new ActionRef<EventParsingInfo>(SingleTriggerAction) },
+            { BaseKeyword.AllTriggerConditions, new ActionRef<EventParsingInfo>(AllTriggersAction) },
         };
 
     public static readonly Dictionary<TriggerKeyword, ActionRef<EventParsingInfo>> TriggerKeywordActions =
         new Dictionary<TriggerKeyword, ActionRef<EventParsingInfo>>
         {
-            {TriggerKeyword.Money, new ActionRef<EventParsingInfo>(MoneyTriggerAction) },
-            {TriggerKeyword.Morality, new ActionRef<EventParsingInfo>(MoralityTriggerAction) },
-            {TriggerKeyword.UpgradeLevel, new ActionRef<EventParsingInfo>(UpgradeLevelTriggerAction) },
-            {TriggerKeyword.Week, new ActionRef<EventParsingInfo>(WeekTriggerAction) },
+            { TriggerKeyword.Money, new ActionRef<EventParsingInfo>(MoneyTriggerAction) },
+            { TriggerKeyword.Morality, new ActionRef<EventParsingInfo>(MoralityTriggerAction) },
+            { TriggerKeyword.UpgradeLevel, new ActionRef<EventParsingInfo>(UpgradeLevelTriggerAction) },
+            { TriggerKeyword.Week, new ActionRef<EventParsingInfo>(WeekTriggerAction) },
         };
+
+    public static readonly Dictionary<TypeKeyword, ActionRef<EventParsingInfo>> TypeKeywordActions =
+        new Dictionary<TypeKeyword, ActionRef<EventParsingInfo>>
+        {
+            { TypeKeyword.Dialogue, new ActionRef<EventParsingInfo>(DialogueTypeAction) },
+            { TypeKeyword.Email, new ActionRef<EventParsingInfo>(EmailTypeAction) },
+            { TypeKeyword.Reward, new ActionRef<EventParsingInfo>(RewardTypeAction) },
+        };
+
+    private static void RewardTypeAction(ref EventParsingInfo parsingInfo)
+    {
+        throw new NotImplementedException();
+    }
+
+    private static void EmailTypeAction(ref EventParsingInfo parsingInfo)
+    {
+        throw new NotImplementedException();
+    }
+
+    private static void DialogueTypeAction(ref EventParsingInfo parsingInfo)
+    {
+        throw new NotImplementedException();
+    }
 
     private static void WeekTriggerAction(ref EventParsingInfo parsingInfo)
     {
@@ -220,10 +260,9 @@ public static class Parsing_Utilities
         }
     }
 
-    // item1 of choice bools is whether in choice, item2 is whether in a choice branch's dialogue
-    private static void BackgroundChangeAction(ref EventParsingInfo parsingInfo)
+    private static void SetStageAction(ref EventParsingInfo parsingInfo)
     {
-        UnityEngine.Debug.LogError("background changing not implemented yet");
+        UnityEngine.Debug.LogError("dynamic background changing not implemented yet");
         return;
     }
 
@@ -328,7 +367,7 @@ public static class Parsing_Utilities
             throw new Exception("cannot add duplicate event name to event " +
                 "dictionary: " + parsingInfo.EventInfo.UniqueName);
         }
-        parsingInfo.EventInfos.Add(parsingInfo.EventInfo.UniqueName, 
+        parsingInfo.EventInfos.Add(parsingInfo.EventInfo.UniqueName,
             parsingInfo.EventInfo);
         parsingInfo.ResetForNextEvent();
     }
@@ -355,12 +394,10 @@ public static class Parsing_Utilities
         parsingInfo.EventInfo.GetLastChoice().AddReward(reward.Item1, reward.Item2);
     }
 
-
-
     private static void TriggerAction(ref EventParsingInfo parsingInfo)
     {
         var triggerKeyword = parsingInfo.TrimmedLine[1].ToLowerInvariant().Trim();
-        if (TRIGGER_KEYWORDS.TryGetValue(triggerKeyword, out TriggerKeyword trigger)) 
+        if (TRIGGER_KEYWORDS.TryGetValue(triggerKeyword, out TriggerKeyword trigger))
         {
             if (TriggerKeywordActions.TryGetValue(trigger, out ActionRef<EventParsingInfo> action))
             {

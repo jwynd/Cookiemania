@@ -505,7 +505,7 @@ public class EventManager : MonoBehaviour
             flipper *= -1;
             var e = new EventInfo(i.ToString(), false)
             {
-                RequiresDialogueControl = false
+                EventType = TypeKeyword.Reward
             };
             e.TriggeringConditions.Add(new Tuple<TriggerKeyword, int>
                 (TriggerKeyword.Money, i));

@@ -101,7 +101,9 @@ public class EventController : MonoBehaviour
         // reference copy, we want to effect the original
         if (!eventInfo.EventListening)
             return;
-        if (runningDialogueEvent)
+        // dialogue events need dialogue control to run
+        if (runningDialogueEvent && 
+            eventInfo.EventType == TypeKeyword.Dialogue)
         {
             eventQueue.Enqueue(eventInfo);
             return;
@@ -111,15 +113,39 @@ public class EventController : MonoBehaviour
 #endif
         var possibleScale = PauseMenu.PauseWithoutScreen();
         timeScale = possibleScale > 0 ? possibleScale : timeScale;
+        RunEventByType(info);
+    }
+
+    private void RunEventByType(EventInfo eventInfo)
+    {
         info = eventInfo;
         info.EventListening = false;
-        if (!info.RequiresDialogueControl)
+        switch (eventInfo.EventType)
         {
-            EventComplete();
-            return;
+            case TypeKeyword.Dialogue:
+                runningDialogueEvent = true;
+                NextBranch(EventInfo.FIRST_BRANCH);
+                break;
+            case TypeKeyword.Email:
+                runningDialogueEvent = true;
+                AddEmail();
+                break;
+            case TypeKeyword.Reward:
+                EventComplete();
+                return;
+            default:
+                Debug.LogError("unimplemented event type for event " +
+                    "controller");
+                return;
         }
-        runningDialogueEvent = true;
-        NextBranch(EventInfo.FIRST_BRANCH);
+    }
+
+    // all this function should do is add an email to the email controller
+    // need to pass the function that returns what the email choice made
+    // was when choices are made
+    private void AddEmail()
+    {
+        throw new NotImplementedException();
     }
 
     private void EventComplete()

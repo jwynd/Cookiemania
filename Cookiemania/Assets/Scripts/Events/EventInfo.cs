@@ -22,9 +22,16 @@ public class EventInfo
 
     // set it to false when event runs first time
     public bool EventListening = true;
-    // these events should all need the dialogue box stuff, but if they dont
-    // when the event runs, they'll just trigger the eventcompletereward and exit
-    public bool RequiresDialogueControl = true;
+
+    // for event type email: need a subject line, a sender, an email body
+    // and can send images using the background dictionary as attachments
+    // can have up to one choice that comes after the email dialogue
+    // that pops up when player tries to close the email
+    
+    // in the branching dictionary --> will have "subject", "attachments",
+    // and only one dialogue (still first) and at most one choice (linked
+    // after the only dialogue)
+    public TypeKeyword EventType = TypeKeyword.Dialogue;
 
     // add to playerdata on event complete regardless of choices made
     // if there is no neutral reward associate your rewards with the choices obv
