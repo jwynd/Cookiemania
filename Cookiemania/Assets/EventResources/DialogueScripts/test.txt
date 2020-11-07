@@ -178,3 +178,5 @@ subject Hey sport, heard you're not doing too hot...
 # dialogue for the player
 # will need to be handled by dialogue / choice controllers
 > Dear player,
+> hey
+event_end

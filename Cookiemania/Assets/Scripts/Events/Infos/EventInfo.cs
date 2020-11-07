@@ -9,6 +9,7 @@ public class EventInfo
 {
     public const string LAST_BRANCH = "end";
     public const string FIRST_BRANCH = "first";
+    public const string EMAIL_SUBJECT = "subject";
     
     // conditions are always the first time the amount has been reached for 
     // all trigger types

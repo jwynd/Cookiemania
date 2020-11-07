@@ -9,6 +9,8 @@ public static partial class Parsing_Utilities
     {
         Event,
         Type,
+        // email only
+        Subject,
         Choice,
         Branch,
         EventEnd,
@@ -88,6 +90,7 @@ public static partial class Parsing_Utilities
         { "event" , BaseKeyword.Event },
         { "events", BaseKeyword.Event },
         { "type", BaseKeyword.Type },
+        { "subject", BaseKeyword.Subject },
         { "choice", BaseKeyword.Choice },
         { "choices", BaseKeyword.Choice },
         { "branch", BaseKeyword.Branch },

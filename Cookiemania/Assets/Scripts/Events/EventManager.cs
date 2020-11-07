@@ -28,7 +28,7 @@ public class EventManager : MonoBehaviour
     private bool useTestMode = true;
 
     // these dictionaries are only initialized
-    private ReadOnlyDictionary<string, Tuple<string, Sprite>> characterDictionary;
+    public ReadOnlyDictionary<string, Tuple<string, Sprite>> CharacterDictionary;
     private ReadOnlyDictionary<string, CharacterInfo> charInfoDictionary;
     private ReadOnlyDictionary<string, BackgroundInfo> backgroundDictionary;
     private ReadOnlyDictionary<string, EventInfo> eventDictionary;
@@ -281,7 +281,6 @@ public class EventManager : MonoBehaviour
             parsingInfo.EventInfo.GetLastChoice().Background =
                 parsingInfo.BackgroundInfo.Background;
         }
-        
     }
 
     private static void ResolveCharacterKeyword(ref EventParsingInfo parsingInfo,
@@ -315,15 +314,16 @@ public class EventManager : MonoBehaviour
         {
             return true;
         }
-        if (trimmedText[0][0] == COMMENT)
-        {
-            return true;
-        }
         if (string.IsNullOrWhiteSpace(trimmedText.First()) ||
             string.IsNullOrEmpty(trimmedText.First()))
         {
             return true;
         }
+        if (trimmedText[0][0] == COMMENT)
+        {
+            return true;
+        }
+
         return false;
     }
 
@@ -371,7 +371,7 @@ public class EventManager : MonoBehaviour
                 new Tuple<string, Sprite>(character.DisplayName, character.Sprite));
             charInfoDictionary.Add(character.UniqueName, character);
         }
-        this.characterDictionary = new ReadOnlyDictionary<string, Tuple<string, Sprite>>
+        this.CharacterDictionary = new ReadOnlyDictionary<string, Tuple<string, Sprite>>
             (charDictionary);
         this.charInfoDictionary = new ReadOnlyDictionary<string, CharacterInfo>
             (charInfoDictionary);
@@ -390,10 +390,9 @@ public class EventManager : MonoBehaviour
         ChoicePrefab = Instantiate(choicePrefab);
         CreateCharDictionaries(characterList);
         CreateBGDictionary(backgroundList);
-        VerifyNoOverlappingCommands(characterDictionary, backgroundDictionary);
+        VerifyNoOverlappingCommands(CharacterDictionary, backgroundDictionary);
         var dController = dialoguePrefab.GetComponent<DialogueController>();
         dialogueCharacterLimit = dController.CharacterMax;
-        dController.InitDictionaryOnly(characterDictionary);
         ParseEventScripts(eventTextFiles);
     }
 

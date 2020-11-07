@@ -77,16 +77,10 @@ public class DialogueController : MonoBehaviour
     private IEnumerator fastTextDisplayer;
     private Tuple<string, string> currentLine;
 
-    public void InitDictionaryOnly(ReadOnlyDictionary<string, Tuple<string, Sprite>> charDict)
-    {
-        charDictionary = new ReadOnlyDictionary<string, Tuple<string, Sprite>>
-                (charDict);
-    }
-
     public void Initialize(DialogueInfo dialogueInfo, OnComplete onComplete)
     {
         Initialize(dialogueInfo.Dialogues, onComplete, dialogueInfo.NextBranch,
-            dialogueInfo.Backgrounds);
+            dialogueInfo.Backgrounds, EventManager.Instance.CharacterDictionary);
     }
 
     public void Initialize(

@@ -6,6 +6,27 @@ public static partial class Parsing_Utilities
 
     public delegate void ActionRef<T1>(ref T1 arg1);
 
+    private static void SubjectAction(ref EventParsingInfo parsingInfo)
+    {
+        parsingInfo.EventInfo.AddDialogue(new DialogueInfo(EventInfo.EMAIL_SUBJECT));
+        parsingInfo.TrimmedLine.PopFront();
+        if (parsingInfo.TrimmedLine.Count < 1)
+        {
+            throw new Exception("email subject must be immediately defined " +
+                "e.g. subject Hey what's up!");
+        }
+        if (parsingInfo.CharacterInfo == null)
+        {
+            throw new Exception("the email sender must be defined before " +
+                "the subject / body of the email");
+        }
+        // emails dont have to worry about character limits
+        var line = string.Join(" ", parsingInfo.TrimmedLine.ToArray());
+        parsingInfo.EventInfo.GetLastDialogue().AddDialogue(
+            line, 
+            parsingInfo.CharacterInfo.UniqueName);
+    }
+
     private static void WebsiteTutorialAction(ref EventParsingInfo parsingInfo)
     {
         parsingInfo.EventInfo.TutorialType = TutorialKeyword.WebsiteTab;

@@ -7,6 +7,7 @@ public static partial class Parsing_Utilities
         {
             { BaseKeyword.Stage, new ActionRef<EventParsingInfo>(SetStageAction) },
             { BaseKeyword.Type, new ActionRef<EventParsingInfo>(TypeAction) },
+            { BaseKeyword.Subject, new ActionRef<EventParsingInfo>(SubjectAction) },
             { BaseKeyword.Branch, new ActionRef<EventParsingInfo>(BranchAction) },
             { BaseKeyword.BranchEnd, new ActionRef<EventParsingInfo>(BranchEndAction) },
             { BaseKeyword.BranchStart, new ActionRef<EventParsingInfo>(BranchStartAction) },
