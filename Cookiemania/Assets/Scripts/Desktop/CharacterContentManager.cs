@@ -30,6 +30,9 @@ public class CharacterContentManager : MonoBehaviour
     [SerializeField] private GameObject[] Eyebrows = null;
     [SerializeField] private Transform BrowAnchor = null;
     [SerializeField] private GameObject newChara = null;
+    [SerializeField] private Transform GlassesAnchor = null;
+    [SerializeField] private Transform HeadphonesAnchor = null;
+    [SerializeField] private Transform ScarfAnchor = null;
     GameObject activebody;
     GameObject activeTopping;
     GameObject activeTop;
@@ -231,8 +234,16 @@ public class CharacterContentManager : MonoBehaviour
                     GameObject.Destroy(activeTop);
                 }
                 activeTop = GameObject.Instantiate(TAccess[id]);
-                activeTop.transform.SetParent(TopAnchor);
-                activeTop.transform.ResetTransform();
+                if (id == 2)
+                {
+                    activeTop.transform.SetParent(HeadphonesAnchor);
+                    activeTop.transform.ResetTransform();
+                }
+                else
+                {
+                    activeTop.transform.SetParent(TopAnchor);
+                    activeTop.transform.ResetTransform();
+                }
                 break;
 
             case AppearanceDetails.MIDDLEACCESSORY:
@@ -241,8 +252,16 @@ public class CharacterContentManager : MonoBehaviour
                     GameObject.Destroy(activeMid);
                 }
                 activeMid = GameObject.Instantiate(MAccess[id]);
-                activeMid.transform.SetParent(MidAnchor);
-                activeMid.transform.ResetTransform();
+                if (id == 2)
+                {
+                    activeMid.transform.SetParent(GlassesAnchor);
+                    activeMid.transform.ResetTransform();
+                }
+                else
+                {
+                    activeMid.transform.SetParent(MidAnchor);
+                    activeMid.transform.ResetTransform();
+                }
                 break;
 
             case AppearanceDetails.BOTTOMACCESSORY:
@@ -251,8 +270,16 @@ public class CharacterContentManager : MonoBehaviour
                     GameObject.Destroy(activeBot);
                 }
                 activeBot = GameObject.Instantiate(BAccess[id]);
-                activeBot.transform.SetParent(BotAnchor);
-                activeBot.transform.ResetTransform();
+                if (id == 3)
+                {
+                    activeBot.transform.SetParent(ScarfAnchor);
+                    activeBot.transform.ResetTransform();
+                }
+                else
+                {
+                    activeBot.transform.SetParent(BotAnchor);
+                    activeBot.transform.ResetTransform();
+                }
                 break;
 
             case AppearanceDetails.EYESHAPE:
@@ -263,6 +290,16 @@ public class CharacterContentManager : MonoBehaviour
                 activeEye = GameObject.Instantiate(Eyes[id]);
                 activeEye.transform.SetParent(EyeAnchor);
                 activeEye.transform.ResetTransform();
+                break;
+
+            case AppearanceDetails.EYEBROWSHAPE:
+                if (activeBrow != null)
+                {
+                    GameObject.Destroy(activeBrow);
+                }
+                activeBrow = GameObject.Instantiate(Eyebrows[id]);
+                activeBrow.transform.SetParent(BrowAnchor);
+                activeBrow.transform.ResetTransform();
                 break;
 
         }
@@ -297,14 +334,16 @@ public class CharacterContentManager : MonoBehaviour
         temp.middle.sprite = MAccess[midindex].GetComponent<UnityEngine.UI.Image>().sprite;
         temp.bottom.sprite = BAccess[botindex].GetComponent<UnityEngine.UI.Image>().sprite;
         temp.eyes.sprite = Eyes[eyeindex].GetComponent<UnityEngine.UI.Image>().sprite;
-        //temp.Eyebrows.sprite = Eyebrows[browindex].GetComponent<UnityEngine.UI.Image>().sprite;
+        temp.eyebrows.sprite = Eyebrows[browindex].GetComponent<UnityEngine.UI.Image>().sprite;
         temp.name = characterName;
+     
         foreach(Transform child in temp.transform)
         {
             child.localPosition = new Vector3(child.localPosition.x, child.localPosition.y, 0);
             foreach(Transform grandchild in child.transform)
             {
                 grandchild.localPosition = new Vector3(grandchild.localPosition.x, grandchild.localPosition.y, 0);
+
             }
         }
     }
