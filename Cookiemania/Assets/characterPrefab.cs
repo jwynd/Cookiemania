@@ -11,5 +11,4 @@ public class characterPrefab : MonoBehaviour
     public SpriteRenderer bottom;
     public SpriteRenderer eyes;
     public SpriteRenderer eyebrows;
-  //  public SpriteRenderer eyebrows;
 }

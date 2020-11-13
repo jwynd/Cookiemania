@@ -12,10 +12,10 @@ public class ShopButtons : MonoBehaviour
 
     private void Start()
     {
-        if (PlayerData.Player.money >= cost && PlayerData.Player.shoplvl >= lvlReq && PlayerData.Player.SpaceUpgradelvl >= lvlReq && purchased == false)
-        {
-            gameObject.GetComponent<Image>().color = Color.yellow;
-        }
+        //if (PlayerData.Player.money >= cost && PlayerData.Player.shoplvl >= lvlReq && PlayerData.Player.SpaceUpgradelvl >= lvlReq && purchased == false)
+       // {
+        //    gameObject.GetComponent<Image>().color = Color.yellow;
+        //}
     }
 
     private void Update()
@@ -72,6 +72,44 @@ public class ShopButtons : MonoBehaviour
         if(gameObject.tag == "milk")
         {
             PlayerData.Player.healthlvl += 1;
+        }
+    }
+
+    public void Global()
+    {
+        GameObject.Find("Global").SetActive(true);
+        GameObject.Find("Marketing").SetActive(false);
+        GameObject.Find("Cyber").SetActive(false);
+        this.gameObject.SetActive(false);
+    }
+
+    public void Marketing()
+    {
+        GameObject.Find("Global").SetActive(false);
+        GameObject.Find("Marketing").SetActive(true);
+        GameObject.Find("Cyber").SetActive(false);
+        this.gameObject.SetActive(false);
+    }
+
+    public void Cyber()
+    {
+        GameObject.Find("Global").SetActive(true);
+        GameObject.Find("Marketing").SetActive(false);
+        GameObject.Find("Cyber").SetActive(false);
+        this.gameObject.SetActive(false);
+    }
+
+    public void Back()
+    {
+        if (this.gameObject.activeSelf != true)
+        {
+            GameObject.Find("Global").SetActive(false);
+            GameObject.Find("Marketing").SetActive(false);
+            GameObject.Find("Cyber").SetActive(false);
+            this.gameObject.SetActive(true);
+        } else
+        {
+            //home tab?
         }
     }
 }
