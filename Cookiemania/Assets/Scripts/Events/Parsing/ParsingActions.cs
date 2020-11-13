@@ -25,6 +25,9 @@ public static partial class Parsing_Utilities
         parsingInfo.EventInfo.GetLastDialogue().AddDialogue(
             line, 
             parsingInfo.CharacterInfo.UniqueName);
+        // for the body
+        parsingInfo.EventInfo.AddDialogue(new DialogueInfo(
+            EventInfo.EMAIL_BODY));
     }
 
     private static void WebsiteTutorialAction(ref EventParsingInfo parsingInfo)
@@ -304,8 +307,7 @@ public static partial class Parsing_Utilities
 
     private static void EventEndAction(ref EventParsingInfo parsingInfo)
     {
-        parsingInfo.EventInfo.GetLastDialogue().NextBranch = EventInfo.LAST_BRANCH;
-        parsingInfo.EventInfo.GetLastDialogue().ExitsEvent = true;
+        parsingInfo.EventInfo.FinalizeCreation();
         if (parsingInfo.EventInfos.ContainsKey(parsingInfo.EventInfo.UniqueName))
         {
             throw new Exception("cannot add duplicate event name to event " +

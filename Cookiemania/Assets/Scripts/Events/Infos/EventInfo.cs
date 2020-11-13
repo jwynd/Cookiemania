@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using UnityEngine;
 using static Parsing_Utilities;
@@ -10,10 +11,11 @@ public class EventInfo
     public const string LAST_BRANCH = "end";
     public const string FIRST_BRANCH = "first";
     public const string EMAIL_SUBJECT = "subject";
-    
+    public const string EMAIL_BODY = "body";
+
     // conditions are always the first time the amount has been reached for 
     // all trigger types
-    public List<Tuple<TriggerKeyword, int>> TriggeringConditions = 
+    public List<Tuple<TriggerKeyword, int>> TriggeringConditions =
        new List<Tuple<TriggerKeyword, int>>();
 
     // whether this event needs all triggering conditions
@@ -24,11 +26,14 @@ public class EventInfo
     // set it to false when event runs first time
     public bool EventListening = true;
 
+    // if an email, will fill this info at the end of the event creation
+    public EmailInfo Email = null;
+
     // for event type email: need a subject line, a sender, an email body
     // and can send images using the background dictionary as attachments
     // can have up to one choice that comes after the email dialogue
     // that pops up when player tries to close the email
-    
+
     // in the branching dictionary --> will have "subject", "attachments",
     // and only one dialogue (still first) and at most one choice (linked
     // after the only dialogue)
@@ -37,7 +42,7 @@ public class EventInfo
 
     // add to playerdata on event complete regardless of choices made
     // if there is no neutral reward associate your rewards with the choices obv
-    public List<Tuple<RewardKeyword, int>> EventCompleteReward = 
+    public List<Tuple<RewardKeyword, int>> EventCompleteReward =
        new List<Tuple<RewardKeyword, int>>();
 
     public int BranchID
@@ -55,7 +60,8 @@ public class EventInfo
     private List<DialogueInfo> Dialogues = new List<DialogueInfo>();
     private List<ChoiceInfo> Choices = new List<ChoiceInfo>();
 
-    public EventInfo(string uniqueName, 
+
+    public EventInfo(string uniqueName,
         bool hasDialogue = true)
     {
         UniqueName = uniqueName;
@@ -72,7 +78,7 @@ public class EventInfo
 
     public void SetNextBranch(string precedingBranch, string nextBranch)
     {
-        if (BranchingDictionary.TryGetValue(precedingBranch, 
+        if (BranchingDictionary.TryGetValue(precedingBranch,
             out Tuple<bool, int> parent))
         {
             if (parent.Item1)
@@ -84,15 +90,15 @@ public class EventInfo
         else
         {
             Debug.Log(precedingBranch + " " + nextBranch);
-            throw new Exception("branch: " + precedingBranch + 
+            throw new Exception("branch: " + precedingBranch +
                 " not found in branching dictionary");
         }
     }
 
     // write to multiple dialogues (for choice branches that should have the same dialogue
     // result
-    public void MultiDialogueWrite(List<string> dialogueBranchNames, 
-        string dialogueLine, string characterName, 
+    public void MultiDialogueWrite(List<string> dialogueBranchNames,
+        string dialogueLine, string characterName,
         Sprite background = null)
     {
         if (characterName == null || characterName == "")
@@ -125,13 +131,13 @@ public class EventInfo
         }
     }
 
-    public List<DialogueInfo> GetAllDialogues(List<string> dialogueBranchNames, 
+    public List<DialogueInfo> GetAllDialogues(List<string> dialogueBranchNames,
         bool noExceptions = false)
     {
         List<DialogueInfo> dialogues = new List<DialogueInfo>();
         foreach (var name in dialogueBranchNames)
         {
-            if (BranchingDictionary.TryGetValue(name, 
+            if (BranchingDictionary.TryGetValue(name,
                 out Tuple<bool, int> dictionaryTuple))
             {
                 if (!dictionaryTuple.Item1)
@@ -189,7 +195,7 @@ public class EventInfo
     {
         if (index >= Choices.Count || index < 0)
         {
-            Debug.LogError("index not in range: " + 
+            Debug.LogError("index not in range: " +
                 index + ", Range: " + Choices.Count);
         }
         return Choices[index];
@@ -199,10 +205,75 @@ public class EventInfo
     {
         if (index >= Dialogues.Count || index < 0)
         {
-            Debug.LogError("index not in range: " + 
+            Debug.LogError("index not in range: " +
                 index + ", Range: " + Dialogues.Count);
         }
         return Dialogues[index];
+    }
+
+    public void FinalizeCreation()
+    {
+        GetLastDialogue().NextBranch = LAST_BRANCH;
+        GetLastDialogue().ExitsEvent = true;
+        // no need to create EmailInfo, which is last step
+        // for email events
+        if (EventType != TypeKeyword.Email)
+        {
+            return;
+        }
+        string sender = "";
+        string subject = "";
+        string body = "";
+        List<Tuple<string, Sprite>> attachments =
+            new List<Tuple<string, Sprite>>();
+        ChoiceInfo choice = GetLastChoice();
+        ExtractSenderAndSubject(ref sender, ref subject);
+        ExtractBodyAndAttachments(ref body, ref attachments);
+
+        if (subject == "" ||
+            body == "" ||
+            sender == "")
+        {
+            throw new Exception("cannot create email without defining a subject: " +
+                subject + ", a body: " + body + " and a sender: " + sender);
+        }
+        Email = new EmailInfo(subject, body, sender, choice, attachments);
+    }
+
+    private void ExtractSenderAndSubject(ref string sender, ref string subject)
+    {
+        if (BranchingDictionary.TryGetValue(
+                    EMAIL_SUBJECT, out Tuple<bool, int> dInfo))
+        {
+            var senderSubject = GetDialogue(dInfo.Item2).Dialogues.First();
+            sender = senderSubject.Item1;
+            subject = senderSubject.Item2;
+        }
+    }
+
+    private void ExtractBodyAndAttachments(ref string body, 
+        ref List<Tuple<string, Sprite>> attachments)
+    {
+        if (BranchingDictionary.TryGetValue(
+                    EMAIL_BODY, out Tuple<bool, int> bodyInfo))
+        {
+            var tuples = GetDialogue(bodyInfo.Item2).Dialogues;
+            var attachmentSprites = GetDialogue(bodyInfo.Item2).Backgrounds;
+            var tupleList = new List<string>();
+
+            foreach (var tuple in tuples)
+            {
+                tupleList.Add(tuple.Item2);
+            }
+
+            foreach (var attachment in attachmentSprites)
+            {
+                if (attachment != null)
+                    attachments.Add(new Tuple<string, Sprite>
+                        ("attachment" + (attachments.Count + 1).ToString(), attachment));
+            }
+            body = string.Join("\n", tupleList);
+        }
     }
 
     // will be using this to track parsing implementation progression
