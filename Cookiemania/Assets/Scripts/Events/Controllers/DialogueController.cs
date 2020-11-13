@@ -115,6 +115,8 @@ public class DialogueController : MonoBehaviour
 
     private IEnumerator TextDisplayer(string fullText, float delay, int startLetter = 0)
     {
+        if (EventManager.Instance)
+            fullText = EventManager.Instance.GetDialogueWithOverwrites(fullText);
         stillDisplayingText = true;
         for(int i = startLetter; i <= fullText.Length; i++)
         {

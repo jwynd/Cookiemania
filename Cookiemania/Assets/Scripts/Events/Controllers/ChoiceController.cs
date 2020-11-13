@@ -162,6 +162,15 @@ public class ChoiceController : MonoBehaviour
             throw new Exception("maximum amount of choices is " + MAX_CHOICES_SUPPORTED);
         }
 
+        if (EventManager.Instance)
+        {
+            choicePrompt = EventManager.Instance.GetDialogueWithOverwrites(choicePrompt);
+            for (int i = 0; i < choices.Count; i++)
+            {
+                choices[i] = EventManager.Instance.GetDialogueWithOverwrites(choices[i]);
+            }
+        }
+
         EnableObjects(false);
         charName.text = cName;
         charImage.sprite = cImage;

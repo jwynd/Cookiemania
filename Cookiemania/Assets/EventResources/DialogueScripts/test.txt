@@ -56,7 +56,7 @@ event_reward morality 0
 
 default
 boss
-> Well hello there.
+> Well hello there, player_name.
 chip
 > ah man i hate this guy.
 boss
@@ -74,7 +74,7 @@ day
 # btw choices can only be one line long
 
 chip
-> Beat this guy up?
+> Beat this guy up, player_name?
 
 # these dont need numbers here, they are in order tho
 # and will need numbers for branch_start
@@ -177,6 +177,6 @@ subject Hey sport, heard you're not doing too hot...
 # ahhhhh i totally forgot to do keyword replacement in 
 # dialogue for the player
 # will need to be handled by dialogue / choice controllers
-> Dear player,
+> Dear player_name,
 > hey
 event_end

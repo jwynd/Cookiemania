@@ -20,6 +20,25 @@ public class EventManager : MonoBehaviour
     [SerializeField]
     [Tooltip("The text files that contain events to be registered")]
     private List<TextAsset> eventTextFiles = new List<TextAsset>();
+
+    [Serializable]
+    public struct NameOverwrites
+    {
+        public string DialogueKeyword;
+        public string UniqueName;
+
+        public NameOverwrites(string keyword, string name)
+        {
+            DialogueKeyword = keyword;
+            UniqueName = name;
+        }
+    }
+
+    [SerializeField]
+    [Tooltip("Keywords in the dialogue that should be replaced by a character's actual name\n" +
+        "Basically anything that gets named by the player, like the player character's name\n" +
+        "Each entry should be (keyword_to_be_replaced, character's_unique_name)")]
+    private List<NameOverwrites> dialogueOverwrites = new List<NameOverwrites>();
     [SerializeField]
     private List<CharacterInfo> characterList = new List<CharacterInfo>();
     [SerializeField]
@@ -29,12 +48,13 @@ public class EventManager : MonoBehaviour
 
     // these dictionaries are only initialized
     public ReadOnlyDictionary<string, Tuple<string, Sprite>> CharacterDictionary;
-    private ReadOnlyDictionary<string, CharacterInfo> charInfoDictionary;
     private ReadOnlyDictionary<string, BackgroundInfo> backgroundDictionary;
     private ReadOnlyDictionary<string, EventInfo> eventDictionary;
+    // value is the corresponding key entry in the character dictionary
+    private ReadOnlyDictionary<string, string> dialogueKeywordToDisplayName;
 
     // mutable dictionary
-    private Dictionary<TriggerKeyword, SortedList<int, EventInfo>> listeningEvents = 
+    private Dictionary<TriggerKeyword, SortedList<int, EventInfo>> listeningEvents =
         new Dictionary<TriggerKeyword, SortedList<int, EventInfo>>();
 
     private int dialogueCharacterLimit = 140;
@@ -58,6 +78,46 @@ public class EventManager : MonoBehaviour
             PlayerData.Player.PrintChoicesMade();
 #endif
         DistributeRewards(rewards);
+    }
+
+    // basically only used for player, cuz they're the only character 
+    // that gets named / updated
+    // pass null sprite to skip update of the sprite
+    public int UpdateCharacterEntry(string newName,
+        Sprite newSprite = null, string playerUID = "player")
+    {
+        if (CharacterDictionary == null)
+        {
+            return -2;
+        }
+
+        if (!CharacterDictionary.TryGetValue(playerUID, out Tuple<string, Sprite> value))
+        {
+            return -1;
+        }
+        var sprite = newSprite == null ? value.Item2 : newSprite;
+        var newDict =
+            new Dictionary<string, Tuple<string, Sprite>>(CharacterDictionary)
+            {
+                [playerUID] = new Tuple<string, Sprite>(newName, sprite)
+            };
+        CharacterDictionary = new ReadOnlyDictionary<string, Tuple<string, Sprite>>(newDict);
+        // needs to be recreated here as we dont know if any overwrite got changed
+        CreateOverwriteDictionary(this.dialogueOverwrites, CharacterDictionary);
+        return 0;
+    }
+
+    // searches the string for any instances of the dialogue keywords
+    public string GetDialogueWithOverwrites(string line)
+    {
+        // not removing empty entries here e.g. "hello    what's up" 
+        // wont have extra whitespace removed
+        foreach (var key in dialogueKeywordToDisplayName.Keys)
+        {
+            if (dialogueKeywordToDisplayName.TryGetValue(key, out string value))
+                line = line.Replace(key, value);
+        }
+        return line;
     }
 
     public void ChoiceMade(string eventName, string choicePrompt, string choiceMade)
@@ -142,7 +202,8 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    private void ParseEventScripts(List<TextAsset> textAssets)
+    private void ParseEventScripts(List<TextAsset> textAssets, 
+        ReadOnlyDictionary<string, CharacterInfo> charInfoDictionary)
     {
         char[] toTrim = { '\t' };
         EventParsingInfo parsingInfo = new EventParsingInfo();
@@ -265,8 +326,8 @@ public class EventManager : MonoBehaviour
             Debug.Log(string.Join(" ", charDictionary.Keys));
             throw new Exception(keywordMatch + " did not match any base " +
                 "keywords, comment, dialogue " +
-                "or any known character unique names. Is this dialogue/ a " +
-                "choice and missing the keyword " +
+                "or any known character/bg unique names. Is this a dialogue" +
+                "and missing the keyword " +
                 DIALOGUE.ToString() + " ?");
         }
     }
@@ -355,7 +416,8 @@ public class EventManager : MonoBehaviour
         return actualLine;
     }
 
-    private void CreateCharDictionaries(List<CharacterInfo> characterList)
+    private ReadOnlyDictionary<string, CharacterInfo> CreateCharDictionaries(
+        List<CharacterInfo> characterList)
     {
         var charDictionary = new Dictionary<string, Tuple<string, Sprite>>();
         var charInfoDictionary = new Dictionary<string, CharacterInfo>();
@@ -373,10 +435,36 @@ public class EventManager : MonoBehaviour
         }
         this.CharacterDictionary = new ReadOnlyDictionary<string, Tuple<string, Sprite>>
             (charDictionary);
-        this.charInfoDictionary = new ReadOnlyDictionary<string, CharacterInfo>
+        CreateOverwriteDictionary(this.dialogueOverwrites, this.CharacterDictionary);
+        return new ReadOnlyDictionary<string, CharacterInfo>
             (charInfoDictionary);
     }
 
+    private void CreateOverwriteDictionary(List<NameOverwrites> overwrites, 
+        ReadOnlyDictionary<string, Tuple<string, Sprite>> charDictionary)
+    {
+        var overwriteDictionary = new Dictionary<string, string>();
+        foreach (var keyword in overwrites)
+        {
+            if (string.IsNullOrEmpty(keyword.UniqueName) || 
+                string.IsNullOrWhiteSpace(keyword.UniqueName) ||
+                string.IsNullOrEmpty(keyword.DialogueKeyword) ||
+                string.IsNullOrWhiteSpace(keyword.DialogueKeyword))
+            {
+                throw new Exception("character name and keyword must exist for" +
+                    " overwrite designation");
+            }
+            var name = keyword.UniqueName.ToLowerInvariant();
+            if (!charDictionary.TryGetValue(name, out Tuple<string, Sprite> value))
+            {
+                throw new Exception("the character key to overwrite for dialogue" +
+                    " was not found");
+            }
+            overwriteDictionary.Add(keyword.DialogueKeyword, value.Item1);
+        }
+        this.dialogueKeywordToDisplayName =
+            new ReadOnlyDictionary<string, string>(overwriteDictionary);
+    }
 
     private void Awake()
     {
@@ -388,12 +476,15 @@ public class EventManager : MonoBehaviour
         Instance = this;
         DialoguePrefab = Instantiate(dialoguePrefab);
         ChoicePrefab = Instantiate(choicePrefab);
-        CreateCharDictionaries(characterList);
+        // character info dictionary is only temporarily required
+        // also creates the dialogue dictionary as it must come immediately
+        // after the other one
+        var charInfoDictionary = CreateCharDictionaries(characterList);
         CreateBGDictionary(backgroundList);
         VerifyNoOverlappingCommands(CharacterDictionary, backgroundDictionary);
         var dController = dialoguePrefab.GetComponent<DialogueController>();
         dialogueCharacterLimit = dController.CharacterMax;
-        ParseEventScripts(eventTextFiles);
+        ParseEventScripts(eventTextFiles, charInfoDictionary);
     }
 
     private static void VerifyNoOverlappingCommands(
