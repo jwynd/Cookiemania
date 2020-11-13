@@ -334,7 +334,7 @@ public class CharacterContentManager : MonoBehaviour
         temp.middle.sprite = MAccess[midindex].GetComponent<UnityEngine.UI.Image>().sprite;
         temp.bottom.sprite = BAccess[botindex].GetComponent<UnityEngine.UI.Image>().sprite;
         temp.eyes.sprite = Eyes[eyeindex].GetComponent<UnityEngine.UI.Image>().sprite;
-        temp.eyebrows.sprite = Eyebrows[browindex].GetComponent<UnityEngine.UI.Image>().sprite;
+        //temp.eyebrows.sprite = Eyebrows[browindex].GetComponent<UnityEngine.UI.Image>().sprite;
         temp.name = characterName;
      
         foreach(Transform child in temp.transform)
