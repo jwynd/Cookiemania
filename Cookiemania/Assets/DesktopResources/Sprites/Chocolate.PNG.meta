@@ -1,25 +1,31 @@
 fileFormatVersion: 2
-guid: 305c978b8987b2e46b60cd4d968113a8
+guid: b729d58fd9bf7b24985d90e71209f213
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3035097721947442811
-    second: customization_body2_0
+      213: 7936415941445060945
+    second: Chocolate_0
   - first:
-      213: 7766366714297792526
-    second: customization_body2_1
+      213: 5879468405840608925
+    second: Chocolate_1
   - first:
-      213: 7903378123237805627
-    second: customization_body2_2
+      213: 6106170033147362309
+    second: Chocolate_2
   - first:
-      213: -7213058509359072085
-    second: customization_body2_3
+      213: -4627892007613801261
+    second: Chocolate_3
   - first:
-      213: 5993861694424222659
-    second: customization_body2_4
+      213: 5589416959019184295
+    second: Chocolate_4
   - first:
-      213: 2348506236494318673
-    second: customization_body2_5
+      213: 2687496167201751760
+    second: Chocolate_5
+  - first:
+      213: -3360201409228927051
+    second: Chocolate_6
+  - first:
+      213: -5520003911209532016
+    second: Chocolate_7
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -104,127 +110,169 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: customization_body2_0
+      name: Chocolate_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 2
-        width: 37
-        height: 39
+        x: 93
+        y: 286
+        width: 36
+        height: 142
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d90e5f8934e873f4aa188d77169a988b
-      internalID: 3035097721947442811
+      spriteID: 9fb5199670204894d968c5a7410bf9f6
+      internalID: 7936415941445060945
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: customization_body2_1
+      name: Chocolate_1
       rect:
         serializedVersion: 2
-        x: 63
-        y: 7
-        width: 29
-        height: 34
+        x: 93
+        y: 135
+        width: 433
+        height: 456
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed90ab8cf9b06b742aeaa8ac3df00052
-      internalID: 7766366714297792526
+      spriteID: f3816ac309761a644baa96abb78d523e
+      internalID: 5879468405840608925
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: customization_body2_2
+      name: Chocolate_2
       rect:
         serializedVersion: 2
-        x: 113
-        y: 12
-        width: 29
-        height: 29
+        x: 489
+        y: 286
+        width: 36
+        height: 142
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f26b6c97ab79a724f98de68b37952719
-      internalID: 7903378123237805627
+      spriteID: f539ceed685d33546843fe853ccaba16
+      internalID: 6106170033147362309
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: customization_body2_3
+      name: Chocolate_3
       rect:
         serializedVersion: 2
-        x: 169
-        y: 12
-        width: 14
-        height: 29
+        x: 722
+        y: 194
+        width: 339
+        height: 397
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 431bfb88c071faa4db6514a56b824a29
-      internalID: -7213058509359072085
+      spriteID: ddc323274d625a44184458190fc8f2f4
+      internalID: -4627892007613801261
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: customization_body2_4
+      name: Chocolate_4
       rect:
         serializedVersion: 2
-        x: 14
-        y: 2
-        width: 4
-        height: 10
+        x: 1305
+        y: 252
+        width: 339
+        height: 339
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a41bce911615a174eafa1982115c0e4e
-      internalID: 5993861694424222659
+      spriteID: 7bd89eac534bdd845b7d20e52d4fe745
+      internalID: 5589416959019184295
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: customization_body2_5
+      name: Chocolate_5
       rect:
         serializedVersion: 2
-        x: 36
-        y: 2
-        width: 4
-        height: 10
+        x: 1952
+        y: 248
+        width: 167
+        height: 434
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0311b76bf7509ea4588bd3e1b889b5ce
-      internalID: 2348506236494318673
+      spriteID: ac978b28e98d2274cbd17d2af2e70149
+      internalID: 2687496167201751760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chocolate_6
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 135
+        width: 48
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 278bb2da2b1278049a038dacc01eadfb
+      internalID: -3360201409228927051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chocolate_7
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 118
+        width: 145
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cde6d9a3552b70040a6903bec875318e
+      internalID: -5520003911209532016
       vertices: []
       indices: 
       edges: []

@@ -1,40 +1,31 @@
 fileFormatVersion: 2
-guid: 41c9a614ad915034dbe2b6b72aba5439
+guid: de68132822c058944955853bb606671d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8370836209057775022
-    second: customization_eyeshape3_0
+      213: 1775669009216684005
+    second: Strawberry_0
   - first:
-      213: 3987202452795291180
-    second: customization_eyeshape3_1
+      213: -32040429760078815
+    second: Strawberry_1
   - first:
-      213: -8704592452155604671
-    second: customization_eyeshape3_2
+      213: -7106730570939000684
+    second: Strawberry_2
   - first:
-      213: -4359456739142319157
-    second: customization_eyeshape3_3
+      213: 4518513080991243510
+    second: Strawberry_3
   - first:
-      213: -1452322402152037638
-    second: customization_eyeshape3_4
+      213: 901954246582174200
+    second: Strawberry_4
   - first:
-      213: 1667474428417724239
-    second: customization_eyeshape3_5
+      213: 825325050284003712
+    second: Strawberry_5
   - first:
-      213: -4853537936276422841
-    second: customization_eyeshape3_6
+      213: -5158240598457465908
+    second: Strawberry_6
   - first:
-      213: -1789254419394322211
-    second: customization_eyeshape3_7
-  - first:
-      213: 5056955578451568996
-    second: customization_eyeshape3_8
-  - first:
-      213: -8959393257521197048
-    second: customization_eyeshape3_9
-  - first:
-      213: 1872988332422537285
-    second: customization_eyeshape3_10
+      213: 2009151386410624793
+    second: Strawberry_7
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -119,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: customization_eyeshape3_0
+      name: Strawberry_0
       rect:
         serializedVersion: 2
-        x: 22
-        y: 51
-        width: 14
-        height: 29
+        x: 87
+        y: 262
+        width: 37
+        height: 138
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -133,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fbe6d1b2244dafc4fae25ce56958b1fc
-      internalID: -8370836209057775022
+      spriteID: c376011da0759ed4f8db097971ee7f53
+      internalID: 1775669009216684005
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: customization_eyeshape3_1
+      name: Strawberry_1
       rect:
         serializedVersion: 2
-        x: 60
-        y: 67
-        width: 6
-        height: 12
+        x: 90
+        y: 113
+        width: 417
+        height: 447
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,20 +145,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5bc4ebf09709c684fa86d09c6c8fdb3a
-      internalID: 3987202452795291180
+      spriteID: d57af5f4efa2d14458a6c5280c184dda
+      internalID: -32040429760078815
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: customization_eyeshape3_2
+      name: Strawberry_2
       rect:
         serializedVersion: 2
-        x: 68
-        y: 67
-        width: 6
-        height: 8
+        x: 473
+        y: 262
+        width: 36
+        height: 138
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -175,20 +166,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c54d57e9fea0a54a8206b5723dc9861
-      internalID: -8704592452155604671
+      spriteID: f3e81817a27941b4cbc6317e1b070dcf
+      internalID: -7106730570939000684
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: customization_eyeshape3_3
+      name: Strawberry_3
       rect:
         serializedVersion: 2
-        x: 73
-        y: 24
-        width: 13
-        height: 7
+        x: 700
+        y: 172
+        width: 330
+        height: 386
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -196,20 +187,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ee091c345f5091146867bc3952563c38
-      internalID: -4359456739142319157
+      spriteID: 579b2ee26a03500449e59e7029f0a76c
+      internalID: 4518513080991243510
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: customization_eyeshape3_4
+      name: Strawberry_4
       rect:
         serializedVersion: 2
-        x: 84
-        y: 67
-        width: 7
-        height: 8
+        x: 1266
+        y: 227
+        width: 330
+        height: 331
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -217,20 +208,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1ee4c87e70225124b9bda4a863d62090
-      internalID: -1452322402152037638
+      spriteID: 61b894e078c1c954d842aa2f574f5144
+      internalID: 901954246582174200
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: customization_eyeshape3_5
+      name: Strawberry_5
       rect:
         serializedVersion: 2
-        x: 92
-        y: 67
-        width: 7
-        height: 11
+        x: 1901
+        y: 227
+        width: 160
+        height: 331
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -238,20 +229,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 252fcfc373fee924baf06ad965c46e56
-      internalID: 1667474428417724239
+      spriteID: e197120b38eb9634aa0de59e108a9820
+      internalID: 825325050284003712
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: customization_eyeshape3_6
+      name: Strawberry_6
       rect:
         serializedVersion: 2
-        x: 108
-        y: 66
-        width: 8
-        height: 9
+        x: 144
+        y: 115
+        width: 49
+        height: 116
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -259,20 +250,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3f5269ecb6bd794cba5ffb63ae010fb
-      internalID: -4853537936276422841
+      spriteID: b5bfc1add35c71d49a6efa44afbbdbcc
+      internalID: -5158240598457465908
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: customization_eyeshape3_7
+      name: Strawberry_7
       rect:
         serializedVersion: 2
-        x: 120
-        y: 66
-        width: 9
-        height: 14
+        x: 394
+        y: 115
+        width: 47
+        height: 116
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -280,71 +271,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 376206c7a0d1dc046a922b22f68c8274
-      internalID: -1789254419394322211
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: customization_eyeshape3_8
-      rect:
-        serializedVersion: 2
-        x: 131
-        y: 24
-        width: 4
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4ad533a0edafdc445818c1d53521ca75
-      internalID: 5056955578451568996
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: customization_eyeshape3_9
-      rect:
-        serializedVersion: 2
-        x: 143
-        y: 66
-        width: 9
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: eb0e178d9dd562745b0d200b05dee364
-      internalID: -8959393257521197048
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: customization_eyeshape3_10
-      rect:
-        serializedVersion: 2
-        x: 15
-        y: 7
-        width: 29
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ffd9b35664cd5bb4b9cf08a8a705d51e
-      internalID: 1872988332422537285
+      spriteID: 1a13a3b47b18cdd45ac6022bfaa5a5ef
+      internalID: 2009151386410624793
       vertices: []
       indices: 
       edges: []

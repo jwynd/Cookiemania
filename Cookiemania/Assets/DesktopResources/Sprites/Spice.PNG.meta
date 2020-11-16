@@ -1,25 +1,31 @@
 fileFormatVersion: 2
-guid: 87b071152a361fa47a1a7320ee090049
+guid: 525100e15ecc1ac4d9012151876109ee
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3150252579448592570
-    second: customization_body4_0
+      213: 2216321810583587132
+    second: Spice_0
   - first:
-      213: 2623700206376762786
-    second: customization_body4_1
+      213: 748773925659175736
+    second: Spice_1
   - first:
-      213: -1139012955432426012
-    second: customization_body4_2
+      213: -7023990102086573892
+    second: Spice_2
   - first:
-      213: 4843027467497198214
-    second: customization_body4_3
+      213: 6126112616209697770
+    second: Spice_3
   - first:
-      213: 1522265747409396188
-    second: customization_body4_4
+      213: 5044515945554052475
+    second: Spice_4
   - first:
-      213: -7350610925402683897
-    second: customization_body4_5
+      213: -2935669096799345868
+    second: Spice_5
+  - first:
+      213: -7308925044687786300
+    second: Spice_6
+  - first:
+      213: 7535194255775444456
+    second: Spice_7
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -104,127 +110,169 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: customization_body4_0
+      name: Spice_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 2
-        width: 37
-        height: 39
+        x: 85
+        y: 283
+        width: 36
+        height: 140
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a8d5a36e6f738e846b206c43d3ced89d
-      internalID: 3150252579448592570
+      spriteID: 44a7125d49cf60d468463771426d92a4
+      internalID: 2216321810583587132
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: customization_body4_1
+      name: Spice_1
       rect:
         serializedVersion: 2
-        x: 63
-        y: 7
-        width: 29
-        height: 34
+        x: 85
+        y: 135
+        width: 420
+        height: 447
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 66bf0c8c9a62fa64c85cbfa85699b07a
-      internalID: 2623700206376762786
+      spriteID: 7cd8d67235a532a44adbe5b48d33c329
+      internalID: 748773925659175736
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: customization_body4_2
+      name: Spice_2
       rect:
         serializedVersion: 2
-        x: 113
-        y: 12
-        width: 29
-        height: 29
+        x: 473
+        y: 283
+        width: 36
+        height: 140
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 05cd87f267ab3be43929a861c35a0a7f
-      internalID: -1139012955432426012
+      spriteID: f915e01486a0d6d40993e1678c76da6c
+      internalID: -7023990102086573892
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: customization_body4_3
+      name: Spice_3
       rect:
         serializedVersion: 2
-        x: 169
-        y: 12
-        width: 14
-        height: 29
+        x: 702
+        y: 192
+        width: 333
+        height: 390
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 21b0d36e124e77d48a3e8fe162b0134d
-      internalID: 4843027467497198214
+      spriteID: 5863071c058731f4a90c3243c05a9015
+      internalID: 6126112616209697770
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: customization_body4_4
+      name: Spice_4
       rect:
         serializedVersion: 2
-        x: 14
-        y: 2
-        width: 4
-        height: 10
+        x: 1273
+        y: 246
+        width: 334
+        height: 334
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ddbf2764c25588f4281ea7883939203c
-      internalID: 1522265747409396188
+      spriteID: 68aecf83c81aa2c47aa38e791646564b
+      internalID: 5044515945554052475
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: customization_body4_5
+      name: Spice_5
       rect:
         serializedVersion: 2
-        x: 36
-        y: 2
-        width: 4
-        height: 10
+        x: 1913
+        y: 248
+        width: 162
+        height: 334
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2e59274c11cb77645a2d90c125513b4d
-      internalID: -7350610925402683897
+      spriteID: 6dac43023ff61c24dae05f81a9f3bfad
+      internalID: -2935669096799345868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spice_6
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 135
+        width: 49
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36ffea5f34eff3c468130b80bede1bfd
+      internalID: -7308925044687786300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spice_7
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 135
+        width: 48
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc33ee4eba4301042b9e242ee13f760f
+      internalID: 7535194255775444456
       vertices: []
       indices: 
       edges: []
