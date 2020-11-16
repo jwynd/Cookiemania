@@ -1,0 +1,583 @@
+fileFormatVersion: 2
+guid: d88498bbcc6e62e4fb069f147074c1dc
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6666983705086131383
+    second: headphones_0
+  - first:
+      213: 4770356540417123569
+    second: headphones_1
+  - first:
+      213: -1591877007025468890
+    second: headphones_2
+  - first:
+      213: 5950853639249897032
+    second: headphones_3
+  - first:
+      213: 8770743048398597764
+    second: headphones_4
+  - first:
+      213: 4896798377015623580
+    second: headphones_5
+  - first:
+      213: 9151159990714011527
+    second: headphones_6
+  - first:
+      213: 2657174212552796747
+    second: headphones_7
+  - first:
+      213: 2004803416447915581
+    second: headphones_8
+  - first:
+      213: -8766453386603050837
+    second: headphones_9
+  - first:
+      213: -2476374228237811495
+    second: headphones_10
+  - first:
+      213: -9000596209681065015
+    second: headphones_11
+  - first:
+      213: -6013912375742164656
+    second: headphones_12
+  - first:
+      213: 5224546450741813890
+    second: headphones_13
+  - first:
+      213: 3246965513459766916
+    second: headphones_14
+  - first:
+      213: -3329469940137240823
+    second: headphones_15
+  - first:
+      213: 8956383371067850572
+    second: headphones_16
+  - first:
+      213: 4116713403447190225
+    second: headphones_17
+  - first:
+      213: -5322268781886138749
+    second: headphones_18
+  - first:
+      213: -4618660227172618227
+    second: headphones_19
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: headphones_0
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 1342
+        width: 106
+        height: 151
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad491567f4f514e46b2847d85617d3aa
+      internalID: 6666983705086131383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: headphones_1
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 1342
+        width: 121
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8f1ed6de01713b43b8d94e3193e8383
+      internalID: 4770356540417123569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: headphones_2
+      rect:
+        serializedVersion: 2
+        x: 853
+        y: 1357
+        width: 119
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ecb05fce168ad34ab82a90f693c297b
+      internalID: -1591877007025468890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: headphones_3
+      rect:
+        serializedVersion: 2
+        x: 1266
+        y: 1357
+        width: 122
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd0cdc8834bd23747bb0e775c00645a5
+      internalID: 5950853639249897032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: headphones_4
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 1475
+        width: 18
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52f105d9ff008844ba104dfad5a621e6
+      internalID: 8770743048398597764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: headphones_5
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 1342
+        width: 121
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e376d7561fa7dff41b727ef1a73acf99
+      internalID: 4896798377015623580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: headphones_6
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 1342
+        width: 107
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17f4685cf0dfffe4598f6ee09c4e79be
+      internalID: 9151159990714011527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: headphones_7
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 1342
+        width: 106
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 894599b76e147a748986212a4682d02c
+      internalID: 2657174212552796747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: headphones_8
+      rect:
+        serializedVersion: 2
+        x: 999
+        y: 1357
+        width: 107
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12c4051ad852d94498d9ad0b2fc49373
+      internalID: 2004803416447915581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: headphones_9
+      rect:
+        serializedVersion: 2
+        x: 1133
+        y: 1357
+        width: 107
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d586e7b11f3bdae4aac2d8523c7a266f
+      internalID: -8766453386603050837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: headphones_10
+      rect:
+        serializedVersion: 2
+        x: 1607
+        y: 1357
+        width: 92
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f461f1457d8245044a354da1bae67fac
+      internalID: -2476374228237811495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: headphones_11
+      rect:
+        serializedVersion: 2
+        x: 1740
+        y: 1357
+        width: 108
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 643ae9ca95f35d84d872a5087c0cb592
+      internalID: -9000596209681065015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: headphones_12
+      rect:
+        serializedVersion: 2
+        x: 1874
+        y: 1357
+        width: 122
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 778f77592d06f65468d37277550bbd54
+      internalID: -6013912375742164656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: headphones_13
+      rect:
+        serializedVersion: 2
+        x: 2008
+        y: 1357
+        width: 106
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9b71a349131b88418089764dcff5fd1
+      internalID: 5224546450741813890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: headphones_14
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 660
+        width: 492
+        height: 506
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d6563d365bd9e144a6bed681c73d814
+      internalID: 3246965513459766916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: headphones_15
+      rect:
+        serializedVersion: 2
+        x: 911
+        y: 734
+        width: 491
+        height: 432
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 348db6b95f980144889dd45945970c61
+      internalID: -3329469940137240823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: headphones_16
+      rect:
+        serializedVersion: 2
+        x: 1771
+        y: 734
+        width: 209
+        height: 432
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9eb015ba0fa3f8141a2873e812f55e69
+      internalID: 8956383371067850572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: headphones_17
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 185
+        width: 492
+        height: 285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4530cb9ac34ea449a846935ead3d69b
+      internalID: 4116713403447190225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: headphones_18
+      rect:
+        serializedVersion: 2
+        x: 911
+        y: 185
+        width: 491
+        height: 285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13f0262079107bb4db166fa394af6636
+      internalID: -5322268781886138749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: headphones_19
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 171
+        width: 122
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc73b34d08b883949a1fa6a4a3cbad6e
+      internalID: -4618660227172618227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
