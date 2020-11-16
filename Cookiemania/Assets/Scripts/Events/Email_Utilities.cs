@@ -59,7 +59,11 @@ public static class Email_Utilities
 
     public static void SetSubject(TMP_Text toSet, EmailInfo email)
     {
-        toSet.text = email.subject;
+        var subject = email.subject;
+        if (EventManager.Instance)
+            subject = EventManager.Instance.
+                GetDialogueWithOverwrites(subject);
+        toSet.text = subject;
     }
 
     public static void SetType(TMP_Text toSet, EmailInfo email)
@@ -69,6 +73,10 @@ public static class Email_Utilities
 
     public static void SetBody(TMP_Text toSet, EmailInfo email)
     {
-        toSet.text = email.body;
+        var body = email.body;
+        if (EventManager.Instance)
+            body = EventManager.Instance.
+                GetDialogueWithOverwrites(body);
+        toSet.text = body;
     }
 }

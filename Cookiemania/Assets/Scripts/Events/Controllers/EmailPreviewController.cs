@@ -24,9 +24,9 @@ public class EmailPreviewController : MonoBehaviour
     { 
         get 
         { 
-            if (eventInfo != null) 
+            if (eventInfo != null && eventInfo.Email != null)
                 return eventInfo.Email.emailType; 
-            else return EmailCategory.Starred; 
+            else return EmailCategory.Starred;
         } 
     }
 
