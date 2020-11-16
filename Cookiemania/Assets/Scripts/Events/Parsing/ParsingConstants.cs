@@ -72,14 +72,6 @@ public static partial class Parsing_Utilities
         HistoryEmail,
     }
 
-    public static bool IsEmail(this TypeKeyword type)
-    {
-        return (
-            type == TypeKeyword.EventEmail ||
-            type == TypeKeyword.HistoryEmail ||
-            type == TypeKeyword.TutorialEmail);
-    }
-
     public enum DelayedRunKeyword
     {
         // none means it will immediately display

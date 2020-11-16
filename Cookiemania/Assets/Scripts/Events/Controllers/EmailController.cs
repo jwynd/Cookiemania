@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+using static Email_Utilities;
+
 // controls a single email's display
 // not to be confused with the EmailPreviewController
 // which shows a preview of an email and on click passes
@@ -22,11 +24,20 @@ using TMPro;
 public class EmailController : MonoBehaviour
 {
     [SerializeField]
-    private Canvas myCanvas = null;
+    private TMP_Text subject = null;
+    [SerializeField]
+    private TMP_Text body = null;
+    [SerializeField]
+    private TMP_Text sender = null;
+
+    private EmailInfo email;
 
     // prefab objects necessary to display an email
     public void Initialize(EmailInfo emailInfo)
     {
-
+        email = emailInfo;
+        SetSenderName(sender, email);
+        SetSubject(subject, email);
+        SetBody(body, email);
     }
 }

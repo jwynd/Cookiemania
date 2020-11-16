@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using UnityEngine;
 using static Parsing_Utilities;
+using static Email_Utilities;
 
 [Serializable]
 public class EventInfo
@@ -230,6 +231,9 @@ public class EventInfo
         string sender = "";
         string subject = "";
         string body = "";
+        // obviously if this doesnt work theres a problem with 
+        // the IsEmail(), like wth howd you even break that
+        EmailCategory type = CATEGORY_FROM_TYPE[EventType];
         List<Tuple<string, Sprite>> attachments =
             new List<Tuple<string, Sprite>>();
         ChoiceInfo choice = GetLastChoice();
@@ -243,7 +247,7 @@ public class EventInfo
             throw new Exception("cannot create email without defining a subject: " +
                 subject + ", a body: " + body + " and a sender: " + sender);
         }
-        Email = new EmailInfo(subject, body, sender, choice, attachments);
+        Email = new EmailInfo(subject, body, sender, type, choice, attachments);
     }
 
     private void ExtractSenderAndSubject(ref string sender, ref string subject)
