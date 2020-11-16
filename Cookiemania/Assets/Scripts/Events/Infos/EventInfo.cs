@@ -218,6 +218,22 @@ public class EventInfo
         return Dialogues[index];
     }
 
+    public List<DialogueInfo> GetEmailDialogues()
+    {
+        var returnList = new List<DialogueInfo>();
+        if (BranchingDictionary.TryGetValue(
+            EMAIL_SUBJECT, out Tuple<bool, int> dInfo))
+        {
+            returnList.Add(GetDialogue(dInfo.Item2));
+        }
+        if (BranchingDictionary.TryGetValue(
+            EMAIL_BODY, out Tuple<bool, int> bodyInfo))
+        {
+            returnList.Add(GetDialogue(bodyInfo.Item2));
+        }
+        return returnList;
+    }
+
     public void FinalizeCreation()
     {
         GetLastDialogue().NextBranch = LAST_BRANCH;

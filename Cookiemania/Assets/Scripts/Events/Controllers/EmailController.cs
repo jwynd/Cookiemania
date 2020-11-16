@@ -15,6 +15,8 @@ public class EmailController : MonoBehaviour
     [SerializeField]
     private EmailViewController emailController = null;
 
+    public delegate void OnComplete(EventInfo info, bool delayCallback);
+
     [Serializable]
     public class ButtonType
     {
@@ -34,7 +36,6 @@ public class EmailController : MonoBehaviour
     // preview mode always set to true when tab is opened / category is clicked
     // initial category is always whatever the first tab in the categories list is
     private bool previewMode = false;
-    private EventController eventController;
 
     public bool PreviewMode
     {
@@ -117,9 +118,8 @@ public class EmailController : MonoBehaviour
         preview.Initialize(eventInfo, ViewEmail);
     }
 
-    public void AddEmail(EventInfo eventInfo, EventController eventController)
+    public void AddEmail(EventInfo eventInfo)
     {
-        this.eventController = eventController;
         if (!eventInfo.EventType.IsEmail() || eventInfo.Email == null)
         {
             throw new Exception("cannot add an event of wrong type as email" +
@@ -151,7 +151,7 @@ public class EmailController : MonoBehaviour
     private void ViewEmail(EventInfo info)
     {
         // read / unread information stored local to email preview controller
-        emailController.Initialize(info, eventController);
+        emailController.Initialize(info);
         SetReadNotifications();
         PreviewMode = false;
     }

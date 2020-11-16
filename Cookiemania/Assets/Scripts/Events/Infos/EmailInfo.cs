@@ -21,7 +21,7 @@ public class EmailInfo
        new List<Tuple<string, Sprite>>();
     public ChoiceInfo choice = null;
     public ChoiceController.OnComplete choiceAction;
-    public EmailViewController.OnComplete emailComplete;
+    public EmailController.OnComplete emailComplete;
     
     public EmailInfo(string subject, string body, string sender,
         EmailCategory type,

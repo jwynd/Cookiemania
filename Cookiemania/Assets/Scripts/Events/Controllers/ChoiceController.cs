@@ -89,11 +89,13 @@ public class ChoiceController : MonoBehaviour
     public delegate void OnComplete(string nextBranch,
         string choicePrompt, 
         string choiceMade,
-        List<Tuple<RewardKeyword, int>> rewardList );
+        List<Tuple<RewardKeyword, int>> rewardList,
+        TypeKeyword type);
     private OnComplete runOnComplete = null;
 
     private List<Button> choiceButtons = new List<Button>();
     private float originalAlpha;
+    private TypeKeyword eventType;
 
     void Awake()
     {
@@ -119,9 +121,9 @@ public class ChoiceController : MonoBehaviour
             }
             Initialize(testCharName, testCharImage, testChoicePrompt, testChoices,
                 altTestRewards, testNextBranches, 
-                (string nextB, string v, string c, List<Tuple<RewardKeyword, int>> rewards) => 
+                (string nextB, string v, string c, List<Tuple<RewardKeyword, int>> rewards, TypeKeyword t) => 
                     Debug.Log("test complete for choice: " + c + ", " + v + " was selected, with rewards " + 
-                    string.Join(" ", rewards) + "\nnext branch is: " + nextB),
+                    string.Join(" ", rewards) + "\nnext branch is: " + nextB), TypeKeyword.Dialogue,
                 testBG);
         }
 #endif
@@ -136,12 +138,12 @@ public class ChoiceController : MonoBehaviour
         choice4.gameObject.SetActive(enable);
     }
 
-    public void Initialize(ChoiceInfo choiceInfo, OnComplete onComplete)
+    public void Initialize(ChoiceInfo choiceInfo, TypeKeyword type, OnComplete onComplete)
     {
         Initialize(choiceInfo.CharacterName, choiceInfo.CharacterImage,
             choiceInfo.Prompt, choiceInfo.Choices, choiceInfo.Rewards,
             choiceInfo.ChoiceDialogueDictionary.Values.ToList(),
-            onComplete, choiceInfo.Background);
+            onComplete, type, choiceInfo.Background);
     }
 
     public void Initialize(string cName, Sprite cImage, 
@@ -149,6 +151,7 @@ public class ChoiceController : MonoBehaviour
         List<List<Tuple<RewardKeyword, int>>> rewards, 
         List<string> nextEvents,
         OnComplete onComplete, 
+        TypeKeyword eventType,
         Sprite background = null)
     {
         if (choices.Count != rewards.Count ||
@@ -161,7 +164,7 @@ public class ChoiceController : MonoBehaviour
         {
             throw new Exception("maximum amount of choices is " + MAX_CHOICES_SUPPORTED);
         }
-
+        this.eventType = eventType;
         if (EventManager.Instance)
         {
             choicePrompt = EventManager.Instance.GetDialogueWithOverwrites(choicePrompt);
@@ -230,7 +233,8 @@ public class ChoiceController : MonoBehaviour
         EnableObjects(false);
         Debug.Log("selected choice #" + v.ToString());
         runOnComplete.Invoke(nextBranches[v],  
-            dialogueLine.text, choices[v], rewards[v]);
+            dialogueLine.text, choices[v], rewards[v],
+            eventType);
     }
 
     // not great, but it was easier to give every button its own callback fn

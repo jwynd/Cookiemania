@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using static Parsing_Utilities;
+using static Email_Utilities;
 
 // carries through all the sequences for a single event
 // should be triggered by an event manager
@@ -13,9 +14,10 @@ public class EventController : MonoBehaviour
     // has some info that needs to be processed after the dialogue plays
     private DialogueInfo lastDialoguePlayed = null;
 
-    public DialogueController.OnComplete onDialogueComplete;
+    public DialogueController.OnComplete OnDialogueComplete;
+    public ChoiceController.OnComplete OnChoiceComplete;
+    public EmailController.OnComplete OnEmailComplete;
 
-    public ChoiceController.OnComplete onChoiceComplete;
     private bool runningDialogueEvent = false;
     private float timeScale = 1f;
 
@@ -25,11 +27,35 @@ public class EventController : MonoBehaviour
     }
 
     public void ChoiceComplete(string nextBranch, string choicePrompt, 
-        string choiceMade, List<Tuple<RewardKeyword, int>> rewards)
+        string choiceMade, List<Tuple<RewardKeyword, int>> rewards, 
+        TypeKeyword type)
     {
         EventManager.Instance.ChoiceMade(info.UniqueName, choicePrompt, choiceMade);
         EventManager.Instance.DistributeRewards(rewards);
-        NextBranch(nextBranch);
+        if (!type.IsEmail())
+        {
+            NextBranch(nextBranch);
+        }
+    }
+
+    public void EmailComplete(EventInfo emailEvent, bool delayedCallback)
+    {
+        // need to check all the triggers 
+        if (delayedCallback)
+        {
+            // delay
+        }
+        else
+        {
+            // immediate
+            TriggerDialogueEvents(emailEvent.GetEmailDialogues());
+            EventComplete(emailEvent, false);
+        }
+    }
+
+    private void TriggerDialogueEvents(List<DialogueInfo> lists)
+    {
+        throw new NotImplementedException();
     }
 
     private void NextBranch(string nextBranch)
@@ -74,7 +100,7 @@ public class EventController : MonoBehaviour
             // char dictionary is handled on event manager awake
             EventManager.Instance.DialoguePrefab.
                 GetComponent<DialogueController>().Initialize(
-                lastDialoguePlayed, onDialogueComplete);
+                lastDialoguePlayed, OnDialogueComplete);
         }
         else
         {
@@ -83,14 +109,15 @@ public class EventController : MonoBehaviour
             var choiceInfo = info.GetChoice(branchTuple.Item2);
             EventManager.Instance.ChoicePrefab.
                 GetComponent<ChoiceController>().Initialize(
-                choiceInfo, onChoiceComplete);
+                choiceInfo, info.EventType, OnChoiceComplete);
         }
     }
 
     public void Awake()
     {
-        onDialogueComplete = DialogueComplete;
-        onChoiceComplete = ChoiceComplete;
+        OnDialogueComplete = DialogueComplete;
+        OnChoiceComplete = ChoiceComplete;
+        OnEmailComplete = EmailComplete;
     }
 
     // is triggered by something else, but event will run until completion
@@ -148,9 +175,11 @@ public class EventController : MonoBehaviour
     // was when choices are made
     private void AddEmail(EventInfo info)
     {
+        info.Email.choiceAction = OnChoiceComplete;
+        info.Email.emailComplete = OnEmailComplete;
         if (EventManager.Instance.Email)
         {
-            EventManager.Instance.Email.AddEmail(info, this);
+            EventManager.Instance.Email.AddEmail(info);
         }
         else
         {
