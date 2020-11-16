@@ -9,6 +9,10 @@ public static partial class Parsing_Utilities
     {
         Event,
         Type,
+        // delay the event to be run after it is triggered
+        // until the player is in the appropriate screen
+        // defined by the DelayedRunKeyword enums
+        Delay,
         // email only
         Subject,
         Choice,
@@ -55,7 +59,6 @@ public static partial class Parsing_Utilities
 
     public enum TypeKeyword
     {
-        Email,
         // just the normal dialogue event and NOT
         // a tutorial
         Dialogue,
@@ -64,11 +67,20 @@ public static partial class Parsing_Utilities
         // specific minigame is opened or specific thing is 
         // bought in the shop ?
         Tutorial,
+        EventEmail,
+        TutorialEmail,
+        HistoryEmail,
     }
 
-    // what must be on screen for the tutorial to next pop up
-    // can queue up multiple tutorials
-    public enum TutorialKeyword
+    public static bool IsEmail(this TypeKeyword type)
+    {
+        return (
+            type == TypeKeyword.EventEmail ||
+            type == TypeKeyword.HistoryEmail ||
+            type == TypeKeyword.TutorialEmail);
+    }
+
+    public enum DelayedRunKeyword
     {
         // none means it will immediately display
         None,
@@ -90,6 +102,9 @@ public static partial class Parsing_Utilities
         { "event" , BaseKeyword.Event },
         { "events", BaseKeyword.Event },
         { "type", BaseKeyword.Type },
+        { "delay", BaseKeyword.Delay },
+        { "delayed_until", BaseKeyword.Delay },
+        { "delay_until", BaseKeyword.Delay },
         { "subject", BaseKeyword.Subject },
         { "choice", BaseKeyword.Choice },
         { "choices", BaseKeyword.Choice },
@@ -162,28 +177,31 @@ public static partial class Parsing_Utilities
         {
             { "default", TypeKeyword.Dialogue },
             { "dialogue", TypeKeyword.Dialogue },
-            { "email", TypeKeyword.Email },
+            { "email", TypeKeyword.EventEmail },
+            { "email_tutorial", TypeKeyword.TutorialEmail },
+            { "tutorial", TypeKeyword.Tutorial },
+            { "email_history", TypeKeyword.HistoryEmail },
             { "reward", TypeKeyword.Reward },
             { "none", TypeKeyword.Reward },
         };
 
-    public static readonly Dictionary<string, TutorialKeyword> TUTORIAL_KEYWORDS =
-        new Dictionary<string, TutorialKeyword>
+    public static readonly Dictionary<string, DelayedRunKeyword> DELAY_KEYWORDS =
+        new Dictionary<string, DelayedRunKeyword>
         {
-            { "default", TutorialKeyword.None },
-            { "none", TutorialKeyword.None },
-            { "any", TutorialKeyword.None },
-            { "analytics", TutorialKeyword.AnalyticsTab },
-            { "analytics_tab", TutorialKeyword.AnalyticsTab },
-            { "desktop", TutorialKeyword.Desktop },
-            { "email", TutorialKeyword.EmailTab },
-            { "email_tab", TutorialKeyword.EmailTab },
-            { "jumper_minigame", TutorialKeyword.JumpingMinigame },
-            { "jumping_minigame", TutorialKeyword.JumpingMinigame },
-            { "jumper", TutorialKeyword.JumpingMinigame },
-            { "minigame", TutorialKeyword.Minigame },
-            { "space_minigame", TutorialKeyword.SpaceMinigame },
-            { "website", TutorialKeyword.WebsiteTab },
-            { "website_tab", TutorialKeyword.WebsiteTab },
+            { "default", DelayedRunKeyword.None },
+            { "none", DelayedRunKeyword.None },
+            { "any", DelayedRunKeyword.None },
+            { "analytics", DelayedRunKeyword.AnalyticsTab },
+            { "analytics_tab", DelayedRunKeyword.AnalyticsTab },
+            { "desktop", DelayedRunKeyword.Desktop },
+            { "email", DelayedRunKeyword.EmailTab },
+            { "email_tab", DelayedRunKeyword.EmailTab },
+            { "jumper_minigame", DelayedRunKeyword.JumpingMinigame },
+            { "jumping_minigame", DelayedRunKeyword.JumpingMinigame },
+            { "jumper", DelayedRunKeyword.JumpingMinigame },
+            { "minigame", DelayedRunKeyword.Minigame },
+            { "space_minigame", DelayedRunKeyword.SpaceMinigame },
+            { "website", DelayedRunKeyword.WebsiteTab },
+            { "website_tab", DelayedRunKeyword.WebsiteTab },
         };
 }

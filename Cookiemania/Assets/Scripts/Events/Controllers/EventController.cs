@@ -34,6 +34,7 @@ public class EventController : MonoBehaviour
 
     private void NextBranch(string nextBranch)
     {
+        runningDialogueEvent = true;
         if (lastDialoguePlayed != null)
         {
             // run through the post dialogue wrap ups (e.g. early exits 
@@ -60,6 +61,7 @@ public class EventController : MonoBehaviour
         {
             Debug.LogError("branch: " + nextBranch + 
                 " not found in triggered event " + info.UniqueName);
+            EventComplete();
         }
     }
 
@@ -117,23 +119,23 @@ public class EventController : MonoBehaviour
     {
         info = eventInfo;
         info.EventListening = false;
+        if (eventInfo.EventType.IsEmail())
+        {
+            AddEmail();
+            return;
+        }
         switch (eventInfo.EventType)
         {
             case TypeKeyword.Dialogue:
-                runningDialogueEvent = true;
                 NextBranch(EventInfo.FIRST_BRANCH);
-                break;
-            case TypeKeyword.Email:
-                runningDialogueEvent = true;
-                AddEmail();
                 break;
             case TypeKeyword.Reward:
                 EventComplete();
-                return;
+                break;
             default:
                 Debug.LogError("unimplemented event type for event " +
                     "controller");
-                return;
+                break;
         }
     }
 

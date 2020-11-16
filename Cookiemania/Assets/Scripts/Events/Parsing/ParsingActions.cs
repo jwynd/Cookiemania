@@ -30,80 +30,87 @@ public static partial class Parsing_Utilities
             EventInfo.EMAIL_BODY));
     }
 
-    private static void WebsiteTutorialAction(ref EventParsingInfo parsingInfo)
+    private static void DelayAction(ref EventParsingInfo parsingInfo)
     {
-        parsingInfo.EventInfo.TutorialType = TutorialKeyword.WebsiteTab;
-    }
-
-    private static void SpaceMinigameTutorialAction(ref EventParsingInfo parsingInfo)
-    {
-        parsingInfo.EventInfo.TutorialType = TutorialKeyword.SpaceMinigame;
-    }
-
-    private static void NoneTutorialAction(ref EventParsingInfo parsingInfo)
-    {
-        parsingInfo.EventInfo.TutorialType = TutorialKeyword.None;
-    }
-
-    private static void MinigameTutorialAction(ref EventParsingInfo parsingInfo)
-    {
-        parsingInfo.EventInfo.TutorialType = TutorialKeyword.Minigame;
-    }
-
-    private static void JumperTutorialAction(ref EventParsingInfo parsingInfo)
-    {
-        parsingInfo.EventInfo.TutorialType = TutorialKeyword.JumpingMinigame;
-    }
-
-    private static void EmailTutorialAction(ref EventParsingInfo parsingInfo)
-    {
-        parsingInfo.EventInfo.TutorialType = TutorialKeyword.EmailTab;
-    }
-
-    private static void DesktopTutorialAction(ref EventParsingInfo parsingInfo)
-    {
-        parsingInfo.EventInfo.TutorialType = TutorialKeyword.Desktop;
-    }
-
-    private static void AnalyticsTutorialAction(ref EventParsingInfo parsingInfo)
-    {
-        parsingInfo.EventInfo.TutorialType = TutorialKeyword.AnalyticsTab;
-    }
-
-    private static void TutorialTypeAction(ref EventParsingInfo parsingInfo)
-    {
-        parsingInfo.EventInfo.EventType = TypeKeyword.Tutorial;
-        TutorialKeyword keyword;
-        if (parsingInfo.TrimmedLine.Count < 3)
+        DelayedRunKeyword keyword;
+        if (parsingInfo.TrimmedLine.Count < 2)
         {
-            keyword = TutorialKeyword.None;
+            throw new Exception("delay location keyword not found in line: "
+                + parsingInfo.TrimmedLine);
         }
-        // need to also get the tutorial start location
-        else if (TUTORIAL_KEYWORDS.TryGetValue(
-            parsingInfo.GetLowercaseWord(2), out TutorialKeyword value))
+        // need to also get the delayed start location
+        else if (DELAY_KEYWORDS.TryGetValue(
+            parsingInfo.GetLowercaseWord(1), out DelayedRunKeyword value))
         {
             keyword = value;
         }
         else
         {
-            throw new Exception("tutorial keyword not found for "
-                + parsingInfo.GetLowercaseWord(2));
+            throw new Exception("delay keyword not found for "
+                + parsingInfo.GetLowercaseWord(2) + " in line: "
+                + parsingInfo.TrimmedLine);
         }
-        RunTutorialAction(ref parsingInfo, keyword);
+        DefineDelayLocation(ref parsingInfo, keyword);
     }
 
-    private static void RunTutorialAction(
+    private static void WebsiteDelayAction(ref EventParsingInfo parsingInfo)
+    {
+        parsingInfo.EventInfo.DelayOption = DelayedRunKeyword.WebsiteTab;
+    }
+
+    private static void SpaceMinigameDelayAction(ref EventParsingInfo parsingInfo)
+    {
+        parsingInfo.EventInfo.DelayOption = DelayedRunKeyword.SpaceMinigame;
+    }
+
+    private static void NoDelayAction(ref EventParsingInfo parsingInfo)
+    {
+        parsingInfo.EventInfo.DelayOption = DelayedRunKeyword.None;
+    }
+
+    private static void MinigameDelayAction(ref EventParsingInfo parsingInfo)
+    {
+        parsingInfo.EventInfo.DelayOption = DelayedRunKeyword.Minigame;
+    }
+
+    private static void JumperDelayAction(ref EventParsingInfo parsingInfo)
+    {
+        parsingInfo.EventInfo.DelayOption = DelayedRunKeyword.JumpingMinigame;
+    }
+
+    private static void EmailDelayAction(ref EventParsingInfo parsingInfo)
+    {
+        parsingInfo.EventInfo.DelayOption = DelayedRunKeyword.EmailTab;
+    }
+
+    private static void DesktopDelayAction(ref EventParsingInfo parsingInfo)
+    {
+        parsingInfo.EventInfo.DelayOption = DelayedRunKeyword.Desktop;
+    }
+
+    private static void AnalyticsDelayAction(ref EventParsingInfo parsingInfo)
+    {
+        parsingInfo.EventInfo.DelayOption = DelayedRunKeyword.AnalyticsTab;
+    }
+
+    private static void TutorialTypeAction(ref EventParsingInfo parsingInfo)
+    {
+        parsingInfo.EventInfo.EventType = TypeKeyword.Tutorial;
+       
+    }
+
+    private static void DefineDelayLocation(
         ref EventParsingInfo parsingInfo, 
-        TutorialKeyword keyword)
+        DelayedRunKeyword keyword)
     {
         if (TutorialKeywordActions.TryGetValue(
-                       keyword, out ActionRef<EventParsingInfo> toRun))
+            keyword, out ActionRef<EventParsingInfo> toRun))
         {
             toRun.Invoke(ref parsingInfo);
         }
         else
         {
-            throw new Exception("an action not defined for: "
+            throw new Exception("no action not defined for: "
                 + keyword);
         }
     }
@@ -115,7 +122,18 @@ public static partial class Parsing_Utilities
 
     private static void EmailTypeAction(ref EventParsingInfo parsingInfo)
     {
-        parsingInfo.EventInfo.EventType = TypeKeyword.Email;
+        parsingInfo.EventInfo.EventType = TypeKeyword.EventEmail;
+    }
+
+    private static void TutorialEmailTypeAction(ref EventParsingInfo parsingInfo)
+    {
+        parsingInfo.EventInfo.EventType = TypeKeyword.TutorialEmail;
+        // this is a summary of a tutorial that would be triggered by a normal tutorial event
+    }
+
+    private static void HistoryEmailTypeAction(ref EventParsingInfo parsingInfo)
+    {
+        parsingInfo.EventInfo.EventType = TypeKeyword.HistoryEmail;
     }
 
     private static void DialogueTypeAction(ref EventParsingInfo parsingInfo)

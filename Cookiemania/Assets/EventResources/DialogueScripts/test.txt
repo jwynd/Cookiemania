@@ -44,6 +44,8 @@ trigger money 0
 
 all_triggers
 one_trigger
+delay minigame
+# not specifying type as default is Dialogue and is correct for this event
 
 event_reward money 1000
 event_reward morality 0
@@ -170,7 +172,9 @@ event_end
 event test_3
 trigger week 2
 type email
+# all emails are sent to the email tab when triggered
 
+# must define who is sending the email before the subject is set
 narrator
 subject Hey sport, heard you're not doing too hot...
 ## all '>' lines will be placed in dialogue

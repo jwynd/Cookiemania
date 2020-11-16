@@ -38,7 +38,7 @@ public class EventInfo
     // and only one dialogue (still first) and at most one choice (linked
     // after the only dialogue)
     public TypeKeyword EventType = TypeKeyword.Dialogue;
-    public TutorialKeyword TutorialType = TutorialKeyword.None;
+    public DelayedRunKeyword DelayOption = DelayedRunKeyword.None;
 
     // add to playerdata on event complete regardless of choices made
     // if there is no neutral reward associate your rewards with the choices obv
@@ -183,11 +183,17 @@ public class EventInfo
 
     public ChoiceInfo GetLastChoice()
     {
+        // Choices can be empty
+        if (Choices.Count < 1)
+            return null;
         return Choices.Last();
     }
 
     public DialogueInfo GetLastDialogue()
     {
+        // Dialogues must never be empty
+        //if (Dialogues.Count < 1)
+        //    return null;
         return Dialogues.Last();
     }
 
@@ -217,7 +223,7 @@ public class EventInfo
         GetLastDialogue().ExitsEvent = true;
         // no need to create EmailInfo, which is last step
         // for email events
-        if (EventType != TypeKeyword.Email)
+        if (!EventType.IsEmail())
         {
             return;
         }
@@ -280,8 +286,10 @@ public class EventInfo
     public void PrintInformation()
     {
         Debug.Log("Event: " + UniqueName);
+        Debug.Log("Event type: " + EventType);
         Debug.Log("Triggering Conditions: " + string.Join(", ", TriggeringConditions));
         Debug.Log("All triggers needed? " + AllTriggersNeeded);
+        Debug.Log("Delayed until: " + DelayOption);
         Debug.Log("Event completion rewards: " + string.Join(", ", EventCompleteReward));
         Debug.Log(string.Join(" ", BranchingDictionary));
         foreach (var dialogue in Dialogues)

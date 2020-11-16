@@ -7,6 +7,7 @@ public static partial class Parsing_Utilities
         {
             { BaseKeyword.Stage, new ActionRef<EventParsingInfo>(SetStageAction) },
             { BaseKeyword.Type, new ActionRef<EventParsingInfo>(TypeAction) },
+            { BaseKeyword.Delay, new ActionRef<EventParsingInfo>(DelayAction) },
             { BaseKeyword.Subject, new ActionRef<EventParsingInfo>(SubjectAction) },
             { BaseKeyword.Branch, new ActionRef<EventParsingInfo>(BranchAction) },
             { BaseKeyword.BranchEnd, new ActionRef<EventParsingInfo>(BranchEndAction) },
@@ -37,21 +38,23 @@ public static partial class Parsing_Utilities
         new Dictionary<TypeKeyword, ActionRef<EventParsingInfo>>
         {
             { TypeKeyword.Dialogue, new ActionRef<EventParsingInfo>(DialogueTypeAction) },
-            { TypeKeyword.Email, new ActionRef<EventParsingInfo>(EmailTypeAction) },
+            { TypeKeyword.EventEmail, new ActionRef<EventParsingInfo>(EmailTypeAction) },
+            { TypeKeyword.TutorialEmail, new ActionRef<EventParsingInfo>(TutorialEmailTypeAction) },
+            { TypeKeyword.HistoryEmail, new ActionRef<EventParsingInfo>(HistoryEmailTypeAction) },
             { TypeKeyword.Reward, new ActionRef<EventParsingInfo>(RewardTypeAction) },
             { TypeKeyword.Tutorial, new ActionRef<EventParsingInfo>(TutorialTypeAction) },
         };
 
-    public static readonly Dictionary<TutorialKeyword, ActionRef<EventParsingInfo>> TutorialKeywordActions =
-       new Dictionary<TutorialKeyword, ActionRef<EventParsingInfo>>
+    public static readonly Dictionary<DelayedRunKeyword, ActionRef<EventParsingInfo>> TutorialKeywordActions =
+       new Dictionary<DelayedRunKeyword, ActionRef<EventParsingInfo>>
        {
-           { TutorialKeyword.AnalyticsTab, new ActionRef<EventParsingInfo>(AnalyticsTutorialAction) },
-           { TutorialKeyword.Desktop, new ActionRef<EventParsingInfo>(DesktopTutorialAction) },
-           { TutorialKeyword.EmailTab, new ActionRef<EventParsingInfo>(EmailTutorialAction) },
-           { TutorialKeyword.JumpingMinigame, new ActionRef<EventParsingInfo>(JumperTutorialAction) },
-           { TutorialKeyword.Minigame, new ActionRef<EventParsingInfo>(MinigameTutorialAction) },
-           { TutorialKeyword.None, new ActionRef<EventParsingInfo>(NoneTutorialAction) },
-           { TutorialKeyword.SpaceMinigame, new ActionRef<EventParsingInfo>(SpaceMinigameTutorialAction) },
-           { TutorialKeyword.WebsiteTab, new ActionRef<EventParsingInfo>(WebsiteTutorialAction) },
+           { DelayedRunKeyword.AnalyticsTab, new ActionRef<EventParsingInfo>(AnalyticsDelayAction) },
+           { DelayedRunKeyword.Desktop, new ActionRef<EventParsingInfo>(DesktopDelayAction) },
+           { DelayedRunKeyword.EmailTab, new ActionRef<EventParsingInfo>(EmailDelayAction) },
+           { DelayedRunKeyword.JumpingMinigame, new ActionRef<EventParsingInfo>(JumperDelayAction) },
+           { DelayedRunKeyword.Minigame, new ActionRef<EventParsingInfo>(MinigameDelayAction) },
+           { DelayedRunKeyword.None, new ActionRef<EventParsingInfo>(NoDelayAction) },
+           { DelayedRunKeyword.SpaceMinigame, new ActionRef<EventParsingInfo>(SpaceMinigameDelayAction) },
+           { DelayedRunKeyword.WebsiteTab, new ActionRef<EventParsingInfo>(WebsiteDelayAction) },
        };
 }

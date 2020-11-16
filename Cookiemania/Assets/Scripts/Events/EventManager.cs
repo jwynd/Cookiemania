@@ -212,7 +212,8 @@ public class EventManager : MonoBehaviour
             parsingInfo.MaxChoices = choiceLimit;
             foreach (var text in asset.text.Split('\n'))
             {
-                parsingInfo.TrimmedLine = text.Trim(toTrim).Split(' ').ToList();
+                parsingInfo.TrimmedLine = text.Split(
+                    new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList();
                 if (SkipLine(parsingInfo.TrimmedLine))
                 {
                     continue;

@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -113,19 +114,18 @@ public class DialogueController : MonoBehaviour
         DisplayNextDialogue();
     }
 
-    private IEnumerator TextDisplayer(string fullText, float delay, int startLetter = 0)
+    private void StartTextDisplay()
     {
-        if (EventManager.Instance)
-            fullText = EventManager.Instance.GetDialogueWithOverwrites(fullText);
         stillDisplayingText = true;
-        for(int i = startLetter; i <= fullText.Length; i++)
-        {
-            dialogueLine.text = fullText.Substring(0, i);
-            yield return new WaitForSecondsRealtime(delay);
-        }
+    }
+
+    private void CompleteTextDisplay()
+    {
         stillDisplayingText = false;
         fastDisplayingText = false;
     }
+
+   
 
     public void DisplayNextDialogue()
     {
@@ -134,8 +134,8 @@ public class DialogueController : MonoBehaviour
             if (!fastDisplayingText)
             {
                 StopCoroutine(textDisplayer);
-                fastTextDisplayer = TextDisplayer(currentLine.Item2, textDelay * 0.2f, 
-                    dialogueLine.text.Length);
+                fastTextDisplayer = dialogueLine.TextDisplayer(currentLine.Item2, textDelay * 0.2f, 
+                    StartTextDisplay, CompleteTextDisplay, dialogueLine.text.Length);
                 fastDisplayingText = true;
                 stillDisplayingText = true;
                 StartCoroutine(fastTextDisplayer);
@@ -173,7 +173,8 @@ public class DialogueController : MonoBehaviour
             charImage.sprite = charInfo.Item2;
             // need to slowly display dialogue in async fn
             // will also want to set and unset the stillDisplayingText bool
-            textDisplayer = TextDisplayer(currentLine.Item2, textDelay);
+            textDisplayer = dialogueLine.TextDisplayer(currentLine.Item2, textDelay, 
+                StartTextDisplay, CompleteTextDisplay);
             StartCoroutine(textDisplayer);
             //dialogueLine.text = line.Item2;
         }
