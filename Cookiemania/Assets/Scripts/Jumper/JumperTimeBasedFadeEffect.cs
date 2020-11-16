@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class JumperTimeBasedFadeEffect : MonoBehaviour
 {
@@ -12,21 +13,28 @@ public class JumperTimeBasedFadeEffect : MonoBehaviour
     [SerializeField]
     private float minimumAlpha = 0.3f;
 
+    [SerializeField]
+    private bool useImage = false;
+
     private bool goToMinimum = false;
     private TextMeshProUGUI textRef;
+    private Image imageAlt;
     private float angle = 1f;
     
     private Color baseColor;
-    // Start is called before the first frame update
+
     void Awake()
     {
         textRef = GetComponentInChildren<TextMeshProUGUI>();
         if (textRef == null)
             textRef = GetComponent<TextMeshProUGUI>();
-        baseColor = textRef.color;
+        imageAlt = GetComponent<Image>();
+        if (useImage)
+            baseColor = imageAlt.color;
+        else
+            baseColor = textRef.color;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (angle <= minimumAlpha || angle >= 1f)
@@ -42,6 +50,9 @@ public class JumperTimeBasedFadeEffect : MonoBehaviour
             angle = Mathf.MoveTowards(angle, 1f, updateSpeed * Time.deltaTime);
         }
         baseColor.a = angle;
-        textRef.color = baseColor;
+        if (useImage)
+            imageAlt.color = baseColor;
+        else
+            textRef.color = baseColor;
     }
 }

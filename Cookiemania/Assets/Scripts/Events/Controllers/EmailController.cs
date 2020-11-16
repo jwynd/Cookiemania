@@ -130,12 +130,29 @@ public class EmailController : MonoBehaviour
         t.transform.SetAsFirstSibling();
         var preview = t.GetComponent<EmailPreviewController>();
         preview.Initialize(eventInfo, ViewEmail);
+        SetReadNotifications();
+    }
+
+    private void SetReadNotifications()
+    {
+        if (!SiteCanvas.Instance)
+            return;
+        var total = previewsHolder.
+            GetComponentsInChildren<EmailPreviewController>();
+        var unreadCount = 0;
+        foreach (var comp in total)
+        {
+            if (comp.Unread)
+                unreadCount++;
+        }
+        SiteCanvas.Instance.SetEmailCount(unreadCount);
     }
 
     private void ViewEmail(EventInfo info)
     {
         // read / unread information stored local to email preview controller
         emailController.Initialize(info, eventController);
+        SetReadNotifications();
         PreviewMode = false;
     }
 }

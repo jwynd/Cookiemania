@@ -30,6 +30,12 @@ public class EmailPreviewController : MonoBehaviour
         } 
     }
 
+    public bool Unread
+    {
+        get;
+        private set;
+    } = true;
+
     /// <summary>
     /// takes the entire emailinfo to store and displays the preview
     /// then runs the given action on click (presumably to swap the 
@@ -45,14 +51,20 @@ public class EmailPreviewController : MonoBehaviour
         SetSubject(subject, eventInfo.Email);
         SetSenderName(sender, eventInfo.Email);
         GetComponent<Image>().color = Color.white;
-        readObject.SetActive(false);
+        readObject.SetActive(!Unread);
     }
 
     public void OnClick()
     {
         GetComponent<Image>().color = new Color(
                 220f / 255f, 220f / 255f, 220f / 255f);
-        readObject.SetActive(true);
+        Unread = false;
+        readObject.SetActive(!Unread);
         action?.Invoke(eventInfo);
+    }
+
+    private void OnEnable()
+    {
+        readObject.SetActive(!Unread);
     }
 }
