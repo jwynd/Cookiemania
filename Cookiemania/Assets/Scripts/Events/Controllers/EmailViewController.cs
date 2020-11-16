@@ -21,8 +21,12 @@ using static Email_Utilities;
 // displays -> need a delayed queue for event controller that waits
 // for starting a minigame or going to a tab
 
-public class EmailController : MonoBehaviour
+public class EmailViewController : MonoBehaviour
 {
+    // theres only one choice in an email event so can just send back the
+    // event info and the integer of the choice selected
+    public delegate void OnComplete(EventInfo info, int choiceMade);
+
     [SerializeField]
     private TMP_Text subject = null;
     [SerializeField]
@@ -31,13 +35,18 @@ public class EmailController : MonoBehaviour
     private TMP_Text sender = null;
 
     private EmailInfo email;
+    private EventInfo eventInfo;
 
     // prefab objects necessary to display an email
-    public void Initialize(EmailInfo emailInfo)
+    public void Initialize(EventInfo eventInfo, EventController eventController)
     {
-        email = emailInfo;
+        this.eventInfo = eventInfo;
+        this.email = eventInfo.Email;
         SetSenderName(sender, email);
         SetSubject(subject, email);
         SetBody(body, email);
+        // need buttons at the bottom of the email for choices
+        // player can make
+        // need to return the info back up to the event controller
     }
 }

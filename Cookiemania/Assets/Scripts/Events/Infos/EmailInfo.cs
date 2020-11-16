@@ -4,6 +4,7 @@ using System;
 using UnityEngine;
 
 using static Email_Utilities;
+using UnityEngine.Events;
 
 // uses the static email backgrounds
 public class EmailInfo
@@ -19,6 +20,8 @@ public class EmailInfo
     public List<Tuple<string, Sprite>> attachments = 
        new List<Tuple<string, Sprite>>();
     public ChoiceInfo choice = null;
+    public ChoiceController.OnComplete choiceAction;
+    public EmailViewController.OnComplete emailComplete;
     
     public EmailInfo(string subject, string body, string sender,
         EmailCategory type,

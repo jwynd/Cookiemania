@@ -15,8 +15,8 @@ public class EmailPreviewController : MonoBehaviour
     [SerializeField]
     private TMP_Text subject = null;
 
-    private UnityAction<EmailInfo> action;
-    private EmailInfo email;
+    private UnityAction<EventInfo> action;
+    private EventInfo eventInfo;
 
     /// <summary>
     /// takes the entire emailinfo to store and displays the preview
@@ -24,19 +24,17 @@ public class EmailPreviewController : MonoBehaviour
     /// email preview with the full view of this email)
     /// </summary>
     /// <param name="action"></param>
-    public void Initialize(EmailInfo email, UnityAction<EmailInfo> action)
+    public void Initialize(EventInfo eventInfo, UnityAction<EventInfo> action)
     {
         this.action = action;
-        this.email = email;
-        SetType(label, email);
-        SetSubject(subject, email);
-        SetSenderName(sender, email);
+        this.eventInfo = eventInfo;
+        SetType(label, eventInfo.Email);
+        SetSubject(subject, eventInfo.Email);
+        SetSenderName(sender, eventInfo.Email);
     }
-
-
 
     public void OnClick()
     {
-        action?.Invoke(email);
+        action?.Invoke(eventInfo);
     }
 }

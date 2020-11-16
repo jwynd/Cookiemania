@@ -6,14 +6,14 @@ using UnityEngine.UI;
 
 using static Email_Utilities;
 
-public class EmailTester : MonoBehaviour
+public class EmailController : MonoBehaviour
 {
     [SerializeField]
     private GameObject previewPrefab = null;
     [SerializeField]
     private GameObject previewsHolder = null;
     [SerializeField]
-    private EmailController emailController = null;
+    private EmailViewController emailController = null;
 
     [Serializable]
     public class ButtonType
@@ -36,6 +36,8 @@ public class EmailTester : MonoBehaviour
     // preview mode always set to true when tab is opened / category is clicked
     // initial category is always whatever the first tab in the categories list is
     private bool previewMode = false;
+    private EventController eventController;
+
     public bool PreviewMode
     {
         get { return previewMode; }
@@ -56,8 +58,7 @@ public class EmailTester : MonoBehaviour
         {
             throw new Exception("number of categories may not exceed the number of " +
                 "possible email tabs");
-        }
-        
+        } 
     }
 
     public void ShowYourself()
@@ -92,21 +93,37 @@ public class EmailTester : MonoBehaviour
 
     private void Start()
     {
+        // only need to instantiate when adding an email
+        TestFunction();
+    }
+
+    private void TestFunction()
+    {
         ShowYourself();
         var t = Instantiate(previewPrefab, previewsHolder.transform);
         var preview = t.GetComponent<EmailPreviewController>();
-        var info = new EmailInfo("hey what's up, just checking in", 
+        var eventInfo = new EventInfo("blarg");
+        eventInfo.Email = new EmailInfo("hey what's up, just checking in",
             "Was hoping to catch you earlier buuuuut\n\nI need you to go down to the bank and make a couple transactions\n" +
             "No big deal, just get it done by tomorrow at lunch.\nBoss OUT!",
             "boss", EmailCategory.Starred, null, null);
-        preview.Initialize(info, ViewEmail);
+        preview.Initialize(eventInfo, ViewEmail);
     }
 
-
-
-    private void ViewEmail(EmailInfo info)
+    public void AddEmail(EventInfo eventInfo, EventController eventController)
     {
-        emailController.Initialize(info);
+        this.eventController = eventController;
+        if (!eventInfo.EventType.IsEmail() || eventInfo.Email == null)
+        {
+            throw new Exception("cannot add an event of wrong type as email" +
+                " and event must have an email");
+        }
+        throw new NotImplementedException();
+    }
+
+    private void ViewEmail(EventInfo info)
+    {
+        emailController.Initialize(info, eventController);
         PreviewMode = false;
     }
 }
