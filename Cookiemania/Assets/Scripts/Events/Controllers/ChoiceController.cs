@@ -154,10 +154,14 @@ public class ChoiceController : MonoBehaviour
         TypeKeyword eventType,
         Sprite background = null)
     {
-        if (choices.Count != rewards.Count ||
-            choices.Count != nextEvents.Count)
+        if (choices.Count != rewards.Count)
         {
             throw new Exception("rewards list and choices list must be same size");
+        }
+
+        if (!eventType.IsEmail() && nextEvents.Count != choices.Count)
+        {
+            throw new Exception("non-email choice events must declare final branches");
         }
 
         if (choices.Count > MAX_CHOICES_SUPPORTED)
@@ -232,7 +236,8 @@ public class ChoiceController : MonoBehaviour
     {
         EnableObjects(false);
         Debug.Log("selected choice #" + v.ToString());
-        runOnComplete.Invoke(nextBranches[v],  
+        var nextBranch = eventType.IsEmail() ? "" : nextBranches[v];
+        runOnComplete.Invoke(nextBranch,  
             dialogueLine.text, choices[v], rewards[v],
             eventType);
     }

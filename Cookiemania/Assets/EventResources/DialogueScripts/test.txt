@@ -177,10 +177,42 @@ type email
 # must define who is sending the email before the subject is set
 narrator
 subject Hey sport, heard you're not doing too hot...
-## all '>' lines will be placed in dialogue
-# ahhhhh i totally forgot to do keyword replacement in 
-# dialogue for the player
-# will need to be handled by dialogue / choice controllers
+
 > Dear player_name,
-> hey
+> hey, lemme know?
+
+event_reward money 5
+
+choices 
+narrator
+> you're good right?
+
+branch
+reward money 10
+> no
+
+branch
+reward money 0
+> yeah
+
+choice_end
+
+event_end
+
+event email_2
+
+trigger week 2
+type email_history
+
+chip
+subject you're moving up!
+
+> good job man!
+> 
+> 
+> proud of ya...
+
+event_reward morality 0
+event_reward money 100
+
 event_end

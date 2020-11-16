@@ -54,8 +54,8 @@ public class EventManager : MonoBehaviour
     private ReadOnlyDictionary<string, string> dialogueKeywordToDisplayName;
 
     // mutable dictionary
-    private Dictionary<TriggerKeyword, SortedList<int, EventInfo>> listeningEvents =
-        new Dictionary<TriggerKeyword, SortedList<int, EventInfo>>();
+    private Dictionary<TriggerKeyword, SortedList<int, List<EventInfo>>> listeningEvents =
+        new Dictionary<TriggerKeyword, SortedList<int, List<EventInfo>>>();
 
     private int dialogueCharacterLimit = 140;
 
@@ -553,7 +553,6 @@ public class EventManager : MonoBehaviour
             {
                 eventController.RunEvent(runnableEvent);
             }
-            TestEventSorting();
         }
 #endif
         ConnectEvents(eventDictionary);
@@ -578,14 +577,22 @@ public class EventManager : MonoBehaviour
                 foreach (var trigger in @event.TriggeringConditions)
                 {
                     if (listeningEvents.TryGetValue(
-                        trigger.Item1, out SortedList<int, EventInfo> list))
+                        trigger.Item1, out SortedList<int, List<EventInfo>> list))
                     {
-                        list.Add(trigger.Item2, @event);
+                        if (list.TryGetValue(trigger.Item2, out List<EventInfo> innerList)) 
+                        {
+                            innerList.Add(@event);
+                        }
+                        else
+                        {
+                            list.Add(trigger.Item2, new List<EventInfo>() { @event });
+                        }
+                        
                     }
                     else
                     {
-                        list = new SortedList<int, EventInfo>
-                            { { trigger.Item2, @event } };
+                        list = new SortedList<int, List<EventInfo>>
+                            { { trigger.Item2, new List<EventInfo>(){@event } } };
                         listeningEvents.Add(trigger.Item1, list);
                     }
                 }  
@@ -602,40 +609,7 @@ public class EventManager : MonoBehaviour
             new EventHandler<PlayerData.IntegerEventArgs>(WeekListener);
     }
 
-    private void TestEventSorting()
-    {
-        listeningEvents.Clear();
-        var list = new SortedList<int, EventInfo>();
-        var flipper = 1;
-        for (var i = -18; i < 85; i+=8)
-        {
-            flipper *= -1;
-            var e = new EventInfo(i.ToString(), false)
-            {
-                EventType = TypeKeyword.Reward
-            };
-            e.TriggeringConditions.Add(new Tuple<TriggerKeyword, int>
-                (TriggerKeyword.Money, i));
-            if (i < 12)
-            {
-                e.TriggeringConditions.Add(new Tuple<TriggerKeyword, int>
-                (TriggerKeyword.Morality, 5));
-            }
-            else
-            {
-                e.TriggeringConditions.Add(new Tuple<TriggerKeyword, int>
-                (TriggerKeyword.Morality, 10));
-            }
-            // need to reward something other than whats being tested 
-            // so i can control the variables
-            e.EventCompleteReward.Add(new Tuple<RewardKeyword, int>
-                (RewardKeyword.Morality, 5 * flipper * i));
-            list.Add(i, e);
-        }
-        listeningEvents.Add(TriggerKeyword.Money, list);
-        PlayerData.Player.morality += 5;
-        PlayerData.Player.money += -22;
-    }
+   
 
     private void MoneyListener(object sender, PlayerData.IntegerEventArgs e)
     {
@@ -664,19 +638,23 @@ public class EventManager : MonoBehaviour
     private void GenericListener(PlayerData.IntegerEventArgs e, TriggerKeyword keyword)
     {
         if (listeningEvents.TryGetValue(
-            keyword, out SortedList<int, EventInfo> list))
+            keyword, out SortedList<int, List<EventInfo>> outerList))
         {
             if (e.Amount == e.PreviousAmount) return;
-            List<KeyValuePair<int, EventInfo>> eventsToRun =
-                FilterEventList(list, e.Amount);
+            List<KeyValuePair<int, List<EventInfo>>> eventsToRun =
+                FilterEventList(outerList, e.Amount);
             // need to filter based on the other triggering conditions IF
             // this is all conditions met event
-            foreach (var eventInfo in eventsToRun)
+            foreach (var eventList in eventsToRun)
             {
-                if (ConfirmTriggered(eventInfo.Value))
+                foreach (var eventInfo in eventList.Value)
                 {
-                    eventController.RunEvent(eventInfo.Value);
+                    if (ConfirmTriggered(eventInfo))
+                    {
+                        eventController.RunEvent(eventInfo);
+                    }
                 }
+
             }
         }
     }
@@ -731,11 +709,11 @@ public class EventManager : MonoBehaviour
         return true;
     }
 
-    private static List<KeyValuePair<int, EventInfo>> FilterEventList(
-        SortedList<int, EventInfo> list, 
+    private static List<KeyValuePair<int, List<EventInfo>>> FilterEventList(
+        SortedList<int, List<EventInfo>> list, 
         int currentAmount, int previousOrZero = 0)
     {
-        List<KeyValuePair<int, EventInfo>> eventsToRun;
+        List<KeyValuePair<int, List<EventInfo>>> eventsToRun;
         if (currentAmount >= previousOrZero)
         {
             // we're increasing, sort in ascending order
@@ -743,7 +721,7 @@ public class EventManager : MonoBehaviour
             // less than or equal to amount
             eventsToRun = list.Where(n =>
                 n.Key >= previousOrZero && n.Key <= currentAmount).ToList();
-            eventsToRun.Sort(new Comparison<KeyValuePair<int, EventInfo>>
+            eventsToRun.Sort(new Comparison<KeyValuePair<int, List<EventInfo>>>
                 ((x, y) => x.Key - y.Key));
         }
         else
@@ -752,7 +730,7 @@ public class EventManager : MonoBehaviour
             // sorts in opposite direction
             eventsToRun = list.Where(n =>
                 n.Key >= currentAmount && n.Key <= previousOrZero).ToList();
-            eventsToRun.Sort(new Comparison<KeyValuePair<int, EventInfo>>
+            eventsToRun.Sort(new Comparison<KeyValuePair<int, List<EventInfo>>>
                 ((x, y) => y.Key - x.Key));
         }
         return eventsToRun;

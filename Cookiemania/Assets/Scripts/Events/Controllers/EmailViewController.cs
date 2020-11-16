@@ -14,13 +14,6 @@ using static Parsing_Utilities;
 // email controller and emailpreviewcontroller holds many
 // previews)
 
-// different types of emails: 
-// email, email_tutorial, email_history
-
-// need to add trigger_delay base keyword to delay when the event
-// displays -> need a delayed queue for event controller that waits
-// for starting a minigame or going to a tab
-
 public class EmailViewController : MonoBehaviour
 {
     [SerializeField]
@@ -35,11 +28,12 @@ public class EmailViewController : MonoBehaviour
     private EmailInfo email;
     private EventInfo eventInfo;
     private ChoiceController.OnComplete hijackedAction;
-    
+    private bool choiceMadeAlready = false;
+    private bool readBefore = false;
 
     private void Awake()
     {
-        hijackedAction = HijackedCompleteAction;
+        hijackedAction = HijackedChoiceAction;
     }
 
     // prefab objects necessary to display an email
@@ -53,15 +47,16 @@ public class EmailViewController : MonoBehaviour
         // need buttons at the bottom of the email for choices
         // player can make
         // need to return the info back up to the event controller
-        var haveChoice = email.choice != null;
+        var haveChoice = email.choice != null && !choiceMadeAlready;
         choiceButton.gameObject.SetActive(haveChoice);
-        if (!haveChoice)
+        if (!haveChoice && !readBefore)
         {
             email.emailComplete.Invoke(eventInfo, true);
         }
+        readBefore = true;
     }
 
-    public void HijackedCompleteAction(string nextBranch,
+    public void HijackedChoiceAction(string nextBranch,
         string choicePrompt,
         string choiceMade,
         List<Tuple<RewardKeyword, int>> rewardList,
@@ -78,8 +73,10 @@ public class EmailViewController : MonoBehaviour
         {
             return;
         }
+        choiceMadeAlready = true;
         EventManager.Instance.ChoicePrefab.GetComponent<ChoiceController>().
-            Initialize(eventInfo.Email.choice, 
+            Initialize(eventInfo.Email.choice,
             eventInfo.EventType, hijackedAction);
+        choiceButton.gameObject.SetActive(false);
     }
 }
