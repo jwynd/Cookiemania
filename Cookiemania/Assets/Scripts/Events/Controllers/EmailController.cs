@@ -30,9 +30,9 @@ public class EmailController : MonoBehaviour
     private List<ButtonType> categories = new List<ButtonType>();
 
     // unread email order can change by random email extraction
-    private List<EmailInfo> unreadEmails = new List<EmailInfo>();
+    private List<EventInfo> unreadEmails = new List<EventInfo>();
     // read email list order will never change and should show up in stack order
-    private Stack<EmailInfo> readEmails = new Stack<EmailInfo>();
+    private Stack<EventInfo> readEmails = new Stack<EventInfo>();
     // preview mode always set to true when tab is opened / category is clicked
     // initial category is always whatever the first tab in the categories list is
     private bool previewMode = false;
@@ -107,7 +107,7 @@ public class EmailController : MonoBehaviour
             "Was hoping to catch you earlier buuuuut\n\nI need you to go down to the bank and make a couple transactions\n" +
             "No big deal, just get it done by tomorrow at lunch.\nBoss OUT!",
             "boss", EmailCategory.Starred, null, null);
-        preview.Initialize(eventInfo, ViewEmail);
+        preview.Initialize(eventInfo, ViewEmail, false);
     }
 
     public void AddEmail(EventInfo eventInfo, EventController eventController)
@@ -118,7 +118,8 @@ public class EmailController : MonoBehaviour
             throw new Exception("cannot add an event of wrong type as email" +
                 " and event must have an email");
         }
-        throw new NotImplementedException();
+        unreadEmails.Add(eventInfo);
+        
     }
 
     private void ViewEmail(EventInfo info)

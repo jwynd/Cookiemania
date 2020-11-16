@@ -18,7 +18,6 @@ public class EventController : MonoBehaviour
     public ChoiceController.OnComplete onChoiceComplete;
     private bool runningDialogueEvent = false;
     private float timeScale = 1f;
-    private EmailController emailController;
 
     public void DialogueComplete(string nextBranch)
     {
