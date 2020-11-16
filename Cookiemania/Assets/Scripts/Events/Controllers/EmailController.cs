@@ -23,14 +23,7 @@ public class EmailController : MonoBehaviour
 {
     [SerializeField]
     private Canvas myCanvas = null;
-    [SerializeField]
-    private Image bgImage = null;
-    [SerializeField]
-    private Image charImage = null;
-    [SerializeField]
-    private TMP_Text charName = null;
-    [SerializeField]
-    private TMP_Text dialogueLine = null;
+
     // prefab objects necessary to display an email
     public void Initialize(EmailInfo emailInfo)
     {
