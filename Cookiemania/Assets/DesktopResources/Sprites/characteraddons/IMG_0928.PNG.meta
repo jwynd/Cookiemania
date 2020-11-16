@@ -1,40 +1,52 @@
 fileFormatVersion: 2
-guid: 5c36cd2c2aeb6414e803cf63f2814c13
+guid: 4a1aff7fe2db7d54bbc3cee4c5d9ec6c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2436077129763584930
-    second: eyebrow2_0
+      213: 7331870566721609186
+    second: IMG_0928_0
   - first:
-      213: 5985216277237458158
-    second: eyebrow2_1
+      213: 3637467710362057589
+    second: IMG_0928_1
   - first:
-      213: -4719365305758003820
-    second: eyebrow2_2
+      213: -3365291663998832479
+    second: IMG_0928_2
   - first:
-      213: 8359843183812943397
-    second: eyebrow2_3
+      213: 7976361438010118864
+    second: IMG_0928_3
   - first:
-      213: 5952530305019324956
-    second: eyebrow2_4
+      213: -8623112540692447248
+    second: IMG_0928_4
   - first:
-      213: 4803720629506032144
-    second: eyebrow2_5
+      213: 2607483061444353779
+    second: IMG_0928_5
   - first:
-      213: -8809526074245060778
-    second: eyebrow2_6
+      213: -2736497177585889593
+    second: IMG_0928_6
   - first:
-      213: 5053590432709614135
-    second: eyebrow2_7
+      213: -123177357555533807
+    second: IMG_0928_7
   - first:
-      213: 2345928248167308623
-    second: eyebrow2_8
+      213: 57241484638801548
+    second: IMG_0928_8
   - first:
-      213: 9034481524855223352
-    second: eyebrow2_9
+      213: -1565438629411964836
+    second: IMG_0928_9
   - first:
-      213: -863344733314127173
-    second: eyebrow2_10
+      213: 933639948952127167
+    second: IMG_0928_10
+  - first:
+      213: -8033525351589761678
+    second: IMG_0928_11
+  - first:
+      213: -4577008250926801892
+    second: IMG_0928_12
+  - first:
+      213: -4819948871304566913
+    second: IMG_0928_13
+  - first:
+      213: 3155080374806306387
+    second: IMG_0928_14
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -119,13 +131,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: eyebrow2_0
+      name: IMG_0928_0
       rect:
         serializedVersion: 2
-        x: 22
-        y: 51
-        width: 14
-        height: 29
+        x: 0
+        y: 918
+        width: 432
+        height: 451
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -133,20 +145,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ea2d61676b70da448822ecca54b9ecc4
-      internalID: -2436077129763584930
+      spriteID: ced1a87ce37c45f42bf70aff4cec0137
+      internalID: 7331870566721609186
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: eyebrow2_1
+      name: IMG_0928_1
       rect:
         serializedVersion: 2
-        x: 60
-        y: 67
-        width: 6
-        height: 12
+        x: 801
+        y: 1166
+        width: 95
+        height: 188
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,20 +166,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 793da5c873bb8364d9a1fb70ad18bd64
-      internalID: 5985216277237458158
+      spriteID: f796af41a38e1f348b36d03831fb3af0
+      internalID: 3637467710362057589
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: eyebrow2_2
+      name: IMG_0928_2
       rect:
         serializedVersion: 2
-        x: 68
-        y: 67
-        width: 6
-        height: 8
+        x: 1297
+        y: 1166
+        width: 110
+        height: 172
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -175,20 +187,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7c30e9ce1d980844bacd085432436731
-      internalID: -4719365305758003820
+      spriteID: c91118fbf7188704ca49ea1572b7b6c0
+      internalID: -3365291663998832479
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: eyebrow2_3
+      name: IMG_0928_3
       rect:
         serializedVersion: 2
-        x: 70
-        y: 32
-        width: 19
-        height: 3
+        x: 1792
+        y: 1320
+        width: 33
+        height: 49
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -196,20 +208,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3eaf7e5032613b34aad14d93fa4dbbbc
-      internalID: 8359843183812943397
+      spriteID: f2420413f3754c24eb3d825e02c6d652
+      internalID: 7976361438010118864
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: eyebrow2_4
+      name: IMG_0928_4
       rect:
         serializedVersion: 2
-        x: 76
-        y: 67
-        width: 7
-        height: 8
+        x: 1900
+        y: 1149
+        width: 174
+        height: 205
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -217,20 +229,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c6d6699605f5b9245adb1e2e37e5bdde
-      internalID: 5952530305019324956
+      spriteID: 726d2602eb8789f41942356d543eab3c
+      internalID: -8623112540692447248
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: eyebrow2_5
+      name: IMG_0928_5
       rect:
         serializedVersion: 2
-        x: 84
-        y: 67
-        width: 7
-        height: 8
+        x: 925
+        y: 1166
+        width: 95
+        height: 126
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -238,20 +250,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a29ef824561f7ac4ea83186a1f10baa4
-      internalID: 4803720629506032144
+      spriteID: 4d8554ff6749fce4ca38a89b6bca2104
+      internalID: 2607483061444353779
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: eyebrow2_6
+      name: IMG_0928_6
       rect:
         serializedVersion: 2
-        x: 92
-        y: 67
-        width: 7
-        height: 11
+        x: 1048
+        y: 1166
+        width: 112
+        height: 126
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -259,20 +271,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f24feb2a9ca88dd4bab0f68e7739ec5e
-      internalID: -8809526074245060778
+      spriteID: 15312166d21d26b4f9dcc252e346db0b
+      internalID: -2736497177585889593
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: eyebrow2_7
+      name: IMG_0928_7
       rect:
         serializedVersion: 2
-        x: 129
-        y: 32
-        width: 4
-        height: 3
+        x: 1172
+        y: 1166
+        width: 111
+        height: 126
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -280,20 +292,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 98bd9907d7daf1f48814e39b062140ec
-      internalID: 5053590432709614135
+      spriteID: 65b1d4123ff8379449ee51ef2f6b9d86
+      internalID: -123177357555533807
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: eyebrow2_8
+      name: IMG_0928_8
       rect:
         serializedVersion: 2
-        x: 131
-        y: 66
-        width: 11
-        height: 13
+        x: 1544
+        y: 1149
+        width: 126
+        height: 143
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -301,20 +313,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c54ceda997f6b54e971e6e2df0e86fc
-      internalID: 2345928248167308623
+      spriteID: 44341c611810c474bbea84970eb6f93c
+      internalID: 57241484638801548
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: eyebrow2_9
+      name: IMG_0928_9
       rect:
         serializedVersion: 2
-        x: 143
-        y: 66
-        width: 9
-        height: 9
+        x: 1730
+        y: 1149
+        width: 143
+        height: 143
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -322,20 +334,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 51966266352e967499f332b146ad0c0e
-      internalID: 9034481524855223352
+      spriteID: 651293106bdee2b45bee25b618a8cd2c
+      internalID: -1565438629411964836
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: eyebrow2_10
+      name: IMG_0928_10
       rect:
         serializedVersion: 2
-        x: 15
-        y: 8
-        width: 29
-        height: 33
+        x: 2086
+        y: 1149
+        width: 138
+        height: 143
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -343,8 +355,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 09ed1ca94fc10444e905125b8af731b7
-      internalID: -863344733314127173
+      spriteID: bfb81ff56b3e2464e8cf563918f1b546
+      internalID: 933639948952127167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMG_0928_11
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 237
+        width: 450
+        height: 528
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28a55ee7129519e458fcd469c32f5c35
+      internalID: -8033525351589761678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMG_0928_12
+      rect:
+        serializedVersion: 2
+        x: 956
+        y: 624
+        width: 298
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c715578de587494d80f11ac38a14a65
+      internalID: -4577008250926801892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMG_0928_13
+      rect:
+        serializedVersion: 2
+        x: 1172
+        y: 624
+        width: 81
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2a72afd01d15844981be66e0b09906f
+      internalID: -4819948871304566913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMG_0928_14
+      rect:
+        serializedVersion: 2
+        x: 1869
+        y: 624
+        width: 66
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66a03225e172ba0439e9a72d2afa169c
+      internalID: 3155080374806306387
       vertices: []
       indices: 
       edges: []

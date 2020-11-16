@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3148008567160660029}
   - component: {fileID: 7327520522461482147}
   m_Layer: 5
-  m_Name: Image 2
+  m_Name: sugar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,7 +63,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 7343210750825820697, guid: 97a50560198daa344be6d8026a76bdd7,
+  m_Sprite: {fileID: 3967200157622263188, guid: 9eecefae78cb1df4d81e875789222340,
     type: 3}
   m_Type: 0
   m_PreserveAspect: 0

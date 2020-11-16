@@ -1,40 +1,43 @@
 fileFormatVersion: 2
-guid: 2f6d2d1371c44284b9a8e723f21ed2df
+guid: 39f122eb1e7da4c428cbeb4805f97c89
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5892401873701181712
-    second: eyebrow1_0
+      213: 5007395434484744977
+    second: bowtie_0
   - first:
-      213: -1145538021169194286
-    second: eyebrow1_1
+      213: 6849203299635897982
+    second: bowtie_1
   - first:
-      213: 4994906072468644789
-    second: eyebrow1_2
+      213: -8855316960927612260
+    second: bowtie_2
   - first:
-      213: 4712856240363844232
-    second: eyebrow1_3
+      213: -5146548785715046057
+    second: bowtie_3
   - first:
-      213: 2140023841553655712
-    second: eyebrow1_4
+      213: 8368493679225284638
+    second: bowtie_4
   - first:
-      213: 7204021670113676246
-    second: eyebrow1_5
+      213: 5877014159996826559
+    second: bowtie_5
   - first:
-      213: 3341045659983940392
-    second: eyebrow1_6
+      213: -1562371777022914898
+    second: bowtie_6
   - first:
-      213: 7264894880295436341
-    second: eyebrow1_7
+      213: -6062613830197237077
+    second: bowtie_7
   - first:
-      213: 872460854611948386
-    second: eyebrow1_8
+      213: 8957694295365645557
+    second: bowtie_8
   - first:
-      213: -1280141145090567459
-    second: eyebrow1_9
+      213: -2497983442766591218
+    second: bowtie_9
   - first:
-      213: 8546500142084316056
-    second: eyebrow1_10
+      213: 6477289389156052358
+    second: bowtie_10
+  - first:
+      213: -698124760067007491
+    second: bowtie_11
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -119,34 +122,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: eyebrow1_0
+      name: bowtie_0
       rect:
         serializedVersion: 2
-        x: 21
-        y: 51
-        width: 15
-        height: 29
-      alignment: 9
-      pivot: {x: 0.52799183, y: 0.49549472}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e1a51d164127362408c7d1bea211927c
-      internalID: 5892401873701181712
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eyebrow1_1
-      rect:
-        serializedVersion: 2
-        x: 60
-        y: 67
-        width: 6
-        height: 12
+        x: 57
+        y: 1196
+        width: 124
+        height: 248
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,20 +136,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 461fa958c6e81a24d94030adc105ccd7
-      internalID: -1145538021169194286
+      spriteID: 8949dc94ca9d3ee4ba8d6b9e0f9ddacb
+      internalID: 5007395434484744977
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: eyebrow1_2
+      name: bowtie_1
       rect:
         serializedVersion: 2
-        x: 68
-        y: 67
-        width: 6
-        height: 8
+        x: 711
+        y: 1196
+        width: 145
+        height: 226
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -175,20 +157,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8072f3adf30bf124a97fc703b44043dd
-      internalID: 4994906072468644789
+      spriteID: 8cb60765f8bc493459ff62f47b7fcf61
+      internalID: 6849203299635897982
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: eyebrow1_3
+      name: bowtie_2
       rect:
         serializedVersion: 2
-        x: 71
-        y: 32
-        width: 17
-        height: 3
+        x: 1589
+        y: 1400
+        width: 120
+        height: 78
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -196,20 +178,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 96a74a8a53be04a44b270919bd761eb0
-      internalID: 4712856240363844232
+      spriteID: 3b21e6d03eb5c5c41b7ba43505866003
+      internalID: -8855316960927612260
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: eyebrow1_4
+      name: bowtie_3
       rect:
         serializedVersion: 2
-        x: 76
-        y: 67
-        width: 7
-        height: 8
+        x: 1733
+        y: 1174
+        width: 227
+        height: 270
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -217,20 +199,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bcaf097f644fdb2449f24cd3c798c366
-      internalID: 2140023841553655712
+      spriteID: 4999ff3e1774a6547b78500fd24879ab
+      internalID: -5146548785715046057
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: eyebrow1_5
+      name: bowtie_4
       rect:
         serializedVersion: 2
-        x: 84
-        y: 67
-        width: 7
-        height: 8
+        x: 220
+        y: 1196
+        width: 125
+        height: 165
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -238,20 +220,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dcf417d41fe032c4d938faff64423b61
-      internalID: 7204021670113676246
+      spriteID: b45d61684e614ef4ea6d47a57ad52507
+      internalID: 8368493679225284638
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: eyebrow1_6
+      name: bowtie_5
       rect:
         serializedVersion: 2
-        x: 92
-        y: 67
-        width: 7
-        height: 11
+        x: 384
+        y: 1196
+        width: 145
+        height: 165
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -259,41 +241,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d92158397b7fc5a40b6e0b96aef0d6d4
-      internalID: 3341045659983940392
+      spriteID: 06c61d9942604b04b96e7f2d3931a81c
+      internalID: 5877014159996826559
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: eyebrow1_7
+      name: bowtie_6
       rect:
         serializedVersion: 2
-        x: 129
-        y: 32
-        width: 4
-        height: 3
-      alignment: 9
-      pivot: {x: 0.5163269, y: 0.4854838}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 07f26e4c898019b47ace258c2c62a3fa
-      internalID: 7264894880295436341
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eyebrow1_8
-      rect:
-        serializedVersion: 2
-        x: 131
-        y: 66
-        width: 11
-        height: 13
+        x: 547
+        y: 1196
+        width: 145
+        height: 165
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -301,20 +262,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 946ba5d62d28c194291042d8470d592a
-      internalID: 872460854611948386
+      spriteID: 91ef3eddad0edd84d93a9c3ff349bad2
+      internalID: -1562371777022914898
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: eyebrow1_9
+      name: bowtie_7
       rect:
         serializedVersion: 2
-        x: 143
-        y: 66
-        width: 9
-        height: 9
+        x: 1262
+        y: 1174
+        width: 167
+        height: 187
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -322,20 +283,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 958a611c00699d04889bccab87e25eea
-      internalID: -1280141145090567459
+      spriteID: e4799308dfa0eb74189fa0178f5adfda
+      internalID: -6062613830197237077
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: eyebrow1_10
+      name: bowtie_8
       rect:
         serializedVersion: 2
-        x: 15
-        y: 7
-        width: 29
-        height: 34
+        x: 1508
+        y: 1174
+        width: 187
+        height: 187
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -343,8 +304,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 737b58eb71e92bc4b92d1feda8a46075
-      internalID: 8546500142084316056
+      spriteID: c086aa8025a068d4bb51e111cdbe0b34
+      internalID: 8957694295365645557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bowtie_9
+      rect:
+        serializedVersion: 2
+        x: 1978
+        y: 1174
+        width: 186
+        height: 187
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b01afbdd71ab7a9448fe06e3a4cd9976
+      internalID: -2497983442766591218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bowtie_10
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 317
+        width: 227
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 506c54f01ff4dfa4088bbc10797c7960
+      internalID: 6477289389156052358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bowtie_11
+      rect:
+        serializedVersion: 2
+        x: 1712
+        y: 317
+        width: 84
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86bd67a4741888e4b8323396c79d4bb1
+      internalID: -698124760067007491
       vertices: []
       indices: 
       edges: []

@@ -1,46 +1,49 @@
 fileFormatVersion: 2
-guid: 475867517b079ce40b416aca7428f6fd
+guid: de8aa1b300af6b843b82653cee420ab8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8956590797478643514
-    second: customization_glasses(mid-head)_0
+      213: -7213107164688964337
+    second: beard_0
   - first:
-      213: 6234893818640090202
-    second: customization_glasses(mid-head)_1
+      213: 65206210893467024
+    second: beard_1
   - first:
-      213: 3114407770272866829
-    second: customization_glasses(mid-head)_2
+      213: 2000703355834762807
+    second: beard_2
   - first:
-      213: 4560883996254447679
-    second: customization_glasses(mid-head)_3
+      213: -433756993679757081
+    second: beard_3
   - first:
-      213: 4981135677641135787
-    second: customization_glasses(mid-head)_4
+      213: 4326156506397588040
+    second: beard_4
   - first:
-      213: 3228345846553991495
-    second: customization_glasses(mid-head)_5
+      213: -3760085170064573461
+    second: beard_5
   - first:
-      213: 3771880794981906505
-    second: customization_glasses(mid-head)_6
+      213: -5306249817012234932
+    second: beard_6
   - first:
-      213: -3562051008660271531
-    second: customization_glasses(mid-head)_7
+      213: 43380792983229055
+    second: beard_7
   - first:
-      213: 942164907033652156
-    second: customization_glasses(mid-head)_8
+      213: -919757422302021585
+    second: beard_8
   - first:
-      213: 149291043974761667
-    second: customization_glasses(mid-head)_9
+      213: 1959993901448545997
+    second: beard_9
   - first:
-      213: 2235979892903205012
-    second: customization_glasses(mid-head)_10
+      213: 5159698831093837209
+    second: beard_10
   - first:
-      213: 2796395109826135087
-    second: customization_glasses(mid-head)_11
+      213: -7673284424366358758
+    second: beard_11
   - first:
-      213: 4659635414699831484
-    second: customization_glasses(mid-head)_12
+      213: -7540352566013522248
+    second: beard_12
+  - first:
+      213: -7582099074331904270
+    second: beard_13
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -125,13 +128,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: customization_glasses(mid-head)_0
+      name: beard_0
       rect:
         serializedVersion: 2
-        x: 10
-        y: 104
-        width: 7
-        height: 10
+        x: 0
+        y: 936
+        width: 494
+        height: 433
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -139,20 +142,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2fc5836ad52990e4a8364df56849f823
-      internalID: -8956590797478643514
+      spriteID: c664a9cb2f3dd84449774ce10fb025a3
+      internalID: -7213107164688964337
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: customization_glasses(mid-head)_1
+      name: beard_1
       rect:
         serializedVersion: 2
-        x: 19
-        y: 104
-        width: 8
-        height: 7
+        x: 850
+        y: 1174
+        width: 91
+        height: 181
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,20 +163,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc530dcc2958f2441b5a567d8d81e26b
-      internalID: 6234893818640090202
+      spriteID: cbfad53df46fe8a48bbbd922d3ab6b62
+      internalID: 65206210893467024
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: customization_glasses(mid-head)_2
+      name: beard_2
       rect:
         serializedVersion: 2
-        x: 28
-        y: 104
-        width: 7
-        height: 7
+        x: 1326
+        y: 1174
+        width: 108
+        height: 167
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,20 +184,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 916be615a5739d54e94e6b39fc3fe5a7
-      internalID: 3114407770272866829
+      spriteID: faa24802ef4bf1a42af3aa76294157f4
+      internalID: 2000703355834762807
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: customization_glasses(mid-head)_3
+      name: beard_3
       rect:
         serializedVersion: 2
-        x: 37
-        y: 104
-        width: 7
-        height: 7
+        x: 1805
+        y: 1323
+        width: 32
+        height: 47
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,20 +205,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3b36c8a1ca4356d4f841f96759a43fbb
-      internalID: 4560883996254447679
+      spriteID: ad533e21e18a4584692e2b543c6c1d4e
+      internalID: -433756993679757081
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: customization_glasses(mid-head)_4
+      name: beard_4
       rect:
         serializedVersion: 2
-        x: 46
-        y: 104
-        width: 8
-        height: 9
+        x: 1910
+        y: 1159
+        width: 166
+        height: 196
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -223,20 +226,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d1bc8962175a9543ba5fe3ff2404d88
-      internalID: 4981135677641135787
+      spriteID: 2a83bf4cabd53f64eac38d899668b40d
+      internalID: 4326156506397588040
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: customization_glasses(mid-head)_5
+      name: beard_5
       rect:
         serializedVersion: 2
-        x: 84
-        y: 105
-        width: 6
-        height: 7
+        x: 969
+        y: 1174
+        width: 92
+        height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -244,20 +247,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 88b8b7ffe38b8e04eb0b9bccfb099bd7
-      internalID: 3228345846553991495
+      spriteID: 2c21d6c1dfa8f2f468e2e21da0262479
+      internalID: -3760085170064573461
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: customization_glasses(mid-head)_6
+      name: beard_6
       rect:
         serializedVersion: 2
-        x: 93
-        y: 105
-        width: 7
-        height: 10
+        x: 1089
+        y: 1174
+        width: 106
+        height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -265,20 +268,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6f3eb0c7da195f74388e16834c02b76d
-      internalID: 3771880794981906505
+      spriteID: a09ca3c0d4a7ea24383f66d21289a7ec
+      internalID: -5306249817012234932
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: customization_glasses(mid-head)_7
+      name: beard_7
       rect:
         serializedVersion: 2
-        x: 102
-        y: 105
-        width: 8
-        height: 10
+        x: 1208
+        y: 1174
+        width: 107
+        height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -286,20 +289,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4b1ad28a7573e6c42920b1ee21ff03bf
-      internalID: -3562051008660271531
+      spriteID: 6e7a92bb72ed2d54d89f360f50bb651c
+      internalID: 43380792983229055
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: customization_glasses(mid-head)_8
+      name: beard_8
       rect:
         serializedVersion: 2
-        x: 111
-        y: 105
-        width: 7
-        height: 7
+        x: 1565
+        y: 1159
+        width: 123
+        height: 136
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -307,20 +310,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bf0ee5be2f72c264f950fbcf61ef2416
-      internalID: 942164907033652156
+      spriteID: 0699ed5300f8cf94ea54197ac40858ce
+      internalID: -919757422302021585
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: customization_glasses(mid-head)_9
+      name: beard_9
       rect:
         serializedVersion: 2
-        x: 25
-        y: 58
-        width: 29
-        height: 34
+        x: 1745
+        y: 1159
+        width: 137
+        height: 136
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -328,20 +331,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f9bd618de01df1b41bc1032d7cd28fff
-      internalID: 149291043974761667
+      spriteID: a353df1aaa812674abee3affe42ea975
+      internalID: 1959993901448545997
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: customization_glasses(mid-head)_10
+      name: beard_10
       rect:
         serializedVersion: 2
-        x: 92
-        y: 63
-        width: 15
-        height: 29
+        x: 2089
+        y: 1159
+        width: 135
+        height: 136
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -349,20 +352,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03e6385925017464e9a38d0f2dd99e88
-      internalID: 2235979892903205012
+      spriteID: 150600137b6a0434baae3fc0824aa4dd
+      internalID: 5159698831093837209
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: customization_glasses(mid-head)_11
+      name: beard_11
       rect:
         serializedVersion: 2
-        x: 26
-        y: 24
-        width: 27
-        height: 8
+        x: 179
+        y: 279
+        width: 433
+        height: 508
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -370,20 +373,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3097fbe089e2dd42ad910d1331f7e13
-      internalID: 2796395109826135087
+      spriteID: 541ed988117213940af022319b0c6825
+      internalID: -7673284424366358758
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: customization_glasses(mid-head)_12
+      name: beard_12
       rect:
         serializedVersion: 2
-        x: 99
-        y: 25
-        width: 8
-        height: 7
+        x: 1014
+        y: 413
+        width: 256
+        height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -391,8 +394,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2d63d5db3effad94aad633feb7229825
-      internalID: 4659635414699831484
+      spriteID: 8e3c2629f32f09d44ab7bbbb62d3c3bd
+      internalID: -7540352566013522248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beard_13
+      rect:
+        serializedVersion: 2
+        x: 1894
+        y: 413
+        width: 78
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c775e03cbf607de4d808746b726c3d57
+      internalID: -7582099074331904270
       vertices: []
       indices: 
       edges: []
