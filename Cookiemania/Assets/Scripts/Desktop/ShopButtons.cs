@@ -9,6 +9,9 @@ public class ShopButtons : MonoBehaviour
     string mini; //either cyber or marketing
     public int lvlReq;
     private bool purchased = false;
+    public GameObject global;
+    public GameObject marketing;
+    public GameObject cyber;
 
     private void Start()
     {
@@ -77,25 +80,25 @@ public class ShopButtons : MonoBehaviour
 
     public void Global()
     {
-        GameObject.Find("Global").SetActive(true);
-        GameObject.Find("Marketing").SetActive(false);
-        GameObject.Find("Cyber").SetActive(false);
+        global.SetActive(true);
+        marketing.SetActive(false);
+        cyber.SetActive(false);
         this.gameObject.SetActive(false);
     }
 
     public void Marketing()
     {
-        GameObject.Find("Global").SetActive(false);
-        GameObject.Find("Marketing").SetActive(true);
-        GameObject.Find("Cyber").SetActive(false);
+        global.SetActive(false);
+        marketing.SetActive(true);
+        cyber.SetActive(false);
         this.gameObject.SetActive(false);
     }
 
     public void Cyber()
     {
-        GameObject.Find("Global").SetActive(true);
-        GameObject.Find("Marketing").SetActive(false);
-        GameObject.Find("Cyber").SetActive(false);
+        global.SetActive(true);
+        marketing.SetActive(false);
+        cyber.SetActive(false);
         this.gameObject.SetActive(false);
     }
 
@@ -103,9 +106,9 @@ public class ShopButtons : MonoBehaviour
     {
         if (this.gameObject.activeSelf != true)
         {
-            GameObject.Find("Global").SetActive(false);
-            GameObject.Find("Marketing").SetActive(false);
-            GameObject.Find("Cyber").SetActive(false);
+            global.SetActive(false);
+            marketing.SetActive(false);
+            cyber.SetActive(false);
             this.gameObject.SetActive(true);
         } else
         {

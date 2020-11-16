@@ -1128,7 +1128,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4663963739732544367
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1230,6 +1230,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cost: 0
   lvlReq: 0
+  global: {fileID: 0}
+  marketing: {fileID: 0}
+  cyber: {fileID: 0}
 --- !u!1 &9200168669102678191
 GameObject:
   m_ObjectHideFlags: 0
