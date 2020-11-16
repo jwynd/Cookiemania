@@ -20,36 +20,39 @@ public class EmailPreviewController : MonoBehaviour
     private UnityAction<EventInfo> action;
     private EventInfo eventInfo;
 
+    public EmailCategory EmailType 
+    { 
+        get 
+        { 
+            if (eventInfo != null) 
+                return eventInfo.Email.emailType; 
+            else return EmailCategory.Starred; 
+        } 
+    }
+
     /// <summary>
     /// takes the entire emailinfo to store and displays the preview
     /// then runs the given action on click (presumably to swap the 
     /// email preview with the full view of this email)
     /// </summary>
     /// <param name="action"></param>
-    public void Initialize(EventInfo eventInfo, 
-        UnityAction<EventInfo> action, 
-        bool unread = true)
+    public void Initialize(EventInfo eventInfo,
+        UnityAction<EventInfo> action)
     {
         this.action = action;
         this.eventInfo = eventInfo;
         SetType(label, eventInfo.Email);
         SetSubject(subject, eventInfo.Email);
         SetSenderName(sender, eventInfo.Email);
-        if (unread)
-        {
-            GetComponent<Image>().color = Color.white;
-            readObject.SetActive(false);
-        }
-        else
-        {
-            GetComponent<Image>().color = new Color(
-                220f / 255f, 220f / 255f, 220f / 255f);
-            readObject.SetActive(true);
-        }
+        GetComponent<Image>().color = Color.white;
+        readObject.SetActive(false);
     }
 
     public void OnClick()
     {
+        GetComponent<Image>().color = new Color(
+                220f / 255f, 220f / 255f, 220f / 255f);
+        readObject.SetActive(true);
         action?.Invoke(eventInfo);
     }
 }

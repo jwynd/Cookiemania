@@ -48,7 +48,7 @@ public class EventController : MonoBehaviour
             lastDialoguePlayed = null;
             if (shouldExit)
             {
-                EventComplete();
+                EventComplete(info, true);
                 return;
             }
         }
@@ -61,7 +61,7 @@ public class EventController : MonoBehaviour
         {
             Debug.LogError("branch: " + nextBranch + 
                 " not found in triggered event " + info.UniqueName);
-            EventComplete();
+            EventComplete(info, true);
         }
     }
 
@@ -117,20 +117,24 @@ public class EventController : MonoBehaviour
 
     private void RunEventByType(EventInfo eventInfo)
     {
-        info = eventInfo;
-        info.EventListening = false;
+        eventInfo.EventListening = false;
         if (eventInfo.EventType.IsEmail())
         {
-            AddEmail(info);
+            AddEmail(eventInfo);
             return;
         }
         switch (eventInfo.EventType)
         {
             case TypeKeyword.Dialogue:
+            case TypeKeyword.Tutorial:
+                // need to check if it should be delayed right here!
+                // would put it in a delayed queue that waits until 
+                // player in correct screen to run the event
+                info = eventInfo;
                 NextBranch(EventInfo.FIRST_BRANCH);
                 break;
             case TypeKeyword.Reward:
-                EventComplete();
+                EventComplete(eventInfo, false);
                 break;
             default:
                 Debug.LogError("unimplemented event type for event " +
@@ -155,11 +159,12 @@ public class EventController : MonoBehaviour
         }
     }
 
-    private void EventComplete()
+    private void EventComplete(EventInfo eInfo, bool hadDialogue)
     {
         EventManager.Instance.EventComplete(
-            info.UniqueName, info.EventCompleteReward);
-        runningDialogueEvent = false;
+            eInfo.UniqueName, eInfo.EventCompleteReward);
+        if (hadDialogue)
+            runningDialogueEvent = false;
         PauseMenu.ResumeWithoutScreen(timeScale);
         if (eventQueue.Count > 0)
         {

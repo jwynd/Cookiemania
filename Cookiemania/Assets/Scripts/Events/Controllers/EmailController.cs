@@ -30,9 +30,7 @@ public class EmailController : MonoBehaviour
     private List<ButtonType> categories = new List<ButtonType>();
 
     // unread email order can change by random email extraction
-    private List<EventInfo> unreadEmails = new List<EventInfo>();
     // read email list order will never change and should show up in stack order
-    private Stack<EventInfo> readEmails = new Stack<EventInfo>();
     // preview mode always set to true when tab is opened / category is clicked
     // initial category is always whatever the first tab in the categories list is
     private bool previewMode = false;
@@ -88,13 +86,22 @@ public class EmailController : MonoBehaviour
             visibleTypes.Add((EmailCategory)
                 Enum.Parse(typeof(EmailCategory), activeTab.ToString()));
         }
+        foreach (Transform child in previewsHolder.transform)
+        {
+            child.gameObject.SetActive(true);
+        }
+        var list = previewsHolder.GetComponentsInChildren<EmailPreviewController>();
+        foreach (var comp in list)
+        {
+            comp.gameObject.SetActive(visibleTypes.Contains(comp.EmailType));
+        }
         Debug.Log(string.Join(", ", visibleTypes));
     }
 
     private void Start()
     {
         // only need to instantiate when adding an email
-        TestFunction();
+        //TestFunction();
     }
 
     private void TestFunction()
@@ -107,7 +114,7 @@ public class EmailController : MonoBehaviour
             "Was hoping to catch you earlier buuuuut\n\nI need you to go down to the bank and make a couple transactions\n" +
             "No big deal, just get it done by tomorrow at lunch.\nBoss OUT!",
             "boss", EmailCategory.Starred, null, null);
-        preview.Initialize(eventInfo, ViewEmail, false);
+        preview.Initialize(eventInfo, ViewEmail);
     }
 
     public void AddEmail(EventInfo eventInfo, EventController eventController)
@@ -118,12 +125,16 @@ public class EmailController : MonoBehaviour
             throw new Exception("cannot add an event of wrong type as email" +
                 " and event must have an email");
         }
-        unreadEmails.Add(eventInfo);
-        
+        // add it to previewsholder in first position
+        var t = Instantiate(previewPrefab, previewsHolder.transform);
+        t.transform.SetAsFirstSibling();
+        var preview = t.GetComponent<EmailPreviewController>();
+        preview.Initialize(eventInfo, ViewEmail);
     }
 
     private void ViewEmail(EventInfo info)
     {
+        // read / unread information stored local to email preview controller
         emailController.Initialize(info, eventController);
         PreviewMode = false;
     }

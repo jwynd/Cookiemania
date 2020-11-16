@@ -35,7 +35,10 @@ public class EmailTabController : MonoBehaviour
     private void OnEnable()
     {
         if (controlledCanvas)
+        {
             controlledCanvas.enabled = true;
+            controlledObj.GetComponent<EmailController>().ShowYourself();
+        }    
     }
 
     private void OnDisable()
