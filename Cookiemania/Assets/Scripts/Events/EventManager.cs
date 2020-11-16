@@ -65,6 +65,8 @@ public class EventManager : MonoBehaviour
 
     public GameObject ChoicePrefab { get; private set; }
 
+    public EmailController Email { get; private set; }
+
     public void EventComplete(string eventName, List<Tuple<RewardKeyword, int>> rewards)
     {
         // not sure what else we'd do here
@@ -105,6 +107,11 @@ public class EventManager : MonoBehaviour
         // needs to be recreated here as we dont know if any overwrite got changed
         CreateOverwriteDictionary(this.dialogueOverwrites, CharacterDictionary);
         return 0;
+    }
+
+    public void SetEmailReference(EmailController emailController)
+    {
+        Email = emailController;
     }
 
     // searches the string for any instances of the dialogue keywords

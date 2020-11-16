@@ -18,6 +18,7 @@ public class EventController : MonoBehaviour
     public ChoiceController.OnComplete onChoiceComplete;
     private bool runningDialogueEvent = false;
     private float timeScale = 1f;
+    private EmailController emailController;
 
     public void DialogueComplete(string nextBranch)
     {
@@ -121,7 +122,7 @@ public class EventController : MonoBehaviour
         info.EventListening = false;
         if (eventInfo.EventType.IsEmail())
         {
-            AddEmail();
+            AddEmail(info);
             return;
         }
         switch (eventInfo.EventType)
@@ -142,9 +143,17 @@ public class EventController : MonoBehaviour
     // all this function should do is add an email to the email controller
     // need to pass the function that returns what the email choice made
     // was when choices are made
-    private void AddEmail()
+    private void AddEmail(EventInfo info)
     {
-        throw new NotImplementedException();
+        if (EventManager.Instance.Email)
+        {
+            EventManager.Instance.Email.AddEmail(info, this);
+        }
+        else
+        {
+            Debug.LogError("Event manager instance needs a reference to the" +
+                " email controller");
+        }
     }
 
     private void EventComplete()
