@@ -2297,7 +2297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   homeTab: {fileID: 1319970853}
-  canvasPrefab: {fileID: 1935137831505669535, guid: 80226453775ac334391de4b7d53ee3c6,
+  canvasPrefab: {fileID: 2901100849826488488, guid: 80226453775ac334391de4b7d53ee3c6,
     type: 3}
 --- !u!1 &1866172481
 GameObject:
@@ -3169,6 +3169,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_MatchWidthOrHeight
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6277808113466769213, guid: 8541eca58d6582944a19e81fec296263,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.6249257
+      objectReference: {fileID: 0}
+    - target: {fileID: 6277808113466769213, guid: 8541eca58d6582944a19e81fec296263,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.6249257
+      objectReference: {fileID: 0}
+    - target: {fileID: 6277808113466769213, guid: 8541eca58d6582944a19e81fec296263,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.6249257
       objectReference: {fileID: 0}
     - target: {fileID: 7834210945013830011, guid: 8541eca58d6582944a19e81fec296263,
         type: 3}
