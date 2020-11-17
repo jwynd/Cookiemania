@@ -22,6 +22,8 @@ public class EmailInfo
     public ChoiceInfo choice = null;
     public ChoiceController.OnComplete choiceAction;
     public EmailController.OnComplete emailComplete;
+    public bool choiceMade = false;
+    public bool unread = true;
     
     public EmailInfo(string subject, string body, string sender,
         EmailCategory type,

@@ -170,6 +170,11 @@ public class EventManager : MonoBehaviour
                 return true;
             }
         }
+        else
+        {
+            Debug.LogError("couldn't find " + eventName);
+            Debug.LogError("Dictionary entries: " + string.Join(", ", eventDictionary.Keys));
+        }
         return false;
     }
 

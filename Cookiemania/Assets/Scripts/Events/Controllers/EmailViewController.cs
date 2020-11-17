@@ -25,11 +25,8 @@ public class EmailViewController : MonoBehaviour
     [SerializeField]
     private Button choiceButton = null;
 
-    private EmailInfo email;
     private EventInfo eventInfo;
     private ChoiceController.OnComplete hijackedAction;
-    private bool choiceMadeAlready = false;
-    private bool readBefore = false;
 
     private void Awake()
     {
@@ -37,23 +34,24 @@ public class EmailViewController : MonoBehaviour
     }
 
     // prefab objects necessary to display an email
+    // theres only one of these controllers...
     public void Initialize(EventInfo eventInfo)
     {
         this.eventInfo = eventInfo;
-        email = eventInfo.Email;
+        var email = eventInfo.Email;
         SetSenderName(sender, email);
         SetSubject(subject, email);
         SetBody(body, email);
         // need buttons at the bottom of the email for choices
         // player can make
         // need to return the info back up to the event controller
-        var haveChoice = email.choice != null && !choiceMadeAlready;
+        var haveChoice = email.choice != null && !email.choiceMade;
         choiceButton.gameObject.SetActive(haveChoice);
-        if (!haveChoice && !readBefore)
+        if (!haveChoice && email.unread)
         {
             email.emailComplete.Invoke(eventInfo, true);
         }
-        readBefore = true;
+        this.eventInfo.Email.unread = false;
     }
 
     public void HijackedChoiceAction(string nextBranch,
@@ -62,6 +60,7 @@ public class EmailViewController : MonoBehaviour
         List<Tuple<RewardKeyword, int>> rewardList,
         TypeKeyword type)
     {
+        eventInfo.Email.choiceMade = true;
         eventInfo.Email.choiceAction.Invoke(nextBranch, choicePrompt, choiceMade,
             rewardList, type);
         eventInfo.Email.emailComplete.Invoke(eventInfo, false);
@@ -73,7 +72,6 @@ public class EmailViewController : MonoBehaviour
         {
             return;
         }
-        choiceMadeAlready = true;
         EventManager.Instance.ChoicePrefab.GetComponent<ChoiceController>().
             Initialize(eventInfo.Email.choice,
             eventInfo.EventType, hijackedAction);

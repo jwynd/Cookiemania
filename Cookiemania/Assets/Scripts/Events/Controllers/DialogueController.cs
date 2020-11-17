@@ -108,6 +108,7 @@ public class DialogueController : MonoBehaviour
             Debug.LogError("No character dictionary!\nUnable to create dialogue");
             return;
         }
+        dialogueLine.text = "";
         bgImage.sprite = null;
         myCanvas.enabled = true;
         DisplayNextDialogue();

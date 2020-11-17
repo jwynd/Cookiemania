@@ -32,9 +32,13 @@ public class EmailPreviewController : MonoBehaviour
 
     public bool Unread
     {
-        get;
-        private set;
-    } = true;
+        get
+        {
+            if (eventInfo == null)
+                return true;
+            return eventInfo.Email.unread;
+        }
+    }
 
     /// <summary>
     /// takes the entire emailinfo to store and displays the preview
@@ -58,8 +62,6 @@ public class EmailPreviewController : MonoBehaviour
     {
         GetComponent<Image>().color = new Color(
                 220f / 255f, 220f / 255f, 220f / 255f);
-        Unread = false;
-        readObject.SetActive(!Unread);
         action?.Invoke(eventInfo);
     }
 

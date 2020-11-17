@@ -214,5 +214,5 @@ subject you're moving up!
 
 event_reward morality 0
 event_reward money 100
-
+direct_trigger test_2
 event_end
