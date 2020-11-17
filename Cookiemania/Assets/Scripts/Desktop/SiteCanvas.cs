@@ -8,7 +8,7 @@ public class SiteCanvas : MonoBehaviour
     [SerializeField]
     [Tooltip("should have all the parts that blink for notification, with a TMP_Text " +
         "object in it's children")]
-    private GameObject emailNotificationObject;
+    private GameObject emailNotificationObject = null;
     private TMP_Text emailNotificationText;
 
     public static SiteCanvas Instance { get; protected set; }

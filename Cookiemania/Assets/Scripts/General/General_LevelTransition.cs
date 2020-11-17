@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+using static Tracking.LocationUtils;
+
 public class General_LevelTransition : MonoBehaviour
 {
     public Dropdown LevelSelect; // Reference to the level select dropdown menu
@@ -13,12 +15,12 @@ public class General_LevelTransition : MonoBehaviour
     public string LoadedScene { get; protected set; } // contains the name of the currently loaded minigame
     public static General_LevelTransition Instance { get; protected set; }
     public Animator transitioning;
-    private float transitionTime = 3f;
     protected float normalTimeScale;
     public AnimationClip animEnter;
     public AnimationClip animExit;
     public GameObject hometab;
     private bool loadingMinigame = false;
+    private Locale localeToSet = Locale.Website;
 
     // public delegate void OnLevelTransiion();
     // public event OnLevelTransiion onBegin;
@@ -57,10 +59,12 @@ public class General_LevelTransition : MonoBehaviour
                 break;
             case 1:
                 //StartCoroutine("wait");
+                localeToSet = Locale.Jumpergame;
                 StartCoroutine(leaveDesktop("Jumper"));
                 break;
             case 2:
                 // StartCoroutine("wait");
+                localeToSet = Locale.Spacegame;
                 StartCoroutine(leaveDesktop("Spacemini"));
                 break;
             case 3:
@@ -85,6 +89,15 @@ public class General_LevelTransition : MonoBehaviour
         if (loadingMinigame)
             return;
         loadingMinigame = true;
+        switch (scene)
+        {
+            case JumperSceneName:
+                localeToSet = Locale.Jumpergame;
+                break;
+            case SpaceSceneName:
+                localeToSet = Locale.Spacegame;
+                break;
+        }
         StartCoroutine(leaveDesktop(scene));
     }
 
@@ -97,7 +110,7 @@ public class General_LevelTransition : MonoBehaviour
         { // first disable unneeded objects in desktop
             g.SetActive(false);
         }
-
+        SetLocation(localeToSet);
         SceneManager.LoadScene(sceneName, LoadSceneMode.Additive); // load the new scene additively
         LoadedScene = sceneName; // set the loaded scene to a non-null value
         Debug.Log("scene set " + LoadedScene);
@@ -108,7 +121,7 @@ public class General_LevelTransition : MonoBehaviour
     // called when exiting a minigame and returning to the desktop
     IEnumerator returnDesktop()
     {
-
+        //location setting unneeded as its clicking the hometab
         SceneTransition(2);
         yield return StartCoroutine(wait());
         if (LoadedScene == null) yield break; // if loadedScene is null then we are not in a mini-game
@@ -126,6 +139,7 @@ public class General_LevelTransition : MonoBehaviour
         LoadedScene = null;
         if (LevelSelect)
             LevelSelect.value = 0;
+        // tab button will set location on click
         hometab.GetComponent<General_TabButton>().click();
     }
     // Calls and wraps the function to play animation for scene transition
@@ -201,5 +215,13 @@ public class General_LevelTransition : MonoBehaviour
     public void LDesk(string scenename)
     {
         StartCoroutine(leaveDesktop(scenename));
+    }
+
+    public void SetLocation(Locale locale)
+    {
+        if (PlayerData.Player)
+        {
+            PlayerData.Player.Location.Current = locale;
+        }
     }
 }

@@ -13,6 +13,7 @@ public class PlayerData : MonoBehaviour
     /// Reference with PlayerData.Player.x
     /// </summary>
     public static PlayerData Player;
+
     //Event stuff
     public class UnityEvent2Int : UnityEvent<int, int>
     {
@@ -23,6 +24,9 @@ public class PlayerData : MonoBehaviour
     public UnityEvent<int, int> OnMoralityChanged = new UnityEvent2Int();
     public UnityEvent<int, int> OnShopLvlChanged = new UnityEvent2Int();
     public UnityEvent<int, int> OnMoneyChanged = new UnityEvent2Int();
+
+    //location reference
+    public Tracking.PlayerLocation Location = new Tracking.PlayerLocation();
 
     //player data that tracks values of player money to their chosen global upgrades
     public int spacelvl = 0; //Game Dificulty

@@ -96,7 +96,7 @@ public class EmailController : MonoBehaviour
         {
             comp.gameObject.SetActive(visibleTypes.Contains(comp.EmailType));
         }
-        Debug.Log(string.Join(", ", visibleTypes));
+        //Debug.Log(string.Join(", ", visibleTypes));
     }
 
     private void Start()

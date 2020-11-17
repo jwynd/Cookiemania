@@ -8,10 +8,16 @@ namespace Tracking
     
     public static class LocationUtils
     {
+        // pretty important to not change scene names randomly btw
+        public const string JumperSceneName = "Jumper";
+        public const string SpaceSceneName = "Spacemini";
+
         public class UnityEvent2Locales : UnityEvent<Locale, Locale>
         {
 
         }
+
+        
 
         public enum Locale
         {
