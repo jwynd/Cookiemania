@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Parsing_Utilities;
@@ -44,18 +45,37 @@ public class EventController : MonoBehaviour
         if (delayedCallback)
         {
             // delay
+            IEnumerator coroutine = DelayedEmailComplete(emailEvent);
+            StartCoroutine(coroutine);
         }
         else
         {
             // immediate
-            TriggerDialogueEvents(emailEvent.GetEmailDialogues());
-            EventComplete(emailEvent, false);
+            EmailCompleteImmediate(emailEvent);
         }
+    }
+
+    private void EmailCompleteImmediate(EventInfo emailEvent)
+    {
+        TriggerDialogueEvents(emailEvent.GetEmailDialogues());
+        EventComplete(emailEvent, false);
+    }
+
+    private IEnumerator DelayedEmailComplete(EventInfo emailEvent)
+    {
+        yield return new WaitForSecondsRealtime(1.0f);
+        EmailCompleteImmediate(emailEvent);
     }
 
     private void TriggerDialogueEvents(List<DialogueInfo> lists)
     {
-        throw new NotImplementedException();
+        foreach (var info in lists)
+        {
+            foreach (var triggerable in info.DirectlyTriggeredEvents)
+            {
+                EventManager.Instance.TriggerEvent(triggerable);
+            }
+        }
     }
 
     private void NextBranch(string nextBranch)
