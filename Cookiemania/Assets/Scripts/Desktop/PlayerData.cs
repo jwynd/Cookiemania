@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerData : MonoBehaviour
 {
@@ -13,21 +14,15 @@ public class PlayerData : MonoBehaviour
     /// </summary>
     public static PlayerData Player;
     //Event stuff
-    public event EventHandler<IntegerEventArgs> OnWeekChanged;
-    public event EventHandler<IntegerEventArgs> OnMoralityChanged;
-    public event EventHandler<IntegerEventArgs> OnShopLvlChanged;
-    public event EventHandler<IntegerEventArgs> OnMoneyChanged;
-
-    public class IntegerEventArgs : EventArgs
+    public class UnityEvent2Int : UnityEvent<int, int>
     {
-        public int Amount { get; private set; } = 0;
-        public int PreviousAmount { get; private set; } = 0;
-        public IntegerEventArgs(int amt, int previousAmt)
-        {
-            Amount = amt;
-            PreviousAmount = previousAmt;
-        }
+
     }
+
+    public UnityEvent<int, int> OnWeekChanged = new UnityEvent2Int();
+    public UnityEvent<int, int> OnMoralityChanged = new UnityEvent2Int();
+    public UnityEvent<int, int> OnShopLvlChanged = new UnityEvent2Int();
+    public UnityEvent<int, int> OnMoneyChanged = new UnityEvent2Int();
 
     //player data that tracks values of player money to their chosen global upgrades
     public int spacelvl = 0; //Game Dificulty
@@ -43,7 +38,7 @@ public class PlayerData : MonoBehaviour
             if (_money == value) return;
             var previous = _money;
             _money = value;
-            OnMoneyChanged?.Invoke(this, new IntegerEventArgs(value, previous));
+            OnMoneyChanged?.Invoke(previous, value);
         }
     }
     [SerializeField]
@@ -59,7 +54,7 @@ public class PlayerData : MonoBehaviour
             }
             var previous = _shoplvl;
             _shoplvl = value;
-            OnShopLvlChanged?.Invoke(this, new IntegerEventArgs(value, previous));
+            OnShopLvlChanged?.Invoke(previous, value);
         }
     }
 
@@ -92,7 +87,7 @@ public class PlayerData : MonoBehaviour
             }
             var previous = _week;
             _week = value;
-            OnWeekChanged?.Invoke(this, new IntegerEventArgs(value, previous));
+            OnWeekChanged?.Invoke(previous, value);
         }
     }
 
@@ -106,7 +101,7 @@ public class PlayerData : MonoBehaviour
             if (_morality == value) return;
             var previous = _morality;
             _morality = value;
-            OnMoralityChanged?.Invoke(this, new IntegerEventArgs(value, previous));
+            OnMoralityChanged?.Invoke(previous, value);
         }
     }
 
@@ -153,6 +148,7 @@ public class PlayerData : MonoBehaviour
         if (Player != null && Player != this)
         {
             Destroy(Player);
+            return;
         }
         else
         {

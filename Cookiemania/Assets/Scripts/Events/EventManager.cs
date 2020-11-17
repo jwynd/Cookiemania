@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using UnityEditor.Events;
 using UnityEngine;
 
 using static Parsing_Utilities;
@@ -598,51 +599,50 @@ public class EventManager : MonoBehaviour
                 }  
             }
         }
-
-        PlayerData.Player.OnMoneyChanged +=
-            new EventHandler<PlayerData.IntegerEventArgs>(MoneyListener);
-        PlayerData.Player.OnMoralityChanged +=
-            new EventHandler<PlayerData.IntegerEventArgs>(MoralityListener);
-        PlayerData.Player.OnShopLvlChanged +=
-            new EventHandler<PlayerData.IntegerEventArgs>(ShopLvlListener);
-        PlayerData.Player.OnWeekChanged +=
-            new EventHandler<PlayerData.IntegerEventArgs>(WeekListener);
+        UnityEventTools.AddPersistentListener(
+            PlayerData.Player.OnMoneyChanged, MoneyListener);
+        UnityEventTools.AddPersistentListener(
+            PlayerData.Player.OnMoralityChanged, MoralityListener);
+        UnityEventTools.AddPersistentListener(
+            PlayerData.Player.OnShopLvlChanged, ShopLvlListener);
+        UnityEventTools.AddPersistentListener(
+            PlayerData.Player.OnWeekChanged, WeekListener);
     }
 
    
 
-    private void MoneyListener(object sender, PlayerData.IntegerEventArgs e)
+    private void MoneyListener(int previous, int current)
     {
         var keyword = TriggerKeyword.Money;
-        GenericListener(e, keyword);
+        GenericListener(previous, current, keyword);
     }
 
-    private void ShopLvlListener(object sender, PlayerData.IntegerEventArgs e)
+    private void ShopLvlListener(int previous, int current)
     {
         var keyword = TriggerKeyword.UpgradeLevel;
-        GenericListener(e, keyword);
+        GenericListener(previous, current, keyword);
     }
 
-    private void MoralityListener(object sender, PlayerData.IntegerEventArgs e)
+    private void MoralityListener(int previous, int current)
     {
         var keyword = TriggerKeyword.Morality;
-        GenericListener(e, keyword);
+        GenericListener(previous, current, keyword);
     }
 
-    private void WeekListener(object sender, PlayerData.IntegerEventArgs e)
+    private void WeekListener(int previous, int current)
     {
         var keyword = TriggerKeyword.Week;
-        GenericListener(e, keyword);
+        GenericListener(previous, current, keyword);
     }
 
-    private void GenericListener(PlayerData.IntegerEventArgs e, TriggerKeyword keyword)
+    private void GenericListener(int previous, int current, TriggerKeyword keyword)
     {
         if (listeningEvents.TryGetValue(
             keyword, out SortedList<int, List<EventInfo>> outerList))
         {
-            if (e.Amount == e.PreviousAmount) return;
+            if (current == previous) return;
             List<KeyValuePair<int, List<EventInfo>>> eventsToRun =
-                FilterEventList(outerList, e.Amount);
+                FilterEventList(outerList, current);
             // need to filter based on the other triggering conditions IF
             // this is all conditions met event
             foreach (var eventList in eventsToRun)
