@@ -71,7 +71,7 @@ PrefabInstance:
     - target: {fileID: 8552561703256424470, guid: aac8ee0ac77d8494b85b09cd37d4f7c1,
         type: 3}
       propertyPath: m_Name
-      value: JumperPlatform Variant 1
+      value: JumperPlatformV4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aac8ee0ac77d8494b85b09cd37d4f7c1, type: 3}
@@ -96,7 +96,7 @@ PrefabInstance:
     - target: {fileID: 4924203214720030482, guid: d99a3250cf3403c4f87c35050f8507ba,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.1939209
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4924203214720030482, guid: d99a3250cf3403c4f87c35050f8507ba,
         type: 3}
