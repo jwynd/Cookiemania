@@ -56,6 +56,30 @@ public class JumperGeneralPlatform : MonoBehaviour
         return bounds;
     }
 
+    public JumperGeneralPlatform GetClosestPlatform(bool trampolineAllowed = false)
+    {
+        var brethren = transform.parent.GetComponentsInChildren<Transform>();
+        Transform nearest = null;
+        var currentDistance = Mathf.Infinity;
+        foreach (var trans in brethren)
+        {
+            if (trans == transform)
+                continue;
+            if (trans.gameObject.activeSelf != true)
+                continue;
+            if (!trampolineAllowed && 
+                trans.GetComponent<JumperTrampolineController>() != null)
+                continue;
+            var distance = Vector3.Distance(transform.position, trans.position);
+            if (distance < currentDistance)
+            {
+                currentDistance = distance;
+                nearest = trans;
+            }
+        }
+        return nearest?.GetComponent<JumperGeneralPlatform>();
+    }
+
     public bool CanPlacePlatformsAbove()
     {
         return placePlatformsAbove;

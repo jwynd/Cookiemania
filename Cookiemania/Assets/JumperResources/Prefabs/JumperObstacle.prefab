@@ -142,10 +142,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc81e740413206843bc6e0f724c055c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destructable: 1
-  health: 0
+  acceleration: 0
+  maxVelocity: 0
   damage: 2.5
   pointValue: 15
-  speed: 0.4
-  maxVelocity: 3.5
-  rotationSpeed: 6
+  indestructable: 1
+  maxHealth: 1
+  rotationSpeed: 0

@@ -555,6 +555,9 @@ public class EventManager : MonoBehaviour
 #if UNITY_EDITOR
         if (useTestMode)
         {
+            var emailRef = FindObjectOfType<EmailController>();
+            SetEmailReference(emailRef);
+            emailRef.ShowYourself();
             foreach (var runnableEvent in eventDictionary.Values)
             {
                 eventController.RunEvent(runnableEvent);
