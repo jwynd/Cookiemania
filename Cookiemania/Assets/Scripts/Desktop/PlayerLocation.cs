@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 using static Tracking.LocationUtils;
+using static Parsing_Utilities;
 
 namespace Tracking
 {
@@ -10,7 +11,7 @@ namespace Tracking
     {
         public UnityEvent<Locale, Locale> Updated = new UnityEvent2Locales();
 
-        private Locale current = Locale.Website;
+        private Locale current = Locale.WebsiteTab;
         public Locale Current
         {
             get
@@ -21,11 +22,10 @@ namespace Tracking
             {
                 Previous = current;
                 current = value;
-                Debug.LogWarning("new location: " + current);
                 Updated?.Invoke(Previous, current);
             }
         }
-        public Locale Previous { get; private set; } = Locale.Website;
+        public Locale Previous { get; private set; } = Locale.WebsiteTab;
     }
 }
 

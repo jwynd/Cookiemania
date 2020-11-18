@@ -45,16 +45,16 @@ public static partial class Parsing_Utilities
             { TypeKeyword.Tutorial, new ActionRef<EventParsingInfo>(TutorialTypeAction) },
         };
 
-    public static readonly Dictionary<DelayedRunKeyword, ActionRef<EventParsingInfo>> TutorialKeywordActions =
-       new Dictionary<DelayedRunKeyword, ActionRef<EventParsingInfo>>
+    public static readonly Dictionary<Locale, ActionRef<EventParsingInfo>> TutorialKeywordActions =
+       new Dictionary<Locale, ActionRef<EventParsingInfo>>
        {
-           { DelayedRunKeyword.AnalyticsTab, new ActionRef<EventParsingInfo>(AnalyticsDelayAction) },
-           { DelayedRunKeyword.Desktop, new ActionRef<EventParsingInfo>(DesktopDelayAction) },
-           { DelayedRunKeyword.EmailTab, new ActionRef<EventParsingInfo>(EmailDelayAction) },
-           { DelayedRunKeyword.JumpingMinigame, new ActionRef<EventParsingInfo>(JumperDelayAction) },
-           { DelayedRunKeyword.Minigame, new ActionRef<EventParsingInfo>(MinigameDelayAction) },
-           { DelayedRunKeyword.None, new ActionRef<EventParsingInfo>(NoDelayAction) },
-           { DelayedRunKeyword.SpaceMinigame, new ActionRef<EventParsingInfo>(SpaceMinigameDelayAction) },
-           { DelayedRunKeyword.WebsiteTab, new ActionRef<EventParsingInfo>(WebsiteDelayAction) },
+           { Locale.AnalyticsTab, new ActionRef<EventParsingInfo>(AnalyticsDelayAction) },
+           { Locale.Desktop, new ActionRef<EventParsingInfo>(DesktopDelayAction) },
+           { Locale.EmailTab, new ActionRef<EventParsingInfo>(EmailDelayAction) },
+           { Locale.JumpingMinigame, new ActionRef<EventParsingInfo>(JumperDelayAction) },
+           { Locale.Minigame, new ActionRef<EventParsingInfo>(MinigameDelayAction) },
+           { Locale.Any, new ActionRef<EventParsingInfo>(NoDelayAction) },
+           { Locale.SpaceMinigame, new ActionRef<EventParsingInfo>(SpaceMinigameDelayAction) },
+           { Locale.WebsiteTab, new ActionRef<EventParsingInfo>(WebsiteDelayAction) },
        };
 }

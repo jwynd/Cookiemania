@@ -153,8 +153,6 @@ public class JumperStoryFramework : MonoBehaviour
             displayText = sections[2];
         }
         //need to look through input replacers and replace the appropriate stuff in the
-
-        Debug.LogWarning(displayText);
         returnList = new System.Tuple<string, string>(displayText, axis);
         return returnList;
     }

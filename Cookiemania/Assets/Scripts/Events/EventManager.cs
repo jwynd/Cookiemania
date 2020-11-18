@@ -561,7 +561,11 @@ public class EventManager : MonoBehaviour
             }
         }
 #endif
+        // playerdata.player better exist by now
+        eventController.ConnectPlayerLocationListener();
         ConnectEvents(eventDictionary);
+        
+        
     }
 
 

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 using static Tracking.LocationUtils;
+using static Parsing_Utilities;
 
 public class General_LevelTransition : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class General_LevelTransition : MonoBehaviour
     public AnimationClip animExit;
     public GameObject hometab;
     private bool loadingMinigame = false;
-    private Locale localeToSet = Locale.Website;
+    private Locale localeToSet = Locale.WebsiteTab;
 
     // public delegate void OnLevelTransiion();
     // public event OnLevelTransiion onBegin;
@@ -59,12 +60,12 @@ public class General_LevelTransition : MonoBehaviour
                 break;
             case 1:
                 //StartCoroutine("wait");
-                localeToSet = Locale.Jumpergame;
+                localeToSet = Locale.JumpingMinigame;
                 StartCoroutine(leaveDesktop("Jumper"));
                 break;
             case 2:
                 // StartCoroutine("wait");
-                localeToSet = Locale.Spacegame;
+                localeToSet = Locale.SpaceMinigame;
                 StartCoroutine(leaveDesktop("Spacemini"));
                 break;
             case 3:
@@ -86,16 +87,20 @@ public class General_LevelTransition : MonoBehaviour
 
     public void ToMinigame(string scene)
     {
+        Debug.LogWarning("trying to run with: " + loadingMinigame + 
+            ", true if loading");
         if (loadingMinigame)
             return;
         loadingMinigame = true;
         switch (scene)
         {
             case JumperSceneName:
-                localeToSet = Locale.Jumpergame;
+                localeToSet = Locale.JumpingMinigame;
                 break;
             case SpaceSceneName:
-                localeToSet = Locale.Spacegame;
+                localeToSet = Locale.SpaceMinigame;
+                break;
+            default:
                 break;
         }
         StartCoroutine(leaveDesktop(scene));
@@ -104,17 +109,20 @@ public class General_LevelTransition : MonoBehaviour
     // called when opening a new minigame, accepts a scene name
     IEnumerator leaveDesktop(string sceneName)
     {
+        Debug.LogWarning("leaving desktop");
         SceneTransition(2);
         yield return StartCoroutine(wait());
+        Debug.LogWarning("leaving desktop again");
         foreach (GameObject g in DisableOnLevelChange)
         { // first disable unneeded objects in desktop
             g.SetActive(false);
         }
-        SetLocation(localeToSet);
+        
         SceneManager.LoadScene(sceneName, LoadSceneMode.Additive); // load the new scene additively
         LoadedScene = sceneName; // set the loaded scene to a non-null value
         Debug.Log("scene set " + LoadedScene);
         loadingMinigame = false;
+        SetLocation(localeToSet);
         //gamePauseMenu.SetActive(true);
     }
 
@@ -122,6 +130,7 @@ public class General_LevelTransition : MonoBehaviour
     IEnumerator returnDesktop()
     {
         //location setting unneeded as its clicking the hometab
+        localeToSet = Locale.WebsiteTab;
         SceneTransition(2);
         yield return StartCoroutine(wait());
         if (LoadedScene == null) yield break; // if loadedScene is null then we are not in a mini-game
@@ -170,10 +179,10 @@ public class General_LevelTransition : MonoBehaviour
             // Time.timeScale = 0;
             gamePauseMenu.SetActive(false);
             transitioning.SetBool("ExitScene", true);
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSecondsRealtime(2);
             //ideally we would load the scene here
             transitioning.SetBool("ExitScene", false);
-            yield return new WaitForSeconds(2);//StartCoroutine("wait");
+            yield return new WaitForSecondsRealtime(2);//StartCoroutine("wait");
             //Time.timeScale = normalTimeScale;
         }
         else if (version == 3)
@@ -181,18 +190,17 @@ public class General_LevelTransition : MonoBehaviour
             normalTimeScale = Time.timeScale;
             //Time.timeScale = 0;
             gamePauseMenu.SetActive(false);
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSecondsRealtime(1);
             //ideally we would load the scene here
             transitioning.SetBool("ExitScene", false);
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSecondsRealtime(1);
             //Time.timeScale = normalTimeScale;
         }
-
     }
     // allows couroutines to pause for seconds
     IEnumerator wait()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSecondsRealtime(2);
         gamePauseMenu.SetActive(true);
     }
 

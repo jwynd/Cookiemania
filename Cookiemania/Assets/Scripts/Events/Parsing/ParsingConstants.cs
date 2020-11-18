@@ -72,10 +72,10 @@ public static partial class Parsing_Utilities
         HistoryEmail,
     }
 
-    public enum DelayedRunKeyword
+    public enum Locale
     {
         // none means it will immediately display
-        None,
+        Any,
         // any minigame
         Minigame,
         SpaceMinigame,
@@ -85,6 +85,7 @@ public static partial class Parsing_Utilities
         EmailTab,
         AnalyticsTab,
         WebsiteTab,
+        MinigameTab,
     }
 
     // no uppercase letters in any of the keywords allowed
@@ -177,23 +178,24 @@ public static partial class Parsing_Utilities
             { "none", TypeKeyword.Reward },
         };
 
-    public static readonly Dictionary<string, DelayedRunKeyword> DELAY_KEYWORDS =
-        new Dictionary<string, DelayedRunKeyword>
+    public static readonly Dictionary<string, Locale> DELAY_KEYWORDS =
+        new Dictionary<string, Locale>
         {
-            { "default", DelayedRunKeyword.None },
-            { "none", DelayedRunKeyword.None },
-            { "any", DelayedRunKeyword.None },
-            { "analytics", DelayedRunKeyword.AnalyticsTab },
-            { "analytics_tab", DelayedRunKeyword.AnalyticsTab },
-            { "desktop", DelayedRunKeyword.Desktop },
-            { "email", DelayedRunKeyword.EmailTab },
-            { "email_tab", DelayedRunKeyword.EmailTab },
-            { "jumper_minigame", DelayedRunKeyword.JumpingMinigame },
-            { "jumping_minigame", DelayedRunKeyword.JumpingMinigame },
-            { "jumper", DelayedRunKeyword.JumpingMinigame },
-            { "minigame", DelayedRunKeyword.Minigame },
-            { "space_minigame", DelayedRunKeyword.SpaceMinigame },
-            { "website", DelayedRunKeyword.WebsiteTab },
-            { "website_tab", DelayedRunKeyword.WebsiteTab },
+            { "default", Locale.Any },
+            { "none", Locale.Any },
+            { "any", Locale.Any },
+            { "analytics", Locale.AnalyticsTab },
+            { "analytics_tab", Locale.AnalyticsTab },
+            { "desktop", Locale.Desktop },
+            { "email", Locale.EmailTab },
+            { "email_tab", Locale.EmailTab },
+            { "jumper_minigame", Locale.JumpingMinigame },
+            { "jumping_minigame", Locale.JumpingMinigame },
+            { "jumper", Locale.JumpingMinigame },
+            { "minigame", Locale.Minigame },
+            { "minigame_tab", Locale.MinigameTab },
+            { "space_minigame", Locale.SpaceMinigame },
+            { "website", Locale.WebsiteTab },
+            { "website_tab", Locale.WebsiteTab },
         };
 }

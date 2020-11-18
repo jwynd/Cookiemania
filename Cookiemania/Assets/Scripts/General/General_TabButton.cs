@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using static Tracking.LocationUtils;
+using static Parsing_Utilities;
 
 public class General_TabButton : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class General_TabButton : MonoBehaviour
     public Locale myLocation;
     private void Awake()
     {
-        if (!myLocation.IsDesktop())
+        if (!myLocation.IsDesktop() || myLocation == Locale.Any)
         {
             Debug.LogError("invalid location, tabs must have a desktop " +
                 "defined location");

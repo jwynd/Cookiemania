@@ -29,14 +29,11 @@ public class Minigame : MonoBehaviour
 
     protected void MinigameTwoStart()
     {
-
         General_LevelTransition.Instance.ToMinigame(minigame2scene);
-
     }
 
     protected void ReturnFunction()
     {
-        minigameCanvas.enabled = false;
         homeTab.GetComponent<General_TabButton>().click();
     }
 
@@ -62,7 +59,6 @@ public class Minigame : MonoBehaviour
     {
         //go to website instead
         minigameCanvas.enabled = true;
-
     }
 
     private void OnDisable()

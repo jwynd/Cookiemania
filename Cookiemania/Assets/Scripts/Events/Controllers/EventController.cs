@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Events;
 using UnityEngine;
 using static Parsing_Utilities;
-using static Email_Utilities;
+using static Tracking.LocationUtils;
 
 // carries through all the sequences for a single event
 // should be triggered by an event manager
@@ -22,13 +23,17 @@ public class EventController : MonoBehaviour
     private bool runningDialogueEvent = false;
     private float timeScale = 1f;
 
+    private Dictionary<Locale, Queue<EventInfo>> DelayedEvents =
+        new Dictionary<Locale, Queue<EventInfo>>();
+    private Locale currentLocation = Locale.WebsiteTab;
+
     public void DialogueComplete(string nextBranch)
     {
         NextBranch(nextBranch);
     }
 
-    public void ChoiceComplete(string nextBranch, string choicePrompt, 
-        string choiceMade, List<Tuple<RewardKeyword, int>> rewards, 
+    public void ChoiceComplete(string nextBranch, string choicePrompt,
+        string choiceMade, List<Tuple<RewardKeyword, int>> rewards,
         TypeKeyword type)
     {
         EventManager.Instance.ChoiceMade(info.UniqueName, choicePrompt, choiceMade);
@@ -85,7 +90,7 @@ public class EventController : MonoBehaviour
         {
             // run through the post dialogue wrap ups (e.g. early exits 
             // and event triggers)
-            foreach(var eventName in lastDialoguePlayed.DirectlyTriggeredEvents)
+            foreach (var eventName in lastDialoguePlayed.DirectlyTriggeredEvents)
             {
                 EventManager.Instance.TriggerEvent(eventName);
             }
@@ -105,7 +110,7 @@ public class EventController : MonoBehaviour
         }
         else
         {
-            Debug.LogError("branch: " + nextBranch + 
+            Debug.LogError("branch: " + nextBranch +
                 " not found in triggered event " + info.UniqueName);
             EventComplete(info, true);
         }
@@ -140,15 +145,39 @@ public class EventController : MonoBehaviour
         OnEmailComplete = EmailComplete;
     }
 
+    public void ConnectPlayerLocationListener()
+    {
+        UnityEventTools.AddPersistentListener(
+            PlayerData.Player.Location.Updated, LocationChanged);
+    }
+
+    private void LocationChanged(Locale previous, Locale current)
+    {
+        currentLocation = current;
+        // need a reverse alias
+        foreach (var toCheck in DelayedEvents.Keys)
+        {
+            if (toCheck.LocaleAlias().Contains(currentLocation))
+            {
+                var queue = DelayedEvents[toCheck];
+                while (queue.Count > 0)
+                {
+                    var toRun = queue.Dequeue();
+                    RunEvent(toRun, true);
+                }
+            }
+        }
+    }
+
     // is triggered by something else, but event will run until completion
     // compare to a quest stage in an rpg
-    public void RunEvent(EventInfo eventInfo)
+    public void RunEvent(EventInfo eventInfo, bool ignoreDelay = false)
     {
         // reference copy, we want to effect the original
-        if (!eventInfo.EventListening)
+        if (!eventInfo.EventListening && !ignoreDelay)
             return;
         // dialogue events need dialogue control to run
-        if (runningDialogueEvent && 
+        if (runningDialogueEvent &&
             eventInfo.EventType == TypeKeyword.Dialogue)
         {
             eventQueue.Enqueue(eventInfo);
@@ -156,13 +185,11 @@ public class EventController : MonoBehaviour
         }
 #if UNITY_EDITOR
         eventInfo.PrintInformation();
-#endif
-        var possibleScale = PauseMenu.PauseWithoutScreen();
-        timeScale = possibleScale > 0 ? possibleScale : timeScale;
-        RunEventByType(eventInfo);
+#endif 
+        RunEventByType(eventInfo, ignoreDelay);
     }
 
-    private void RunEventByType(EventInfo eventInfo)
+    private void RunEventByType(EventInfo eventInfo, bool ignoreDelay)
     {
         eventInfo.EventListening = false;
         if (eventInfo.EventType.IsEmail())
@@ -177,10 +204,13 @@ public class EventController : MonoBehaviour
                 // need to check if it should be delayed right here!
                 // would put it in a delayed queue that waits until 
                 // player in correct screen to run the event
-                info = eventInfo;
-                NextBranch(EventInfo.FIRST_BRANCH);
+                if (ignoreDelay)
+                    ImmediateRun(eventInfo);
+                else
+                    ImmediateOrDelayedRun(eventInfo);
                 break;
             case TypeKeyword.Reward:
+                // i see no reason a reward event would be delayed...?
                 EventComplete(eventInfo, false);
                 break;
             default:
@@ -188,6 +218,36 @@ public class EventController : MonoBehaviour
                     "controller");
                 break;
         }
+    }
+
+    private void ImmediateOrDelayedRun(EventInfo eventInfo)
+    {
+        var currentAcceptableLocales = eventInfo.DelayOption.LocaleAlias();
+        if (currentAcceptableLocales.Contains(currentLocation))
+        {
+            ImmediateRun(eventInfo);
+            return;
+        }
+        if (DelayedEvents.TryGetValue(eventInfo.DelayOption, 
+            out Queue<EventInfo> queue))
+        {
+            queue.Enqueue(eventInfo);
+        }
+        else
+        {
+            queue = new Queue<EventInfo>();
+            queue.Enqueue(eventInfo);
+            DelayedEvents.Add(eventInfo.DelayOption, queue);
+        }
+    }
+
+    private void ImmediateRun(EventInfo eventInfo)
+    {
+        Debug.LogError("Running: " + eventInfo.UniqueName);
+        var possibleScale = PauseMenu.PauseWithoutScreen();
+        timeScale = possibleScale > 0 ? possibleScale : timeScale;
+        info = eventInfo;
+        NextBranch(EventInfo.FIRST_BRANCH);
     }
 
     // all this function should do is add an email to the email controller

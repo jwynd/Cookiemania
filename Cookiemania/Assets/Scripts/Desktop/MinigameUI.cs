@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor.Events;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
@@ -17,17 +18,18 @@ public class MinigameUI : MonoBehaviour
 
     public void SetGame1Listener(UnityAction fn)
     {
-        startGame1.onClick.AddListener(fn);
-        startGame1alt.onClick.AddListener(fn);
+        UnityEventTools.AddPersistentListener(startGame1.onClick, fn);
+        UnityEventTools.AddPersistentListener(startGame1alt.onClick, fn);
     }
 
     public void SetGame2Listener(UnityAction fn)
     {
-        startGame2.onClick.AddListener(fn);
-        startGame2alt.onClick.AddListener(fn);
+        UnityEventTools.AddPersistentListener(startGame2.onClick, fn);
+        UnityEventTools.AddPersistentListener(startGame2alt.onClick, fn);
     }
     public void SetReturnListener(UnityAction fn)
     {
-        returnButton.onClick.AddListener(fn);
+        UnityEventTools.AddPersistentListener(returnButton.onClick, fn);
     }
+
 }

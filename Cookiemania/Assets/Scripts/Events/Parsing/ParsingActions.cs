@@ -32,7 +32,7 @@ public static partial class Parsing_Utilities
 
     private static void DelayAction(ref EventParsingInfo parsingInfo)
     {
-        DelayedRunKeyword keyword;
+        Locale keyword;
         if (parsingInfo.TrimmedLine.Count < 2)
         {
             throw new Exception("delay location keyword not found in line: "
@@ -40,7 +40,7 @@ public static partial class Parsing_Utilities
         }
         // need to also get the delayed start location
         else if (DELAY_KEYWORDS.TryGetValue(
-            parsingInfo.GetLowercaseWord(1), out DelayedRunKeyword value))
+            parsingInfo.GetLowercaseWord(1), out Locale value))
         {
             keyword = value;
         }
@@ -55,42 +55,42 @@ public static partial class Parsing_Utilities
 
     private static void WebsiteDelayAction(ref EventParsingInfo parsingInfo)
     {
-        parsingInfo.EventInfo.DelayOption = DelayedRunKeyword.WebsiteTab;
+        parsingInfo.EventInfo.DelayOption = Locale.WebsiteTab;
     }
 
     private static void SpaceMinigameDelayAction(ref EventParsingInfo parsingInfo)
     {
-        parsingInfo.EventInfo.DelayOption = DelayedRunKeyword.SpaceMinigame;
+        parsingInfo.EventInfo.DelayOption = Locale.SpaceMinigame;
     }
 
     private static void NoDelayAction(ref EventParsingInfo parsingInfo)
     {
-        parsingInfo.EventInfo.DelayOption = DelayedRunKeyword.None;
+        parsingInfo.EventInfo.DelayOption = Locale.Any;
     }
 
     private static void MinigameDelayAction(ref EventParsingInfo parsingInfo)
     {
-        parsingInfo.EventInfo.DelayOption = DelayedRunKeyword.Minigame;
+        parsingInfo.EventInfo.DelayOption = Locale.Minigame;
     }
 
     private static void JumperDelayAction(ref EventParsingInfo parsingInfo)
     {
-        parsingInfo.EventInfo.DelayOption = DelayedRunKeyword.JumpingMinigame;
+        parsingInfo.EventInfo.DelayOption = Locale.JumpingMinigame;
     }
 
     private static void EmailDelayAction(ref EventParsingInfo parsingInfo)
     {
-        parsingInfo.EventInfo.DelayOption = DelayedRunKeyword.EmailTab;
+        parsingInfo.EventInfo.DelayOption = Locale.EmailTab;
     }
 
     private static void DesktopDelayAction(ref EventParsingInfo parsingInfo)
     {
-        parsingInfo.EventInfo.DelayOption = DelayedRunKeyword.Desktop;
+        parsingInfo.EventInfo.DelayOption = Locale.Desktop;
     }
 
     private static void AnalyticsDelayAction(ref EventParsingInfo parsingInfo)
     {
-        parsingInfo.EventInfo.DelayOption = DelayedRunKeyword.AnalyticsTab;
+        parsingInfo.EventInfo.DelayOption = Locale.AnalyticsTab;
     }
 
     private static void TutorialTypeAction(ref EventParsingInfo parsingInfo)
@@ -101,7 +101,7 @@ public static partial class Parsing_Utilities
 
     private static void DefineDelayLocation(
         ref EventParsingInfo parsingInfo, 
-        DelayedRunKeyword keyword)
+        Locale keyword)
     {
         if (TutorialKeywordActions.TryGetValue(
             keyword, out ActionRef<EventParsingInfo> toRun))

@@ -884,7 +884,7 @@ MonoBehaviour:
   - {fileID: 1365991720}
   - {fileID: 1419960844}
   - {fileID: 1319970853}
-  myLocation: 5
+  myLocation: 8
 --- !u!4 &650401069
 Transform:
   m_ObjectHideFlags: 0
@@ -1958,7 +1958,7 @@ MonoBehaviour:
   - {fileID: 1365991720}
   - {fileID: 1419960844}
   - {fileID: 650401067}
-  myLocation: 4
+  myLocation: 7
 --- !u!1 &1365991720
 GameObject:
   m_ObjectHideFlags: 0
@@ -2009,7 +2009,7 @@ MonoBehaviour:
   - {fileID: 1319970853}
   - {fileID: 1419960844}
   - {fileID: 650401067}
-  myLocation: 0
+  myLocation: 6
 --- !u!1 &1367958654
 GameObject:
   m_ObjectHideFlags: 0
@@ -2179,7 +2179,7 @@ MonoBehaviour:
   - {fileID: 1319970853}
   - {fileID: 1365991720}
   - {fileID: 650401067}
-  myLocation: 3
+  myLocation: 5
 --- !u!1 &1464930992
 GameObject:
   m_ObjectHideFlags: 0
@@ -3540,11 +3540,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TransitionCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 8931215537192271767, guid: 7b63da0d818bf1a49a15c2be8b424443,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8931215537192271771, guid: 7b63da0d818bf1a49a15c2be8b424443,
         type: 3}
