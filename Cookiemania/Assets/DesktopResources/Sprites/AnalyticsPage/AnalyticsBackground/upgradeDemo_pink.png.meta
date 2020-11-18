@@ -1,7 +1,19 @@
 fileFormatVersion: 2
 guid: 935cbf1460ac744498b5f5dc7c9e2f08
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -441152029215167584
+    second: upgradeDemo_pink_0
+  - first:
+      213: 4414402971714122654
+    second: upgradeDemo_pink_1
+  - first:
+      213: 2046455981975338981
+    second: upgradeDemo_pink_2
+  - first:
+      213: -3134771287834322736
+    second: upgradeDemo_pink_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -40,7 +52,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -70,9 +82,105 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: upgradeDemo_pink_0
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 574
+        width: 876
+        height: 460
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e13f2b2fb09ac0a42ba1300787c8f83c
+      internalID: -441152029215167584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: upgradeDemo_pink_1
+      rect:
+        serializedVersion: 2
+        x: 977
+        y: 573
+        width: 876
+        height: 460
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: edbd9c3d93eae0141ab10aea580b2739
+      internalID: 4414402971714122654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: upgradeDemo_pink_2
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 35
+        width: 876
+        height: 460
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 409bbca63ac674b4d822b2c528404fc7
+      internalID: 2046455981975338981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: upgradeDemo_pink_3
+      rect:
+        serializedVersion: 2
+        x: 980
+        y: 41
+        width: 876
+        height: 460
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bcc50a6bf208e344a1d413edd357c57
+      internalID: -3134771287834322736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
