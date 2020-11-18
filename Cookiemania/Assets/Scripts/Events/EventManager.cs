@@ -419,7 +419,7 @@ public class EventManager : MonoBehaviour
     private static string ExtractDialogue(ref List<string> trimmedText, int charLimit)
     {
         if (trimmedText[0].Length > 1)
-            trimmedText[0].Substring(1);
+            trimmedText[0] = trimmedText[0].Substring(1);
         else
             trimmedText.PopFront();
         var actualLine = string.Join(" ", trimmedText.ToArray());

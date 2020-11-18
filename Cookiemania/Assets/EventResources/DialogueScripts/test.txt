@@ -58,7 +58,7 @@ event_reward morality 0
 
 default
 boss
-> Well hello there, player_name.
+>Well hello there, player_name.
 chip
 > ah man i hate this guy.
 boss
