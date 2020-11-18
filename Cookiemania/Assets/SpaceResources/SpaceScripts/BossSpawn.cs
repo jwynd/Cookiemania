@@ -25,9 +25,9 @@ public class BossSpawn : MonoBehaviour
         {
             randX = Random.Range(-14.4f, 14.4f);
             whereToSpawn = new Vector2(randX, transform.position.y);
-            GameObject go = Instantiate(boss1, whereToSpawn, Quaternion.identity);
-            go.transform.parent = transform;
-            go.transform.parent = null;
+           // GameObject go = Instantiate(boss1, whereToSpawn, Quaternion.identity);
+            //go.transform.parent = transform;
+            //go.transform.parent = null;
             spawning = spawning + 60f;
         }
     }

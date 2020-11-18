@@ -14,7 +14,7 @@ public class player : MonoBehaviour
     public Transform Player, direct1, direct2, direct3, direct4, direct5;
     public static int bulletlevel = 0;
     public static int bulletpiercelvl = 0;
-    public static int shieldWidth = 0;
+    public static int shieldWidth = 2;
 
     private void Start()
     {
