@@ -24,6 +24,11 @@ TagManager:
   - Pierce
   - Spread
   - Iframes
+  - milk
+  - AI
+  - UpgradeTitle
+  - UpgradeDescription
+  - UpgradeCost
   layers:
   - Default
   - TransparentFX

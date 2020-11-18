@@ -252,9 +252,10 @@ GameObject:
   - component: {fileID: 2815530054216380169}
   - component: {fileID: 3072810805035060911}
   - component: {fileID: 1412647132599322064}
+  - component: {fileID: 9124195946747983012}
   m_Layer: 5
   m_Name: Button (1)
-  m_TagString: Untagged
+  m_TagString: milk
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -357,7 +358,34 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3072810805035060911}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9124195946747983012}
+        m_MethodName: select
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &9124195946747983012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327082899231513773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43ab30db85f559f49b089f1442b65273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupText: Yummy milk, gain 1 hp
+  lvlReq: 1
+  popupTitle: Skim Milk
+  popupPrice: $20
 --- !u!1 &460451174952744265
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,7 +398,7 @@ GameObject:
   - component: {fileID: 3750189557958045757}
   - component: {fileID: 188904828632330723}
   m_Layer: 5
-  m_Name: upgradetitle (1)
+  m_Name: upgradetitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -900,9 +928,10 @@ GameObject:
   - component: {fileID: 3278553470975022066}
   - component: {fileID: 2460545634394967004}
   - component: {fileID: 3096343435289106117}
+  - component: {fileID: 468665479441540206}
   m_Layer: 5
   m_Name: Button (2)
-  m_TagString: Untagged
+  m_TagString: milk
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1005,7 +1034,34 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2460545634394967004}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 468665479441540206}
+        m_MethodName: select
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &468665479441540206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431813193876322574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43ab30db85f559f49b089f1442b65273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupText: its soy milk!
+  lvlReq: 0
+  popupTitle: Soy Milk
+  popupPrice: 20
 --- !u!1 &1842353996533773788
 GameObject:
   m_ObjectHideFlags: 0
@@ -1506,7 +1562,7 @@ GameObject:
   - component: {fileID: 2510984488104324447}
   m_Layer: 5
   m_Name: upgradeDescription
-  m_TagString: Untagged
+  m_TagString: UpgradeDescription
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1737,8 +1793,8 @@ GameObject:
   - component: {fileID: 6229963000940501451}
   - component: {fileID: 392460846729297994}
   m_Layer: 5
-  m_Name: upgradetitle
-  m_TagString: Untagged
+  m_Name: popupTitle
+  m_TagString: UpgradeTitle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2656,9 +2712,10 @@ GameObject:
   - component: {fileID: 5538695116941440885}
   - component: {fileID: 5030930823376823749}
   - component: {fileID: 6712842903090196314}
+  - component: {fileID: 7814423031131626284}
   m_Layer: 5
   m_Name: Button (4)
-  m_TagString: Untagged
+  m_TagString: milk
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2761,7 +2818,34 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5030930823376823749}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7814423031131626284}
+        m_MethodName: select
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7814423031131626284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4609258605098347830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43ab30db85f559f49b089f1442b65273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupText: A nice cold treat
+  lvlReq: 0
+  popupTitle: Ice Cream
+  popupPrice: 20
 --- !u!1 &4647798271288416497
 GameObject:
   m_ObjectHideFlags: 0
@@ -2774,9 +2858,10 @@ GameObject:
   - component: {fileID: 9099364380448527872}
   - component: {fileID: 2269261599527572415}
   - component: {fileID: 2392987719758164623}
+  - component: {fileID: 34904047}
   m_Layer: 5
   m_Name: Button
-  m_TagString: Untagged
+  m_TagString: milk
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2879,7 +2964,34 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2269261599527572415}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 34904047}
+        m_MethodName: select
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &34904047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4647798271288416497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43ab30db85f559f49b089f1442b65273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupText: Gain Additional Health!
+  lvlReq: 0
+  popupTitle: Instant Milk
+  popupPrice: $20
 --- !u!1 &4844718526400488353
 GameObject:
   m_ObjectHideFlags: 0
@@ -2893,7 +3005,7 @@ GameObject:
   - component: {fileID: 2943400315748118146}
   m_Layer: 5
   m_Name: cost
-  m_TagString: Untagged
+  m_TagString: UpgradeCost
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3429,9 +3541,10 @@ GameObject:
   - component: {fileID: 7928747108074904537}
   - component: {fileID: 5369229150657691557}
   - component: {fileID: 737044966066231528}
+  - component: {fileID: 4556267874527450090}
   m_Layer: 5
   m_Name: Button (3)
-  m_TagString: Untagged
+  m_TagString: milk
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3534,7 +3647,34 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5369229150657691557}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4556267874527450090}
+        m_MethodName: select
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4556267874527450090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5637308291182713165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43ab30db85f559f49b089f1442b65273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupText: yum tastes like almonds
+  lvlReq: 0
+  popupTitle: Almond Milk
+  popupPrice: 20
 --- !u!1 &5866693999753815827
 GameObject:
   m_ObjectHideFlags: 0
@@ -3547,9 +3687,10 @@ GameObject:
   - component: {fileID: 7814537158108529886}
   - component: {fileID: 4338782668258843088}
   - component: {fileID: 1996605246852106720}
+  - component: {fileID: 4132340014988053349}
   m_Layer: 5
   m_Name: Button (6)
-  m_TagString: Untagged
+  m_TagString: AI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3652,7 +3793,34 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4338782668258843088}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4132340014988053349}
+        m_MethodName: select
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4132340014988053349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5866693999753815827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43ab30db85f559f49b089f1442b65273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupText: Advanced Artificial intellegence helper
+  lvlReq: 0
+  popupTitle: Advanced AI
+  popupPrice: $20
 --- !u!1 &5897589983078398752
 GameObject:
   m_ObjectHideFlags: 0
@@ -3815,9 +3983,10 @@ GameObject:
   - component: {fileID: 3366820043898895039}
   - component: {fileID: 1354605643725419228}
   - component: {fileID: 4244691614630841776}
+  - component: {fileID: 8650426714311525739}
   m_Layer: 5
   m_Name: Button (5)
-  m_TagString: Untagged
+  m_TagString: AI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3920,7 +4089,34 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1354605643725419228}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8650426714311525739}
+        m_MethodName: select
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8650426714311525739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6324012839775893091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43ab30db85f559f49b089f1442b65273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupText: Basic artificial intellegence helper
+  lvlReq: 0
+  popupTitle: Basic AI
+  popupPrice: $20
 --- !u!1 &6511348405914771951
 GameObject:
   m_ObjectHideFlags: 0
@@ -4445,9 +4641,10 @@ GameObject:
   - component: {fileID: 3973182916197327392}
   - component: {fileID: 8887982135188196450}
   - component: {fileID: 5209436591719738473}
+  - component: {fileID: 7422855554840443802}
   m_Layer: 5
   m_Name: Button (7)
-  m_TagString: Untagged
+  m_TagString: AI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4550,7 +4747,34 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8887982135188196450}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7422855554840443802}
+        m_MethodName: select
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7422855554840443802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8194623186841470772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43ab30db85f559f49b089f1442b65273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupText: Self-Learning Artificial Intelligence
+  lvlReq: 0
+  popupTitle: Self-Learning AI
+  popupPrice: $20
 --- !u!1 &8208834909603696024
 GameObject:
   m_ObjectHideFlags: 0
@@ -4746,7 +4970,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2125113949291006820, guid: db20f19ec28152b4ba03b8a5fab4facf,
+  m_Sprite: {fileID: -5909933219099762773, guid: f4c285fc7791bdb40b13e0c0c95e7b6e,
     type: 3}
   m_Type: 0
   m_PreserveAspect: 0
