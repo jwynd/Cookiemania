@@ -243,7 +243,6 @@ public class EventController : MonoBehaviour
 
     private void ImmediateRun(EventInfo eventInfo)
     {
-        Debug.LogError("Running: " + eventInfo.UniqueName);
         var possibleScale = PauseMenu.PauseWithoutScreen();
         timeScale = possibleScale > 0 ? possibleScale : timeScale;
         info = eventInfo;

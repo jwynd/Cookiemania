@@ -95,12 +95,9 @@ public class JumperThrowingEnemy : JumperGeneralThreat
         if (playerTransform == null)
         {
             Destroy(gameObject);
+            return;
         }
-        else
-        {
-            //this actually has to go in an else lol
-            currentPlayerPos = playerTransform.position;
-        }
+        currentPlayerPos = playerTransform.position;
         if (!projectileCoroutineCalled)
         {
             StartCoroutine(ReadyProjectile());
@@ -109,7 +106,7 @@ public class JumperThrowingEnemy : JumperGeneralThreat
         {
             RunToPlayer();
             CheckBoundsTrackingPlayer();
-            Walk();
+            //Walk();
             if (projectileReadied)
             {
                 ThrowProjectile();
@@ -118,7 +115,7 @@ public class JumperThrowingEnemy : JumperGeneralThreat
         else
         {
             CheckBounds();
-            Walk();
+            //Walk();
         }
         
         
@@ -146,13 +143,13 @@ public class JumperThrowingEnemy : JumperGeneralThreat
         {
             rb.velocity = Vector2.zero;
             direction = 1;
-            transform.localScale = new Vector3(originalScale.x, originalScale.y, originalScale.z);
+            //transform.localScale = new Vector3(originalScale.x, originalScale.y, originalScale.z);
         }
         else if (direction > 0 && rb.position.x > parentRight)
         {
             rb.velocity = Vector2.zero;
             direction = -1;
-            transform.localScale = new Vector3(-originalScale.x, originalScale.y, originalScale.z);
+            //transform.localScale = new Vector3(-originalScale.x, originalScale.y, originalScale.z);
         }
     }
 
@@ -171,7 +168,7 @@ public class JumperThrowingEnemy : JumperGeneralThreat
     }
 
     protected void Walk()
-    { 
+    {
         //direction set to 0 disables this
         rb.velocity = new Vector2(Mathf.Clamp(direction * acceleration + rb.velocity.x, -maxVelocity, maxVelocity), rb.velocity.y);
     }
@@ -180,16 +177,16 @@ public class JumperThrowingEnemy : JumperGeneralThreat
     {
         float playerX = currentPlayerPos.x;
         //sprint speed hehe
-        maxVelocity = originalMaxVelocity * 1.5f;
+        //maxVelocity = originalMaxVelocity * 1.5f;
         if (rb.position.x > playerX + buffer)
         {
             direction = -1;
-            transform.localScale = new Vector3(-originalScale.x, originalScale.y, originalScale.z);
+            //transform.localScale = new Vector3(-originalScale.x, originalScale.y, originalScale.z);
         }
         else if (rb.position.x + buffer < playerX)
         {
             direction = 1;
-            transform.localScale = new Vector3(originalScale.x, originalScale.y, originalScale.z);
+            //transform.localScale = new Vector3(originalScale.x, originalScale.y, originalScale.z);
         }
         throwDirection = direction;
 

@@ -15,7 +15,7 @@ PrefabInstance:
     - target: {fileID: 4924203214720030482, guid: 1a56a6d0a81ed1546987bbc1deb01539,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.3013455
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4924203214720030482, guid: 1a56a6d0a81ed1546987bbc1deb01539,
         type: 3}
@@ -61,11 +61,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4924203214720030482, guid: 1a56a6d0a81ed1546987bbc1deb01539,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6066617287731359766, guid: 1a56a6d0a81ed1546987bbc1deb01539,
         type: 3}
@@ -145,7 +140,7 @@ PrefabInstance:
     - target: {fileID: 8552561703256424470, guid: aac8ee0ac77d8494b85b09cd37d4f7c1,
         type: 3}
       propertyPath: m_Name
-      value: JumperPlatform Variant
+      value: JumperPlatformV3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aac8ee0ac77d8494b85b09cd37d4f7c1, type: 3}
