@@ -534,6 +534,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &984293967 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 796880504553135381, guid: ec6ab6091ed20a44b92914699d86fb78,
+    type: 3}
+  m_PrefabInstance: {fileID: 232447264}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &984293968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 984293967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7e179dbda28d184f9f0ee596bef12e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  desktopMusic: {fileID: 8300000, guid: a5650e39b4114fe42a42f996bb59cd90, type: 3}
+  jumperMusic: {fileID: 8300000, guid: 89946677580da134781e8d2ccdfc70e5, type: 3}
+  spaceMusic: {fileID: 8300000, guid: 89946677580da134781e8d2ccdfc70e5, type: 3}
 --- !u!1 &1233017393
 GameObject:
   m_ObjectHideFlags: 0
