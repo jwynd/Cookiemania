@@ -368,7 +368,8 @@ MonoBehaviour:
   - DialogueKeyword: player_name
     UniqueName: player
   characterList:
-  - Sprite: {fileID: 21300000, guid: 9f8e03ac43b138d47ac66004c1b38881, type: 3}
+  - Sprite: {fileID: -1607683666704256706, guid: 4753fa95fc650a94e9f1a6e4236e5c6c,
+      type: 3}
     DisplayName: Boss
     UniqueName: boss
   - Sprite: {fileID: 21300000, guid: 5cf159fef7f183e4d80a9f09a590c1c5, type: 3}
