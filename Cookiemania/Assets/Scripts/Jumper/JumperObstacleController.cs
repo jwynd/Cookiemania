@@ -1,19 +1,22 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class JumperObstacleController : JumperGeneralThreat
 {
     #region variables
+    
     [SerializeField]
-    private float rotationSpeed = 3.0f;
+    private float secondsBetweenFlashes = 1.2f;
 
-    private float parentLeft;
-    private float parentRight;
     private Rigidbody2D rb;
     protected JumperGeneralPlatform dad;
     protected JumperGeneralPlatform uncle;
+    protected JumperGeneralPlatform currentlyOn;
+    protected Animator animator;
+    protected float flashCountdown = 0f;
+    private bool flashing = false;
+    private float heightOffPlatform = 1.5f;
     #endregion
 
     #region startup
@@ -21,15 +24,35 @@ public class JumperObstacleController : JumperGeneralThreat
     {
         base.Start();
         SetBaseParameters();
+        animator = GetComponent<Animator>();
         dad = transform.parent.GetComponent<JumperGeneralPlatform>();
-        dad.enemyChild = this;
-        Vector3 pBounds = dad.GetHorizontalBounds();
-        parentLeft = pBounds.x;
-        parentRight = pBounds.z;
+        heightOffPlatform = GetComponent<SpriteRenderer>().bounds.extents.y * 
+            transform.localScale.magnitude;
         transform.parent = null;
-        transform.position = new Vector2(UnityEngine.Random.Range(parentLeft, parentRight), transform.position.y);
+        currentlyOn = dad;
+        FlashOntoPlatform(transform, dad, uncle, heightOffPlatform);
+        flashCountdown = secondsBetweenFlashes * UnityEngine.Random.Range(1f, 2f);
+        secondsBetweenFlashes *= UnityEngine.Random.Range(0.3f, 1.4f);
         IEnumerator coroutine = DelayedGetUncle(dad);
         StartCoroutine(coroutine);
+    }
+
+    private static void FlashOntoPlatform(Transform trans, 
+        JumperGeneralPlatform newDaddio,
+        JumperGeneralPlatform oldDad,
+        float heightOffPlatform)
+    {
+        if (oldDad)
+            oldDad.enemyChild = null;
+        newDaddio.enemyChild = trans.GetComponent<JumperObstacleController>();
+        Vector3 pBounds = newDaddio.GetHorizontalBounds();
+        var parentLeft = pBounds.x;
+        var parentRight = pBounds.z;
+        pBounds = newDaddio.GetVerticalBounds();
+        var parentTop = pBounds.z;
+        trans.parent = null;
+        trans.position = new Vector3(UnityEngine.Random.Range(parentLeft, parentRight), 
+            parentTop + heightOffPlatform, 0);
     }
 
     private void SetBaseParameters()
@@ -57,9 +80,35 @@ public class JumperObstacleController : JumperGeneralThreat
 
     #region fixedUpdate
 
-    void FixedUpdate()
+    void Update()
     {
-        
+        if (flashing)
+            return;
+        flashCountdown -= Time.deltaTime;
+        if (flashCountdown <= 0)
+        {
+            Flash();
+        }
+    }
+
+    private void Flash()
+    {
+        flashing = true;
+        animator.SetTrigger("Teleport");
+    }
+
+    // should be called by an event through the animator
+    public void TeleportComplete()
+    {
+        animator.SetTrigger("FinishTeleport");
+        currentlyOn = currentlyOn == dad ? uncle : dad;
+        var oldDad = currentlyOn == dad ? uncle : dad;
+        if (currentlyOn != null)
+        {
+            FlashOntoPlatform(transform, currentlyOn, oldDad, heightOffPlatform);
+        }
+        flashing = false;
+        flashCountdown = secondsBetweenFlashes;
     }
 
     #endregion

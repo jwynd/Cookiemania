@@ -20,13 +20,13 @@ public class JumperGeneralPlatform : MonoBehaviour
 
     protected JumperManagerGame jm;
     protected bool notFlashing = true;
-    protected Renderer rend = null;
+    protected SpriteRenderer rend = null;
     #endregion
 
     #region startup
     protected virtual void Awake()
     {
-        rend = GetComponent<Renderer>();
+        rend = GetComponent<SpriteRenderer>();
     }
 
     protected virtual void Start()
@@ -38,7 +38,7 @@ public class JumperGeneralPlatform : MonoBehaviour
 
     #region publicFunctions
 
-    //left x position = .x, right x position = .z, y center position = .y 
+    //left x position = .x, right x position = .z
     public Vector3 GetHorizontalBounds()
     {
         Vector3 bounds = transform.position;
@@ -47,7 +47,7 @@ public class JumperGeneralPlatform : MonoBehaviour
         return bounds;
     }
 
-    //upper y in z, lower y bound in y, x center position in x
+    //upper y in z, lower y bound in y
     public Vector3 GetVerticalBounds()
     {
         Vector3 bounds = transform.position;
