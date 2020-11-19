@@ -27,7 +27,9 @@ public class PlayerData : MonoBehaviour
 
     //location reference
     public Tracking.PlayerLocation Location = new Tracking.PlayerLocation();
-
+    //analytics page info
+    public int race = 0;
+    public int userstats = 0;
     //player data that tracks values of player money to their chosen global upgrades
     public int spacelvl = 0; //Game Dificulty
     public int incomelvl = 0;
