@@ -284,6 +284,7 @@ public class PlayerData : MonoBehaviour
     private void Start()
     {
         IEnumerator coroutine = StartWeekOne();
+        StartCoroutine(coroutine);
     }
 
     private IEnumerator StartWeekOne()
