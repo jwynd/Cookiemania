@@ -1085,6 +1085,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013f393eefb62c840a6b0274ec1dab9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  race: 0
+  userstats: 0
   spacelvl: 0
   incomelvl: 0
   healthlvl: 0
@@ -2224,7 +2226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   homeTab: {fileID: 1319970853}
-  canvasPrefab: {fileID: 2901100849826488488, guid: 80226453775ac334391de4b7d53ee3c6,
+  canvasPrefab: {fileID: 2454862884721560008, guid: 80226453775ac334391de4b7d53ee3c6,
     type: 3}
 --- !u!1 &1866172481
 GameObject:

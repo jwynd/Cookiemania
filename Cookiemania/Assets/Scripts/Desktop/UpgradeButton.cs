@@ -29,6 +29,7 @@ public class UpgradeButton : MonoBehaviour
 
     public void select()
     {
+        PlayerData.Player.userstats += 1;
         for (int i = 0; i < upgradeTitles.Length; i++)
         {
             upgradeTitles[i].GetComponent<TMPro.TextMeshProUGUI>().text = popupTitle;
