@@ -120,6 +120,80 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &232447264
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 796880504553135381, guid: ec6ab6091ed20a44b92914699d86fb78,
+        type: 3}
+      propertyPath: m_Name
+      value: BackgroundMusic
+      objectReference: {fileID: 0}
+    - target: {fileID: 796880504553135382, guid: ec6ab6091ed20a44b92914699d86fb78,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: a5650e39b4114fe42a42f996bb59cd90, type: 3}
+    - target: {fileID: 796880504553135383, guid: ec6ab6091ed20a44b92914699d86fb78,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 250.55934
+      objectReference: {fileID: 0}
+    - target: {fileID: 796880504553135383, guid: ec6ab6091ed20a44b92914699d86fb78,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 224.54437
+      objectReference: {fileID: 0}
+    - target: {fileID: 796880504553135383, guid: ec6ab6091ed20a44b92914699d86fb78,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -244.64658
+      objectReference: {fileID: 0}
+    - target: {fileID: 796880504553135383, guid: ec6ab6091ed20a44b92914699d86fb78,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 796880504553135383, guid: ec6ab6091ed20a44b92914699d86fb78,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 796880504553135383, guid: ec6ab6091ed20a44b92914699d86fb78,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 796880504553135383, guid: ec6ab6091ed20a44b92914699d86fb78,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 796880504553135383, guid: ec6ab6091ed20a44b92914699d86fb78,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 796880504553135383, guid: ec6ab6091ed20a44b92914699d86fb78,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 796880504553135383, guid: ec6ab6091ed20a44b92914699d86fb78,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 796880504553135383, guid: ec6ab6091ed20a44b92914699d86fb78,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ec6ab6091ed20a44b92914699d86fb78, type: 3}
 --- !u!1 &331845297
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,34 +271,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 655915835}
-    - target: {fileID: 608663135, guid: af5d66ab99d4c4b4cbc507399e5098e3, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: IncrementWeek
-      objectReference: {fileID: 0}
-    - target: {fileID: 608663135, guid: af5d66ab99d4c4b4cbc507399e5098e3, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7804471701406804768, guid: af5d66ab99d4c4b4cbc507399e5098e3,
         type: 3}
       propertyPath: m_Name
       value: EventCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 7804471701406804769, guid: af5d66ab99d4c4b4cbc507399e5098e3,
-        type: 3}
-      propertyPath: eventTextFiles.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7804471701406804769, guid: af5d66ab99d4c4b4cbc507399e5098e3,
-        type: 3}
-      propertyPath: eventTextFiles.Array.data[1]
-      value: 
-      objectReference: {fileID: 4900000, guid: 26362d336f4ac7545adcb15d24bfb807, type: 3}
-    - target: {fileID: 7804471701406804769, guid: af5d66ab99d4c4b4cbc507399e5098e3,
-        type: 3}
-      propertyPath: eventTextFiles.Array.data[0]
-      value: 
-      objectReference: {fileID: 4900000, guid: b839bd667894ad2438fc11168323bc00, type: 3}
     - target: {fileID: 7804471701406804781, guid: af5d66ab99d4c4b4cbc507399e5098e3,
         type: 3}
       propertyPath: m_LocalPosition.x
