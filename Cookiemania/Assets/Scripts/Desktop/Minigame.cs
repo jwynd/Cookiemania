@@ -34,7 +34,7 @@ public class Minigame : MonoBehaviour
 
     protected void ReturnFunction()
     {
-        homeTab.GetComponent<General_TabButton>().click();
+        homeTab.GetComponent<General_TabButton>().Click();
     }
 
     private void Awake()

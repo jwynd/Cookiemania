@@ -4,12 +4,15 @@ using UnityEngine;
 
 using static Tracking.LocationUtils;
 using static Parsing_Utilities;
+using UnityEngine.UI;
 
 public class General_TabButton : MonoBehaviour
 {
     public bool homeTab = false;
     public GameObject[] otherTabs;
     public Locale myLocation;
+    public Sprite myBackground;
+    public Image backgroundObject;
     private void Awake()
     {
         if (!myLocation.IsDesktop() || myLocation == Locale.Any)
@@ -31,11 +34,13 @@ public class General_TabButton : MonoBehaviour
                     " designation: " + myLocation);
             }
         }
-        if (homeTab)deactivateOthers();
+        if (homeTab) 
+            deactivateOthers();
     }
 
-    public void click(){
-        if(!this.gameObject.activeSelf){
+    public void Click(){
+        if(!this.gameObject.activeSelf) 
+        {
             this.gameObject.SetActive(true);
             if (PlayerData.Player)
             {
@@ -46,8 +51,11 @@ public class General_TabButton : MonoBehaviour
         }
     }
 
-    private void deactivateOthers(){
-        foreach(GameObject g in otherTabs){
+    private void deactivateOthers() 
+    {
+        backgroundObject.sprite = myBackground;
+        foreach(GameObject g in otherTabs)
+        {
             g.SetActive(false);
             g.tag = "DeactivateOnLoad";
         }

@@ -149,7 +149,7 @@ public class General_LevelTransition : MonoBehaviour
         if (LevelSelect)
             LevelSelect.value = 0;
         // tab button will set location on click
-        hometab.GetComponent<General_TabButton>().click();
+        hometab.GetComponent<General_TabButton>().Click();
     }
     // Calls and wraps the function to play animation for scene transition
     public void SceneTransition(int version)

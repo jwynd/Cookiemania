@@ -15,7 +15,7 @@ public class EmailTabController : MonoBehaviour
     protected void ReturnFunction()
     {
         controlledCanvas.enabled = false;
-        homeTab.GetComponent<General_TabButton>().click();
+        homeTab.GetComponent<General_TabButton>().Click();
     }
 
     private void Awake()
