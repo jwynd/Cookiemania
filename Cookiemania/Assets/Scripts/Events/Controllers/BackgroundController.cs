@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.Animations;
 
 
 public class BackgroundController : MonoBehaviour
@@ -11,7 +10,7 @@ public class BackgroundController : MonoBehaviour
     public function m_call;
     public Transform parentTransform;
     public Animation ani;
-    public AnimatorController aniCtrl;
+    public Animator aniCtrl;
     public Transform loc1;
     Dictionary<int, function> Stages;
     void Start()

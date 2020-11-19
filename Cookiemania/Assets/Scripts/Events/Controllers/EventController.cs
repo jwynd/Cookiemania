@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Events;
 using UnityEngine;
 using static Parsing_Utilities;
 using static Tracking.LocationUtils;
@@ -147,8 +146,7 @@ public class EventController : MonoBehaviour
 
     public void ConnectPlayerLocationListener()
     {
-        UnityEventTools.AddPersistentListener(
-            PlayerData.Player.Location.Updated, LocationChanged);
+        PlayerData.Player.Location.Updated.AddListener(LocationChanged);
     }
 
     private void LocationChanged(Locale previous, Locale current)

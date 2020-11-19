@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using UnityEditor.Events;
 using UnityEngine;
 
 using static Parsing_Utilities;
@@ -611,14 +610,10 @@ public class EventManager : MonoBehaviour
                 }  
             }
         }
-        UnityEventTools.AddPersistentListener(
-            PlayerData.Player.MoneyChanged, MoneyListener);
-        UnityEventTools.AddPersistentListener(
-            PlayerData.Player.MoralityChanged, MoralityListener);
-        UnityEventTools.AddPersistentListener(
-            PlayerData.Player.ShopLevelChanged, ShopLvlListener);
-        UnityEventTools.AddPersistentListener(
-            PlayerData.Player.WeekChanged, WeekListener);
+        PlayerData.Player.MoneyChanged.AddListener(MoneyListener);
+        PlayerData.Player.MoralityChanged.AddListener(MoralityListener);
+        PlayerData.Player.ShopLevelChanged.AddListener(ShopLvlListener);
+        PlayerData.Player.WeekChanged.AddListener(WeekListener);
     }
 
    
