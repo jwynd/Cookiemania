@@ -57,12 +57,6 @@ public class JumperManagerUI : MonoBehaviour
         jm = JumperManagerGame.Instance;
         storyfw = JumperStoryFramework.Instance;
         levelController = General_LevelTransition.Instance;
-        if (jm.IsRunningTutorial())
-        {
-            tutorialActive = true;
-            needNextLine = true;
-            tutorialTimer = 0f;
-        }
         heightSlider.minValue = jm.Player.transform.position.y;
         heightSlider.maxValue = jm.GetHeightGoal();
         healthSlider.minValue = 0;

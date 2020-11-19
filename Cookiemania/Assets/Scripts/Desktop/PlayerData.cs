@@ -20,10 +20,10 @@ public class PlayerData : MonoBehaviour
 
     }
 
-    public UnityEvent<int, int> OnWeekChanged = new UnityEvent2Int();
-    public UnityEvent<int, int> OnMoralityChanged = new UnityEvent2Int();
-    public UnityEvent<int, int> OnShopLvlChanged = new UnityEvent2Int();
-    public UnityEvent<int, int> OnMoneyChanged = new UnityEvent2Int();
+    public UnityEvent<int, int> WeekChanged = new UnityEvent2Int();
+    public UnityEvent<int, int> MoralityChanged = new UnityEvent2Int();
+    public UnityEvent<int, int> ShopLevelChanged = new UnityEvent2Int();
+    public UnityEvent<int, int> MoneyChanged = new UnityEvent2Int();
 
     //location reference
     public Tracking.PlayerLocation Location = new Tracking.PlayerLocation();
@@ -32,8 +32,18 @@ public class PlayerData : MonoBehaviour
     public int spacelvl = 0; //Game Dificulty
     public int incomelvl = 0;
     public int healthlvl = 0;
+    
+    //variables tracked by event system
     [SerializeField]
     private int _money = 0;
+    [SerializeField]
+    private int _shoplvl;
+    //Game progress
+    [SerializeField]
+    private int _week;
+    [SerializeField]
+    private int _morality;
+
     public int money
     {
         get { return _money; }
@@ -42,11 +52,10 @@ public class PlayerData : MonoBehaviour
             if (_money == value) return;
             var previous = _money;
             _money = value;
-            OnMoneyChanged?.Invoke(previous, value);
+            MoneyChanged?.Invoke(previous, value);
         }
     }
-    [SerializeField]
-    private int _shoplvl;
+
     public int shoplvl //Follows progression of player and shop access
     {
         get { return _shoplvl; }
@@ -58,7 +67,34 @@ public class PlayerData : MonoBehaviour
             }
             var previous = _shoplvl;
             _shoplvl = value;
-            OnShopLvlChanged?.Invoke(previous, value);
+            ShopLevelChanged?.Invoke(previous, value);
+        }
+    }
+
+    public int week
+    {
+        get { return _week; }
+        set
+        {
+            if (value <= _week)
+            {
+                return;
+            }
+            var previous = _week;
+            _week = value;
+            WeekChanged?.Invoke(previous, value);
+        }
+    }
+
+    public int morality
+    {
+        get { return _morality; }
+        set
+        {
+            if (_morality == value) return;
+            var previous = _morality;
+            _morality = value;
+            MoralityChanged?.Invoke(previous, value);
         }
     }
 
@@ -74,40 +110,123 @@ public class PlayerData : MonoBehaviour
     public int invulnerability = 0;
 
     //Marketing minigame flags will go here
-    public int TimesPlayedMarketing = 0; //A counter for times playing the marketing game
-
-
-    //Game progress
     [SerializeField]
-    private int _week;
-    public int week
+    private int _timesPlayedMarketing = 0;
+    [SerializeField]
+    private int _extraJumps = 0;
+    [SerializeField]
+    private int _bonusEnemyTypes = 0;
+    // how big capture net is 
+    [SerializeField]
+    private int _captureSize = 0;
+    // how quickly you can reload your net
+    [SerializeField]
+    private int _captureReload = 0;
+    [SerializeField]
+    private int _jumperInvulnerability = 0;
+    [SerializeField]
+    private int _jumperHealth = 0;
+    [SerializeField]
+    private int _jumperMoneyGeneration = 0;
+    // the proportion of coins/empty platforms to enemies
+    [SerializeField]
+    private int _jumperRisk = 0;
+
+    // for upgrades that can increase by more than one at once
+    // but can't be decreased
+    private void MustIncrease(int newValue, ref int myVariable)
     {
-        get { return _week; }
+        if (newValue <= myVariable)
+            return;
+        myVariable = newValue;
+    }
+
+    public int TimesPlayedMarketing
+    {
+        get
+        { return _timesPlayedMarketing; }
+        // only incrementing by one allowed :)
         set
         {
-            if (value <= _week)
+            if (value == _timesPlayedMarketing + 1)
             {
-                return;
+                _timesPlayedMarketing = value;
             }
-            var previous = _week;
-            _week = value;
-            OnWeekChanged?.Invoke(previous, value);
         }
     }
 
-    [SerializeField]
-    private int _morality;
-    public int morality
+    public int ExtraJumps
     {
-        get { return _morality; }
-        set
+        get { return _extraJumps; }
+        set 
         {
-            if (_morality == value) return;
-            var previous = _morality;
-            _morality = value;
-            OnMoralityChanged?.Invoke(previous, value);
+            MustIncrease(value, ref _extraJumps); 
         }
     }
+
+    public int BonusEnemyTypes
+    {
+        get { return _bonusEnemyTypes; }
+        set
+        {
+            MustIncrease(value, ref _bonusEnemyTypes);
+        }
+    }
+
+    public int CaptureSize
+    {
+        get { return _captureSize; }
+        set
+        {
+            MustIncrease(value, ref _captureSize);
+        }
+    }
+
+    public int CaptureReload
+    {
+        get { return _captureReload; }
+        set
+        {
+            MustIncrease(value, ref _captureReload);
+        }
+    }
+
+    public int JumperInvulnerability
+    {
+        get { return _jumperInvulnerability; }
+        set
+        {
+            MustIncrease(value, ref _jumperInvulnerability);
+        }
+    }
+
+    public int JumperHealth
+    {
+        get { return _jumperHealth; }
+        set
+        {
+            MustIncrease(value, ref _jumperHealth);
+        }
+    }
+
+    public int JumperMoneyGeneration
+    {
+        get { return _jumperMoneyGeneration; }
+        set
+        {
+            MustIncrease(value, ref _jumperMoneyGeneration);
+        }
+    }
+
+    public int JumperRisk
+    {
+        get { return _jumperRisk; }
+        set
+        {
+            MustIncrease(value, ref _jumperRisk);
+        }
+    }
+
 
     // dict of dialogue choices made
     // first item of each list is the name of the triggered event and choice number is meaningless
@@ -158,5 +277,59 @@ public class PlayerData : MonoBehaviour
         {
             Player = this;
         }
+    }
+
+    private void Start()
+    {
+        IEnumerator coroutine = StartWeekOne();
+    }
+
+    private IEnumerator StartWeekOne()
+    {
+        // waiting a couple frames then initializing everything
+        yield return new WaitForFixedUpdate();
+        yield return new WaitForFixedUpdate();
+        // important for events
+        InitImportantEventVariables();
+        // space game
+        InitSpaceVariables();
+        // jumper game, setting the private version
+        // directly when necessary
+        InitJumperVariables();
+    }
+
+    private void InitImportantEventVariables()
+    {
+        week = 1;
+        Location.Current = Parsing_Utilities.Locale.WebsiteTab;
+        money = 0;
+        morality = 0;
+    }
+
+    private void InitJumperVariables()
+    {
+        _timesPlayedMarketing = 0;
+        _captureReload = 0;
+        _bonusEnemyTypes = 0;
+        _captureSize = 0;
+        _extraJumps = 0;
+        _jumperHealth = 0;
+        _jumperInvulnerability = 0;
+        _jumperMoneyGeneration = 0;
+        _jumperRisk = 0;
+    }
+
+    private void InitSpaceVariables()
+    {
+        TimesPlayedSpace = 0;
+        spacelvl = 0;
+        incomelvl = 0;
+        SpaceUpgradelvl = 0;
+        healthlvl = 0;
+        ShieldHealth = 0;
+        GunSpread = 0;
+        Pierce = 0;
+        ShieldWidth = 0;
+        invulnerability = 0;
     }
 }

@@ -73,8 +73,8 @@ public class JumperManagerGame : MonoBehaviour
     [Tooltip("Important game tag, ensure this is added to the tags list")]
     protected string collectiblesTag = "Pickup";
     public string CollectiblesTag { get { return collectiblesTag; } }
-    public bool Tutorial { get; protected set; } = true;
     public bool Night { get; protected set; } = false;
+
 
     //game manager always tagged with game controller
     private const string myTag = "GameController";
@@ -99,6 +99,9 @@ public class JumperManagerGame : MonoBehaviour
 
     public static JumperManagerGame Instance { get; private set; }
 
+    public float StartingDifficulty { get { return startingDifficulty; } }
+    public bool DoubleJump { get; private set; } = false;
+
     #endregion
 
     #region startup
@@ -113,8 +116,27 @@ public class JumperManagerGame : MonoBehaviour
         {
             Instance = this;
         }
-        //look to actual game manager to update outer game variables and stuff
+        InitFromPlayerData();
         RunAwakeInit();
+    }
+
+    private void InitFromPlayerData()
+    {
+        if (!PlayerData.Player)
+        {
+            Debug.LogError("Player data must exist before instantiation of this game");
+            return;
+        }
+        var moralityMult = 0f;
+        var badGuy = PlayerData.Player.morality < 0;
+        Night = badGuy;
+        if (badGuy)
+        {
+            moralityMult += -1f / PlayerData.Player.morality;
+        }
+        startingDifficulty += PlayerData.Player.week * 0.12f;
+        startingDifficulty -= moralityMult;
+        PlayerData.Player.TimesPlayedMarketing++;
     }
 
     private void RunAwakeInit()
@@ -353,11 +375,6 @@ public class JumperManagerGame : MonoBehaviour
         return alteredGravity;
     }
 
-    public bool IsRunningTutorial()
-    {
-        return Tutorial;
-    }
-
     //credit: https://forum.unity.com/threads/re-map-a-number-from-one-range-to-another.119437/
     //maps from old range to new range
     //not safe if oldmin and oldmax are the same values
@@ -388,6 +405,5 @@ public class JumperManagerGame : MonoBehaviour
 
     
         #endregion
-
 
     }

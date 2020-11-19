@@ -61,7 +61,7 @@ MonoBehaviour:
     weight: 0.149
   - platform: {fileID: 7739518868798799298, guid: e58f8d79e5ed8e743a3424413f3d1b0d,
       type: 3}
-    weight: 0.121
+    weight: 0.253
   dayPrefabs:
   - platform: {fileID: 8552561703256424470, guid: 4ca44e740c861f842a921fa06972ee9c,
       type: 3}

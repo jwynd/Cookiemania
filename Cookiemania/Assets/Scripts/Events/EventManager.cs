@@ -612,13 +612,13 @@ public class EventManager : MonoBehaviour
             }
         }
         UnityEventTools.AddPersistentListener(
-            PlayerData.Player.OnMoneyChanged, MoneyListener);
+            PlayerData.Player.MoneyChanged, MoneyListener);
         UnityEventTools.AddPersistentListener(
-            PlayerData.Player.OnMoralityChanged, MoralityListener);
+            PlayerData.Player.MoralityChanged, MoralityListener);
         UnityEventTools.AddPersistentListener(
-            PlayerData.Player.OnShopLvlChanged, ShopLvlListener);
+            PlayerData.Player.ShopLevelChanged, ShopLvlListener);
         UnityEventTools.AddPersistentListener(
-            PlayerData.Player.OnWeekChanged, WeekListener);
+            PlayerData.Player.WeekChanged, WeekListener);
     }
 
    

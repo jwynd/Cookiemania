@@ -981,11 +981,6 @@ PrefabInstance:
       propertyPath: startingPlatform
       value: 
       objectReference: {fileID: 1904667531}
-    - target: {fileID: 826711010817931759, guid: 97c37d740f218ae4abebbf038c44dbe5,
-        type: 3}
-      propertyPath: nightPrefabs.Array.data[5].weight
-      value: 0.253
-      objectReference: {fileID: 0}
     - target: {fileID: 6845973269452864297, guid: 97c37d740f218ae4abebbf038c44dbe5,
         type: 3}
       propertyPath: m_Name
