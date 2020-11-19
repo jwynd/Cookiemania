@@ -113,6 +113,7 @@ public class PauseMenu : MonoBehaviour
     public void Pause()
     {
         // dont use menuactive over true here
+        normalTimeScale = Time.timeScale;
         PauseWithoutScreen();
         markedButton = -1;
         Up();

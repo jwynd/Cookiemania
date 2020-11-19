@@ -180,6 +180,7 @@ public class JumperManagerUI : MonoBehaviour
         {
             jm.MainCam.ZoomIn();
         }
+        endscreenCanvas.SetActive(true);
         StartCoroutine(SwitchCamera(timeToNextScene, isGood));
     }
 
@@ -231,11 +232,12 @@ public class JumperManagerUI : MonoBehaviour
         {
             endUI.UpdateText("Game Over<br>you made " + coinsCollected.ToString());
         }
-
+        
         GetComponent<Canvas>().worldCamera.enabled = false;
         GetComponent<Canvas>().worldCamera.GetComponent<AudioListener>().enabled = false;
         endscreenCamera.GetComponent<Camera>().enabled = true;
         endscreenCamera.GetComponent<AudioListener>().enabled = true;
+        PlayerData.Player?.AddMoney(coinsCollected);
     }
     #endregion
 }

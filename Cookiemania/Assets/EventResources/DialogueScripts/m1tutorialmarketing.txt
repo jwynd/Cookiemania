@@ -45,11 +45,13 @@ chip
 choice_end
 
 chip
+
+direct_trigger m1tutorialmarketing2
+
 > I'll have all of this and their instructions sent over email after you collect some cookies
 > We wouldn't to leave anything we do out of transparent eyes of course.
 > I'll let you fiddle around with it a little bit, but once you've done todays work, I'll explain more to you.
 > Just remember, collect the golden glowly cookies, and in general, AVOID any other menacing looking cookies
 
-direct_trigger m1tutorialmarketing2
 
 event_end

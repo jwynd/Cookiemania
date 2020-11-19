@@ -151,6 +151,7 @@ public class General_LevelTransition : MonoBehaviour
         // tab button will set location on click
         hometab.GetComponent<General_TabButton>().Click();
     }
+
     // Calls and wraps the function to play animation for scene transition
     public void SceneTransition(int version)
     {
