@@ -2019,7 +2019,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43ab30db85f559f49b089f1442b65273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popupText: helps look at the traffic
+  popupText: The first thing to good marketing is to know who you are selling to.
+    The demographic upgrade keeps track of basic information of your users. What race
+    they identify with and how many people go to your sites.  They also make the marketing
+    minigame easier to get points.
   lvlReq: 0
   popupTitle: Website Traffic
   popupPrice: $20
