@@ -225,12 +225,6 @@ PrefabInstance:
       propertyPath: eventTextFiles.Array.data[0]
       value: 
       objectReference: {fileID: 4900000, guid: b839bd667894ad2438fc11168323bc00, type: 3}
-    - target: {fileID: 7804471701406804769, guid: af5d66ab99d4c4b4cbc507399e5098e3,
-        type: 3}
-      propertyPath: characterList.Array.data[0].Sprite
-      value: 
-      objectReference: {fileID: -1607683666704256706, guid: 4753fa95fc650a94e9f1a6e4236e5c6c,
-        type: 3}
     - target: {fileID: 7804471701406804781, guid: af5d66ab99d4c4b4cbc507399e5098e3,
         type: 3}
       propertyPath: m_LocalPosition.x
