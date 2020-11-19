@@ -306,6 +306,8 @@ public class PlayerData : MonoBehaviour
         Location.Current = Parsing_Utilities.Locale.WebsiteTab;
         money = 0;
         morality = 0;
+        race = 0;
+        userstats = 0;
     }
 
     private void InitJumperVariables()
