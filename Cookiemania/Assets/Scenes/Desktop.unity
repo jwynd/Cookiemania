@@ -210,6 +210,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: EventCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 7804471701406804769, guid: af5d66ab99d4c4b4cbc507399e5098e3,
+        type: 3}
+      propertyPath: eventTextFiles.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7804471701406804769, guid: af5d66ab99d4c4b4cbc507399e5098e3,
+        type: 3}
+      propertyPath: eventTextFiles.Array.data[1]
+      value: 
+      objectReference: {fileID: 4900000, guid: 26362d336f4ac7545adcb15d24bfb807, type: 3}
+    - target: {fileID: 7804471701406804769, guid: af5d66ab99d4c4b4cbc507399e5098e3,
+        type: 3}
+      propertyPath: eventTextFiles.Array.data[0]
+      value: 
+      objectReference: {fileID: 4900000, guid: b839bd667894ad2438fc11168323bc00, type: 3}
     - target: {fileID: 7804471701406804781, guid: af5d66ab99d4c4b4cbc507399e5098e3,
         type: 3}
       propertyPath: m_LocalPosition.x

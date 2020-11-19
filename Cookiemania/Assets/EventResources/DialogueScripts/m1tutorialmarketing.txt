@@ -1,0 +1,55 @@
+#The goal of this is to introduce the player to the game and their tasks with some humor
+#This should be after they create their character, it should transition to the boss's office 
+
+# use boss room image
+
+event m1tutorialmarketing1
+
+trigger week 1
+delay jumping_minigame
+
+default
+chip
+> Welcome to the Marketing Minigame. Looks cool huh?
+> Your goal is to collect the data, or cookies, that have our users data
+> As a reminder, cookies are little packets of data that are created after you open a website
+> These are actually stored into your hard drive, or internal computer storage
+> But don't worry, our website has the gadgets to catch it all
+#Start to show pictures of enemies
+chip
+#show image of cookies for collection
+> You'll want to collect 2 types of cookies, temporary and persistent.
+> Temporary cookies are stored in the hard drive and are removed after you leave it
+> Persistent cookies are still stores even after you close the browsers. 
+> Those are the ones you want
+
+choices
+default
+#minigame background
+chip
+> Which type of cookies are best collect?
+
+branch
+> Persistent
+
+branch
+> Temporary
+
+branch
+> I forgot
+
+branch_start 1 2 3
+chip
+> The answer is persistent! Don't worry if any of this is overwhelming.
+
+choice_end
+
+chip
+> I'll have all of this and their instructions sent over email after you collect some cookies
+> We wouldn't to leave anything we do out of transparent eyes of course.
+> I'll let you fiddle around with it a little bit, but once you've done todays work, I'll explain more to you.
+> Just remember, collect the golden glowly cookies, and in general, AVOID any other menacing looking cookies
+
+direct_trigger m1tutorialmarketing2
+
+event_end

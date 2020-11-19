@@ -362,7 +362,8 @@ MonoBehaviour:
     type: 3}
   eventController: {fileID: 6384683681933845725}
   eventTextFiles:
-  - {fileID: 4900000, guid: 17e502865fb663b44baa678514dac8e8, type: 3}
+  - {fileID: 4900000, guid: b839bd667894ad2438fc11168323bc00, type: 3}
+  - {fileID: 4900000, guid: 26362d336f4ac7545adcb15d24bfb807, type: 3}
   dialogueOverwrites:
   - DialogueKeyword: player_name
     UniqueName: player

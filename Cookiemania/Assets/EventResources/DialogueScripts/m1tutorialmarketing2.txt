@@ -1,0 +1,88 @@
+#Goal of this Scene is to inform the player of the different enemies they faced
+
+#use minigame image
+
+event m1tutorialmarketing2
+
+#this trigger should occur after they first play the game
+delay desktop
+
+#This should use the minigame's bg
+
+default
+chip
+> Not bad for your first week of the job.
+> Time really does fly by when you're learning.
+
+
+choices
+#should be office
+day
+chip
+> How was that for you?
+
+branch
+
+> Has it really been a week?
+
+branch 
+> Hard
+
+branch 
+> Easy
+
+branch_start 1
+chip
+>Time really flies by if you know what I mean
+
+branch_start 2 3
+chip
+> I'll take that into consideration for the next time we play!
+
+choice_end
+
+chip
+>Well anyways you probably faced these different cookie types.
+#flash cookie
+>Flash cookies are a type of persistent cookie that is typically used to collect data.
+>Specifically, they collect data from advertisement.
+
+choices
+#should be office
+day
+chip
+> >However, they may have... a dark side
+
+branch
+
+> I'm MilkMan!
+
+branch 
+> What do you mean?
+
+branch 
+> Been there done that.
+
+branch_start 1
+chip
+> Ahh I see you're also cultured in the supercookie movie series as well
+
+branch_start 2 3
+chip
+> Well let me explain.
+
+choice_end
+
+chip
+> Flash cookies have a function that allows to respawn itself, even if you tried to delete it. 
+> That's why you saw it flashing around
+> Normally it's helpful to make sure we're tracking the people's data.
+> However, some people can use this ability to create zombie cookies
+#insert zombie cookie image here
+> Zombie cookies are used to ipmlement malware or a virus to a person's computer
+> They recreate themselves and never die, even after you delete them, and they will continue to steal information from people.
+> Well, whenever you need to make money, this is one of the best routes to get them.
+> But we will soon work on the privacy of the game next week!
+
+
+event_end
