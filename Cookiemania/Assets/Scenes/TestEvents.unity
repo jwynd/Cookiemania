@@ -232,11 +232,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013f393eefb62c840a6b0274ec1dab9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  race: 0
+  userstats: 0
   spacelvl: 0
   incomelvl: 0
   healthlvl: 0
   _money: 0
   _shoplvl: 0
+  _week: 0
+  _morality: 0
   SpaceUpgradelvl: 0
   TimesPlayedSpace: 0
   GunSpread: 0
@@ -244,9 +248,15 @@ MonoBehaviour:
   ShieldHealth: 0
   ShieldWidth: 0
   invulnerability: 0
-  TimesPlayedMarketing: 0
-  _week: 0
-  _morality: 0
+  _timesPlayedMarketing: 0
+  _extraJumps: 0
+  _bonusEnemyTypes: 0
+  _captureSize: 0
+  _captureReload: 0
+  _jumperInvulnerability: 0
+  _jumperHealth: 0
+  _jumperMoneyGeneration: 0
+  _jumperRisk: 0
 --- !u!4 &807501173
 Transform:
   m_ObjectHideFlags: 0
@@ -334,11 +344,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 362721404630104100, guid: be6f52bc807fc3343a3e8e8f13084612,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 362721404630104100, guid: be6f52bc807fc3343a3e8e8f13084612,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -517,7 +522,7 @@ PrefabInstance:
     - target: {fileID: 3718790938282781031, guid: be6f52bc807fc3343a3e8e8f13084612,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 7.700001
+      value: 0.0000038146973
       objectReference: {fileID: 0}
     - target: {fileID: 3718790938282781031, guid: be6f52bc807fc3343a3e8e8f13084612,
         type: 3}
@@ -588,16 +593,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4380620749601360345, guid: be6f52bc807fc3343a3e8e8f13084612,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 110.67999
-      objectReference: {fileID: 0}
-    - target: {fileID: 4380620749601360345, guid: be6f52bc807fc3343a3e8e8f13084612,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -16.025024
       objectReference: {fileID: 0}
     - target: {fileID: 4729367463104846609, guid: be6f52bc807fc3343a3e8e8f13084612,
         type: 3}
@@ -718,16 +713,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7502898744847393211, guid: be6f52bc807fc3343a3e8e8f13084612,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7780131000086111022, guid: be6f52bc807fc3343a3e8e8f13084612,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -5.299988
       objectReference: {fileID: 0}
     - target: {fileID: 8000561900869718433, guid: be6f52bc807fc3343a3e8e8f13084612,
         type: 3}
