@@ -104,11 +104,11 @@ public class CustomizationUI : MonoBehaviour
     {
         if (!PropertiesNonNull(this, myInfos))
         {
-            StartCoroutine(Error());
+            Error();
         }
         else if (CompanyName.Length < 2 || CompanyMotto.Length < 2 || CompanyDescription.Length < 2)
         {
-            StartCoroutine(Error());
+            Error();
         }
         else
         {
@@ -137,18 +137,13 @@ public class CustomizationUI : MonoBehaviour
         }
     }
 
-    IEnumerator Error()
+    private void Error()
     {
         errorCanvas.enabled = true;
-        float fluc = 0.25f;
-        float flucMid = 0.5f;
-        for (int i = 0; i < 5; i++)
-        {
-            yield return new WaitForSecondsRealtime(0.15f);
-            var mats = errPanel.GetComponentInChildren<Image>();
-            fluc *= -1f;
-            mats.color = new Color(mats.color.r, mats.color.r, mats.color.r, fluc + flucMid);
-        }
+    }
+
+    public void CloseErrorCanvas()
+    {
         errorCanvas.enabled = false;
     }
 
