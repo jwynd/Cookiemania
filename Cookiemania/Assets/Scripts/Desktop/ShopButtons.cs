@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,101 +10,69 @@ public class ShopButtons : MonoBehaviour
     public int lvlReq;
     private bool purchased = false;
     [SerializeField]
-    protected GameObject global = null;
+    [Tooltip("Order matters, canvases should correlate to button names, homepage" +
+        " is designated as the first canvas in this list")]
+    protected List<Canvas> pages = new List<Canvas>();
     [SerializeField]
-    protected GameObject marketing = null;
-    [SerializeField]
-    protected GameObject cyber = null;
+    protected Canvas upgradePopup = null;
 
-    protected Canvas controlledCanvas1;
-    protected Canvas controlledCanvas2;
-    protected Canvas controlledCanvas3;
-    protected Canvas controlledCanvas4;
-    protected GameObject controlledObj1;
-    protected GameObject controlledObj2;
-    protected GameObject controlledObj3;
-    protected GameObject controlledObj4;
-
-    private void Awake()
+    private void OnEnable()
     {
-        controlledObj4 = GameObject.Find("ShopCanvas(Clone)");
-        controlledCanvas4 = controlledObj4.GetComponent<Canvas>();
-        if (gameObject.name == "ShopCanvas(Clone)")
+        OpenHomepage();
+    }
+
+    public void OpenHomepage()
+    {
+        OpenPage(0);
+    }
+
+    public void OpenPage(int pageNumber)
+    {
+        for (int i = 0; i < pages.Count; i++)
         {
-            controlledObj1 = Instantiate(global);
-            controlledCanvas1 = controlledObj1.GetComponent<Canvas>();         
-
-            controlledObj2 = Instantiate(marketing);
-            controlledCanvas2 = controlledObj2.GetComponent<Canvas>();        
-
-            controlledObj3 = Instantiate(cyber);
-            controlledCanvas3 = controlledObj3.GetComponent<Canvas>();
-
-            Debug.Log("Is Shop Canvas");
+            pages[i].enabled = i == pageNumber;
         }
-        else
+        // upgrade popup is disabled for home page
+        var atHome = pageNumber == 0;
+        if (upgradePopup)
         {
-            Debug.Log("NotShop Canvas");
-        }              
-    }
-    private void Start()
-    {
-        if (gameObject.name == "ShopCanvas(Clone)")
-        {
-            controlledObj1.transform.SetParent(SiteCanvas.Instance.transform);
-            controlledObj2.transform.SetParent(SiteCanvas.Instance.transform);
-            controlledObj3.transform.SetParent(SiteCanvas.Instance.transform);
+            upgradePopup.enabled = !atHome;
         }
-        if (gameObject.name != "ShopCanvas(Clone)")
+        // no need for the rest if on home page
+        if (atHome)
         {
-            controlledObj1 = GameObject.Find("Global(Clone)");
-            controlledCanvas1 = controlledObj1.GetComponent<Canvas>();
-            controlledObj2 = GameObject.Find("Marketing(Clone)");
-            controlledCanvas2 = controlledObj2.GetComponent<Canvas>();
-            controlledObj3 = GameObject.Find("Cyber(Clone)");
-            controlledCanvas3 = controlledObj3.GetComponent<Canvas>();
+            return;
         }
-        if (GameObject.Find("Cyber(Clone)"))
+        SetUpgradeButtonColor(pageNumber);
+    }
+
+    private void SetUpgradeButtonColor(int pageNumber)
+    {
+        if (pageNumber >= pages.Count || pageNumber < 0)
+            return;
+        var color = pages[pageNumber].GetComponentInChildren
+                    <TMPro.TMP_Text>().color;
+        // the child of the canvas's child
+        // should have a button child
+        var button = upgradePopup.transform.GetChild(0)?
+            .GetComponentInChildren<Button>();
+        if (button)
         {
-            controlledCanvas1.enabled = false;
-            controlledCanvas2.enabled = false;
-            controlledCanvas3.enabled = false;
+            try
+            {
+                var child = button.transform.GetChild(0);
+                // trying to change text color first as it's more 
+                // visually important
+                child.GetChild(0).GetComponent<TMPro.TMP_Text>().color = color;
+                child.GetComponent<Image>().color = color;
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("cannot change colors for upgrade button");
+                Debug.LogError("expected image child of button with TMP text" +
+                    " as child of image was not found");
+                Debug.LogError(e);
+            }
         }
-    }
-
-    private void Update()
-    {
-    }
-
-    public void Global()
-    {
-        controlledCanvas1.enabled = true;
-        controlledCanvas2.enabled = false;
-        controlledCanvas3.enabled = false;
-        controlledCanvas4.enabled = false;
-    }
-
-    public void Marketing()
-    {
-        controlledCanvas1.enabled = false;
-        controlledCanvas2.enabled = true;
-        controlledCanvas3.enabled = false;
-        controlledCanvas4.enabled = false;
-    }
-
-    public void Cyber()
-    {
-        controlledCanvas1.enabled = false;
-        controlledCanvas2.enabled = false;
-        controlledCanvas3.enabled = true;
-        controlledCanvas4.enabled = false;
-    }
-
-    public void Back()
-    {    
-            controlledCanvas1.enabled = false;
-            controlledCanvas2.enabled = false;
-            controlledCanvas3.enabled = false;
-            controlledCanvas4.enabled = true;
     }
 }
