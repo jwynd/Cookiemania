@@ -6,6 +6,7 @@ using UnityEngine;
 
 using static General_Utilities.ReflectionHelpers;
 using System;
+using TMPro;
 
 public class CustomizationUI : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class CustomizationUI : MonoBehaviour
     protected List<GameObject> toDisableWhenActive = new List<GameObject>();
     [SerializeField]
     protected GameObject errPanel = null;
+    [SerializeField]
+    private List<TMP_InputField> inputFields = new List<TMP_InputField>();
     protected Canvas errorCanvas = null;
     protected System.Action runOnEnd = null;
 
@@ -95,6 +98,7 @@ public class CustomizationUI : MonoBehaviour
 
     public void CustomizationStart(System.Action runOnComplete = null)
     {
+        EnableTextInputs(true);
         StateChangeHelper(true);
         if (runOnComplete != null)
             runOnEnd = runOnComplete;
@@ -114,10 +118,19 @@ public class CustomizationUI : MonoBehaviour
         {
             StopAllCoroutines();
             StateChangeHelper(false);
+            EnableTextInputs(false);
             if (runOnEnd != null)
                 runOnEnd.Invoke();
         }
         //else return an error that not everything has been set
+    }
+
+    private void EnableTextInputs(bool enable)
+    {
+        foreach(TMP_InputField input in inputFields)
+        {
+            input.gameObject.SetActive(enable);
+        }
     }
 
     private void StateChangeHelper(bool enabled)
@@ -150,6 +163,7 @@ public class CustomizationUI : MonoBehaviour
     protected List<PropertyInfo> myInfos = new List<PropertyInfo>();
     private bool customizable = false;
 
+
     private void Awake()
     {
         if (Instance && Instance != this)
@@ -161,6 +175,4 @@ public class CustomizationUI : MonoBehaviour
         errorCanvas.enabled = false;
         myInfos = GetValidProperties(this);
     }
-
-
 }

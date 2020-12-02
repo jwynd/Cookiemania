@@ -387,7 +387,8 @@ public class JumperManagerGame : MonoBehaviour
         return map;
     }
 
-    public static IEnumerator FlashThenKill(GameObject selfReference, float totalTime, float flashInterval, JumperGeneralThreat killableChild = null)
+    public static IEnumerator FlashThenKill(GameObject selfReference, float totalTime, 
+        float flashInterval, JumperGeneralThreat killableChild = null)
     {
         if (killableChild != null) { killableChild.PlatformDestroyed(totalTime, flashInterval); }
         int timer = (int)(totalTime / flashInterval);
@@ -400,7 +401,7 @@ public class JumperManagerGame : MonoBehaviour
             yield return new WaitForSeconds(flashInterval);
         }
         //this could be changed to recycling the object
-        Destroy(selfReference.gameObject);
+        Destroy(selfReference);
     }
 
     

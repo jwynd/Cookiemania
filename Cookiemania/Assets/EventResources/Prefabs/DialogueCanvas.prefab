@@ -91,7 +91,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7827764725951550811
 RectTransform:
   m_ObjectHideFlags: 0
@@ -654,40 +654,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8843202141590804026, guid: e3b8b2143dbb3534f98c190281b3c604,
         type: 3}
-      propertyPath: m_text
-      value: 'Dialogue goes here up to two lines only so a max word letter count of
-        96 must be enforced but now we have a lot omoasid fpaosi napsofin aspodfi
-        aspod fihaspofd ihaspod fihaspodfihaspdofihaspodfiahspdofiashdpfoiasj '
-      objectReference: {fileID: 0}
-    - target: {fileID: 8843202141590804026, guid: e3b8b2143dbb3534f98c190281b3c604,
-        type: 3}
-      propertyPath: m_fontSize
-      value: 24
-      objectReference: {fileID: 0}
-    - target: {fileID: 8843202141590804026, guid: e3b8b2143dbb3534f98c190281b3c604,
-        type: 3}
       propertyPath: m_fontSizeBase
       value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 8843202141590804026, guid: e3b8b2143dbb3534f98c190281b3c604,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 214
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 8843202141590804026, guid: e3b8b2143dbb3534f98c190281b3c604,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 33
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8843202141590804026, guid: e3b8b2143dbb3534f98c190281b3c604,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 33
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8843202141590804026, guid: e3b8b2143dbb3534f98c190281b3c604,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8843202141736558202, guid: e3b8b2143dbb3534f98c190281b3c604,
         type: 3}

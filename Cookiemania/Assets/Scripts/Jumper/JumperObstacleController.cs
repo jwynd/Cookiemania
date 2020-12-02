@@ -33,8 +33,7 @@ public class JumperObstacleController : JumperGeneralThreat
         FlashOntoPlatform(transform, dad, uncle, heightOffPlatform);
         flashCountdown = secondsBetweenFlashes * UnityEngine.Random.Range(1f, 2f);
         secondsBetweenFlashes *= UnityEngine.Random.Range(0.3f, 1.4f);
-        IEnumerator coroutine = DelayedGetUncle(dad);
-        StartCoroutine(coroutine);
+        GetUncle(dad);
     }
 
     private static void FlashOntoPlatform(Transform trans, 
@@ -113,7 +112,6 @@ public class JumperObstacleController : JumperGeneralThreat
 
     #endregion
 
-
     #region public
 
 
@@ -135,12 +133,8 @@ public class JumperObstacleController : JumperGeneralThreat
     #endregion
 
     #region coroutine
-    private IEnumerator DelayedGetUncle(JumperGeneralPlatform dad)
+    private void GetUncle(JumperGeneralPlatform dad)
     {
-        // waiting a couple frames, then we're looking for our uncle
-        yield return new WaitForFixedUpdate();
-        yield return new WaitForFixedUpdate();
-
         uncle = dad.GetClosestPlatform();
     }
     #endregion

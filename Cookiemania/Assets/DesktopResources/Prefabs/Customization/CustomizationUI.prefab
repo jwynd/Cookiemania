@@ -1707,7 +1707,7 @@ MonoBehaviour:
   m_enableKerning: 1
   m_enableExtraPadding: 1
   checkPaddingRequired: 0
-  m_isRichText: 1
+  m_isRichText: 0
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -3438,7 +3438,7 @@ MonoBehaviour:
   m_HideSoftKeyboard: 0
   m_CharacterValidation: 0
   m_RegexValue: 
-  m_GlobalPointSize: 24
+  m_GlobalPointSize: 22
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
@@ -3482,10 +3482,10 @@ MonoBehaviour:
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
-  m_RichText: 1
-  m_GlobalFontAsset: {fileID: 11400000, guid: d2b927f2a185e554091aa389d12ce347, type: 2}
+  m_RichText: 0
+  m_GlobalFontAsset: {fileID: 11400000, guid: 8075864e2ded4384c9d98e3b0a0f7ae5, type: 2}
   m_OnFocusSelectAll: 1
-  m_ResetOnDeActivation: 1
+  m_ResetOnDeActivation: 0
   m_RestoreOriginalTextOnEscape: 1
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 4
@@ -4280,7 +4280,7 @@ MonoBehaviour:
   m_HideSoftKeyboard: 0
   m_CharacterValidation: 0
   m_RegexValue: 
-  m_GlobalPointSize: 32
+  m_GlobalPointSize: 22
   m_CharacterLimit: 50
   m_OnEndEdit:
     m_PersistentCalls:
@@ -4324,10 +4324,10 @@ MonoBehaviour:
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
-  m_RichText: 1
-  m_GlobalFontAsset: {fileID: 11400000, guid: d2b927f2a185e554091aa389d12ce347, type: 2}
+  m_RichText: 0
+  m_GlobalFontAsset: {fileID: 11400000, guid: 8075864e2ded4384c9d98e3b0a0f7ae5, type: 2}
   m_OnFocusSelectAll: 1
-  m_ResetOnDeActivation: 1
+  m_ResetOnDeActivation: 0
   m_RestoreOriginalTextOnEscape: 1
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 0
@@ -4500,6 +4500,10 @@ MonoBehaviour:
   picture2: {fileID: 434240399}
   toDisableWhenActive: []
   errPanel: {fileID: 8056279187951780140}
+  inputFields:
+  - {fileID: 2666497090788068766}
+  - {fileID: 8068862412300959697}
+  - {fileID: 4318829334209281192}
 --- !u!1 &5503502296295246684
 GameObject:
   m_ObjectHideFlags: 0
@@ -5306,7 +5310,7 @@ MonoBehaviour:
   m_enableKerning: 1
   m_enableExtraPadding: 1
   checkPaddingRequired: 0
-  m_isRichText: 1
+  m_isRichText: 0
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -5730,7 +5734,7 @@ MonoBehaviour:
   m_enableKerning: 1
   m_enableExtraPadding: 1
   checkPaddingRequired: 0
-  m_isRichText: 1
+  m_isRichText: 0
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -6590,7 +6594,7 @@ MonoBehaviour:
   m_HideSoftKeyboard: 0
   m_CharacterValidation: 0
   m_RegexValue: 
-  m_GlobalPointSize: 24
+  m_GlobalPointSize: 22
   m_CharacterLimit: 24
   m_OnEndEdit:
     m_PersistentCalls:
@@ -6634,10 +6638,10 @@ MonoBehaviour:
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
-  m_RichText: 1
-  m_GlobalFontAsset: {fileID: 11400000, guid: d2b927f2a185e554091aa389d12ce347, type: 2}
+  m_RichText: 0
+  m_GlobalFontAsset: {fileID: 11400000, guid: 8075864e2ded4384c9d98e3b0a0f7ae5, type: 2}
   m_OnFocusSelectAll: 1
-  m_ResetOnDeActivation: 1
+  m_ResetOnDeActivation: 0
   m_RestoreOriginalTextOnEscape: 1
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 0

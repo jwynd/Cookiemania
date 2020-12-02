@@ -519,7 +519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textRef: {fileID: 5989427524142611236}
   constantText: 
-  changingText: Game Over<br>you made 0
+  changingText: Congratulations!<br>you made 0
   constantTextPart2: ' coins'
 --- !u!1 &6905569982628744915
 GameObject:

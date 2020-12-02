@@ -37,7 +37,9 @@ public abstract class JumperGeneralThreat : MonoBehaviour
     #region public
     public virtual void TakesDamage(float dmg)
     {
-        if (!IsIndestructable()) { currentHealth -= Mathf.Abs(dmg); }        
+        if (IsIndestructable())
+            return;
+        currentHealth -= Mathf.Abs(dmg);       
         if (currentHealth <= 0)
         {
             jm.Player.GivePoints(pointValue);
