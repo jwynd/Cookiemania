@@ -65,7 +65,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: im goin again!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1248bdbf33c5a96498693537bdfe21d4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8075864e2ded4384c9d98e3b0a0f7ae5, type: 2}
   m_sharedMaterial: {fileID: -689129272568514691, guid: 1248bdbf33c5a96498693537bdfe21d4,
     type: 2}
   m_fontSharedMaterials: []
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_subTextObjects:
   - {fileID: 0}
   - {fileID: 0}
@@ -190,8 +190,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000000059605, y: 1.514}
-  m_SizeDelta: {x: 969.991, y: 609.305}
+  m_AnchoredPosition: {x: -0.000033379, y: 37}
+  m_SizeDelta: {x: 733.9, y: 116.25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5989427524142611237
 CanvasRenderer:
@@ -221,11 +221,10 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Congratulations!
 
-
     you made 0 coins'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d2b927f2a185e554091aa389d12ce347, type: 2}
-  m_sharedMaterial: {fileID: -7865273506847581104, guid: d2b927f2a185e554091aa389d12ce347,
+  m_fontAsset: {fileID: 11400000, guid: 8075864e2ded4384c9d98e3b0a0f7ae5, type: 2}
+  m_sharedMaterial: {fileID: 8163171998885815143, guid: 8075864e2ded4384c9d98e3b0a0f7ae5,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -251,7 +250,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 72
+  m_fontSize: 49.35
   m_fontSizeBase: 150
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -289,15 +288,15 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 108.709694, z: 0.000048628448, w: 207.00693}
+  m_margin: {x: 0, y: 0.16223495, z: 0.000048628448, w: 0.34938258}
   m_textInfo:
     textComponent: {fileID: 5989427524142611236}
-    characterCount: 34
+    characterCount: 33
     spriteCount: 0
-    spaceCount: 5
+    spaceCount: 4
     wordCount: 5
     linkCount: 0
-    lineCount: 3
+    lineCount: 2
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -587,16 +586,16 @@ MonoBehaviour:
       m_Calls: []
   m_text: Back To Main Menu
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1248bdbf33c5a96498693537bdfe21d4, type: 2}
-  m_sharedMaterial: {fileID: -689129272568514691, guid: 1248bdbf33c5a96498693537bdfe21d4,
+  m_fontAsset: {fileID: 11400000, guid: 8075864e2ded4384c9d98e3b0a0f7ae5, type: 2}
+  m_sharedMaterial: {fileID: 8163171998885815143, guid: 8075864e2ded4384c9d98e3b0a0f7ae5,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -614,7 +613,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 64.3
+  m_fontSize: 42.05
   m_fontSizeBase: 54
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -823,6 +822,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   updateSpeed: 2
   minimumAlpha: 0.2
+  useImage: 0
 --- !u!1 &8267912167805010551
 GameObject:
   m_ObjectHideFlags: 0
