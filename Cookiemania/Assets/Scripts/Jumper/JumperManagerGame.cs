@@ -395,13 +395,18 @@ public class JumperManagerGame : MonoBehaviour
         Renderer rend = selfReference.GetComponent<Renderer>();
         for (int i = 0; i < timer; i++)
         {
+            if (!rend)
+                break;
             rend.material.color = Color.gray;
             yield return new WaitForSeconds(flashInterval);
+            if (!rend)
+                break;
             rend.material.color = Color.white;
             yield return new WaitForSeconds(flashInterval);
         }
         //this could be changed to recycling the object
-        Destroy(selfReference);
+        if (selfReference)
+            Destroy(selfReference);
     }
 
     

@@ -15,6 +15,9 @@ public class JumperGeneralPlatform : MonoBehaviour
     [HideInInspector]
     public JumperGeneralThreat enemyChild = null;
 
+    [HideInInspector]
+    public HashSet<JumperGeneralThreat> secondaryChildren = new HashSet<JumperGeneralThreat>();
+
     [SerializeField]
     protected bool placePlatformsAbove = true;
 
@@ -88,22 +91,32 @@ public class JumperGeneralPlatform : MonoBehaviour
     //ensures child ALWAYS destroyed when this is destroyed. gotta make sure ya know
     public void OnDestroy()
     {
-        if (enemyChild != null)
-        {
+        if (enemyChild)
             Destroy(enemyChild);
-        }
+        foreach(var child in secondaryChildren)
+            if (child)
+                Destroy(child);
+        secondaryChildren.Clear();
     }
 
     public virtual void Remove(bool immediately = false)
     {
+        var tRemoveTime = 0.01f;
+        var tFlashPeriod = 0.01f;
+        if (!immediately)
+        {
+            tRemoveTime = timeToRemove;
+            tFlashPeriod = flashPeriod;
+        }
         if (notFlashing)
         {
             notFlashing = false;
-            StartCoroutine(JumperManagerGame.FlashThenKill(gameObject, timeToRemove, flashPeriod, enemyChild));
-        }
-        else if (immediately)
-        {
-            StartCoroutine(JumperManagerGame.FlashThenKill(gameObject, 0.1f, 0.1f, enemyChild));
+            StartCoroutine(JumperManagerGame.FlashThenKill(
+                gameObject, tRemoveTime, tFlashPeriod, enemyChild));
+            foreach(var child in secondaryChildren)
+                if (child)
+                    StartCoroutine(JumperManagerGame.FlashThenKill(
+                        child.gameObject, tRemoveTime, tFlashPeriod));  
         }
     }
     #endregion

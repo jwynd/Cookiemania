@@ -14,6 +14,7 @@ public class JumperObstacleController : JumperGeneralThreat
     protected JumperGeneralPlatform uncle;
     protected JumperGeneralPlatform currentlyOn;
     protected Animator animator;
+    protected Collider2D coll2D;
     protected float flashCountdown = 0f;
     private bool flashing = false;
     private float heightOffPlatform = 1.5f;
@@ -23,27 +24,33 @@ public class JumperObstacleController : JumperGeneralThreat
     protected override void Start()
     {
         base.Start();
+        coll2D = GetComponent<Collider2D>();
         SetBaseParameters();
         animator = GetComponent<Animator>();
         dad = transform.parent.GetComponent<JumperGeneralPlatform>();
+        dad.enemyChild = null;
         heightOffPlatform = GetComponent<SpriteRenderer>().bounds.extents.y * 
             transform.localScale.magnitude;
         transform.parent = null;
         currentlyOn = dad;
-        FlashOntoPlatform(transform, dad, uncle, heightOffPlatform);
+        FlashOntoPlatform(this, transform, dad, uncle, heightOffPlatform);
         flashCountdown = secondsBetweenFlashes * UnityEngine.Random.Range(1f, 2f);
         secondsBetweenFlashes *= UnityEngine.Random.Range(0.3f, 1.4f);
         GetUncle(dad);
     }
 
-    private static void FlashOntoPlatform(Transform trans, 
+    private static void FlashOntoPlatform(
+        JumperGeneralThreat self,
+        Transform trans, 
         JumperGeneralPlatform newDaddio,
         JumperGeneralPlatform oldDad,
         float heightOffPlatform)
     {
+        if (!newDaddio)
+            return;
         if (oldDad)
-            oldDad.enemyChild = null;
-        newDaddio.enemyChild = trans.GetComponent<JumperObstacleController>();
+            oldDad.secondaryChildren.Remove(self);
+        newDaddio.secondaryChildren.Add(self);
         Vector3 pBounds = newDaddio.GetHorizontalBounds();
         var parentLeft = pBounds.x;
         var parentRight = pBounds.z;
@@ -93,21 +100,35 @@ public class JumperObstacleController : JumperGeneralThreat
     private void Flash()
     {
         flashing = true;
+        coll2D.enabled = false;
         animator.SetTrigger("Teleport");
     }
 
     // should be called by an event through the animator
-    public void TeleportComplete()
+    public void TeleportReappear()
     {
-        animator.SetTrigger("FinishTeleport");
         currentlyOn = currentlyOn == dad ? uncle : dad;
         var oldDad = currentlyOn == dad ? uncle : dad;
-        if (currentlyOn != null)
+        if (currentlyOn)
         {
-            FlashOntoPlatform(transform, currentlyOn, oldDad, heightOffPlatform);
+            FlashOntoPlatform(this, transform, currentlyOn, oldDad, heightOffPlatform);
+            animator.SetTrigger("FinishTeleport");
+            flashing = false;
+            flashCountdown = secondsBetweenFlashes;
         }
-        flashing = false;
-        flashCountdown = secondsBetweenFlashes;
+        else
+        {
+            Remove(true);
+        }
+    }
+
+    public void TeleportComplete()
+    {
+        // all we're doing is re-enabling the collider, will also 
+        // be called by the animator
+        coll2D.enabled = true;
+        if (!currentlyOn)
+            Remove(true);
     }
 
     #endregion
@@ -125,12 +146,18 @@ public class JumperObstacleController : JumperGeneralThreat
         rb.isKinematic = true;
         if (isImmediate)
         {
-            StartCoroutine(JumperManagerGame.FlashThenKill(gameObject, 0.05f, 0.05f));
-
+            Destroy(gameObject);
+            return;
         }
         StartCoroutine(JumperManagerGame.FlashThenKill(gameObject, 0.5f, 0.1f));
     }
     #endregion
+
+    private void OnDestroy()
+    {
+        // no destroying this script without destroying the whole object
+        Destroy(gameObject);
+    }
 
     #region coroutine
     private void GetUncle(JumperGeneralPlatform dad)

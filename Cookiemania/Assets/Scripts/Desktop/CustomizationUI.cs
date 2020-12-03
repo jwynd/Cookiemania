@@ -3,10 +3,10 @@ using System.Reflection;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using TMPro;
 
 using static General_Utilities.ReflectionHelpers;
-using System;
-using TMPro;
+
 
 public class CustomizationUI : MonoBehaviour
 {
@@ -21,9 +21,11 @@ public class CustomizationUI : MonoBehaviour
     [SerializeField]
     protected GameObject errPanel = null;
     [SerializeField]
-    private List<TMP_InputField> inputFields = new List<TMP_InputField>();
+    private GameObject normalPanel = null;
     protected Canvas errorCanvas = null;
     protected System.Action runOnEnd = null;
+    protected List<PropertyInfo> myInfos = new List<PropertyInfo>();
+    private bool customizable = false;
 
     public static CustomizationUI Instance { get; protected set; }
     public string CompanyName { get; protected set; } = null;
@@ -98,7 +100,7 @@ public class CustomizationUI : MonoBehaviour
 
     public void CustomizationStart(System.Action runOnComplete = null)
     {
-        EnableTextInputs(true);
+        EnablePanels(true);
         StateChangeHelper(true);
         if (runOnComplete != null)
             runOnEnd = runOnComplete;
@@ -118,19 +120,17 @@ public class CustomizationUI : MonoBehaviour
         {
             StopAllCoroutines();
             StateChangeHelper(false);
-            EnableTextInputs(false);
+            EnablePanels(false);
             if (runOnEnd != null)
                 runOnEnd.Invoke();
         }
         //else return an error that not everything has been set
     }
 
-    private void EnableTextInputs(bool enable)
+    private void EnablePanels(bool enable)
     {
-        foreach(TMP_InputField input in inputFields)
-        {
-            input.gameObject.SetActive(enable);
-        }
+        errPanel.SetActive(enable);
+        normalPanel.SetActive(enable);
     }
 
     private void StateChangeHelper(bool enabled)
@@ -160,8 +160,6 @@ public class CustomizationUI : MonoBehaviour
         errorCanvas.enabled = false;
     }
 
-    protected List<PropertyInfo> myInfos = new List<PropertyInfo>();
-    private bool customizable = false;
 
 
     private void Awake()

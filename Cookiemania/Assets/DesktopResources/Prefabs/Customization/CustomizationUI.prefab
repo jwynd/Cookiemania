@@ -4500,10 +4500,7 @@ MonoBehaviour:
   picture2: {fileID: 434240399}
   toDisableWhenActive: []
   errPanel: {fileID: 8056279187951780140}
-  inputFields:
-  - {fileID: 2666497090788068766}
-  - {fileID: 8068862412300959697}
-  - {fileID: 4318829334209281192}
+  normalPanel: {fileID: 3442284654028059781}
 --- !u!1 &5503502296295246684
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4951104152917797380}
   - component: {fileID: 2588161464325743103}
   - component: {fileID: 1601617664054280113}
-  - component: {fileID: 455056099776919384}
-  - component: {fileID: 2574748521298377041}
+  - component: {fileID: 6228754146897808095}
   - component: {fileID: 7531371117447983618}
+  - component: {fileID: 2574748521298377041}
   m_Layer: 0
   m_Name: JumperObstacle
   m_TagString: Obstacle
@@ -106,8 +106,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &455056099776919384
-BoxCollider2D:
+--- !u!58 &6228754146897808095
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -119,38 +119,9 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.022542477, y: -0.022518158}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.01, y: 2.5511758}
-    newSize: {x: 3.57, y: 3.61}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 1
+  m_Offset: {x: 0, y: -0.019067764}
   serializedVersion: 2
-  m_Size: {x: 3.299488, y: 3.294742}
-  m_EdgeRadius: 0
---- !u!114 &2574748521298377041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7912494556424759361}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc81e740413206843bc6e0f724c055c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  acceleration: 0
-  maxVelocity: 0
-  damage: 2.5
-  pointValue: 15
-  indestructable: 1
-  maxHealth: 1
-  secondsBetweenFlashes: 2
+  m_Radius: 0.7861856
 --- !u!95 &7531371117447983618
 Animator:
   serializedVersion: 3
@@ -170,3 +141,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2574748521298377041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7912494556424759361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc81e740413206843bc6e0f724c055c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  acceleration: 0
+  maxVelocity: 0
+  damage: 2.5
+  pointValue: 15
+  indestructable: 1
+  maxHealth: 1
+  secondsBetweenFlashes: 4
