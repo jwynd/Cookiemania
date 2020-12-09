@@ -20,6 +20,10 @@ public class ShopButtons : MonoBehaviour
     {
         OpenHomepage();
     }
+    private void Start()
+    {
+        UpdatePlayer();
+    }
 
     public void OpenHomepage()
     {
@@ -74,5 +78,15 @@ public class ShopButtons : MonoBehaviour
                 Debug.LogError(e);
             }
         }
+    }
+
+    public void UpdatePlayer()
+    {
+        if (GameObject.Find("ShopCanvas(Clone)") != null)
+        {
+            GameObject.Find("AnalyticsMoney").GetComponent<TMPro.TextMeshProUGUI>().text = "Money: $" + PlayerData.Player.money.ToString();
+            GameObject.Find("AnalyticsLvl").GetComponent<TMPro.TextMeshProUGUI>().text = "Lvl: " + PlayerData.Player.shoplvl.ToString();
+        }
+
     }
 }

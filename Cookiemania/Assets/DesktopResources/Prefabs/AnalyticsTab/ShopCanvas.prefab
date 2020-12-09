@@ -6101,6 +6101,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2454862884721560009}
+    - target: {fileID: 2413052073605502200, guid: 4547bce901538c74b803561cbd36f6fc,
+        type: 3}
+      propertyPath: m_Name
+      value: AnalyticsLvl
+      objectReference: {fileID: 0}
     - target: {fileID: 4333096691704568177, guid: 4547bce901538c74b803561cbd36f6fc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6215,6 +6220,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SharedBG
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800064900088939664, guid: 4547bce901538c74b803561cbd36f6fc,
+        type: 3}
+      propertyPath: m_Name
+      value: AnalyticsMoney
       objectReference: {fileID: 0}
     - target: {fileID: 8256816972784502951, guid: 4547bce901538c74b803561cbd36f6fc,
         type: 3}
