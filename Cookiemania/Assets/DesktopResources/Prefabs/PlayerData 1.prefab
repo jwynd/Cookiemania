@@ -48,7 +48,7 @@ MonoBehaviour:
   spacelvl: 0
   incomelvl: 0
   healthlvl: 0
-  _money: 0
+  _money: 50
   _shoplvl: 0
   _week: 0
   _morality: 0

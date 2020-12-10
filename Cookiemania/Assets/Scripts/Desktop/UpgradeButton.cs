@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UpgradeButton : MonoBehaviour
 {
@@ -9,8 +10,8 @@ public class UpgradeButton : MonoBehaviour
     public string popupText;
     public int lvlReq;
     public string popupTitle;
-    public string popupPrice;
-    private bool purchased = false;
+    public int popupPrice;
+    public bool purchased = false;
     private GameObject [] upgradeTitles;
     private GameObject [] upgradeDescriptions;
     private GameObject [] upgradeCosts;
@@ -19,12 +20,19 @@ public class UpgradeButton : MonoBehaviour
        upgradeTitles = GameObject.FindGameObjectsWithTag("UpgradeTitle");
        upgradeDescriptions = GameObject.FindGameObjectsWithTag("UpgradeDescription");
        upgradeCosts = GameObject.FindGameObjectsWithTag("UpgradeCost");
+        cost = popupPrice;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (cost > PlayerData.Player.money || lvlReq > PlayerData.Player.shoplvl)
+        {
+            gameObject.GetComponent<Button>().interactable = false;
+        } else
+        {
+            gameObject.GetComponent<Button>().interactable = true;
+        }
     }
 
     public void select()
@@ -40,8 +48,9 @@ public class UpgradeButton : MonoBehaviour
         }
         for (int i = 0; i < upgradeCosts.Length; i++)
         {
-            upgradeCosts[i].GetComponent<TMPro.TextMeshProUGUI>().text = popupPrice;
+            upgradeCosts[i].GetComponent<TMPro.TextMeshProUGUI>().text = "Cost: $" + popupPrice.ToString();
         }
+        GameObject.FindGameObjectWithTag("Purchase").GetComponent<BuyButton>().selectedUpgrade = this;
     }
     public void Buy()
     {

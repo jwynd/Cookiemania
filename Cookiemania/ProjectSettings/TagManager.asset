@@ -29,6 +29,7 @@ TagManager:
   - UpgradeTitle
   - UpgradeDescription
   - UpgradeCost
+  - Purchase
   layers:
   - Default
   - TransparentFX

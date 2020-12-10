@@ -144,7 +144,8 @@ MonoBehaviour:
   popupText: Gain Additional Health!
   lvlReq: 0
   popupTitle: Instant Milk
-  popupPrice: $20
+  popupPrice: 0
+  purchased: 0
 --- !u!1 &243840306237982630
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,6 +364,7 @@ MonoBehaviour:
   lvlReq: 0
   popupTitle: Almond Milk
   popupPrice: 20
+  purchased: 0
 --- !u!1 &1251457841009143750
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,7 +509,8 @@ MonoBehaviour:
   popupText: Advanced Artificial intellegence helper
   lvlReq: 0
   popupTitle: Advanced AI
-  popupPrice: $20
+  popupPrice: 20
+  purchased: 0
 --- !u!1 &1406126243520236232
 GameObject:
   m_ObjectHideFlags: 0
@@ -725,7 +728,8 @@ MonoBehaviour:
   popupText: Basic artificial intellegence helper
   lvlReq: 0
   popupTitle: Basic AI
-  popupPrice: $20
+  popupPrice: 20
+  purchased: 0
 --- !u!1 &3108257664824156864
 GameObject:
   m_ObjectHideFlags: 0
@@ -943,7 +947,8 @@ MonoBehaviour:
   popupText: Self-Learning Artificial Intelligence
   lvlReq: 0
   popupTitle: Self-Learning AI
-  popupPrice: $20
+  popupPrice: 20
+  purchased: 0
 --- !u!1 &4860501226173031172
 GameObject:
   m_ObjectHideFlags: 0
@@ -1159,9 +1164,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popupText: Yummy milk, gain 1 hp
-  lvlReq: 1
+  lvlReq: 0
   popupTitle: Skim Milk
-  popupPrice: $20
+  popupPrice: 20
+  purchased: 0
 --- !u!1 &5068630672214588828
 GameObject:
   m_ObjectHideFlags: 0
@@ -1295,13 +1301,13 @@ MonoBehaviour:
   m_margin: {x: -76.22633, y: -35.672577, z: 177.50238, w: 23.871536}
   m_textInfo:
     textComponent: {fileID: 4804112280217958710}
-    characterCount: 6
+    characterCount: 0
     spriteCount: 0
     spaceCount: 0
-    wordCount: 1
+    wordCount: 0
     linkCount: 0
-    lineCount: 1
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -1466,13 +1472,13 @@ MonoBehaviour:
   m_margin: {x: -165.42783, y: -22.641724, z: -121.32464, w: 23.871536}
   m_textInfo:
     textComponent: {fileID: 612661681243656374}
-    characterCount: 15
+    characterCount: 0
     spriteCount: 0
-    spaceCount: 1
-    wordCount: 2
+    spaceCount: 0
+    wordCount: 0
     linkCount: 0
-    lineCount: 1
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -1634,6 +1640,7 @@ MonoBehaviour:
   lvlReq: 0
   popupTitle: Soy Milk
   popupPrice: 20
+  purchased: 0
 --- !u!1 &7610542613404841488
 GameObject:
   m_ObjectHideFlags: 0
@@ -1840,13 +1847,13 @@ MonoBehaviour:
   m_margin: {x: -76.22633, y: -35.672577, z: 202.94214, w: 23.871536}
   m_textInfo:
     textComponent: {fileID: 3085627065971330054}
-    characterCount: 2
+    characterCount: 0
     spriteCount: 0
     spaceCount: 0
-    wordCount: 1
+    wordCount: 0
     linkCount: 0
-    lineCount: 1
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -2008,3 +2015,4 @@ MonoBehaviour:
   lvlReq: 0
   popupTitle: Ice Cream
   popupPrice: 20
+  purchased: 0
