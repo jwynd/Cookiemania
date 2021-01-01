@@ -1016,6 +1016,16 @@ PrefabInstance:
       propertyPath: heightGoal
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 826711010817931759, guid: 97c37d740f218ae4abebbf038c44dbe5,
+        type: 3}
+      propertyPath: dayPrefabs.Array.data[2].weight
+      value: 0.311
+      objectReference: {fileID: 0}
+    - target: {fileID: 826711010817931759, guid: 97c37d740f218ae4abebbf038c44dbe5,
+        type: 3}
+      propertyPath: dayPrefabs.Array.data[1].weight
+      value: 0.774
+      objectReference: {fileID: 0}
     - target: {fileID: 6845973269452864297, guid: 97c37d740f218ae4abebbf038c44dbe5,
         type: 3}
       propertyPath: m_Name
