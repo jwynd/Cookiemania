@@ -71,7 +71,7 @@ MonoBehaviour:
     weight: 0.371
   - platform: {fileID: 637888742533752541, guid: 45b8d4f185c9d584c8dce7c171ed52e4,
       type: 3}
-    weight: 0.112
+    weight: 0.852
   - platform: {fileID: 2042707450985415420, guid: 633e2ba3c5535b244a4708b29c5d1d0b,
       type: 3}
     weight: 0.251
@@ -83,7 +83,7 @@ MonoBehaviour:
     weight: 0.584
   nightExit: {fileID: 2001070790077626028, guid: e57e91b6f70b8ec4ba5ebc1b1c8c9e49,
     type: 3}
-  dayExit: {fileID: 2001070790077626028, guid: b2bb088d569d26b478cf619d145a22e8, type: 3}
+  dayExit: {fileID: 2001070790077626028, guid: 4b664211927d6084f8bd7a2493038db3, type: 3}
   startingPlatform: {fileID: 0}
   defaultDayPlatformImage: {fileID: 21300000, guid: b6a2d196ba5ec404683819280e4b72d7,
     type: 3}

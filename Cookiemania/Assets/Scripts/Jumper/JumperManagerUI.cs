@@ -23,7 +23,6 @@ public class JumperManagerUI : MonoBehaviour
     private int coinsCollected = 0;
     private JumperManagerGame jm;
     private General_LevelTransition levelController;
-    private JumperGeneralText scoreText;
     private JumperGeneralText tutorialText;
     private bool tutorialActive = false;
     private bool needNextLine;
@@ -45,7 +44,6 @@ public class JumperManagerUI : MonoBehaviour
         Instance = this;
         endscreenCamera.GetComponent<Camera>().enabled = false;
         endscreenCamera.GetComponent<AudioListener>().enabled = false;
-        scoreText = scoreRef.gameObject.GetComponent<JumperGeneralText>();
 
         tutorialText = tutorialRef.gameObject.GetComponent<JumperGeneralText>();
         
@@ -74,7 +72,7 @@ public class JumperManagerUI : MonoBehaviour
             heightSlider.value = jm.Player.transform.position.y;
             healthSlider.value = jm.Player.GetCurrentHealth();
             coinsCollected = (int)jm.Player.GetCoinsCollected();
-            scoreText.UpdateText(coinsCollected.ToString());
+            scoreRef.text = coinsCollected.ToString();
         }
         TutorialUpdate();
     }

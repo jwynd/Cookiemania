@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8594421183954262580}
   - component: {fileID: 4423854033441122629}
   m_Layer: 10
-  m_Name: JumperExitPrefab
+  m_Name: JumperExit
   m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -134,26 +134,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 865942182042545269}
     m_Modifications:
-    - target: {fileID: 7342528545440380723, guid: 5f20168f6c8f71a4f92a68d54d88d431,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7342528545440380723, guid: 5f20168f6c8f71a4f92a68d54d88d431,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7342528545440380723, guid: 5f20168f6c8f71a4f92a68d54d88d431,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7342528545440380723, guid: 5f20168f6c8f71a4f92a68d54d88d431,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7342528546163051625, guid: 5f20168f6c8f71a4f92a68d54d88d431,
         type: 3}
       propertyPath: m_Name
@@ -162,12 +142,12 @@ PrefabInstance:
     - target: {fileID: 7342528546163051631, guid: 5f20168f6c8f71a4f92a68d54d88d431,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.008974075
+      value: -0.083
       objectReference: {fileID: 0}
     - target: {fileID: 7342528546163051631, guid: 5f20168f6c8f71a4f92a68d54d88d431,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.2793245
+      value: 2.11
       objectReference: {fileID: 0}
     - target: {fileID: 7342528546163051631, guid: 5f20168f6c8f71a4f92a68d54d88d431,
         type: 3}
