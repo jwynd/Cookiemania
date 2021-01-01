@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4790512461018026982}
   - component: {fileID: 4790512461018026983}
-  - component: {fileID: 4790512461018026976}
   - component: {fileID: 4790512461018026977}
-  - component: {fileID: 2253716481641927315}
+  - component: {fileID: 8877228904129625591}
+  - component: {fileID: 153939217032341059}
   m_Layer: 0
   m_Name: JumperPickup
   m_TagString: Pickup
@@ -83,32 +83,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &4790512461018026976
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4790512461018026978}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.008289099, y: 0.000045776367}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 11.84, y: 10.67}
-    newSize: {x: 2.56, y: 2.56}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.574038, y: 2.4574733}
-  m_EdgeRadius: 0
 --- !u!50 &4790512461018026977
 Rigidbody2D:
   serializedVersion: 4
@@ -130,7 +104,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &2253716481641927315
+--- !u!114 &8877228904129625591
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,13 +113,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 4790512461018026978}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe4b28c1c230b3d4aa1a37149754393e, type: 3}
+  m_Script: {fileID: 11500000, guid: cf692b8798c71094aa580e1881387f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 15
-  pointsOnPickup: 5
-  automaticallyPickup: 0
-  explosionTimer: 0.75
-  explosionFlashCount: 3
-  explosionFrames: 5
-  explosionSize: 8
+  damage: 0
+  pointsOnPickup: 25
+  destroyOnPickup: 1
+  automaticallyPickup: 1
+--- !u!58 &153939217032341059
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4790512461018026978}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 5.92

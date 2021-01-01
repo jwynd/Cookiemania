@@ -13,6 +13,8 @@ public abstract class JumperGeneralPickup : MonoBehaviour
     [SerializeField]
     protected float pointsOnPickup = 5f;
     [SerializeField]
+    protected bool destroyOnPickup = false;
+    [SerializeField]
     protected bool automaticallyPickup = false;
 
 
@@ -31,12 +33,26 @@ public abstract class JumperGeneralPickup : MonoBehaviour
     {
         gameObject.tag = JumperManagerGame.Instance.GetCollectiblesTag();
     }
+
+    public virtual void Remove()
+    {
+        StopAllCoroutines();
+        Destroy(gameObject);
+    }
     #endregion
 
     #region noOverride
     public bool IsAutomaticPickup()
     {
         return automaticallyPickup;
+    }
+    public bool IsDestroyOnPickup()
+    {
+        return destroyOnPickup;
+    }
+    public float PointsOnPickup()
+    {
+        return pointsOnPickup;
     }
     #endregion
 

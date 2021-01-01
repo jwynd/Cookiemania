@@ -107,9 +107,9 @@ public class JumperPickupController : JumperGeneralPickup
         }
     }
 
-    protected void Remove()
+    public override void Remove()
     {
         RemoveFromParent();
-        Destroy(gameObject);
+        base.Remove();
     }
 }
