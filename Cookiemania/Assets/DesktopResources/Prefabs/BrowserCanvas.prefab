@@ -886,7 +886,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   updateSpeed: 1.2
   minimumAlpha: 0.3
-  useImage: 0
+  useCase: 2
+  disableOnHover: 0
 --- !u!1 &700382184389942288
 GameObject:
   m_ObjectHideFlags: 0
@@ -1233,7 +1234,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   updateSpeed: 1.2
   minimumAlpha: 0.3
-  useImage: 1
+  useCase: 1
+  disableOnHover: 0
 --- !u!114 &700382185167439114
 MonoBehaviour:
   m_ObjectHideFlags: 0

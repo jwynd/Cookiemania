@@ -88,7 +88,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   updateSpeed: 0.9
   minimumAlpha: 0.3
-  useImage: 1
+  useCase: 1
   disableOnHover: 0
 --- !u!1 &7342528544784071565
 GameObject:
@@ -202,6 +202,7 @@ GameObject:
   - component: {fileID: 7342528545440380685}
   - component: {fileID: 7342528545440380722}
   - component: {fileID: 7342528545440380723}
+  - component: {fileID: 5819184749742233036}
   m_Layer: 5
   m_Name: Exit Text
   m_TagString: Untagged
@@ -347,6 +348,22 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5819184749742233036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7342528545440380686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98c1364da2f611c45b8a840dc6899b7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateSpeed: 0.4
+  minimumAlpha: 0.3
+  useCase: 2
+  disableOnHover: 0
 --- !u!1 &7342528546163051625
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,7 +463,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   updateSpeed: 0.9
   minimumAlpha: 0.3
-  useImage: 0
+  useCase: 2
   disableOnHover: 0
 --- !u!61 &5656671127033559237
 BoxCollider2D:
@@ -580,7 +597,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   updateSpeed: 0.9
   minimumAlpha: 0.3
-  useImage: 1
+  useCase: 1
   disableOnHover: 0
 --- !u!1 &8865698588912568922
 GameObject:

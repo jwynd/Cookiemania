@@ -5,6 +5,13 @@ using UnityEngine.EventSystems;
 
 public class JumperTimeBasedFadeEffect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    public enum EUseCase : uint
+    {
+        Sprite,
+        Image,
+        Text,
+    }
+
     private const float MAX_ALPHA = 1f;
     [SerializeField]
     private float updateSpeed = 0.5f;
@@ -14,8 +21,7 @@ public class JumperTimeBasedFadeEffect : MonoBehaviour, IPointerEnterHandler, IP
     private float minimumAlpha = 0.3f;
 
     [SerializeField]
-    [Tooltip("uses TMP text instead if false")]
-    private bool useImage = false;
+    private EUseCase useCase = EUseCase.Text;
 
     [SerializeField]
     private bool disableOnHover = false;
@@ -24,6 +30,7 @@ public class JumperTimeBasedFadeEffect : MonoBehaviour, IPointerEnterHandler, IP
     private bool effectDisabled = false;
     private TextMeshProUGUI textRef;
     private Image imageAlt;
+    private SpriteRenderer spriteAlt;
     private float angle = MAX_ALPHA;
     
     private Color baseColor;
@@ -32,15 +39,25 @@ public class JumperTimeBasedFadeEffect : MonoBehaviour, IPointerEnterHandler, IP
     {
         // prefer text in child, image in parent
         textRef = GetComponentInChildren<TextMeshProUGUI>();
+        imageAlt = GetComponent<Image>();
+        spriteAlt = GetComponent<SpriteRenderer>();
         if (textRef == null)
             textRef = GetComponent<TextMeshProUGUI>();
-        imageAlt = GetComponent<Image>();
+
         if (imageAlt == null)
             imageAlt = GetComponentInChildren<Image>();
-        if (useImage)
-            baseColor = imageAlt.color;
-        else
-            baseColor = textRef.color;
+        switch (useCase) 
+        {
+            case EUseCase.Image:
+                baseColor = imageAlt.color;
+                break;
+            case EUseCase.Text:
+                baseColor = textRef.color;
+                break;
+            case EUseCase.Sprite:
+                baseColor = spriteAlt.color;
+                break;
+        }
     }
 
     void Update()
@@ -68,10 +85,18 @@ public class JumperTimeBasedFadeEffect : MonoBehaviour, IPointerEnterHandler, IP
     private void SetAlpha(float alpha)
     {
         baseColor.a = alpha;
-        if (useImage)
-            imageAlt.color = baseColor;
-        else
-            textRef.color = baseColor;
+        switch(useCase)
+        {
+            case EUseCase.Text:
+                textRef.color = baseColor;
+                break;
+            case EUseCase.Image:
+                imageAlt.color = baseColor;
+                break;
+            case EUseCase.Sprite:
+                spriteAlt.color = baseColor;
+                break;
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
