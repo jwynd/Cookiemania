@@ -495,7 +495,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a8acd0f70d03b3640bb694d6e4a5b61d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f25c2f5f436682a4cb381f94d169ef98, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -518,7 +518,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AspectMode: 4
-  m_AspectRatio: 1.334202
+  m_AspectRatio: 2
 --- !u!1 &7394395173352058610
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,6 +530,7 @@ GameObject:
   - component: {fileID: 7394395173352058611}
   - component: {fileID: 7394395173352058609}
   - component: {fileID: 7394395173352058608}
+  - component: {fileID: 1639920205}
   m_Layer: 5
   m_Name: GameOver
   m_TagString: Untagged
@@ -677,6 +678,18 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1639920205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7394395173352058610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ef303c79563f1d4e80e6a7bad9ca78d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7394395174224279123
 GameObject:
   m_ObjectHideFlags: 0
@@ -690,7 +703,6 @@ GameObject:
   - component: {fileID: 7394395174224279121}
   - component: {fileID: 7394395174224279120}
   - component: {fileID: 7394395174224279124}
-  - component: {fileID: 284351755249037925}
   m_Layer: 5
   m_Name: SpaceEndCanvas
   m_TagString: Untagged
@@ -797,22 +809,6 @@ MonoBehaviour:
   constantText: 
   changingText: Game Over<br>you made 0
   constantTextPart2: ' coins'
---- !u!114 &284351755249037925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7394395174224279123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0eb4e481b05dc3a4fbbec16c6b4baec4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dayPrefabs:
-  - {fileID: 0}
-  nightPrefabs:
-  - {fileID: 7394395173269619310}
 --- !u!1 &7662048955141413639
 GameObject:
   m_ObjectHideFlags: 0

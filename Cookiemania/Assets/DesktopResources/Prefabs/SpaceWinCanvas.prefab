@@ -167,9 +167,10 @@ GameObject:
   - component: {fileID: 5989427524142611239}
   - component: {fileID: 5989427524142611237}
   - component: {fileID: 5989427524142611236}
+  - component: {fileID: 422676151}
   m_Layer: 5
-  m_Name: GameOver
-  m_TagString: Untagged
+  m_Name: Congratulations
+  m_TagString: Congratulations
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -257,7 +258,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 258
+  m_textAlignment: 514
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -314,6 +315,18 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &422676151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5989427524142611238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3da61f31dbad5ff49b36b5fcfe627dc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5989427524594948026
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,9 +361,9 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 149.73404}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5989427524594948022
 CanvasRenderer:
@@ -378,7 +391,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a8acd0f70d03b3640bb694d6e4a5b61d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: af039ba222650254f98de5a181ef91ab, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -401,7 +414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AspectMode: 4
-  m_AspectRatio: 1.334202
+  m_AspectRatio: 2
 --- !u!1 &5989427525685912455
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,7 +434,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5989427525685912451
 RectTransform:
   m_ObjectHideFlags: 0
@@ -464,7 +477,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 242417985
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &5989427525685912453
 MonoBehaviour:
@@ -796,9 +809,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 29125470496223545, guid: 033eec8b3faf40642b1b528004d0f8ad,
-          type: 3}
-        m_MethodName: ReturnToDesktop
+      - m_Target: {fileID: 0}
+        m_MethodName: leaveGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -822,7 +834,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   updateSpeed: 2
   minimumAlpha: 0.2
-  useImage: 0
+  useCase: 2
+  disableOnHover: 0
 --- !u!1 &8267912167805010551
 GameObject:
   m_ObjectHideFlags: 0
