@@ -281,6 +281,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: EventCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 7804471701406804769, guid: af5d66ab99d4c4b4cbc507399e5098e3,
+        type: 3}
+      propertyPath: characterList.Array.data[2].Sprite
+      value: 
+      objectReference: {fileID: 5897409136971021404, guid: 62f4baed5a7065f428588936ef6033e1,
+        type: 3}
+    - target: {fileID: 7804471701406804769, guid: af5d66ab99d4c4b4cbc507399e5098e3,
+        type: 3}
+      propertyPath: backgroundList.Array.data[0].background
+      value: 
+      objectReference: {fileID: 21300000, guid: 60948d9b0160f234c916015b34b4ffdb,
+        type: 3}
     - target: {fileID: 7804471701406804781, guid: af5d66ab99d4c4b4cbc507399e5098e3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -810,6 +822,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7032505325890627353, guid: b4f5cd09659dd7d43933b10b474a537f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7032505325890627353, guid: b4f5cd09659dd7d43933b10b474a537f,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7032505325890627353, guid: b4f5cd09659dd7d43933b10b474a537f,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -44.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 7032505325890627353, guid: b4f5cd09659dd7d43933b10b474a537f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -22.14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4f5cd09659dd7d43933b10b474a537f, type: 3}
