@@ -10,9 +10,10 @@ public static class View_Utilities
        string fullText, float delay, Action startingAction, Action endingAction, int resumePoint = 0)
     {
         startingAction.Invoke();
+        var yieldDelay = new WaitForSecondsRealtime(delay);
         if (EventManager.Instance)
             fullText = EventManager.Instance.GetDialogueWithOverwrites(fullText);
-        yield return new WaitForSecondsRealtime(delay);
+        yield return yieldDelay;
         // use resume point here for correct implementation
         for (int i = resumePoint; i <= fullText.Length; i++)
         {
@@ -21,15 +22,15 @@ public static class View_Utilities
             string temp = fullText.Substring(0, i);
             // this is rich text tagged so only want to do slow display of string
             // when we have full tags
-            if (temp.Count(f => f == '<') == temp.Count(f => f == '>'))
+            if (temp.Count(f => f == Parsing_Utilities.DIALOGUE) == temp.Count(f => f == Parsing_Utilities.DIALOGUE))
             {
                 textBox.text = temp;
-                yield return new WaitForSecondsRealtime(delay);
+                yield return yieldDelay;
             }
         }
         // in case error was made and text has rich text tags
         // 0 is correct
-        textBox.text = fullText.Substring(0, fullText.Length);
+        textBox.text = fullText;
         endingAction.Invoke();
     }
 }
