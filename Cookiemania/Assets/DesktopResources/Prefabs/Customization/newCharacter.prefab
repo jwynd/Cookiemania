@@ -394,13 +394,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4adcdf894b35d1e4ba83fab4e71b4361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bodys: {fileID: 5038075559788844791}
-  _toppings: {fileID: 4326029967734396850}
-  _top: {fileID: 1272464538789678178}
-  _middle: {fileID: 7545369784225326620}
-  _bottom: {fileID: 4935169965178535961}
-  _eyes: {fileID: 7556986345924360911}
-  _eyebrows: {fileID: 6354848129837719019}
+  bodys: {fileID: 5038075559788844791}
+  toppings: {fileID: 4326029967734396850}
+  top: {fileID: 1272464538789678178}
+  middle: {fileID: 7545369784225326620}
+  bottom: {fileID: 4935169965178535961}
+  eyes: {fileID: 7556986345924360911}
+  eyebrows: {fileID: 6354848129837719019}
 --- !u!1 &4497169967320312477
 GameObject:
   m_ObjectHideFlags: 0

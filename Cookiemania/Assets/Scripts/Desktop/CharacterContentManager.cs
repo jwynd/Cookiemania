@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class CharacterContentManager : MonoBehaviour
 {
@@ -15,8 +14,6 @@ public class CharacterContentManager : MonoBehaviour
         EYESHAPE,
         EYEBROWSHAPE
     }
-
-
 
     [SerializeField] private GameObject[] bodys = null;
     [SerializeField] private Transform bodyAnchor = null;
@@ -47,7 +44,6 @@ public class CharacterContentManager : MonoBehaviour
     public GameObject characterSprite { get; protected set; }
     public static CharacterContentManager Instance { get; protected set; }
     public string characterName { get; protected set; } = null;
-    public string companyName { get; protected set; } = null;
     [SerializeField] private GameObject panel;
     [SerializeField] private GameObject panelName;
 
@@ -81,7 +77,7 @@ public class CharacterContentManager : MonoBehaviour
         var temp = panel.GetComponent<ConfimationUI>();
         temp.SetCancel(cancel);
         temp.SetConfirm(confirm);
-        characterSprite = newChara;
+        characterSprite = Instantiate(newChara);
         characterSprite.SetActive(false);
         panelName.SetActive(false);
 
@@ -215,9 +211,9 @@ public class CharacterContentManager : MonoBehaviour
             case AppearanceDetails.BODY:
                 if (activebody != null)
                 {
-                    Destroy(activebody);
+                    GameObject.Destroy(activebody);
                 }
-                activebody = Instantiate(bodys[id]);
+                activebody = GameObject.Instantiate(bodys[id]);
                 activebody.transform.SetParent(bodyAnchor);
                 activebody.transform.ResetTransform();
                 break;
@@ -225,9 +221,9 @@ public class CharacterContentManager : MonoBehaviour
             case AppearanceDetails.TOPPINGS:
                 if (activeTopping != null)
                 {
-                    Destroy(activeTopping);
+                    GameObject.Destroy(activeTopping);
                 }
-                activeTopping = Instantiate(toppings[id]);
+                activeTopping = GameObject.Instantiate(toppings[id]);
                 activeTopping.transform.SetParent(ToppingAnchor);
                 activeTopping.transform.ResetTransform();
                 break;
@@ -235,9 +231,9 @@ public class CharacterContentManager : MonoBehaviour
             case AppearanceDetails.TOPACCESSORY:
                 if (activeTop != null)
                 {
-                    Destroy(activeTop);
+                    GameObject.Destroy(activeTop);
                 }
-                activeTop = Instantiate(TAccess[id]);
+                activeTop = GameObject.Instantiate(TAccess[id]);
                 if (id == 2)
                 {
                     activeTop.transform.SetParent(HeadphonesAnchor);
@@ -253,9 +249,9 @@ public class CharacterContentManager : MonoBehaviour
             case AppearanceDetails.MIDDLEACCESSORY:
                 if (activeMid != null)
                 {
-                    Destroy(activeMid);
+                    GameObject.Destroy(activeMid);
                 }
-                activeMid = Instantiate(MAccess[id]);
+                activeMid = GameObject.Instantiate(MAccess[id]);
                 if (id == 2)
                 {
                     activeMid.transform.SetParent(GlassesAnchor);
@@ -271,9 +267,9 @@ public class CharacterContentManager : MonoBehaviour
             case AppearanceDetails.BOTTOMACCESSORY:
                 if (activeBot != null)
                 {
-                    Destroy(activeBot);
+                    GameObject.Destroy(activeBot);
                 }
-                activeBot = Instantiate(BAccess[id]);
+                activeBot = GameObject.Instantiate(BAccess[id]);
                 if (id == 3)
                 {
                     activeBot.transform.SetParent(ScarfAnchor);
@@ -289,9 +285,9 @@ public class CharacterContentManager : MonoBehaviour
             case AppearanceDetails.EYESHAPE:
                 if (activeEye != null)
                 {
-                    Destroy(activeEye);
+                    GameObject.Destroy(activeEye);
                 }
-                activeEye = Instantiate(Eyes[id]);
+                activeEye = GameObject.Instantiate(Eyes[id]);
                 activeEye.transform.SetParent(EyeAnchor);
                 activeEye.transform.ResetTransform();
                 break;
@@ -299,9 +295,9 @@ public class CharacterContentManager : MonoBehaviour
             case AppearanceDetails.EYEBROWSHAPE:
                 if (activeBrow != null)
                 {
-                    Destroy(activeBrow);
+                    GameObject.Destroy(activeBrow);
                 }
-                activeBrow = Instantiate(Eyebrows[id]);
+                activeBrow = GameObject.Instantiate(Eyebrows[id]);
                 activeBrow.transform.SetParent(BrowAnchor);
                 activeBrow.transform.ResetTransform();
                 break;
@@ -312,8 +308,7 @@ public class CharacterContentManager : MonoBehaviour
 
     public void dialoguebox()
     {
-        if(characterName == null || characterName.Length < 2 || 
-            companyName == null || companyName.Length < 2)
+        if(characterName == null || characterName.Length < 2)
         {
             panelName.SetActive(true);
             return;
@@ -332,7 +327,7 @@ public class CharacterContentManager : MonoBehaviour
     {
         //to do reconstruct character
         gameObject.SetActive(false);
-        var temp = characterSprite.GetComponent<CharacterPrefab>();
+        var temp = characterSprite.GetComponent<characterPrefab>();
         temp.bodys.sprite = bodys[bodyindex].GetComponent<UnityEngine.UI.Image>().sprite;
         temp.toppings.sprite = toppings[toppingindex].GetComponent<UnityEngine.UI.Image>().sprite;
         temp.top.sprite = TAccess[topindex].GetComponent<UnityEngine.UI.Image>().sprite;
@@ -341,8 +336,6 @@ public class CharacterContentManager : MonoBehaviour
         temp.eyes.sprite = Eyes[eyeindex].GetComponent<UnityEngine.UI.Image>().sprite;
         temp.eyebrows.sprite = Eyebrows[browindex].GetComponent<UnityEngine.UI.Image>().sprite;
         temp.name = characterName;
-        temp.CharName = characterName;
-        temp.CompanyName = companyName;
      
         foreach(Transform child in temp.transform)
         {
@@ -353,8 +346,6 @@ public class CharacterContentManager : MonoBehaviour
 
             }
         }
-        temp.transform.position = new Vector3(1000, 1000, 0);
-        temp.gameObject.SetActive(true);
     }
 
     public void okay()
@@ -366,11 +357,6 @@ public class CharacterContentManager : MonoBehaviour
     {
         characterName = name;
        
-    }
-
-    public void SetCompanyName(string name)
-    {
-        companyName = name;
     }
 
 
