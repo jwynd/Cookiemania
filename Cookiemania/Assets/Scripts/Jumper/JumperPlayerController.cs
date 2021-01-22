@@ -8,17 +8,6 @@ using UnityEngine;
  * "Throw" mapped to something else
  */
 
-
-//General_score
-//has trust and stuff
-//Scorekeeper
-
-//NOTE : okay can change the jumping to be NOT using a cooldown but instead
-//reset the force calculation, zero out the force then add a new force when 
-//jumping
-
-//doesnt like jumping, wants full arial control, everythings too fast
-//jump speed is too fast
 [RequireComponent(typeof(JumperInputComponent))]
 public class JumperPlayerController : MonoBehaviour
 {
@@ -32,8 +21,19 @@ public class JumperPlayerController : MonoBehaviour
     public float maxHealth = 5;
     public float flashTime = 0.15f;
     public float damageTimerMax = 1.5f;
+    public float shieldCooldown = 10f;
+    public float shieldDuration = 2f;
+    public float magnetCooldown = 5f;
+    public float magnetDuration = 0.5f;
+    // levelable character properties
+    public int magnetLevel = 0;
+    public int shieldLevel = 0;
+    public int jumpLevel = 0;
     public AudioClip jumpSound;
     public JumperSelfDestruct jumpParticles;
+    public GameObject magnet;
+    public JumperMagnet magnetController;
+    public GameObject shield;
     [SerializeField]
     [Tooltip("Axis for left and right movements")]
     protected string horizontalAxis = "Horizontal";
@@ -46,8 +46,8 @@ public class JumperPlayerController : MonoBehaviour
     [Tooltip("Axis for picking up items")]
     protected string pickupAxis = "Pickup";
     [SerializeField]
-    [Tooltip("Axis for throwing items")]
-    protected string throwAxis = "Throw";
+    [Tooltip("Axis for using magnet ability")]
+    protected string magnetAxis = "Throw";
     [SerializeField]
     [Tooltip("EMPTY INPUT axis, should still exist but no keys mapped to it")]
     protected string dummyAxis = "Dummy";
@@ -77,11 +77,20 @@ public class JumperPlayerController : MonoBehaviour
     protected bool jumped = false;
 
     protected bool pickup = false;
-    
+
     protected float aerialManeuverability = 0.5f;
     protected float normalManeuverability = 1;
     protected bool haveItem = false;
+    protected float currentMagnetCD = 0f;
+    protected float currentMagnet = 0f;
+    protected float currentShieldCD = 0f;
+    protected float currentShield = 0f;
+    protected bool canMagnet = true;
+    protected bool isMagnetic = false;
+    protected bool canShield = true;
+    protected bool isShielded = false;
     protected Rigidbody2D heldItemRB = null;
+    protected SpriteRenderer heldItemSprite = null;
     protected AudioSource audioPlayer = null;
     protected float maxHeightReached = 0f;
     protected float points = 0f;
@@ -92,6 +101,7 @@ public class JumperPlayerController : MonoBehaviour
     protected Color defaultColor = Color.white;
     protected bool throwStuff;
     protected bool canAirJump = true;
+    protected bool coinJump = false;
     protected string groundTag;
     protected string enemyTag;
     protected string obstacleTag;
@@ -99,6 +109,7 @@ public class JumperPlayerController : MonoBehaviour
     protected string myTag;
     protected float horizontalInput = 0f;
     protected float originalJumpSpeed;
+    
     #endregion
 
     #region startup
@@ -119,6 +130,11 @@ public class JumperPlayerController : MonoBehaviour
         rb.gravityScale = jm.GetAlteredGravity();
         jumpSpeed *= rb.gravityScale;
         airJumpSpeed *= rb.gravityScale;
+        magnet.SetActive(false);
+        magnetController = magnet.GetComponent<JumperMagnet>();
+        shield.SetActive(false);
+        canMagnet = true;
+        canShield = true;
         GetTags();
     }
 
@@ -189,7 +205,7 @@ public class JumperPlayerController : MonoBehaviour
     {
         if (inputVal > 0f)
         {
-            if (grounded || canAirJump)
+            if (grounded || canAirJump || coinJump)
             {
                 return true;
             }
@@ -207,6 +223,7 @@ public class JumperPlayerController : MonoBehaviour
         UpdateJumpCapability();
         Movement();
         ThrowItem();
+        ActivateShield();
         //currently, no timers on character
         Timers();
         ResetInputForFixedUpdate();
@@ -216,6 +233,8 @@ public class JumperPlayerController : MonoBehaviour
     {
         grounded = IsGrounded();
         canAirJump = grounded ? true : canAirJump;
+        // lose the coin jump when you get grounded
+        coinJump = grounded ? false : coinJump;
     }
 
     void UpdateHeight()
@@ -321,7 +340,7 @@ public class JumperPlayerController : MonoBehaviour
     //run after movement
     protected void ThrowItem()
     {
-        if (throwStuff && haveItem)
+/*        if (throwStuff && haveItem)
         {
             haveItem = false;
             Debug.Log("threw item");
@@ -334,8 +353,36 @@ public class JumperPlayerController : MonoBehaviour
                 throwTemp.x += rb.velocity.x * 0.3f;
             }
             heldItemRB.gameObject.GetComponent<JumperPickupController>().Thrown(throwTemp);
+        }*/
+        if (throwStuff && canMagnet && magnetLevel > 0)
+        {
+            // activate magnet
+            Debug.LogWarning("activating magnet");
+            currentMagnetCD = magnetCooldown;
+            currentMagnet = magnetDuration;
+            isMagnetic = true;
+            magnetController.ActivateMagnet(magnetDuration);
+            canMagnet = false;
         }
+        if (!isMagnetic)
+            magnet.SetActive(false);
         throwStuff = false;
+    }
+
+    protected void ActivateShield()
+    {
+        if (pickup && canShield && shieldLevel > 0)
+        {
+            Debug.LogWarning("activating shield");
+            currentShieldCD = shieldCooldown;
+            currentShield = shieldDuration;
+            isShielded = true;
+            shield.SetActive(true);
+            canShield = false;
+        }
+        if (!isShielded)
+            shield.SetActive(false);
+        pickup = false;
     }
 
     
@@ -343,6 +390,18 @@ public class JumperPlayerController : MonoBehaviour
     //to be run in fixed update
     protected void Timers()
     {
+        // decrement timers
+        // they're floats: i would need to run the game for years to underflow
+        // and precision stops mattering once im under 0 :)
+        currentMagnetCD -= Time.fixedDeltaTime;
+        currentShieldCD -= Time.fixedDeltaTime;
+        currentShield -= Time.fixedDeltaTime;
+        currentMagnet -= Time.fixedDeltaTime;
+        // set timer flags
+        canMagnet = currentMagnetCD < 0.01f;
+        canShield = currentShieldCD < 0.01f;
+        isShielded = currentShield > 0f;
+        isMagnetic = currentMagnet > 0f;
     }
 
     #endregion
@@ -350,8 +409,8 @@ public class JumperPlayerController : MonoBehaviour
     #region public
     public void PickupDestroyed()
     {
-        heldItemRB = null;
-        haveItem = false;
+        /*heldItemRB = null;
+        haveItem = false;*/
     }
 
     public float GetJumpStrength()
@@ -403,7 +462,7 @@ public class JumperPlayerController : MonoBehaviour
     }
     public string GetThrowAxis()
     {
-        return throwAxis;
+        return magnetAxis;
     }
     public string GetDummyAxis()
     {
@@ -461,15 +520,16 @@ public class JumperPlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag(collectiblesTag))
         {
             JumperGeneralPickup pu = collision.gameObject.GetComponent<JumperGeneralPickup>();
-            if (!pu) { return; }
+            if (!pu) return;
             if (pu.IsAutomaticPickup())
             {
                 //blah blah do stuff for picking up the item
                 points += pu.PointsOnPickup();
+                coinJump = jumpLevel > 0;
                 if (pu.IsDestroyOnPickup())
                     pu.Remove();
             }
-            else if (pickup && !haveItem)
+            /*else if (pickup && !haveItem)
             {
                 //gonna parent the held item to the player then put it in the held item position
                 //modified by the size of the object in future
@@ -479,7 +539,7 @@ public class JumperPlayerController : MonoBehaviour
                 heldItemRB = collision.gameObject.GetComponent<Rigidbody2D>();
                 pickup = false;
                 haveItem = true;
-            }        
+            } */       
         }
         else if (collision.gameObject.CompareTag(obstacleTag) || collision.gameObject.CompareTag(enemyTag))
         {
@@ -491,7 +551,7 @@ public class JumperPlayerController : MonoBehaviour
     protected void TakesDamage(GameObject collision)
     {
         //requires damage and destroyable parameters in obstacle controller
-        if (damageTimer <= 0)
+        if (damageTimer <= 0 && !isShielded)
         {
             JumperGeneralThreat obsControl = collision.GetComponent<JumperGeneralThreat>();
             if (obsControl != null)
