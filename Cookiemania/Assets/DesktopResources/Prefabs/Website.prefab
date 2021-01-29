@@ -90,7 +90,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &132956985
 RectTransform:
   m_ObjectHideFlags: 0
@@ -497,7 +497,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 36.95, y: -66.4}
+  m_AnchoredPosition: {x: 36.94995, y: -66.400024}
   m_SizeDelta: {x: 57, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1388224201
@@ -571,7 +571,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.0030441, y: -25.340267}
+  m_AnchoredPosition: {x: -0.0000045982, y: -60.4}
   m_SizeDelta: {x: 604.5, y: 54.46}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1625741447
@@ -637,7 +637,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_textAlignment: 514
-  m_characterSpacing: 0
+  m_characterSpacing: 3
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -1041,12 +1041,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf706f0cfd29dfd469abe5fdf082ad00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Icon: {fileID: 1388224200}
-  Picture1: {fileID: 103895490}
-  Picture2: {fileID: 7156199584639937202}
   CompanyName: {fileID: 1625741446}
-  Motto: {fileID: 132956986}
-  CompanyDescription: {fileID: 795292523}
 --- !u!1 &6531487770475066905
 GameObject:
   m_ObjectHideFlags: 0

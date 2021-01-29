@@ -266,7 +266,8 @@ public class JumperManagerGame : MonoBehaviour
         float randomx = BuildHelper();
         float randomy = UnityEngine.Random.Range(height + minHeightIncrease, height + jumpHeight);
         Vector3 pos = new Vector3(randomx, randomy, 0);
-        Instantiate(actualExit, pos, Quaternion.Euler(0, 0, rotation));
+        var obj = Instantiate(actualExit, pos, Quaternion.Euler(0, 0, rotation));
+        obj.transform.parent = transform;
         haveBuiltExit = true;
     }
 
@@ -303,7 +304,8 @@ public class JumperManagerGame : MonoBehaviour
         for (int i = 0; i < density; ++i)
         {
             float randomy = canPlaceAboveLast ? UnityEngine.Random.Range(height + minHeightIncrease, height + jumpHeight) :
-                UnityEngine.Random.Range(height + (minHeightIncrease * bounceHeightMultiplier), height + (jumpHeight * bounceHeightMultiplier));
+                UnityEngine.Random.Range(height + (minHeightIncrease * bounceHeightMultiplier), 
+                height + (jumpHeight * bounceHeightMultiplier));
             if (randomy >= heightGoal)
             {
                 AttemptToBuildExit();
