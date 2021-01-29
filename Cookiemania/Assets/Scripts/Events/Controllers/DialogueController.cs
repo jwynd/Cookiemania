@@ -18,6 +18,8 @@ using UnityEngine.UI;
 
 public class DialogueController : MonoBehaviour
 {
+    private const int LineLength = 38;
+
     // requires a list of 
     // tuple items -> name, voice line
     // and a dictionary of 
@@ -134,7 +136,7 @@ public class DialogueController : MonoBehaviour
             if (!fastDisplayingText)
             {
                 StopCoroutine(textDisplayer);
-                fastTextDisplayer = dialogueLine.TextDisplayer(currentLine.Item2, textDelay * 0.2f, 
+                fastTextDisplayer = dialogueLine.TextDisplayer(currentLine.Item2, LineLength, textDelay * 0.2f, 
                     StartTextDisplay, CompleteTextDisplay, dialogueLine.text.Length);
                 fastDisplayingText = true;
                 stillDisplayingText = true;
@@ -173,7 +175,7 @@ public class DialogueController : MonoBehaviour
             charImage.sprite = charInfo.Item2;
             // need to slowly display dialogue in async fn
             // will also want to set and unset the stillDisplayingText bool
-            textDisplayer = dialogueLine.TextDisplayer(currentLine.Item2, textDelay, 
+            textDisplayer = dialogueLine.TextDisplayer(currentLine.Item2, LineLength, textDelay, 
                 StartTextDisplay, CompleteTextDisplay);
             StartCoroutine(textDisplayer);
             //dialogueLine.text = line.Item2;

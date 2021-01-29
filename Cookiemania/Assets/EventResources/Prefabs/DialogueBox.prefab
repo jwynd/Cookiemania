@@ -139,7 +139,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: max 96 characters
+  m_text: 96 char, 38 per line
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8075864e2ded4384c9d98e3b0a0f7ae5, type: 2}
   m_sharedMaterial: {fileID: 8163171998885815143, guid: 8075864e2ded4384c9d98e3b0a0f7ae5,
@@ -209,10 +209,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -0.00009938598, w: -0.23107636}
   m_textInfo:
     textComponent: {fileID: 8843202141590804026}
-    characterCount: 17
+    characterCount: 20
     spriteCount: 0
-    spaceCount: 2
-    wordCount: 3
+    spaceCount: 4
+    wordCount: 5
     linkCount: 0
     lineCount: 1
     pageCount: 1
