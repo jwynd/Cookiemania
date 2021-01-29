@@ -14,13 +14,11 @@ public class WebsiteUI : MonoBehaviour
     public void SetUpFromCharPrefab(CharacterPrefab charprefab)
     {
         charRef = charprefab;
-        Debug.LogError("listening to " + charprefab.name);
         charRef.CompanyUpdate.AddListener(UpdateCompany);
     }
 
     public void UpdateCompany(string newName)
     {
-        Debug.LogError("got " + newName);
         CompanyName.text = newName;
     }
 }

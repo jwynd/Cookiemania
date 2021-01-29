@@ -333,18 +333,18 @@ public class CharacterContentManager : MonoBehaviour
         //to do reconstruct character
         gameObject.SetActive(false);
         var temp = characterSprite.GetComponent<CharacterPrefab>();
-        temp.bodys.sprite = bodys[bodyindex].GetComponent<UnityEngine.UI.Image>().sprite;
-        temp.toppings.sprite = toppings[toppingindex].GetComponent<UnityEngine.UI.Image>().sprite;
-        temp.top.sprite = TAccess[topindex].GetComponent<UnityEngine.UI.Image>().sprite;
-        temp.middle.sprite = MAccess[midindex].GetComponent<UnityEngine.UI.Image>().sprite;
-        temp.bottom.sprite = BAccess[botindex].GetComponent<UnityEngine.UI.Image>().sprite;
-        temp.eyes.sprite = Eyes[eyeindex].GetComponent<UnityEngine.UI.Image>().sprite;
-        temp.eyebrows.sprite = Eyebrows[browindex].GetComponent<UnityEngine.UI.Image>().sprite;
+        temp.body = bodys[bodyindex].GetComponent<UnityEngine.UI.Image>().sprite;
+        temp.topping = toppings[toppingindex].GetComponent<UnityEngine.UI.Image>().sprite;
+        temp.top = TAccess[topindex].GetComponent<UnityEngine.UI.Image>().sprite;
+        temp.middle = MAccess[midindex].GetComponent<UnityEngine.UI.Image>().sprite;
+        temp.bottom = BAccess[botindex].GetComponent<UnityEngine.UI.Image>().sprite;
+        temp.eyes = Eyes[eyeindex].GetComponent<UnityEngine.UI.Image>().sprite;
+        temp.eyebrows = Eyebrows[browindex].GetComponent<UnityEngine.UI.Image>().sprite;
         temp.name = characterName;
         temp.CharName = characterName;
         temp.CompanyName = companyName;
 
-        foreach (Transform child in temp.transform)
+        /*foreach (Transform child in temp.transform)
         {
             child.localPosition = new Vector3(child.localPosition.x, child.localPosition.y, 0);
             foreach (Transform grandchild in child.transform)
@@ -352,7 +352,7 @@ public class CharacterContentManager : MonoBehaviour
                 grandchild.localPosition = new Vector3(grandchild.localPosition.x, grandchild.localPosition.y, 0);
 
             }
-        }
+        }*/
         temp.transform.position = new Vector3(1000, 1000, 0);
         temp.gameObject.SetActive(true);
     }
