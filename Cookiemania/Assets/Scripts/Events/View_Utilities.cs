@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -31,18 +30,18 @@ public static class View_Utilities
         // use resume point here for correct implementation
         for (int i = resumePoint; i < fullText.Length; i++)
         {
-            // 0 is correct implementation (only want sped up textdisplayer in use case
-            // where we have start letter, don't want to start over)
             if (fullText[i] == '<')
                 startCount++;
             else if (fullText[i] == '>')
                 endCount++;
-            string temp = fullText.Substring(0, i);
+            // 0 is correct implementation (only want sped up textdisplayer in use case
+            // where we have start letter, don't want to start over)
+            
             // this is rich text tagged so only want to do slow display of string
             // when we have full tags
             if (startCount == endCount)
             {
-                textBox.text = temp;
+                textBox.text = fullText.Substring(0, i);
                 yield return yieldDelay;
             }
         }
@@ -52,33 +51,28 @@ public static class View_Utilities
         endingAction.Invoke();
     }
 
+    // this doesn't work right with rich text tbh, but its decent
     public static string SplitTextIntoLines(string fullText, int lineLength)
     {
         // need to split by word, then split by char count of list of words
         var words = fullText.Split(' ');
         var lines = new List<string>();
-        var charCount = lineLength + 1;
-        var lineIndex = -1;
+        var charCount = lineLength;
+        int ind;
         foreach(var word in words)
         {
-            charCount += word.Length + 1;
-            if (charCount >= lineLength)
+            if (charCount + word.Length > lineLength)
             {
                 lines.Add(word);
-                lineIndex++;
                 charCount = word.Length + 1;
             }
             else
             {
-                lines[lineIndex] += " " + word;
+                ind = lines.Count - 1;
+                lines[ind] += " " + word;
+                charCount = lines[ind].Length;
             }
         }
-        fullText = "";
-        foreach (var line in lines)
-        {
-            fullText += line + "\n";
-        }
-
-        return fullText;
+        return string.Join("\n", lines);
     }
 }
