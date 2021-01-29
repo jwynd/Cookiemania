@@ -44,7 +44,7 @@ public class JumperManagerUI : MonoBehaviour
         Instance = this;
         endscreenCamera.GetComponent<Camera>().enabled = false;
         endscreenCamera.GetComponent<AudioListener>().enabled = false;
-
+        endscreenCanvas.SetActive(false);
         tutorialText = tutorialRef.gameObject.GetComponent<JumperGeneralText>();
         
     }
@@ -235,6 +235,7 @@ public class JumperManagerUI : MonoBehaviour
         GetComponent<Canvas>().worldCamera.GetComponent<AudioListener>().enabled = false;
         endscreenCamera.GetComponent<Camera>().enabled = true;
         endscreenCamera.GetComponent<AudioListener>().enabled = true;
+        endscreenCanvas.SetActive(true);
         PlayerData.Player?.AddMoney(coinsCollected);
     }
     #endregion

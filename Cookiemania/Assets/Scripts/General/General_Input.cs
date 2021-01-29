@@ -157,7 +157,8 @@ public abstract class General_Input : MonoBehaviour
         SetAxisNameToIndex();
         SetAxesDelegates();
 #if UNITY_EDITOR
-        PrintAxes();
+/*        PrintAxes();
+*/
 #endif
     }
 }
