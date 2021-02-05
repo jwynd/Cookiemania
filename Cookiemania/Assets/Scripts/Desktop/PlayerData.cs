@@ -73,6 +73,9 @@ public class PlayerData : MonoBehaviour
         }
     }
 
+    // range of 1 - 5
+    public int difficulty { get; private set; } = 1;
+
     public int week
     {
         get { return _week; }
@@ -84,7 +87,31 @@ public class PlayerData : MonoBehaviour
             }
             var previous = _week;
             _week = value;
+            SetDifficulty(_week);
             WeekChanged?.Invoke(previous, value);
+        }
+    }
+
+    // keep private
+    private void SetDifficulty(int week)
+    {
+        switch (week)
+        {
+            case int n when n < 5:
+                difficulty = 1;
+                break;
+            case int n when n < 21:
+                difficulty = 2;
+                break;
+            case int n when n < 37:
+                difficulty = 3;
+                break;
+            case int n when n < 45:
+                difficulty = 4;
+                break;
+            default:
+                difficulty = 5;
+                break;
         }
     }
 
