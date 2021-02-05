@@ -317,6 +317,13 @@ public class PlayerData : MonoBehaviour
         {
             Player = this;
         }
+        // important for events
+        InitImportantEventVariables();
+        // space game
+        InitSpaceVariables();
+        // jumper game, setting the private version
+        // directly when necessary
+        InitJumperVariables();
     }
 
     private void Start()
@@ -330,23 +337,18 @@ public class PlayerData : MonoBehaviour
         // waiting a couple frames then initializing everything
         yield return new WaitForFixedUpdate();
         yield return new WaitForFixedUpdate();
-        // important for events
-        InitImportantEventVariables();
-        // space game
-        InitSpaceVariables();
-        // jumper game, setting the private version
-        // directly when necessary
-        InitJumperVariables();
+        week = 1;
+        
     }
 
     private void InitImportantEventVariables()
     {
-        week = 1;
         Location.Current = Parsing_Utilities.Locale.WebsiteTab;
         money = 0;
         morality = 0;
         race = 0;
         userstats = 0;
+        week = 0;
     }
 
     // later this will init from a save file when present
