@@ -140,26 +140,39 @@ public class PlayerData : MonoBehaviour
 
     //Marketing minigame flags will go here
     [SerializeField]
-    private int _timesPlayedMarketing = 0;
+    private int _jTimesPlayed = 0;
     [SerializeField]
-    private int _extraJumps = 0;
+    private int _jJumpPower = 0;
+    // now handled by difficulty
+/*    [SerializeField]
+    private int _jEnemyTypes = 0;*/
+    // can only level to 1, everything after doesnt matter
     [SerializeField]
-    private int _bonusEnemyTypes = 0;
-    // how big capture net is 
+    private int _jMagnet = 0;
+    // how far magnet reaches 
     [SerializeField]
-    private int _captureSize = 0;
+    private int _jMagnetDistance = 0;
     // how quickly you can reload your net
     [SerializeField]
-    private int _captureReload = 0;
+    private int _jMagnetCD = 0;
     [SerializeField]
-    private int _jumperInvulnerability = 0;
+    private int _jCoinJump = 0;
     [SerializeField]
-    private int _jumperHealth = 0;
+    private int _jShield = 0;
+    // this is no longer a field, access with Player.JUpgradeLevel
     [SerializeField]
-    private int _jumperMoneyGeneration = 0;
+    private int _jUpgradeLevel = 0;
+    //handled in global upgrades
+/*    [SerializeField]
+    private int _jHealth = 0;*/
+    // the jumper AI upgrades how much value enemies have
+    //handled in global upgrades
+/*    [SerializeField]
+    private int _jAI = 0;*/
     // the proportion of coins/empty platforms to enemies
-    [SerializeField]
-    private int _jumperRisk = 0;
+    // now handled by difficulty
+/*    [SerializeField]
+    private int _jumperRisk = 0;*/
 
     // for upgrades that can increase by more than one at once
     // but can't be decreased
@@ -170,92 +183,90 @@ public class PlayerData : MonoBehaviour
         myVariable = newValue;
     }
 
-    public int TimesPlayedMarketing
+    public int JTimesPlayed
     {
         get
-        { return _timesPlayedMarketing; }
+        { return _jTimesPlayed; }
         // only incrementing by one allowed :)
         set
         {
-            if (value == _timesPlayedMarketing + 1)
+            if (value == _jTimesPlayed + 1)
             {
-                _timesPlayedMarketing = value;
+                _jTimesPlayed = value;
             }
         }
     }
 
-    public int ExtraJumps
+    public int JJumpPower
     {
-        get { return _extraJumps; }
+        get { return _jJumpPower; }
         set 
         {
-            MustIncrease(value, ref _extraJumps); 
+            MustIncrease(value, ref _jJumpPower);
+            JUpgradeRecalc();
         }
     }
 
-    public int BonusEnemyTypes
+    public int JMagnet
     {
-        get { return _bonusEnemyTypes; }
+        get { return _jMagnet; }
         set
         {
-            MustIncrease(value, ref _bonusEnemyTypes);
+            MustIncrease(value, ref _jMagnet);
+            JUpgradeRecalc();
         }
     }
 
-    public int CaptureSize
+    public int JMagnetDistance
     {
-        get { return _captureSize; }
+        get { return _jMagnetDistance; }
         set
         {
-            MustIncrease(value, ref _captureSize);
+            MustIncrease(value, ref _jMagnetDistance);
+            JUpgradeRecalc();
         }
     }
 
-    public int CaptureReload
+    public int JMagnetCD
     {
-        get { return _captureReload; }
+        get { return _jMagnetCD; }
         set
         {
-            MustIncrease(value, ref _captureReload);
+            MustIncrease(value, ref _jMagnetCD);
+            JUpgradeRecalc();
         }
     }
 
-    public int JumperInvulnerability
+    public int JCoinJump
     {
-        get { return _jumperInvulnerability; }
+        get { return _jCoinJump; }
         set
         {
-            MustIncrease(value, ref _jumperInvulnerability);
+            MustIncrease(value, ref _jCoinJump);
+            JUpgradeRecalc();
         }
     }
 
-    public int JumperHealth
+    public int JShield
     {
-        get { return _jumperHealth; }
+        get { return _jShield; }
         set
         {
-            MustIncrease(value, ref _jumperHealth);
+            MustIncrease(value, ref _jShield);
+            JUpgradeRecalc();
         }
     }
 
-    public int JumperMoneyGeneration
+    private void JUpgradeRecalc()
     {
-        get { return _jumperMoneyGeneration; }
-        set
-        {
-            MustIncrease(value, ref _jumperMoneyGeneration);
-        }
+        _jUpgradeLevel = JShield + JCoinJump + JMagnet + 
+            JMagnetCD + JMagnetDistance + JJumpPower;
     }
 
-    public int JumperRisk
+    public int JUpgradeLevel
     {
-        get { return _jumperRisk; }
-        set
-        {
-            MustIncrease(value, ref _jumperRisk);
-        }
+        get { return _jUpgradeLevel; }
     }
-
 
     // dict of dialogue choices made
     // first item of each list is the name of the triggered event and choice number is meaningless
@@ -338,17 +349,17 @@ public class PlayerData : MonoBehaviour
         userstats = 0;
     }
 
+    // later this will init from a save file when present
     private void InitJumperVariables()
     {
-        _timesPlayedMarketing = 0;
-        _captureReload = 0;
-        _bonusEnemyTypes = 0;
-        _captureSize = 0;
-        _extraJumps = 0;
-        _jumperHealth = 0;
-        _jumperInvulnerability = 0;
-        _jumperMoneyGeneration = 0;
-        _jumperRisk = 0;
+        _jTimesPlayed = 0;
+        _jMagnetCD = 0;
+        _jMagnet = 0;
+        _jMagnetDistance = 0;
+        _jJumpPower = 0;
+        _jShield = 0;
+        _jCoinJump = 0;
+        _jUpgradeLevel = 0;
     }
 
     private void InitSpaceVariables()

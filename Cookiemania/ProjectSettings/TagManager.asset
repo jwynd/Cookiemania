@@ -30,6 +30,12 @@ TagManager:
   - UpgradeDescription
   - UpgradeCost
   - Purchase
+  - Jshield
+  - Jmagnet
+  - Jcoinjump
+  - Jjumppower
+  - Jmagnetcd
+  - Jmagnetdistance
   layers:
   - Default
   - TransparentFX

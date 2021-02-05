@@ -136,7 +136,7 @@ public class JumperManagerGame : MonoBehaviour
         }
         startingDifficulty += PlayerData.Player.week * 0.12f;
         startingDifficulty -= moralityMult;
-        PlayerData.Player.TimesPlayedMarketing++;
+        PlayerData.Player.JTimesPlayed++;
     }
 
     private void RunAwakeInit()

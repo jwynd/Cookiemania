@@ -20,7 +20,7 @@ public class UpgradeButton : MonoBehaviour
        upgradeTitles = GameObject.FindGameObjectsWithTag("UpgradeTitle");
        upgradeDescriptions = GameObject.FindGameObjectsWithTag("UpgradeDescription");
        upgradeCosts = GameObject.FindGameObjectsWithTag("UpgradeCost");
-        cost = popupPrice;
+       cost = popupPrice;
     }
 
     // Update is called once per frame
@@ -60,7 +60,7 @@ public class UpgradeButton : MonoBehaviour
             checkGlobal();
             //&& PlayerData.Player.SpaceUpgradelvl >= lvlReq
             checkCyber();
-            //checkMarketing();
+            MarketingReducer(gameObject.tag);
             purchased = true;
         }
     }
@@ -96,10 +96,12 @@ public class UpgradeButton : MonoBehaviour
         {
             PlayerData.Player.SpaceUpgradelvl += 1;
         }
+#if UNITY_EDITOR
         else
         {
             Debug.Log("Not a space purchase");
         }
+#endif
     }
 
     void checkGlobal()
@@ -108,14 +110,36 @@ public class UpgradeButton : MonoBehaviour
         {
             PlayerData.Player.healthlvl += 1;
         }
-        if(gameObject.tag == "AI")
+        else if(gameObject.tag == "AI")
         {
             PlayerData.Player.incomelvl += 1;
         }
     }
 
-    void checkMarketing()
+    void MarketingReducer(string type)
     {
-
+        switch (type) 
+        {
+            case "Jshield":
+                PlayerData.Player.JShield += 1;
+                break;
+            case "Jcoinjump":
+                PlayerData.Player.JCoinJump += 1;
+                break;
+            case "Jmagnet":
+                PlayerData.Player.JMagnet += 1;
+                break;
+            case "Jjumppower":
+                PlayerData.Player.JJumpPower += 1;
+                break;
+            case "Jmagnetcd":
+                PlayerData.Player.JMagnetCD += 1;
+                break;
+            case "Jmagnetdistance":
+                PlayerData.Player.JMagnetDistance += 1;
+                break;
+            default:
+                break;
+        }
     }
 }
