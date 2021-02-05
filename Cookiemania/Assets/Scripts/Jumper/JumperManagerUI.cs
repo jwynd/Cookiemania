@@ -74,10 +74,10 @@ public class JumperManagerUI : MonoBehaviour
             coinsCollected = (int)jm.Player.GetCoinsCollected();
             scoreRef.text = coinsCollected.ToString();
         }
-        TutorialUpdate();
-    }
+/*        TutorialUpdate();
+*/    }
 
-    protected void TutorialUpdate()
+/*    protected void TutorialUpdate()
     {
         if (!tutorialActive)
         {
@@ -118,7 +118,7 @@ public class JumperManagerUI : MonoBehaviour
                 needNextLine = true;
             }
         }
-    }
+    }*/
 
     private void CheckPlayerInput(string axis)
     {
