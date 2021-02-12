@@ -10,25 +10,26 @@ public class AnalyticImages : MonoBehaviour
     private string hold;
     void Start()
     {
-        for(int i = 0; i < gameObject.transform.childCount; i++)
+        for (int i = 0; i < gameObject.transform.childCount; i++)
         {
             userstatistics.Add(gameObject.transform.GetChild(i).gameObject);
+
         }
+        
+        //Temporary testing -> these functions should be called after purchasing AND updated after every few minutes or every game.
+        userinfo();
+
     }
+
 
     // Update is called once per frame
     void Update()
     {
-        if (PlayerData.Player.userstats == 1)
-        {
-            userinfo();
-        }
+    
     }
 
-    void userinfo()
+    public void userinfo()
     {
-        if (PlayerData.Player.userstats == 1)
-        {
             for (int i = 0; i < userstatistics.Count; i++)
             {
                 rand = Random.Range(1, 10000);
@@ -42,21 +43,6 @@ public class AnalyticImages : MonoBehaviour
             hold = rand.ToString();
             userstatistics[1].GetComponent<TMPro.TextMeshProUGUI>().text = "Average stay of User: " + hold + " hrs";
             PlayerData.Player.userstats += 1;
-        }
-    }
-
-    void LeaderBoard()
-    {
-        //todo
-    }
-
-    void piechart()
-    {
-        //todo
-    }
-
-    void linegraph()
-    {
-        //todo need varying lines first
+        
     }
 }
