@@ -2,6 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public static class ListExtensions
+{
+    public static void Shuffle<T>(this IList<T> list)
+    {
+        System.Random rng = new System.Random();
+        int n = list.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = rng.Next(n + 1);
+            T value = list[k];
+            list[k] = list[n];
+            list[n] = value;
+        }
+    }
+}
 public class LeaderBoard : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -54,13 +70,13 @@ public class LeaderBoard : MonoBehaviour
     {
 
     }
-
     public void Leadernames()
     {
+        Leaders.Shuffle();
         for (int i = 0; i < userstatistics.Count; i++)
         {
 
-            userstatistics[i].GetComponent<TMPro.TextMeshProUGUI>().text = Leaders[Random.Range(0, Leaders.Count)];
+            userstatistics[i].GetComponent<TMPro.TextMeshProUGUI>().text = Leaders[i];
         }
     }
 
