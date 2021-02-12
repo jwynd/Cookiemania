@@ -19,9 +19,17 @@ public class AnalyticImages : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(PlayerData.Player.userstats == 1)
+        if (PlayerData.Player.userstats == 1)
         {
-            for(int i =0; i < userstatistics.Count; i++)
+            userinfo();
+        }
+    }
+
+    void userinfo()
+    {
+        if (PlayerData.Player.userstats == 1)
+        {
+            for (int i = 0; i < userstatistics.Count; i++)
             {
                 rand = Random.Range(1, 10000);
                 hold = rand.ToString();
@@ -35,5 +43,20 @@ public class AnalyticImages : MonoBehaviour
             userstatistics[1].GetComponent<TMPro.TextMeshProUGUI>().text = "Average stay of User: " + hold + " hrs";
             PlayerData.Player.userstats += 1;
         }
+    }
+
+    void LeaderBoard()
+    {
+        //todo
+    }
+
+    void piechart()
+    {
+        //todo
+    }
+
+    void linegraph()
+    {
+        //todo need varying lines first
     }
 }

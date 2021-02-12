@@ -48,7 +48,7 @@ MonoBehaviour:
   spacelvl: 0
   incomelvl: 0
   healthlvl: 0
-  _money: 50
+  _money: 0
   _shoplvl: 0
   _week: 0
   _morality: 0
@@ -59,12 +59,11 @@ MonoBehaviour:
   ShieldHealth: 0
   ShieldWidth: 0
   invulnerability: 0
-  _timesPlayedMarketing: 0
-  _extraJumps: 0
-  _bonusEnemyTypes: 0
-  _captureSize: 0
-  _captureReload: 0
-  _jumperInvulnerability: 0
-  _jumperHealth: 0
-  _jumperMoneyGeneration: 0
-  _jumperRisk: 0
+  _jTimesPlayed: 0
+  _jJumpPower: 0
+  _jMagnet: 0
+  _jMagnetDistance: 0
+  _jMagnetCD: 0
+  _jCoinJump: 0
+  _jShield: 0
+  _jUpgradeLevel: 0
