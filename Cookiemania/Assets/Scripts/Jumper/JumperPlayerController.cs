@@ -22,7 +22,7 @@ public class JumperPlayerController : MonoBehaviour
     public float flashTime = 0.15f;
     public float damageTimerMax = 1.5f;
 
-    public float magnetCooldown = 5f;
+    public float magnetCooldown = 10f;
     public float magnetDuration = 0.5f;
     // levelable character properties
     
@@ -81,7 +81,6 @@ public class JumperPlayerController : MonoBehaviour
     protected float currentMagnetCD = 0f;
     protected float currentMagnet = 0f;
     protected bool canMagnet = true;
-    protected float magnetRange = 0f;
     protected bool isMagnetic = false;
 
     protected float currentShieldCD = 0f;
@@ -139,9 +138,12 @@ public class JumperPlayerController : MonoBehaviour
         shieldLevel = jm.Shield;
         jumpLevel = jm.CoinJump;
         aiLevel = jm.AI;
-        magnetCooldown = (8f - (jm.MagnetCD * 2f));
-        magnetRange = (15f + jm.MagnetRange * 2);
-        shieldCooldown = (10f - ((jm.Shield - 1) * 2f));
+        magnetCooldown -= jm.MagnetCD * 2f;
+        var magnetRange = 1 + jm.MagnetRange;
+        var magnetCapsule = magnet.GetComponent<CapsuleCollider2D>();
+        magnetCapsule.size *= magnetRange;
+        magnetCapsule.offset *= magnetRange;
+        shieldCooldown -= (jm.Shield - 1) * 2f;
         GetTags();
     }
 

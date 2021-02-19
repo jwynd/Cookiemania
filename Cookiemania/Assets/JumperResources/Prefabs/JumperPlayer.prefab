@@ -243,13 +243,8 @@ MonoBehaviour:
   maxHealth: 5
   flashTime: 0.15
   damageTimerMax: 1.5
-  shieldCooldown: 10
-  shieldDuration: 2
   magnetCooldown: 5
   magnetDuration: 0.5
-  magnetLevel: 1
-  shieldLevel: 1
-  jumpLevel: 1
   jumpSound: {fileID: 8300000, guid: a6090fc5dc421514a8cc3f15f2ea37a1, type: 3}
   jumpParticles: {fileID: 846660659473921572, guid: f06033af58e927949942949bb3076dc0,
     type: 3}
@@ -509,7 +504,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.6041654, y: 1.6987797}
-  m_Size: {x: 2.7273016, y: 3.9677005}
+  m_Size: {x: 2.7, y: 4}
   m_Direction: 0
 --- !u!114 &8653240779995508474
 MonoBehaviour:
