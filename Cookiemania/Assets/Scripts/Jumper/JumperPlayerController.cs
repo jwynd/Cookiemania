@@ -93,6 +93,7 @@ public class JumperPlayerController : MonoBehaviour
     protected bool canShield = true;
     protected bool isShielded = false;
     protected bool hasAI = false;
+    protected JumperAI aiRef = null;
     protected Rigidbody2D heldItemRB = null;
     protected SpriteRenderer heldItemSprite = null;
     protected AudioSource audioPlayer = null;
@@ -146,7 +147,8 @@ public class JumperPlayerController : MonoBehaviour
         {
             var instance = Instantiate(aiPrefab);
             instance.transform.position = aiAttach.position;
-            instance.GetComponent<JumperAI>().SetFollowPoint(aiAttach);
+            aiRef = instance.GetComponent<JumperAI>();
+            aiRef.SetFollowPoint(aiAttach);
         }
         magnetCooldown -= jm.MagnetCD * 2f;
         var magnetRange = 1 + jm.MagnetRange;
@@ -596,6 +598,7 @@ public class JumperPlayerController : MonoBehaviour
     //TODO get a death animation
     protected void DeathAnimation()
     {
+        aiRef.Die();
         return;
     }
 
@@ -607,9 +610,27 @@ public class JumperPlayerController : MonoBehaviour
         DanceAnimation();
     }
 
+    public void OnDestroy()
+    {
+        aiRef?.gameObject?.SetActive(false);
+    }
+
+    public void OnDisable()
+    {
+        if (aiRef)
+            aiRef.enabled = false;
+    }
+
+    public void OnEnable()
+    {
+        if (aiRef)
+            aiRef.enabled = true;
+    }
+
     //TODO get a dance animation
     protected void DanceAnimation()
     {
+        aiRef.Dance();
         return;
     }
 

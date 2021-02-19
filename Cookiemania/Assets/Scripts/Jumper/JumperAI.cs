@@ -14,7 +14,16 @@ public class JumperAI : MonoBehaviour
         leader = toFollow;
     }
 
-    // Update is called once per frame
+    public void Die()
+    {
+        // animate this
+    }
+
+    public void Dance()
+    {
+        // animate this
+    }
+
     void FixedUpdate()
     {
         transform.position = Vector3.SmoothDamp(
