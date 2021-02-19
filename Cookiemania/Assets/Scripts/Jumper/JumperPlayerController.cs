@@ -12,6 +12,7 @@ using UnityEngine;
 public class JumperPlayerController : MonoBehaviour
 {
     #region variables
+
     public float acceleration = 1f;
     public float maxSpeed = 5.5f;
     public float jumpSpeed = 7.5f;
@@ -28,8 +29,10 @@ public class JumperPlayerController : MonoBehaviour
     
     public AudioClip jumpSound;
     public JumperSelfDestruct jumpParticles;
+        public GameObject aiPrefab;
+    public Transform aiAttach;
     public GameObject magnet;
-    public JumperMagnet magnetController;
+    
     public GameObject shield;
     [SerializeField]
     [Tooltip("Axis for left and right movements")]
@@ -69,7 +72,7 @@ public class JumperPlayerController : MonoBehaviour
     protected int shieldLevel = 0;
     protected int jumpLevel = 0;
     protected int aiLevel = 0;
-
+    protected JumperMagnet magnetController;
     protected float currentHealth;
     protected bool jumped = false;
 
@@ -124,6 +127,7 @@ public class JumperPlayerController : MonoBehaviour
         rb.velocity = Vector2.zero;
         currentHealth = maxHealth;
         originalJumpSpeed = jumpSpeed;
+        
     }
     protected void Start()
     {
@@ -138,6 +142,12 @@ public class JumperPlayerController : MonoBehaviour
         shieldLevel = jm.Shield;
         jumpLevel = jm.CoinJump;
         aiLevel = jm.AI;
+        if (aiLevel > 0)
+        {
+            var instance = Instantiate(aiPrefab);
+            instance.transform.position = aiAttach.position;
+            instance.GetComponent<JumperAI>().SetFollowPoint(aiAttach);
+        }
         magnetCooldown -= jm.MagnetCD * 2f;
         var magnetRange = 1 + jm.MagnetRange;
         var magnetCapsule = magnet.GetComponent<CapsuleCollider2D>();

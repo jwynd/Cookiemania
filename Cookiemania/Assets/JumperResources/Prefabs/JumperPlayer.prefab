@@ -146,6 +146,7 @@ Transform:
   m_Children:
   - {fileID: 5030401620394928986}
   - {fileID: 6977076378197039835}
+  - {fileID: 8725463364865352860}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -248,8 +249,10 @@ MonoBehaviour:
   jumpSound: {fileID: 8300000, guid: a6090fc5dc421514a8cc3f15f2ea37a1, type: 3}
   jumpParticles: {fileID: 846660659473921572, guid: f06033af58e927949942949bb3076dc0,
     type: 3}
+  aiPrefab: {fileID: 5975152754571497438, guid: 98746eb7e2c8f4e498233ac0e6a3988a,
+    type: 3}
+  aiAttach: {fileID: 8725463364865352860}
   magnet: {fileID: 3177681861256741812}
-  magnetController: {fileID: 0}
   shield: {fileID: 2040978121208780886}
   horizontalAxis: Horizontal
   jumpAxis: Jump
@@ -521,3 +524,33 @@ MonoBehaviour:
   myPlayer: {fileID: 122012273554611361}
   suckInEnd: {fileID: 5351079039808528750}
   defaultSuckTime: 0.5
+--- !u!1 &8056393457377436083
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8725463364865352860}
+  m_Layer: 9
+  m_Name: ai_attach_point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8725463364865352860
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8056393457377436083}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.499, y: 0.432, z: 0}
+  m_LocalScale: {x: 0.2097, y: 0.1949, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6827058439672286679}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
