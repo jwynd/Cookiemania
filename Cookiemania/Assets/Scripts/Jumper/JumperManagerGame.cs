@@ -94,13 +94,18 @@ public class JumperManagerGame : MonoBehaviour
     private GameObject actualExit;
 
     public JumperCameraController MainCam { get; private set; }
-
     public JumperPlayerController Player { get; private set; }
-
     public static JumperManagerGame Instance { get; private set; }
-
     public float StartingDifficulty { get { return startingDifficulty; } }
-    public bool DoubleJump { get; private set; } = false;
+    public int CoinJump { get; private set; } = 0;
+    public int JumpPower { get; private set; } = 0;
+    public int MagnetAvailable { get; private set; } = 0;
+    public int MagnetCD { get; private set; } = 0;
+    public int MagnetRange { get; private set; } = 0;
+    public int Shield { get; private set; } = 0;
+    public int AI { get; private set; } = 3;
+
+    // copied from player data 
 
     #endregion
 
@@ -134,9 +139,15 @@ public class JumperManagerGame : MonoBehaviour
         {
             moralityMult += -1f / PlayerData.Player.morality;
         }
-        startingDifficulty += PlayerData.Player.week * 0.12f;
-        startingDifficulty -= moralityMult;
         PlayerData.Player.JTimesPlayed++;
+        CoinJump = PlayerData.Player.JCoinJump;
+        MagnetAvailable = PlayerData.Player.JMagnet;
+        MagnetCD = PlayerData.Player.JMagnetCD;
+        MagnetRange = PlayerData.Player.JMagnetDistance;
+        Shield = PlayerData.Player.JShield;
+        JumpPower = PlayerData.Player.JJumpPower;
+        AI = PlayerData.Player.ai;
+        startingDifficulty = PlayerData.Player.difficulty - moralityMult;
     }
 
     private void RunAwakeInit()

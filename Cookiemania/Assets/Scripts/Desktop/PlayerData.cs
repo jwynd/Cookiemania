@@ -24,6 +24,7 @@ public class PlayerData : MonoBehaviour
     public UnityEvent<int, int> MoralityChanged = new UnityEvent2Int();
     public UnityEvent<int, int> ShopLevelChanged = new UnityEvent2Int();
     public UnityEvent<int, int> MoneyChanged = new UnityEvent2Int();
+    public UnityEvent<int, int> AIChanged = new UnityEvent2Int();
 
     //location reference
     public Tracking.PlayerLocation Location = new Tracking.PlayerLocation();
@@ -45,6 +46,8 @@ public class PlayerData : MonoBehaviour
     private int _week;
     [SerializeField]
     private int _morality;
+    [SerializeField]
+    private int _ai;
 
     public int money
     {
@@ -124,6 +127,18 @@ public class PlayerData : MonoBehaviour
             var previous = _morality;
             _morality = value;
             MoralityChanged?.Invoke(previous, value);
+        }
+    }
+
+    public int ai
+    {
+        get { return _ai; }
+        set
+        {
+            if (_ai == value) return;
+            var previous = _ai;
+            _ai = value;
+            AIChanged?.Invoke(previous, value);
         }
     }
 
@@ -318,7 +333,7 @@ public class PlayerData : MonoBehaviour
             Player = this;
         }
         // important for events
-        InitImportantEventVariables();
+        InitGeneralVariables();
         // space game
         InitSpaceVariables();
         // jumper game, setting the private version
@@ -341,12 +356,13 @@ public class PlayerData : MonoBehaviour
         
     }
 
-    private void InitImportantEventVariables()
+    private void InitGeneralVariables()
     {
         Location.Current = Parsing_Utilities.Locale.WebsiteTab;
         money = 0;
         morality = 0;
         race = 0;
+        ai = 0;
         userstats = 0;
         week = 0;
     }

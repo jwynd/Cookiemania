@@ -21,14 +21,11 @@ public class JumperPlayerController : MonoBehaviour
     public float maxHealth = 5;
     public float flashTime = 0.15f;
     public float damageTimerMax = 1.5f;
-    public float shieldCooldown = 10f;
-    public float shieldDuration = 2f;
+
     public float magnetCooldown = 5f;
     public float magnetDuration = 0.5f;
     // levelable character properties
-    public int magnetLevel = 0;
-    public int shieldLevel = 0;
-    public int jumpLevel = 0;
+    
     public AudioClip jumpSound;
     public JumperSelfDestruct jumpParticles;
     public GameObject magnet;
@@ -67,12 +64,12 @@ public class JumperPlayerController : MonoBehaviour
     protected Renderer rend;
     protected Vector2 velocity = Vector2.zero;
     protected bool grounded = true;
-    protected int jumpCount;
     protected float damageTimer = 0;
-    protected float jumpCooldown = 0;
-    protected float jumpCooldownMax = 0.25f;
-    
-    
+    protected int magnetLevel = 0;
+    protected int shieldLevel = 0;
+    protected int jumpLevel = 0;
+    protected int aiLevel = 0;
+
     protected float currentHealth;
     protected bool jumped = false;
 
@@ -80,28 +77,33 @@ public class JumperPlayerController : MonoBehaviour
 
     protected float aerialManeuverability = 0.5f;
     protected float normalManeuverability = 1;
-    protected bool haveItem = false;
+
     protected float currentMagnetCD = 0f;
     protected float currentMagnet = 0f;
+    protected bool canMagnet = true;
+    protected float magnetRange = 0f;
+    protected bool isMagnetic = false;
+
     protected float currentShieldCD = 0f;
     protected float currentShield = 0f;
-    protected bool canMagnet = true;
-    protected bool isMagnetic = false;
+    protected float shieldCooldown = 10f;
+    protected float shieldDuration = 1.5f;
     protected bool canShield = true;
     protected bool isShielded = false;
+    protected bool hasAI = false;
     protected Rigidbody2D heldItemRB = null;
     protected SpriteRenderer heldItemSprite = null;
     protected AudioSource audioPlayer = null;
-    protected float maxHeightReached = 0f;
+    //protected float maxHeightReached = 0f;
     protected float points = 0f;
     protected JumperManagerGame jm;
     protected float movementDirection = 1;
     protected Vector3 originalScale;
     protected Color damagedColor = Color.red * Color.white;
     protected Color defaultColor = Color.white;
-    protected bool throwStuff;
+    protected bool magnetInput;
     protected bool canAirJump = true;
-    protected bool coinJump = false;
+    protected int coinJump = 0;
     protected string groundTag;
     protected string enemyTag;
     protected string obstacleTag;
@@ -133,8 +135,13 @@ public class JumperPlayerController : MonoBehaviour
         magnet.SetActive(false);
         magnetController = magnet.GetComponent<JumperMagnet>();
         shield.SetActive(false);
-        canMagnet = true;
-        canShield = true;
+        magnetLevel = jm.MagnetAvailable;
+        shieldLevel = jm.Shield;
+        jumpLevel = jm.CoinJump;
+        aiLevel = jm.AI;
+        magnetCooldown = (8f - (jm.MagnetCD * 2f));
+        magnetRange = (15f + jm.MagnetRange * 2);
+        shieldCooldown = (10f - ((jm.Shield - 1) * 2f));
         GetTags();
     }
 
@@ -167,7 +174,7 @@ public class JumperPlayerController : MonoBehaviour
         }
         jumped = JumpInput(input.Jump);
         pickup = input.Pickup > 0f;
-        throwStuff = input.Throw > 0f ? true : throwStuff;
+        magnetInput = input.Throw > 0f ? true : magnetInput;
         horizontalInput = input.Horizontal;
     }
 
@@ -179,7 +186,7 @@ public class JumperPlayerController : MonoBehaviour
     protected void ResetInputForFixedUpdate()
     {
         jumped = false;
-        throwStuff = false;
+        magnetInput = false;
         horizontalInput = 0f;
     }
 
@@ -205,7 +212,7 @@ public class JumperPlayerController : MonoBehaviour
     {
         if (inputVal > 0f)
         {
-            if (grounded || canAirJump || coinJump)
+            if (grounded || canAirJump || coinJump > 0)
             {
                 return true;
             }
@@ -219,12 +226,11 @@ public class JumperPlayerController : MonoBehaviour
 
     protected void FixedUpdate()
     {
-        UpdateHeight();
+        // UpdateHeight();
         UpdateJumpCapability();
         Movement();
-        ThrowItem();
+        UseMagnet();
         ActivateShield();
-        //currently, no timers on character
         Timers();
         ResetInputForFixedUpdate();
     }
@@ -234,13 +240,13 @@ public class JumperPlayerController : MonoBehaviour
         grounded = IsGrounded();
         canAirJump = grounded ? true : canAirJump;
         // lose the coin jump when you get grounded
-        coinJump = grounded ? false : coinJump;
+        coinJump = grounded ? 0 : coinJump;
     }
 
-    void UpdateHeight()
+/*    void UpdateHeight()
     {
         maxHeightReached = transform.position.y > maxHeightReached ? transform.position.y : maxHeightReached;
-    }
+    }*/
 
     //this function requires the collider be the same size as the renderer or smaller
     protected bool IsGrounded()
@@ -318,7 +324,12 @@ public class JumperPlayerController : MonoBehaviour
         {
             //this is a physics bool, needs to be reset by physics functions
             JumpHelper(horizontal, airJumpSpeed);
-            canAirJump = false;
+            if (coinJump > 0 && !canAirJump)
+                coinJump -= 1;
+            else
+            {
+                canAirJump = false;
+            }
         }
     }
 
@@ -338,23 +349,9 @@ public class JumperPlayerController : MonoBehaviour
     }
 
     //run after movement
-    protected void ThrowItem()
+    protected void UseMagnet()
     {
-/*        if (throwStuff && haveItem)
-        {
-            haveItem = false;
-            Debug.Log("threw item");
-            Vector2 throwTemp = throwStrength;
-            throwTemp.x *= movementDirection;
-            //check if velocity and movement direction are both positive/both negative
-            //no need to add if velocity is 0 ofc
-            if (rb.velocity.x * movementDirection > 0)
-            {
-                throwTemp.x += rb.velocity.x * 0.3f;
-            }
-            heldItemRB.gameObject.GetComponent<JumperPickupController>().Thrown(throwTemp);
-        }*/
-        if (throwStuff && canMagnet && magnetLevel > 0)
+        if (magnetInput && canMagnet && magnetLevel > 0)
         {
             // activate magnet
             Debug.LogWarning("activating magnet");
@@ -366,7 +363,7 @@ public class JumperPlayerController : MonoBehaviour
         }
         if (!isMagnetic)
             magnet.SetActive(false);
-        throwStuff = false;
+        magnetInput = false;
     }
 
     protected void ActivateShield()
@@ -398,8 +395,8 @@ public class JumperPlayerController : MonoBehaviour
         currentShield -= Time.fixedDeltaTime;
         currentMagnet -= Time.fixedDeltaTime;
         // set timer flags
-        canMagnet = currentMagnetCD < 0.01f;
-        canShield = currentShieldCD < 0.01f;
+        canMagnet = currentMagnetCD < 0.01f && magnetLevel > 0;
+        canShield = currentShieldCD < 0.01f && shieldLevel > 0;
         isShielded = currentShield > 0f;
         isMagnetic = currentMagnet > 0f;
     }
@@ -445,7 +442,7 @@ public class JumperPlayerController : MonoBehaviour
 
     public float GetCoinsCollected()
     {
-        return points + maxHeightReached;
+        return points * (1 + (aiLevel * 0.2f));
     }
 
     public string GetHorizontalAxis()
@@ -467,11 +464,6 @@ public class JumperPlayerController : MonoBehaviour
     public string GetDummyAxis()
     {
         return dummyAxis;
-    }
-
-    public bool HasThrowable()
-    {
-        return haveItem;
     }
 
     public void RebindInputController()
@@ -525,7 +517,7 @@ public class JumperPlayerController : MonoBehaviour
             {
                 //blah blah do stuff for picking up the item
                 points += pu.PointsOnPickup();
-                coinJump = jumpLevel > 0;
+                coinJump = jumpLevel;
                 if (pu.IsDestroyOnPickup())
                     pu.Remove();
             }

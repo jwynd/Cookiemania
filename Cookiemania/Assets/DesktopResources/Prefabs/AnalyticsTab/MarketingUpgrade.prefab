@@ -293,7 +293,7 @@ MonoBehaviour:
     minigame easier to get points.
   lvlReq: 0
   popupTitle: Coin Jump
-  popupPrice: 0
+  popupPrice: 150
   purchased: 0
 --- !u!1 &3616772542393268406
 GameObject:
@@ -515,7 +515,7 @@ MonoBehaviour:
     minigame easier to get points.
   lvlReq: 0
   popupTitle: Magnet
-  popupPrice: 0
+  popupPrice: 200
   purchased: 0
 --- !u!1 &4682932385848126488
 GameObject:
@@ -817,7 +817,7 @@ MonoBehaviour:
   popupText: unlocks location
   lvlReq: 0
   popupTitle: Coin Jump
-  popupPrice: 50
+  popupPrice: 800
   purchased: 0
 --- !u!1 &4971429859701953535
 GameObject:
@@ -1252,7 +1252,7 @@ MonoBehaviour:
   popupText: click click click
   lvlReq: 0
   popupTitle: Magnet Distance
-  popupPrice: 50
+  popupPrice: 600
   purchased: 0
 --- !u!1 &6092385500116820011
 GameObject:
@@ -1554,7 +1554,7 @@ MonoBehaviour:
   popupText: Percentages
   lvlReq: 0
   popupTitle: Magnet Cooldown
-  popupPrice: 50
+  popupPrice: 800
   purchased: 0
 --- !u!1 &6511325922439472925
 GameObject:
@@ -1929,7 +1929,7 @@ MonoBehaviour:
   popupText: User 3 info
   lvlReq: 0
   popupTitle: Jump Power
-  popupPrice: 0
+  popupPrice: 1000
   purchased: 0
 --- !u!1 &7072628973258600166
 GameObject:
@@ -2075,7 +2075,7 @@ MonoBehaviour:
   popupText: Unlocks Race
   lvlReq: 0
   popupTitle: Jump Power
-  popupPrice: 50
+  popupPrice: 300
   purchased: 0
 --- !u!1 &7576570646800188942
 GameObject:
@@ -2221,7 +2221,7 @@ MonoBehaviour:
   popupText: User 3 info
   lvlReq: 0
   popupTitle: Magnet Distance
-  popupPrice: 50
+  popupPrice: 1000
   purchased: 0
 --- !u!1 &7668126412113280261
 GameObject:
@@ -2370,7 +2370,7 @@ MonoBehaviour:
     minigame easier to get points.
   lvlReq: 0
   popupTitle: Shield
-  popupPrice: 50
+  popupPrice: 800
   purchased: 0
 --- !u!1 &7770130482120927210
 GameObject:
@@ -2516,7 +2516,7 @@ MonoBehaviour:
   popupText: Unlocks Top Users
   lvlReq: 0
   popupTitle: Jump Power
-  popupPrice: 50
+  popupPrice: 500
   purchased: 0
 --- !u!1 &7907670542308229375
 GameObject:
@@ -2662,7 +2662,7 @@ MonoBehaviour:
   popupText: User 3 info
   lvlReq: 0
   popupTitle: Magnet Cooldown
-  popupPrice: 0
+  popupPrice: 1200
   purchased: 0
 --- !u!1 &8005209258922979245
 GameObject:

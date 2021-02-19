@@ -815,7 +815,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -146.8, y: 20.450012}
+  m_AnchoredPosition: {x: -146.80002, y: 20.450012}
   m_SizeDelta: {x: 97.4, y: 40.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9176062764783981481
@@ -1487,7 +1487,6 @@ GameObject:
   - component: {fileID: 9176062765846552833}
   - component: {fileID: 9176062765846552832}
   - component: {fileID: 29125470496223545}
-  - component: {fileID: 6249482136023176331}
   m_Layer: 5
   m_Name: JumperUICanvas
   m_TagString: Untagged
@@ -1597,22 +1596,10 @@ MonoBehaviour:
   healthSlider: {fileID: 9176062765672800013}
   endscreenCamera: {fileID: 0}
   endscreenCanvas: {fileID: 0}
+  endscreenBG: {fileID: 0}
   timeToNextScene: 2.5
   scoreRef: {fileID: 4644382514563458857}
   tutorialRef: {fileID: 4666425232642906821}
---- !u!114 &6249482136023176331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9176062765846552835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 814af8dc3d568e242bdd7c86a65e98d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UITextsName: Assets/JumperResources/UI/JumperUILines.txt
 --- !u!1 &9176062765866156380
 GameObject:
   m_ObjectHideFlags: 0

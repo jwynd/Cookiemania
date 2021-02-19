@@ -68,10 +68,10 @@ MonoBehaviour:
     weight: 0.26
   - platform: {fileID: 3987228348188153383, guid: 59c341f3cf7d8a0478f772c98dba4889,
       type: 3}
-    weight: 0.371
+    weight: 0.774
   - platform: {fileID: 637888742533752541, guid: 45b8d4f185c9d584c8dce7c171ed52e4,
       type: 3}
-    weight: 0.852
+    weight: 0.311
   - platform: {fileID: 2042707450985415420, guid: 633e2ba3c5535b244a4708b29c5d1d0b,
       type: 3}
     weight: 0.251

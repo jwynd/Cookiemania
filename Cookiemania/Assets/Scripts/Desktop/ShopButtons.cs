@@ -20,7 +20,8 @@ public class ShopButtons : MonoBehaviour
     {
         OpenHomepage();
     }
-    private void Start()
+
+    private void Update()
     {
         UpdatePlayer();
     }

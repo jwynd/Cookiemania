@@ -10,11 +10,10 @@ public class JumperManagerUI : MonoBehaviour
     public UnityEngine.UI.Slider healthSlider;
     public GameObject endscreenCamera;
     public GameObject endscreenCanvas;
+    public JumperBackgroundController endscreenBG;
     public float timeToNextScene = 2.5f;
     public TextMeshProUGUI scoreRef;
     public TextMeshProUGUI tutorialRef;
-   
-
 
     public static JumperManagerUI Instance { get; private set; }
 
@@ -22,15 +21,7 @@ public class JumperManagerUI : MonoBehaviour
     private bool endingGame = false;
     private int coinsCollected = 0;
     private JumperManagerGame jm;
-    private General_LevelTransition levelController;
-    private JumperGeneralText tutorialText;
-    private bool tutorialActive = false;
-    private bool needNextLine;
-    private JumperStoryFramework storyfw;
-    private bool listeningToAxis;
-    private string axis;
-    private float tutorialTimer;
-    private float minTutorialTimer = 0.35f;
+
 
     #endregion
 
@@ -45,16 +36,13 @@ public class JumperManagerUI : MonoBehaviour
         endscreenCamera.GetComponent<Camera>().enabled = false;
         endscreenCamera.GetComponent<AudioListener>().enabled = false;
         endscreenCanvas.SetActive(false);
-        tutorialText = tutorialRef.gameObject.GetComponent<JumperGeneralText>();
-        
+        endscreenBG = endscreenCanvas.GetComponent<JumperBackgroundController>();
     }
 
    
     void Start()
     {
         jm = JumperManagerGame.Instance;
-        storyfw = JumperStoryFramework.Instance;
-        levelController = General_LevelTransition.Instance;
         heightSlider.minValue = jm.Player.transform.position.y;
         heightSlider.maxValue = jm.GetHeightGoal();
         healthSlider.minValue = 0;
@@ -74,90 +62,8 @@ public class JumperManagerUI : MonoBehaviour
             coinsCollected = (int)jm.Player.GetCoinsCollected();
             scoreRef.text = coinsCollected.ToString();
         }
-/*        TutorialUpdate();
-*/    }
-
-/*    protected void TutorialUpdate()
-    {
-        if (!tutorialActive)
-        {
-            return;
-        }
-        if (needNextLine)
-        {
-            needNextLine = false;
-            System.Tuple<string, string> textNAxis = storyfw.GetNextTutorialLine();
-            if (textNAxis == null)
-            {
-                tutorialActive = false;
-                tutorialText.UpdateText("");
-                return;
-            }
-            else if (storyfw.IsAnAxis(textNAxis.Item2))
-            {
-                listeningToAxis = true;
-                axis = textNAxis.Item2;
-            }
-            else
-            {
-                listeningToAxis = false;
-                tutorialTimer = float.Parse(textNAxis.Item2);
-                Debug.Log(tutorialTimer.ToString());
-            }
-            tutorialText.UpdateText(textNAxis.Item1);
-        }  
-        if (listeningToAxis)
-        {
-            CheckPlayerInput(axis);
-        }
-        else
-        {
-            tutorialTimer -= Time.deltaTime;
-            if (tutorialTimer < 0)
-            {
-                needNextLine = true;
-            }
-        }
-    }*/
-
-    private void CheckPlayerInput(string axis)
-    {
-        
-        //switch did not work ??
-        if (axis == nameof(jm.Player.Input.Horizontal))
-        {
-            if (jm.Player.Input.Horizontal != 0)
-            {
-                listeningToAxis = false;
-                tutorialTimer = minTutorialTimer;
-            }       
-        }
-        //should only be checking this when we have an item to throw tbh
-        else if (axis == nameof(jm.Player.Input.Throw))
-        {
-            if (jm.Player.Input.Throw != 0)
-            {
-                listeningToAxis = false;
-                tutorialTimer = minTutorialTimer;
-            }
-        }
-        else if (axis == nameof(jm.Player.Input.Jump))
-        {
-            if (jm.Player.Input.Jump != 0)
-            {
-                listeningToAxis = false;
-                tutorialTimer = minTutorialTimer;
-            }
-        }
-        else if (axis == nameof(jm.Player.Input.Pickup))
-        {
-            if (jm.Player.HasThrowable())
-            {
-                listeningToAxis = false;
-                tutorialTimer = minTutorialTimer;
-            }
-        }
     }
+    
     #region public
     public void End(bool isGood, bool runSequence = true, Transform target = null)
     {
@@ -222,12 +128,14 @@ public class JumperManagerUI : MonoBehaviour
         JumperTextAdvanced endUI = endscreenCanvas.GetComponent<JumperTextAdvanced>();
         if (isGoodEnd)
         {
-            coinsCollected += (int)JumperManagerGame.Instance.GetLevelReward();
+            endscreenBG.SetNight(false);
+            coinsCollected = (int)(coinsCollected * 1.5f);
             endUI.UpdateText("LEVEL COMPLETE!<br>you made " + coinsCollected.ToString());
 
         }
         else
         {
+            endscreenBG.SetNight(true);
             endUI.UpdateText("Game Over<br>you made " + coinsCollected.ToString());
         }
         

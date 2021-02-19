@@ -22,7 +22,7 @@ public class JumperBackgroundController : MonoBehaviour
 
     }
 
-    private void SetNight(bool night)
+    public void SetNight(bool night)
     {
         foreach (var obj in dayPrefabs)
         {
