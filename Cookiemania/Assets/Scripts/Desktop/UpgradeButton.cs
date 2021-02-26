@@ -47,7 +47,7 @@ public class UpgradeButton : MonoBehaviour
         }
         for (int i = 0; i < upgradeQuotes.Length; i++)
         {
-            upgradeQuotes[i].GetComponent<TMPro.TextMeshPro>().text = popupQuote;
+            upgradeQuotes[i].GetComponent<TMPro.TextMeshProUGUI>().text = popupQuote;
         }
         for (int i = 0; i < upgradeDescriptions.Length; i++)
         {

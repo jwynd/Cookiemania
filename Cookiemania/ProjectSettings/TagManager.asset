@@ -36,6 +36,7 @@ TagManager:
   - Jjumppower
   - Jmagnetcd
   - Jmagnetdistance
+  - UpgradeQuote
   layers:
   - Default
   - TransparentFX

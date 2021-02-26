@@ -479,7 +479,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 48.3, y: 2.3}
+  m_AnchoredPosition: {x: 51.8, y: 2.3}
   m_SizeDelta: {x: 211, y: 180}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &560993614
@@ -537,14 +537,14 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 13
-  m_fontSizeBase: 13
+  m_fontSize: 14
+  m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 258
+  m_textAlignment: 514
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -1792,12 +1792,12 @@ PrefabInstance:
     - target: {fileID: 3177143172974464830, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -72.9
+      value: -47.1
       objectReference: {fileID: 0}
     - target: {fileID: 3177143172974464830, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3177143172974464830, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
         type: 3}
@@ -1839,6 +1839,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: upgradeQuote
       objectReference: {fileID: 0}
+    - target: {fileID: 6924357752519249417, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
+        type: 3}
+      propertyPath: m_TagString
+      value: UpgradeQuote
+      objectReference: {fileID: 0}
     - target: {fileID: 7465200544413817179, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -1858,6 +1863,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7774176309326274127, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
+        type: 3}
+      propertyPath: m_margin.x
+      value: -16.10727
+      objectReference: {fileID: 0}
+    - target: {fileID: 7774176309326274127, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
+        type: 3}
+      propertyPath: m_margin.z
+      value: -12.212893
       objectReference: {fileID: 0}
     - target: {fileID: 7774176309326274127, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
         type: 3}
@@ -1887,27 +1902,42 @@ PrefabInstance:
     - target: {fileID: 7794327378085086846, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
         type: 3}
       propertyPath: m_text
-      value: oh I love quotes
+      value: '"oh I love quotes"'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7794327378085086846, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
+        type: 3}
+      propertyPath: m_enableVertexGradient
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7794327378085086846, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
         type: 3}
       propertyPath: m_fontSize
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7794327378085086846, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
         type: 3}
       propertyPath: m_fontSizeBase
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7794327378085086846, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
         type: 3}
       propertyPath: m_fontStyle
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7794327378085086846, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
         type: 3}
       propertyPath: m_textAlignment
       value: 514
+      objectReference: {fileID: 0}
+    - target: {fileID: 7794327378085086846, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
+        type: 3}
+      propertyPath: m_margin.x
+      value: -8.76946
+      objectReference: {fileID: 0}
+    - target: {fileID: 7794327378085086846, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
+        type: 3}
+      propertyPath: m_margin.z
+      value: -7.325967
       objectReference: {fileID: 0}
     - target: {fileID: 7794327378085086846, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
         type: 3}
@@ -1917,7 +1947,7 @@ PrefabInstance:
     - target: {fileID: 7794327378085086846, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 16
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 7794327378085086846, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
         type: 3}
