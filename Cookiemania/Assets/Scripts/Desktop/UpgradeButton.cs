@@ -10,16 +10,19 @@ public class UpgradeButton : MonoBehaviour
     public string popupText;
     public int lvlReq;
     public string popupTitle;
+    public string popupQuote;
     public int popupPrice;
     public bool purchased = false;
     private GameObject [] upgradeTitles;
     private GameObject [] upgradeDescriptions;
     private GameObject [] upgradeCosts;
+    private GameObject [] upgradeQuotes;
     void Start()
     {
        upgradeTitles = GameObject.FindGameObjectsWithTag("UpgradeTitle");
        upgradeDescriptions = GameObject.FindGameObjectsWithTag("UpgradeDescription");
        upgradeCosts = GameObject.FindGameObjectsWithTag("UpgradeCost");
+       upgradeQuotes = GameObject.FindGameObjectsWithTag("UpgradeQuote");
        cost = popupPrice;
     }
 
@@ -41,6 +44,10 @@ public class UpgradeButton : MonoBehaviour
         for (int i = 0; i < upgradeTitles.Length; i++)
         {
             upgradeTitles[i].GetComponent<TMPro.TextMeshProUGUI>().text = popupTitle;
+        }
+        for (int i = 0; i < upgradeQuotes.Length; i++)
+        {
+            upgradeQuotes[i].GetComponent<TMPro.TextMeshPro>().text = popupQuote;
         }
         for (int i = 0; i < upgradeDescriptions.Length; i++)
         {
