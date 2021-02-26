@@ -10,8 +10,15 @@ public class WebsiteUI : MonoBehaviour
     protected Animator weatherAnimator = null;
     [SerializeField]
     protected TMP_Text CompanyName = null;
-
+    [SerializeField]
+    protected List<AnimationClip> animations = new List<AnimationClip>();
+    protected string currentWeather = "";
     protected CharacterPrefab charRef = null;
+
+    private void Awake()
+    {
+        currentWeather = animations[0].name;
+    }
 
     public void SetUpFromCharPrefab(CharacterPrefab charprefab)
     {
@@ -19,9 +26,19 @@ public class WebsiteUI : MonoBehaviour
         charRef.CompanyUpdate.AddListener(UpdateCompany);
     }
 
+    public void AttachWeekListener()
+    {
+        PlayerData.Player.WeekChanged.AddListener(ChangeAnimation);
+    }
+
     public void AnimateWeather()
     {
-        weatherAnimator.Play("sunny", -1, 0f);
+        weatherAnimator.Play(currentWeather, -1, 0f);
+    }
+
+    public void ChangeAnimation(int _arg0, int _arg1)
+    {
+        currentWeather = animations[Random.Range(0, animations.Count)].name;
     }
 
     public void UpdateCompany(string newName)

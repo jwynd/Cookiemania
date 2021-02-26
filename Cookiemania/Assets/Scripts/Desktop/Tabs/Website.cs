@@ -25,6 +25,7 @@ public class Website : MonoBehaviour
     {
         websiteCanvas.transform.SetParent(SiteCanvas.Instance.transform);
         ui.SetUpFromCharPrefab(charPrefab);
+        ui.AttachWeekListener();
     }
 
     private void OnEnable()
