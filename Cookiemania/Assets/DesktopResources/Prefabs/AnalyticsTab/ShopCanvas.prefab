@@ -218,6 +218,7 @@ MonoBehaviour:
   popupText: Basic artificial intellegence helper
   lvlReq: 0
   popupTitle: Basic AI
+  popupQuote: 
   popupPrice: 20
   purchased: 0
 --- !u!1 &461623040
@@ -441,8 +442,165 @@ MonoBehaviour:
   popupText: xxxx
   lvlReq: 0
   popupTitle: invul
+  popupQuote: 
   popupPrice: 20
   purchased: 0
+--- !u!1 &560993611
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 560993612}
+  - component: {fileID: 560993614}
+  - component: {fileID: 560993613}
+  m_Layer: 5
+  m_Name: upgradeDescription
+  m_TagString: UpgradeDescription
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &560993612
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 560993611}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5327413852569299222}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 51.8, y: 2.3}
+  m_SizeDelta: {x: 211, y: 180}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &560993614
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 560993611}
+  m_CullTransparentMesh: 0
+--- !u!114 &560993613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 560993611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Talks about the upgrade and what it does and how it is used.
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8075864e2ded4384c9d98e3b0a0f7ae5, type: 2}
+  m_sharedMaterial: {fileID: 8163171998885815143, guid: 8075864e2ded4384c9d98e3b0a0f7ae5,
+    type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_outlineColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontSize: 14
+  m_fontSizeBase: 14
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_textAlignment: 514
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_firstOverflowCharacterIndex: -1
+  m_linkedTextComponent: {fileID: 0}
+  m_isLinkedTextComponent: 0
+  m_isTextTruncated: 0
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_ignoreRectMaskCulling: 0
+  m_ignoreCulling: 1
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_VertexBufferAutoSizeReduction: 1
+  m_firstVisibleCharacter: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: -0.75280005, y: 0.07902836, z: -0.20006683, w: 0.059133247}
+  m_textInfo:
+    textComponent: {fileID: 560993613}
+    characterCount: 60
+    spriteCount: 0
+    spaceCount: 12
+    wordCount: 13
+    linkCount: 0
+    lineCount: 4
+    pageCount: 1
+    materialCount: 1
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_spriteAnimator: {fileID: 0}
+  m_hasFontAssetChanged: 0
+  m_subTextObjects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1640131010
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,6 +823,7 @@ MonoBehaviour:
   popupText: Basic artificial intellegence helper
   lvlReq: 0
   popupTitle: Basic AI
+  popupQuote: 
   popupPrice: 20
   purchased: 0
 --- !u!114 &7998924640616642860
@@ -1633,17 +1792,22 @@ PrefabInstance:
     - target: {fileID: 3177143172974464830, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 5
+      value: -47.1
       objectReference: {fileID: 0}
     - target: {fileID: 3177143172974464830, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3177143172974464830, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
         type: 3}
       propertyPath: m_SizeDelta.x
       value: 211
+      objectReference: {fileID: 0}
+    - target: {fileID: 3177143172974464830, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 3471608584521942790, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
         type: 3}
@@ -1670,6 +1834,16 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6924357752519249417, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
+        type: 3}
+      propertyPath: m_Name
+      value: upgradeQuote
+      objectReference: {fileID: 0}
+    - target: {fileID: 6924357752519249417, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
+        type: 3}
+      propertyPath: m_TagString
+      value: UpgradeQuote
+      objectReference: {fileID: 0}
     - target: {fileID: 7465200544413817179, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -1692,6 +1866,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7774176309326274127, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
         type: 3}
+      propertyPath: m_margin.x
+      value: -16.10727
+      objectReference: {fileID: 0}
+    - target: {fileID: 7774176309326274127, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
+        type: 3}
+      propertyPath: m_margin.z
+      value: -12.212893
+      objectReference: {fileID: 0}
+    - target: {fileID: 7774176309326274127, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
+        type: 3}
       propertyPath: m_textInfo.characterCount
       value: 12
       objectReference: {fileID: 0}
@@ -1717,33 +1901,68 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7794327378085086846, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
         type: 3}
+      propertyPath: m_text
+      value: '"oh I love quotes"'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7794327378085086846, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
+        type: 3}
+      propertyPath: m_enableVertexGradient
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7794327378085086846, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
+        type: 3}
       propertyPath: m_fontSize
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 7794327378085086846, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
-        type: 3}
-      propertyPath: m_fontSizeBase
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 7794327378085086846, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 7794327378085086846, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
-        type: 3}
-      propertyPath: m_textInfo.spaceCount
       value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7794327378085086846, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
         type: 3}
+      propertyPath: m_fontSizeBase
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7794327378085086846, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
+        type: 3}
+      propertyPath: m_fontStyle
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7794327378085086846, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
+        type: 3}
+      propertyPath: m_textAlignment
+      value: 514
+      objectReference: {fileID: 0}
+    - target: {fileID: 7794327378085086846, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
+        type: 3}
+      propertyPath: m_margin.x
+      value: -8.76946
+      objectReference: {fileID: 0}
+    - target: {fileID: 7794327378085086846, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
+        type: 3}
+      propertyPath: m_margin.z
+      value: -7.325967
+      objectReference: {fileID: 0}
+    - target: {fileID: 7794327378085086846, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
+        type: 3}
+      propertyPath: m_margin.w
+      value: 1.7898567
+      objectReference: {fileID: 0}
+    - target: {fileID: 7794327378085086846, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7794327378085086846, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7794327378085086846, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
+        type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 13
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7794327378085086846, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7794327378085086846, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
         type: 3}
@@ -1771,6 +1990,23 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7383341329791087626}
     m_Modifications:
+    - target: {fileID: 1548209563760548618, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: popupText
+      value: Allows you to store two extra jumps from the cookie
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548209563760548618, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: popupTitle
+      value: Cookie Type
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548209563760548618, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: popupQuote
+      value: "\u201CThe weird part is seeing how all different types of cookies, from
+        the fake circle red velvets to the flat biscuit cookies, could work so well
+        together and drink from the same milk\u201D"
+      objectReference: {fileID: 0}
     - target: {fileID: 2300205551993698448, guid: 604d5d088a1448c48badacd19ffe99e6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1876,10 +2112,44 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4441538659642771348, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: popupText
+      value: Allows an extra jump after collecting cookies (coin)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4441538659642771348, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: popupTitle
+      value: Cookie Toppings
+      objectReference: {fileID: 0}
+    - target: {fileID: 4441538659642771348, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: popupQuote
+      value: "\u201CI heard someone say that we shouldn\u2019t judge each other by
+        our cookie toppings, but I swear she has way more white chocolate chips and
+        black chips\u201D"
+      objectReference: {fileID: 0}
     - target: {fileID: 5633834869011340775, guid: 604d5d088a1448c48badacd19ffe99e6,
         type: 3}
       propertyPath: m_Name
       value: MarketingUpgrade
+      objectReference: {fileID: 0}
+    - target: {fileID: 7217208316664351441, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: popupText
+      value: Allows you to store Three extra jumps from the cookie
+      objectReference: {fileID: 0}
+    - target: {fileID: 7217208316664351441, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: popupTitle
+      value: Cookie Identity
+      objectReference: {fileID: 0}
+    - target: {fileID: 7217208316664351441, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: popupQuote
+      value: "\u201CI know who they are, some are my late cousins, some are possible
+        adopted step-siblings, but some are actually just me going to website when
+        I\u2019m asleep\u201D"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 604d5d088a1448c48badacd19ffe99e6, type: 3}
@@ -1946,6 +2216,27 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -274.1
       objectReference: {fileID: 0}
+    - target: {fileID: 454058410732516419, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupText
+      value: Increasese the width of the shield
+      objectReference: {fileID: 0}
+    - target: {fileID: 454058410732516419, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupTitle
+      value: Allowing Trusted Programs
+      objectReference: {fileID: 0}
+    - target: {fileID: 454058410732516419, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupQuote
+      value: "\u201CApparently these pop-up menus offering me services were causing
+        some people to see my browsing activity, how rude.\u201D"
+      objectReference: {fileID: 0}
+    - target: {fileID: 454058410732516419, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupPrice
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 1360264541001020590, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1955,6 +2246,70 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -222
+      objectReference: {fileID: 0}
+    - target: {fileID: 1939287764619041250, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupText
+      value: Increase the width of the shield
+      objectReference: {fileID: 0}
+    - target: {fileID: 1939287764619041250, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupTitle
+      value: Cloud Protection
+      objectReference: {fileID: 0}
+    - target: {fileID: 1939287764619041250, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupQuote
+      value: "\u201CSo you\u2019re saying that if my computer crashes, everything
+        was saved into the cloud? Can I safely put photos and important things in
+        there too?\u201D"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1939287764619041250, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupPrice
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 2161206889326937586, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupText
+      value: Provides a shield to protect you from 1 instance of damage
+      objectReference: {fileID: 0}
+    - target: {fileID: 2161206889326937586, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupTitle
+      value: Enable Direwall
+      objectReference: {fileID: 0}
+    - target: {fileID: 2161206889326937586, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupQuote
+      value: "\u201CApparently this stops people from invading your network, whatever
+        that means\u201D"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2161206889326937586, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupPrice
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2194432568644392660, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupText
+      value: Upgrades your weapon to shoot always shoot 1 piercing bullets
+      objectReference: {fileID: 0}
+    - target: {fileID: 2194432568644392660, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupTitle
+      value: Paid Subscription
+      objectReference: {fileID: 0}
+    - target: {fileID: 2194432568644392660, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupQuote
+      value: "\u201CIt checks everyday if I have a virus, and apparently cookietube.com
+        has way too many viruses. I gotta stop watching videos from there\u201D"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2194432568644392660, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupPrice
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 2395300011772522400, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
         type: 3}
@@ -2015,6 +2370,27 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 2983858885395682677, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupText
+      value: Increases the Health of your shield to take 2 hits of damage
+      objectReference: {fileID: 0}
+    - target: {fileID: 2983858885395682677, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupTitle
+      value: Advanced Settings
+      objectReference: {fileID: 0}
+    - target: {fileID: 2983858885395682677, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupQuote
+      value: "\u201C I didn\u2019t even know that there were this many settings for
+        such a simple thing\u201D"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2983858885395682677, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupPrice
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 3103064280539813701, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
         type: 3}
@@ -2161,6 +2537,44 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3982413111430612655, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupText
+      value: Increases the Health of your shield to take 3 hits of damage
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982413111430612655, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: lvlReq
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982413111430612655, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupTitle
+      value: VPN Setup
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982413111430612655, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupQuote
+      value: "\u201CThis is perfect to help me watch videos without people know where
+        I\u2019m from! Wait\u2026 this protects me from scammers too? I guess I shouldn\u2019t
+        have bought that turtle\u201D"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4062953978534414705, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupText
+      value: Upgrades your weapon to occasionally shoot piercing bullets
+      objectReference: {fileID: 0}
+    - target: {fileID: 4062953978534414705, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupTitle
+      value: Free Trial
+      objectReference: {fileID: 0}
+    - target: {fileID: 4062953978534414705, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupQuote
+      value: "\u201CThere\u2019s always a free trial available for some reason. How
+        do they ever make money?\u201D"
+      objectReference: {fileID: 0}
     - target: {fileID: 5084873362701425003, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2170,6 +2584,49 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -250.20001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5284711790998609733, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupText
+      value: Upgrades your weapon to shoot 5 bullets in a triangle formation
+      objectReference: {fileID: 0}
+    - target: {fileID: 5284711790998609733, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupTitle
+      value: Business Version
+      objectReference: {fileID: 0}
+    - target: {fileID: 5284711790998609733, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupQuote
+      value: "\u201CThey\u2019re supposed to be encrypt all our data so that no one
+        can get business files, but what about protecting it from people inside the
+        network...\u201D"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5284711790998609733, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupPrice
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 5332347153333427353, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupText
+      value: Upgrades your weapon to shoot 3 bullets in a triangle formation
+      objectReference: {fileID: 0}
+    - target: {fileID: 5332347153333427353, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupTitle
+      value: Extend Free Trial
+      objectReference: {fileID: 0}
+    - target: {fileID: 5332347153333427353, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupQuote
+      value: "\u201CI finally took the bait and paid for one month, at least the popups
+        are finally gone\u201D"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5332347153333427353, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupPrice
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 6139823998291945578, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
         type: 3}
@@ -2190,6 +2647,22 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -320.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563579561126446943, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupText
+      value: Upgrades your weapon to shoot piercing bullets for all of your bullets.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563579561126446943, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupTitle
+      value: Premium 3 Year Contract
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563579561126446943, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupQuote
+      value: "\u201CI know their average education levels, know their location, but
+        the really weird part is that I know which underwear brand they like\u201D"
       objectReference: {fileID: 0}
     - target: {fileID: 7818530055111895579, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
         type: 3}
@@ -2238,15 +2711,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a, type: 3}
---- !u!224 &9104601386800051792 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3103064280539813701, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
-    type: 3}
-  m_PrefabInstance: {fileID: 6145801867788656917}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3397900275042644445 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8821850665747206344, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+    type: 3}
+  m_PrefabInstance: {fileID: 6145801867788656917}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &9104601386800051792 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3103064280539813701, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
     type: 3}
   m_PrefabInstance: {fileID: 6145801867788656917}
   m_PrefabAsset: {fileID: 0}
@@ -2257,110 +2730,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4547578654756160205}
     m_Modifications:
-    - target: {fileID: 650557142008192026, guid: 7705a38246549d84881209b14b7902d2,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 650557142008192026, guid: 7705a38246549d84881209b14b7902d2,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 650557142008192026, guid: 7705a38246549d84881209b14b7902d2,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 650557142008192026, guid: 7705a38246549d84881209b14b7902d2,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1137682172268254215, guid: 7705a38246549d84881209b14b7902d2,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1137682172268254215, guid: 7705a38246549d84881209b14b7902d2,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1137682172268254215, guid: 7705a38246549d84881209b14b7902d2,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1137682172268254215, guid: 7705a38246549d84881209b14b7902d2,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2919379544061725386, guid: 7705a38246549d84881209b14b7902d2,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2919379544061725386, guid: 7705a38246549d84881209b14b7902d2,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2919379544061725386, guid: 7705a38246549d84881209b14b7902d2,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2919379544061725386, guid: 7705a38246549d84881209b14b7902d2,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6390620795353419632, guid: 7705a38246549d84881209b14b7902d2,
         type: 3}
       propertyPath: m_Name
       value: Analytics
-      objectReference: {fileID: 0}
-    - target: {fileID: 6890602319513415142, guid: 7705a38246549d84881209b14b7902d2,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6890602319513415142, guid: 7705a38246549d84881209b14b7902d2,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6890602319513415142, guid: 7705a38246549d84881209b14b7902d2,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6890602319513415142, guid: 7705a38246549d84881209b14b7902d2,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7157059464528697969, guid: 7705a38246549d84881209b14b7902d2,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7157059464528697969, guid: 7705a38246549d84881209b14b7902d2,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7157059464528697969, guid: 7705a38246549d84881209b14b7902d2,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7157059464528697969, guid: 7705a38246549d84881209b14b7902d2,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7648525989809109691, guid: 7705a38246549d84881209b14b7902d2,
         type: 3}
@@ -2466,26 +2839,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8788309611255688440, guid: 7705a38246549d84881209b14b7902d2,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8788309611255688440, guid: 7705a38246549d84881209b14b7902d2,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8788309611255688440, guid: 7705a38246549d84881209b14b7902d2,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8788309611255688440, guid: 7705a38246549d84881209b14b7902d2,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7705a38246549d84881209b14b7902d2, type: 3}
@@ -2758,6 +3111,23 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.9
       objectReference: {fileID: 0}
+    - target: {fileID: 2826002813900518223, guid: 50441ce5151b68744b5e87fb213f604f,
+        type: 3}
+      propertyPath: popupText
+      value: Increase the passive income multiplier to (N amount)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826002813900518223, guid: 50441ce5151b68744b5e87fb213f604f,
+        type: 3}
+      propertyPath: popupQuote
+      value: "\u201CIt can start detecting face, know who you are, where you live,
+        what you ate last night, but somehow doesn\u2019t know what to do with any
+        of this information\u201D"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826002813900518223, guid: 50441ce5151b68744b5e87fb213f604f,
+        type: 3}
+      propertyPath: popupPrice
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 3085627065971330054, guid: 50441ce5151b68744b5e87fb213f604f,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -2778,6 +3148,77 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3190471593469711353, guid: 50441ce5151b68744b5e87fb213f604f,
+        type: 3}
+      propertyPath: popupText
+      value: Upgrade your drink even more to improve your health for all the minigames
+      objectReference: {fileID: 0}
+    - target: {fileID: 3190471593469711353, guid: 50441ce5151b68744b5e87fb213f604f,
+        type: 3}
+      propertyPath: popupTitle
+      value: Almond Milk
+      objectReference: {fileID: 0}
+    - target: {fileID: 3190471593469711353, guid: 50441ce5151b68744b5e87fb213f604f,
+        type: 3}
+      propertyPath: popupQuote
+      value: "\u201CHow does something so crunchy turn into milk?\u201D"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3190471593469711353, guid: 50441ce5151b68744b5e87fb213f604f,
+        type: 3}
+      propertyPath: popupPrice
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4051199080365379006, guid: 50441ce5151b68744b5e87fb213f604f,
+        type: 3}
+      propertyPath: popupText
+      value: Gain a multiplier of (N amount) everytime you finish playing a minigame
+      objectReference: {fileID: 0}
+    - target: {fileID: 4051199080365379006, guid: 50441ce5151b68744b5e87fb213f604f,
+        type: 3}
+      propertyPath: popupQuote
+      value: "\u201CAI\u2019s are just numbers and formulas task to do the writer\u2019s
+        every bidding\u2026 but they\u2019re really dumb\u201D"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4051199080365379006, guid: 50441ce5151b68744b5e87fb213f604f,
+        type: 3}
+      propertyPath: popupPrice
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4515732212846378097, guid: 50441ce5151b68744b5e87fb213f604f,
+        type: 3}
+      propertyPath: popupText
+      value: Upgrade your drink even more to improve your health for all the minigames
+      objectReference: {fileID: 0}
+    - target: {fileID: 4515732212846378097, guid: 50441ce5151b68744b5e87fb213f604f,
+        type: 3}
+      propertyPath: popupQuote
+      value: "\u201CWe got to lose some of these carbs from sitting around all day\u201D"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4515732212846378097, guid: 50441ce5151b68744b5e87fb213f604f,
+        type: 3}
+      propertyPath: popupPrice
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4626530914540937018, guid: 50441ce5151b68744b5e87fb213f604f,
+        type: 3}
+      propertyPath: popupText
+      value: Upgrade your drink to improve your health for all the minigames
+      objectReference: {fileID: 0}
+    - target: {fileID: 4626530914540937018, guid: 50441ce5151b68744b5e87fb213f604f,
+        type: 3}
+      propertyPath: popupTitle
+      value: Discount Milk
+      objectReference: {fileID: 0}
+    - target: {fileID: 4626530914540937018, guid: 50441ce5151b68744b5e87fb213f604f,
+        type: 3}
+      propertyPath: popupQuote
+      value: "\u201CSometimes a hard glass of milk really makes the days go easy\u201D"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4626530914540937018, guid: 50441ce5151b68744b5e87fb213f604f,
+        type: 3}
+      propertyPath: popupPrice
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4804112280217958710, guid: 50441ce5151b68744b5e87fb213f604f,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -2797,6 +3238,27 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5095178250244467899, guid: 50441ce5151b68744b5e87fb213f604f,
+        type: 3}
+      propertyPath: popupText
+      value: Transform your drink into a savory ice cream to improve your health for
+        all the minigames
+      objectReference: {fileID: 0}
+    - target: {fileID: 5095178250244467899, guid: 50441ce5151b68744b5e87fb213f604f,
+        type: 3}
+      propertyPath: popupTitle
+      value: Ice Cream
+      objectReference: {fileID: 0}
+    - target: {fileID: 5095178250244467899, guid: 50441ce5151b68744b5e87fb213f604f,
+        type: 3}
+      propertyPath: popupQuote
+      value: "\u201CI\u2019m done with fads, I just want to be happy and eat ice cream\u201D"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5095178250244467899, guid: 50441ce5151b68744b5e87fb213f604f,
+        type: 3}
+      propertyPath: popupPrice
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 5615452260850637317, guid: 50441ce5151b68744b5e87fb213f604f,
         type: 3}
@@ -2893,6 +3355,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -178
       objectReference: {fileID: 0}
+    - target: {fileID: 8749851977463694256, guid: 50441ce5151b68744b5e87fb213f604f,
+        type: 3}
+      propertyPath: popupText
+      value: Increase the passive income multiplier to (N amount)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8749851977463694256, guid: 50441ce5151b68744b5e87fb213f604f,
+        type: 3}
+      propertyPath: popupQuote
+      value: "\u201CI heard that combined all these numbers and formulas to make things
+        we cookies do in a day, be done in seconds\u201D"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8749851977463694256, guid: 50441ce5151b68744b5e87fb213f604f,
+        type: 3}
+      propertyPath: popupPrice
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 8894108412610057081, guid: 50441ce5151b68744b5e87fb213f604f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2937,6 +3415,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -266.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155712658295249727, guid: 50441ce5151b68744b5e87fb213f604f,
+        type: 3}
+      propertyPath: popupText
+      value: Upgrade your drink even more to improve your health for all the minigames
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155712658295249727, guid: 50441ce5151b68744b5e87fb213f604f,
+        type: 3}
+      propertyPath: popupTitle
+      value: Soy Milk
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155712658295249727, guid: 50441ce5151b68744b5e87fb213f604f,
+        type: 3}
+      propertyPath: popupQuote
+      value: "\u201CSoy is the new craze, and I guess I have to like it now\u201D"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155712658295249727, guid: 50441ce5151b68744b5e87fb213f604f,
+        type: 3}
+      propertyPath: popupPrice
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 9169980859977926651, guid: 50441ce5151b68744b5e87fb213f604f,
         type: 3}
