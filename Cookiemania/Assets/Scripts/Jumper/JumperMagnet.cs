@@ -23,11 +23,13 @@ public class JumperMagnet : MonoBehaviour
     protected float lerpTime = 0f;
     protected Vector3 small = new Vector3(0.01f, 0.01f, 0.01f);
     protected Collider2D coll;
+    protected Animator animator;
 
     protected void Start()
     {
         coll = GetComponent<Collider2D>();
         coll.enabled = false;
+        animator = GetComponent<Animator>();
     }
 
     public void ActivateMagnet(float time = 0f)
@@ -38,6 +40,7 @@ public class JumperMagnet : MonoBehaviour
         lerpTime = 0f;
         gameObject.SetActive(true);
         coll.enabled = true;
+        animator.Play("magnet_start", -1, 0f);
     }
 
     private void Update()

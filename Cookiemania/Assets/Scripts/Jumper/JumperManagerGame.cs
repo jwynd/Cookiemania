@@ -99,7 +99,7 @@ public class JumperManagerGame : MonoBehaviour
     public float StartingDifficulty { get { return startingDifficulty; } }
     public int CoinJump { get; private set; } = 0;
     public int JumpPower { get; private set; } = 0;
-    public int MagnetAvailable { get; private set; } = 0;
+    public int MagnetAvailable { get; private set; } = 1;
     public int MagnetCD { get; private set; } = 0;
     public int MagnetRange { get; private set; } = 0;
     public int Shield { get; private set; } = 0;
