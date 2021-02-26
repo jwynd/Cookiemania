@@ -10,6 +10,7 @@ public class Website : MonoBehaviour
     protected CharacterPrefab charPrefab = null;
     protected GameObject websiteRef = null;
     protected Canvas websiteCanvas = null;
+    protected WebsiteUI ui = null;
 
     private void Awake()
     {
@@ -17,17 +18,19 @@ public class Website : MonoBehaviour
         //dont parent
         websiteCanvas = websiteRef.GetComponent<Canvas>();
         websiteCanvas.enabled = false;
+        ui = websiteRef.GetComponent<WebsiteUI>();
     }
 
     private void Start()
     {
         websiteCanvas.transform.SetParent(SiteCanvas.Instance.transform);
-        websiteRef.GetComponent<WebsiteUI>().SetUpFromCharPrefab(charPrefab);
+        ui.SetUpFromCharPrefab(charPrefab);
     }
 
     private void OnEnable()
     {
         websiteCanvas.enabled = true;
+        ui.AnimateWeather();
     }
 
     private void OnDisable()

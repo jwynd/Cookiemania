@@ -7,6 +7,8 @@ using TMPro;
 public class WebsiteUI : MonoBehaviour
 {
     [SerializeField]
+    protected Animator weatherAnimator = null;
+    [SerializeField]
     protected TMP_Text CompanyName = null;
 
     protected CharacterPrefab charRef = null;
@@ -17,8 +19,14 @@ public class WebsiteUI : MonoBehaviour
         charRef.CompanyUpdate.AddListener(UpdateCompany);
     }
 
+    public void AnimateWeather()
+    {
+        weatherAnimator.Play("sunny", -1, 0f);
+    }
+
     public void UpdateCompany(string newName)
     {
         CompanyName.text = newName;
+        AnimateWeather();
     }
 }
