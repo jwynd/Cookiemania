@@ -7,7 +7,7 @@ public class Website : MonoBehaviour
     [SerializeField]
     protected GameObject websitePrefab = null;
     [SerializeField]
-    protected CharacterPrefab charPrefab = null;
+    protected CharPrefab charPrefab = null;
     protected GameObject websiteRef = null;
     protected Canvas websiteCanvas = null;
     protected WebsiteUI ui = null;

@@ -332,7 +332,7 @@ public class CharacterContentManager : MonoBehaviour
     {
         //to do reconstruct character
         gameObject.SetActive(false);
-        var temp = characterSprite.GetComponent<CharacterPrefab>();
+        var temp = characterSprite.GetComponent<CharPrefab>();
         temp.body = bodys[bodyindex].GetComponent<UnityEngine.UI.Image>().sprite;
         temp.topping = toppings[toppingindex].GetComponent<UnityEngine.UI.Image>().sprite;
         temp.top = TAccess[topindex].GetComponent<UnityEngine.UI.Image>().sprite;

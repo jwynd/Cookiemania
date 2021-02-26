@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class CharacterPrefab : MonoBehaviour
+public class CharPrefab : MonoBehaviour
 {
     //Event stuff
     public class UnityEventConfirm : UnityEvent<string>

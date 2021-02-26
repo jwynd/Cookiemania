@@ -13,14 +13,14 @@ public class WebsiteUI : MonoBehaviour
     [SerializeField]
     protected List<AnimationClip> animations = new List<AnimationClip>();
     protected string currentWeather = "";
-    protected CharacterPrefab charRef = null;
+    protected CharPrefab charRef = null;
 
     private void Awake()
     {
         currentWeather = animations[0].name;
     }
 
-    public void SetUpFromCharPrefab(CharacterPrefab charprefab)
+    public void SetUpFromCharPrefab(CharPrefab charprefab)
     {
         charRef = charprefab;
         charRef.CompanyUpdate.AddListener(UpdateCompany);
