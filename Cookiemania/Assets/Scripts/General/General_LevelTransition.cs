@@ -101,6 +101,7 @@ public class General_LevelTransition : MonoBehaviour
                 localeToSet = Locale.SpaceMinigame;
                 break;
             default:
+                localeToSet = Locale.SpaceMinigame;
                 break;
         }
         StartCoroutine(leaveDesktop(scene));
@@ -149,7 +150,10 @@ public class General_LevelTransition : MonoBehaviour
         if (LevelSelect)
             LevelSelect.value = 0;
         // tab button will set location on click
-        hometab.GetComponent<General_TabButton>().Click();
+        if (hometab != null)
+            hometab.GetComponent<General_TabButton>().Click();
+        else
+            PlayerData.Player.Location.Current = Locale.AnalyticsTab;
     }
 
     // Calls and wraps the function to play animation for scene transition

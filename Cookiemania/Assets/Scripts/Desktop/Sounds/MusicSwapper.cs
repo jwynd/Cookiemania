@@ -15,17 +15,17 @@ public class MusicSwapper : MonoBehaviour
 
     private void ChangeSong(Locale previous, Locale current)
     {
-        if (current.IsDesktop())
-        {
-            CheckToChange(desktopMusic);
-        }
-        else if (current == Locale.JumpingMinigame)
+        if (current == Locale.JumpingMinigame)
         {
             CheckToChange(jumperMusic);
         }
         else if (current == Locale.SpaceMinigame)
         {
             CheckToChange(spaceMusic);
+        }
+        else
+        {
+            CheckToChange(desktopMusic);
         }
         
     }

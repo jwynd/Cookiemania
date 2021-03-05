@@ -44,57 +44,63 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nightPrefabs:
-  - platform: {fileID: 8552561703256424470, guid: aac8ee0ac77d8494b85b09cd37d4f7c1,
-      type: 3}
-    weight: 0.269
   - platform: {fileID: 3987228348188153383, guid: 5a016c1074bc4f549bf90dfe89614fba,
       type: 3}
-    weight: 0.232
-  - platform: {fileID: 637888742533752541, guid: cc54fb576a91e744088e172ffe38cd33,
-      type: 3}
-    weight: 0.13
-  - platform: {fileID: 2042707450985415420, guid: 487bf4f22b7476b49b0286556c5e8af7,
-      type: 3}
-    weight: 0.093
-  - platform: {fileID: 7095647266122237542, guid: daaf91a083b83f740844f40d96ecef9a,
-      type: 3}
-    weight: 0.149
+    weight: 0.487
+    dangerous: 0
   - platform: {fileID: 7739518868798799298, guid: e58f8d79e5ed8e743a3424413f3d1b0d,
       type: 3}
-    weight: 0.253
-  dayPrefabs:
-  - platform: {fileID: 8552561703256424470, guid: 4ca44e740c861f842a921fa06972ee9c,
+    weight: 0.414
+    dangerous: 0
+  - platform: {fileID: 8552561703256424470, guid: aac8ee0ac77d8494b85b09cd37d4f7c1,
       type: 3}
-    weight: 0.26
+    weight: 0.34
+    dangerous: 0
+  - platform: {fileID: 2042707450985415420, guid: 487bf4f22b7476b49b0286556c5e8af7,
+      type: 3}
+    weight: 0.278
+    dangerous: 1
+  - platform: {fileID: 7095647266122237542, guid: daaf91a083b83f740844f40d96ecef9a,
+      type: 3}
+    weight: 0.213
+    dangerous: 1
+  - platform: {fileID: 637888742533752541, guid: cc54fb576a91e744088e172ffe38cd33,
+      type: 3}
+    weight: 0.184
+    dangerous: 1
+  dayPrefabs:
   - platform: {fileID: 3987228348188153383, guid: 59c341f3cf7d8a0478f772c98dba4889,
       type: 3}
-    weight: 0.774
-  - platform: {fileID: 637888742533752541, guid: 45b8d4f185c9d584c8dce7c171ed52e4,
+    weight: 0.486
+    dangerous: 0
+  - platform: {fileID: 7739518868798799298, guid: 562ddbfea17a31142a095706256ee411,
       type: 3}
-    weight: 0.311
+    weight: 0.403
+    dangerous: 0
+  - platform: {fileID: 8552561703256424470, guid: 4ca44e740c861f842a921fa06972ee9c,
+      type: 3}
+    weight: 0.339
+    dangerous: 0
   - platform: {fileID: 2042707450985415420, guid: 633e2ba3c5535b244a4708b29c5d1d0b,
       type: 3}
-    weight: 0.251
+    weight: 0.299
+    dangerous: 1
   - platform: {fileID: 7095647266122237542, guid: 506cc46d74200dd45ad4270f469eed56,
       type: 3}
     weight: 0.27
-  - platform: {fileID: 7739518868798799298, guid: 562ddbfea17a31142a095706256ee411,
+    dangerous: 1
+  - platform: {fileID: 637888742533752541, guid: 45b8d4f185c9d584c8dce7c171ed52e4,
       type: 3}
-    weight: 0.584
+    weight: 0.249
+    dangerous: 1
   nightExit: {fileID: 2001070790077626028, guid: e57e91b6f70b8ec4ba5ebc1b1c8c9e49,
     type: 3}
   dayExit: {fileID: 2001070790077626028, guid: 4b664211927d6084f8bd7a2493038db3, type: 3}
   startingPlatform: {fileID: 0}
   defaultDayPlatformImage: {fileID: 21300000, guid: b6a2d196ba5ec404683819280e4b72d7,
     type: 3}
-  width: 10
-  density: 10
-  startingDifficulty: 1
-  difficultyIncrement: 0.3
-  levelReward: 40
-  heightGoal: 100
+  heightGoal: 50
   maxFallDistance: 20
-  rotation: 0
   alteredGravity: 2
   bounceHeightMultiplier: 1.5
   playerTag: Player
@@ -102,3 +108,5 @@ MonoBehaviour:
   obstacleTag: Obstacle
   groundTag: Platform
   collectiblesTag: Pickup
+  startingDifficulty: 1
+  difficultyIncrement: 0.3

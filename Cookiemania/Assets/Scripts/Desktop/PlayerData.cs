@@ -393,4 +393,117 @@ public class PlayerData : MonoBehaviour
         ShieldWidth = 0;
         invulnerability = 0;
     }
+
+    [Serializable]
+    public enum PlayerDataProperty
+    {
+        race,
+        userstats,
+        spacelvl,
+        incomelvl,
+        healthlvl,
+        money,
+        shoplvl,
+        week,
+        morality,
+        ai,
+        spaceupgradelvl,
+        timesplayedspace,
+        gunspread,
+        pierce,
+        shieldhealth,
+        shieldwidth,
+        invulnerability,
+        jtimesplayed,
+        jjumppower,
+        jmagnet,
+        jmagnetdistance,
+        jmagnetcd,
+        jcoinjump,
+        jshield,
+        jupgradelvl
+    }
+
+    public int TestSetter(PlayerDataProperty prop, int add)
+    {
+        switch(prop)
+        {
+            case PlayerDataProperty.ai:
+                _ai += add;
+                return ai;
+            case PlayerDataProperty.gunspread:
+                GunSpread += add;
+                return GunSpread;
+            case PlayerDataProperty.healthlvl:
+                healthlvl += add;
+                return healthlvl;
+            case PlayerDataProperty.incomelvl:
+                incomelvl += add;
+                return incomelvl;
+            case PlayerDataProperty.invulnerability:
+                invulnerability += add;
+                return invulnerability;
+            case PlayerDataProperty.jcoinjump:
+                _jCoinJump += add;
+                return JCoinJump;
+            case PlayerDataProperty.jjumppower:
+                _jJumpPower += add;
+                return JJumpPower;
+            case PlayerDataProperty.jmagnet:
+                _jMagnet += add;
+                return JMagnet;
+            case PlayerDataProperty.jmagnetcd:
+                _jMagnetCD += add;
+                return JMagnetCD;
+            case PlayerDataProperty.jmagnetdistance:
+                _jMagnetDistance += add;
+                return JMagnetDistance;
+            case PlayerDataProperty.jshield:
+                _jShield += add;
+                return JShield;
+            case PlayerDataProperty.jtimesplayed:
+                _jTimesPlayed += add;
+                return JTimesPlayed;
+            case PlayerDataProperty.jupgradelvl:
+                _jUpgradeLevel += add;
+                return JUpgradeLevel;
+            case PlayerDataProperty.money:
+                _money += add;
+                return money;
+            case PlayerDataProperty.morality:
+                _morality += add;
+                return morality;
+            case PlayerDataProperty.pierce:
+                Pierce += add;
+                return Pierce;
+            case PlayerDataProperty.race:
+                race += add;
+                return race;
+            case PlayerDataProperty.shieldhealth:
+                ShieldHealth += add;
+                return ShieldHealth;
+            case PlayerDataProperty.shieldwidth:
+                ShieldWidth += add;
+                return ShieldWidth;
+            case PlayerDataProperty.shoplvl:
+                _shoplvl += add;
+                return shoplvl;
+            case PlayerDataProperty.spacelvl:
+                spacelvl += add;
+                return spacelvl;
+            case PlayerDataProperty.spaceupgradelvl:
+                SpaceUpgradelvl += add;
+                return SpaceUpgradelvl;
+            case PlayerDataProperty.timesplayedspace:
+                TimesPlayedSpace += add;
+                return TimesPlayedSpace;
+            case PlayerDataProperty.userstats:
+                userstats += add;
+                return userstats;
+            case PlayerDataProperty.week:
+                week += add;
+                return week;
+            default: return 0;
+        }
+    }
 }

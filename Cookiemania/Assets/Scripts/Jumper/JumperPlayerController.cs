@@ -145,7 +145,9 @@ public class JumperPlayerController : MonoBehaviour
         aiLevel = jm.AI;
         if (aiLevel > 0)
         {
-            var instance = Instantiate(aiPrefab);
+            var instance = Instantiate(aiPrefab, transform);
+            instance.transform.parent = null;
+            instance.transform.localScale = Vector3.one;
             instance.transform.position = aiAttach.position;
             aiRef = instance.GetComponent<JumperAI>();
             aiRef.SetFollowPoint(aiAttach);
@@ -612,7 +614,8 @@ public class JumperPlayerController : MonoBehaviour
 
     public void OnDestroy()
     {
-        aiRef?.gameObject?.SetActive(false);
+        if (aiRef)
+            Destroy(aiRef.gameObject);
     }
 
     public void OnDisable()

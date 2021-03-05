@@ -16,6 +16,7 @@ public class JumperManagerGame : MonoBehaviour
             "the array are more likely due to using pseudo normal distribution.")]
         [Range(0.01f, 1.0f)]
         public float weight = 0.1f;
+        public bool dangerous = false;
         public float probability { get; set; } = 0f;
     }
 
@@ -31,26 +32,11 @@ public class JumperManagerGame : MonoBehaviour
     private JumperSemiPermanentPlatforms startingPlatform = null;
     [SerializeField]
     private Sprite defaultDayPlatformImage = null;
-
-    [Tooltip("How far to either side from the offset position a platform can spawn")]
-    public float width = 10.0f;
-
-    [Tooltip("Number of platforms per section")]
-    public int density = 10;
-    [Range(1f, 45f)]
-    [Tooltip("Starting difficulty of the level")]
-    public float startingDifficulty = 1.0f;
-    [Tooltip("How much difficulty increases every time a region is built")]
-    public float difficultyIncrement = 0.3f;
-    [Tooltip("Bonus for beating the level")]
-    public float levelReward = 40f;
-    [Tooltip("Height to finish the level")]
+    
+    [Tooltip("Base height to finish the level")]
     public float heightGoal = 100f;
     [Tooltip("Maximum height player can fall")]
     public float maxFallDistance = 15f;
-    [Tooltip("The rotation of the game object on the Z axis")]
-    [Range(0.0f, 360.0f)]
-    public float rotation = 0.0f;
     public float alteredGravity = 2f;
     public float bounceHeightMultiplier = 3f;
     [SerializeField]
@@ -74,29 +60,39 @@ public class JumperManagerGame : MonoBehaviour
     protected string collectiblesTag = "Pickup";
     public string CollectiblesTag { get { return collectiblesTag; } }
     public bool Night { get; protected set; } = false;
+    [Range(1f, 45f)]
+    [Tooltip("Starting difficulty of the level")]
+    public float startingDifficulty = 1.0f;
+    [Tooltip("How much difficulty increases every time a region is built")]
+    public float difficultyIncrement = 0.3f;
 
 
     //game manager always tagged with game controller
-    private const string myTag = "GameController";
-    private float minHeightIncrease = 0.0f;
+    protected const string myTag = "GameController";
+    protected float minHeightIncrease = 0.0f;
 
-    private float offset;
-    private float height;
-    private float maxHeightReached;
-    private bool canPlaceAboveLast = true;
-    private float firstPrefabWidth = 0f;
-    private bool haveBuiltExit = false;
-    private int max;
-    private float weightRange = 0.0f;
-    private float checkAgainstPosition;
-    private float jumpHeight;
-    private List<Platforms> actualPrefabs;
-    private GameObject actualExit;
+    protected float width = 10.0f;
+    protected int density = 15;
+    protected float offset;
+    protected float height;
+    protected float maxHeightReached;
+    protected bool canPlaceAboveLast = true;
+    protected float firstPrefabWidth = 0f;
+    protected bool haveBuiltExit = false;
+    protected int max;
+    protected float weightRange = 0.0f;
+    protected float checkAgainstPosition;
+    protected float jumpHeight;
+    protected List<Platforms> actualPrefabs;
+    protected GameObject actualExit;
+    protected bool TestingMode = false;
+    protected float minDifficulty = 0.3f;
 
     public JumperCameraController MainCam { get; private set; }
     public JumperPlayerController Player { get; private set; }
     public static JumperManagerGame Instance { get; private set; }
     public float StartingDifficulty { get { return startingDifficulty; } }
+
     public int CoinJump { get; private set; } = 0;
     public int JumpPower { get; private set; } = 0;
     public int MagnetAvailable { get; private set; } = 1;
@@ -148,11 +144,11 @@ public class JumperManagerGame : MonoBehaviour
         JumpPower = PlayerData.Player.JJumpPower;
         AI = PlayerData.Player.ai;
         startingDifficulty = PlayerData.Player.difficulty - moralityMult;
+        minDifficulty = Mathf.Max(startingDifficulty, 0.3f);
     }
 
     private void RunAwakeInit()
     {
-        weightRange = 0;
         PrefabInit();
         Player = FindObjectOfType<JumperPlayerController>().gameObject.GetComponent<JumperPlayerController>();
         MainCam = FindObjectOfType<JumperCameraController>().gameObject.GetComponent<JumperCameraController>();
@@ -161,6 +157,7 @@ public class JumperManagerGame : MonoBehaviour
 
     private void PrefabInit()
     {
+        weightRange = 0;
         if (Night)
         {
             actualPrefabs = nightPrefabs;
@@ -174,6 +171,8 @@ public class JumperManagerGame : MonoBehaviour
         }
         foreach (var fab in actualPrefabs)
         {
+            if (fab.dangerous)
+                fab.weight *= minDifficulty;
             fab.probability = fab.weight + weightRange;
             weightRange += fab.weight;
         }
@@ -225,8 +224,7 @@ public class JumperManagerGame : MonoBehaviour
         Destroy(g);
         jumpHeight = ( Player.GetOriginalJumpStrength() * alteredGravity ) / 3;
         width = Player.GetMaxVelocity() * 2.5f;
-        Debug.Log(width);
-        max  = (int)(density * 1.5);
+        max  = (int)(density * 1.5f);
         offset = Player.transform.position.x;
         height = Player.transform.position.y;
         maxHeightReached = Player.transform.position.y;
@@ -277,7 +275,7 @@ public class JumperManagerGame : MonoBehaviour
         float randomx = BuildHelper();
         float randomy = UnityEngine.Random.Range(height + minHeightIncrease, height + jumpHeight);
         Vector3 pos = new Vector3(randomx, randomy, 0);
-        var obj = Instantiate(actualExit, pos, Quaternion.Euler(0, 0, rotation));
+        var obj = Instantiate(actualExit, pos, Quaternion.Euler(0, 0, 0));
         obj.transform.parent = transform;
         haveBuiltExit = true;
     }
@@ -326,7 +324,7 @@ public class JumperManagerGame : MonoBehaviour
             Vector3 pos = new Vector3(randomx, randomy, 0);
             offset = pos.x;
             height = pos.y;
-            GameObject g = Instantiate(Roulette(), pos, Quaternion.Euler(0, 0, rotation));
+            GameObject g = Instantiate(Roulette(), pos, Quaternion.Euler(0, 0, 0));
             canPlaceAboveLast = g.GetComponent<JumperGeneralPlatform>().CanPlacePlatformsAbove();
             g.transform.parent = transform;
             g.transform.SetAsFirstSibling();
@@ -351,11 +349,6 @@ public class JumperManagerGame : MonoBehaviour
     public float GetMaxHeightReached()
     {
         return maxHeightReached;
-    }
-
-    public float GetLevelReward()
-    {
-        return levelReward;
     }
 
     public string GetPlayerTag()
