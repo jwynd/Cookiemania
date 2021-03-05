@@ -439,11 +439,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43ab30db85f559f49b089f1442b65273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popupText: xxxx
+  popupText: Provides invulnerability after being hit for 5 seconds.
   lvlReq: 0
-  popupTitle: invul
-  popupQuote: 
-  popupPrice: 20
+  popupTitle: Specialized Privacy
+  popupQuote: "\u201Creads common patterns of known viruses/malware\u201D"
+  popupPrice: 900
   purchased: 0
 --- !u!1 &560993611
 GameObject:
@@ -1866,6 +1866,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7774176309326274127, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
         type: 3}
+      propertyPath: m_fontSize
+      value: 37.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7774176309326274127, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
+        type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7774176309326274127, guid: 57f2cc76cb0b45d409f10d487a1ff9e9,
+        type: 3}
       propertyPath: m_margin.x
       value: -16.10727
       objectReference: {fileID: 0}
@@ -2112,10 +2122,55 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2629805234244445243, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: popupText
+      value: Provides a humongous range of cookie collection.  Also unlocks data on
+        hours spent on page and number of buyers.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2629805234244445243, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: popupTitle
+      value: Subliminal Messaging
+      objectReference: {fileID: 0}
+    - target: {fileID: 2629805234244445243, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: popupQuote
+      value: "\u201CThere are many things that are presented to you subconsciously
+        that affect the choices you make everyday\u201D"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3737181138679246666, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: m_text
+      value: User Analytics
+      objectReference: {fileID: 0}
+    - target: {fileID: 3737181138679246666, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 3902079714134214631, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: popupText
+      value: Makes the magnet reach farther than was initially believed. Also unlocks
+        weird data.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3902079714134214631, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: popupTitle
+      value: User Profiles
+      objectReference: {fileID: 0}
+    - target: {fileID: 3902079714134214631, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: popupQuote
+      value: "\u201CI know their average education levels, know their location, but
+        the really weird part is that I know which underwear brand they like\u201D"
+      objectReference: {fileID: 0}
     - target: {fileID: 4441538659642771348, guid: 604d5d088a1448c48badacd19ffe99e6,
         type: 3}
       propertyPath: popupText
-      value: Allows an extra jump after collecting cookies (coin)
+      value: Allows an extra jump after collecting cookies (coin). Also unlocks cookie
+        race in the analytics page.
       objectReference: {fileID: 0}
     - target: {fileID: 4441538659642771348, guid: 604d5d088a1448c48badacd19ffe99e6,
         type: 3}
@@ -2129,27 +2184,126 @@ PrefabInstance:
         our cookie toppings, but I swear she has way more white chocolate chips and
         black chips\u201D"
       objectReference: {fileID: 0}
+    - target: {fileID: 4746871762495456849, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: popupText
+      value: Unlocks Demographics Tree
+      objectReference: {fileID: 0}
+    - target: {fileID: 4746871762495456849, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: popupTitle
+      value: Demographics
+      objectReference: {fileID: 0}
+    - target: {fileID: 5582802881904362947, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: popupText
+      value: 'Provides a magnet that sucks in cookies around you. Also unlocks website
+        traffic information on the analytics to find out how many people visit your
+        website. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 5582802881904362947, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: popupTitle
+      value: Website Traffic
+      objectReference: {fileID: 0}
+    - target: {fileID: 5582802881904362947, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: popupQuote
+      value: "\u201CDoes number even matter? Yes of course it does, people always
+        want to know how popular you are\u201D"
+      objectReference: {fileID: 0}
     - target: {fileID: 5633834869011340775, guid: 604d5d088a1448c48badacd19ffe99e6,
         type: 3}
       propertyPath: m_Name
       value: MarketingUpgrade
       objectReference: {fileID: 0}
+    - target: {fileID: 5761250392931965588, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: popupText
+      value: Provides a magnet to suck in cookies. Also unlocks data on the age of
+        your users and their number of clicks
+      objectReference: {fileID: 0}
+    - target: {fileID: 5761250392931965588, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: popupTitle
+      value: Cookie Preference
+      objectReference: {fileID: 0}
+    - target: {fileID: 5761250392931965588, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: popupQuote
+      value: "\u201CSomeone likes to have their fonts and pictures uneven and crooked,
+        who does that?\u201D"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483742284736893364, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: popupText
+      value: Unlocks the User Analytics Tree
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483742284736893364, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: popupTitle
+      value: User Analytics
+      objectReference: {fileID: 0}
     - target: {fileID: 7217208316664351441, guid: 604d5d088a1448c48badacd19ffe99e6,
         type: 3}
       propertyPath: popupText
-      value: Allows you to store Three extra jumps from the cookie
+      value: Allows you to store Three extra jumps from the cookie. Also unlocks cookie
+        leaderboard for your top users.
       objectReference: {fileID: 0}
     - target: {fileID: 7217208316664351441, guid: 604d5d088a1448c48badacd19ffe99e6,
         type: 3}
       propertyPath: popupTitle
-      value: Cookie Identity
+      value: Favorite Cookie
       objectReference: {fileID: 0}
     - target: {fileID: 7217208316664351441, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: popupQuote
+      value: "\u201CSome people here simply love this site a little too much, maybe
+        we should show them off. They like that\u2026 right?\u201D"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7340018267409545359, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: popupText
+      value: Increases the width of the magnet. Also unlocks data on the number of
+        users who clicks on your ad on the analytics page.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7340018267409545359, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: popupTitle
+      value: Predicted Actions
+      objectReference: {fileID: 0}
+    - target: {fileID: 7340018267409545359, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: popupQuote
+      value: "\u201CSo you\u2019re saying this formula predicts that if we show them
+        cute animals, they\u2019re going to buy our products? Let\u2019s do it\u201D"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7594093599253229223, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: popupText
+      value: Allows you to store Four extra jumps from the cookie.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7594093599253229223, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: popupTitle
+      value: Cookie Identity
+      objectReference: {fileID: 0}
+    - target: {fileID: 7594093599253229223, guid: 604d5d088a1448c48badacd19ffe99e6,
         type: 3}
       propertyPath: popupQuote
       value: "\u201CI know who they are, some are my late cousins, some are possible
         adopted step-siblings, but some are actually just me going to website when
         I\u2019m asleep\u201D"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9099979129804926956, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: m_text
+      value: Website Traffic
+      objectReference: {fileID: 0}
+    - target: {fileID: 9099979129804926956, guid: 604d5d088a1448c48badacd19ffe99e6,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 604d5d088a1448c48badacd19ffe99e6, type: 3}
@@ -2277,7 +2431,7 @@ PrefabInstance:
     - target: {fileID: 2161206889326937586, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
         type: 3}
       propertyPath: popupTitle
-      value: Enable Direwall
+      value: Enable Firewall
       objectReference: {fileID: 0}
     - target: {fileID: 2161206889326937586, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
         type: 3}
@@ -2544,11 +2698,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3982413111430612655, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
         type: 3}
-      propertyPath: lvlReq
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 3982413111430612655, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
-        type: 3}
       propertyPath: popupTitle
       value: VPN Setup
       objectReference: {fileID: 0}
@@ -2558,6 +2707,11 @@ PrefabInstance:
       value: "\u201CThis is perfect to help me watch videos without people know where
         I\u2019m from! Wait\u2026 this protects me from scammers too? I guess I shouldn\u2019t
         have bought that turtle\u201D"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982413111430612655, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: popupPrice
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 4062953978534414705, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
         type: 3}
