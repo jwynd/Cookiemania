@@ -1,40 +1,40 @@
 fileFormatVersion: 2
-guid: 56511bf485f5c4c4ca8fceb4bb727df6
+guid: 84e20ed624c619441829f9c174a5a92d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6252962329647545432
-    second: rain-sheet_0
+      213: -8199375553600427165
+    second: new_rainy_sheet-export_0
   - first:
-      213: -5800219958288500319
-    second: rain-sheet_1
+      213: -3995628553318103140
+    second: new_rainy_sheet-export_1
   - first:
-      213: 7383255504502262905
-    second: rain-sheet_2
+      213: 2583599685838212732
+    second: new_rainy_sheet-export_2
   - first:
-      213: 5971457798623218089
-    second: rain-sheet_3
+      213: 544664952342282210
+    second: new_rainy_sheet-export_3
   - first:
-      213: -2430540812137579107
-    second: rain-sheet_4
+      213: 4061455488220667260
+    second: new_rainy_sheet-export_4
   - first:
-      213: -2092625500322890322
-    second: rain-sheet_5
+      213: -76249945039012822
+    second: new_rainy_sheet-export_5
   - first:
-      213: -8399849157001564002
-    second: rain-sheet_6
+      213: -7595506494050015378
+    second: new_rainy_sheet-export_6
   - first:
-      213: -4676958487666337372
-    second: rain-sheet_7
+      213: -8844014725261973155
+    second: new_rainy_sheet-export_7
   - first:
-      213: -3871366143505623812
-    second: rain-sheet_8
+      213: 2352066473964071538
+    second: new_rainy_sheet-export_8
   - first:
-      213: -9099912720524504505
-    second: rain-sheet_9
+      213: -5516707913645603307
+    second: new_rainy_sheet-export_9
   - first:
-      213: 8152909563898686362
-    second: rain-sheet_10
+      213: 5469349806071893842
+    second: new_rainy_sheet-export_10
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -93,10 +93,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -105,10 +105,10 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -117,10 +117,10 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Windows Store Apps
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -129,10 +129,10 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: tvOS
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -141,10 +141,10 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: iPhone
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -153,10 +153,10 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Lumin
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -165,10 +165,10 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -177,10 +177,10 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -191,232 +191,232 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: rain-sheet_0
+      name: new_rainy_sheet-export_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 866
+        width: 867
         height: 1010
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 8
+      pivot: {x: 1, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5aea80161d34cb949b592081b00366aa
-      internalID: 6252962329647545432
+      spriteID: 0fb89740c8f9880469a21338cf3314e8
+      internalID: -8199375553600427165
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rain-sheet_1
+      name: new_rainy_sheet-export_1
       rect:
         serializedVersion: 2
         x: 920
         y: 0
-        width: 866
+        width: 867
         height: 1010
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 8
+      pivot: {x: 1, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d490f0ddb618c8841ab5ba03665a339c
-      internalID: -5800219958288500319
+      spriteID: ac28788880359a2498df1e3c73fa6490
+      internalID: -3995628553318103140
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rain-sheet_2
+      name: new_rainy_sheet-export_2
       rect:
         serializedVersion: 2
         x: 1840
         y: 0
-        width: 866
+        width: 867
         height: 1010
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 8
+      pivot: {x: 1, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 030fd3a72c436634b9531e73d2013624
-      internalID: 7383255504502262905
+      spriteID: 3ed2799cb42e2bf49969218834375849
+      internalID: 2583599685838212732
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rain-sheet_3
+      name: new_rainy_sheet-export_3
       rect:
         serializedVersion: 2
         x: 2760
         y: 0
-        width: 866
+        width: 867
         height: 1010
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 8
+      pivot: {x: 1, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f532387cd97f95048bd565f4f614b3f9
-      internalID: 5971457798623218089
+      spriteID: acdfc66e608828e4bbffc851799ca99d
+      internalID: 544664952342282210
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rain-sheet_4
+      name: new_rainy_sheet-export_4
       rect:
         serializedVersion: 2
         x: 3680
         y: 0
-        width: 866
+        width: 867
         height: 1010
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 8
+      pivot: {x: 1, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30e42e4558c1c0a4aa0b0eae69978adc
-      internalID: -2430540812137579107
+      spriteID: 7aa7980b8caf619429a63e6db547ef11
+      internalID: 4061455488220667260
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rain-sheet_5
+      name: new_rainy_sheet-export_5
       rect:
         serializedVersion: 2
         x: 4600
         y: 0
-        width: 866
+        width: 867
         height: 1010
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 8
+      pivot: {x: 1, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 15c481a20ee436344af9f1bf24fef4e8
-      internalID: -2092625500322890322
+      spriteID: 1f8d0003ff8990f4998d5a3c2360ba08
+      internalID: -76249945039012822
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rain-sheet_6
+      name: new_rainy_sheet-export_6
       rect:
         serializedVersion: 2
         x: 5520
         y: 0
-        width: 866
+        width: 867
         height: 1010
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 8
+      pivot: {x: 1, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 64ddaec2b4913ac489308124498f6783
-      internalID: -8399849157001564002
+      spriteID: f020a6f223b601b4793eeef8c0a2bdd6
+      internalID: -7595506494050015378
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rain-sheet_7
+      name: new_rainy_sheet-export_7
       rect:
         serializedVersion: 2
         x: 6440
         y: 0
-        width: 866
+        width: 867
         height: 1010
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 8
+      pivot: {x: 1, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 60f166df6109c7d4da297b1897e8019a
-      internalID: -4676958487666337372
+      spriteID: 63b6da26390bc6d4fbb5b0f05d248ea3
+      internalID: -8844014725261973155
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rain-sheet_8
+      name: new_rainy_sheet-export_8
       rect:
         serializedVersion: 2
         x: 7360
         y: 0
-        width: 866
+        width: 867
         height: 1010
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 8
+      pivot: {x: 1, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 669a9bff56924ed4880902d434878a8c
-      internalID: -3871366143505623812
+      spriteID: 29883815c8ebca142b43489427055b05
+      internalID: 2352066473964071538
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rain-sheet_9
+      name: new_rainy_sheet-export_9
       rect:
         serializedVersion: 2
         x: 8280
         y: 0
-        width: 866
+        width: 867
         height: 1010
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 8
+      pivot: {x: 1, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 880c5a8df0937ea4586d86e10c3669c4
-      internalID: -9099912720524504505
+      spriteID: bfc23a84845a0f945ae5d9189dfa3bee
+      internalID: -5516707913645603307
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rain-sheet_10
+      name: new_rainy_sheet-export_10
       rect:
         serializedVersion: 2
         x: 9200
         y: 0
-        width: 866
+        width: 867
         height: 1010
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 8
+      pivot: {x: 1, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ac502637d7d01834d8d5ea0a24e01642
-      internalID: 8152909563898686362
+      spriteID: 3bca34890ed594944990ca4e47bd4f74
+      internalID: 5469349806071893842
       vertices: []
       indices: 
       edges: []
