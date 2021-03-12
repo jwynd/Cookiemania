@@ -37,6 +37,8 @@ TagManager:
   - Jmagnetcd
   - Jmagnetdistance
   - UpgradeQuote
+  - fireunlock
+  - virusunlock
   layers:
   - Default
   - TransparentFX

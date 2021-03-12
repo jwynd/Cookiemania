@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 301209909}
   m_Layer: 5
   m_Name: Button (9)
-  m_TagString: AI
+  m_TagString: milk
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -313,7 +313,7 @@ GameObject:
   - component: {fileID: 480631908}
   m_Layer: 5
   m_Name: Button (10)
-  m_TagString: Untagged
+  m_TagString: Iframes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2525,6 +2525,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 35
       objectReference: {fileID: 0}
+    - target: {fileID: 2820723846569645029, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: m_TagString
+      value: fireunlock
+      objectReference: {fileID: 0}
     - target: {fileID: 2983858885395682677, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
         type: 3}
       propertyPath: popupText
@@ -2545,6 +2550,11 @@ PrefabInstance:
         type: 3}
       propertyPath: popupPrice
       value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 3067167331555500890, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Pierce
       objectReference: {fileID: 0}
     - target: {fileID: 3103064280539813701, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
         type: 3}
@@ -2729,6 +2739,11 @@ PrefabInstance:
       value: "\u201CThere\u2019s always a free trial available for some reason. How
         do they ever make money?\u201D"
       objectReference: {fileID: 0}
+    - target: {fileID: 4814994287089206700, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: m_TagString
+      value: virusunlock
+      objectReference: {fileID: 0}
     - target: {fileID: 5084873362701425003, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2792,6 +2807,31 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -214.1
       objectReference: {fileID: 0}
+    - target: {fileID: 6141086301243530745, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Spread
+      objectReference: {fileID: 0}
+    - target: {fileID: 6393472490558771338, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: m_TagString
+      value: SWidth
+      objectReference: {fileID: 0}
+    - target: {fileID: 6982859476966367502, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Pierce
+      objectReference: {fileID: 0}
+    - target: {fileID: 7014908990653211628, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: m_TagString
+      value: SHealth
+      objectReference: {fileID: 0}
+    - target: {fileID: 7068365376426342418, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: m_TagString
+      value: SWidth
+      objectReference: {fileID: 0}
     - target: {fileID: 7423122045558519190, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2828,6 +2868,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -302.30002
       objectReference: {fileID: 0}
+    - target: {fileID: 8210026535377261552, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Spread
+      objectReference: {fileID: 0}
     - target: {fileID: 8371093257594334347, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2852,6 +2897,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -299.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912933561846962788, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
+        type: 3}
+      propertyPath: m_TagString
+      value: SHealth
       objectReference: {fileID: 0}
     - target: {fileID: 9014771515659176076, guid: 85234fa5ac4f40c4ea6a5f9e0fd7bc3a,
         type: 3}
