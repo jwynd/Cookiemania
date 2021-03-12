@@ -6,6 +6,8 @@ using System;
 public class JumperManagerUI : MonoBehaviour
 {
     #region variables
+    public const int LEVEL_COMPLETE_BONUS = 50;
+
     public UnityEngine.UI.Slider heightSlider;
     public UnityEngine.UI.Slider healthSlider;
     public GameObject endscreenCamera;
@@ -18,6 +20,7 @@ public class JumperManagerUI : MonoBehaviour
     public static JumperManagerUI Instance { get; private set; }
 
     private const string sceneName = "Jumper";
+    
     private bool endingGame = false;
     private int coinsCollected = 0;
     private JumperManagerGame jm;
@@ -122,7 +125,8 @@ public class JumperManagerUI : MonoBehaviour
     private IEnumerator SwitchCamera(float timer, bool isGoodEnd)
     {
         yield return new WaitForSeconds(timer);
-        coinsCollected = (int)jm.Player.GetCoinsCollected();
+
+        coinsCollected = (int)(jm.Player.GetCoinsCollected() + (LEVEL_COMPLETE_BONUS * (1 + jm.AI)));
         //if this throws an error, need to stop whatever destroyed the player before this function
         Destroy(jm.Player.gameObject);
         JumperTextAdvanced endUI = endscreenCanvas.GetComponent<JumperTextAdvanced>();

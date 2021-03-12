@@ -52,7 +52,6 @@ public class JumperEnemyController : JumperGeneralThreat
         damage *= diff;
         maxHealth *= diff;
         currentHealth = maxHealth;
-        acceleration *= diff;
         maxVelocity *= diff;
         rb.velocity = Vector2.zero;
         rb.isKinematic = true;

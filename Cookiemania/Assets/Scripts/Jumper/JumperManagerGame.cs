@@ -94,6 +94,7 @@ public class JumperManagerGame : MonoBehaviour
     public float StartingDifficulty { get { return startingDifficulty; } }
 
     public int CoinJump { get; private set; } = 0;
+    public int Health { get; private set; } = 0;
     public int JumpPower { get; private set; } = 0;
     public int MagnetAvailable { get; private set; } = 1;
     public int MagnetCD { get; private set; } = 0;
@@ -143,7 +144,8 @@ public class JumperManagerGame : MonoBehaviour
         Shield = PlayerData.Player.JShield;
         JumpPower = PlayerData.Player.JJumpPower;
         AI = PlayerData.Player.ai;
-        startingDifficulty = PlayerData.Player.difficulty - moralityMult;
+        Health = PlayerData.Player.healthlvl;
+        startingDifficulty = ( PlayerData.Player.difficulty - moralityMult ) / 1.4f;
         minDifficulty = Mathf.Max(startingDifficulty, 0.3f);
     }
 

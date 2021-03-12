@@ -72,6 +72,8 @@ public class JumperPlayerController : MonoBehaviour
     protected int shieldLevel = 0;
     protected int jumpLevel = 0;
     protected int aiLevel = 0;
+    protected int healthLevel = 0;
+    protected float damageReduction = 0.0f;
     protected JumperMagnet magnetController;
     protected float currentHealth;
     protected bool jumped = false;
@@ -143,6 +145,12 @@ public class JumperPlayerController : MonoBehaviour
         shieldLevel = jm.Shield;
         jumpLevel = jm.CoinJump;
         aiLevel = jm.AI;
+        // each level of health enhances damage reduction and small amount
+        // of flat hp
+        healthLevel = jm.Health;
+        maxHealth += healthLevel;
+        currentHealth = maxHealth;
+        damageReduction = Mathf.Min(0.8f, 0.1f * healthLevel);
         if (aiLevel > 0)
         {
             var instance = Instantiate(aiPrefab, transform);
@@ -574,8 +582,9 @@ public class JumperPlayerController : MonoBehaviour
 
     protected void DamageHelper(float damage)
     {
-        //when damage is too high, gets reduced to 90% of players max hp
-        float sanitizedDamage = Mathf.Min(Mathf.Abs(damage), maxHealth);
+        //when damage is too high, gets reduced to 100% - healthLevel * 10%
+        // e.g. healthlevel = 1, max damage taken is 90%, for 2 max damage is 80% of maxhealth
+        float sanitizedDamage = Mathf.Min(Mathf.Abs(damage), maxHealth * ( 1f - damageReduction ));
         currentHealth -= sanitizedDamage;
         StartCoroutine(Flasher());
         if (currentHealth <= 0)
@@ -600,7 +609,7 @@ public class JumperPlayerController : MonoBehaviour
     //TODO get a death animation
     protected void DeathAnimation()
     {
-        aiRef.Die();
+        aiRef?.Die();
         return;
     }
 
@@ -633,7 +642,7 @@ public class JumperPlayerController : MonoBehaviour
     //TODO get a dance animation
     protected void DanceAnimation()
     {
-        aiRef.Dance();
+        aiRef?.Dance();
         return;
     }
 
