@@ -158,7 +158,7 @@ public class JumperPlayerController : MonoBehaviour
             instance.transform.localScale = Vector3.one;
             instance.transform.position = aiAttach.position;
             aiRef = instance.GetComponent<JumperAI>();
-            aiRef.SetFollowPoint(aiAttach);
+            aiRef.SetFollowPoint(aiAttach, transform);
         }
         magnetCooldown -= jm.MagnetCD * 2f;
         var magnetRange = 1 + jm.MagnetRange;

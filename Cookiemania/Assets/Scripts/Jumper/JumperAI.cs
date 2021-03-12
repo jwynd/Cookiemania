@@ -6,6 +6,7 @@ public class JumperAI : MonoBehaviour
 {
 
     protected Transform leader = null;
+    protected Transform lookPoint = null;
     public float smoothTime = 0.3F;
     private Vector3 velocity = Vector3.zero;
     private SpriteRenderer rend;
@@ -17,9 +18,10 @@ public class JumperAI : MonoBehaviour
         rend = GetComponent<SpriteRenderer>();
     }
 
-    public void SetFollowPoint(Transform toFollow)
+    public void SetFollowPoint(Transform toFollow, Transform focusPoint)
     {
         leader = toFollow;
+        lookPoint = focusPoint;
         enabled = true;
     }
 
@@ -37,6 +39,6 @@ public class JumperAI : MonoBehaviour
     {
         transform.position = Vector3.SmoothDamp(
             transform.position, leader.position, ref velocity, smoothTime);
-        rend.flipX = velocity.x < 0;
+        rend.flipX = transform.position.x - lookPoint.position.x > 0;
     }
 }
