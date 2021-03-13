@@ -3,11 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/*
- * REQUIRED AXES : "Pickup" mapped to something... like j?
- * "Throw" mapped to something else
- */
-
 [RequireComponent(typeof(JumperInputComponent))]
 public class JumperPlayerController : MonoBehaviour
 {
@@ -26,22 +21,23 @@ public class JumperPlayerController : MonoBehaviour
     public float magnetCooldown = 10f;
     public float magnetDuration = 0.5f;
     // levelable character properties
-    
+
     public AudioClip jumpSound;
     public JumperSelfDestruct jumpParticles;
-        public GameObject aiPrefab;
+    public GameObject aiPrefab;
     public Transform aiAttach;
     public GameObject magnet;
-    
     public GameObject shield;
+    public JumperRealText text;
+
     [SerializeField]
     [Tooltip("Axis for left and right movements")]
     protected string horizontalAxis = "Horizontal";
     [SerializeField]
     [Tooltip("Axis for jumping")]
     protected string jumpAxis = "Jump";
-    
-    
+
+
     [SerializeField]
     [Tooltip("Axis for picking up items")]
     protected string pickupAxis = "Pickup";
@@ -116,7 +112,7 @@ public class JumperPlayerController : MonoBehaviour
     protected string myTag;
     protected float horizontalInput = 0f;
     protected float originalJumpSpeed;
-    
+
     #endregion
 
     #region startup
@@ -130,7 +126,7 @@ public class JumperPlayerController : MonoBehaviour
         rb.velocity = Vector2.zero;
         currentHealth = maxHealth;
         originalJumpSpeed = jumpSpeed;
-        
+
     }
     protected void Start()
     {
@@ -267,17 +263,17 @@ public class JumperPlayerController : MonoBehaviour
         coinJump = grounded ? 0 : coinJump;
     }
 
-/*    void UpdateHeight()
-    {
-        maxHeightReached = transform.position.y > maxHeightReached ? transform.position.y : maxHeightReached;
-    }*/
+    /*    void UpdateHeight()
+        {
+            maxHeightReached = transform.position.y > maxHeightReached ? transform.position.y : maxHeightReached;
+        }*/
 
     //this function requires the collider be the same size as the renderer or smaller
     protected bool IsGrounded()
     {
         float offset = rend.bounds.extents.x;
         float yoffset = rend.bounds.extents.y * 1.02f;
-        return Physics2D.OverlapArea(new Vector2(transform.position.x - offset, transform.position.y - yoffset), 
+        return Physics2D.OverlapArea(new Vector2(transform.position.x - offset, transform.position.y - yoffset),
             new Vector2(transform.position.x + offset, transform.position.y - yoffset + 0.01f), groundLayer);
     }
 
@@ -331,7 +327,7 @@ public class JumperPlayerController : MonoBehaviour
         //changing the direction of the throw to the last direction moved
         float horizontal = HorizontalMovement();
         if (jumped) { Jump(horizontal); }
-        else { rb.velocity = new Vector2(horizontal, rb.velocity.y); }        
+        else { rb.velocity = new Vector2(horizontal, rb.velocity.y); }
     }
 
     protected void Jump(float horizontal)
@@ -406,7 +402,7 @@ public class JumperPlayerController : MonoBehaviour
         pickup = false;
     }
 
-    
+
 
     //to be run in fixed update
     protected void Timers()
@@ -461,7 +457,10 @@ public class JumperPlayerController : MonoBehaviour
 
     public void GivePoints(float p)
     {
-        points += Mathf.Abs(p);
+        var toAdd = Mathf.Abs(p);
+        points += toAdd;
+        if (toAdd >= 1f)
+            text.Activate(((int)toAdd).ToString(), JumperRealText.FeedbackType.Good, transform.position);
     }
 
     public float GetCoinsCollected()
@@ -516,7 +515,7 @@ public class JumperPlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag(groundTag))
         {
             JumperGeneralPlatform check = collision.gameObject.GetComponent<JumperGeneralPlatform>();
-            if (check != null) 
+            if (check != null)
             {
                 if (collision.gameObject.transform.position.y + collision.gameObject.GetComponent<Renderer>().bounds.extents.y <
                 transform.position.y + rend.bounds.extents.y)
@@ -540,7 +539,7 @@ public class JumperPlayerController : MonoBehaviour
             if (pu.IsAutomaticPickup())
             {
                 //blah blah do stuff for picking up the item
-                points += pu.PointsOnPickup();
+                GivePoints(pu.PointsOnPickup());
                 coinJump = jumpLevel;
                 if (pu.IsDestroyOnPickup())
                     pu.Remove();
@@ -555,7 +554,7 @@ public class JumperPlayerController : MonoBehaviour
                 heldItemRB = collision.gameObject.GetComponent<Rigidbody2D>();
                 pickup = false;
                 haveItem = true;
-            } */       
+            } */
         }
         else if (collision.gameObject.CompareTag(obstacleTag) || collision.gameObject.CompareTag(enemyTag))
         {
@@ -575,17 +574,21 @@ public class JumperPlayerController : MonoBehaviour
                 DamageHelper(obsControl.GetDamage());
             }
             obsControl.RemoveOnDamage();
-
+        }
+        else if (isShielded)
+        {
+            text.Activate("Blocked!", JumperRealText.FeedbackType.Neutral, transform.position);
         }
     }
-    
+
 
     protected void DamageHelper(float damage)
     {
         //when damage is too high, gets reduced to 100% - healthLevel * 10%
         // e.g. healthlevel = 1, max damage taken is 90%, for 2 max damage is 80% of maxhealth
-        float sanitizedDamage = Mathf.Min(Mathf.Abs(damage), maxHealth * ( 1f - damageReduction ));
+        float sanitizedDamage = Mathf.Min(Mathf.Abs(damage), maxHealth * (1f - damageReduction));
         currentHealth -= sanitizedDamage;
+        text.Activate(((int)sanitizedDamage).ToString(), JumperRealText.FeedbackType.Bad, transform.position);
         StartCoroutine(Flasher());
         if (currentHealth <= 0)
         {
@@ -593,8 +596,8 @@ public class JumperPlayerController : MonoBehaviour
         }
         //player destruction handled elsewhere
     }
-    
-    
+
+
 
     public void RunDeathSequence()
     {
@@ -650,7 +653,7 @@ public class JumperPlayerController : MonoBehaviour
     IEnumerator Flasher()
     {
         damageTimer = damageTimerMax;
-        int interval = (int)( damageTimerMax / flashTime);
+        int interval = (int)(damageTimerMax / flashTime);
         Renderer rend = GetComponent<Renderer>();
         for (int i = 0; i < interval; i++)
         {
