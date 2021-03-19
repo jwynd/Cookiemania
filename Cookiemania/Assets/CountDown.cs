@@ -23,7 +23,7 @@ public class CountDown : MonoBehaviour
         }
         if (dificulty == 0)
         {
-            mainTimer = 40f;
+            mainTimer = 60f;
         } else if (dificulty == 1)
         {
             mainTimer = 180f;
