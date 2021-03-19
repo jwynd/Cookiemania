@@ -155,7 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acceleration: 0
   maxVelocity: 0
-  damage: 2.5
+  damage: 50
   pointValue: 15
   indestructable: 1
   maxHealth: 1

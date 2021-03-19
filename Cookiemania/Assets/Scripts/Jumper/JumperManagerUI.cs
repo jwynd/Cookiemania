@@ -15,7 +15,7 @@ public class JumperManagerUI : MonoBehaviour
     public JumperBackgroundController endscreenBG;
     public float timeToNextScene = 2.5f;
     public TextMeshProUGUI scoreRef;
-    public TextMeshProUGUI tutorialRef;
+    public TextMeshProUGUI hpRef;
 
     public static JumperManagerUI Instance { get; private set; }
 
@@ -24,6 +24,8 @@ public class JumperManagerUI : MonoBehaviour
     private bool endingGame = false;
     private int coinsCollected = 0;
     private JumperManagerGame jm;
+    private float prevHP = 0;
+    private float realMin = 0f;
 
 
     #endregion
@@ -50,6 +52,11 @@ public class JumperManagerUI : MonoBehaviour
         heightSlider.maxValue = jm.GetHeightGoal();
         healthSlider.minValue = 0;
         healthSlider.maxValue = jm.Player.GetMaxHealth();
+        realMin = healthSlider.maxValue * 0.031f;
+        prevHP = jm.Player.GetCurrentHealth();
+        scoreRef.text = "0";
+        healthSlider.value = prevHP;
+        hpRef.text = prevHP.ToString();
     }
 
     #endregion
@@ -61,9 +68,20 @@ public class JumperManagerUI : MonoBehaviour
         if (jm.Player != null)
         {
             heightSlider.value = jm.Player.transform.position.y;
-            healthSlider.value = jm.Player.GetCurrentHealth();
-            coinsCollected = (int)jm.Player.GetCoinsCollected();
-            scoreRef.text = coinsCollected.ToString();
+            var newHP = jm.Player.GetCurrentHealth();
+            var newCoins = (int)jm.Player.GetCoinsCollected();
+            if (prevHP != newHP)
+            {
+                healthSlider.value = Mathf.Max(newHP, realMin);
+                hpRef.text = newHP.ToString();
+                prevHP = newHP;
+            }
+            if (coinsCollected != newCoins)
+            {
+                coinsCollected = newCoins;
+                scoreRef.text = coinsCollected.ToString();
+            }
+            
         }
     }
     

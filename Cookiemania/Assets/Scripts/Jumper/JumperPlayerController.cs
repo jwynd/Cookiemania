@@ -14,7 +14,7 @@ public class JumperPlayerController : MonoBehaviour
     public float airJumpSpeed = 5.5f;
     public LayerMask groundLayer;
     public Vector2 throwStrength = new Vector2(4.0f, 4.0f);
-    public float maxHealth = 5;
+    public int maxHealth = 5;
     public float flashTime = 0.15f;
     public float damageTimerMax = 1.5f;
 
@@ -71,7 +71,7 @@ public class JumperPlayerController : MonoBehaviour
     protected int healthLevel = 0;
     protected float damageReduction = 0.0f;
     protected JumperMagnet magnetController;
-    protected float currentHealth;
+    protected int currentHealth;
     protected bool jumped = false;
 
     protected bool shieldInput = false;
@@ -149,7 +149,8 @@ public class JumperPlayerController : MonoBehaviour
         // each level of health enhances damage reduction and small amount
         // of flat hp
         healthLevel = jm.Health;
-        maxHealth += healthLevel;
+        // 10% more hp per level
+        maxHealth += (int)(healthLevel * 0.1f * maxHealth);
         currentHealth = maxHealth;
         damageReduction = Mathf.Min(0.8f, 0.1f * healthLevel);
         if (aiLevel > 0)
@@ -453,12 +454,12 @@ public class JumperPlayerController : MonoBehaviour
         return maxSpeed;
     }
 
-    public float GetMaxHealth()
+    public int GetMaxHealth()
     {
         return maxHealth;
     }
 
-    public float GetCurrentHealth()
+    public int GetCurrentHealth()
     {
         return currentHealth;
     }
@@ -594,9 +595,9 @@ public class JumperPlayerController : MonoBehaviour
     {
         //when damage is too high, gets reduced to 100% - healthLevel * 10%
         // e.g. healthlevel = 1, max damage taken is 90%, for 2 max damage is 80% of maxhealth
-        float sanitizedDamage = Mathf.Min(Mathf.Abs(damage), maxHealth * (1f - damageReduction));
+        int sanitizedDamage = (int)Mathf.Min(Mathf.Abs(damage), maxHealth * (1f - damageReduction));
         currentHealth -= sanitizedDamage;
-        text.Activate(((int)sanitizedDamage).ToString(), JumperRealText.FeedbackType.Bad, transform.position);
+        text.Activate(sanitizedDamage.ToString(), JumperRealText.FeedbackType.Bad, transform.position);
         StartCoroutine(Flasher());
         if (currentHealth <= 0)
         {
