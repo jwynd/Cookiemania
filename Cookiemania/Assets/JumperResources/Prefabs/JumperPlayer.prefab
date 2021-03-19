@@ -126,6 +126,8 @@ GameObject:
   - component: {fileID: 1793148104149608238}
   - component: {fileID: 1712654719569626921}
   - component: {fileID: 3679143282031186485}
+  - component: {fileID: 6983193897583704948}
+  - component: {fileID: 2283239748538315119}
   m_Layer: 9
   m_Name: JumperPlayer
   m_TagString: Player
@@ -390,6 +392,83 @@ MonoBehaviour:
   jumpKeys: 2000000011010000
   pickupKeys: 6600000031010000
   throwKeys: 650000002f010000
+--- !u!60 &6983193897583704948
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2857318615114850780}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 1
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.29, y: 0.35}
+    newSize: {x: 0.32, y: 0.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.12645254, y: 0.22113042}
+      - {x: -0.26242292, y: 0.08725695}
+      - {x: -0.24145454, y: -0.114515804}
+      - {x: -0.01064235, y: -0.1372569}
+      - {x: 0.24145454, y: -0.1288696}
+      - {x: 0.26661655, y: 0.08532014}
+      - {x: 0.11338733, y: 0.22322726}
+--- !u!66 &2283239748538315119
+CompositeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2857318615114850780}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_GeometryType: 0
+  m_GenerationType: 0
+  m_EdgeRadius: 0
+  m_ColliderPaths:
+  - m_Collider: {fileID: 6983193897583704948}
+    m_ColliderPaths:
+    - - X: -3793576
+        Y: 6633912
+      - X: -7872687
+        Y: 2617708
+      - X: -7243636
+        Y: -3435474
+      - X: -319270
+        Y: -4117707
+      - X: 7243636
+        Y: -3866087
+      - X: 7998496
+        Y: 2559604
+      - X: 3401619
+        Y: 6696818
+  m_CompositePaths:
+    m_Paths:
+    - - {x: -0.0319286, y: -0.4117705}
+      - {x: 0.7243665, y: -0.3865845}
+      - {x: 0.7998395, y: 0.2559695}
+      - {x: 0.34015182, y: 0.6696817}
+      - {x: -0.379365, y: 0.6633839}
+      - {x: -0.7872673, y: 0.2617582}
+      - {x: -0.72434074, y: -0.3435496}
+  m_VertexDistance: 0.0005
+  m_OffsetDistance: 0.00005
 --- !u!1 &3177681861256741812
 GameObject:
   m_ObjectHideFlags: 0

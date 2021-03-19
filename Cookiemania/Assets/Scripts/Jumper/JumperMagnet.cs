@@ -16,7 +16,7 @@ public class JumperMagnet : MonoBehaviour
     [SerializeField]
     protected float defaultSuckTime = 0.5f;
 
-    List<Tuple<JumperGeneralThreat, Vector3, Vector3>> threats = new List<Tuple<JumperGeneralThreat, Vector3, Vector3>>();
+//    List<Tuple<JumperGeneralThreat, Vector3, Vector3>> threats = new List<Tuple<JumperGeneralThreat, Vector3, Vector3>>();
     List<Tuple<JumperGeneralPickup, Vector3, Vector3>> pickups = new List<Tuple<JumperGeneralPickup, Vector3, Vector3>>();
 
     protected float lifeTime = 0f;
@@ -35,7 +35,7 @@ public class JumperMagnet : MonoBehaviour
     public void ActivateMagnet(float time = 0f)
     {
         pickups.Clear();
-        threats.Clear();
+        //      threats.Clear();
         lifeTime = time > 0.01f ? time : defaultSuckTime;
         lerpTime = 0f;
         gameObject.SetActive(true);
@@ -58,11 +58,11 @@ public class JumperMagnet : MonoBehaviour
             pu.Item1.transform.position = Vector3.Lerp(pu.Item2, suckInEnd.position, lerpPoint);
             pu.Item1.transform.localScale = Vector3.Lerp(pu.Item3, small, lerpPoint);
         }
-        foreach (var th in threats)
+        /*foreach (var th in threats)
         {
             th.Item1.transform.position = Vector3.Lerp(th.Item2, suckInEnd.position, lerpPoint);
             th.Item1.transform.localScale = Vector3.Lerp(th.Item3, small, lerpPoint);
-        }
+        }*/
         lerpTime += Time.deltaTime;
     }
 
@@ -78,13 +78,13 @@ public class JumperMagnet : MonoBehaviour
             myPlayer.GivePoints(pu.Item1.PointsOnPickup());
             pu.Item1.Remove();
         }
-        foreach (var th in threats)
+        /*foreach (var th in threats)
         {
             myPlayer.GivePoints(th.Item1.GetPointValue());
             th.Item1.Remove();
-        }
+        }*/
         pickups.Clear();
-        threats.Clear();
+        //threats.Clear();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -92,19 +92,19 @@ public class JumperMagnet : MonoBehaviour
         var endDoor = collision.gameObject.GetComponent<JumperEndDoorController>();
         if (endDoor)
             return;
-        var threat = collision.gameObject.GetComponent<JumperGeneralThreat>();
+        //var threat = collision.gameObject.GetComponent<JumperGeneralThreat>();
         var pickup = collision.gameObject.GetComponent<JumperGeneralPickup>();
-        if (threat || pickup)
+        if (/*threat ||*/ pickup)
         {
             var collider = collision.gameObject.GetComponent<Collider2D>();
             if (collider) collider.enabled = false;
             collision.transform.parent = null;
         }
-        if (threat)
+        /*if (threat)
         {
             threats.Add(new Tuple<JumperGeneralThreat, Vector3, Vector3>(
                 threat, threat.transform.position, threat.transform.localScale));
-        }
+        }*/
         if (pickup)
         {
             pickups.Add(new Tuple<JumperGeneralPickup, Vector3, Vector3>(

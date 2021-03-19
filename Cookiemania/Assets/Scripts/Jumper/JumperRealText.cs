@@ -28,6 +28,7 @@ public class JumperRealText : MonoBehaviour
     private float ttl = 0f;
     private Color currentColor = Color.white;
     private Vector3 offset = Vector3.zero;
+    private Transform parent = null;
 
     private void Awake()
     {
@@ -36,13 +37,31 @@ public class JumperRealText : MonoBehaviour
         transform.parent = null;
         offset = new Vector3(0f, heightAbovePlayer, 0f);
         enabled = false;
+        gameObject.SetActive(false);
     }
 
     /*
      * new idea: gets random velocity and size is based on an intensity argument
-     * if no text, uses intensity as its text
-     * Spawn(int intensity, FeedbackType type, Vector3 position, string text, float dur)
+     * if no text, uses intensity as its text, parent is what it will reparent to when it deactivates
+     * Spawn(Transform parent, int intensity, FeedbackType type, Vector3 position, string text, float dur)
+     * 
+     * will have a manager that "spawns" it and recycles after
      */
+
+    public void Spawn(Transform dad, int intensity, FeedbackType type, Vector3 pos, string txt, float dur)
+    {
+        StopAllCoroutines();
+        transform.parent = null;
+        parent = dad;
+        duration = dur > 0f ? dur : duration;
+        ttl = duration;
+        text.text = txt != "" ? txt : intensity.ToString();
+        currentColor = ChangeColor(type);
+        text.color = currentColor;
+        transform.position = pos + offset;
+        enabled = true;
+        gameObject.SetActive(true);
+    }
 
     public void Activate(string displayText, FeedbackType feedback, Vector3 position, float dur = 0f)
     {
@@ -54,6 +73,7 @@ public class JumperRealText : MonoBehaviour
         text.color = currentColor;
         transform.position = position + offset;
         enabled = true;
+        gameObject.SetActive(true);
     }
 
     private Color ChangeColor(FeedbackType feedback)
@@ -94,5 +114,7 @@ public class JumperRealText : MonoBehaviour
             elapsed += updateTime;
         }
         text.text = "";
+        transform.parent = parent;
+        gameObject.SetActive(false);
     }
 }

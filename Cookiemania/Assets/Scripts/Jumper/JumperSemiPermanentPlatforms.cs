@@ -17,20 +17,21 @@ public class JumperSemiPermanentPlatforms : JumperGeneralPlatform
     public override void Remove(bool immediately = false)
     {
         if (neverRemove) { return; }
-        if (!removeCheck && notFlashing)
+        if (immediately)
+        {
+            StartCoroutine(JumperManagerGame.FlashThenKill(gameObject, 0.1f, 0.1f, enemyChild));
+        }
+        else if (!removeCheck && notFlashing)
         {
             notFlashing = false;
             StartCoroutine(JumperManagerGame.FlashThenKill(gameObject, timeToRemove, flashPeriod, enemyChild));
-        }
-        else if (immediately)
-        {
-            StartCoroutine(JumperManagerGame.FlashThenKill(gameObject, 0.1f, 0.1f, enemyChild));
         }
         else
         {
             removeCheck = false;
         }
     }
+
     protected virtual void FixedUpdate()
     {
         if (!neverRemove)

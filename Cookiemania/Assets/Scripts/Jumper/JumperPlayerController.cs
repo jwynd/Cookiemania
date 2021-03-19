@@ -74,7 +74,7 @@ public class JumperPlayerController : MonoBehaviour
     protected float currentHealth;
     protected bool jumped = false;
 
-    protected bool pickup = false;
+    protected bool shieldInput = false;
 
     protected float aerialManeuverability = 0.5f;
     protected float normalManeuverability = 1;
@@ -112,6 +112,8 @@ public class JumperPlayerController : MonoBehaviour
     protected string myTag;
     protected float horizontalInput = 0f;
     protected float originalJumpSpeed;
+    protected CapsuleCollider2D coll;
+    protected PolygonCollider2D shieldColl;
 
     #endregion
 
@@ -126,7 +128,10 @@ public class JumperPlayerController : MonoBehaviour
         rb.velocity = Vector2.zero;
         currentHealth = maxHealth;
         originalJumpSpeed = jumpSpeed;
-
+        coll = GetComponent<CapsuleCollider2D>();
+        shieldColl = GetComponent<PolygonCollider2D>();
+        shieldColl.enabled = false;
+        coll.enabled = true;
     }
     protected void Start()
     {
@@ -193,14 +198,14 @@ public class JumperPlayerController : MonoBehaviour
             return;
         }
         jumped = JumpInput(input.Jump);
-        pickup = input.Pickup > 0f;
+        shieldInput = input.Pickup > 0f;
         magnetInput = input.Throw > 0f ? true : magnetInput;
         horizontalInput = input.Horizontal;
     }
 
     protected void ResetInputForCollisions()
     {
-        pickup = false;
+        shieldInput = false;
     }
 
     protected void ResetInputForFixedUpdate()
@@ -381,25 +386,28 @@ public class JumperPlayerController : MonoBehaviour
             magnetController.ActivateMagnet(magnetDuration);
             canMagnet = false;
         }
-        if (!isMagnetic)
+        if (magnet.activeSelf && !isMagnetic)
             magnet.SetActive(false);
         magnetInput = false;
     }
 
     protected void ActivateShield()
     {
-        if (pickup && canShield && shieldLevel > 0)
+        if (shieldInput && canShield && shieldLevel > 0)
         {
-            Debug.LogWarning("activating shield");
             currentShieldCD = shieldCooldown;
             currentShield = shieldDuration;
             isShielded = true;
             shield.SetActive(true);
+            shieldColl.enabled = true;
             canShield = false;
         }
-        if (!isShielded)
+        if (shield.activeSelf && !isShielded)
+        {
             shield.SetActive(false);
-        pickup = false;
+            shieldColl.enabled = false;
+        }
+        shieldInput = false;
     }
 
 
@@ -566,18 +574,18 @@ public class JumperPlayerController : MonoBehaviour
     protected void TakesDamage(GameObject collision)
     {
         //requires damage and destroyable parameters in obstacle controller
+        JumperGeneralThreat obsControl = collision.GetComponent<JumperGeneralThreat>();
+        if (obsControl == null) return;
         if (damageTimer <= 0 && !isShielded)
         {
-            JumperGeneralThreat obsControl = collision.GetComponent<JumperGeneralThreat>();
-            if (obsControl != null)
-            {
-                DamageHelper(obsControl.GetDamage());
-            }
+            DamageHelper(obsControl.GetDamage());
             obsControl.RemoveOnDamage();
         }
         else if (isShielded)
         {
             text.Activate("Blocked!", JumperRealText.FeedbackType.Neutral, transform.position);
+            GivePoints(obsControl.GetPointValue());
+            obsControl.Remove(true);
         }
     }
 
