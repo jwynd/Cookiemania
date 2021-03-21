@@ -28,7 +28,7 @@ public class JumperPlayerController : MonoBehaviour
     public Transform aiAttach;
     public GameObject magnet;
     public GameObject shield;
-    public JumperRealText text;
+    public TextParticleSystem texts;
 
     [SerializeField]
     [Tooltip("Axis for left and right movements")]
@@ -469,7 +469,7 @@ public class JumperPlayerController : MonoBehaviour
         var toAdd = Mathf.Abs(p);
         points += toAdd;
         if (toAdd >= 1f)
-            text.Activate(((int)toAdd).ToString(), JumperRealText.FeedbackType.Good, transform.position);
+            texts.EmitEasy(2f, ((int)toAdd).ToString(), Color.yellow);
     }
 
     public float GetCoinsCollected()
@@ -584,7 +584,7 @@ public class JumperPlayerController : MonoBehaviour
         }
         else if (isShielded)
         {
-            text.Activate("Blocked!", JumperRealText.FeedbackType.Neutral, transform.position);
+            texts.EmitEasy(1f, "Blocked", Color.cyan);
             GivePoints(obsControl.GetPointValue());
             obsControl.Remove(true);
         }
@@ -597,7 +597,8 @@ public class JumperPlayerController : MonoBehaviour
         // e.g. healthlevel = 1, max damage taken is 90%, for 2 max damage is 80% of maxhealth
         int sanitizedDamage = (int)Mathf.Min(Mathf.Abs(damage), maxHealth * (1f - damageReduction));
         currentHealth -= sanitizedDamage;
-        text.Activate(sanitizedDamage.ToString(), JumperRealText.FeedbackType.Bad, transform.position);
+        float intensity = (sanitizedDamage / (float)maxHealth) * 4f;
+        texts.EmitEasy(intensity, sanitizedDamage.ToString(), Color.red);
         StartCoroutine(Flasher());
         if (currentHealth <= 0)
         {
