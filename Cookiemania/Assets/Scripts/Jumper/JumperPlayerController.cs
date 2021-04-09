@@ -7,7 +7,6 @@ using UnityEngine;
 public class JumperPlayerController : MonoBehaviour
 {
     #region variables
-
     public float acceleration = 1f;
     public float maxSpeed = 5.5f;
     public float jumpSpeed = 7.5f;
@@ -133,6 +132,7 @@ public class JumperPlayerController : MonoBehaviour
         shieldColl.enabled = false;
         coll.enabled = true;
     }
+
     protected void Start()
     {
         jm = JumperManagerGame.Instance;
