@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d4cecb6b2248fda45b5dd5e7a0281ae1
+guid: a5aa9809c1bb1bf4098aadd25a3d886a
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -87,7 +87,7 @@ ScriptedImporter:
     uvTransform: {x: 0, y: 0}
   mosaicSpriteImportData: []
   rigSpriteImportData:
-  - name: body1_body
+  - name: body2_body
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -98,7 +98,7 @@ ScriptedImporter:
       y: 4
       width: 290
       height: 290
-    spriteID: fb208dbbd34a85d4581c8ca773c7c44f
+    spriteID: e7ed2c7fe9e5f8342bbb04dc05303693
     internalID: 0
     spriteBone:
     - name: bone_3
@@ -499,7 +499,7 @@ ScriptedImporter:
         boneIndex2: 0
         boneIndex3: 0
     spritePhysicsOutline: []
-    indices: 1d0000001c0000001b0000000000000002000000010000000200000023000000040000000400000023000000050000000700000006000000050000000700000005000000230000000400000003000000020000000000000023000000020000000800000007000000230000000f0000002300000010000000230000000e0000000d0000000a00000009000000080000000b0000000d0000000c0000000a000000230000000b000000230000000d0000000b000000230000000f0000000e00000008000000230000000a0000000000000021000000200000001100000010000000230000001a00000019000000230000001b0000001a0000002300000023000000200000001e000000200000001f0000001e0000001e0000001d000000230000001d0000001b00000023000000230000001900000018000000000000002000000023000000160000001500000023000000230000001700000016000000140000001300000015000000230000001500000013000000130000001200000023000000110000002300000012000000230000001800000017000000220000002100000000000000
+    indices: 1d0000001c0000001b000000000000000200000001000000020000002300000004000000040000002300000005000000070000000600000005000000070000000500000023000000040000000300000002000000230000000f0000000e00000008000000230000000a0000000f0000002300000010000000230000000e0000000d0000000a00000009000000080000000b0000000d0000000c0000000a000000230000000b000000230000000d0000000b0000000000000023000000020000000800000007000000230000000000000021000000200000000000000020000000230000001a00000019000000230000001b0000001a0000002300000023000000200000001e000000200000001f0000001e0000001e0000001d000000230000001d0000001b00000023000000230000001800000017000000110000001000000023000000160000001500000023000000230000001700000016000000140000001300000015000000230000001500000013000000130000001200000023000000110000002300000012000000230000001900000018000000220000002100000000000000
     edges:
     - {x: 0, y: 1}
     - {x: 1, y: 2}
@@ -539,7 +539,7 @@ ScriptedImporter:
     tessellationDetail: 0
     parentGroupIndex: -1
     uvTransform: {x: -106, y: -116}
-  - name: body1_lleg
+  - name: body2_lleg
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -550,7 +550,7 @@ ScriptedImporter:
       y: 4
       width: 40
       height: 100
-    spriteID: 5e57fb162eaabab4faaa775a9a0c1a9e
+    spriteID: e6b79d14260a0064b96547ce3d1c55cb
     internalID: 0
     spriteBone:
     - name: bone_8
@@ -1009,7 +1009,7 @@ ScriptedImporter:
     tessellationDetail: 0
     parentGroupIndex: -1
     uvTransform: {x: 122, y: -66}
-  - name: body1_rleg
+  - name: body2_rleg
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -1020,7 +1020,7 @@ ScriptedImporter:
       y: 112
       width: 40
       height: 100
-    spriteID: 5cda715b6408f184c893a63dd278ed0d
+    spriteID: a484d7436710ae0428cf4ba25dce45fd
     internalID: 0
     spriteBone:
     - name: bone_9
@@ -1479,7 +1479,7 @@ ScriptedImporter:
     tessellationDetail: 0
     parentGroupIndex: -1
     uvTransform: {x: 12, y: 42}
-  - name: body1_larm
+  - name: body2_larm
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -1490,7 +1490,7 @@ ScriptedImporter:
       y: 4
       width: 30
       height: 120
-    spriteID: 4aa1cd3cf8e53464799671a859718dc6
+    spriteID: 4b7565802a2f18548b12691baee0f045
     internalID: 0
     spriteBone:
     - name: bone_6
@@ -2019,7 +2019,7 @@ ScriptedImporter:
     tessellationDetail: 0
     parentGroupIndex: -1
     uvTransform: {x: 240, y: -136}
-  - name: body1_rarm
+  - name: body2_rarm
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -2030,7 +2030,7 @@ ScriptedImporter:
       y: 132
       width: 30
       height: 120
-    spriteID: 191cbe282c39c824eb878370afd69a0f
+    spriteID: 475722c2fe09fd74fad1dd67e69072c4
     internalID: 0
     spriteBone:
     - name: bone_7
@@ -2578,40 +2578,40 @@ ScriptedImporter:
   characterMode: 1
   mosaicPSDLayers: []
   rigPSDLayers:
-  - name: body1_body
-    spriteName: body1_body
+  - name: body2_body
+    spriteName: body2_body
     isGroup: 0
     parentIndex: -1
-    spriteID: fb208dbbd34a85d4581c8ca773c7c44f
+    spriteID: e7ed2c7fe9e5f8342bbb04dc05303693
     layerID: 0
     mosaicPosition: {x: 4, y: 4}
-  - name: body1_lleg
-    spriteName: body1_lleg
+  - name: body2_lleg
+    spriteName: body2_lleg
     isGroup: 0
     parentIndex: -1
-    spriteID: 5e57fb162eaabab4faaa775a9a0c1a9e
-    layerID: -902748322
+    spriteID: e6b79d14260a0064b96547ce3d1c55cb
+    layerID: -902747301
     mosaicPosition: {x: 302, y: 4}
-  - name: body1_rleg
-    spriteName: body1_rleg
+  - name: body2_rleg
+    spriteName: body2_rleg
     isGroup: 0
     parentIndex: -1
-    spriteID: 5cda715b6408f184c893a63dd278ed0d
-    layerID: -902749176
+    spriteID: a484d7436710ae0428cf4ba25dce45fd
+    layerID: -902748023
     mosaicPosition: {x: 302, y: 112}
-  - name: body1_larm
-    spriteName: body1_larm
+  - name: body2_larm
+    spriteName: body2_larm
     isGroup: 0
     parentIndex: -1
-    spriteID: 4aa1cd3cf8e53464799671a859718dc6
-    layerID: -284137620
+    spriteID: 4b7565802a2f18548b12691baee0f045
+    layerID: -284136593
     mosaicPosition: {x: 350, y: 4}
-  - name: body1_rarm
-    spriteName: body1_rarm
+  - name: body2_rarm
+    spriteName: body2_rarm
     isGroup: 0
     parentIndex: -1
-    spriteID: 191cbe282c39c824eb878370afd69a0f
-    layerID: -284138446
+    spriteID: 475722c2fe09fd74fad1dd67e69072c4
+    layerID: -284137295
     mosaicPosition: {x: 350, y: 132}
   characterData:
     bones:
@@ -2666,7 +2666,7 @@ ScriptedImporter:
         y: 120
         width: 290
         height: 290
-      spriteId: fb208dbbd34a85d4581c8ca773c7c44f
+      spriteId: e7ed2c7fe9e5f8342bbb04dc05303693
       bones: 02000000000000000600000003000000040000000500000001000000
       parentGroup: 0
       order: 0
@@ -2675,7 +2675,7 @@ ScriptedImporter:
         y: 70
         width: 40
         height: 100
-      spriteId: 5e57fb162eaabab4faaa775a9a0c1a9e
+      spriteId: e6b79d14260a0064b96547ce3d1c55cb
       bones: 0700000001000000
       parentGroup: 0
       order: 0
@@ -2684,7 +2684,7 @@ ScriptedImporter:
         y: 70
         width: 40
         height: 100
-      spriteId: 5cda715b6408f184c893a63dd278ed0d
+      spriteId: a484d7436710ae0428cf4ba25dce45fd
       bones: 0800000002000000
       parentGroup: 0
       order: 0
@@ -2693,7 +2693,7 @@ ScriptedImporter:
         y: 140
         width: 30
         height: 120
-      spriteId: 4aa1cd3cf8e53464799671a859718dc6
+      spriteId: 4b7565802a2f18548b12691baee0f045
       bones: 0500000004000000
       parentGroup: 0
       order: 0
@@ -2702,14 +2702,14 @@ ScriptedImporter:
         y: 140
         width: 30
         height: 120
-      spriteId: 191cbe282c39c824eb878370afd69a0f
+      spriteId: 475722c2fe09fd74fad1dd67e69072c4
       bones: 0600000003000000
       parentGroup: 0
       order: 0
     dimension: {x: 0, y: 0}
     characterGroups: []
   generateGOHierarchy: 0
-  textureAssetName: body1 Texture
-  prefabAssetName: body1 Prefab
-  spriteLibAssetName: body1 Sprite Lib
+  textureAssetName: body2 Texture
+  prefabAssetName: body2 Prefab
+  spriteLibAssetName: body2 Sprite Lib
   secondarySpriteTextures: []
