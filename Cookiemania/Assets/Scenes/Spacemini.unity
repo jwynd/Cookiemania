@@ -1581,14 +1581,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 763917097}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 316bab2e03125bb4b9ce65b368a5bace, type: 3}
+  m_Script: {fileID: 11500000, guid: 20e44a3305184c046ae7c5b146e45f4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 8706619386830073998, guid: 34056b25a4d921e4282fb94cb83c3ddb, type: 3}
   enemy2: {fileID: 4215776844763078832, guid: 2cc44b86129f8424897a8eb05b8ed06f, type: 3}
   enemy3: {fileID: 8706619386830073998, guid: 34056b25a4d921e4282fb94cb83c3ddb, type: 3}
   enemy4: {fileID: 4215776844763078832, guid: 2cc44b86129f8424897a8eb05b8ed06f, type: 3}
-  spawnRate: 6
+  spawnRate: 10
 --- !u!4 &763917099
 Transform:
   m_ObjectHideFlags: 0
@@ -2819,14 +2819,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1551143589}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 316bab2e03125bb4b9ce65b368a5bace, type: 3}
+  m_Script: {fileID: 11500000, guid: 20e44a3305184c046ae7c5b146e45f4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 8706619386830073998, guid: 34056b25a4d921e4282fb94cb83c3ddb, type: 3}
   enemy2: {fileID: 4215776844763078832, guid: 2cc44b86129f8424897a8eb05b8ed06f, type: 3}
   enemy3: {fileID: 8706619386830073998, guid: 34056b25a4d921e4282fb94cb83c3ddb, type: 3}
   enemy4: {fileID: 4215776844763078832, guid: 2cc44b86129f8424897a8eb05b8ed06f, type: 3}
-  spawnRate: 8
+  spawnRate: 10
 --- !u!4 &1551143591
 Transform:
   m_ObjectHideFlags: 0
