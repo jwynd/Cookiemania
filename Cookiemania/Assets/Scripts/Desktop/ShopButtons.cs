@@ -16,6 +16,17 @@ public class ShopButtons : MonoBehaviour
     [SerializeField]
     protected Canvas upgradePopup = null;
 
+    private GameObject canvas = null;
+    private TMPro.TextMeshProUGUI money = null;
+    private TMPro.TextMeshProUGUI lvl = null;
+
+    private void Start()
+    {
+        canvas = GameObject.Find("ShopCanvas(Clone)");
+        money = GameObject.Find("AnalyticsMoney").GetComponent<TMPro.TextMeshProUGUI>();
+        lvl = GameObject.Find("AnalyticsLvl").GetComponent<TMPro.TextMeshProUGUI>();
+    }
+
     private void OnEnable()
     {
         OpenHomepage();
@@ -83,12 +94,18 @@ public class ShopButtons : MonoBehaviour
 
     public void UpdatePlayer()
     {
-        if (GameObject.Find("ShopCanvas(Clone)") != null)
+        if (canvas == null)
         {
-            GameObject.Find("AnalyticsMoney").GetComponent<TMPro.TextMeshProUGUI>().text = "Money: $" + PlayerData.Player.money.ToString();
-            GameObject.Find("AnalyticsLvl").GetComponent<TMPro.TextMeshProUGUI>().text = "Lvl: " + PlayerData.Player.shoplvl.ToString();
+            canvas = GameObject.Find("ShopCanvas(Clone)");
+            money = GameObject.Find("AnalyticsMoney").GetComponent<TMPro.TextMeshProUGUI>();
+            lvl = GameObject.Find("AnalyticsLvl").GetComponent<TMPro.TextMeshProUGUI>();
+            if (money) money.text = "Money: $" + PlayerData.Player.money.ToString();
+            if (lvl) lvl.text = "Lvl: " + PlayerData.Player.shoplvl.ToString();
         }
-
+        else
+        {
+            money.text = "Money: $" + PlayerData.Player.money.ToString();
+            lvl.text = "Lvl: " + PlayerData.Player.shoplvl.ToString();
+        }
     }
-
 }

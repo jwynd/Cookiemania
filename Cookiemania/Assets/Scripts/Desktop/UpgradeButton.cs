@@ -5,37 +5,40 @@ using UnityEngine.UI;
 
 public class UpgradeButton : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public static int cost;
     public string popupText;
     public int lvlReq;
     public string popupTitle;
     public string popupQuote;
     public int popupPrice;
+    public string purchaseClip = "upgrade_click";
     public bool purchased = false;
-    private GameObject [] upgradeTitles;
-    private GameObject [] upgradeDescriptions;
-    private GameObject [] upgradeCosts;
-    private GameObject [] upgradeQuotes;
+    private TMPro.TextMeshProUGUI[] upgradeTitles;
+    private TMPro.TextMeshProUGUI[] upgradeDescriptions;
+    private TMPro.TextMeshProUGUI[] upgradeCosts;
+    private TMPro.TextMeshProUGUI[] upgradeQuotes;
+    private BuyButton purchaseButton;
+    private Animator animator;
+
     void Start()
     {
-       upgradeTitles = GameObject.FindGameObjectsWithTag("UpgradeTitle");
-       upgradeDescriptions = GameObject.FindGameObjectsWithTag("UpgradeDescription");
-       upgradeCosts = GameObject.FindGameObjectsWithTag("UpgradeCost");
-       upgradeQuotes = GameObject.FindGameObjectsWithTag("UpgradeQuote");
-       cost = popupPrice;
+        animator = GetComponent<Animator>();
+        upgradeTitles = ConvertToTextArr(GameObject.FindGameObjectsWithTag("UpgradeTitle"));
+        upgradeDescriptions = ConvertToTextArr(GameObject.FindGameObjectsWithTag("UpgradeDescription"));
+        upgradeCosts = ConvertToTextArr(GameObject.FindGameObjectsWithTag("UpgradeCost"));
+        upgradeQuotes = ConvertToTextArr(GameObject.FindGameObjectsWithTag("UpgradeQuote"));
+        purchaseButton = GameObject.FindGameObjectWithTag("Purchase").GetComponent<BuyButton>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public TMPro.TextMeshProUGUI[] ConvertToTextArr(GameObject[] objects)
     {
-        if (cost > PlayerData.Player.money || lvlReq > PlayerData.Player.shoplvl)
+        List<TMPro.TextMeshProUGUI> texts = new List<TMPro.TextMeshProUGUI>();
+        foreach (var obj in objects)
         {
-            gameObject.GetComponent<Button>().interactable = false;
-        } else
-        {
-            gameObject.GetComponent<Button>().interactable = true;
+            var text = obj.GetComponent<TMPro.TextMeshProUGUI>();
+            if (text != null)
+                texts.Add(text);
         }
+        return texts.ToArray();
     }
 
     public void select()
@@ -43,89 +46,82 @@ public class UpgradeButton : MonoBehaviour
         PlayerData.Player.userstats += 1;
         for (int i = 0; i < upgradeTitles.Length; i++)
         {
-            upgradeTitles[i].GetComponent<TMPro.TextMeshProUGUI>().text = popupTitle;
+            upgradeTitles[i].text = popupTitle;
         }
         for (int i = 0; i < upgradeQuotes.Length; i++)
         {
-            upgradeQuotes[i].GetComponent<TMPro.TextMeshProUGUI>().text = popupQuote;
+            upgradeQuotes[i].text = popupQuote;
         }
         for (int i = 0; i < upgradeDescriptions.Length; i++)
         {
-            upgradeDescriptions[i].GetComponent<TMPro.TextMeshProUGUI>().text = popupText;
+            upgradeDescriptions[i].text = popupText;
         }
         for (int i = 0; i < upgradeCosts.Length; i++)
         {
-            upgradeCosts[i].GetComponent<TMPro.TextMeshProUGUI>().text = "Cost: $" + popupPrice.ToString();
+            upgradeCosts[i].text = "Cost: $" + popupPrice.ToString();
         }
-        GameObject.FindGameObjectWithTag("Purchase").GetComponent<BuyButton>().selectedUpgrade = this;
+        purchaseButton.selectedUpgrade = this;
     }
     public void Buy()
     {
-        if (PlayerData.Player.money >= cost && PlayerData.Player.shoplvl >= lvlReq && purchased == false)
+        if (PlayerData.Player.money >= popupPrice &&
+            PlayerData.Player.shoplvl >= lvlReq &&
+            !purchased)
         {
-            PlayerData.Player.money -= cost;
-            checkGlobal();
-            //&& PlayerData.Player.SpaceUpgradelvl >= lvlReq
-            checkCyber();
+            PlayerData.Player.money -= popupPrice;
+            animator?.Play(purchaseClip, -1, 0f);
+            GlobalReducer(gameObject.tag);
+            CyberReducer(gameObject.tag);
             MarketingReducer(gameObject.tag);
             purchased = true;
         }
     }
 
-    void checkCyber()
+    void CyberReducer(string tag)
     {
-        if (gameObject.tag == "SHealth")
+        switch (tag)
         {
-            PlayerData.Player.ShieldHealth += 1;
-            Debug.Log("player S Health lvl is now:" + PlayerData.Player.ShieldHealth);
+            case "SHealth":
+                PlayerData.Player.ShieldHealth += 1;
+                break;
+            case "SWidth":
+                PlayerData.Player.ShieldWidth += 1;
+                break;
+            case "Pierce":
+                PlayerData.Player.Pierce += 1;
+                break;
+            case "Spread":
+                PlayerData.Player.GunSpread += 1;
+                break;
+            case "Iframes":
+                PlayerData.Player.invulnerability += 1;
+                break;
+            case "Analyze":
+                PlayerData.Player.SpaceUpgradelvl += 1;
+                break;
+            default:
+                break;
         }
-        else if (gameObject.tag == "SWidth")
-        {
-            PlayerData.Player.ShieldWidth += 1;
-            Debug.Log("player S Width lvl is now:" + PlayerData.Player.ShieldWidth);
-        }
-        else if (gameObject.tag == "Pierce")
-        {
-            PlayerData.Player.Pierce += 1;
-            Debug.Log("player pierce lvl is now:" + PlayerData.Player.Pierce);
-        }
-        else if (gameObject.tag == "Spread")
-        {
-            PlayerData.Player.GunSpread += 1;
-            Debug.Log("player GunSpread lvl is now:" + PlayerData.Player.GunSpread);
-        }
-        else if (gameObject.tag == "Iframes")
-        {
-            PlayerData.Player.invulnerability += 1;
-            Debug.Log("player iframe lvl is now:" + PlayerData.Player.invulnerability);
-        }
-        else if (gameObject.tag == "Analyze")
-        {
-            PlayerData.Player.SpaceUpgradelvl += 1;
-        }
-#if UNITY_EDITOR
-        else
-        {
-            Debug.Log("Not a space purchase");
-        }
-#endif
     }
 
-    void checkGlobal()
+    void GlobalReducer(string tag)
     {
-        if (gameObject.tag == "milk")
+        switch (tag)
         {
-            PlayerData.Player.healthlvl += 1;
-        }
-        else if(gameObject.tag == "AI")
-        {
-            PlayerData.Player.incomelvl += 1;
+            case "milk":
+                PlayerData.Player.healthlvl += 1;
+                break;
+            case "AI":
+                PlayerData.Player.incomelvl += 1;
+                break;
+            default:
+                break;
         }
     }
 
     void MarketingReducer(string type)
     {
-        switch (type) 
+        switch (type)
         {
             case "Jshield":
                 PlayerData.Player.JShield += 1;
