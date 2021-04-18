@@ -5,12 +5,14 @@ using UnityEngine.UI;
 
 public class UpgradeButton : MonoBehaviour
 {
+    private const string purchaseClip = "upgrade_click";
+    private const string connectorClip = "upgrade_connector";
     public string popupText;
     public int lvlReq;
     public string popupTitle;
     public string popupQuote;
     public int popupPrice;
-    public string purchaseClip = "upgrade_click";
+    public Animator[] connectors;
     public bool purchased = false;
     private TMPro.TextMeshProUGUI[] upgradeTitles;
     private TMPro.TextMeshProUGUI[] upgradeDescriptions;
@@ -18,6 +20,7 @@ public class UpgradeButton : MonoBehaviour
     private TMPro.TextMeshProUGUI[] upgradeQuotes;
     private BuyButton purchaseButton;
     private Animator animator;
+    
 
     void Start()
     {
@@ -71,6 +74,10 @@ public class UpgradeButton : MonoBehaviour
             PlayerData.Player.userstats += 1;
             PlayerData.Player.money -= popupPrice;
             animator?.Play(purchaseClip, -1, 0f);
+            foreach(var anim in connectors)
+            {
+                anim.Play(connectorClip, -1, 0f);
+            }
             GlobalReducer(gameObject.tag);
             CyberReducer(gameObject.tag);
             MarketingReducer(gameObject.tag);
