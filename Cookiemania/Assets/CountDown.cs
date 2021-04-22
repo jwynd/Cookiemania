@@ -13,23 +13,29 @@ public class CountDown : MonoBehaviour
     private bool count = true;
     private float hold;
     private float holds;
-    private int dificulty = 0;
+    private int difficulty = 0;
 
     private void Start()
     {
         if (PlayerData.Player != null)
         {
-            dificulty = PlayerData.Player.spacelvl;
+            difficulty = PlayerData.Player.spacelvl;
         }
-        if (dificulty == 0)
+        if (difficulty == 0)
+        {
+            mainTimer = 40f;
+        } else if (difficulty == 1)
         {
             mainTimer = 60f;
-        } else if (dificulty == 1)
+        } else if (difficulty == 2)
         {
-            mainTimer = 180f;
-        } else if (dificulty == 2)
+            mainTimer = 100f;
+        } else if (difficulty == 3)
         {
-            mainTimer = 300f;
+            mainTimer = 120f;
+        } else if (difficulty >= 4)
+        {
+            mainTimer = 140f;
         }
         else
         {
