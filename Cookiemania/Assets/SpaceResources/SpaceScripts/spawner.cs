@@ -15,6 +15,7 @@ public class spawner : MonoBehaviour
     public float spawnRate = 10f;
     float nextSpawn = 1f;
     float probability;
+    int algorithm;
 
 
     // Start is called before the first frame update
@@ -24,19 +25,39 @@ public class spawner : MonoBehaviour
         Enemies.Add(enemy2);
         Enemies.Add(enemy3);
         Enemies.Add(enemy4);
-
+        if(PlayerData.Player.spacelvl == null)
+        {
+            algorithm = 1;
+            spawnRate = 10f;
+        }
         switch (PlayerData.Player.spacelvl)
         {
+            case 0:
+                algorithm = 1;
+                break;
             case 1:
-               
+                algorithm = 1;
+                spawnRate = 7f;
                 break;
             case 2:
+                algorithm = 2;
+                spawnRate = 10f;
                 break;
             case 3:
+                algorithm = 2;
+                spawnRate = 7f;
                 break;
             case 4:
+                algorithm = 3;
+                spawnRate = 10f;
                 break;
             case 5:
+                algorithm = 3;
+                spawnRate = 7f;
+                break;
+            default:
+                algorithm = 1;
+                spawnRate = 10f;
                 break;
         }
 
@@ -45,7 +66,7 @@ public class spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        spawnAlgorithmThree();
+        algorithmFilter(algorithm);
     }
 
     void spawnAlgorithmOne() //spawner guaranteed to spawn at spawn time for every spawner
@@ -60,7 +81,6 @@ public class spawner : MonoBehaviour
             eTemp.transform.parent = null;
         }
     }
-
     void spawnAlgorithmTwo()// spawner has 70 percent chance to spawn an enemy on time for every spawner.
     {
         if (Time.time > nextSpawn)
@@ -77,7 +97,6 @@ public class spawner : MonoBehaviour
             }
         }
     }
-
     void spawnAlgorithmThree()// spawner has 50 percent chance to spawn and enemy on time for each spawn site.
     {
         if (Time.time > nextSpawn)
@@ -97,6 +116,20 @@ public class spawner : MonoBehaviour
             {
                 Debug.Log("no spawn this turn");
             }
+        }
+    }
+    void algorithmFilter(int filter) //difficulty alg 3 is the lowest and one is highest.
+    {
+        switch(filter){
+            case 1:
+                spawnAlgorithmThree();
+                break;
+            case 2:
+                spawnAlgorithmTwo();
+                break;
+            case 3:
+                spawnAlgorithmOne();
+                break;
         }
     }
 

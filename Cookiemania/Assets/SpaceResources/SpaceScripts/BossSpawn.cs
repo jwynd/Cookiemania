@@ -9,12 +9,19 @@ public class BossSpawn : MonoBehaviour
     List<GameObject> Enemies = new List<GameObject>();
     float randX;
     Vector2 whereToSpawn;
-    float spawning = 10f;
+    float spawning = 60f;
 
     // Start is called before the first frame update
     void Start()
     {
         Enemies.Add(boss1);
+        if(PlayerData.Player.spacelvl <= 1)
+        {
+            spawning = 40f;
+        } else
+        {
+            spawning = 30f;
+        }
 
     }
 
