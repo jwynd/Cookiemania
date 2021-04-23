@@ -43,7 +43,7 @@ public class UpgradeButton : MonoBehaviour
         {
             _purchased = value;
             if (_purchased == false) return;
-            gameObject.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.75f);
+            gameObject.GetComponent<Image>().color = new Color(0.75f, 0.75f, 0.75f, 1f);
         }
 
         get { return _purchased; }
