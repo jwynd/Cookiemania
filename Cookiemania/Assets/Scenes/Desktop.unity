@@ -603,7 +603,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   desktopMusic: {fileID: 8300000, guid: a5650e39b4114fe42a42f996bb59cd90, type: 3}
   jumperMusic: {fileID: 8300000, guid: 89946677580da134781e8d2ccdfc70e5, type: 3}
-  spaceMusic: {fileID: 8300000, guid: 89946677580da134781e8d2ccdfc70e5, type: 3}
+  spaceMusic: {fileID: 8300000, guid: 73aa6571e1f17204ba0cae4fba5669ff, type: 3}
 --- !u!1 &1233017393
 GameObject:
   m_ObjectHideFlags: 0
