@@ -8,9 +8,13 @@ public class spawner : MonoBehaviour
     public GameObject enemy2;
     public GameObject enemy3;
     public GameObject enemy4;
+    public Transform spawner1;
+    public Transform spawner2;
+    public Transform spawner3;
 
     List<GameObject> Enemies = new List<GameObject>();
     float randX;
+    float randY;
     Vector2 whereToSpawn;
     public float spawnRate = 10f;
     float nextSpawn = 1f;
@@ -73,27 +77,55 @@ public class spawner : MonoBehaviour
     {
         if (Time.time > nextSpawn)
         {
-            nextSpawn = Time.time + spawnRate;
-            randX = Random.Range(-14.4f, 14.4f);
-            whereToSpawn = new Vector2(randX, transform.position.y);
-            GameObject eTemp = Instantiate((Enemies[Random.Range(0, Enemies.Count)]), whereToSpawn, Quaternion.identity);
-            eTemp.transform.parent = transform;
-            eTemp.transform.parent = null;
+            if(transform.position == spawner1.position)
+            {
+                nextSpawn = Time.time + spawnRate;
+                randX = Random.Range(-14.4f, 14.4f);
+                whereToSpawn = new Vector2(randX, transform.position.y);
+                GameObject eTemp = Instantiate((Enemies[Random.Range(0, Enemies.Count)]), whereToSpawn, Quaternion.identity);
+                eTemp.transform.parent = transform;
+                eTemp.transform.parent = null;
+            }
+            else
+            {
+                nextSpawn = Time.time + spawnRate;
+                randY = Random.Range(-7.5f, 7.5f);
+                whereToSpawn = new Vector2(transform.position.x, randY);
+                GameObject eTemp = Instantiate((Enemies[Random.Range(0, Enemies.Count)]), whereToSpawn, Quaternion.identity);
+                eTemp.transform.parent = transform;
+                eTemp.transform.parent = null;
+            }      
         }
     }
     void spawnAlgorithmTwo()// spawner has 70 percent chance to spawn an enemy on time for every spawner.
     {
         if (Time.time > nextSpawn)
         {
-            nextSpawn = Time.time + spawnRate;
-            randX = Random.Range(-14.4f, 14.4f);
-            whereToSpawn = new Vector2(randX, transform.position.y);
-            probability = Random.Range(0, 100);
-            if (probability <= 70)
+            if(transform.position == spawner1.position)
             {
-                GameObject eTemp = Instantiate((Enemies[Random.Range(0, Enemies.Count)]), whereToSpawn, Quaternion.identity);
-                eTemp.transform.parent = transform;
-                eTemp.transform.parent = null;
+                nextSpawn = Time.time + spawnRate;
+                randX = Random.Range(-14.4f, 14.4f);
+                whereToSpawn = new Vector2(randX, transform.position.y);
+                probability = Random.Range(0, 100);
+                if (probability <= 70)
+                {
+                    GameObject eTemp = Instantiate((Enemies[Random.Range(0, Enemies.Count)]), whereToSpawn, Quaternion.identity);
+                    eTemp.transform.parent = transform;
+                    eTemp.transform.parent = null;
+                }
+            }
+            else
+            {
+                nextSpawn = Time.time + spawnRate;
+                randY = Random.Range(-7.5f, 7.5f);
+                whereToSpawn = new Vector2(transform.position.x, randY);
+                probability = Random.Range(0, 100);
+                if (probability <= 70)
+                {
+                    GameObject eTemp = Instantiate((Enemies[Random.Range(0, Enemies.Count)]), whereToSpawn, Quaternion.identity);
+                    eTemp.transform.parent = transform;
+                    eTemp.transform.parent = null;
+                }
             }
         }
     }
@@ -101,20 +133,39 @@ public class spawner : MonoBehaviour
     {
         if (Time.time > nextSpawn)
         {
-            nextSpawn = Time.time + spawnRate;
-            randX = Random.Range(-14.4f, 14.4f);
-            whereToSpawn = new Vector2(randX, transform.position.y);
-            probability = Random.Range(0, 100);
-            Debug.Log(probability);
-            if (probability <= 50)
+            if (transform.position == spawner1.position)
             {
-                GameObject eTemp = Instantiate((Enemies[Random.Range(0, Enemies.Count)]), whereToSpawn, Quaternion.identity);
-                eTemp.transform.parent = transform;
-                eTemp.transform.parent = null;
+                nextSpawn = Time.time + spawnRate;
+                randX = Random.Range(-14.4f, 14.4f);
+                whereToSpawn = new Vector2(randX, transform.position.y);
+                probability = Random.Range(0, 100);
+                if (probability <= 50)
+                {
+                    GameObject eTemp = Instantiate((Enemies[Random.Range(0, Enemies.Count)]), whereToSpawn, Quaternion.identity);
+                    eTemp.transform.parent = transform;
+                    eTemp.transform.parent = null;
+                }
+                else
+                {
+                    Debug.Log("no spawn this turn");
+                }
             }
             else
             {
-                Debug.Log("no spawn this turn");
+                nextSpawn = Time.time + spawnRate;
+                randY = Random.Range(-7.5f, 7.5f);
+                whereToSpawn = new Vector2(transform.position.x, randY);
+                probability = Random.Range(0, 100);
+                if (probability <= 50)
+                {
+                    GameObject eTemp = Instantiate((Enemies[Random.Range(0, Enemies.Count)]), whereToSpawn, Quaternion.identity);
+                    eTemp.transform.parent = transform;
+                    eTemp.transform.parent = null;
+                }
+                else
+                {
+                    Debug.Log("no spawn this turn");
+                }
             }
         }
     }
