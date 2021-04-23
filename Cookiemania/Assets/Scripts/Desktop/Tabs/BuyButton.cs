@@ -34,7 +34,10 @@ public class BuyButton : MonoBehaviour
 
     void CheckCanBuy()
     {
-        if (selectedUpgrade.popupPrice > PlayerData.Player.money || selectedUpgrade.lvlReq > PlayerData.Player.shoplvl || selectedUpgrade.purchased == true)
+        if (!selectedUpgrade) button.interactable = false;
+        if (selectedUpgrade.popupPrice > PlayerData.Player.money || 
+            selectedUpgrade.lvlReq > PlayerData.Player.shoplvl || 
+            selectedUpgrade.Purchased == true)
         {
             button.interactable = false;
         }
