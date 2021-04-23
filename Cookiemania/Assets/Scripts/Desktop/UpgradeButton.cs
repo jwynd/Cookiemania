@@ -7,20 +7,55 @@ public class UpgradeButton : MonoBehaviour
 {
     private const string purchaseClip = "upgrade_click";
     private const string connectorClip = "upgrade_connector";
+
+    [System.Flags]
+    [System.Serializable]
+    public enum UpgradeType
+    {
+        SShieldHP = 1 << 0,
+        SShieldWidth = 1 << 1,
+        SPierce = 1 << 2,
+        SSpread = 1 << 3,
+        SInvulnerability = 1 << 4,
+        GHealth = 1 << 5,
+        GAI = 1 << 6,
+        JShield = 1 << 7,
+        JCoinJump = 1 << 8,
+        JJumpPower = 1 << 9,
+        JMagnet = 1 << 10,
+        JMagnetCD = 1 << 11,
+        JMagnetDistance = 1 << 12,
+        JumperUpgrade = JShield | JCoinJump | JJumpPower | JMagnet | JMagnetCD | JMagnetDistance,
+        SpaceUpgrade = SShieldHP | SShieldWidth | SPierce | SSpread | SInvulnerability,
+        GlobalUpgrade = GHealth | GAI,
+    }
+
+    public UpgradeType upgradeType;
     public string popupText;
     public int lvlReq;
     public string popupTitle;
     public string popupQuote;
     public int popupPrice;
     public Animator[] connectors;
-    public bool purchased = false;
+    public bool Purchased
+    {
+        private set
+        {
+            _purchased = value;
+            if (_purchased == false) return;
+            gameObject.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.75f);
+        }
+
+        get { return _purchased; }
+    }
+    private bool _purchased = false;
     private TMPro.TextMeshProUGUI[] upgradeTitles;
     private TMPro.TextMeshProUGUI[] upgradeDescriptions;
     private TMPro.TextMeshProUGUI[] upgradeCosts;
     private TMPro.TextMeshProUGUI[] upgradeQuotes;
     private BuyButton purchaseButton;
     private Animator animator;
-    
+
 
     void Start()
     {
@@ -46,7 +81,7 @@ public class UpgradeButton : MonoBehaviour
 
     public void select()
     {
-       
+
         for (int i = 0; i < upgradeTitles.Length; i++)
         {
             upgradeTitles[i].text = popupTitle;
@@ -61,7 +96,7 @@ public class UpgradeButton : MonoBehaviour
         }
         for (int i = 0; i < upgradeCosts.Length; i++)
         {
-            upgradeCosts[i].text = "Cost: $" + popupPrice.ToString();
+            upgradeCosts[i].text = Purchased ? "Unlocked!" : "Cost: $" + popupPrice.ToString();
         }
         purchaseButton.selectedUpgrade = this;
     }
@@ -69,88 +104,93 @@ public class UpgradeButton : MonoBehaviour
     {
         if (PlayerData.Player.money >= popupPrice &&
             PlayerData.Player.shoplvl >= lvlReq &&
-            !purchased)
+            !Purchased)
         {
             PlayerData.Player.userstats += 1;
             PlayerData.Player.money -= popupPrice;
             animator?.Play(purchaseClip, -1, 0f);
-            foreach(var anim in connectors)
+            foreach (var anim in connectors)
             {
                 anim.Play(connectorClip, -1, 0f);
             }
-            GlobalReducer(gameObject.tag);
-            CyberReducer(gameObject.tag);
-            MarketingReducer(gameObject.tag);
-            purchased = true;
+            GlobalReducer(upgradeType);
+            CyberReducer(upgradeType);
+            MarketingReducer(upgradeType);
+            Purchased = true;
+            for (int i = 0; i < upgradeCosts.Length; i++)
+            {
+                upgradeCosts[i].text = "Unlocked!";
+            }
         }
     }
 
-    void CyberReducer(string tag)
+    void CyberReducer(UpgradeType type)
     {
-        switch (tag)
+        if ((type & UpgradeType.SpaceUpgrade) == 0) return;
+        Debug.LogWarning(type.ToString() + " has a space upgrade");
+        if (type.HasFlag(UpgradeType.SShieldHP))
         {
-            case "SHealth":
-                PlayerData.Player.ShieldHealth += 1;
-                break;
-            case "SWidth":
-                PlayerData.Player.ShieldWidth += 1;
-                break;
-            case "Pierce":
-                PlayerData.Player.Pierce += 1;
-                break;
-            case "Spread":
-                PlayerData.Player.GunSpread += 1;
-                break;
-            case "Iframes":
-                PlayerData.Player.invulnerability += 1;
-                break;
-            case "Analyze":
-                PlayerData.Player.SpaceUpgradelvl += 1;
-                break;
-            default:
-                break;
+            PlayerData.Player.ShieldHealth += 1;
+        }
+        if (type.HasFlag(UpgradeType.SShieldWidth))
+        {
+            PlayerData.Player.ShieldWidth += 1;
+        }
+        if (type.HasFlag(UpgradeType.SPierce))
+        {
+            PlayerData.Player.Pierce += 1;
+        }
+        if (type.HasFlag(UpgradeType.SSpread))
+        {
+            PlayerData.Player.GunSpread += 1;
+        }
+        if (type.HasFlag(UpgradeType.SInvulnerability))
+        {
+            PlayerData.Player.invulnerability += 1;
         }
     }
 
-    void GlobalReducer(string tag)
+    void GlobalReducer(UpgradeType type)
     {
-        switch (tag)
+        if ((type & UpgradeType.GlobalUpgrade) == 0) return;
+        Debug.LogWarning(type.ToString() + " has a global upgrade");
+        if (type.HasFlag(UpgradeType.GHealth))
         {
-            case "milk":
-                PlayerData.Player.healthlvl += 1;
-                break;
-            case "AI":
-                PlayerData.Player.incomelvl += 1;
-                break;
-            default:
-                break;
+            PlayerData.Player.healthlvl += 1;
+        }
+        if (type.HasFlag(UpgradeType.GAI))
+        {
+            PlayerData.Player.ai += 1;
         }
     }
 
-    void MarketingReducer(string type)
+    void MarketingReducer(UpgradeType type)
     {
-        switch (type)
+        if ((type & UpgradeType.JumperUpgrade) == 0) return;
+        Debug.LogWarning(type.ToString() + " has a jumper upgrade");
+        if (type.HasFlag(UpgradeType.JShield))
         {
-            case "Jshield":
-                PlayerData.Player.JShield += 1;
-                break;
-            case "Jcoinjump":
-                PlayerData.Player.JCoinJump += 1;
-                break;
-            case "Jmagnet":
-                PlayerData.Player.JMagnet += 1;
-                break;
-            case "Jjumppower":
-                PlayerData.Player.JJumpPower += 1;
-                break;
-            case "Jmagnetcd":
-                PlayerData.Player.JMagnetCD += 1;
-                break;
-            case "Jmagnetdistance":
-                PlayerData.Player.JMagnetDistance += 1;
-                break;
-            default:
-                break;
+            PlayerData.Player.JShield += 1;
+        }
+        if (type.HasFlag(UpgradeType.JMagnetCD))
+        {
+            PlayerData.Player.JMagnetCD += 1;
+        }
+        if (type.HasFlag(UpgradeType.JCoinJump))
+        {
+            PlayerData.Player.JCoinJump += 1;
+        }
+        if (type.HasFlag(UpgradeType.JMagnet))
+        {
+            PlayerData.Player.JMagnet += 1;
+        }
+        if (type.HasFlag(UpgradeType.JJumpPower))
+        {
+            PlayerData.Player.JJumpPower += 1;
+        }
+        if (type.HasFlag(UpgradeType.JMagnetDistance))
+        {
+            PlayerData.Player.JMagnetDistance += 1;
         }
     }
 }
