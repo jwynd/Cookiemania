@@ -32,7 +32,10 @@ public class UpgradeButton : MonoBehaviour
 
     public UpgradeType upgradeType;
     public string popupText;
-    public int lvlReq;
+    public UpgradeButton[] precedingUpgrades;
+    [SerializeField]
+    private int _UID = -1;
+    public int UID { private set { _UID = value; } get { return _UID; } }
     public string popupTitle;
     public string popupQuote;
     public int popupPrice;
@@ -48,6 +51,19 @@ public class UpgradeButton : MonoBehaviour
 
         get { return _purchased; }
     }
+    public bool CanPurchase
+    {
+        get 
+        { 
+            if (PlayerData.Player.money < popupPrice || Purchased) 
+                return false;
+            foreach (var button in precedingUpgrades)
+            {
+                if (!button.Purchased) return false;
+            }
+            return true;
+        }
+    }
     private bool _purchased = false;
     private TMPro.TextMeshProUGUI[] upgradeTitles;
     private TMPro.TextMeshProUGUI[] upgradeDescriptions;
@@ -59,6 +75,17 @@ public class UpgradeButton : MonoBehaviour
 
     void Start()
     {
+#if UNITY_EDITOR
+        var allUpgradeButtons = FindObjectsOfType<UpgradeButton>();
+        HashSet<int> ids = new HashSet<int>();
+        foreach(var button in allUpgradeButtons)
+        {
+            if (ids.Contains(button.UID)) 
+                throw new System.Exception("matching unique ids on upgrade buttons: " +
+                    button.popupTitle);
+            ids.Add(button.UID);
+        }
+#endif
         animator = GetComponent<Animator>();
         upgradeTitles = ConvertToTextArr(GameObject.FindGameObjectsWithTag("UpgradeTitle"));
         upgradeDescriptions = ConvertToTextArr(GameObject.FindGameObjectsWithTag("UpgradeDescription"));
@@ -102,9 +129,7 @@ public class UpgradeButton : MonoBehaviour
     }
     public void Buy()
     {
-        if (PlayerData.Player.money >= popupPrice &&
-            PlayerData.Player.shoplvl >= lvlReq &&
-            !Purchased)
+        if (CanPurchase)
         {
             PlayerData.Player.userstats += 1;
             PlayerData.Player.money -= popupPrice;

@@ -359,7 +359,7 @@ public class PlayerData : MonoBehaviour
     private void InitGeneralVariables()
     {
         Location.Current = Parsing_Utilities.Locale.WebsiteTab;
-        money = 500000;
+        money = 0;
         morality = 0;
         race = 0;
         ai = 0;

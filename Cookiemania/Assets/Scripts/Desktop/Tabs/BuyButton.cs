@@ -23,28 +23,21 @@ public class BuyButton : MonoBehaviour
     void Update()
     {
         if (selectedUpgrade != null)
-        {
             CheckCanBuy();
-        }
-        else
-        {
-            button.interactable = false;
-        }
+        else button.interactable = false;
+        
     }
 
     void CheckCanBuy()
     {
-        if (!selectedUpgrade) button.interactable = false;
-        if (selectedUpgrade.popupPrice > PlayerData.Player.money || 
-            selectedUpgrade.lvlReq > PlayerData.Player.shoplvl || 
-            selectedUpgrade.Purchased == true)
-        {
-            button.interactable = false;
+        if (!selectedUpgrade) 
+        { 
+            button.interactable = false; 
+            return; 
         }
-        else
-        {
+        if (selectedUpgrade.CanPurchase)
             button.interactable = true;
-        }
+        else button.interactable = false;
     }
     public void Buy()
     {

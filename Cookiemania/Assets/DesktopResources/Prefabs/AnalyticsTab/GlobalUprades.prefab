@@ -579,6 +579,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
         type: 3}
+      propertyPath: _UID
+      value: 109
+      objectReference: {fileID: 0}
+    - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
+        type: 3}
       propertyPath: popupText
       value: Basic artificial intellegence helper
       objectReference: {fileID: 0}
@@ -600,6 +605,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 411373428911505581}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2441614226467919694 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
+    type: 3}
+  m_PrefabInstance: {fileID: 411373428911505581}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43ab30db85f559f49b089f1442b65273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &583790861145904298
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -719,6 +736,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
         type: 3}
+      propertyPath: _UID
+      value: 105
+      objectReference: {fileID: 0}
+    - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
+        type: 3}
       propertyPath: popupText
       value: Gain a multiplier of (N amount) everytime you finish playing a minigame
       objectReference: {fileID: 0}
@@ -748,8 +770,30 @@ PrefabInstance:
       propertyPath: connectors.Array.data[0]
       value: 
       objectReference: {fileID: 5355832775952171414}
+    - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
+        type: 3}
+      propertyPath: precedingUpgrades.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
+        type: 3}
+      propertyPath: precedingUpgrades.Array.data[0]
+      value: 
+      objectReference: {fileID: 5709738157258900420}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 456a0ba3068795f4da0cbcbae594653f, type: 3}
+--- !u!114 &3192256596979712841 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
+    type: 3}
+  m_PrefabInstance: {fileID: 583790861145904298}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43ab30db85f559f49b089f1442b65273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &3112261094359325318 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2534104132008463916, guid: 456a0ba3068795f4da0cbcbae594653f,
@@ -875,6 +919,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
         type: 3}
+      propertyPath: _UID
+      value: 102
+      objectReference: {fileID: 0}
+    - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
+        type: 3}
       propertyPath: popupText
       value: Transform your drink into a savory ice cream to improve your health
         for all the minigames
@@ -905,6 +954,16 @@ PrefabInstance:
       propertyPath: connectors.Array.data[0]
       value: 
       objectReference: {fileID: 8654137468048870137}
+    - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
+        type: 3}
+      propertyPath: precedingUpgrades.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
+        type: 3}
+      propertyPath: precedingUpgrades.Array.data[0]
+      value: 
+      objectReference: {fileID: 6613267772849611199}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 456a0ba3068795f4da0cbcbae594653f, type: 3}
 --- !u!224 &3345247565151141321 stripped
@@ -913,6 +972,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 956529657738703845}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2959252396561343494 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
+    type: 3}
+  m_PrefabInstance: {fileID: 956529657738703845}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43ab30db85f559f49b089f1442b65273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1656893389026668212
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1032,6 +1103,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
         type: 3}
+      propertyPath: _UID
+      value: 106
+      objectReference: {fileID: 0}
+    - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
+        type: 3}
       propertyPath: popupText
       value: Increase the passive income multiplier to (N amount)
       objectReference: {fileID: 0}
@@ -1061,6 +1137,16 @@ PrefabInstance:
       propertyPath: connectors.Array.data[0]
       value: 
       objectReference: {fileID: 7708070235239293598}
+    - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
+        type: 3}
+      propertyPath: precedingUpgrades.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
+        type: 3}
+      propertyPath: precedingUpgrades.Array.data[0]
+      value: 
+      objectReference: {fileID: 3192256596979712841}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 456a0ba3068795f4da0cbcbae594653f, type: 3}
 --- !u!224 &3878872007354769560 stripped
@@ -1069,6 +1155,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1656893389026668212}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3650538058648369495 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1656893389026668212}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43ab30db85f559f49b089f1442b65273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2595546592574968035
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1324,6 +1422,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
         type: 3}
+      propertyPath: _UID
+      value: 104
+      objectReference: {fileID: 0}
+    - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
+        type: 3}
       propertyPath: popupText
       value: Upgrade your drink even more to improve your health for all the minigames
       objectReference: {fileID: 0}
@@ -1342,6 +1445,16 @@ PrefabInstance:
       propertyPath: popupTitle
       value: Soy Milk
       objectReference: {fileID: 0}
+    - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
+        type: 3}
+      propertyPath: precedingUpgrades.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
+        type: 3}
+      propertyPath: precedingUpgrades.Array.data[0]
+      value: 
+      objectReference: {fileID: 2959252396561343494}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 456a0ba3068795f4da0cbcbae594653f, type: 3}
 --- !u!224 &1717547388771187442 stripped
@@ -1474,15 +1587,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddc5770d03f2a5442b2fcdb94273bcda, type: 3}
---- !u!95 &3652148650601166369 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 740386382461431700, guid: ddc5770d03f2a5442b2fcdb94273bcda,
-    type: 3}
-  m_PrefabInstance: {fileID: 4100923993327360437}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &7484735518000524234 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6860802924101825151, guid: ddc5770d03f2a5442b2fcdb94273bcda,
+    type: 3}
+  m_PrefabInstance: {fileID: 4100923993327360437}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &3652148650601166369 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 740386382461431700, guid: ddc5770d03f2a5442b2fcdb94273bcda,
     type: 3}
   m_PrefabInstance: {fileID: 4100923993327360437}
   m_PrefabAsset: {fileID: 0}
@@ -1605,15 +1718,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddc5770d03f2a5442b2fcdb94273bcda, type: 3}
---- !u!95 &5355832775952171414 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 740386382461431700, guid: ddc5770d03f2a5442b2fcdb94273bcda,
-    type: 3}
-  m_PrefabInstance: {fileID: 4617839939845910018}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &2243825183375531133 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6860802924101825151, guid: ddc5770d03f2a5442b2fcdb94273bcda,
+    type: 3}
+  m_PrefabInstance: {fileID: 4617839939845910018}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &5355832775952171414 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 740386382461431700, guid: ddc5770d03f2a5442b2fcdb94273bcda,
     type: 3}
   m_PrefabInstance: {fileID: 4617839939845910018}
   m_PrefabAsset: {fileID: 0}
@@ -1736,6 +1849,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
         type: 3}
+      propertyPath: _UID
+      value: 107
+      objectReference: {fileID: 0}
+    - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
+        type: 3}
       propertyPath: popupText
       value: Increase the passive income multiplier to (N amount)
       objectReference: {fileID: 0}
@@ -1756,6 +1874,16 @@ PrefabInstance:
       propertyPath: popupTitle
       value: Self-Learning AI
       objectReference: {fileID: 0}
+    - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
+        type: 3}
+      propertyPath: precedingUpgrades.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
+        type: 3}
+      propertyPath: precedingUpgrades.Array.data[0]
+      value: 
+      objectReference: {fileID: 3650538058648369495}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 456a0ba3068795f4da0cbcbae594653f, type: 3}
 --- !u!224 &9061373289371071300 stripped
@@ -1883,15 +2011,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddc5770d03f2a5442b2fcdb94273bcda, type: 3}
---- !u!95 &7708070235239293598 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 740386382461431700, guid: ddc5770d03f2a5442b2fcdb94273bcda,
-    type: 3}
-  m_PrefabInstance: {fileID: 6971273670464720138}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4578058138277232501 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6860802924101825151, guid: ddc5770d03f2a5442b2fcdb94273bcda,
+    type: 3}
+  m_PrefabInstance: {fileID: 6971273670464720138}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7708070235239293598 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 740386382461431700, guid: ddc5770d03f2a5442b2fcdb94273bcda,
     type: 3}
   m_PrefabInstance: {fileID: 6971273670464720138}
   m_PrefabAsset: {fileID: 0}
@@ -2014,6 +2142,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
         type: 3}
+      propertyPath: _UID
+      value: 103
+      objectReference: {fileID: 0}
+    - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
+        type: 3}
       propertyPath: popupText
       value: Upgrade your drink even more to improve your health for all the minigames
       objectReference: {fileID: 0}
@@ -2032,6 +2165,16 @@ PrefabInstance:
       propertyPath: popupTitle
       value: Soy Milk
       objectReference: {fileID: 0}
+    - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
+        type: 3}
+      propertyPath: precedingUpgrades.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
+        type: 3}
+      propertyPath: precedingUpgrades.Array.data[0]
+      value: 
+      objectReference: {fileID: 5632012756634784856}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 456a0ba3068795f4da0cbcbae594653f, type: 3}
 --- !u!224 &4939559872849060006 stripped
@@ -2159,6 +2302,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
         type: 3}
+      propertyPath: _UID
+      value: 101
+      objectReference: {fileID: 0}
+    - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
+        type: 3}
       propertyPath: popupText
       value: Upgrade your drink even more to improve your health for all the minigames
       objectReference: {fileID: 0}
@@ -2187,6 +2335,16 @@ PrefabInstance:
       propertyPath: connectors.Array.data[0]
       value: 
       objectReference: {fileID: 3652148650601166369}
+    - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
+        type: 3}
+      propertyPath: precedingUpgrades.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
+        type: 3}
+      propertyPath: precedingUpgrades.Array.data[0]
+      value: 
+      objectReference: {fileID: 6613267772849611199}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 456a0ba3068795f4da0cbcbae594653f, type: 3}
 --- !u!224 &5284192739842231703 stripped
@@ -2195,6 +2353,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 7674075512041915323}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5632012756634784856 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
+    type: 3}
+  m_PrefabInstance: {fileID: 7674075512041915323}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43ab30db85f559f49b089f1442b65273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7740058686483993639
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2314,6 +2484,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
         type: 3}
+      propertyPath: _UID
+      value: 108
+      objectReference: {fileID: 0}
+    - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
+        type: 3}
       propertyPath: popupText
       value: Basic artificial intellegence helper
       objectReference: {fileID: 0}
@@ -2329,6 +2504,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 456a0ba3068795f4da0cbcbae594653f, type: 3}
+--- !u!114 &5709738157258900420 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
+    type: 3}
+  m_PrefabInstance: {fileID: 7740058686483993639}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43ab30db85f559f49b089f1442b65273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &5206376766946990603 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2534104132008463916, guid: 456a0ba3068795f4da0cbcbae594653f,
@@ -2726,6 +2913,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
         type: 3}
+      propertyPath: _UID
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
+        type: 3}
       propertyPath: popupText
       value: Upgrade your drink to improve your health for all the minigames
       objectReference: {fileID: 0}
@@ -2759,6 +2951,16 @@ PrefabInstance:
       propertyPath: connectors.Array.data[1]
       value: 
       objectReference: {fileID: 3333607801876283255}
+    - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
+        type: 3}
+      propertyPath: precedingUpgrades.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
+        type: 3}
+      propertyPath: precedingUpgrades.Array.data[0]
+      value: 
+      objectReference: {fileID: 2441614226467919694}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 456a0ba3068795f4da0cbcbae594653f, type: 3}
 --- !u!224 &6681891109245597808 stripped
@@ -2767,3 +2969,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 9191893877648946780}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6613267772849611199 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2618604348160546787, guid: 456a0ba3068795f4da0cbcbae594653f,
+    type: 3}
+  m_PrefabInstance: {fileID: 9191893877648946780}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43ab30db85f559f49b089f1442b65273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
