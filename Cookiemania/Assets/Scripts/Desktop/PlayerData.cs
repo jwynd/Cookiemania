@@ -35,7 +35,7 @@ public class PlayerData : MonoBehaviour
     public int spacelvl = 0; //Game Dificulty
     public int incomelvl = 0;
     public int healthlvl = 0;
-    
+
     //variables tracked by event system
     [SerializeField]
     private int _money = 0;
@@ -159,8 +159,8 @@ public class PlayerData : MonoBehaviour
     [SerializeField]
     private int _jJumpPower = 0;
     // now handled by difficulty
-/*    [SerializeField]
-    private int _jEnemyTypes = 0;*/
+    /*    [SerializeField]
+        private int _jEnemyTypes = 0;*/
     // can only level to 1, everything after doesnt matter
     [SerializeField]
     private int _jMagnet = 0;
@@ -178,16 +178,16 @@ public class PlayerData : MonoBehaviour
     [SerializeField]
     private int _jUpgradeLevel = 0;
     //handled in global upgrades
-/*    [SerializeField]
-    private int _jHealth = 0;*/
+    /*    [SerializeField]
+        private int _jHealth = 0;*/
     // the jumper AI upgrades how much value enemies have
     //handled in global upgrades
-/*    [SerializeField]
-    private int _jAI = 0;*/
+    /*    [SerializeField]
+        private int _jAI = 0;*/
     // the proportion of coins/empty platforms to enemies
     // now handled by difficulty
-/*    [SerializeField]
-    private int _jumperRisk = 0;*/
+    /*    [SerializeField]
+        private int _jumperRisk = 0;*/
 
     // for upgrades that can increase by more than one at once
     // but can't be decreased
@@ -215,7 +215,7 @@ public class PlayerData : MonoBehaviour
     public int JJumpPower
     {
         get { return _jJumpPower; }
-        set 
+        set
         {
             MustIncrease(value, ref _jJumpPower);
             JUpgradeRecalc();
@@ -274,7 +274,7 @@ public class PlayerData : MonoBehaviour
 
     private void JUpgradeRecalc()
     {
-        _jUpgradeLevel = JShield + JCoinJump + JMagnet + 
+        _jUpgradeLevel = JShield + JCoinJump + JMagnet +
             JMagnetCD + JMagnetDistance + JJumpPower;
     }
 
@@ -290,6 +290,11 @@ public class PlayerData : MonoBehaviour
     // all the choices will have the script choice number and the prompt associated with it
     public Dictionary<string, List<Tuple<string, string>>> EventChoicesMade =
        new Dictionary<string, List<Tuple<string, string>>>();
+
+    public HashSet<string> CompletedEvents = new HashSet<string>();
+    public Queue<string> QueuedEvents = new Queue<string>();
+    public Dictionary<int, bool> UpgradesPurchased = new Dictionary<int, bool>();
+
 
     public void PrintChoicesMade()
     {
@@ -328,10 +333,9 @@ public class PlayerData : MonoBehaviour
             Destroy(Player);
             return;
         }
-        else
-        {
-            Player = this;
-        }
+
+        Player = this;
+
         // important for events
         InitGeneralVariables();
         // space game
@@ -353,7 +357,6 @@ public class PlayerData : MonoBehaviour
         yield return new WaitForFixedUpdate();
         yield return new WaitForFixedUpdate();
         week = 1;
-        
     }
 
     private void InitGeneralVariables()
@@ -424,6 +427,55 @@ public class PlayerData : MonoBehaviour
         jupgradelvl
     }
 
+    // unsafe to use without ensuring Player instance != null
+    private static readonly Dictionary<PlayerDataProperty, Func<int, int>> ModPlayerData =
+        new Dictionary<PlayerDataProperty, Func<int, int>>
+        {
+           { PlayerDataProperty.ai, v => Player.ai += v },
+           { PlayerDataProperty.gunspread, v => Player.GunSpread += v },
+           { PlayerDataProperty.healthlvl, v => Player.healthlvl += v },
+           { PlayerDataProperty.incomelvl, v => Player.incomelvl += v },
+           { PlayerDataProperty.invulnerability, v => Player.invulnerability += v },
+           { PlayerDataProperty.jcoinjump, v => Player.JCoinJump += v },
+           { PlayerDataProperty.jjumppower, v => Player.JJumpPower += v },
+           { PlayerDataProperty.jmagnet, v => Player.JMagnet += v },
+           { PlayerDataProperty.jmagnetcd, v => Player.JMagnetCD += v },
+           { PlayerDataProperty.jmagnetdistance, v => Player.JMagnetDistance += v },
+           { PlayerDataProperty.jshield, v => Player.JShield += v },
+           { PlayerDataProperty.jtimesplayed, v => Player.JTimesPlayed += v},
+           // jupgrade level is read only (its auto updated)
+           // { PlayerDataProperty.jupgradelvl, v => Player.JUpgradeLevel += v },
+           { PlayerDataProperty.money, v => Player.money += v },
+           { PlayerDataProperty.morality, v => Player.morality += v },
+           { PlayerDataProperty.pierce, v => Player.Pierce += v},
+           { PlayerDataProperty.race, v => Player.race += v },
+           { PlayerDataProperty.shieldhealth, v => Player.ShieldHealth += v},
+           { PlayerDataProperty.shieldwidth, v => Player.ShieldWidth += v},
+           { PlayerDataProperty.shoplvl, v => Player.shoplvl += v},
+           { PlayerDataProperty.spacelvl, v => Player.spacelvl += v},
+           { PlayerDataProperty.spaceupgradelvl, v => Player.SpaceUpgradelvl += v },
+           { PlayerDataProperty.timesplayedspace, v => Player.TimesPlayedSpace += v},
+           { PlayerDataProperty.userstats, v => Player.userstats += v},
+           { PlayerDataProperty.week, v => Player.week += v},
+        };
+
+    // returns current property level after adjustment
+    public static int AddToProperty(PlayerDataProperty prop, int add)
+    {
+        if (Player == null) return 0;
+        if (ModPlayerData.TryGetValue(prop, out Func<int, int> addFn))
+        {
+            return addFn.Invoke(add);
+        }
+        else
+        {
+            Debug.LogError("No function found for player data property " + prop);
+            return 0;
+        }
+        
+    }
+
+    // only to be used in testing situations to create correct environment
     public int TestSetter(PlayerDataProperty prop, int add)
     {
         switch(prop)
