@@ -32,7 +32,7 @@ public class BossSpawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        secondsCount = Time.deltaTime;
+        secondsCount += Time.deltaTime;
         if (secondsCount > spawning)
         {
             randX = Random.Range(-14.4f, 14.4f);
@@ -40,7 +40,7 @@ public class BossSpawn : MonoBehaviour
             GameObject go = Instantiate(boss1, whereToSpawn, Quaternion.identity);
             go.transform.parent = transform;
             go.transform.parent = null;
-            spawning = spawning + spawning;
+            secondsCount = 0;
         }
     }
 }
