@@ -29,10 +29,11 @@ public class spawner : MonoBehaviour
         Enemies.Add(enemy2);
         Enemies.Add(enemy3);
         Enemies.Add(enemy4);
-        if(PlayerData.Player.spacelvl == null)
+        if(PlayerData.Player == null)
         {
             algorithm = 1;
             spawnRate = 10f;
+            return;
         }
         switch (PlayerData.Player.spacelvl)
         {

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+using static PlayerDataStatics;
+
 public class PlayerData : MonoBehaviour
 {
     /// <summary>
@@ -397,83 +399,7 @@ public class PlayerData : MonoBehaviour
         invulnerability = 0;
     }
 
-    [Serializable]
-    public enum PlayerDataProperty
-    {
-        race,
-        userstats,
-        spacelvl,
-        incomelvl,
-        healthlvl,
-        money,
-        shoplvl,
-        week,
-        morality,
-        ai,
-        spaceupgradelvl,
-        timesplayedspace,
-        gunspread,
-        pierce,
-        shieldhealth,
-        shieldwidth,
-        invulnerability,
-        jtimesplayed,
-        jjumppower,
-        jmagnet,
-        jmagnetdistance,
-        jmagnetcd,
-        jcoinjump,
-        jshield,
-        jupgradelvl
-    }
-
-    // unsafe to use without ensuring Player instance != null
-    private static readonly Dictionary<PlayerDataProperty, Func<int, int>> ModPlayerData =
-        new Dictionary<PlayerDataProperty, Func<int, int>>
-        {
-           { PlayerDataProperty.ai, v => Player.ai += v },
-           { PlayerDataProperty.gunspread, v => Player.GunSpread += v },
-           { PlayerDataProperty.healthlvl, v => Player.healthlvl += v },
-           { PlayerDataProperty.incomelvl, v => Player.incomelvl += v },
-           { PlayerDataProperty.invulnerability, v => Player.invulnerability += v },
-           { PlayerDataProperty.jcoinjump, v => Player.JCoinJump += v },
-           { PlayerDataProperty.jjumppower, v => Player.JJumpPower += v },
-           { PlayerDataProperty.jmagnet, v => Player.JMagnet += v },
-           { PlayerDataProperty.jmagnetcd, v => Player.JMagnetCD += v },
-           { PlayerDataProperty.jmagnetdistance, v => Player.JMagnetDistance += v },
-           { PlayerDataProperty.jshield, v => Player.JShield += v },
-           { PlayerDataProperty.jtimesplayed, v => Player.JTimesPlayed += v},
-           // jupgrade level is read only (its auto updated)
-           // { PlayerDataProperty.jupgradelvl, v => Player.JUpgradeLevel += v },
-           { PlayerDataProperty.money, v => Player.money += v },
-           { PlayerDataProperty.morality, v => Player.morality += v },
-           { PlayerDataProperty.pierce, v => Player.Pierce += v},
-           { PlayerDataProperty.race, v => Player.race += v },
-           { PlayerDataProperty.shieldhealth, v => Player.ShieldHealth += v},
-           { PlayerDataProperty.shieldwidth, v => Player.ShieldWidth += v},
-           { PlayerDataProperty.shoplvl, v => Player.shoplvl += v},
-           { PlayerDataProperty.spacelvl, v => Player.spacelvl += v},
-           { PlayerDataProperty.spaceupgradelvl, v => Player.SpaceUpgradelvl += v },
-           { PlayerDataProperty.timesplayedspace, v => Player.TimesPlayedSpace += v},
-           { PlayerDataProperty.userstats, v => Player.userstats += v},
-           { PlayerDataProperty.week, v => Player.week += v},
-        };
-
-    // returns current property level after adjustment
-    public static int AddToProperty(PlayerDataProperty prop, int add)
-    {
-        if (Player == null) return 0;
-        if (ModPlayerData.TryGetValue(prop, out Func<int, int> addFn))
-        {
-            return addFn.Invoke(add);
-        }
-        else
-        {
-            Debug.LogError("No function found for player data property " + prop);
-            return 0;
-        }
-        
-    }
+    
 
     // only to be used in testing situations to create correct environment
     public int TestSetter(PlayerDataProperty prop, int add)

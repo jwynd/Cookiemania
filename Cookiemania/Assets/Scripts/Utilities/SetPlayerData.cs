@@ -2,9 +2,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+using static PlayerDataStatics;
+
 public class SetPlayerData : MonoBehaviour
 {
-    public PlayerData.PlayerDataProperty PropertyName;
+    public PlayerDataProperty PropertyName;
     public TMPro.TextMeshProUGUI valueText;
     public Button decrementButton;
 
@@ -16,9 +18,9 @@ public class SetPlayerData : MonoBehaviour
     {
         data = PlayerData.Player;
         GetComponent<TMPro.TextMeshProUGUI>().text = PropertyName.ToString();
-        if (PropertyName == PlayerData.PlayerDataProperty.money)
+        if (PropertyName == PlayerDataProperty.money)
             incAmount = 100;
-        else if (PropertyName == PlayerData.PlayerDataProperty.week)
+        else if (PropertyName == PlayerDataProperty.week)
             decrementButton.interactable = false;
         StartCoroutine(initValue());
     }

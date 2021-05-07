@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
-    private float speed = 15;
     public Rigidbody2D rigidBody;
     public Sprite startingImage;
     public Sprite altImage;

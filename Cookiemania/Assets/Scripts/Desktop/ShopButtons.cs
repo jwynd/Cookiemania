@@ -6,9 +6,7 @@ using UnityEngine.UI;
 public class ShopButtons : MonoBehaviour
 {
     public int cost;
-    string mini; //either cyber or marketing
     public int lvlReq;
-    private bool purchased = false;
     [SerializeField]
     [Tooltip("Order matters, canvases should correlate to button names, homepage" +
         " is designated as the first canvas in this list")]
