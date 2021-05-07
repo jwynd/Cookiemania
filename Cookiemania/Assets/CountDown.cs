@@ -41,7 +41,7 @@ public class CountDown : MonoBehaviour
         {
             mainTimer = 10f;
         }
-        timer = mainTimer;
+        timer = mainTimer + 1.5f;
         hold = 3;
         uiText.text = hold.ToString();
     }

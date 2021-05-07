@@ -10,6 +10,7 @@ public class BossSpawn : MonoBehaviour
     float randX;
     Vector2 whereToSpawn;
     float spawning = 60f;
+    private float secondsCount = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +18,10 @@ public class BossSpawn : MonoBehaviour
         Enemies.Add(boss1);
         if(PlayerData.Player.spacelvl <= 1)
         {
-            spawning = 40f;
+            spawning = 60f;
+        } else if (PlayerData.Player.spacelvl == 2 || PlayerData.Player.spacelvl == 3)
+        {
+            spawning = 45f;
         } else
         {
             spawning = 30f;
@@ -28,14 +32,15 @@ public class BossSpawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time > spawning)
+        secondsCount = Time.deltaTime;
+        if (secondsCount > spawning)
         {
             randX = Random.Range(-14.4f, 14.4f);
             whereToSpawn = new Vector2(randX, transform.position.y);
             GameObject go = Instantiate(boss1, whereToSpawn, Quaternion.identity);
             go.transform.parent = transform;
             go.transform.parent = null;
-            spawning = spawning + 60f;
+            spawning = spawning + spawning;
         }
     }
 }
