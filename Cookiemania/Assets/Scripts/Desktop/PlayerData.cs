@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-
+using static Parsing_Utilities;
 using static PlayerDataStatics;
 
 public class PlayerData : MonoBehaviour
@@ -295,6 +295,8 @@ public class PlayerData : MonoBehaviour
 
     public HashSet<string> CompletedEvents = new HashSet<string>();
     public Queue<string> QueuedEvents = new Queue<string>();
+    public Dictionary<Locale, Queue<string>> DelayedEvents = new Dictionary<Locale, Queue<string>>();
+    public List<Email> Inbox = new List<Email>();
     public Dictionary<int, bool> UpgradesPurchased = new Dictionary<int, bool>();
 
 
@@ -308,10 +310,6 @@ public class PlayerData : MonoBehaviour
     }
 
     // increment specifically for buttons
-    public void IncrementWeek()
-    {
-        week += 1;
-    }
 
     public void IncrementShopLvl()
     {

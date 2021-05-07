@@ -14,7 +14,7 @@ public class Boss : MonoBehaviour
     public float maxFireRateTime = 3.0f;
     public float baseFireWaitTime = 5.0f;
     public Sprite playerdeathImage;
-    private Transform target;
+    // private Transform target;
     public Transform Player;
     private Vector2 movement;
     public float moveSpeed = 3f;

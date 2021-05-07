@@ -80,6 +80,22 @@ public class EventManager : MonoBehaviour
             PlayerData.Player.PrintChoicesMade();
 #endif
         DistributeRewards(rewards);
+        // should only stop the event listening
+        RemoveEvent(eventName);
+#if UNITY_EDITOR
+        foreach (var list in listeningEvents)
+        {
+            Debug.LogWarning(list.Key);
+            foreach (var item in list.Value)
+            {
+                Debug.LogWarning(item.Key);
+                foreach (var eventInfoVal in item.Value)
+                {
+                    Debug.LogWarning(eventInfoVal.UniqueName);
+                }
+            }
+        }
+#endif
     }
 
     // basically only used for player, cuz they're the only character 
@@ -105,7 +121,7 @@ public class EventManager : MonoBehaviour
             };
         CharacterDictionary = new ReadOnlyDictionary<string, Tuple<string, Sprite>>(newDict);
         // needs to be recreated here as we dont know if any overwrite got changed
-        CreateOverwriteDictionary(this.dialogueOverwrites, CharacterDictionary);
+        CreateOverwriteDictionary(dialogueOverwrites, CharacterDictionary);
         return 0;
     }
 
@@ -156,6 +172,16 @@ public class EventManager : MonoBehaviour
             throw new Exception("event " + eventName + " not found");
         }
     }
+
+    // should: tell email to load from email list
+    // tell event controller to load from both event queues
+    // remove matching events in completedevents from its triggerable events
+    public void LoadGame()
+    {
+
+    }
+
+    public EventController EventController { get { return eventController; } }
     
     // in case something outside the event system wants to trigger an event, or 
     // if the event controller wants to trigger an event
@@ -446,9 +472,9 @@ public class EventManager : MonoBehaviour
                 new Tuple<string, Sprite>(character.DisplayName, character.Sprite));
             charInfoDictionary.Add(character.UniqueName, character);
         }
-        this.CharacterDictionary = new ReadOnlyDictionary<string, Tuple<string, Sprite>>
+        CharacterDictionary = new ReadOnlyDictionary<string, Tuple<string, Sprite>>
             (charDictionary);
-        CreateOverwriteDictionary(this.dialogueOverwrites, this.CharacterDictionary);
+        CreateOverwriteDictionary(dialogueOverwrites, this.CharacterDictionary);
         return new ReadOnlyDictionary<string, CharacterInfo>
             (charInfoDictionary);
     }
@@ -545,7 +571,7 @@ public class EventManager : MonoBehaviour
             }
             bgDictionary.Add(bgInfo.UniqueName, bgInfo);
         }
-        this.backgroundDictionary = new ReadOnlyDictionary<string, BackgroundInfo>
+        backgroundDictionary = new ReadOnlyDictionary<string, BackgroundInfo>
             (bgDictionary);
     }
 
@@ -564,10 +590,9 @@ public class EventManager : MonoBehaviour
         }
 #endif
         // playerdata.player better exist by now
+        // check if playerdata.player is a loaded version or normal
         eventController.ConnectPlayerLocationListener();
         ConnectEvents(eventDictionary);
-        
-        
     }
 
 
@@ -642,6 +667,39 @@ public class EventManager : MonoBehaviour
         GenericListener(previous, current, keyword);
     }
 
+    // only run after event controller has finished using it
+    public void RemoveEvent(string name)
+    {
+        if (!eventDictionary.TryGetValue(name, out EventInfo eInfo)) 
+        {
+            return;
+        }
+        // directly telling event its not listening now and remove it from all 
+        // possible listening lists
+        eInfo.EventListening = false;
+        foreach (var condTuple in eInfo.TriggeringConditions)
+        {
+            if (!listeningEvents.TryGetValue(condTuple.Item1, out var sortedList))
+            {
+                continue;
+            }
+            if (!sortedList.TryGetValue(condTuple.Item2, out var finalList))
+            {
+                continue;
+            }
+            finalList.Remove(eInfo);
+            // if this was the last in the final list / sorted list remove recursively
+            if (finalList.Count < 1)
+            {
+                sortedList.Remove(condTuple.Item2);
+            }
+            if (sortedList.Count < 1)
+            {
+                listeningEvents.Remove(condTuple.Item1);
+            }
+        }
+    }
+
     private void GenericListener(int previous, int current, TriggerKeyword keyword)
     {
         if (listeningEvents.TryGetValue(
@@ -661,7 +719,7 @@ public class EventManager : MonoBehaviour
                         eventController.RunEvent(eventInfo);
                     }
                 }
-
+                
             }
         }
     }

@@ -158,10 +158,12 @@ public class EventController : MonoBehaviour
             if (toCheck.LocaleAlias().Contains(currentLocation))
             {
                 var queue = DelayedEvents[toCheck];
-                while (queue.Count > 0)
+                // player legit can't move while this is happening
+                // but best to be double checking that their locale hasn't changed
+                while (queue.Count > 0 && 
+                       PlayerData.Player.Location.Current == current)
                 {
-                    var toRun = queue.Dequeue();
-                    RunEvent(toRun, true);
+                    RunEvent(queue.Dequeue(), true);
                 }
             }
         }
@@ -265,10 +267,40 @@ public class EventController : MonoBehaviour
         }
     }
 
+    public Queue<string> GetEventQueue()
+    {
+        var eq = new Queue<string>();
+        foreach (var item in eventQueue) {
+            eq.Enqueue(item.UniqueName);
+        }
+        return eq;
+    }
+
+    public Dictionary<Locale, Queue<string>> GetDelayedEvents()
+    {
+        var de = new Dictionary<Locale, Queue<string>>();
+        foreach (var item in DelayedEvents.Keys)
+        {
+            var list = new Queue<string>();
+            foreach (var li in DelayedEvents[item])
+            {
+                list.Enqueue(li.UniqueName);
+            }
+            de.Add(item, list);
+        }
+        return de;
+    }
+
+    public bool CanSaveGame()
+    {
+        return !runningDialogueEvent;
+    }
+
     private void EventComplete(EventInfo eInfo, bool hadDialogue)
     {
         EventManager.Instance.EventComplete(
             eInfo.UniqueName, eInfo.EventCompleteReward);
+        PlayerData.Player.CompletedEvents.Add(eInfo.UniqueName);
         if (hadDialogue)
             runningDialogueEvent = false;
         PauseMenu.ResumeWithoutScreen(timeScale);

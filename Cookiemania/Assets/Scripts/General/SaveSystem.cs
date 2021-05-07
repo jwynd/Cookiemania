@@ -16,6 +16,8 @@ public static class SaveSystem
     public static int Save(string filename)
     {
         if (Player == null) return 1;
+        // can't save the game while running a dialogue event
+        if (!EventManager.Instance.EventController.CanSaveGame()) return 2;
         string path = Application.persistentDataPath + filename + SAVE_EXTENSION;
         FileStream stream = new FileStream(path, FileMode.Create);
         new BinaryFormatter().Serialize(stream, CreateSaveData());
