@@ -267,6 +267,29 @@ public class EventController : MonoBehaviour
         }
     }
 
+    public void LoadGame(SaveSystem.SaveData data)
+    {
+        eventQueue.Clear();
+        DelayedEvents.Clear();
+        info = null;
+        lastDialoguePlayed = null;
+        runningDialogueEvent = false;
+        currentLocation = Locale.WebsiteTab;
+        foreach (var name in data.QueuedEvents)
+        {
+            eventQueue.Enqueue(EventManager.Instance.GetEvent(name));
+        }
+        foreach (var kval in data.DelayedEvents)
+        {
+            var deq = new Queue<EventInfo>();
+            foreach (var name in kval.Value)
+            {
+                deq.Enqueue(EventManager.Instance.GetEvent(name));
+            }
+            DelayedEvents.Add(kval.Key, deq);
+        }
+    }
+
     public Queue<string> GetEventQueue()
     {
         var eq = new Queue<string>();
@@ -279,19 +302,19 @@ public class EventController : MonoBehaviour
     public Dictionary<Locale, Queue<string>> GetDelayedEvents()
     {
         var de = new Dictionary<Locale, Queue<string>>();
-        foreach (var item in DelayedEvents.Keys)
+        foreach (var kv in DelayedEvents)
         {
             var list = new Queue<string>();
-            foreach (var li in DelayedEvents[item])
+            foreach (var einfo in kv.Value)
             {
-                list.Enqueue(li.UniqueName);
+                list.Enqueue(einfo.UniqueName);
             }
-            de.Add(item, list);
+            de.Add(kv.Key, list);
         }
         return de;
     }
 
-    public bool CanSaveGame()
+    public bool CanSaveLoad()
     {
         return !runningDialogueEvent;
     }

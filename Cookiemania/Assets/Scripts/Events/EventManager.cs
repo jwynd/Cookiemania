@@ -176,9 +176,24 @@ public class EventManager : MonoBehaviour
     // should: tell email to load from email list
     // tell event controller to load from both event queues
     // remove matching events in completedevents from its triggerable events
-    public void LoadGame()
+    public void LoadGame(SaveSystem.SaveData data)
     {
+        // untrigger completed events
+        foreach (var e in data.CompletedEvents)
+        {
+            RemoveEvent(e);
+        }
+        // set event queues in event controller
+        eventController.LoadGame(data);
+        // set visible emails and read / choice status in email controller
+        Email.LoadGame(data);
 
+    }
+
+    public EventInfo GetEvent(string name)
+    {
+        eventDictionary.TryGetValue(name, out var value);
+        return value;
     }
 
     public EventController EventController { get { return eventController; } }

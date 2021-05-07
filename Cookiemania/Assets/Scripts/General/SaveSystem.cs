@@ -17,7 +17,7 @@ public static class SaveSystem
     {
         if (Player == null) return 1;
         // can't save the game while running a dialogue event
-        if (!EventManager.Instance.EventController.CanSaveGame()) return 2;
+        if (!EventManager.Instance.EventController.CanSaveLoad()) return 2;
         string path = Application.persistentDataPath + filename + SAVE_EXTENSION;
         FileStream stream = new FileStream(path, FileMode.Create);
         new BinaryFormatter().Serialize(stream, CreateSaveData());
@@ -44,9 +44,10 @@ public static class SaveSystem
         public Dictionary<int, bool> UpgradesPurchased;
         public Queue<string> QueuedEvents;
         public HashSet<string> CompletedEvents;
+        public Dictionary<Parsing_Utilities.Locale, Queue<string>> DelayedEvents;
         public Dictionary<string, List<Tuple<string, string>>> ChoicesMade;
         // all sent emails, bool = true if read
-        public Queue<Tuple<Email, bool>> Inbox;
+        public Queue<Tuple<string, bool>> Inbox;
         // from money to coin jumps to what week it is
         // everything that is just a property -> integer
         // on the player class
@@ -67,6 +68,8 @@ public static class SaveSystem
             ChoicesMade = Player.EventChoicesMade,
             CompletedEvents = Player.CompletedEvents,
             PlayerLevels = CreatePDPDictionary(),
+            DelayedEvents = Player.DelayedEvents,
+            Inbox = Player.Inbox,
             // Inbox = // something
             // UpgradesPurchased = // something
             QueuedEvents = Player.QueuedEvents,

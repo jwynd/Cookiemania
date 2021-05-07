@@ -57,7 +57,7 @@ public class EmailController : MonoBehaviour
         {
             throw new Exception("number of categories may not exceed the number of " +
                 "possible email tabs");
-        } 
+        }
     }
 
     public void ShowYourself()
@@ -118,7 +118,7 @@ public class EmailController : MonoBehaviour
         preview.Initialize(eventInfo, ViewEmail);
     }
 
-    public void AddEmail(EventInfo eventInfo)
+    public void AddEmail(EventInfo eventInfo, bool bulk = false, bool read = false)
     {
         if (!eventInfo.EventType.IsEmail() || eventInfo.Email == null)
         {
@@ -127,9 +127,22 @@ public class EmailController : MonoBehaviour
         }
         // add it to previewsholder in first position
         var t = Instantiate(previewPrefab, previewsHolder.transform);
-        t.transform.SetAsFirstSibling();
+        // when adding in bulk, its coming from an already ordered queue,
+        // no need to set as first sibling
+        if (!bulk) t.transform.SetAsFirstSibling();
+        eventInfo.Email.unread = !read;
         var preview = t.GetComponent<EmailPreviewController>();
         preview.Initialize(eventInfo, ViewEmail);
+        if (!bulk) SetReadNotifications();
+    }
+
+    public void AddBulkEmails(Queue<Tuple<string, bool>> eventNameToReads)
+    {
+        while (eventNameToReads.Count > 0)
+        {
+            var eventN = eventNameToReads.Dequeue();
+            AddEmail(EventManager.Instance.GetEvent(eventN.Item1), true, eventN.Item2);
+        }
         SetReadNotifications();
     }
 
@@ -154,5 +167,33 @@ public class EmailController : MonoBehaviour
         emailController.Initialize(info);
         SetReadNotifications();
         PreviewMode = false;
+    }
+
+    public Queue<Tuple<string, bool>> GetEmailQueue()
+    {
+        var eq = new Queue<Tuple<string, bool>>();
+        foreach (Transform trans in transform)
+        {
+            var preview = trans.GetComponent<EmailPreviewController>();
+            if (preview != null)
+            {
+                eq.Enqueue(new Tuple<string, bool>
+                    (preview.EventName, !preview.Unread));
+            }
+        }
+        return eq;
+    }
+
+    public void LoadGame(SaveSystem.SaveData data)
+    {
+        // probably wanna delete all my email preview controllers
+        // then add all the emails i got, ensuring the unread / read is set correctly
+
+        foreach (Transform trans in transform)
+        {
+            if (trans.GetComponent<EmailPreviewController>() != null)
+                Destroy(trans.gameObject);
+        }
+        AddBulkEmails(data.Inbox);
     }
 }

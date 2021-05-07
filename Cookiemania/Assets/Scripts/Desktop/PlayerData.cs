@@ -296,7 +296,7 @@ public class PlayerData : MonoBehaviour
     public HashSet<string> CompletedEvents = new HashSet<string>();
     public Queue<string> QueuedEvents = new Queue<string>();
     public Dictionary<Locale, Queue<string>> DelayedEvents = new Dictionary<Locale, Queue<string>>();
-    public List<Email> Inbox = new List<Email>();
+    public Queue<Tuple<string, bool>> Inbox = new Queue<Tuple<string, bool>>();
     public Dictionary<int, bool> UpgradesPurchased = new Dictionary<int, bool>();
 
 

@@ -20,13 +20,23 @@ public class EmailPreviewController : MonoBehaviour
     private UnityAction<EventInfo> action;
     private EventInfo eventInfo;
 
-    public EmailCategory EmailType 
+    public EmailCategory EmailType
+    {
+        get
+        {
+            if (eventInfo != null && eventInfo.Email != null)
+                return eventInfo.Email.emailType;
+            return EmailCategory.Starred;
+        }
+    }
+
+    public string EventName 
     { 
         get 
         { 
-            if (eventInfo != null && eventInfo.Email != null)
-                return eventInfo.Email.emailType; 
-            else return EmailCategory.Starred;
+            if (eventInfo != null) 
+                return eventInfo.UniqueName; 
+            return ""; 
         } 
     }
 
