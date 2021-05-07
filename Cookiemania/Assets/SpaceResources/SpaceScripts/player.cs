@@ -22,23 +22,23 @@ public class player : MonoBehaviour
 
     private void Start()
     {
-      if (PlayerData.Player != null)
+        if (PlayerData.Player != null)
         {
             Debug.Log("This is a full game playthrough PlayerData is Active");
             bulletlevel = PlayerData.Player.GunSpread;
             bulletpiercelvl = PlayerData.Player.Pierce;
             shieldWidth = PlayerData.Player.ShieldWidth;
         }
-      else
+        else
         {
             Debug.Log("This is a direct space scene playthrough PlayerData is inactive");
         }
-}
-    private void FixedUpdate()
-    {
-        //float horzmove = Input.GetAxisRaw("Horizontal");
-       // GetComponent<Rigidbody2D>().velocity = new Vector2(horzmove, 0) * speed;
     }
+    //private void FixedUpdate()
+    //{
+        //float horzmove = Input.GetAxisRaw("Horizontal");
+        // GetComponent<Rigidbody2D>().velocity = new Vector2(horzmove, 0) * speed;
+    //}
 
     // Update is called once per frame
     void Update()
@@ -47,118 +47,92 @@ public class player : MonoBehaviour
         {
             return;
         }
-        Vector3 direction = transform.position - Player.position;
+        //Vector3 direction = transform.position - Player.position;
         //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         //rigidBody.rotation = angle;
         //direction.Normalize();
         if (Input.GetButtonDown("Jump"))
         {
-            if (bulletpiercelvl >= 1) //if the bullet pierce is upgraded the main bullet will be pierce
+            if (Time.time > nextbullettime)
             {
-                if (Time.time > nextbullettime)
-                {
-                    GameObject go = Instantiate(piercebullet, transform.position, transform.rotation);
-                    nextbullettime = Time.time + cooldownbullets;
-                }
+                Fire();
+                nextbullettime = Time.time + cooldownbullets;
             }
-            else // fire regular bullet
-            {
-                if (Time.time > nextbullettime)
-                {
-                    GameObject go = Instantiate(theplayerfire, transform.position, transform.rotation);
-                    go.transform.parent = transform;
-                    go.transform.parent = null;
-                    nextbullettime = Time.time + cooldownbullets;
-
-                }
-            }
-
-            if (bulletlevel == 1)// if bullet level is one shoot a spread of 3 bullets (add 2 bullets)
-            {
-                if (bulletpiercelvl >= 2)// check for piercing bullets
-                {
-                    if (Time.time > nextbullettime)
-                    {
-                        GameObject d1 = Instantiate(piercebullet, direct1.position, transform.rotation);
-                        GameObject d2 = Instantiate(piercebullet, direct2.position, transform.rotation);
-                        nextbullettime = Time.time + cooldownbullets;
-                    }
-                }
-                else
-                {
-                    if (Time.time > nextbullettime)
-                    {
-                        GameObject d1 = Instantiate(theplayerfire, direct1.position, transform.rotation);
-                        GameObject d2 = Instantiate(theplayerfire, direct2.position, transform.rotation);
-                        nextbullettime = Time.time + cooldownbullets;
-                    }
-                }
-            } else if (bulletlevel == 2) // checks spread level
-            {
-                if (bulletpiercelvl >= 2) // checkfor pierce !! change to 3 if 3rd level
-                {
-                    if (Time.time > nextbullettime)
-                    {
-                        GameObject d1 = Instantiate(piercebullet, direct1.position, transform.rotation);
-                        GameObject d2 = Instantiate(piercebullet, direct2.position, transform.rotation);
-                        GameObject d3 = Instantiate(piercebullet, direct3.position, transform.rotation);
-                        GameObject d4 = Instantiate(piercebullet, direct4.position, transform.rotation);
-                        nextbullettime = Time.time + cooldownbullets;
-                    }
-                }
-                else
-                {
-                    if (Time.time > nextbullettime)
-                    {
-                        GameObject d1 = Instantiate(theplayerfire, direct1.position, transform.rotation);
-                        GameObject d2 = Instantiate(theplayerfire, direct2.position, transform.rotation);
-                        GameObject d3 = Instantiate(theplayerfire, direct3.position, transform.rotation);
-                        GameObject d4 = Instantiate(theplayerfire, direct4.position, transform.rotation);
-                        nextbullettime = Time.time + cooldownbullets;
-                    }
-                }
-            }
-            soundmanager.Instance.PlayOneShot(soundmanager.Instance.playerfire);
         }
         if (Input.GetButtonDown("Fire2"))
         {
-            if (shieldWidth < 1)
+            if (Time.time > nextskilltime)
             {
-                if (Time.time > nextskilltime)
-                {
-                    GameObject go = Instantiate(theplayershield, transform.position, Quaternion.identity);
-                    go.transform.parent = transform;
-                    go.transform.parent = null;
-                    soundmanager.Instance.PlayOneShot(soundmanager.Instance.shield);
-                    nextskilltime = Time.time + cooldowntime;
-                }
-            } else if (shieldWidth == 1)
+                Shield();
+                nextskilltime = Time.time + cooldowntime;
+            }
+        }
+    }
+
+    private void Shield()
+    {
+        GameObject go;
+        if (shieldWidth < 1)
+        {
+            go = Instantiate(theplayershield, transform.position, Quaternion.identity);
+        }
+        else if (shieldWidth == 1)
+        {
+            go = Instantiate(theplayershield2, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            go = Instantiate(theplayershield3, direct5.position, Quaternion.identity);
+        }
+        go.transform.parent = transform;
+        go.transform.parent = null;
+        soundmanager.Instance.PlayOneShot(soundmanager.Instance.shield);
+    }
+
+    private void Fire()
+    {
+        if (bulletpiercelvl >= 1) //if the bullet pierce is upgraded the main bullet will be pierce
+        {
+            GameObject go = Instantiate(piercebullet, transform.position, transform.rotation);
+        }
+        else // fire regular bullet
+        {
+            GameObject go = Instantiate(theplayerfire, transform.position, transform.rotation);
+            go.transform.parent = transform;
+            go.transform.parent = null;
+        }
+
+        if (bulletlevel == 1)// if bullet level is one shoot a spread of 3 bullets (add 2 bullets)
+        {
+            if (bulletpiercelvl >= 2)// check for piercing bullets
             {
-                if (Time.time > nextskilltime)
-                {
-                    GameObject go = Instantiate(theplayershield2, transform.position, Quaternion.identity);
-                    go.transform.parent = transform;
-                    go.transform.parent = null;
-                    soundmanager.Instance.PlayOneShot(soundmanager.Instance.shield);
-                    nextskilltime = Time.time + cooldowntime;
-                }
-            } else if (shieldWidth == 2)
-            {
-                if (Time.time > nextskilltime)
-                {
-                    GameObject go = Instantiate(theplayershield3, direct5.position, Quaternion.identity);
-                    go.transform.parent = transform;
-                    go.transform.parent = null;
-                    soundmanager.Instance.PlayOneShot(soundmanager.Instance.shield);
-                    nextskilltime = Time.time + cooldowntime;
-                }
+                GameObject d1 = Instantiate(piercebullet, direct1.position, transform.rotation);
+                GameObject d2 = Instantiate(piercebullet, direct2.position, transform.rotation);
             }
             else
             {
-                Debug.Log("ERROR");
-                Debug.Log(shieldWidth);
+                GameObject d1 = Instantiate(theplayerfire, direct1.position, transform.rotation);
+                GameObject d2 = Instantiate(theplayerfire, direct2.position, transform.rotation);
             }
         }
+        else if (bulletlevel == 2) // checks spread level
+        {
+            if (bulletpiercelvl >= 2) // checkfor pierce !! change to 3 if 3rd level
+            {
+                GameObject d1 = Instantiate(piercebullet, direct1.position, transform.rotation);
+                GameObject d2 = Instantiate(piercebullet, direct2.position, transform.rotation);
+                GameObject d3 = Instantiate(piercebullet, direct3.position, transform.rotation);
+                GameObject d4 = Instantiate(piercebullet, direct4.position, transform.rotation);
+            }
+            else
+            {
+                GameObject d1 = Instantiate(theplayerfire, direct1.position, transform.rotation);
+                GameObject d2 = Instantiate(theplayerfire, direct2.position, transform.rotation);
+                GameObject d3 = Instantiate(theplayerfire, direct3.position, transform.rotation);
+                GameObject d4 = Instantiate(theplayerfire, direct4.position, transform.rotation);
+            }
+        }
+        soundmanager.Instance.PlayOneShot(soundmanager.Instance.playerfire);
     }
 
     public void wait()
@@ -172,6 +146,8 @@ public class player : MonoBehaviour
 
     void OnDestroy()
     {
-        FindObjectOfType<spaceManager>().EndGame();
+        var manager = FindObjectOfType<spaceManager>();
+        if (manager != null)
+            manager.EndGame();
     }
 }
