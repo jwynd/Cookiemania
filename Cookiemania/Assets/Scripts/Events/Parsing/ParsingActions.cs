@@ -269,7 +269,16 @@ public static partial class Parsing_Utilities
         foreach (var str in parsingInfo.TrimmedLine)
         {
             // actual index is 1 less
-            var index = int.Parse(str) - 1;
+            var index = 0;
+            try
+            {
+                index = int.Parse(str) - 1;
+            }
+            catch
+            {
+                throw new Exception("unable to parse as an integer for branch_start declaration: " + str);
+            }
+            
             if (choice.ChoiceDialogueDictionary.TryGetValue(index, out string name))
             {
                 parsingInfo.ChoiceDialoguesToMultiWrite.Add(name);

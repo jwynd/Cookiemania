@@ -31,12 +31,15 @@
 # # one line. Chat bubble limit is about 140 letters, so break up the monologues a bit.
 
 # case insensitive name btw
-event test
+
+
+
+event player_test
 # these are always minimum thresholds
 # if negative need to reach a more/equal negative point to meet trigger condition
 # if positive need to reach a more/equal positive point to meet trigger condition
 trigger week 1
-trigger money 0
+trigger money 50
 
 # all_triggers means it needs all triggers valid to proc event
 # one_trigger means it needs only one condition fulfilled to proc
@@ -59,6 +62,7 @@ event_reward morality 0
 default
 boss
 >Well hello there, player_name.
+>aspdofiasd 
 chip
 > ah man i hate this guy.
 boss
@@ -137,10 +141,7 @@ choice_end
 default
 player
 
-# you can use italic, bold, underline html tags if you want
-# is kinda bugged rn but i'll get it completely debugged pretty soon
-
-> <i>Man</i> I'm hungry, I should get back to work
+> <i>Man</i> I'm hung<b>ry</b>, I should get back to work
 
 event_end
 
@@ -165,7 +166,7 @@ narrator
 
 # special event name that places the game over screen
 # under the dialogue
-direct_trigger game_over
+# direct_trigger game_over
 
 event_end
 
@@ -178,7 +179,7 @@ type email
 narrator
 subject Hey sport, heard you're not doing too hot...
 
-> Dear player_name,
+> Dear player_name, 
 > hey, lemme know?
 
 event_reward money 5
@@ -213,6 +214,9 @@ subject you're moving up!
 > proud of ya...
 
 event_reward morality 0
+
 event_reward money 100
+
 direct_trigger test_2
+
 event_end

@@ -60,6 +60,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -139,6 +140,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -364,6 +366,7 @@ MonoBehaviour:
   eventTextFiles:
   - {fileID: 4900000, guid: b839bd667894ad2438fc11168323bc00, type: 3}
   - {fileID: 4900000, guid: 26362d336f4ac7545adcb15d24bfb807, type: 3}
+  - {fileID: 4900000, guid: 17e502865fb663b44baa678514dac8e8, type: 3}
   dialogueOverwrites:
   - DialogueKeyword: player_name
     UniqueName: player
@@ -372,7 +375,7 @@ MonoBehaviour:
       type: 3}
     DisplayName: Boss
     UniqueName: boss
-  - Sprite: {fileID: 21300000, guid: 5cf159fef7f183e4d80a9f09a590c1c5, type: 3}
+  - Sprite: {fileID: 0}
     DisplayName: Player
     UniqueName: player
   - Sprite: {fileID: 21300000, guid: a8acd0f70d03b3640bb694d6e4a5b61d, type: 3}
@@ -381,6 +384,9 @@ MonoBehaviour:
   - Sprite: {fileID: 21300000, guid: 1263a792fe801154aa0df884031123e6, type: 3}
     DisplayName: Narrator
     UniqueName: narrator
+  - Sprite: {fileID: 21300000, guid: 1263a792fe801154aa0df884031123e6, type: 3}
+    DisplayName: Narrator
+    UniqueName: narrator_angry
   backgroundList:
   - uniqueName: default
     background: {fileID: 21300000, guid: f66c76c87c21d484bab0adfa2cb384d1, type: 3}

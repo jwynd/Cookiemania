@@ -258,14 +258,14 @@ public class EventManager : MonoBehaviour
     private void ParseEventScripts(List<TextAsset> textAssets, 
         ReadOnlyDictionary<string, CharacterInfo> charInfoDictionary)
     {
-        char[] toTrim = { '\t' };
         EventParsingInfo parsingInfo = new EventParsingInfo();
         foreach (var asset in textAssets)
         {
             parsingInfo.MaxChoices = choiceLimit;
             foreach (var text in asset.text.Split('\n'))
             {
-                parsingInfo.TrimmedLine = text.Split(
+                var textTrimmed = text.Trim();
+                parsingInfo.TrimmedLine = textTrimmed.Split(
                     new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList();
                 if (SkipLine(parsingInfo.TrimmedLine))
                 {
