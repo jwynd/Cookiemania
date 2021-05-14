@@ -9,7 +9,8 @@ public class LoadMenu : MonoBehaviour
 {
     [SerializeField]
     private bool dontDestroy = false;
-
+    public List<GameObject> activateOnDestroy;
+    public List<MonoBehaviour> enableOnDestroy;
 
     public void Return()
     {
@@ -28,5 +29,28 @@ public class LoadMenu : MonoBehaviour
         {
             Return();
         }
+    }
+
+    void OnDestroy()
+    {
+        if (enabled)
+            ReactivateObjects();
+    }
+
+    private void ReactivateObjects()
+    {
+        foreach (GameObject g in activateOnDestroy)
+        {
+            g.SetActive(true);
+        }
+        foreach (MonoBehaviour g in enableOnDestroy)
+        {
+            g.enabled = true;
+        }
+    }
+
+    private void OnDisable()
+    {
+        ReactivateObjects();
     }
 }
