@@ -82,6 +82,7 @@ public class player : MonoBehaviour
         }
         else
         {
+            cooldowntime = 3f;
             go = Instantiate(theplayershield3, direct5.position, Quaternion.identity);
         }
         go.transform.parent = transform;
@@ -104,6 +105,7 @@ public class player : MonoBehaviour
 
         if (bulletlevel == 1)// if bullet level is one shoot a spread of 3 bullets (add 2 bullets)
         {
+            cooldownbullets = .35f;
             if (bulletpiercelvl >= 2)// check for piercing bullets
             {
                 GameObject d1 = Instantiate(piercebullet, direct1.position, transform.rotation);
@@ -117,6 +119,7 @@ public class player : MonoBehaviour
         }
         else if (bulletlevel == 2) // checks spread level
         {
+            cooldownbullets = .7f;
             if (bulletpiercelvl >= 2) // checkfor pierce !! change to 3 if 3rd level
             {
                 GameObject d1 = Instantiate(piercebullet, direct1.position, transform.rotation);
