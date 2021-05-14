@@ -2,14 +2,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 public class MainMenu : MonoBehaviour
 {
     public GameObject settingsPrefab;
+    public GameObject loadGamePrefab;
+    public Button continueB;
     public Animator transitioning = null;
+
+    private string continueFile = "";
+
+
+    public void Start()
+    {
+        if (!PlayerPrefs.HasKey(PlayerDataStatics.P_PREFS_LAST_SAVED))
+        {
+            continueB.gameObject.SetActive(false);
+        }
+        else
+        {
+            continueFile = PlayerPrefs.GetString(PlayerDataStatics.P_PREFS_LAST_SAVED);
+        }
+    }
 
     public void Play()
     {
-      //  SceneTransition(2);
+        //  SceneTransition(2);
+        PlayerPrefs.DeleteKey(PlayerDataStatics.P_PREFS_LOAD);
+        PlayerPrefs.Save();
+        SceneManager.LoadScene("Desktop", LoadSceneMode.Single);
+    }
+
+    public void Continue()
+    {
+        if (continueFile == "") return;
+        PlayerPrefs.SetString(PlayerDataStatics.P_PREFS_LOAD, continueFile);
+        PlayerPrefs.Save();
         SceneManager.LoadScene("Desktop", LoadSceneMode.Single);
     }
 
@@ -29,6 +58,11 @@ public class MainMenu : MonoBehaviour
         s.transform.SetParent(c, false);
         s.GetComponent<SettingsMenu>().activateOnDestroy = g;
         s.SetActive(true);
+    }
+
+    public void Load()
+    {
+
     }
 
     public void SceneTransition(int version)
