@@ -788,7 +788,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settingsPrefab: {fileID: 4115704931409894043, guid: bd60292cfee3d1e4aaa62bed2c92fc50,
     type: 3}
-  loadGamePrefab: {fileID: 0}
+  loadGamePrefab: {fileID: 4115704931409894043, guid: cb305fb0087d9ec4a83059d7b165c068,
+    type: 3}
   continueB: {fileID: 872373530}
   transitioning: {fileID: 0}
 --- !u!4 &671989947
@@ -1919,7 +1920,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 671989946}
-        m_MethodName: Play
+        m_MethodName: Load
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
