@@ -37,7 +37,8 @@ public class CharPrefab : MonoBehaviour
     public Sprite bottom { get { return _bottom.sprite; } set { _bottom.sprite = value; } }
     public Sprite eyes { get { return _eyes.sprite; } set { _eyes.sprite = value; } }
     public Sprite eyebrows { get { return _eyebrows.sprite; } set { _eyebrows.sprite = value; } }
-    public string CharName { get { return _charName; } set { _charName = value; } }
+    public string CharName { get { return _charName; } 
+        set { _charName = value; PlayerData.Player.Name = _charName; } }
     public string CompanyName
     {
         get { return _companyName; }
@@ -45,6 +46,7 @@ public class CharPrefab : MonoBehaviour
         {
             _companyName = value;
             CompanyUpdate?.Invoke(_companyName);
+            PlayerData.Player.CompanyName = _companyName;
         }
     }
 }

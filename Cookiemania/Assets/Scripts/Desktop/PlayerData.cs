@@ -40,6 +40,9 @@ public class PlayerData : MonoBehaviour
 
     public LoadState Load { get; private set; }
 
+    public string Name = "";
+    public string CompanyName = "";
+
     //variables tracked by event system
     [SerializeField]
     private int _money = 0;

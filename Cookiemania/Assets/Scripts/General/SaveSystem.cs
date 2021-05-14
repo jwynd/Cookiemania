@@ -76,6 +76,8 @@ public static class SaveSystem
         // everything that is just a property -> integer
         // on the player class
         public Dictionary<PlayerDataProperty, int> PlayerLevels;
+        public string Name;
+        public string CompanyName;
     }
 
     // creates the save data from the Player instance variable
@@ -96,7 +98,8 @@ public static class SaveSystem
             Inbox = Player.Inbox,
             UpgradesPurchased = Player.UpgradesPurchased,
             QueuedEvents = Player.QueuedEvents,
-
+            Name = Player.Name,
+            CompanyName = Player.CompanyName,
         };
     }
 
@@ -110,7 +113,8 @@ public static class SaveSystem
         Player.UpgradesPurchased = data.UpgradesPurchased;
         Player.DelayedEvents = data.DelayedEvents;
         Player.Inbox = data.Inbox;
-
+        Player.Name = data.Name;
+        Player.CompanyName = data.CompanyName;
         // last step is setting the player data integer properties
         SetPDP(data.PlayerLevels);
         // and the consistency checks for upgrades, events to ensure save data
