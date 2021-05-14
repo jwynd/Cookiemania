@@ -47,7 +47,7 @@ public static class SaveSystem
         public Dictionary<Parsing_Utilities.Locale, Queue<string>> DelayedEvents;
         public Dictionary<string, List<Tuple<string, string>>> ChoicesMade;
         // all sent emails, bool = true if read
-        public Queue<Tuple<string, bool>> Inbox;
+        public Queue<Tuple<string, bool, bool>> Inbox;
         // from money to coin jumps to what week it is
         // everything that is just a property -> integer
         // on the player class

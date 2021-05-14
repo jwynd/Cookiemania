@@ -118,7 +118,7 @@ public class EmailController : MonoBehaviour
         preview.Initialize(eventInfo, ViewEmail);
     }
 
-    public void AddEmail(EventInfo eventInfo, bool bulk = false, bool read = false)
+    public void AddEmail(EventInfo eventInfo, bool bulk = false, bool read = false, bool choiceMade = false)
     {
         if (!eventInfo.EventType.IsEmail() || eventInfo.Email == null)
         {
@@ -131,17 +131,18 @@ public class EmailController : MonoBehaviour
         // no need to set as first sibling
         if (!bulk) t.transform.SetAsFirstSibling();
         eventInfo.Email.unread = !read;
+        eventInfo.Email.choiceMade = choiceMade;
         var preview = t.GetComponent<EmailPreviewController>();
         preview.Initialize(eventInfo, ViewEmail);
         if (!bulk) SetReadNotifications();
     }
 
-    public void AddBulkEmails(Queue<Tuple<string, bool>> eventNameToReads)
+    public void AddBulkEmails(Queue<Tuple<string, bool, bool>> eventNameToReads)
     {
         while (eventNameToReads.Count > 0)
         {
             var eventN = eventNameToReads.Dequeue();
-            AddEmail(EventManager.Instance.GetEvent(eventN.Item1), true, eventN.Item2);
+            AddEmail(EventManager.Instance.GetEvent(eventN.Item1), true, eventN.Item2, eventN.Item3);
         }
         SetReadNotifications();
     }
@@ -169,16 +170,16 @@ public class EmailController : MonoBehaviour
         PreviewMode = false;
     }
 
-    public Queue<Tuple<string, bool>> GetEmailQueue()
+    public Queue<Tuple<string, bool, bool>> GetEmailQueue()
     {
-        var eq = new Queue<Tuple<string, bool>>();
+        var eq = new Queue<Tuple<string, bool, bool>>();
         foreach (Transform trans in transform)
         {
             var preview = trans.GetComponent<EmailPreviewController>();
             if (preview != null)
             {
-                eq.Enqueue(new Tuple<string, bool>
-                    (preview.EventName, !preview.Unread));
+                eq.Enqueue(new Tuple<string, bool, bool>
+                    (preview.EventName, !preview.Unread, !preview.ChoiceAvailable));
             }
         }
         return eq;

@@ -50,6 +50,16 @@ public class EmailPreviewController : MonoBehaviour
         }
     }
 
+    public bool ChoiceAvailable
+    {
+        get
+        {
+            if (eventInfo == null)
+                return true;
+            return !eventInfo.Email.choiceMade;
+        }
+    }
+
     /// <summary>
     /// takes the entire emailinfo to store and displays the preview
     /// then runs the given action on click (presumably to swap the 
