@@ -9,8 +9,6 @@ using static PlayerDataStatics;
 
 public static class SaveSystem
 {
-    public static string SAVE_EXTENSION = ".SAV";
-
     // requires static fn on PlayerData: CreateSaveData()
     // should create based on the static player instance
     public static int Save(string filename)
@@ -18,22 +16,48 @@ public static class SaveSystem
         if (Player == null) return 1;
         // can't save the game while running a dialogue event
         if (!EventManager.Instance.EventController.CanSaveLoad()) return 2;
-        string path = Application.persistentDataPath + filename + SAVE_EXTENSION;
+        string path = Application.persistentDataPath + SAVE_FOLDER + filename + SAVE_EXTENSION;
         FileStream stream = new FileStream(path, FileMode.Create);
         new BinaryFormatter().Serialize(stream, CreateSaveData());
         stream.Close();
+        // set and save the player preferences last saved key
+        PlayerPrefs.SetString(P_PREFS_LAST_SAVED, filename);
+        PlayerPrefs.Save();
         return 0;
     }
 
     public static int Load(string filename)
     {
         if (Player == null) return 1;
-        string path = Application.persistentDataPath + filename + SAVE_EXTENSION;
+        string path = Application.persistentDataPath + SAVE_FOLDER + filename + SAVE_EXTENSION;
         if (!File.Exists(path)) return 2;
         FileStream stream = new FileStream(path, FileMode.Open);
         LoadFromSave(new BinaryFormatter().Deserialize(stream) as SaveData);
         stream.Close();
         return 0;
+    }
+
+    public static List<string> ListSaves()
+    {
+        string[] files = Directory.GetFiles(Application.persistentDataPath + SAVE_FOLDER);
+        List<string> saves = new List<string>();
+        foreach (var file in files)
+        {
+            // its a directory in this case
+            // we're not checking recursively
+            if (!File.Exists(file)) continue;
+            // only saving the file up to but not including the save extension
+            // e.g. file1.SAV will be file1 instead
+            if (file.EndsWith(SAVE_EXTENSION)) saves.Add(file.Remove(file.Length - SAVE_EXTENSION.Length));
+        }
+        return saves;
+    }
+
+    public static bool DontLoad()
+    {
+        if (!Player || Player.Load != LoadState.LoadSuccess)
+            return true;
+        return false;
     }
 
     public class SaveData
@@ -70,8 +94,7 @@ public static class SaveSystem
             PlayerLevels = CreatePDPDictionary(),
             DelayedEvents = Player.DelayedEvents,
             Inbox = Player.Inbox,
-            // Inbox = // something
-            // UpgradesPurchased = // something
+            UpgradesPurchased = Player.UpgradesPurchased,
             QueuedEvents = Player.QueuedEvents,
 
         };
@@ -85,7 +108,8 @@ public static class SaveSystem
         Player.CompletedEvents = data.CompletedEvents;
         Player.EventChoicesMade = data.ChoicesMade;
         Player.UpgradesPurchased = data.UpgradesPurchased;
-        // Player.Inbox = data.Inbox;
+        Player.DelayedEvents = data.DelayedEvents;
+        Player.Inbox = data.Inbox;
 
         // last step is setting the player data integer properties
         SetPDP(data.PlayerLevels);

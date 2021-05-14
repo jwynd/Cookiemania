@@ -173,23 +173,6 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    // should: tell email to load from email list
-    // tell event controller to load from both event queues
-    // remove matching events in completedevents from its triggerable events
-    public void LoadGame(SaveSystem.SaveData data)
-    {
-        // untrigger completed events
-        foreach (var e in data.CompletedEvents)
-        {
-            RemoveEvent(e);
-        }
-        // set event queues in event controller
-        eventController.LoadGame(data);
-        // set visible emails and read / choice status in email controller
-        Email.LoadGame(data);
-
-    }
-
     public EventInfo GetEvent(string name)
     {
         eventDictionary.TryGetValue(name, out var value);
@@ -606,8 +589,22 @@ public class EventManager : MonoBehaviour
 #endif
         // playerdata.player better exist by now
         // check if playerdata.player is a loaded version or normal
+        // run before connecting events so they dont bother trying to listen
+        LoadedGame();
         eventController.ConnectPlayerLocationListener();
         ConnectEvents(eventDictionary);
+    }
+
+    private void LoadedGame()
+    {
+        if (SaveSystem.DontLoad()) return;
+        foreach (var ename in PlayerData.Player.CompletedEvents)
+        {
+            if (eventDictionary.TryGetValue(ename, out EventInfo @event))
+            {
+                @event.EventListening = false;
+            }
+        }
     }
 
 

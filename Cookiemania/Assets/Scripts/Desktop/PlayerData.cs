@@ -38,6 +38,8 @@ public class PlayerData : MonoBehaviour
     public int incomelvl = 0;
     public int healthlvl = 0;
 
+    public LoadState Load { get; private set; }
+
     //variables tracked by event system
     [SerializeField]
     private int _money = 0;
@@ -344,12 +346,35 @@ public class PlayerData : MonoBehaviour
         // jumper game, setting the private version
         // directly when necessary
         InitJumperVariables();
+        //
+        // this is also where game data must be loaded
+        // after all defaults have been attempted to load
+        //
+        AttemptLoad();
+    }
+
+    private void AttemptLoad()
+    {
+        // check if should load a saved game, load if it can
+        if (PlayerPrefs.HasKey(P_PREFS_LOAD))
+        {
+            // loads and sets data on Player instance, returns status of attempt
+            Load = SaveSystem.Load(PlayerPrefs.GetString(P_PREFS_LOAD)) == 0 ? 
+                LoadState.LoadSuccess : LoadState.LoadFail;
+        }
+        else
+        {
+            Load = LoadState.NewGame;
+        }
     }
 
     private void Start()
     {
-        IEnumerator coroutine = StartWeekOne();
-        StartCoroutine(coroutine);
+        if (Load != LoadState.LoadSuccess)
+        {
+            IEnumerator coroutine = StartWeekOne();
+            StartCoroutine(coroutine);
+        }
     }
 
     private IEnumerator StartWeekOne()
@@ -362,7 +387,7 @@ public class PlayerData : MonoBehaviour
 
     private void InitGeneralVariables()
     {
-        Location.Current = Parsing_Utilities.Locale.WebsiteTab;
+        Location.Current = Locale.WebsiteTab;
         money = 0;
         morality = 0;
         race = 0;
@@ -481,6 +506,7 @@ public class PlayerData : MonoBehaviour
                 week += add;
                 return week;
             default: return 0;
+
         }
     }
 }

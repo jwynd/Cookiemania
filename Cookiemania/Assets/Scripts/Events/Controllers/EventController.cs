@@ -144,6 +144,29 @@ public class EventController : MonoBehaviour
         OnEmailComplete = EmailComplete;
     }
 
+    public void Start()
+    {
+        LoadedGame();
+    }
+
+    private void LoadedGame()
+    {
+        if (SaveSystem.DontLoad()) return;
+        foreach (var ename in PlayerData.Player.QueuedEvents)
+        {
+            eventQueue.Enqueue(EventManager.Instance.GetEvent(ename));
+        }
+        foreach (var kvpair in PlayerData.Player.DelayedEvents)
+        {
+            var q = new Queue<EventInfo>();
+            foreach (var ename in kvpair.Value)
+            {
+                q.Enqueue(EventManager.Instance.GetEvent(ename));
+            }
+            DelayedEvents.Add(kvpair.Key, q);
+        }
+    }
+
     public void ConnectPlayerLocationListener()
     {
         PlayerData.Player.Location.Updated.AddListener(LocationChanged);
@@ -264,29 +287,6 @@ public class EventController : MonoBehaviour
         {
             Debug.LogError("Event manager instance needs a reference to the" +
                 " email controller");
-        }
-    }
-
-    public void LoadGame(SaveSystem.SaveData data)
-    {
-        eventQueue.Clear();
-        DelayedEvents.Clear();
-        info = null;
-        lastDialoguePlayed = null;
-        runningDialogueEvent = false;
-        currentLocation = Locale.WebsiteTab;
-        foreach (var name in data.QueuedEvents)
-        {
-            eventQueue.Enqueue(EventManager.Instance.GetEvent(name));
-        }
-        foreach (var kval in data.DelayedEvents)
-        {
-            var deq = new Queue<EventInfo>();
-            foreach (var name in kval.Value)
-            {
-                deq.Enqueue(EventManager.Instance.GetEvent(name));
-            }
-            DelayedEvents.Add(kval.Key, deq);
         }
     }
 

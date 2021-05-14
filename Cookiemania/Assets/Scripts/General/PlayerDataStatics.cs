@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class PlayerDataStatics
 {
+    public static string SAVE_EXTENSION = ".SAV";
+    public static string SAVE_FOLDER = "SAV/";
+    // if this key exists try to load a save from it
+    public static string P_PREFS_LOAD = "LoadGame";
+    // this key is the "continue" option
+    // when this continue is selected LoadGame should also be set to this same value 
+    // so playerdata doesn't have to do anything different
+    public static string P_PREFS_LAST_SAVED = "LastSavedGame";
+
     [Serializable]
     public enum PlayerDataProperty
     {
@@ -32,6 +41,14 @@ public class PlayerDataStatics
         jcoinjump,
         jshield,
         jupgradelvl
+    }
+
+    [Serializable]
+    public enum LoadState
+    {
+        NewGame,
+        LoadSuccess,
+        LoadFail
     }
 
     // unsafe to use without ensuring Player instance != null

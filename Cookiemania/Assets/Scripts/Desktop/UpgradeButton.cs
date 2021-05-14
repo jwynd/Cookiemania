@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -86,12 +87,22 @@ public class UpgradeButton : MonoBehaviour
             ids.Add(button.UID);
         }
 #endif
+        Purchased = LoadedGame();
         animator = GetComponent<Animator>();
         upgradeTitles = ConvertToTextArr(GameObject.FindGameObjectsWithTag("UpgradeTitle"));
         upgradeDescriptions = ConvertToTextArr(GameObject.FindGameObjectsWithTag("UpgradeDescription"));
         upgradeCosts = ConvertToTextArr(GameObject.FindGameObjectsWithTag("UpgradeCost"));
         upgradeQuotes = ConvertToTextArr(GameObject.FindGameObjectsWithTag("UpgradeQuote"));
         purchaseButton = GameObject.FindGameObjectWithTag("Purchase").GetComponent<BuyButton>();
+    }
+
+    private bool LoadedGame()
+    {
+        if (SaveSystem.DontLoad()) return false;
+        // if this is a purchased upgrade, it's upgrade levels were recorded in the save game already
+        if (PlayerData.Player.UpgradesPurchased.TryGetValue(UID, out bool bought))
+            return bought;
+        return false;
     }
 
     public TMPro.TextMeshProUGUI[] ConvertToTextArr(GameObject[] objects)
@@ -142,6 +153,7 @@ public class UpgradeButton : MonoBehaviour
             CyberReducer(upgradeType);
             MarketingReducer(upgradeType);
             Purchased = true;
+            PlayerData.Player.UpgradesPurchased.Add(UID, true);
             for (int i = 0; i < upgradeCosts.Length; i++)
             {
                 upgradeCosts[i].text = "Unlocked!";

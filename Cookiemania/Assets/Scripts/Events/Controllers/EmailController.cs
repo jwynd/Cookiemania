@@ -99,22 +99,25 @@ public class EmailController : MonoBehaviour
         //Debug.Log(string.Join(", ", visibleTypes));
     }
 
-    private void Start()
-    {
+     private void Start()
+     {
         // only need to instantiate when adding an email
         //TestFunction();
-    }
+        LoadedGame();
+     }
 
     private void TestFunction()
     {
         ShowYourself();
         var t = Instantiate(previewPrefab, previewsHolder.transform);
         var preview = t.GetComponent<EmailPreviewController>();
-        var eventInfo = new EventInfo("blarg");
-        eventInfo.Email = new EmailInfo("hey what's up, just checking in",
+        var eventInfo = new EventInfo("blarg")
+        {
+            Email = new EmailInfo("hey what's up, just checking in",
             "Was hoping to catch you earlier buuuuut\n\nI need you to go down to the bank and make a couple transactions\n" +
             "No big deal, just get it done by tomorrow at lunch.\nBoss OUT!",
-            "boss", EmailCategory.Starred, null, null);
+            "boss", EmailCategory.Starred, null, null)
+        };
         preview.Initialize(eventInfo, ViewEmail);
     }
 
@@ -185,16 +188,16 @@ public class EmailController : MonoBehaviour
         return eq;
     }
 
-    public void LoadGame(SaveSystem.SaveData data)
+    public void LoadedGame()
     {
         // probably wanna delete all my email preview controllers
         // then add all the emails i got, ensuring the unread / read is set correctly
-
+        if (SaveSystem.DontLoad()) return;
         foreach (Transform trans in transform)
         {
             if (trans.GetComponent<EmailPreviewController>() != null)
                 Destroy(trans.gameObject);
         }
-        AddBulkEmails(data.Inbox);
+        AddBulkEmails(PlayerData.Player.Inbox);
     }
 }
