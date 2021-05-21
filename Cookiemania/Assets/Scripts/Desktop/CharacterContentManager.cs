@@ -66,7 +66,6 @@ public class CharacterContentManager : MonoBehaviour
             Destroy(gameObject);
         }
         Instance = this;
-
     }
     private void Start()
     {
@@ -85,6 +84,14 @@ public class CharacterContentManager : MonoBehaviour
         characterSprite.SetActive(false);
         panelName.SetActive(false);
 
+        if (SaveSystem.DontLoad()) return;
+        //TODO: alright need to set up the character from the saved game
+        // probably gonna be a dictionary of enum to int values?
+        // iterate through dictionary and select stuff
+        // then finalize with confirm
+        characterName = PlayerData.Player.Name;
+        companyName = PlayerData.Player.CompanyName;
+        confirm();
     }
     public void bodyup()
     {
