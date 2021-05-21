@@ -5,13 +5,22 @@ using UnityEngine;
 public class PlayerDataStatics
 {
     public static string SAVE_EXTENSION = ".SAV";
-    public static string SAVE_FOLDER = "SAV/";
+    public static string SAVE_FOLDER = "/SAV/";
     // if this key exists try to load a save from it
     public static string P_PREFS_LOAD = "LoadGame";
     // this key is the "continue" option
     // when this continue is selected LoadGame should also be set to this same value 
     // so playerdata doesn't have to do anything different
     public static string P_PREFS_LAST_SAVED = "LastSavedGame";
+    public static string P_PREFS_SLOT_1 = "Save1";
+    public static string P_PREFS_SLOT_2 = "Save2";
+    public static string P_PREFS_SLOT_3 = "Save3";
+    public static string P_PREFS_SLOT_1_NAME = "SlotOneName";
+    public static string P_PREFS_SLOT_2_NAME = "SlotTwoName";
+    public static string P_PREFS_SLOT_3_NAME = "SlotThreeName";
+    public static string P_PREFS_SLOT_1_MONEY = "SlotOneMoney";
+    public static string P_PREFS_SLOT_2_MONEY = "SlotTwoMoney";
+    public static string P_PREFS_SLOT_3_MONEY = "SlotThreeMoney";
 
     [Serializable]
     public enum PlayerDataProperty
@@ -68,7 +77,7 @@ public class PlayerDataStatics
            { PlayerDataProperty.jshield, v => PlayerData.Player.JShield += v },
            { PlayerDataProperty.jtimesplayed, v => PlayerData.Player.JTimesPlayed += v},
            // jupgrade level is read only (its auto updated)
-           // { PlayerDataProperty.jupgradelvl, v => PlayerData.Player.JUpgradeLevel += v },
+           { PlayerDataProperty.jupgradelvl, v => PlayerData.Player.JUpgradeLevel },
            { PlayerDataProperty.money, v => PlayerData.Player.money += v },
            { PlayerDataProperty.morality, v => PlayerData.Player.morality += v },
            { PlayerDataProperty.pierce, v => PlayerData.Player.Pierce += v},

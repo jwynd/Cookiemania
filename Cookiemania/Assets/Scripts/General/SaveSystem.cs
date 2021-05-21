@@ -11,17 +11,37 @@ public static class SaveSystem
 {
     // requires static fn on PlayerData: CreateSaveData()
     // should create based on the static player instance
-    public static int Save(string filename)
+    public static int Save(string filename, int slotNumber)
     {
         if (Player == null) return 1;
+        // needs to be the right slot number
+        if (slotNumber < 1 || slotNumber > 3) return 2;
         // can't save the game while running a dialogue event
-        if (!EventManager.Instance.EventController.CanSaveLoad()) return 2;
-        string path = Application.persistentDataPath + SAVE_FOLDER + filename + SAVE_EXTENSION;
+        if (!EventManager.Instance.EventController.CanSaveLoad()) return 3;
+        string path = Application.persistentDataPath + filename + SAVE_EXTENSION;
         FileStream stream = new FileStream(path, FileMode.Create);
         new BinaryFormatter().Serialize(stream, CreateSaveData());
         stream.Close();
         // set and save the player preferences last saved key
         PlayerPrefs.SetString(P_PREFS_LAST_SAVED, filename);
+        switch (slotNumber) 
+        {
+            case 1:
+                PlayerPrefs.SetString(P_PREFS_SLOT_1, filename);
+                PlayerPrefs.SetString(P_PREFS_SLOT_1_NAME, Player.Name);
+                PlayerPrefs.SetString(P_PREFS_SLOT_1_MONEY, Player.money.ToString());
+                break;
+            case 2:
+                PlayerPrefs.SetString(P_PREFS_SLOT_2, filename);
+                PlayerPrefs.SetString(P_PREFS_SLOT_2_NAME, Player.Name);
+                PlayerPrefs.SetString(P_PREFS_SLOT_2_MONEY, Player.money.ToString());
+                break;
+            case 3:
+                PlayerPrefs.SetString(P_PREFS_SLOT_3, filename);
+                PlayerPrefs.SetString(P_PREFS_SLOT_3_NAME, Player.Name);
+                PlayerPrefs.SetString(P_PREFS_SLOT_3_MONEY, Player.money.ToString());
+                break;
+        }
         PlayerPrefs.Save();
         return 0;
     }
@@ -29,7 +49,7 @@ public static class SaveSystem
     public static int Load(string filename)
     {
         if (Player == null) return 1;
-        string path = Application.persistentDataPath + SAVE_FOLDER + filename + SAVE_EXTENSION;
+        string path = Application.persistentDataPath + filename + SAVE_EXTENSION;
         if (!File.Exists(path)) return 2;
         FileStream stream = new FileStream(path, FileMode.Open);
         LoadFromSave(new BinaryFormatter().Deserialize(stream) as SaveData);
@@ -39,7 +59,7 @@ public static class SaveSystem
 
     public static List<string> ListSaves()
     {
-        string[] files = Directory.GetFiles(Application.persistentDataPath + SAVE_FOLDER);
+        string[] files = Directory.GetFiles(Application.persistentDataPath);
         List<string> saves = new List<string>();
         foreach (var file in files)
         {
@@ -60,6 +80,7 @@ public static class SaveSystem
         return false;
     }
 
+    [Serializable]
     public class SaveData
     {
         // turns on / off ability to purchase upgrade, if purchased does not

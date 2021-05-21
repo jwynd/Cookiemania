@@ -20,6 +20,15 @@ public class WebsiteUI : MonoBehaviour
         currentWeather = animations[0].name;
     }
 
+    private void Update()
+    {
+        if (!SaveSystem.DontLoad())
+        {
+            UpdateCompany(charRef.CompanyName);
+        }
+        enabled = false;
+    }
+
     public void SetUpFromCharPrefab(CharPrefab charprefab)
     {
         charRef = charprefab;

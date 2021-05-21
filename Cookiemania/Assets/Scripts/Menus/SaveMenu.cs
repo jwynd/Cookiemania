@@ -5,20 +5,20 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static PlayerDataStatics;
 
-public class LoadMenu : MonoBehaviour
+public class SaveMenu : MonoBehaviour
 {
     [SerializeField]
     private bool dontDestroy = false;
     [SerializeField]
     private List<Button> saveSlots = null;
     [SerializeField]
-    private TMPro.TextMeshProUGUI noSaves = null;
-    [SerializeField]
     private Button loadButton = null;
     public List<GameObject> activateOnDestroy;
     public List<MonoBehaviour> enableOnDestroy;
 
     private string loadSlot = "";
+    private bool overwriting = false;
+    private int slotNumber = 0;
 
     // readies a file to load and opens the confirm menu
     public void ReadyOpen(int i)
@@ -37,10 +37,11 @@ public class LoadMenu : MonoBehaviour
             default:
                 break;
         }
-        // button failed
+        slotNumber = i;
+        overwriting = loadSlot != "";
         if (loadSlot == "")
         {
-            return;
+            loadSlot = "Save" + i;
         }
         EnableLoadButton(true);
     }
@@ -48,10 +49,16 @@ public class LoadMenu : MonoBehaviour
     private void EnableLoadButton(bool v)
     {
         loadButton.gameObject.SetActive(v);
+        if (v)
+            loadButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text =
+                overwriting ? "OVERWRITE" : "SAVE";
     }
 
     public void Return()
     {
+        loadSlot = "";
+        overwriting = false;
+        slotNumber = 0;
         if (dontDestroy)
         {
             enabled = false;
@@ -64,20 +71,23 @@ public class LoadMenu : MonoBehaviour
     private void Awake()
     {
         EnableLoadButton(false);
-        saveSlots[0].gameObject.SetActive(PlayerPrefs.GetString(P_PREFS_SLOT_1, "") != "");
-        saveSlots[0].GetComponent<TMPro.TextMeshProUGUI>().text = 
-            PlayerPrefs.GetString(P_PREFS_SLOT_1_NAME, "") + ": $" + 
-            PlayerPrefs.GetString(P_PREFS_SLOT_1_MONEY, "");
-        saveSlots[1].gameObject.SetActive(PlayerPrefs.GetString(P_PREFS_SLOT_2, "") != "");
-        saveSlots[1].GetComponent<TMPro.TextMeshProUGUI>().text =
-            PlayerPrefs.GetString(P_PREFS_SLOT_2_NAME, "") + ": $" +
-            PlayerPrefs.GetString(P_PREFS_SLOT_2_MONEY, "");
-        saveSlots[2].gameObject.SetActive(PlayerPrefs.GetString(P_PREFS_SLOT_3, "") != "");
-        saveSlots[2].GetComponent<TMPro.TextMeshProUGUI>().text =
-            PlayerPrefs.GetString(P_PREFS_SLOT_3_NAME, "") + ": $" +
-            PlayerPrefs.GetString(P_PREFS_SLOT_3_MONEY, "");
-        // if the slots all got disabled, there are no loadable games can swap with text
-        noSaves.gameObject.SetActive(saveSlots.All(button => !button.gameObject.activeSelf));
+        SetSaveData();
+    }
+
+    private void SetSaveData()
+    {
+        if (PlayerPrefs.GetString(P_PREFS_SLOT_1, "") != "")
+            saveSlots[0].GetComponent<TMPro.TextMeshProUGUI>().text =
+                PlayerPrefs.GetString(P_PREFS_SLOT_1_NAME, "") + ": $" +
+                PlayerPrefs.GetString(P_PREFS_SLOT_1_MONEY, "");
+        if (PlayerPrefs.GetString(P_PREFS_SLOT_2, "") != "")
+            saveSlots[1].GetComponent<TMPro.TextMeshProUGUI>().text =
+                PlayerPrefs.GetString(P_PREFS_SLOT_2_NAME, "") + ": $" +
+                PlayerPrefs.GetString(P_PREFS_SLOT_2_MONEY, "");
+        if (PlayerPrefs.GetString(P_PREFS_SLOT_3, "") != "")
+            saveSlots[2].GetComponent<TMPro.TextMeshProUGUI>().text =
+                PlayerPrefs.GetString(P_PREFS_SLOT_3_NAME, "") + ": $" +
+                PlayerPrefs.GetString(P_PREFS_SLOT_3_MONEY, "");
     }
 
     void Update()
@@ -89,7 +99,7 @@ public class LoadMenu : MonoBehaviour
     }
 
 
-    public void Load()
+    public void Save()
     {
         // shouldn't be called when loadslot is empty
         if (loadSlot == "")
@@ -97,9 +107,11 @@ public class LoadMenu : MonoBehaviour
             EnableLoadButton(false);
             return;
         }
-        PlayerPrefs.SetString(P_PREFS_LOAD, loadSlot);
-        PlayerPrefs.Save();
-        SceneManager.LoadScene("Desktop", LoadSceneMode.Single);
+        // show that game is saving with some kinda overview thingy?
+        SaveSystem.Save(loadSlot, slotNumber);
+        EnableLoadButton(false);
+        SetSaveData();
+        Return();
     }
 
     void OnDestroy()

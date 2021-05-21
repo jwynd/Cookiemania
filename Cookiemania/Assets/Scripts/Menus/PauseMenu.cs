@@ -9,6 +9,8 @@ public class PauseMenu : MonoBehaviour
     [SerializeField]
     protected GameObject settingsPrefab;
     [SerializeField]
+    protected GameObject savePrefab;
+    [SerializeField]
     protected General_InputMenu input;
     [SerializeField]
     protected GameObject markerObj;
@@ -22,6 +24,7 @@ public class PauseMenu : MonoBehaviour
     protected float normalTimeScale;
     protected General_LevelTransition levelController;
     protected SettingsMenu settings;
+    protected SaveMenu save;
 
     public static PauseMenu Instance { get; protected set; }
 
@@ -35,6 +38,7 @@ public class PauseMenu : MonoBehaviour
         Instance = this;
         normalTimeScale = Time.timeScale;
         SetupSettings();
+        SaveSettings();
         Resume();
     }
 
@@ -50,6 +54,21 @@ public class PauseMenu : MonoBehaviour
         settings.activateOnDestroy = addToActivate;
         settingsPrefab.SetActive(false);
     }
+
+    private void SaveSettings()
+    {
+        save = savePrefab.GetComponent<SaveMenu>();
+        save.enableOnDestroy = new List<MonoBehaviour> { this };
+        List<GameObject> addToActivate = new List<GameObject>();
+        foreach (Transform child in myPanel.transform)
+        {
+            addToActivate.Add(child.gameObject);
+        }
+        save.activateOnDestroy = addToActivate;
+        savePrefab.SetActive(false);
+    }
+
+
 
     private void Start()
     {
@@ -120,6 +139,7 @@ public class PauseMenu : MonoBehaviour
         menuActive = true;
         transform.SetActiveChildren(true);
         settingsPrefab.SetActive(false);
+        savePrefab.SetActive(false);
     }
 
     public static float PauseWithoutScreen()
@@ -143,8 +163,17 @@ public class PauseMenu : MonoBehaviour
         // dont use menuactive over false here
         menuActive = false;
         settingsPrefab.SetActive(false);
+        savePrefab.SetActive(false);
         transform.SetActiveChildren(false);
         ResumeWithoutScreen(normalTimeScale);
+    }
+
+    public void Save()
+    {
+        myPanel.transform.SetActiveChildren(false);
+        enabled = false;
+        save.enabled = true;
+        savePrefab.SetActive(true);
     }
 
     public void Settings()

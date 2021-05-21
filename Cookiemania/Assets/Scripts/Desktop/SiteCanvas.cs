@@ -20,13 +20,13 @@ public class SiteCanvas : MonoBehaviour
             return;
         }
         Instance = this;
+        emailNotificationText = emailNotificationObject.
+            GetComponentInChildren<TMP_Text>();
     }
 
     private void Start()
     {
-        emailNotificationText = emailNotificationObject.
-            GetComponentInChildren<TMP_Text>();
-        SetEmailCount(0);
+        if (SaveSystem.DontLoad()) SetEmailCount(0);
     }
 
     public void SetEmailCount(int count)
