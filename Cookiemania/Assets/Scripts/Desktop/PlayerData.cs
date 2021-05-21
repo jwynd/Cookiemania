@@ -304,6 +304,7 @@ public class PlayerData : MonoBehaviour
     // first bool: read/unread, choice made/not made
     public Queue<Tuple<string, bool, bool>> Inbox = new Queue<Tuple<string, bool, bool>>();
     public Dictionary<int, bool> UpgradesPurchased = new Dictionary<int, bool>();
+    public List<int> CustomizeData = new List<int>();
 
 
     public void PrintChoicesMade()

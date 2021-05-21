@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -91,8 +92,12 @@ public class CharacterContentManager : MonoBehaviour
         // then finalize with confirm
         characterName = PlayerData.Player.Name;
         companyName = PlayerData.Player.CompanyName;
+        GetFromPlayerData();
         confirm();
     }
+
+
+
     public void bodyup()
     {
         if (bodyindex < bodys.Length - 1)
@@ -351,6 +356,7 @@ public class CharacterContentManager : MonoBehaviour
         temp.CharName = characterName;
         temp.CompanyName = companyName;
 
+        SetOnPlayer();
         /*foreach (Transform child in temp.transform)
         {
             child.localPosition = new Vector3(child.localPosition.x, child.localPosition.y, 0);
@@ -362,6 +368,25 @@ public class CharacterContentManager : MonoBehaviour
         }*/
         temp.transform.position = new Vector3(1000, 1000, 0);
         temp.gameObject.SetActive(true);
+    }
+
+    private void GetFromPlayerData()
+    {
+        if (PlayerData.Player.CustomizeData.Count < 7) return;
+        bodyindex = PlayerData.Player.CustomizeData[0];
+        toppingindex = PlayerData.Player.CustomizeData[1];
+        topindex = PlayerData.Player.CustomizeData[2];
+        midindex = PlayerData.Player.CustomizeData[3];
+        botindex = PlayerData.Player.CustomizeData[4];
+        eyeindex = PlayerData.Player.CustomizeData[5];
+        browindex = PlayerData.Player.CustomizeData[6];
+    }
+
+    private void SetOnPlayer()
+    {
+        // we're just adding in order from our indices
+        var spriteInts = new List<int>() { bodyindex, toppingindex, topindex, midindex, botindex, eyeindex, browindex };
+        PlayerData.Player.CustomizeData = spriteInts;
     }
 
     public void okay()
