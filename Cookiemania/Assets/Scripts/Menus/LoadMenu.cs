@@ -19,6 +19,7 @@ public class LoadMenu : MonoBehaviour
     public List<MonoBehaviour> enableOnDestroy;
 
     private string loadSlot = "";
+    private bool NoReactivate = false;
 
     // readies a file to load and opens the confirm menu
     public void ReadyOpen(int i)
@@ -99,6 +100,7 @@ public class LoadMenu : MonoBehaviour
         }
         PlayerPrefs.SetString(P_PREFS_LOAD, loadSlot);
         PlayerPrefs.Save();
+        NoReactivate = true;
         SceneManager.LoadScene("Desktop", LoadSceneMode.Single);
     }
 
@@ -110,6 +112,7 @@ public class LoadMenu : MonoBehaviour
 
     private void ReactivateObjects()
     {
+        if (NoReactivate) return;
         foreach (GameObject g in activateOnDestroy)
         {
             g.SetActive(true);
