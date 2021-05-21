@@ -183,13 +183,18 @@ public class EventController : MonoBehaviour
                 var queue = DelayedEvents[toCheck];
                 // player legit can't move while this is happening
                 // but best to be double checking that their locale hasn't changed
-                while (queue.Count > 0 && 
-                       PlayerData.Player.Location.Current == current)
+                while (queue.Count > 0)
                 {
-                    RunEvent(queue.Dequeue(), true);
+                    eventQueue.Enqueue(queue.Dequeue()); 
                 }
             }
         }
+        foreach (var e in eventQueue)
+        {
+            Debug.LogWarning(e.UniqueName);
+        }
+        if (!runningDialogueEvent && eventQueue.Count > 0) RunEvent(eventQueue.Dequeue(), true);
+        
     }
 
     // is triggered by something else, but event will run until completion
@@ -197,11 +202,17 @@ public class EventController : MonoBehaviour
     public void RunEvent(EventInfo eventInfo, bool ignoreDelay = false)
     {
         // reference copy, we want to effect the original
-        if (!eventInfo.EventListening && !ignoreDelay)
+        Debug.LogWarning(eventInfo.UniqueName);
+        Debug.LogWarning(eventInfo.EventListening);
+        // dont want to rerun events we've done before
+        if (PlayerData.Player.CompletedEvents.Contains(eventInfo.UniqueName))
+        {
             return;
+        }
         // dialogue events need dialogue control to run
         if (runningDialogueEvent &&
-            eventInfo.EventType == TypeKeyword.Dialogue)
+            eventInfo.EventType == TypeKeyword.Dialogue ||
+            eventInfo.EventType == TypeKeyword.Tutorial)
         {
             eventQueue.Enqueue(eventInfo);
             return;
@@ -220,27 +231,10 @@ public class EventController : MonoBehaviour
             AddEmail(eventInfo);
             return;
         }
-        switch (eventInfo.EventType)
-        {
-            case TypeKeyword.Dialogue:
-            case TypeKeyword.Tutorial:
-                // need to check if it should be delayed right here!
-                // would put it in a delayed queue that waits until 
-                // player in correct screen to run the event
-                if (ignoreDelay)
-                    ImmediateRun(eventInfo);
-                else
-                    ImmediateOrDelayedRun(eventInfo);
-                break;
-            case TypeKeyword.Reward:
-                // i see no reason a reward event would be delayed...?
-                EventComplete(eventInfo, false);
-                break;
-            default:
-                Debug.LogError("unimplemented event type for event " +
-                    "controller");
-                break;
-        }
+        if (ignoreDelay)
+            ImmediateRun(eventInfo);
+        else
+            ImmediateOrDelayedRun(eventInfo);
     }
 
     private void ImmediateOrDelayedRun(EventInfo eventInfo)
@@ -269,6 +263,11 @@ public class EventController : MonoBehaviour
         var possibleScale = PauseMenu.PauseWithoutScreen();
         timeScale = possibleScale > 0 ? possibleScale : timeScale;
         info = eventInfo;
+        if (eventInfo.EventType == TypeKeyword.Reward)
+        {
+            EventComplete(eventInfo, false);
+            return;
+        }
         NextBranch(EventInfo.FIRST_BRANCH);
     }
 

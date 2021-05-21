@@ -45,7 +45,6 @@ trigger money 50
 # one_trigger means it needs only one condition fulfilled to proc
 # event
 
-all_triggers
 one_trigger
 delay minigame
 # not specifying type as default is Dialogue and is correct for this event

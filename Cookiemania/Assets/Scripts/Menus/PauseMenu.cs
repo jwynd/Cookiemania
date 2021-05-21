@@ -19,6 +19,8 @@ public class PauseMenu : MonoBehaviour
     [Tooltip("Buttons in visual order, top to bottom")]
     [SerializeField]
     protected List<Button> myChildButtons = new List<Button>();
+    [SerializeField]
+    protected Button saveButton = null;
     protected int markedButton = 0;
     protected bool menuActive = false;
     protected float normalTimeScale;
@@ -133,6 +135,7 @@ public class PauseMenu : MonoBehaviour
     {
         // dont use menuactive over true here
         normalTimeScale = Time.timeScale;
+        saveButton.interactable = EventManager.Instance.EventController.CanSaveLoad();
         PauseWithoutScreen();
         markedButton = -1;
         Up();
