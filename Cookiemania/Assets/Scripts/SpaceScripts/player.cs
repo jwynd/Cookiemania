@@ -53,7 +53,7 @@ public class player : MonoBehaviour
         //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         //rigidBody.rotation = angle;
         //direction.Normalize();
-        if (Input.GetButtonDown("Jump"))
+        if (InputAxes.Instance.Jump.triggered)
         {
             if (Time.time > nextbullettime)
             {
@@ -62,7 +62,7 @@ public class player : MonoBehaviour
                 nextbullettime = Time.time + cooldownbullets;
             }
         }
-        if (Input.GetButtonDown("Fire2"))
+        if (InputAxes.Instance.Fire.triggered)
         {
             if (Time.time > nextskilltime)
             {

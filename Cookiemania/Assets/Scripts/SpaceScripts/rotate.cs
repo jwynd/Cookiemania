@@ -13,11 +13,10 @@ public class rotate : MonoBehaviour
         {
             return;
         }
-        if (Input.GetKey("q"))
-            //print ("q key was pressed");
+        var rotation = InputAxes.Instance.Rotation.ReadValue<float>();
+        if (rotation > 0f)
             this.transform.Rotate(Vector3.forward * rotatespeed);
-        if (Input.GetKey("e"))
-            //print ("e key was pressed");
+        else if (rotation < 0f)
             this.transform.Rotate(Vector3.forward * -rotatespeed);
 
     }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 using static General_Utilities.Children;
@@ -10,8 +11,6 @@ public class PauseMenu : MonoBehaviour
     protected GameObject settingsPrefab;
     [SerializeField]
     protected GameObject savePrefab;
-    [SerializeField]
-    protected General_InputMenu input;
     [SerializeField]
     protected GameObject markerObj;
     [SerializeField]
@@ -25,6 +24,7 @@ public class PauseMenu : MonoBehaviour
     protected bool menuActive = false;
     protected float normalTimeScale;
     protected General_LevelTransition levelController;
+    private GameObject charCustom;
     protected SettingsMenu settings;
     protected SaveMenu save;
 
@@ -75,24 +75,23 @@ public class PauseMenu : MonoBehaviour
     private void Start()
     {
         levelController = General_LevelTransition.Instance;
+        charCustom = FindObjectOfType<CharacterContentManager>().gameObject;
     }
 
     private void Update()
     {
-        if (!menuActive && input.OpenMenu > 0f)
+        // the only higher precedence input taker
+        if (charCustom.activeSelf) return;
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-            Debug.Log("clicked");
-            Pause();
-            return;
+            if (menuActive) Resume();
+            else Pause();            
         }
-        if (!menuActive)
-        {
-            return;
-        }
-        CheckMenuInputs();
+        // CheckMenuInputs();
+        
     }
 
-    private void CheckMenuInputs()
+   /* private void CheckMenuInputs()
     {
         //only one input per frame
         var vert = input.Vertical;
@@ -120,7 +119,7 @@ public class PauseMenu : MonoBehaviour
         {
             Enter();
         }
-    }
+    }*/
 
     protected void Enter()
     {

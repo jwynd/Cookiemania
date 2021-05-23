@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static PlayerDataStatics;
@@ -66,8 +67,8 @@ public class LoadMenu : MonoBehaviour
     {
         EnableLoadButton(false);
         saveSlots[0].gameObject.SetActive(PlayerPrefs.GetString(P_PREFS_SLOT_1, "") != "");
-        saveSlots[0].GetComponent<TMPro.TextMeshProUGUI>().text = 
-            PlayerPrefs.GetString(P_PREFS_SLOT_1_NAME, "") + ": $" + 
+        saveSlots[0].GetComponent<TMPro.TextMeshProUGUI>().text =
+            PlayerPrefs.GetString(P_PREFS_SLOT_1_NAME, "") + ": $" +
             PlayerPrefs.GetString(P_PREFS_SLOT_1_MONEY, "");
         saveSlots[1].gameObject.SetActive(PlayerPrefs.GetString(P_PREFS_SLOT_2, "") != "");
         saveSlots[1].GetComponent<TMPro.TextMeshProUGUI>().text =
@@ -83,7 +84,7 @@ public class LoadMenu : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             Return();
         }

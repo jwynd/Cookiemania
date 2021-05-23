@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.Audio;
 using UnityEngine;
 using System;
+using UnityEngine.InputSystem;
 
 public class SettingsMenu : MonoBehaviour
 {
@@ -72,7 +73,7 @@ public class SettingsMenu : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             Return();
         }

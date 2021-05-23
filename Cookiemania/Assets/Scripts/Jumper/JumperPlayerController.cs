@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(JumperInputComponent))]
 public class JumperPlayerController : MonoBehaviour
 {
     #region variables
@@ -46,17 +45,6 @@ public class JumperPlayerController : MonoBehaviour
     [SerializeField]
     [Tooltip("EMPTY INPUT axis, should still exist but no keys mapped to it")]
     protected string dummyAxis = "Dummy";
-
-    protected JumperInputComponent input = null;
-
-    //allowing other objects to listen to player's inputs
-    public JumperInputComponent Input
-    {
-        get
-        {
-            return input;
-        }
-    }
 
     protected Rigidbody2D rb;
     protected Renderer rend;
@@ -123,7 +111,6 @@ public class JumperPlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         audioPlayer = GetComponent<AudioSource>();
         rend = GetComponent<Renderer>();
-        RebindInputController();
         rb.velocity = Vector2.zero;
         currentHealth = maxHealth;
         originalJumpSpeed = jumpSpeed;
@@ -198,10 +185,10 @@ public class JumperPlayerController : MonoBehaviour
             jumped = false;
             return;
         }
-        jumped = JumpInput(input.Jump);
-        shieldInput = input.Pickup > 0f;
-        magnetInput = input.Throw > 0f ? true : magnetInput;
-        horizontalInput = input.Horizontal;
+        jumped = JumpInput(InputAxes.Instance.Jump.triggered);
+        shieldInput = InputAxes.Instance.Action1.triggered;
+        magnetInput = InputAxes.Instance.Action2.triggered;
+        horizontalInput = InputAxes.Instance.X.ReadValue<float>();
     }
 
     protected void ResetInputForCollisions()
@@ -234,16 +221,9 @@ public class JumperPlayerController : MonoBehaviour
         enabled = true;
     }
 
-    bool JumpInput(float inputVal)
+    bool JumpInput(bool jump)
     {
-        if (inputVal > 0f)
-        {
-            if (grounded || canAirJump || coinJump > 0)
-            {
-                return true;
-            }
-        }
-        return jumped;
+        return (jump && (grounded || canAirJump || coinJump > 0)) || jumped;
     }
 
     #endregion
@@ -496,15 +476,6 @@ public class JumperPlayerController : MonoBehaviour
     public string GetDummyAxis()
     {
         return dummyAxis;
-    }
-
-    public void RebindInputController()
-    {
-        input = GetComponent<JumperInputComponent>();
-        if (input == null)
-        {
-            input = gameObject.AddComponent<JumperInputKeyboard>();
-        }
     }
 
     public void BouncePlayer(float bounceStrength)

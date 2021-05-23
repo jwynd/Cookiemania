@@ -4,7 +4,10 @@
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "Unity.TextMeshPro",
-        "BaseDef"
+        "BaseDef",
+        "Unity.InputSystem",
+        "Unity.InputSystem.IntegrationTests",
+        "Unity.InputSystem.TestFramework"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

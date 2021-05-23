@@ -52,24 +52,10 @@ public class JumperStoryFramework : MonoBehaviour
     void Start()
     {
         jm = JumperManagerGame.Instance;
-        PopulateInputReplacers(out inputReplacers);
         //want to populate even if we dont use the tutorial
         ReadInTexts(out tutorialStrings, out endgameStrings);
         //once all the texts are finished, disable
         enabled = false;
-    }
-
-    private void PopulateInputReplacers(out Dictionary<string, System.Tuple<string, string>> inputReplacers)
-    {
-        inputReplacers = new Dictionary<string, System.Tuple<string, string>>();
-        GetKeysFromInputController(out Dictionary<string, System.Tuple<List<string>, List<string>>> temp);
-        foreach (string key in temp.Keys)
-        {
-            AddOrs(temp[key], out string positive, out string negative);
-            //Debug.Log(positive);
-            //Debug.Log(negative);
-            inputReplacers.Add("<" + key + ">", new System.Tuple<string, string>(positive, negative));
-        }
     }
 
     //puts all positive options into a string, each separated by " or ", same with negative options 
@@ -89,11 +75,6 @@ public class JumperStoryFramework : MonoBehaviour
             ordKeys += key;
         }
         ordKeys = ordKeys.Remove(0, init.Length);
-    }
-
-    private void GetKeysFromInputController(out Dictionary<string, System.Tuple<List<string>, List<string>>> buttons)
-    {
-        buttons = jm.Player.Input.AxesToKeys;
     }
 
 
@@ -208,11 +189,5 @@ public class JumperStoryFramework : MonoBehaviour
             return axis.Substring(1, axis.Length - 2);          
         }
         return axis;
-    }
-
-    //should attempt to use as a timer if not an axis
-    public bool IsAnAxis(string axis)
-    {
-        return jm.Player.Input.Axes.Contains(axis);
     }
 }
