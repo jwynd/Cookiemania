@@ -11,8 +11,8 @@ public class InputAxes : MonoBehaviour
     public InputAction Fire { get; private set; } = new InputAction(binding: "<Keyboard>/f");
     public InputAction Jump { get; private set; } = new InputAction(binding: "<Keyboard>/space");
     public InputAction Rotation { get; private set; } = new InputAction();
-    public InputAction X { get; private set; } = new InputAction();
-    public InputAction Y { get; private set; } = new InputAction();
+    public InputAction Horizontal { get; private set; } = new InputAction();
+    public InputAction Vertical { get; private set; } = new InputAction();
     public InputAction Action1 { get; private set; } = new InputAction(binding: "<Keyboard>/r");
     public InputAction Action2 { get; private set; } = new InputAction(binding: "<Keyboard>/e");
     public InputAction Action3 { get; private set; } = new InputAction(binding: "<Keyboard>/q");
@@ -26,10 +26,10 @@ public class InputAxes : MonoBehaviour
             return;
         }
         Instance = this;
-        X.AddCompositeBinding("Axis")
+        Horizontal.AddCompositeBinding("Axis")
             .With("Positive", "<Keyboard>/d")
             .With("Negative", "<Keyboard>/a");
-        Y.AddCompositeBinding("Axis")
+        Vertical.AddCompositeBinding("Axis")
             .With("Positive", "<Keyboard>/w")
             .With("Negative", "<Keyboard>/s");
         Rotation.AddCompositeBinding("Axis")

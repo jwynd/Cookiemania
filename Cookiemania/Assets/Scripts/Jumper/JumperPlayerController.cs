@@ -188,7 +188,7 @@ public class JumperPlayerController : MonoBehaviour
         jumped = JumpInput(InputAxes.Instance.Jump.triggered);
         shieldInput = InputAxes.Instance.Action1.triggered;
         magnetInput = InputAxes.Instance.Action2.triggered;
-        horizontalInput = InputAxes.Instance.X.ReadValue<float>();
+        horizontalInput = InputAxes.Instance.Horizontal.ReadValue<float>();
     }
 
     protected void ResetInputForCollisions()
