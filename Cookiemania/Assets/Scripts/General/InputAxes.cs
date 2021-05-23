@@ -13,8 +13,8 @@ public class InputAxes : MonoBehaviour
     public InputAction Rotation { get; private set; } = new InputAction();
     public InputAction X { get; private set; } = new InputAction();
     public InputAction Y { get; private set; } = new InputAction();
-    public InputAction Action1 { get; private set; } = new InputAction(binding: "<Keyboard>/e");
-    public InputAction Action2 { get; private set; } = new InputAction(binding: "<Keyboard>/r");
+    public InputAction Action1 { get; private set; } = new InputAction(binding: "<Keyboard>/r");
+    public InputAction Action2 { get; private set; } = new InputAction(binding: "<Keyboard>/e");
     public InputAction Action3 { get; private set; } = new InputAction(binding: "<Keyboard>/q");
 
 
