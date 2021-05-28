@@ -9,13 +9,14 @@ public class MainMenu : MonoBehaviour
     public GameObject settingsPrefab;
     public GameObject loadGamePrefab;
     public Button continueB;
-    public Animator transitioning = null;
+    public Animator transitioning;
 
     private string continueFile = "";
 
 
     public void Start()
     {
+        
         if (!PlayerPrefs.HasKey(PlayerDataStatics.P_PREFS_LAST_SAVED))
         {
             continueB.gameObject.SetActive(false);
@@ -31,7 +32,7 @@ public class MainMenu : MonoBehaviour
         //  SceneTransition(2);
         PlayerPrefs.DeleteKey(PlayerDataStatics.P_PREFS_LOAD);
         PlayerPrefs.Save();
-        SceneManager.LoadScene("Desktop", LoadSceneMode.Single);
+        StartCoroutine(transition());
     }
 
     public void Continue()
@@ -84,6 +85,12 @@ public class MainMenu : MonoBehaviour
     }
 
     //Handles the animation
+    IEnumerator transition()
+    {
+        transitioning.SetBool("ExitScene", true);
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("Desktop", LoadSceneMode.Single);
+    }
     IEnumerator LoadTransition(int version)
     {
         if (version == 1)
