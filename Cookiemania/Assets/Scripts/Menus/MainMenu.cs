@@ -40,7 +40,7 @@ public class MainMenu : MonoBehaviour
         if (continueFile == "") return;
         PlayerPrefs.SetString(PlayerDataStatics.P_PREFS_LOAD, continueFile);
         PlayerPrefs.Save();
-        SceneManager.LoadScene("Desktop", LoadSceneMode.Single);
+        StartCoroutine(conttransition());
     }
 
     public void Settings()
@@ -86,6 +86,13 @@ public class MainMenu : MonoBehaviour
 
     //Handles the animation
     IEnumerator transition()
+    {
+        transitioning.SetBool("ExitScene", true);
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("Desktop", LoadSceneMode.Single);
+    }
+
+    IEnumerator conttransition()
     {
         transitioning.SetBool("ExitScene", true);
         yield return new WaitForSeconds(3);
