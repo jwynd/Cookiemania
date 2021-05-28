@@ -16,7 +16,7 @@ public class InputAxes : MonoBehaviour
     public InputAction Action1 { get; private set; } = new InputAction(binding: "<Keyboard>/r");
     public InputAction Action2 { get; private set; } = new InputAction(binding: "<Keyboard>/e");
     public InputAction Action3 { get; private set; } = new InputAction(binding: "<Keyboard>/q");
-
+    public InputAction Escape { get; private set; } = new InputAction(binding: "<Keyboard>/escape");
 
     private void Awake()
     {

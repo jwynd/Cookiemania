@@ -56,6 +56,7 @@ public class SaveMenu : MonoBehaviour
 
     public void Return()
     {
+        if (!enabled) return;
         loadSlot = "";
         overwriting = false;
         slotNumber = 0;
@@ -90,14 +91,10 @@ public class SaveMenu : MonoBehaviour
                 PlayerPrefs.GetString(P_PREFS_SLOT_3_MONEY, "");
     }
 
-    void Update()
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Return();
-        }
+        InputAxes.Instance.Escape.started += delegate { Return(); };
     }
-
 
     public void Save()
     {

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 using static General_Utilities.Children;
@@ -75,51 +74,18 @@ public class PauseMenu : MonoBehaviour
     private void Start()
     {
         levelController = General_LevelTransition.Instance;
-        charCustom = FindObjectOfType<CharacterContentManager>().gameObject;
+        var possibleChar = FindObjectOfType<CharacterContentManager>();
+        if (possibleChar)
+            charCustom = possibleChar.gameObject;
+        InputAxes.Instance.Escape.performed += delegate { CheckEscape(); };
     }
 
-    private void Update()
+    private void CheckEscape()
     {
-        // the only higher precedence input taker
-        if (charCustom.activeSelf) return;
-        if (Keyboard.current.escapeKey.wasPressedThisFrame)
-        {
-            if (menuActive) Resume();
-            else Pause();            
-        }
-        // CheckMenuInputs();
-        
+        if (charCustom && charCustom.activeSelf) return;
+        if (menuActive) Resume();
+        else Pause();
     }
-
-   /* private void CheckMenuInputs()
-    {
-        //only one input per frame
-        var vert = input.Vertical;
-        if (input.Resume > 0f)
-        {
-            Resume();
-        }
-        else if (input.Exit > 0)
-        {
-            Exit();
-        }
-        else if (input.Settings > 0f)
-        {
-            Settings();
-        }
-        else if (vert > 0)
-        {
-            Up();
-        }
-        else if (vert < 0)
-        {
-            Down();
-        }
-        else if (input.Enter > 0)
-        {
-            Enter();
-        }
-    }*/
 
     protected void Enter()
     {
