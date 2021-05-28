@@ -997,6 +997,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1309468239786616575, guid: 8541eca58d6582944a19e81fec296263,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 327
+      objectReference: {fileID: 0}
     - target: {fileID: 7294615606107567921, guid: 8541eca58d6582944a19e81fec296263,
         type: 3}
       propertyPath: newChara
@@ -1015,7 +1020,7 @@ PrefabInstance:
     - target: {fileID: 7834210945013830011, guid: 8541eca58d6582944a19e81fec296263,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7834210945013830011, guid: 8541eca58d6582944a19e81fec296263,
         type: 3}
@@ -1190,6 +1195,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: TransitionCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8931215537192271768, guid: 7b63da0d818bf1a49a15c2be8b424443,
+        type: 3}
+      propertyPath: m_PixelPerfect
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8931215537192271768, guid: 7b63da0d818bf1a49a15c2be8b424443,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 3276
+      objectReference: {fileID: 0}
     - target: {fileID: 8931215537192271771, guid: 7b63da0d818bf1a49a15c2be8b424443,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1203,7 +1218,7 @@ PrefabInstance:
     - target: {fileID: 8931215537192271771, guid: 7b63da0d818bf1a49a15c2be8b424443,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8931215537192271771, guid: 7b63da0d818bf1a49a15c2be8b424443,
         type: 3}
