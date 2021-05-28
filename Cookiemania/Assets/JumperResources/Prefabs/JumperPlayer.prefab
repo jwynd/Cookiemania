@@ -75,6 +75,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -125,7 +126,6 @@ GameObject:
   - component: {fileID: 122012273554611361}
   - component: {fileID: 1793148104149608238}
   - component: {fileID: 1712654719569626921}
-  - component: {fileID: 3679143282031186485}
   - component: {fileID: 6983193897583704948}
   - component: {fileID: 2283239748538315119}
   m_Layer: 9
@@ -167,6 +167,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -375,23 +376,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &3679143282031186485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2857318615114850780}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db3fccd97650503468e834ddc072b1d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leftKeys: 6100000014010000
-  rightKeys: 6400000013010000
-  jumpKeys: 2000000011010000
-  pickupKeys: 6600000031010000
-  throwKeys: 650000002f010000
 --- !u!60 &6983193897583704948
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -519,6 +503,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -671,13 +656,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textObj: {fileID: 6459117367488761214, guid: 501e458ed872c1d46819839a5832dc6b, type: 3}
   poolSize: 30
-  spacingDefault: 0.15
-  timeTilFade: 0.75
-  fadeDuration: 0.15
+  positionOffset: 0.15
   velXRange: {x: -2.2, y: 2.2}
   velYRange: {x: 0, y: 2.2}
   accelXRange: {x: -2.2, y: 2.2}
   accelYRange: {x: 0, y: 2.2}
+  timeTilFade: 0.75
+  fadeDuration: 0.15
 --- !u!1 &8056393457377436083
 GameObject:
   m_ObjectHideFlags: 0
