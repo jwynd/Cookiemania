@@ -1,0 +1,536 @@
+fileFormatVersion: 2
+guid: 29a99ac9bf2ad494fad4efdb92f1d7c3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2058045627884428781
+    second: pirate wind up-Sheet-export_0
+  - first:
+      213: 2707796039849861905
+    second: pirate wind up-Sheet-export_1
+  - first:
+      213: -3844403716914488158
+    second: pirate wind up-Sheet-export_2
+  - first:
+      213: -6958256701396921893
+    second: pirate wind up-Sheet-export_3
+  - first:
+      213: 8846142034819382045
+    second: pirate wind up-Sheet-export_4
+  - first:
+      213: 8313933426002686342
+    second: pirate wind up-Sheet-export_5
+  - first:
+      213: -1299716895390601914
+    second: pirate wind up-Sheet-export_6
+  - first:
+      213: -7957012199231008485
+    second: pirate wind up-Sheet-export_7
+  - first:
+      213: -2734651700541423906
+    second: pirate wind up-Sheet-export_8
+  - first:
+      213: -3336535280241583387
+    second: pirate wind up-Sheet-export_9
+  - first:
+      213: -4423838006574250102
+    second: pirate wind up-Sheet-export_10
+  - first:
+      213: -6417045930581464203
+    second: pirate wind up-Sheet-export_11
+  - first:
+      213: -1702788122979033409
+    second: pirate wind up-Sheet-export_12
+  - first:
+      213: -2037256160519284200
+    second: pirate wind up-Sheet-export_13
+  - first:
+      213: 3184077687815402892
+    second: pirate wind up-Sheet-export_14
+  - first:
+      213: 2399947421887811092
+    second: pirate wind up-Sheet-export_15
+  - first:
+      213: -5371944204364082093
+    second: pirate wind up-Sheet-export_16
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: pirate wind up-Sheet-export_0
+      rect:
+        serializedVersion: 2
+        x: 3165
+        y: 457
+        width: 14
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 312276ac76a5073e0800000000000000
+      internalID: -2058045627884428781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pirate wind up-Sheet-export_1
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 60
+        width: 319
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 113e577d626049520800000000000000
+      internalID: 2707796039849861905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pirate wind up-Sheet-export_2
+      rect:
+        serializedVersion: 2
+        x: 861
+        y: 357
+        width: 14
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2acde10203fe5aac0800000000000000
+      internalID: -3844403716914488158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pirate wind up-Sheet-export_3
+      rect:
+        serializedVersion: 2
+        x: 2912
+        y: 60
+        width: 503
+        height: 427
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd15141856e4f6f90800000000000000
+      internalID: -6958256701396921893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pirate wind up-Sheet-export_4
+      rect:
+        serializedVersion: 2
+        x: 3336
+        y: 367
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1b7f02df4fc3ca70800000000000000
+      internalID: 8846142034819382045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pirate wind up-Sheet-export_5
+      rect:
+        serializedVersion: 2
+        x: 3570
+        y: 60
+        width: 321
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 681f22fd666016370800000000000000
+      internalID: 8313933426002686342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pirate wind up-Sheet-export_6
+      rect:
+        serializedVersion: 2
+        x: 668
+        y: 60
+        width: 383
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64d6badae5a76fde0800000000000000
+      internalID: -1299716895390601914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pirate wind up-Sheet-export_7
+      rect:
+        serializedVersion: 2
+        x: 718
+        y: 312
+        width: 31
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b11d2671093039190800000000000000
+      internalID: -7957012199231008485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pirate wind up-Sheet-export_8
+      rect:
+        serializedVersion: 2
+        x: 987
+        y: 321
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ede7fc464c09c0ad0800000000000000
+      internalID: -2734651700541423906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pirate wind up-Sheet-export_9
+      rect:
+        serializedVersion: 2
+        x: 1285
+        y: 60
+        width: 304
+        height: 285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ea54a027de32b1d0800000000000000
+      internalID: -3336535280241583387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pirate wind up-Sheet-export_10
+      rect:
+        serializedVersion: 2
+        x: 1861
+        y: 60
+        width: 284
+        height: 275
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a87054285ce5b92c0800000000000000
+      internalID: -4423838006574250102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pirate wind up-Sheet-export_11
+      rect:
+        serializedVersion: 2
+        x: 2428
+        y: 52
+        width: 302
+        height: 293
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57b6350a9b212f6a0800000000000000
+      internalID: -6417045930581464203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pirate wind up-Sheet-export_12
+      rect:
+        serializedVersion: 2
+        x: 672
+        y: 186
+        width: 42
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbe9412593b7e58e0800000000000000
+      internalID: -1702788122979033409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pirate wind up-Sheet-export_13
+      rect:
+        serializedVersion: 2
+        x: 1015
+        y: 178
+        width: 31
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81a95cbd0563ab3e0800000000000000
+      internalID: -2037256160519284200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pirate wind up-Sheet-export_14
+      rect:
+        serializedVersion: 2
+        x: 1564
+        y: 178
+        width: 22
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c85fb7f79cd103c20800000000000000
+      internalID: 3184077687815402892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pirate wind up-Sheet-export_15
+      rect:
+        serializedVersion: 2
+        x: 2913
+        y: 186
+        width: 41
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41ecc39f6735e4120800000000000000
+      internalID: 2399947421887811092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pirate wind up-Sheet-export_16
+      rect:
+        serializedVersion: 2
+        x: 3381
+        y: 178
+        width: 32
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35419a935350375b0800000000000000
+      internalID: -5371944204364082093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

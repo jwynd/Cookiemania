@@ -1,0 +1,632 @@
+fileFormatVersion: 2
+guid: 184c4603fac508b4ebc6c4df50f2bf17
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3130107184054872339
+    second: cookie_enemy_death-sheet-export_0
+  - first:
+      213: 8054922894565384601
+    second: cookie_enemy_death-sheet-export_1
+  - first:
+      213: -790873326495331905
+    second: cookie_enemy_death-sheet-export_2
+  - first:
+      213: 7360118500655452928
+    second: cookie_enemy_death-sheet-export_3
+  - first:
+      213: 7693039641328049031
+    second: cookie_enemy_death-sheet-export_4
+  - first:
+      213: -318241960531305749
+    second: cookie_enemy_death-sheet-export_5
+  - first:
+      213: -4071164351675551562
+    second: cookie_enemy_death-sheet-export_6
+  - first:
+      213: 6564496180723783969
+    second: cookie_enemy_death-sheet-export_7
+  - first:
+      213: -7688909550565083670
+    second: cookie_enemy_death-sheet-export_8
+  - first:
+      213: -4480366655343518351
+    second: cookie_enemy_death-sheet-export_9
+  - first:
+      213: -6211240800810354442
+    second: cookie_enemy_death-sheet-export_10
+  - first:
+      213: 664880130912208230
+    second: cookie_enemy_death-sheet-export_11
+  - first:
+      213: -3736158915940082963
+    second: cookie_enemy_death-sheet-export_12
+  - first:
+      213: -3849437367924804979
+    second: cookie_enemy_death-sheet-export_13
+  - first:
+      213: 6242685171000530399
+    second: cookie_enemy_death-sheet-export_14
+  - first:
+      213: -5662910327389426403
+    second: cookie_enemy_death-sheet-export_15
+  - first:
+      213: 5358415849295860667
+    second: cookie_enemy_death-sheet-export_16
+  - first:
+      213: 3546215163238868248
+    second: cookie_enemy_death-sheet-export_17
+  - first:
+      213: 6898368462417398299
+    second: cookie_enemy_death-sheet-export_18
+  - first:
+      213: 3826624015095333819
+    second: cookie_enemy_death-sheet-export_19
+  - first:
+      213: 4322165882873406168
+    second: cookie_enemy_death-sheet-export_20
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: cookie_enemy_death-sheet-export_0
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 133
+        width: 265
+        height: 310
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de6d281a910af84d0800000000000000
+      internalID: -3130107184054872339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cookie_enemy_death-sheet-export_1
+      rect:
+        serializedVersion: 2
+        x: 673
+        y: 98
+        width: 391
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9912bbf12b5d8cf60800000000000000
+      internalID: 8054922894565384601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cookie_enemy_death-sheet-export_2
+      rect:
+        serializedVersion: 2
+        x: 2095
+        y: 421
+        width: 57
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb90ae756e04605f0800000000000000
+      internalID: -790873326495331905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cookie_enemy_death-sheet-export_3
+      rect:
+        serializedVersion: 2
+        x: 2361
+        y: 138
+        width: 165
+        height: 314
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0035950e7c4642660800000000000000
+      internalID: 7360118500655452928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cookie_enemy_death-sheet-export_4
+      rect:
+        serializedVersion: 2
+        x: 2491
+        y: 421
+        width: 31
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78b5b585bca23ca60800000000000000
+      internalID: 7693039641328049031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cookie_enemy_death-sheet-export_5
+      rect:
+        serializedVersion: 2
+        x: 2703
+        y: 124
+        width: 79
+        height: 316
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bea58ed7f90659bf0800000000000000
+      internalID: -318241960531305749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cookie_enemy_death-sheet-export_6
+      rect:
+        serializedVersion: 2
+        x: 1493
+        y: 367
+        width: 39
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b0352497915087c0800000000000000
+      internalID: -4071164351675551562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cookie_enemy_death-sheet-export_7
+      rect:
+        serializedVersion: 2
+        x: 1870
+        y: 376
+        width: 40
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12913750f76c91b50800000000000000
+      internalID: 6564496180723783969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cookie_enemy_death-sheet-export_8
+      rect:
+        serializedVersion: 2
+        x: 2455
+        y: 394
+        width: 31
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae5b57850818b4590800000000000000
+      internalID: -7688909550565083670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cookie_enemy_death-sheet-export_9
+      rect:
+        serializedVersion: 2
+        x: 2725
+        y: 386
+        width: 12
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17d9eb4d34a82d1c0800000000000000
+      internalID: -4480366655343518351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cookie_enemy_death-sheet-export_10
+      rect:
+        serializedVersion: 2
+        x: 2753
+        y: 386
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f83945766d3dc9a0800000000000000
+      internalID: -6211240800810354442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cookie_enemy_death-sheet-export_11
+      rect:
+        serializedVersion: 2
+        x: 1339
+        y: 224
+        width: 196
+        height: 187
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 665cc35d4f02a3900800000000000000
+      internalID: 664880130912208230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cookie_enemy_death-sheet-export_12
+      rect:
+        serializedVersion: 2
+        x: 1375
+        y: 223
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dea9bfec24f762cc0800000000000000
+      internalID: -3736158915940082963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cookie_enemy_death-sheet-export_13
+      rect:
+        serializedVersion: 2
+        x: 1474
+        y: 233
+        width: 40
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d823abbeb1d049ac0800000000000000
+      internalID: -3849437367924804979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cookie_enemy_death-sheet-export_14
+      rect:
+        serializedVersion: 2
+        x: 1816
+        y: 179
+        width: 358
+        height: 286
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd5d51e761972a650800000000000000
+      internalID: 6242685171000530399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cookie_enemy_death-sheet-export_15
+      rect:
+        serializedVersion: 2
+        x: 2743
+        y: 223
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1def058f0d4961b0800000000000000
+      internalID: -5662910327389426403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cookie_enemy_death-sheet-export_16
+      rect:
+        serializedVersion: 2
+        x: 2123
+        y: 178
+        width: 39
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb35a1823daec5a40800000000000000
+      internalID: 5358415849295860667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cookie_enemy_death-sheet-export_17
+      rect:
+        serializedVersion: 2
+        x: 2365
+        y: 169
+        width: 22
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 815e4fdf6efa63130800000000000000
+      internalID: 3546215163238868248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cookie_enemy_death-sheet-export_18
+      rect:
+        serializedVersion: 2
+        x: 2455
+        y: 143
+        width: 22
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1a8524419debbf50800000000000000
+      internalID: 6898368462417398299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cookie_enemy_death-sheet-export_19
+      rect:
+        serializedVersion: 2
+        x: 2708
+        y: 133
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb38cb47446ea1530800000000000000
+      internalID: 3826624015095333819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cookie_enemy_death-sheet-export_20
+      rect:
+        serializedVersion: 2
+        x: 2725
+        y: 133
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d26bfc78fa6bfb30800000000000000
+      internalID: 4322165882873406168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

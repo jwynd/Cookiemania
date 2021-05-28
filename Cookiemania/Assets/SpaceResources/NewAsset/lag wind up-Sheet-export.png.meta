@@ -1,0 +1,560 @@
+fileFormatVersion: 2
+guid: fbfbd58a553ae4141a6c27835d33ac80
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4854535837676056193
+    second: lag wind up-Sheet-export_0
+  - first:
+      213: -5093309446508981331
+    second: lag wind up-Sheet-export_1
+  - first:
+      213: 7977737386612054883
+    second: lag wind up-Sheet-export_2
+  - first:
+      213: 26933465294598444
+    second: lag wind up-Sheet-export_3
+  - first:
+      213: 427136524441427208
+    second: lag wind up-Sheet-export_4
+  - first:
+      213: 6718255907461705861
+    second: lag wind up-Sheet-export_5
+  - first:
+      213: -1392805093755488279
+    second: lag wind up-Sheet-export_6
+  - first:
+      213: 8366554536297339410
+    second: lag wind up-Sheet-export_7
+  - first:
+      213: -8422863255883740125
+    second: lag wind up-Sheet-export_8
+  - first:
+      213: -3372862126345474939
+    second: lag wind up-Sheet-export_9
+  - first:
+      213: 7632095229322893524
+    second: lag wind up-Sheet-export_10
+  - first:
+      213: 8947156260353760608
+    second: lag wind up-Sheet-export_11
+  - first:
+      213: -1332005013484926216
+    second: lag wind up-Sheet-export_12
+  - first:
+      213: 4455996504268937160
+    second: lag wind up-Sheet-export_13
+  - first:
+      213: 7859222925897137150
+    second: lag wind up-Sheet-export_14
+  - first:
+      213: 5092721934225993804
+    second: lag wind up-Sheet-export_15
+  - first:
+      213: -7421892377677992132
+    second: lag wind up-Sheet-export_16
+  - first:
+      213: 8166628130157767311
+    second: lag wind up-Sheet-export_17
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: lag wind up-Sheet-export_0
+      rect:
+        serializedVersion: 2
+        x: 3165
+        y: 457
+        width: 14
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18ea51abf96ce5340800000000000000
+      internalID: 4854535837676056193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lag wind up-Sheet-export_1
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 60
+        width: 266
+        height: 311
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da3d0bd3b0ee059b0800000000000000
+      internalID: -5093309446508981331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lag wind up-Sheet-export_2
+      rect:
+        serializedVersion: 2
+        x: 871
+        y: 357
+        width: 14
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36b5d50a2ed96be60800000000000000
+      internalID: 7977737386612054883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lag wind up-Sheet-export_3
+      rect:
+        serializedVersion: 2
+        x: 2976
+        y: 357
+        width: 33
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c21747f08dfaf5000800000000000000
+      internalID: 26933465294598444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lag wind up-Sheet-export_4
+      rect:
+        serializedVersion: 2
+        x: 2912
+        y: 60
+        width: 509
+        height: 436
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80d1de9e76e7de500800000000000000
+      internalID: 427136524441427208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lag wind up-Sheet-export_5
+      rect:
+        serializedVersion: 2
+        x: 3336
+        y: 367
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 580bc6a272a0c3d50800000000000000
+      internalID: 6718255907461705861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lag wind up-Sheet-export_6
+      rect:
+        serializedVersion: 2
+        x: 3625
+        y: 60
+        width: 266
+        height: 311
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e779598523cbace0800000000000000
+      internalID: -1392805093755488279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lag wind up-Sheet-export_7
+      rect:
+        serializedVersion: 2
+        x: 727
+        y: 312
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21a9fe9d509fb1470800000000000000
+      internalID: 8366554536297339410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lag wind up-Sheet-export_8
+      rect:
+        serializedVersion: 2
+        x: 997
+        y: 321
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32c0c59be7afb1b80800000000000000
+      internalID: -8422863255883740125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lag wind up-Sheet-export_9
+      rect:
+        serializedVersion: 2
+        x: 1446
+        y: 321
+        width: 14
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58c2fca24cf2131d0800000000000000
+      internalID: -3372862126345474939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lag wind up-Sheet-export_10
+      rect:
+        serializedVersion: 2
+        x: 1897
+        y: 52
+        width: 266
+        height: 275
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d89ebbac26aae960800000000000000
+      internalID: 7632095229322893524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lag wind up-Sheet-export_11
+      rect:
+        serializedVersion: 2
+        x: 2472
+        y: 52
+        width: 266
+        height: 275
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06d5c48f63faa2c70800000000000000
+      internalID: 8947156260353760608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lag wind up-Sheet-export_12
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 186
+        width: 40
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fa013c5f74c38de0800000000000000
+      internalID: -1332005013484926216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lag wind up-Sheet-export_13
+      rect:
+        serializedVersion: 2
+        x: 671
+        y: 60
+        width: 389
+        height: 332
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c715553631e6dd30800000000000000
+      internalID: 4455996504268937160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lag wind up-Sheet-export_14
+      rect:
+        serializedVersion: 2
+        x: 1023
+        y: 178
+        width: 33
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efb74b47c91911d60800000000000000
+      internalID: 7859222925897137150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lag wind up-Sheet-export_15
+      rect:
+        serializedVersion: 2
+        x: 1312
+        y: 60
+        width: 289
+        height: 296
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c407165ed9bfca640800000000000000
+      internalID: 5092721934225993804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lag wind up-Sheet-export_16
+      rect:
+        serializedVersion: 2
+        x: 2913
+        y: 186
+        width: 41
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3fe2539434200990800000000000000
+      internalID: -7421892377677992132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lag wind up-Sheet-export_17
+      rect:
+        serializedVersion: 2
+        x: 3381
+        y: 178
+        width: 32
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8a24c60401b55170800000000000000
+      internalID: 8166628130157767311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
