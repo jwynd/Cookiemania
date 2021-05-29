@@ -28,23 +28,8 @@ public class JumperPlayerController : MonoBehaviour
     public GameObject shield;
     public TextParticleSystem texts;
 
-    [SerializeField]
-    [Tooltip("Axis for left and right movements")]
-    protected string horizontalAxis = "Horizontal";
-    [SerializeField]
-    [Tooltip("Axis for jumping")]
-    protected string jumpAxis = "Jump";
-
-
-    [SerializeField]
-    [Tooltip("Axis for picking up items")]
-    protected string pickupAxis = "Pickup";
-    [SerializeField]
-    [Tooltip("Axis for using magnet ability")]
-    protected string magnetAxis = "Throw";
-    [SerializeField]
-    [Tooltip("EMPTY INPUT axis, should still exist but no keys mapped to it")]
-    protected string dummyAxis = "Dummy";
+    public AbilityCooldown magnetcdSymbol;
+    public AbilityCooldown shieldcdSymbol;
 
     protected Rigidbody2D rb;
     protected Renderer rend;
@@ -156,6 +141,14 @@ public class JumperPlayerController : MonoBehaviour
         magnetCapsule.offset *= magnetRange;
         shieldCooldown -= (jm.Shield - 1) * 2f;
         GetTags();
+        if (magnetLevel < 1)
+        {
+            magnetcdSymbol.gameObject.SetActive(false);
+        }
+        if (shieldLevel < 1)
+        {
+            shieldcdSymbol.gameObject.SetActive(false);
+        }
     }
 
     protected void GetTags()
@@ -186,8 +179,8 @@ public class JumperPlayerController : MonoBehaviour
             return;
         }
         jumped = JumpInput(InputAxes.Instance.Jump.triggered);
-        shieldInput = InputAxes.Instance.Action1.triggered;
-        magnetInput = InputAxes.Instance.Action2.triggered;
+        shieldInput = InputAxes.Instance.Action1.triggered || shieldInput;
+        magnetInput = InputAxes.Instance.Action2.triggered || magnetInput;
         horizontalInput = InputAxes.Instance.Horizontal.ReadValue<float>();
     }
 
@@ -200,6 +193,7 @@ public class JumperPlayerController : MonoBehaviour
     {
         jumped = false;
         magnetInput = false;
+        shieldInput = false;
         horizontalInput = 0f;
     }
 
@@ -361,7 +355,7 @@ public class JumperPlayerController : MonoBehaviour
         {
             // activate magnet
             Debug.LogWarning("activating magnet");
-            currentMagnetCD = magnetCooldown;
+            magnetcdSymbol.StartAppear(() => { currentMagnetCD = 0f; canMagnet = true; }, magnetCooldown);
             currentMagnet = magnetDuration;
             isMagnetic = true;
             magnetController.ActivateMagnet(magnetDuration);
@@ -376,7 +370,8 @@ public class JumperPlayerController : MonoBehaviour
     {
         if (shieldInput && canShield && shieldLevel > 0)
         {
-            currentShieldCD = shieldCooldown;
+            Debug.LogWarning("shield up!");
+            shieldcdSymbol.StartAppear(() => { currentShieldCD = 0f; canShield = true; }, shieldCooldown);
             currentShield = shieldDuration;
             isShielded = true;
             shield.SetActive(true);
@@ -399,13 +394,9 @@ public class JumperPlayerController : MonoBehaviour
         // decrement timers
         // they're floats: i would need to run the game for years to underflow
         // and precision stops mattering once im under 0 :)
-        currentMagnetCD -= Time.fixedDeltaTime;
-        currentShieldCD -= Time.fixedDeltaTime;
         currentShield -= Time.fixedDeltaTime;
         currentMagnet -= Time.fixedDeltaTime;
         // set timer flags
-        canMagnet = currentMagnetCD < 0.01f && magnetLevel > 0;
-        canShield = currentShieldCD < 0.01f && shieldLevel > 0;
         isShielded = currentShield > 0f;
         isMagnetic = currentMagnet > 0f;
     }
@@ -457,30 +448,8 @@ public class JumperPlayerController : MonoBehaviour
         return points * (1 + (aiLevel * 0.2f));
     }
 
-    public string GetHorizontalAxis()
-    {
-        return horizontalAxis;
-    }
-    public string GetJumpAxis()
-    {
-        return jumpAxis;
-    }
-    public string GetPickupAxis()
-    {
-        return pickupAxis;
-    }
-    public string GetThrowAxis()
-    {
-        return magnetAxis;
-    }
-    public string GetDummyAxis()
-    {
-        return dummyAxis;
-    }
-
     public void BouncePlayer(float bounceStrength)
     {
-        Debug.Log("Bounce called");
         JumpHelper(rb.velocity.x, bounceStrength * jumpSpeed);
         canAirJump = true;
     }
