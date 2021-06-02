@@ -9,18 +9,18 @@ EditorBuildSettings:
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/TestMinigames.unity
+    path: Assets/Scenes/test/TestMinigames.unity
     guid: c57484b7e86683348b1a01f6a70537af
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
+    path: Assets/Scenes/build/MainMenu.unity
     guid: 9fc3f8540fbc53c44b03bba72ada6d82
   - enabled: 1
-    path: Assets/Scenes/Desktop.unity
+    path: Assets/Scenes/build/Desktop.unity
     guid: 49d92bb0aeabe534e9f54aaaa978ee0f
   - enabled: 1
-    path: Assets/Scenes/Jumper.unity
+    path: Assets/Scenes/build/Jumper.unity
     guid: 5bac6f7a0f2b737418802aa859a5f8a1
   - enabled: 1
-    path: Assets/Scenes/Spacemini.unity
+    path: Assets/Scenes/build/Spacemini.unity
     guid: 18675ef7018a9094f9373e3c5b1d4d08
   m_configObjects: {}
