@@ -28,6 +28,8 @@ public class InputAxes : MonoBehaviour
             return;
         }
         Instance = this;
+        Jump.AddBinding("<Keyboard>/upArrow");
+        Action1.AddBinding("<Keyboard>/downArrow");
         Horizontal.AddCompositeBinding("Axis")
             .With("Positive", "<Keyboard>/d")
             .With("Negative", "<Keyboard>/a");
@@ -37,6 +39,9 @@ public class InputAxes : MonoBehaviour
         Rotation.AddCompositeBinding("Axis")
             .With("Positive", "<Keyboard>/q")
             .With("Negative", "<Keyboard>/e");
+        Rotation.AddCompositeBinding("Axis")
+            .With("Positive", "<Keyboard>/leftArrow")
+            .With("Negative", "<Keyboard>/rightArrow");
         PropertyInfo[] props = typeof(InputAxes).GetProperties();
         foreach (var prop in props)
         {
