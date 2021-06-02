@@ -15,16 +15,21 @@ public class BossSpawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Enemies.Add(boss1);
-        if(PlayerData.Player.spacelvl <= 1)
+        if (PlayerData.Player != null)
         {
-            spawning = 60f;
-        } else if (PlayerData.Player.spacelvl == 2 || PlayerData.Player.spacelvl == 3)
-        {
-            spawning = 45f;
-        } else
-        {
-            spawning = 30f;
+            Enemies.Add(boss1);
+            if (PlayerData.Player.spacelvl <= 1)
+            {
+                spawning = 60f;
+            }
+            else if (PlayerData.Player.spacelvl == 2 || PlayerData.Player.spacelvl == 3)
+            {
+                spawning = 45f;
+            }
+            else
+            {
+                spawning = 30f;
+            }
         }
 
     }
