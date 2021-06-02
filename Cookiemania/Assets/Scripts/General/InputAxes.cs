@@ -28,8 +28,8 @@ public class InputAxes : MonoBehaviour
             return;
         }
         Instance = this;
-        Jump.AddBinding("<Keyboard>/upArrow");
-        Action1.AddBinding("<Keyboard>/downArrow");
+        Action1.AddBinding("<Keyboard>/upArrow");
+        Jump.AddBinding("<Keyboard>/downArrow");
         Horizontal.AddCompositeBinding("Axis")
             .With("Positive", "<Keyboard>/d")
             .With("Negative", "<Keyboard>/a");
