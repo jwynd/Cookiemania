@@ -98,10 +98,9 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
-        // dont use menuactive over true here
-        normalTimeScale = Time.timeScale;
         saveButton.interactable = EventManager.Instance.EventController.CanSaveLoad();
-        PauseWithoutScreen();
+        var pauseTime = PauseWithoutScreen();
+        if (pauseTime >= 0f) normalTimeScale = pauseTime;
         markedButton = -1;
         Up();
         menuActive = true;
@@ -114,7 +113,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (Time.timeScale <= 0)
         {
-            return -1;
+            return -1f;
         }
         var currentScale = Time.timeScale;
         Time.timeScale = 0;

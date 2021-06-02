@@ -17,6 +17,7 @@ public class Website : MonoBehaviour
         websiteRef = Instantiate(websitePrefab);
         //dont parent
         websiteCanvas = websiteRef.GetComponent<Canvas>();
+        websiteCanvas.gameObject.SetActive(false);
         websiteCanvas.enabled = false;
         ui = websiteRef.GetComponent<WebsiteUI>();
     }
@@ -30,13 +31,20 @@ public class Website : MonoBehaviour
 
     private void OnEnable()
     {
+        if (!websiteCanvas)
+            return;
+        websiteCanvas.gameObject.SetActive(true);
         websiteCanvas.enabled = true;
+
         ui.AnimateWeather();
     }
 
     private void OnDisable()
     {
-        if (websiteCanvas)
-            websiteCanvas.enabled = false;
+        if (!websiteCanvas)
+            return;
+        websiteCanvas.gameObject.SetActive(false);
+        websiteCanvas.enabled = false;
+
     }
 }

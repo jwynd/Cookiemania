@@ -42,6 +42,7 @@ public class Minigame : MonoBehaviour
         minigameRef = Instantiate(minigameUIPrefab);
         //dont parent
         minigameCanvas = minigameRef.GetComponent<Canvas>();
+        minigameCanvas.gameObject.SetActive(false);
         minigameCanvas.enabled = false;
         MinigameUI setRef = minigameRef.GetComponent<MinigameUI>();
         setRef.SetGame1Listener(MinigameOneStart);
@@ -58,13 +59,20 @@ public class Minigame : MonoBehaviour
     private void OnEnable()
     {
         //go to website instead
+        if (!minigameCanvas)
+            return;
+        minigameCanvas.gameObject.SetActive(true);
         minigameCanvas.enabled = true;
+
     }
 
     private void OnDisable()
     {
-        if (minigameCanvas)
-            minigameCanvas.enabled = false;
+        if (!minigameCanvas)
+            return;
+        minigameCanvas.gameObject.SetActive(false);
+        minigameCanvas.enabled = false;
+
     }
 
 }

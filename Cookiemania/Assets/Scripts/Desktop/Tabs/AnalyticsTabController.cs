@@ -14,6 +14,7 @@ public class AnalyticsTabController : MonoBehaviour
 
     protected void ReturnFunction()
     {
+        controlledCanvas.gameObject.SetActive(false);
         controlledCanvas.enabled = false;
         homeTab.GetComponent<General_TabButton>().Click();
     }
@@ -22,6 +23,7 @@ public class AnalyticsTabController : MonoBehaviour
     {
         controlledObj = Instantiate(canvasPrefab);
         controlledCanvas = controlledObj.GetComponent<Canvas>();
+        controlledCanvas.gameObject.SetActive(false);
         controlledCanvas.enabled = false;
     }
 
@@ -32,13 +34,17 @@ public class AnalyticsTabController : MonoBehaviour
 
     private void OnEnable()
     {
-        if (controlledCanvas)
-            controlledCanvas.enabled = true;
+        if (!controlledCanvas)
+            return;
+        controlledCanvas.gameObject.SetActive(true);
+        controlledCanvas.enabled = true;
     }
 
     private void OnDisable()
     {
-        if (controlledCanvas)
-            controlledCanvas.enabled = false;
+        if (!controlledCanvas)
+            return;
+        controlledCanvas.gameObject.SetActive(false);
+        controlledCanvas.enabled = false;
     }
 }

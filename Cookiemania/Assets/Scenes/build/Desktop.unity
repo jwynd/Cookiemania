@@ -884,25 +884,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7032505325890627353, guid: b4f5cd09659dd7d43933b10b474a537f,
+    - target: {fileID: 700382183918619725, guid: b4f5cd09659dd7d43933b10b474a537f,
         type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 31
       objectReference: {fileID: 0}
-    - target: {fileID: 7032505325890627353, guid: b4f5cd09659dd7d43933b10b474a537f,
+    - target: {fileID: 7252936618966338890, guid: b4f5cd09659dd7d43933b10b474a537f,
         type: 3}
-      propertyPath: m_SizeDelta.y
-      value: -44.28
-      objectReference: {fileID: 0}
-    - target: {fileID: 7032505325890627353, guid: b4f5cd09659dd7d43933b10b474a537f,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7032505325890627353, guid: b4f5cd09659dd7d43933b10b474a537f,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -22.14
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4f5cd09659dd7d43933b10b474a537f, type: 3}

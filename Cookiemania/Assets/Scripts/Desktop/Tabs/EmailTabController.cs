@@ -15,6 +15,7 @@ public class EmailTabController : MonoBehaviour
     protected void ReturnFunction()
     {
         controlledCanvas.enabled = false;
+        controlledCanvas.gameObject.SetActive(false);
         homeTab.GetComponent<General_TabButton>().Click();
     }
 
@@ -22,7 +23,7 @@ public class EmailTabController : MonoBehaviour
     {
         controlledObj = Instantiate(canvasPrefab);
         controlledCanvas = controlledObj.GetComponent<Canvas>();
-        controlledCanvas.enabled = false;
+        controlledCanvas.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -34,16 +35,20 @@ public class EmailTabController : MonoBehaviour
 
     private void OnEnable()
     {
-        if (controlledCanvas)
-        {
-            controlledCanvas.enabled = true;
-            controlledObj.GetComponent<EmailController>().ShowYourself();
-        }    
+        if (!controlledCanvas)
+            return;
+        controlledCanvas.gameObject.SetActive(true);
+        controlledCanvas.enabled = true;
+        controlledObj.GetComponent<EmailController>().ShowYourself();
+
     }
 
     private void OnDisable()
     {
-        if (controlledCanvas)
-            controlledCanvas.enabled = false;
+        if (!controlledCanvas)
+            return;
+        controlledCanvas.gameObject.SetActive(false);
+        controlledCanvas.enabled = false;
+
     }
 }
