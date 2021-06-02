@@ -62,7 +62,7 @@ public class player : MonoBehaviour
                 nextbullettime = Time.time + cooldownbullets;
             }
         }
-        if (InputAxes.Instance.Fire.triggered)
+        if (InputAxes.Instance.Action1.triggered)
         {
             if (Time.time > nextskilltime)
             {

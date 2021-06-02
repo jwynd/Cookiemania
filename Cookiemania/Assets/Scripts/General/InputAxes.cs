@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class InputAxes : MonoBehaviour
 {
     public static InputAxes Instance { get; private set; }
-    public InputAction Fire { get; private set; } = new InputAction(binding: "<Keyboard>/f");
+    public InputAction Fire { get; private set; } = new InputAction(binding: "<Keyboard>/UpArrow");
     public InputAction Jump { get; private set; } = new InputAction(binding: "<Keyboard>/space");
     public InputAction Rotation { get; private set; } = new InputAction();
     public InputAction Horizontal { get; private set; } = new InputAction();

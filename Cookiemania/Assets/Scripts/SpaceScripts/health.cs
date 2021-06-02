@@ -19,8 +19,12 @@ public class health : MonoBehaviour
 
     private void Start()
     {
-        lives += PlayerData.Player.healthlvl;
-        numlives += PlayerData.Player.healthlvl;
+        if(PlayerData.Player != null)
+        {
+            lives += PlayerData.Player.healthlvl;
+            numlives += PlayerData.Player.healthlvl;
+        }
+        
 
         switch (lives)
         {
