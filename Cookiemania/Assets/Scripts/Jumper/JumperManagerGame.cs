@@ -25,6 +25,8 @@ public class JumperManagerGame : MonoBehaviour
     [SerializeField]
     private List<Platforms> dayPrefabs = new List<Platforms>();
     [SerializeField]
+    private GameObject coinPrefab = null;
+    [SerializeField]
     private GameObject nightExit = null;
     [SerializeField]
     private GameObject dayExit = null;
@@ -87,6 +89,7 @@ public class JumperManagerGame : MonoBehaviour
     protected GameObject actualExit;
     protected bool TestingMode = false;
     protected float minDifficulty = 0.3f;
+    private bool building;
 
     public JumperCameraController MainCam { get; private set; }
     public JumperPlayerController Player { get; private set; }
@@ -225,7 +228,7 @@ public class JumperManagerGame : MonoBehaviour
         minHeightIncrease = Player.gameObject.GetComponent<Renderer>().bounds.size.y * 2f + g.GetComponent<Renderer>().bounds.size.y;
         Destroy(g);
         jumpHeight = ( Player.GetOriginalJumpStrength() * alteredGravity ) / 3;
-        width = Player.GetMaxVelocity() * 2.5f;
+        width = Player.GetMaxVelocity() * 2.2f;
         max  = (int)(density * 1.5f);
         offset = Player.transform.position.x;
         height = Player.transform.position.y;
@@ -248,6 +251,22 @@ public class JumperManagerGame : MonoBehaviour
         return actualPrefabs[actualPrefabs.Count - 1].platform;
     }
 
+    private void PlaceCoins(Transform platform)
+    {
+        // 75% no coins
+        if (UnityEngine.Random.Range(0f, 1f) > 0.75f) return;
+        var modpos = platform.position;
+        modpos.y += 2f;
+        int amt = UnityEngine.Random.Range(1, 3);
+        for (int i = 0; i < amt; i++)
+        {
+            var go = Instantiate(coinPrefab);
+            go.transform.position = modpos + (UnityEngine.Random.rotation * Vector3.one * 1.2f);
+            modpos = go.transform.position;
+            go.transform.parent = platform;
+        }
+    }
+
     #endregion
 
     #region update
@@ -265,10 +284,18 @@ public class JumperManagerGame : MonoBehaviour
         {
             JumperManagerUI.Instance.End(false, false);
         }
-        if (heightRightNow > checkAgainstPosition)
-        { 
-            BuildSection();
+        if (!building && heightRightNow > checkAgainstPosition)
+        {
+            StartCoroutine(BuildWrapper());
         }
+    }
+
+    private IEnumerator BuildWrapper()
+    {
+        building = true;
+        yield return new WaitForEndOfFrame();
+        BuildSection();
+        building = !haveBuiltExit;
     }
 
     private void AttemptToBuildExit()
@@ -327,6 +354,7 @@ public class JumperManagerGame : MonoBehaviour
             offset = pos.x;
             height = pos.y;
             GameObject g = Instantiate(Roulette(), pos, Quaternion.Euler(0, 0, 0));
+            PlaceCoins(g.transform);
             canPlaceAboveLast = g.GetComponent<JumperGeneralPlatform>().CanPlacePlatformsAbove();
             g.transform.parent = transform;
             g.transform.SetAsFirstSibling();
@@ -334,7 +362,8 @@ public class JumperManagerGame : MonoBehaviour
             {
                 checkAgainstPosition = pos.y;
             }
-            if(transform.childCount > max) transform.GetChild(transform.childCount-1).gameObject.GetComponent<JumperGeneralPlatform>().Remove();
+            if(transform.childCount > max) 
+                transform.GetChild(transform.childCount-1).gameObject.GetComponent<JumperGeneralPlatform>().Remove();
         }
     }
 

@@ -86,6 +86,7 @@ public class JumperPlayerController : MonoBehaviour
     protected float originalJumpSpeed;
     protected CapsuleCollider2D coll;
     protected PolygonCollider2D shieldColl;
+    protected SpriteExpander magnetEffect;
 
     #endregion
 
@@ -113,6 +114,7 @@ public class JumperPlayerController : MonoBehaviour
         airJumpSpeed *= rb.gravityScale;
         magnet.SetActive(false);
         magnetController = magnet.GetComponent<JumperMagnet>();
+        magnetEffect = magnet.GetComponentInChildren<SpriteExpander>();
         shield.SetActive(false);
         magnetLevel = jm.MagnetAvailable;
         shieldLevel = jm.Shield;
@@ -359,6 +361,7 @@ public class JumperPlayerController : MonoBehaviour
             currentMagnet = magnetDuration;
             isMagnetic = true;
             magnetController.ActivateMagnet(magnetDuration);
+            magnetEffect.RequestResize(0.3f, 0.2f, 1.8f);
             canMagnet = false;
         }
         if (magnet.activeSelf && !isMagnetic)

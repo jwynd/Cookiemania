@@ -144,23 +144,21 @@ public class JumperManagerUI : MonoBehaviour
     {
         yield return new WaitForSeconds(timer);
 
-        coinsCollected = (int)(jm.Player.GetCoinsCollected() + (LEVEL_COMPLETE_BONUS * (1 + jm.AI)));
+        coinsCollected = (int)(jm.Player.GetCoinsCollected() * (1 + (0.1f * jm.AI)));
         //if this throws an error, need to stop whatever destroyed the player before this function
         Destroy(jm.Player.gameObject);
         JumperTextAdvanced endUI = endscreenCanvas.GetComponent<JumperTextAdvanced>();
         if (isGoodEnd)
         {
             endscreenBG.SetNight(false);
-            coinsCollected = (int)(coinsCollected * 1.5f);
+            coinsCollected += LEVEL_COMPLETE_BONUS;
             endUI.UpdateText("LEVEL COMPLETE!<br>you made " + coinsCollected.ToString());
-
         }
         else
         {
             endscreenBG.SetNight(true);
             endUI.UpdateText("Game Over<br>you made " + coinsCollected.ToString());
         }
-        
         GetComponent<Canvas>().worldCamera.enabled = false;
         GetComponent<Canvas>().worldCamera.GetComponent<AudioListener>().enabled = false;
         endscreenCamera.GetComponent<Camera>().enabled = true;
