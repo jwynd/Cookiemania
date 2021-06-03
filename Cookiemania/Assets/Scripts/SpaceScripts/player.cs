@@ -20,7 +20,14 @@ public class player : MonoBehaviour
     private float cooldownbullets = .18f;
     private float nextbullettime;
     public Animator fireanimator;
+
+    public float animationSpeed = 10f;
     private string aniname = "bullet_ani";
+
+    private void Awake()
+    {
+        fireanimator.speed = animationSpeed;
+    }
 
     private void Start()
     {
@@ -57,7 +64,7 @@ public class player : MonoBehaviour
         {
             if (Time.time > nextbullettime)
             {
-                fireanimator.Play("bullet_ani", -1, 0f);
+                fireanimator.Play(aniname, -1, 0f);
                 Fire();
                 nextbullettime = Time.time + cooldownbullets;
             }
