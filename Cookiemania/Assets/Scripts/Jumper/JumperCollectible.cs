@@ -9,15 +9,8 @@ public class JumperCollectible : JumperGeneralPickup
     {
         base.Start();
         //change this to x when we switch sprites lol
-        if (!transform.parent) return;
         JumperGeneralPlatform dad = transform.parent.GetComponent<JumperGeneralPlatform>();
-
-        Vector3 pBounds = dad.GetHorizontalBounds();
-
-        //get info from parent, set parent child to this, then 
-        var parentLeft = pBounds.x;
-        var parentRight = pBounds.z;
-        transform.position = new Vector2(Random.Range(parentLeft - offsetValue, parentRight + offsetValue), 
-            Random.Range(transform.position.y, transform.position.y + offsetValue));
+        dad.tertiaryChildren.Add(this);
+        transform.parent = null;
     }
 }

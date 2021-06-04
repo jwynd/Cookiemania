@@ -157,6 +157,8 @@ public class JumperManagerUI : MonoBehaviour
         else
         {
             endscreenBG.SetNight(true);
+            // removing half of the coins as penalty
+            coinsCollected = coinsCollected >> 1;
             endUI.UpdateText("Game Over<br>you made " + coinsCollected.ToString());
         }
         GetComponent<Canvas>().worldCamera.enabled = false;

@@ -18,6 +18,9 @@ public class JumperGeneralPlatform : MonoBehaviour
     [HideInInspector]
     public HashSet<JumperGeneralThreat> secondaryChildren = new HashSet<JumperGeneralThreat>();
 
+    [HideInInspector]
+    public HashSet<JumperGeneralPickup> tertiaryChildren = new HashSet<JumperGeneralPickup>();
+
     [SerializeField]
     protected bool placePlatformsAbove = true;
 
@@ -96,6 +99,9 @@ public class JumperGeneralPlatform : MonoBehaviour
         foreach(var child in secondaryChildren)
             if (child)
                 Destroy(child);
+        foreach (var child in tertiaryChildren)
+            if (child)
+                Destroy(child);
         secondaryChildren.Clear();
     }
 
@@ -116,7 +122,11 @@ public class JumperGeneralPlatform : MonoBehaviour
             foreach(var child in secondaryChildren)
                 if (child)
                     StartCoroutine(JumperManagerGame.FlashThenKill(
-                        child.gameObject, tRemoveTime, tFlashPeriod));  
+                        child.gameObject, tRemoveTime, tFlashPeriod));
+            foreach(var child in tertiaryChildren)
+                if (child)
+                    StartCoroutine(JumperManagerGame.FlashThenKill(
+                        child.gameObject, tRemoveTime, tFlashPeriod));
         }
     }
     #endregion

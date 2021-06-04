@@ -275,11 +275,6 @@ public class JumperManagerGame : MonoBehaviour
         if (Player == null) { return; }
         float heightRightNow = Player.transform.position.y;
         maxHeightReached = heightRightNow > maxHeightReached ? heightRightNow : maxHeightReached;
-        //not checking for health in update, will just run end on player death
-        //else if (player.GetCurrentHealth() <= 0)
-        //{
-         //   JumperUIManager.Instance.End(false);
-        //}
         if (maxHeightReached - maxFallDistance >= heightRightNow)
         {
             JumperManagerUI.Instance.End(false, false);

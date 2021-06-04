@@ -304,7 +304,7 @@ MonoBehaviour:
   acceleration: 2
   maxSpeed: 7
   jumpSpeed: 7
-  airJumpSpeed: 5.5
+  airJumpSpeed: 4.5
   groundLayer:
     serializedVersion: 2
     m_Bits: 1024

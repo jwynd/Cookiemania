@@ -1159,6 +1159,38 @@ PrefabInstance:
       propertyPath: startingPlatform
       value: 
       objectReference: {fileID: 1904667531}
+    - target: {fileID: 826711010817931759, guid: 97c37d740f218ae4abebbf038c44dbe5,
+        type: 3}
+      propertyPath: dayPrefabs.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 826711010817931759, guid: 97c37d740f218ae4abebbf038c44dbe5,
+        type: 3}
+      propertyPath: nightPrefabs.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 826711010817931759, guid: 97c37d740f218ae4abebbf038c44dbe5,
+        type: 3}
+      propertyPath: dayPrefabs.Array.data[0].platform
+      value: 
+      objectReference: {fileID: 637888742533752541, guid: 45b8d4f185c9d584c8dce7c171ed52e4,
+        type: 3}
+    - target: {fileID: 826711010817931759, guid: 97c37d740f218ae4abebbf038c44dbe5,
+        type: 3}
+      propertyPath: dayPrefabs.Array.data[0].dangerous
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 826711010817931759, guid: 97c37d740f218ae4abebbf038c44dbe5,
+        type: 3}
+      propertyPath: nightPrefabs.Array.data[0].platform
+      value: 
+      objectReference: {fileID: 637888742533752541, guid: cc54fb576a91e744088e172ffe38cd33,
+        type: 3}
+    - target: {fileID: 826711010817931759, guid: 97c37d740f218ae4abebbf038c44dbe5,
+        type: 3}
+      propertyPath: nightPrefabs.Array.data[0].dangerous
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6845973269452864297, guid: 97c37d740f218ae4abebbf038c44dbe5,
         type: 3}
       propertyPath: m_Name
