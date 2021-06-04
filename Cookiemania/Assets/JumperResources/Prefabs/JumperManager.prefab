@@ -93,6 +93,8 @@ MonoBehaviour:
       type: 3}
     weight: 0.249
     dangerous: 1
+  coinPrefab: {fileID: 4790512461018026978, guid: 9e9af407198d7e44c89e757ea8a779bd,
+    type: 3}
   nightExit: {fileID: 2001070790077626028, guid: e57e91b6f70b8ec4ba5ebc1b1c8c9e49,
     type: 3}
   dayExit: {fileID: 2001070790077626028, guid: 4b664211927d6084f8bd7a2493038db3, type: 3}
@@ -110,3 +112,27 @@ MonoBehaviour:
   collectiblesTag: Pickup
   startingDifficulty: 1
   difficultyIncrement: 0.3
+  deathFlashCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

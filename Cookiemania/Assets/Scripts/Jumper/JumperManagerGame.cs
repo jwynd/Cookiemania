@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using static General_Utilities.AnimationCurveLerp;
+
 public class JumperManagerGame : MonoBehaviour
 {
 
@@ -71,6 +73,8 @@ public class JumperManagerGame : MonoBehaviour
 
     //game manager always tagged with game controller
     protected const string myTag = "GameController";
+    private const float FLASH_COUNT = 12f;
+    private const float MIN_FLASH_INTERVAL = 0.01f;
     protected float minHeightIncrease = 0.0f;
 
     protected float width = 10.0f;
@@ -93,6 +97,8 @@ public class JumperManagerGame : MonoBehaviour
 
     public JumperCameraController MainCam { get; private set; }
     public JumperPlayerController Player { get; private set; }
+
+    public AnimationCurve deathFlashCurve;
     public static JumperManagerGame Instance { get; private set; }
     public float StartingDifficulty { get { return startingDifficulty; } }
 
@@ -423,19 +429,32 @@ public class JumperManagerGame : MonoBehaviour
         float flashInterval, JumperGeneralThreat killableChild = null)
     {
         if (killableChild != null) { killableChild.PlatformDestroyed(totalTime, flashInterval); }
-        int timer = (int)(totalTime / flashInterval);
         Renderer rend = selfReference.GetComponent<Renderer>();
-        for (int i = 0; i < timer; i++)
+        var incrementTimeBy = totalTime * (1f / FLASH_COUNT);
+        var time = 0f;
+        var i = 0f;
+        while (i < totalTime && time < totalTime)
         {
             if (!rend)
                 break;
-            rend.material.color = Color.gray;
-            yield return new WaitForSeconds(flashInterval);
-            if (!rend)
-                break;
-            rend.material.color = Color.white;
-            yield return new WaitForSeconds(flashInterval);
+            rend.material.color = rend.material.color != Color.gray ? Color.gray : Color.white;
+            time += incrementTimeBy;
+            var nextValue = Interpolate(Instance.deathFlashCurve, 0f, totalTime, time / totalTime);
+            if (nextValue - i < MIN_FLASH_INTERVAL)
+            {
+                nextValue = i + MIN_FLASH_INTERVAL;
+            }
+            yield return new WaitForSeconds(nextValue - i);
+            i = nextValue;
         }
+        // set to gray at the last, wait remainder of the total time
+        if (i < totalTime)
+        {
+            if (rend)
+                rend.material.color = Color.gray;
+            yield return new WaitForSeconds(totalTime - i);
+        }
+
         //this could be changed to recycling the object
         if (selfReference)
             Destroy(selfReference);

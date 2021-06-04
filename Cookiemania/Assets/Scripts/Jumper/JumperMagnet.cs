@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using static General_Utilities.AnimationCurveLerp;
+
 public class JumperMagnet : MonoBehaviour
 {
 
@@ -33,16 +35,6 @@ public class JumperMagnet : MonoBehaviour
     protected Collider2D coll;
     protected Animator animator;
     protected float accumulatedPoints = 0f;
-
-    public static float InterpolateOverCurve(AnimationCurve curve, float from, float to, float t)
-    {
-        return from + curve.Evaluate(t) * (to - from);
-    }
-
-    public static Vector3 InterpolateOverCurve(AnimationCurve curve, Vector3 from, Vector3 to, float t)
-    {
-        return from + curve.Evaluate(t) * (to - from);
-    }
 
     protected void Awake()
     {
@@ -76,8 +68,8 @@ public class JumperMagnet : MonoBehaviour
         foreach (var pu in pickups)
         {
             if (!pu.Item1) continue;
-            pu.Item1.transform.position = InterpolateOverCurve(lerpCurve, pu.Item2, suckInEnd.position, lerpPoint);
-            pu.Item1.transform.localScale = InterpolateOverCurve(lerpCurve, pu.Item3, small, lerpPoint);
+            pu.Item1.transform.position = Interpolate(lerpCurve, pu.Item2, suckInEnd.position, lerpPoint);
+            pu.Item1.transform.localScale = Interpolate(lerpCurve, pu.Item3, small, lerpPoint);
         }
         /*foreach (var th in threats)
         {
