@@ -6,6 +6,17 @@ using UnityEngine;
 public class JumperPlayerController : MonoBehaviour
 {
     #region variables
+    private const float MAGNET_BASE_SIZE = 1.8f;
+    private const float MAGNET_BASE_SMALL_SIZE = 0.2f;
+    private const float MAGNET_BASE_EXTEND_TIME = 0.18f;
+    private const float MAGNET_FLAT_CD_REDUCTION = 1f;
+    private const float MAGNET_FLAT_DURATION_INCREASE = .15f;
+    private const float MAGNET_FLAT_RANGE_INCREASE = 0.2f;
+    private const float HEALTH_PERCENT_DR_INCREASE = .1f;
+    private const float HEALTH_PERCENT_INCREASE = .1f;
+    private const float HEALTH_PERCENT_DR_CAP = .8f;
+    private const float SHIELD_FLAT_CD_REDUCTION = 2f;
+
     public float acceleration = 1f;
     public float maxSpeed = 5.5f;
     public float jumpSpeed = 7.5f;
@@ -25,6 +36,7 @@ public class JumperPlayerController : MonoBehaviour
     public GameObject aiPrefab;
     public Transform aiAttach;
     public GameObject magnet;
+    public GameObject magnetAnimator;
     public GameObject shield;
     public TextParticleSystem texts;
 
@@ -39,13 +51,11 @@ public class JumperPlayerController : MonoBehaviour
     protected int magnetLevel = 0;
     protected int shieldLevel = 0;
     protected int jumpLevel = 0;
-    protected int aiLevel = 0;
-    protected int healthLevel = 0;
     protected float damageReduction = 0.0f;
     protected JumperMagnet magnetController;
     protected int currentHealth;
-    protected bool jumped = false;
 
+    protected bool jumpInput = false;
     protected bool shieldInput = false;
 
     protected float aerialManeuverability = 0.5f;
@@ -87,47 +97,63 @@ public class JumperPlayerController : MonoBehaviour
     protected CapsuleCollider2D coll;
     protected PolygonCollider2D shieldColl;
     protected SpriteExpander magnetEffect;
+    private float magnetRange;
 
     #endregion
 
     #region startup
     protected void Awake()
     {
+        SetRequiredComponentRefs();
+        SetAwakeAvailableInits();
+    }
+
+    private void SetAwakeAvailableInits()
+    {
         originalScale = transform.localScale;
-        rb = GetComponent<Rigidbody2D>();
-        audioPlayer = GetComponent<AudioSource>();
-        rend = GetComponent<Renderer>();
         rb.velocity = Vector2.zero;
         currentHealth = maxHealth;
         originalJumpSpeed = jumpSpeed;
-        coll = GetComponent<CapsuleCollider2D>();
-        shieldColl = GetComponent<PolygonCollider2D>();
         shieldColl.enabled = false;
         coll.enabled = true;
+    }
+
+    private void SetRequiredComponentRefs()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        audioPlayer = GetComponent<AudioSource>();
+        rend = GetComponent<Renderer>();
+        coll = GetComponent<CapsuleCollider2D>();
+        shieldColl = GetComponent<PolygonCollider2D>();
     }
 
     protected void Start()
     {
         jm = JumperManagerGame.Instance;
-        rb.gravityScale = jm.GetAlteredGravity();
-        jumpSpeed *= rb.gravityScale;
-        airJumpSpeed *= rb.gravityScale;
-        magnet.SetActive(false);
+        magnetAnimator.SetActive(false);
         magnetController = magnet.GetComponent<JumperMagnet>();
         magnetEffect = magnet.GetComponentInChildren<SpriteExpander>();
         shield.SetActive(false);
+        SetFromManagerStoredInfo();
+    }
+
+    private void SetFromManagerStoredInfo()
+    {
+        rb.gravityScale = jm.GetAlteredGravity();
+        GetTags();
         magnetLevel = jm.MagnetAvailable;
         shieldLevel = jm.Shield;
         jumpLevel = jm.CoinJump;
-        aiLevel = jm.AI;
+        jumpSpeed *= rb.gravityScale;
+        airJumpSpeed *= rb.gravityScale;
         // each level of health enhances damage reduction and small amount
         // of flat hp
-        healthLevel = jm.Health;
         // 10% more hp per level
-        maxHealth += (int)(healthLevel * 0.1f * maxHealth);
+        maxHealth += (int)(jm.Health * HEALTH_PERCENT_INCREASE * maxHealth);
         currentHealth = maxHealth;
-        damageReduction = Mathf.Min(0.8f, 0.1f * healthLevel);
-        if (aiLevel > 0)
+        damageReduction = Mathf.Min(HEALTH_PERCENT_DR_CAP,
+            HEALTH_PERCENT_DR_INCREASE * jm.Health);
+        if (jm.AI > 0)
         {
             var instance = Instantiate(aiPrefab, transform);
             instance.transform.parent = null;
@@ -136,13 +162,11 @@ public class JumperPlayerController : MonoBehaviour
             aiRef = instance.GetComponent<JumperAI>();
             aiRef.SetFollowPoint(aiAttach, transform);
         }
-        magnetCooldown -= jm.MagnetCD * 2f;
-        var magnetRange = 1 + jm.MagnetRange;
-        var magnetCapsule = magnet.GetComponent<CapsuleCollider2D>();
-        magnetCapsule.size *= magnetRange;
-        magnetCapsule.offset *= magnetRange;
-        shieldCooldown -= (jm.Shield - 1) * 2f;
-        GetTags();
+        magnetCooldown -= jm.MagnetCD * MAGNET_FLAT_CD_REDUCTION;
+        magnetDuration += (jm.MagnetAvailable - 1) * MAGNET_FLAT_DURATION_INCREASE;
+        magnetRange = jm.MagnetRange * MAGNET_FLAT_RANGE_INCREASE;
+        shieldCooldown -= (jm.Shield - 1) * SHIELD_FLAT_CD_REDUCTION;
+
         if (magnetLevel < 1)
         {
             magnetcdSymbol.gameObject.SetActive(false);
@@ -151,6 +175,7 @@ public class JumperPlayerController : MonoBehaviour
         {
             shieldcdSymbol.gameObject.SetActive(false);
         }
+        
     }
 
     protected void GetTags()
@@ -177,10 +202,10 @@ public class JumperPlayerController : MonoBehaviour
     {
         if (Time.timeScale == 0)
         {
-            jumped = false;
+            jumpInput = false;
             return;
         }
-        jumped = JumpInput(InputAxes.Instance.Jump.triggered);
+        jumpInput = JumpInput(InputAxes.Instance.Jump.triggered);
         shieldInput = InputAxes.Instance.Action1.triggered || shieldInput;
         magnetInput = InputAxes.Instance.Action2.triggered || magnetInput;
         horizontalInput = InputAxes.Instance.Horizontal.ReadValue<float>();
@@ -193,7 +218,7 @@ public class JumperPlayerController : MonoBehaviour
 
     protected void ResetInputForFixedUpdate()
     {
-        jumped = false;
+        jumpInput = false;
         magnetInput = false;
         shieldInput = false;
         horizontalInput = 0f;
@@ -219,7 +244,7 @@ public class JumperPlayerController : MonoBehaviour
 
     bool JumpInput(bool jump)
     {
-        return (jump && (grounded || canAirJump || coinJump > 0)) || jumped;
+        return (jump && (grounded || canAirJump || coinJump > 0)) || jumpInput;
     }
 
     #endregion
@@ -245,11 +270,6 @@ public class JumperPlayerController : MonoBehaviour
         coinJump = grounded ? 0 : coinJump;
     }
 
-    /*    void UpdateHeight()
-        {
-            maxHeightReached = transform.position.y > maxHeightReached ? transform.position.y : maxHeightReached;
-        }*/
-
     //this function requires the collider be the same size as the renderer or smaller
     protected bool IsGrounded()
     {
@@ -261,8 +281,8 @@ public class JumperPlayerController : MonoBehaviour
 
     protected float HorizontalMovement()
     {
-        float tempManeuver = !grounded || jumped ? aerialManeuverability : normalManeuverability;
-        return HorizontalMovementHelper(rb.velocity.x, horizontalInput, tempManeuver, !grounded || jumped);
+        float tempManeuver = !grounded || jumpInput ? aerialManeuverability : normalManeuverability;
+        return HorizontalMovementHelper(rb.velocity.x, horizontalInput, tempManeuver, !grounded || jumpInput);
     }
 
     protected float HorizontalMovementHelper(float currentV, float direction, float maneuverability, bool inAir)
@@ -308,7 +328,7 @@ public class JumperPlayerController : MonoBehaviour
     {
         //changing the direction of the throw to the last direction moved
         float horizontal = HorizontalMovement();
-        if (jumped) { Jump(horizontal); }
+        if (jumpInput) { Jump(horizontal); }
         else { rb.velocity = new Vector2(horizontal, rb.velocity.y); }
     }
 
@@ -356,16 +376,20 @@ public class JumperPlayerController : MonoBehaviour
         if (magnetInput && canMagnet && magnetLevel > 0)
         {
             // activate magnet
-            Debug.LogWarning("activating magnet");
             magnetcdSymbol.StartAppear(() => { currentMagnetCD = 0f; canMagnet = true; }, magnetCooldown);
             currentMagnet = magnetDuration;
             isMagnetic = true;
             magnetController.ActivateMagnet(magnetDuration);
-            magnetEffect.RequestResize(0.3f, 0.2f, 1.8f);
+            magnetAnimator.SetActive(true);
+            magnetEffect.RequestResize(
+                MAGNET_BASE_EXTEND_TIME, MAGNET_BASE_SMALL_SIZE, MAGNET_BASE_SIZE + magnetRange);
             canMagnet = false;
         }
-        if (magnet.activeSelf && !isMagnetic)
+        if (!isMagnetic)
+        {
+            magnetAnimator.SetActive(false);
             magnet.SetActive(false);
+        }
         magnetInput = false;
     }
 
@@ -448,7 +472,7 @@ public class JumperPlayerController : MonoBehaviour
 
     public float GetCoinsCollected()
     {
-        return points * (1 + (aiLevel * 0.2f));
+        return points;
     }
 
     public void BouncePlayer(float bounceStrength)
@@ -491,7 +515,7 @@ public class JumperPlayerController : MonoBehaviour
             if (pu.IsAutomaticPickup())
             {
                 //blah blah do stuff for picking up the item
-                GivePoints(pu.PointsOnPickup());
+                GivePoints(pu.DepletePickupPoints());
                 coinJump = jumpLevel;
                 if (pu.IsDestroyOnPickup())
                     pu.Remove();

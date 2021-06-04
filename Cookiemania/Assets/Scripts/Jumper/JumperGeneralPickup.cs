@@ -50,9 +50,11 @@ public abstract class JumperGeneralPickup : MonoBehaviour
     {
         return destroyOnPickup;
     }
-    public float PointsOnPickup()
+    public float DepletePickupPoints()
     {
-        return pointsOnPickup;
+        var returnVal = pointsOnPickup;
+        pointsOnPickup = 0f;
+        return returnVal;
     }
     #endregion
 

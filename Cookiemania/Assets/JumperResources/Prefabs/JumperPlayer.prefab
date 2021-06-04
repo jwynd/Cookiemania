@@ -11,6 +11,11 @@ GameObject:
   - component: {fileID: 5351079039808528750}
   - component: {fileID: 5610558732763459225}
   - component: {fileID: 9078943981584866093}
+  - component: {fileID: 5407857185263717496}
+  - component: {fileID: 4728708421678967218}
+  - component: {fileID: 3685985608883639611}
+  - component: {fileID: 8758377404622784979}
+  - component: {fileID: 709192910718641978}
   m_Layer: 9
   m_Name: vacuumend
   m_TagString: Untagged
@@ -94,6 +99,165 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dec9e41cf234b642a6a7458c29b07ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5407857185263717496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496927499777696300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b05adeff8cd024c4d8456cd30f8cae61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myPlayer: {fileID: 122012273554611361}
+  suckInEnd: {fileID: 6827058439672286679}
+  defaultSuckTime: 0.5
+  magnetAnimator: {fileID: 5094336056158277056}
+  lerpCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.21736073
+      value: 0.43606985
+      inSlope: 0.32834458
+      outSlope: 0.32834458
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.2440906
+    - serializedVersion: 3
+      time: 0.8973238
+      value: 0.53105104
+      inSlope: 0.38773984
+      outSlope: 0.38773984
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.21544077
+      outWeight: 0.37003982
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!50 &4728708421678967218
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496927499777696300}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!66 &3685985608883639611
+CompositeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496927499777696300}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_GeometryType: 0
+  m_GenerationType: 0
+  m_EdgeRadius: 0
+  m_ColliderPaths: []
+  m_CompositePaths:
+    m_Paths: []
+  m_VertexDistance: 0.0005
+  m_OffsetDistance: 0.00005
+--- !u!70 &8758377404622784979
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496927499777696300}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.014440802, y: 0.021953398}
+  m_Size: {x: 0.86823905, y: 2.516097}
+  m_Direction: 0
+--- !u!60 &709192910718641978
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496927499777696300}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.28, y: 2.56}
+    newSize: {x: 1.28, y: 2.56}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.049999997, y: -1.09}
+      - {x: -0.049999997, y: -1.12}
+      - {x: -0.04, y: -1.15}
+      - {x: 0.02, y: -1.15}
+      - {x: 0.049999997, y: -1.14}
+      - {x: 0.049999997, y: -1.09}
+      - {x: 0.02, y: -1.06}
+      - {x: -0.02, y: -1.06}
+    - - {x: -0.48678455, y: -0.51051974}
+      - {x: -0.60767114, y: -0.93934125}
+      - {x: -0.59417456, y: -1.2049546}
+      - {x: -0.2667022, y: -1.203392}
+      - {x: -0.0005233884, y: -1.0177681}
+      - {x: 0.30363297, y: -1.1705896}
+      - {x: 0.5818359, y: -1.2228084}
+      - {x: 0.5719541, y: -0.80936134}
+      - {x: 0.44717413, y: -0.35573423}
 --- !u!1 &2040978121208780886
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,7 +484,8 @@ MonoBehaviour:
   aiPrefab: {fileID: 5975152754571497438, guid: 98746eb7e2c8f4e498233ac0e6a3988a,
     type: 3}
   aiAttach: {fileID: 8725463364865352860}
-  magnet: {fileID: 3177681861256741812}
+  magnet: {fileID: 496927499777696300}
+  magnetAnimator: {fileID: 3177681861256741812}
   shield: {fileID: 2040978121208780886}
   texts: {fileID: 9201149036756048416}
   magnetcdSymbol: {fileID: 0}
@@ -525,9 +690,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5030401620394928986}
   - component: {fileID: 427130450781229713}
-  - component: {fileID: 6547316761508115879}
-  - component: {fileID: 5962418185393157494}
-  - component: {fileID: 8653240779995508474}
   - component: {fileID: 5094336056158277056}
   m_Layer: 9
   m_Name: magnet
@@ -602,58 +764,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &6547316761508115879
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3177681861256741812}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 1
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!70 &5962418185393157494
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3177681861256741812}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1.8}
-  m_Size: {x: 3.0377023, y: 4.1937885}
-  m_Direction: 0
---- !u!114 &8653240779995508474
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3177681861256741812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b05adeff8cd024c4d8456cd30f8cae61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myPlayer: {fileID: 122012273554611361}
-  suckInEnd: {fileID: 6827058439672286679}
-  defaultSuckTime: 0.5
 --- !u!95 &5094336056158277056
 Animator:
   serializedVersion: 3
