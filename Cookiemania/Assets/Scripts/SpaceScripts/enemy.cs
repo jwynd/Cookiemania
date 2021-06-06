@@ -63,7 +63,7 @@ public class enemy : MonoBehaviour
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = enemydeathimage1;
             gameObject.GetComponent<SpriteRenderer>().sprite = enemydeathimage2;
-            chargeanimator.Play(deathani, -1, 0f);
+            death();
             soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemydies);
             Destroy(gameObject);
         }
@@ -72,7 +72,7 @@ public class enemy : MonoBehaviour
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = enemydeathimage1;
             gameObject.GetComponent<SpriteRenderer>().sprite = enemydeathimage2;
-            chargeanimator.Play(deathani, -1, 0f);
+            death();
             soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemydies);
             Destroy(gameObject);
         }
@@ -99,13 +99,17 @@ public class enemy : MonoBehaviour
             if(lives <= 0)
             {
                 soundmanager.Instance.PlayOneShot(soundmanager.Instance.playerdies);
-                col.gameObject.GetComponent<SpriteRenderer>().sprite = playerdeathImage;
-                col.gameObject.GetComponent<SpriteRenderer>().sprite = playerdeath2;
+                death();
+
                 Destroy(gameObject);
                 Destroy(col.gameObject, .05f); //.05f
             }
 
         }
+    }
+    public void death()
+    {
+        chargeanimator.SetTrigger("Death");
     }
        public IEnumerator changeEnemySprite()
        {
@@ -156,7 +160,7 @@ public class enemy : MonoBehaviour
 
     void Launch()
     {
-        chargeanimator.Play(aniname, -1, 0f);
+        chargeanimator.Play(aniname);
         GameObject go = Instantiate(enemyFire, transform.position, Quaternion.identity);
         go.transform.parent = transform;
         go.transform.parent = null;
@@ -183,8 +187,7 @@ public class enemy : MonoBehaviour
             if (lives <= 0)
             {
                 soundmanager.Instance.PlayOneShot(soundmanager.Instance.playerdies);
-                col.gameObject.GetComponent<SpriteRenderer>().sprite = playerdeathImage;
-                col.gameObject.GetComponent<SpriteRenderer>().sprite = playerdeath2;
+                col.gameObject.GetComponent<Animator>().SetTrigger("Death");
                 Destroy(gameObject);
                 Destroy(col.gameObject, .05f); //.05f
             }
