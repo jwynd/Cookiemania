@@ -98,7 +98,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
-        saveButton.interactable = EventManager.Instance.EventController.CanSaveLoad();
+        saveButton.interactable = EventManager.Instance && EventManager.Instance.EventController.CanSaveLoad();
         var pauseTime = PauseWithoutScreen();
         if (pauseTime >= 0f) normalTimeScale = pauseTime;
         markedButton = -1;
