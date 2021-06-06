@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4215776844763078832}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.753133, y: -0.15592968, z: 2.859375}
-  m_LocalScale: {x: 0.31111833, y: 0.34568706, z: 0.34568706}
+  m_LocalScale: {x: 3.1293325, y: 3.6741352, z: 14.566864}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -170,8 +170,9 @@ MonoBehaviour:
   pos2: {fileID: 1712844284885222188, guid: 6c7055731fb63a941a7e623f1a957554, type: 3}
   moveSpeed: 1.5
   chargeanimator: {fileID: 5860400772695892918}
-  animationSpeed: 10
   aniname: pirate_charge
+  idle: pirate_idle
+  deathani: pirate_death
 --- !u!95 &5860400772695892918
 Animator:
   serializedVersion: 3

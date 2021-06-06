@@ -1076,6 +1076,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 14887601, guid: 9d3a5fbb070fba9479490f450dd22e7d, type: 3}
+      propertyPath: m_Size.y
+      value: 2.784306
+      objectReference: {fileID: 0}
+    - target: {fileID: 14887601, guid: 9d3a5fbb070fba9479490f450dd22e7d, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.817153
+      objectReference: {fileID: 0}
     - target: {fileID: 14887603, guid: 9d3a5fbb070fba9479490f450dd22e7d, type: 3}
       propertyPath: animationSpeed
       value: 4

@@ -124,6 +124,8 @@ MonoBehaviour:
   moveSpeed: 1.5
   chargeanimator: {fileID: 103121162500521482}
   aniname: zombie_charge
+  idle: zombie_idle
+  deathani: zombie_death
 --- !u!50 &109994208989446824
 Rigidbody2D:
   serializedVersion: 4

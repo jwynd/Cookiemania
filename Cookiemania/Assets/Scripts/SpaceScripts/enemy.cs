@@ -33,12 +33,15 @@ public class enemy : MonoBehaviour
 
     //public float animationSpeed = 10f;
     public string aniname;
+    public string idle;
+    public string deathani;
 
 
     // Start is called before the first frame update
     void Start()
     {
         //chargeanimator.speed = animationSpeed;
+        chargeanimator.Play(idle);
         rand = Random.Range(0, 100);
         Player = GameObject.FindGameObjectWithTag("treasure").GetComponent<Transform>();
         location1 = pos1.GetComponent<Transform>();
@@ -60,6 +63,7 @@ public class enemy : MonoBehaviour
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = enemydeathimage1;
             gameObject.GetComponent<SpriteRenderer>().sprite = enemydeathimage2;
+            chargeanimator.Play(deathani, -1, 0f);
             soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemydies);
             Destroy(gameObject);
         }
@@ -68,6 +72,7 @@ public class enemy : MonoBehaviour
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = enemydeathimage1;
             gameObject.GetComponent<SpriteRenderer>().sprite = enemydeathimage2;
+            chargeanimator.Play(deathani, -1, 0f);
             soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemydies);
             Destroy(gameObject);
         }
@@ -155,6 +160,7 @@ public class enemy : MonoBehaviour
         GameObject go = Instantiate(enemyFire, transform.position, Quaternion.identity);
         go.transform.parent = transform;
         go.transform.parent = null;
+        chargeanimator.Play(idle);
     }
 
     private void OnTriggerEnter2D(Collider2D col)
