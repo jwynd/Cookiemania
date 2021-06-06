@@ -29,11 +29,16 @@ public class enemy : MonoBehaviour
     private Vector2 movement3;
     private int rand;
     public float moveSpeed = 1.5f;
+    public Animator chargeanimator;
+
+    //public float animationSpeed = 10f;
+    public string aniname;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        //chargeanimator.speed = animationSpeed;
         rand = Random.Range(0, 100);
         Player = GameObject.FindGameObjectWithTag("treasure").GetComponent<Transform>();
         location1 = pos1.GetComponent<Transform>();
@@ -146,6 +151,7 @@ public class enemy : MonoBehaviour
 
     void Launch()
     {
+        chargeanimator.Play(aniname, -1, 0f);
         GameObject go = Instantiate(enemyFire, transform.position, Quaternion.identity);
         go.transform.parent = transform;
         go.transform.parent = null;

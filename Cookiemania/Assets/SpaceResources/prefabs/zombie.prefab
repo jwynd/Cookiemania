@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -3839895726222421396}
   - component: {fileID: 109994208989446824}
   - component: {fileID: -6902841229801406431}
+  - component: {fileID: 103121162500521482}
   m_Layer: 13
   m_Name: zombie
   m_TagString: Enemy
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 8706619386830073998}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.268861, y: -0.33715466, z: 2.859375}
-  m_LocalScale: {x: 3.4902322, y: 3.4902322, z: 3.4902322}
+  m_LocalScale: {x: 3.7242665, y: 3.5845697, z: 3.7242665}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -48,6 +49,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -106,7 +108,6 @@ MonoBehaviour:
     type: 3}
   minFireRateTime: 0.3
   maxFireRateTime: 3
-  baseFireWaitTime: 5
   playerdeathImage: {fileID: -4568620655595551830, guid: 20266f58562693e428758ed785e35b25,
     type: 3}
   playerdeath2: {fileID: 1160252235788339688, guid: 20266f58562693e428758ed785e35b25,
@@ -121,6 +122,8 @@ MonoBehaviour:
   pos1: {fileID: 2101281234196067432, guid: 39283a503619dd541a5a9e26cd19e560, type: 3}
   pos2: {fileID: 1712844284885222188, guid: 6c7055731fb63a941a7e623f1a957554, type: 3}
   moveSpeed: 1.5
+  chargeanimator: {fileID: 103121162500521482}
+  aniname: zombie_charge
 --- !u!50 &109994208989446824
 Rigidbody2D:
   serializedVersion: 4
@@ -168,3 +171,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.29, y: 0.27}
   m_EdgeRadius: 0
+--- !u!95 &103121162500521482
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8706619386830073998}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 94995da262a8ccb40873e638f4657f2b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
