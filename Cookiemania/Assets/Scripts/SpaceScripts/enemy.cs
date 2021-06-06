@@ -107,8 +107,9 @@ public class enemy : MonoBehaviour
 
         }
     }
-    public void death()
+    public void death() //test as a couroutine to see if that triggers next
     {
+        chargeanimator.SetBool("moving", false);
         chargeanimator.SetTrigger("Death");
     }
        public IEnumerator changeEnemySprite()
@@ -160,11 +161,13 @@ public class enemy : MonoBehaviour
 
     void Launch()
     {
-        chargeanimator.Play(aniname);
+        chargeanimator.SetBool("moving", false);
+        chargeanimator.SetTrigger("fire");
         GameObject go = Instantiate(enemyFire, transform.position, Quaternion.identity);
         go.transform.parent = transform;
         go.transform.parent = null;
-        chargeanimator.Play(idle);
+        chargeanimator.ResetTrigger("fire");
+        chargeanimator.SetBool("moving", true);
     }
 
     private void OnTriggerEnter2D(Collider2D col)
