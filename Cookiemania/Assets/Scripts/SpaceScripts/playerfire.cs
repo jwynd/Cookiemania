@@ -28,25 +28,14 @@ public class playerfire : MonoBehaviour
     // Update is called once per frame
     private void OnTriggerEnter2D(Collider2D col)
     {
-
         if (col.gameObject.CompareTag("Enemy"))
         {
             soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemydies);
+            col.gameObject.GetComponent<enemy>().death();
             increaseTextUIScore();
-
-            col.GetComponent<SpriteRenderer>().sprite = EExplosionImage;
-            Destroy(gameObject);
-            Destroy(col.gameObject, 0.2f); //DestroyObject(col.gameObject, 0.5f)
-
         }
-
-       /* if (col.gameObject.CompareTag("shield")) 
-        {
-            Destroy (gameObject);
-            Destroy(col.gameObject);
-        } */
-        
     }
+
     void OnBecomeInvisible()
     {
         Destroy(gameObject);

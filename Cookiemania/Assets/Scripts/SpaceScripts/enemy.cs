@@ -4,24 +4,18 @@ using UnityEngine;
 
 public class enemy : MonoBehaviour
 {
+    private const float TIME_UNTIL_FIRST_SHOT = 4f;
+
     public float speed = 10;
-    public Rigidbody2D rigidBody;
-    public Sprite startingImage;
-    public Sprite altImage;
-    private SpriteRenderer spriteRenderer;
+    private Rigidbody2D rigidBody;
     public float secBeforeSpriteChange = .5f;
     public GameObject enemyFire;
     public float minFireRateTime = 5.0f;
     public float maxFireRateTime = 10.0f;
     public static float baseFireWaitTime = 3f;
-    public Sprite playerdeathImage;
-    public Sprite playerdeath2;
-    public Sprite enemydeathimage1;
-    public Sprite enemydeathimage2;
-    private Transform target;
     public Transform Player;
-    public Transform location1;
-    public Transform location2;
+    private Transform location1;
+    private Transform location2;
     public GameObject pos1;
     public GameObject pos2;
     private Vector2 movement;
@@ -29,111 +23,70 @@ public class enemy : MonoBehaviour
     private Vector2 movement3;
     private int rand;
     public float moveSpeed = 1.5f;
-    public Animator chargeanimator;
+    private Animator chargeanimator;
 
-    //public float animationSpeed = 10f;
-    public string aniname;
-    public string idle;
-    public string deathani;
+    private bool Death = false;
+    private bool launch = false;
 
-
-    // Start is called before the first frame update
     void Start()
     {
-        //chargeanimator.speed = animationSpeed;
-        chargeanimator.Play(idle);
         rand = Random.Range(0, 100);
         Player = GameObject.FindGameObjectWithTag("treasure").GetComponent<Transform>();
         location1 = pos1.GetComponent<Transform>();
         location2 = pos2.GetComponent<Transform>();
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.velocity = new Vector2(1, 0) * speed;
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        StartCoroutine(changeEnemySprite());
         baseFireWaitTime = baseFireWaitTime + Random.Range(minFireRateTime, maxFireRateTime);
-        InvokeRepeating("Launch", 4f, baseFireWaitTime);
-       // target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        InvokeRepeating("Launch", TIME_UNTIL_FIRST_SHOT, baseFireWaitTime);
+        chargeanimator = GetComponent<Animator>();
     }
 
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-
+        if (Death) return;
         if (col.gameObject.CompareTag("fire"))
         {
-            gameObject.GetComponent<SpriteRenderer>().sprite = enemydeathimage1;
-            gameObject.GetComponent<SpriteRenderer>().sprite = enemydeathimage2;
             death();
             soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemydies);
-            Destroy(gameObject);
         }
-
-        if (col.gameObject.CompareTag("pierce"))
+        else if (col.gameObject.CompareTag("pierce"))
         {
-            gameObject.GetComponent<SpriteRenderer>().sprite = enemydeathimage1;
-            gameObject.GetComponent<SpriteRenderer>().sprite = enemydeathimage2;
             death();
             soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemydies);
-            Destroy(gameObject);
         }
-
-        //if (col.gameObject.CompareTag("shield"))
-        //{
-        //    soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemydies);
-        //    Destroy(gameObject);
-            
-       // }
-
-        if (col.gameObject.CompareTag("Player"))
+        else if (col.gameObject.CompareTag("Player"))
         {
             int lives = col.gameObject.GetComponent<health>().lives;
             if(lives > 1)
             {
                 soundmanager.Instance.PlayOneShot(soundmanager.Instance.loseheart);
                 col.gameObject.GetComponent<health>().takedamage();
-                lives = col.gameObject.GetComponent<health>().lives;
             } else if(lives == 1) {
                 col.gameObject.GetComponent<health>().takedamage();
-                lives = col.gameObject.GetComponent<health>().lives;
-            }
-            if(lives <= 0)
+            } else if(lives <= 0)
             {
                 soundmanager.Instance.PlayOneShot(soundmanager.Instance.playerdies);
-                death();
-
-                Destroy(gameObject);
-                Destroy(col.gameObject, .05f); //.05f
             }
-
+            death();
         }
     }
     public void death() //test as a couroutine to see if that triggers next
     {
+        if (Death) return;
         chargeanimator.SetBool("moving", false);
         chargeanimator.SetTrigger("Death");
+        chargeanimator.ResetTrigger("fire");
+        GetComponent<Collider2D>().enabled = false;
+        CancelInvoke();
+        Death = true;
+        rigidBody.velocity = Vector3.zero;
+        Destroy(gameObject, 1f);
     }
-       public IEnumerator changeEnemySprite()
-       {
-           while (true)
-           {
-               if(spriteRenderer.sprite == startingImage)
-               {
-                   spriteRenderer.sprite = altImage;
-                  // soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemysound);
-
-               }
-               else
-               {
-                   spriteRenderer.sprite = startingImage;
-                  // soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemysound2);
-               }
-
-               yield return new WaitForSeconds(secBeforeSpriteChange);
-           }
-       }
 
     void Update()
     {
+        if (Death) return;
         Vector3 direction = Player.position - transform.position;
         Vector3 direction2 = transform.position - Player.position;
         Vector3 direction3 = location2.position - transform.position;
@@ -145,33 +98,29 @@ public class enemy : MonoBehaviour
         movement = direction;
         movement2 = direction2;
         movement3 = direction3;
-        
-
+        if (launch) launch = false;
+        else chargeanimator.SetBool("moving", true);
     }
+
     private void FixedUpdate()
     {
-        Debug.Log("move character triggered");
+        if (Death) return;
         moveCharacter(movement, movement2, movement3);
-        if (Time.time > baseFireWaitTime)
-        {
-            baseFireWaitTime = baseFireWaitTime + Random.Range(minFireRateTime, maxFireRateTime);
-            //Instantiate(enemyFire, transform.position, Quaternion.identity);
-        }
     }
 
     void Launch()
     {
-        chargeanimator.SetBool("moving", false);
         chargeanimator.SetTrigger("fire");
+        chargeanimator.SetBool("moving", false);
         GameObject go = Instantiate(enemyFire, transform.position, Quaternion.identity);
+        launch = true;
         go.transform.parent = transform;
         go.transform.parent = null;
-        chargeanimator.ResetTrigger("fire");
-        chargeanimator.SetBool("moving", true);
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
+        if (Death) return;
         if (col.gameObject.CompareTag("Player"))
         {
             int lives = col.gameObject.GetComponent<health>().lives;
@@ -179,22 +128,18 @@ public class enemy : MonoBehaviour
             {
                 soundmanager.Instance.PlayOneShot(soundmanager.Instance.loseheart);
                 col.gameObject.GetComponent<health>().takedamage();
-                lives = col.gameObject.GetComponent<health>().lives;
-                Destroy(gameObject);
             }
             else if (lives == 1)
             {
                 col.gameObject.GetComponent<health>().takedamage();
-                lives = col.gameObject.GetComponent<health>().lives;
             }
-            if (lives <= 0)
+            else if (lives <= 0)
             {
                 soundmanager.Instance.PlayOneShot(soundmanager.Instance.playerdies);
+                // take damage should be sufficient over tracking lives here and playing death anim / losing hearts
                 col.gameObject.GetComponent<Animator>().SetTrigger("Death");
-                Destroy(gameObject);
-                Destroy(col.gameObject, .05f); //.05f
             }
-
+            death();
         }
 
     }
@@ -203,8 +148,8 @@ public class enemy : MonoBehaviour
     {
         if (GameObject.Find("lag(Clone)") != null || GameObject.Find("bosscookie(Clone)") != null)
         {
-            GameObject.Find("space background").GetComponent<Renderer>().material.color = Color.Lerp(Color.white, Color.red, Mathf.PingPong(Time.time, 5));
-            Debug.Log("boss on screen");
+            GameObject.Find("space background").GetComponent<Renderer>().material.color = 
+                Color.Lerp(Color.white, Color.red, Mathf.PingPong(Time.time, 5));
             if (rand >= 50)
             {
                 rigidBody.velocity = Vector3.zero;
@@ -220,14 +165,11 @@ public class enemy : MonoBehaviour
         {
             if (GameObject.Find("space background").GetComponent<Renderer>().material.color != Color.white)
             {
-                GameObject.Find("space background").GetComponent<Renderer>().material.color = Color.Lerp(Color.red, Color.white, Mathf.PingPong(Time.time, 10));
+                GameObject.Find("space background").GetComponent<Renderer>().material.color = 
+                    Color.Lerp(Color.red, Color.white, Mathf.PingPong(Time.time, 10));
             }
-            
-            Debug.Log("boss not on screen");
             rigidBody.MovePosition((Vector2)transform.position + (direction * moveSpeed * Time.deltaTime));
             GameObject.Find("space background").GetComponent<Renderer>().material.color = Color.white;
         }
     }
-
-
 }
