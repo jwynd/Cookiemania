@@ -11,10 +11,9 @@ public class playerfire : MonoBehaviour
     public GameObject user;
     private int ilevel = 0;
 
-    // Start is called before the first frame update
     void Start()
     {
-        if(PlayerData.Player != null)
+        if (PlayerData.Player != null)
         {
             ilevel = PlayerData.Player.incomelvl;
         }
@@ -23,17 +22,6 @@ public class playerfire : MonoBehaviour
         Vector3 direction = transform.position - Player.position;
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.velocity = direction * speed;
-    } 
-
-    // Update is called once per frame
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.gameObject.CompareTag("Enemy"))
-        {
-            soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemydies);
-            col.gameObject.GetComponent<enemy>().death();
-            increaseTextUIScore();
-        }
     }
 
     void OnBecomeInvisible()
@@ -41,12 +29,12 @@ public class playerfire : MonoBehaviour
         Destroy(gameObject);
     }
 
-    void increaseTextUIScore()
+    public void increaseTextUIScore()
     {
         var textUIComp = GameObject.Find("Score").GetComponent<Text>();
         int score = int.Parse(textUIComp.text);
-        
-        if(ilevel == 1)
+
+        if (ilevel == 1)
         {
             score += 3;
             winmessage.coins = score;
@@ -56,7 +44,8 @@ public class playerfire : MonoBehaviour
                 soundmanager.Instance.PlayOneShot(soundmanager.Instance.gainlife);
                 user.gameObject.GetComponent<health>().gainlife();
             }
-        } else if (ilevel == 2)
+        }
+        else if (ilevel == 2)
         {
             score += 6;
             winmessage.coins = score;
@@ -66,7 +55,8 @@ public class playerfire : MonoBehaviour
                 soundmanager.Instance.PlayOneShot(soundmanager.Instance.gainlife);
                 user.gameObject.GetComponent<health>().gainlife();
             }
-        } else if (ilevel == 3)
+        }
+        else if (ilevel == 3)
         {
             score += 10;
             winmessage.coins = score;
@@ -76,7 +66,8 @@ public class playerfire : MonoBehaviour
                 soundmanager.Instance.PlayOneShot(soundmanager.Instance.gainlife);
                 user.gameObject.GetComponent<health>().gainlife();
             }
-        } else
+        }
+        else
         {
             score += 1;
             winmessage.coins = score;

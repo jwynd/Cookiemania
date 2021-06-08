@@ -15,7 +15,7 @@ public class pierce : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        Destroy(gameObject, 2f);
         Player = GameObject.FindGameObjectWithTag("treasure").GetComponent<Transform>();
         user = GameObject.FindGameObjectWithTag("Player");
         Vector3 direction = transform.position - Player.position;
@@ -23,28 +23,12 @@ public class pierce : MonoBehaviour
         rigidBody.velocity = direction * speed;
     }
 
-    // Update is called once per frame
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-
-        if (col.gameObject.CompareTag("Enemy"))
-        {
-            soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemydies);
-            increaseTextUIScore();
-
-            col.GetComponent<SpriteRenderer>().sprite = EExplosionImage;
-           // Destroy(gameObject); pierce object does not get destroyed
-            Destroy(col.gameObject, 0.2f); //DestroyObject(col.gameObject, 0.5f)
-
-        }
-
-    }
     void OnBecomeInvisible()
     {
         Destroy(gameObject);
     }
 
-    void increaseTextUIScore()
+    public void increaseTextUIScore()
     {
         var textUIComp = GameObject.Find("Score").GetComponent<Text>();
         int score = int.Parse(textUIComp.text);
@@ -90,10 +74,5 @@ public class pierce : MonoBehaviour
         }
 
         textUIComp.text = score.ToString();
-    }
-
-    private void Update()
-    {
-        Destroy(this.gameObject, 2f);
     }
 }

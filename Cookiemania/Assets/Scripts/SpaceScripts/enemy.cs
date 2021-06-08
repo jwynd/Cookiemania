@@ -41,27 +41,6 @@ public class enemy : MonoBehaviour
         chargeanimator = GetComponent<Animator>();
     }
 
-
-    private void OnCollisionEnter2D(Collision2D col)
-    {
-        if (Death) return;
-        if (col.gameObject.CompareTag("fire"))
-        {
-            death();
-            soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemydies);
-        }
-        else if (col.gameObject.CompareTag("pierce"))
-        {
-            death();
-            soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemydies);
-        }
-        else if (col.gameObject.CompareTag("Player"))
-        {
-            col.gameObject.GetComponent<health>().takedamage();
-
-            death();
-        }
-    }
     public void death() //test as a couroutine to see if that triggers next
     {
         if (Death) return;
@@ -111,7 +90,20 @@ public class enemy : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (Death) return;
-        if (col.gameObject.CompareTag("Player"))
+        if (col.gameObject.CompareTag("fire"))
+        {
+            col.gameObject.GetComponent<playerfire>().increaseTextUIScore();
+            Destroy(col.gameObject);
+            soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemydies);
+            death();
+        }
+        else if (col.gameObject.CompareTag("pierce"))
+        {
+            col.gameObject.GetComponent<pierce>().increaseTextUIScore();
+            death();
+            soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemydies);
+        }
+        else if (col.gameObject.CompareTag("Player"))
         {
             col.gameObject.GetComponent<health>().takedamage();
             death();
