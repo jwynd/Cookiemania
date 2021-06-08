@@ -10,6 +10,7 @@ public class player : MonoBehaviour
     public GameObject theplayershield;
     public GameObject theplayershield2;
     public GameObject theplayershield3;
+    public GameObject biscuit;
     public Rigidbody2D rigidBody;
     public Transform Player, direct1, direct2, direct3, direct4, direct5;
     public static int bulletlevel = 0;
@@ -21,6 +22,8 @@ public class player : MonoBehaviour
     private float nextbullettime;
     public Animator fireanimator;
 
+    
+
     public float animationSpeed = 10f;
     private string aniname = "bullet_ani";
 
@@ -31,6 +34,7 @@ public class player : MonoBehaviour
 
     private void Start()
     {
+        this.GetComponent<health>().SetDeathFunction(zerohealth);
         if (PlayerData.Player != null)
         {
             Debug.Log("This is a full game playthrough PlayerData is Active");
@@ -157,8 +161,19 @@ public class player : MonoBehaviour
         yield return new WaitForSeconds(3);
     }
 
+    private void zerohealth()
+    {
+        if (biscuit)
+        {
+            biscuit.GetComponent<Animator>().SetTrigger("Death");
+            Destroy(gameObject, 3);
+            GetComponent<Collider2D>().enabled = false;
+        }
+    }
+
     void OnDestroy()
     {
+       
         var manager = FindObjectOfType<spaceManager>();
         if (manager != null)
             manager.EndGame();

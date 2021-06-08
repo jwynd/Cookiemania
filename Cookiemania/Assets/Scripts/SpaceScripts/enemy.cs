@@ -57,17 +57,8 @@ public class enemy : MonoBehaviour
         }
         else if (col.gameObject.CompareTag("Player"))
         {
-            int lives = col.gameObject.GetComponent<health>().lives;
-            if(lives > 1)
-            {
-                soundmanager.Instance.PlayOneShot(soundmanager.Instance.loseheart);
-                col.gameObject.GetComponent<health>().takedamage();
-            } else if(lives == 1) {
-                col.gameObject.GetComponent<health>().takedamage();
-            } else if(lives <= 0)
-            {
-                soundmanager.Instance.PlayOneShot(soundmanager.Instance.playerdies);
-            }
+            col.gameObject.GetComponent<health>().takedamage();
+
             death();
         }
     }
@@ -80,13 +71,13 @@ public class enemy : MonoBehaviour
         GetComponent<Collider2D>().enabled = false;
         CancelInvoke();
         Death = true;
+        enabled = false;
         rigidBody.velocity = Vector3.zero;
         Destroy(gameObject, 1f);
     }
 
     void Update()
     {
-        if (Death) return;
         Vector3 direction = Player.position - transform.position;
         Vector3 direction2 = transform.position - Player.position;
         Vector3 direction3 = location2.position - transform.position;
@@ -104,7 +95,6 @@ public class enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Death) return;
         moveCharacter(movement, movement2, movement3);
     }
 
@@ -123,22 +113,7 @@ public class enemy : MonoBehaviour
         if (Death) return;
         if (col.gameObject.CompareTag("Player"))
         {
-            int lives = col.gameObject.GetComponent<health>().lives;
-            if (lives > 1)
-            {
-                soundmanager.Instance.PlayOneShot(soundmanager.Instance.loseheart);
-                col.gameObject.GetComponent<health>().takedamage();
-            }
-            else if (lives == 1)
-            {
-                col.gameObject.GetComponent<health>().takedamage();
-            }
-            else if (lives <= 0)
-            {
-                soundmanager.Instance.PlayOneShot(soundmanager.Instance.playerdies);
-                // take damage should be sufficient over tracking lives here and playing death anim / losing hearts
-                col.gameObject.GetComponent<Animator>().SetTrigger("Death");
-            }
+            col.gameObject.GetComponent<health>().takedamage();
             death();
         }
 
@@ -148,7 +123,7 @@ public class enemy : MonoBehaviour
     {
         if (GameObject.Find("lag(Clone)") != null || GameObject.Find("bosscookie(Clone)") != null)
         {
-            GameObject.Find("space background").GetComponent<Renderer>().material.color = 
+            GameObject.Find("space background").GetComponent<Renderer>().material.color =
                 Color.Lerp(Color.white, Color.red, Mathf.PingPong(Time.time, 5));
             if (rand >= 50)
             {
@@ -165,7 +140,7 @@ public class enemy : MonoBehaviour
         {
             if (GameObject.Find("space background").GetComponent<Renderer>().material.color != Color.white)
             {
-                GameObject.Find("space background").GetComponent<Renderer>().material.color = 
+                GameObject.Find("space background").GetComponent<Renderer>().material.color =
                     Color.Lerp(Color.red, Color.white, Mathf.PingPong(Time.time, 10));
             }
             rigidBody.MovePosition((Vector2)transform.position + (direction * moveSpeed * Time.deltaTime));

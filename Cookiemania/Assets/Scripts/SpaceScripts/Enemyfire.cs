@@ -14,7 +14,7 @@ public class Enemyfire : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        Destroy(this.gameObject, 3.5f);
         enemy = GameObject.FindGameObjectWithTag("treasure").GetComponent<Transform>();
         Vector3 direction = enemy.position - transform.position;
         rigidBody = GetComponent<Rigidbody2D>();
@@ -25,17 +25,8 @@ public class Enemyfire : MonoBehaviour
     {
         if(col.gameObject.CompareTag("Player"))
         {
-            soundmanager.Instance.PlayOneShot(soundmanager.Instance.loseheart);
             col.gameObject.GetComponent<health>().takedamage();
-            int lives = col.gameObject.GetComponent<health>().lives;
-            if (lives <= 0)
-            {
-                soundmanager.Instance.PlayOneShot(soundmanager.Instance.playerdies);
-                col.gameObject.GetComponent<SpriteRenderer>().sprite = PExplosionImage;
-                Destroy(gameObject);
-                Destroy(col.gameObject, .05f); //.05f
-            }
-
+            Destroy(gameObject);
         }
 
         if (col.gameObject.CompareTag("shield")) 
@@ -63,11 +54,6 @@ public class Enemyfire : MonoBehaviour
     void OnBecomeInvisible()
     {
         Destroy(this.gameObject);
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        Destroy(this.gameObject, 3.5f);
     }
 
 }
