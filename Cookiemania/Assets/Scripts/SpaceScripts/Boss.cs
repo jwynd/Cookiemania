@@ -177,6 +177,11 @@ public class Boss : MonoBehaviour
             }
 
         }
+        if (col.gameObject.CompareTag("fire"))
+        {
+            soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemydies);
+            Destroy(gameObject);
+        }
 
     }
 
