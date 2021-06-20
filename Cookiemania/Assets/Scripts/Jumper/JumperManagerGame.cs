@@ -356,12 +356,21 @@ public class JumperManagerGame : MonoBehaviour
             height = pos.y;
             GameObject g = Instantiate(Roulette(), pos, Quaternion.Euler(0, 0, 0));
             PlaceCoins(g.transform);
-            canPlaceAboveLast = g.GetComponent<JumperGeneralPlatform>().CanPlacePlatformsAbove();
+            JumperGeneralPlatform plat = g.GetComponent<JumperGeneralPlatform>();
+            canPlaceAboveLast = plat.CanPlacePlatformsAbove();
             g.transform.parent = transform;
             g.transform.SetAsFirstSibling();
+            if (plat.IsVertical)
+            {
+                g.transform.position = new Vector3(
+                    g.transform.position.x, 
+                    g.transform.position.y + 3f, 
+                    g.transform.position.z);
+                height = plat.Top();
+            }
             if (i == density - 3)
             {
-                checkAgainstPosition = pos.y;
+                checkAgainstPosition = height;
             }
             if(transform.childCount > max) 
                 transform.GetChild(transform.childCount-1).gameObject.GetComponent<JumperGeneralPlatform>().Remove();

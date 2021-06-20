@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1182,52 +1182,9 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 826711010817931759, guid: 97c37d740f218ae4abebbf038c44dbe5,
         type: 3}
-      propertyPath: coinPrefab
-      value: 
-      objectReference: {fileID: 4790512461018026978, guid: 9e9af407198d7e44c89e757ea8a779bd,
-        type: 3}
-    - target: {fileID: 826711010817931759, guid: 97c37d740f218ae4abebbf038c44dbe5,
-        type: 3}
-      propertyPath: heightGoal
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 826711010817931759, guid: 97c37d740f218ae4abebbf038c44dbe5,
-        type: 3}
       propertyPath: startingPlatform
       value: 
       objectReference: {fileID: 1904667531}
-    - target: {fileID: 826711010817931759, guid: 97c37d740f218ae4abebbf038c44dbe5,
-        type: 3}
-      propertyPath: dayPrefabs.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 826711010817931759, guid: 97c37d740f218ae4abebbf038c44dbe5,
-        type: 3}
-      propertyPath: nightPrefabs.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 826711010817931759, guid: 97c37d740f218ae4abebbf038c44dbe5,
-        type: 3}
-      propertyPath: dayPrefabs.Array.data[0].platform
-      value: 
-      objectReference: {fileID: 637888742533752541, guid: 45b8d4f185c9d584c8dce7c171ed52e4,
-        type: 3}
-    - target: {fileID: 826711010817931759, guid: 97c37d740f218ae4abebbf038c44dbe5,
-        type: 3}
-      propertyPath: dayPrefabs.Array.data[0].dangerous
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 826711010817931759, guid: 97c37d740f218ae4abebbf038c44dbe5,
-        type: 3}
-      propertyPath: nightPrefabs.Array.data[0].platform
-      value: 
-      objectReference: {fileID: 637888742533752541, guid: cc54fb576a91e744088e172ffe38cd33,
-        type: 3}
-    - target: {fileID: 826711010817931759, guid: 97c37d740f218ae4abebbf038c44dbe5,
-        type: 3}
-      propertyPath: nightPrefabs.Array.data[0].dangerous
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6845973269452864297, guid: 97c37d740f218ae4abebbf038c44dbe5,
         type: 3}
       propertyPath: m_Name

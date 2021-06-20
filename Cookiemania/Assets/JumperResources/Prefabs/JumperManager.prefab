@@ -44,10 +44,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nightPrefabs:
-  - platform: {fileID: 3987228348188153383, guid: 5a016c1074bc4f549bf90dfe89614fba,
+  - platform: {fileID: 637888742533752541, guid: cc54fb576a91e744088e172ffe38cd33,
       type: 3}
     weight: 0.487
-    dangerous: 0
+    dangerous: 1
   - platform: {fileID: 7739518868798799298, guid: e58f8d79e5ed8e743a3424413f3d1b0d,
       type: 3}
     weight: 0.414
@@ -64,15 +64,15 @@ MonoBehaviour:
       type: 3}
     weight: 0.213
     dangerous: 1
-  - platform: {fileID: 637888742533752541, guid: cc54fb576a91e744088e172ffe38cd33,
+  - platform: {fileID: 8552561703256424470, guid: 86c3fec6584ea4844ac7cfe5b70164ff,
       type: 3}
-    weight: 0.184
-    dangerous: 1
+    weight: 0.213
+    dangerous: 0
   dayPrefabs:
-  - platform: {fileID: 3987228348188153383, guid: 59c341f3cf7d8a0478f772c98dba4889,
+  - platform: {fileID: 637888742533752541, guid: 45b8d4f185c9d584c8dce7c171ed52e4,
       type: 3}
     weight: 0.486
-    dangerous: 0
+    dangerous: 1
   - platform: {fileID: 7739518868798799298, guid: 562ddbfea17a31142a095706256ee411,
       type: 3}
     weight: 0.403
@@ -89,10 +89,10 @@ MonoBehaviour:
       type: 3}
     weight: 0.27
     dangerous: 1
-  - platform: {fileID: 637888742533752541, guid: 45b8d4f185c9d584c8dce7c171ed52e4,
+  - platform: {fileID: 8552561703256424470, guid: 57a7d260f99778743bdca77fe62581e5,
       type: 3}
-    weight: 0.249
-    dangerous: 1
+    weight: 0.27
+    dangerous: 0
   coinPrefab: {fileID: 4790512461018026978, guid: 9e9af407198d7e44c89e757ea8a779bd,
     type: 3}
   nightExit: {fileID: 2001070790077626028, guid: e57e91b6f70b8ec4ba5ebc1b1c8c9e49,
@@ -101,7 +101,7 @@ MonoBehaviour:
   startingPlatform: {fileID: 0}
   defaultDayPlatformImage: {fileID: 21300000, guid: b6a2d196ba5ec404683819280e4b72d7,
     type: 3}
-  heightGoal: 50
+  heightGoal: 80
   maxFallDistance: 20
   alteredGravity: 2
   bounceHeightMultiplier: 1.5

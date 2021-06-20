@@ -11,6 +11,10 @@ public class JumperGeneralPlatform : MonoBehaviour
     protected float timeToRemove = 1.5f;
     [SerializeField]
     protected float flashPeriod = 0.25f;
+    [SerializeField]
+    protected bool isVertical = false;
+    [SerializeField]
+    protected Transform verticalPoint;
 
     [HideInInspector]
     public JumperGeneralThreat enemyChild = null;
@@ -43,6 +47,13 @@ public class JumperGeneralPlatform : MonoBehaviour
     #endregion
 
     #region publicFunctions
+
+    public bool IsVertical { get { return isVertical; } }
+
+    public float Top()
+    {
+        return verticalPoint.position.y;
+    }
 
     //left x position = .x, right x position = .z
     public Vector3 GetHorizontalBounds()
