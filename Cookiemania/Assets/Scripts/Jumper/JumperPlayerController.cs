@@ -41,6 +41,7 @@ public class JumperPlayerController : MonoBehaviour
 
     public AbilityCooldown magnetcdSymbol;
     public AbilityCooldown shieldcdSymbol;
+    public AbilityCooldown coinjumpSymbol;
 
     public Transform wallL1;
     public Transform wallL2;
@@ -279,9 +280,12 @@ public class JumperPlayerController : MonoBehaviour
     {
         grounded = IsGrounded();
         walled = IsWalled();
-        canAirJump = grounded ? true : canAirJump;
-        // lose the coin jump when you get grounded
-        coinJump = grounded ? 0 : coinJump;
+        if (grounded)
+        {
+            canAirJump = true;
+            coinJump = 0;
+            coinjumpSymbol.StartFade(null, 0f);
+        }
     }
 
     private bool IsWalled()
@@ -372,7 +376,14 @@ public class JumperPlayerController : MonoBehaviour
             //this is a physics bool, needs to be reset by physics functions
             JumpHelper(horizontal, airJumpSpeed);
             if (coinJump > 0 && !canAirJump)
+            {
                 coinJump -= 1;
+                if (coinJump < 1)
+                {
+                    coinjumpSymbol.StartFade(null, 0f);
+                }
+            }
+                
             else
             {
                 canAirJump = false;
@@ -384,14 +395,12 @@ public class JumperPlayerController : MonoBehaviour
     {
         if (wallLeft)
         {
-            Debug.LogWarning("Wall jump left!");
             rb.velocity = new Vector2(maxSpeed * Math.Sign(transform.localScale.x), 0);
             wallJumped = true;
             wallJumpTime = wallJumpMaxTime;
         }
         else if (wallRight)
         {
-            Debug.LogWarning("Wall jump right!");
             rb.velocity = new Vector2(-maxSpeed * Math.Sign(transform.localScale.x), 0);
             wallJumped = true;
             wallJumpTime = wallJumpMaxTime;
@@ -556,6 +565,10 @@ public class JumperPlayerController : MonoBehaviour
             {
                 //blah blah do stuff for picking up the item
                 GivePoints(pu.DepletePickupPoints());
+                if (coinJump < 1 && jumpLevel > 0)
+                {
+                    coinjumpSymbol.StartAppear(null, 0f);
+                }
                 coinJump = jumpLevel;
                 if (pu.IsDestroyOnPickup())
                     pu.Remove();

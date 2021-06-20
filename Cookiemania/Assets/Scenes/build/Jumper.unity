@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -716,6 +716,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1197026038 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3814822378913642549, guid: 033eec8b3faf40642b1b528004d0f8ad,
+    type: 3}
+  m_PrefabInstance: {fileID: 1733227045}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c55f8b57c68b464f863ec126e5f7aad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1733227045
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -765,6 +777,26 @@ PrefabInstance:
       propertyPath: endscreenCanvas
       value: 
       objectReference: {fileID: 191621361}
+    - target: {fileID: 6441444706581871944, guid: 033eec8b3faf40642b1b528004d0f8ad,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6441444706581871944, guid: 033eec8b3faf40642b1b528004d0f8ad,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6441444706581871944, guid: 033eec8b3faf40642b1b528004d0f8ad,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6441444706581871944, guid: 033eec8b3faf40642b1b528004d0f8ad,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9176062763796850783, guid: 033eec8b3faf40642b1b528004d0f8ad,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -1064,6 +1096,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 122012273554611361, guid: 8a891ced0f6cdcf4a834421b3072a1ae,
+        type: 3}
+      propertyPath: coinjumpSymbol
+      value: 
+      objectReference: {fileID: 1197026038}
     - target: {fileID: 122012273554611361, guid: 8a891ced0f6cdcf4a834421b3072a1ae,
         type: 3}
       propertyPath: magnetcdSymbol

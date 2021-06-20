@@ -10,7 +10,8 @@ public class AbilityCooldown : MonoBehaviour
     public enum Abilities
     {
         Magnet,
-        JumperShield
+        JumperShield,
+        CoinJump
     }
 
     [SerializeField]
@@ -36,6 +37,9 @@ public class AbilityCooldown : MonoBehaviour
             case Abilities.Magnet:
                 enabler = PlayerData.Player.JMagnet > 0;
                 break;
+            case Abilities.CoinJump:
+                enabler = PlayerData.Player.JCoinJump > 0;
+                break;
             default:
                 Debug.LogError("unimplemented ability type");
                 return;
@@ -60,7 +64,7 @@ public class AbilityCooldown : MonoBehaviour
     private void FinalizeEffect()
     {
         image.fillAmount = fadeTarget;
-        runAfterFade.Invoke();
+        runAfterFade?.Invoke();
         enabled = false;
     }
 

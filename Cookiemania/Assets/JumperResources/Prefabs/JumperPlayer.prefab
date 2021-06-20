@@ -524,10 +524,13 @@ MonoBehaviour:
   texts: {fileID: 9201149036756048416}
   magnetcdSymbol: {fileID: 0}
   shieldcdSymbol: {fileID: 0}
+  coinjumpSymbol: {fileID: 0}
   wallL1: {fileID: 3243796130678964407}
   wallL2: {fileID: 3575744622826003658}
   wallR1: {fileID: 8225349564549019443}
   wallR2: {fileID: 8138827225474664307}
+  wallJumpMaxTime: 0.5
+  wallFallSpeed: -0.2
 --- !u!70 &1793148104149608238
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
