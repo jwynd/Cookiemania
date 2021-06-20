@@ -16,7 +16,6 @@ public class JumperPlayerController : MonoBehaviour
     private const float HEALTH_PERCENT_INCREASE = .1f;
     private const float HEALTH_PERCENT_DR_CAP = .8f;
     private const float SHIELD_FLAT_CD_REDUCTION = 2f;
-
     public float acceleration = 1f;
     public float maxSpeed = 5.5f;
     public float jumpSpeed = 7.5f;
@@ -43,10 +42,19 @@ public class JumperPlayerController : MonoBehaviour
     public AbilityCooldown magnetcdSymbol;
     public AbilityCooldown shieldcdSymbol;
 
+    public Transform wallL1;
+    public Transform wallL2;
+    public Transform wallR1;
+    public Transform wallR2;
+
+    public float wallJumpMaxTime = 0.5f;
+    public float wallFallSpeed = -0.2f;
+
     protected Rigidbody2D rb;
     protected Renderer rend;
     protected Vector2 velocity = Vector2.zero;
     protected bool grounded = true;
+    private bool walled;
     protected float damageTimer = 0;
     protected int magnetLevel = 0;
     protected int shieldLevel = 0;
@@ -98,6 +106,11 @@ public class JumperPlayerController : MonoBehaviour
     protected PolygonCollider2D shieldColl;
     protected SpriteExpander magnetEffect;
     private float magnetRange;
+    private Collider2D wallLeft;
+    private Collider2D wallRight;
+    private bool wallJumped;
+    private float wallJumpTime;
+
 
     #endregion
 
@@ -208,7 +221,7 @@ public class JumperPlayerController : MonoBehaviour
         jumpInput = JumpInput(InputAxes.Instance.Jump.triggered);
         shieldInput = InputAxes.Instance.Action1.triggered || shieldInput;
         magnetInput = InputAxes.Instance.Action2.triggered || magnetInput;
-        horizontalInput = InputAxes.Instance.Horizontal.ReadValue<float>();
+        horizontalInput = wallJumped ? 0f : InputAxes.Instance.Horizontal.ReadValue<float>();
     }
 
     protected void ResetInputForCollisions()
@@ -244,7 +257,7 @@ public class JumperPlayerController : MonoBehaviour
 
     bool JumpInput(bool jump)
     {
-        return (jump && (grounded || canAirJump || coinJump > 0)) || jumpInput;
+        return (jump && (grounded || walled || canAirJump || coinJump > 0)) || jumpInput;
     }
 
     #endregion
@@ -265,9 +278,17 @@ public class JumperPlayerController : MonoBehaviour
     protected void UpdateJumpCapability()
     {
         grounded = IsGrounded();
+        walled = IsWalled();
         canAirJump = grounded ? true : canAirJump;
         // lose the coin jump when you get grounded
         coinJump = grounded ? 0 : coinJump;
+    }
+
+    private bool IsWalled()
+    {
+        wallLeft = Physics2D.OverlapArea(wallL1.position, wallL2.position, groundLayer);
+        wallRight = Physics2D.OverlapArea(wallR1.position, wallR2.position, groundLayer);
+        return wallLeft || wallRight;
     }
 
     //this function requires the collider be the same size as the renderer or smaller
@@ -298,7 +319,7 @@ public class JumperPlayerController : MonoBehaviour
             currentV = Mathf.Max(inputAccel + currentV, -maxSpeed);
             movementDirection = -1;
         }
-        //lower their velocity if they're on the ground and not going forward or back
+        //lower their velocity if they're on the ground / wall and not going forward or back
         else if (inputAccel == 0 && !inAir)
         {
             currentV = ApplyFriction(currentV, maneuverability);
@@ -329,6 +350,10 @@ public class JumperPlayerController : MonoBehaviour
         //changing the direction of the throw to the last direction moved
         float horizontal = HorizontalMovement();
         if (jumpInput) { Jump(horizontal); }
+        else if (walled && grounded)
+        {
+            rb.velocity = new Vector2(0f, wallFallSpeed);
+        }
         else { rb.velocity = new Vector2(horizontal, rb.velocity.y); }
     }
 
@@ -357,7 +382,22 @@ public class JumperPlayerController : MonoBehaviour
 
     protected void JumpHelper(float horizontalSpeed, float verticalSpeed)
     {
-        rb.velocity = new Vector2(horizontalSpeed, 0);
+        if (wallLeft)
+        {
+            Debug.LogWarning("Wall jump left!");
+            rb.velocity = new Vector2(maxSpeed * Math.Sign(transform.localScale.x), 0);
+            wallJumped = true;
+            wallJumpTime = wallJumpMaxTime;
+        }
+        else if (wallRight)
+        {
+            Debug.LogWarning("Wall jump right!");
+            rb.velocity = new Vector2(-maxSpeed * Math.Sign(transform.localScale.x), 0);
+            wallJumped = true;
+            wallJumpTime = wallJumpMaxTime;
+        }
+        else
+            rb.velocity = new Vector2(horizontalSpeed, 0);
         rb.AddForce(new Vector2(0, verticalSpeed), ForceMode2D.Impulse);
     }
 
@@ -423,6 +463,8 @@ public class JumperPlayerController : MonoBehaviour
         // and precision stops mattering once im under 0 :)
         currentShield -= Time.fixedDeltaTime;
         currentMagnet -= Time.fixedDeltaTime;
+        wallJumpTime -= Time.fixedDeltaTime;
+        if (wallJumpTime < 0f) wallJumped = false;
         // set timer flags
         isShielded = currentShield > 0f;
         isMagnetic = currentMagnet > 0f;
@@ -480,8 +522,6 @@ public class JumperPlayerController : MonoBehaviour
         JumpHelper(rb.velocity.x, bounceStrength * jumpSpeed);
         canAirJump = true;
     }
-
-
 
     #endregion
 
@@ -650,5 +690,4 @@ public class JumperPlayerController : MonoBehaviour
         print("unimplemented, set trap");
     }
     #endregion
-
 }
