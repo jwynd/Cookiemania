@@ -6,7 +6,7 @@ public class rotate : MonoBehaviour
 {
     float rotatespeed = 1f;
     public float sensitivity;
-    // Update is called once per frame
+
     void Update()
     {
         if (Time.timeScale == 0)
@@ -15,9 +15,9 @@ public class rotate : MonoBehaviour
         }
         var rotation = InputAxes.Instance.Rotation.ReadValue<float>();
         if (rotation > 0f)
-            this.transform.Rotate(Vector3.forward * rotatespeed);
+            transform.Rotate(Vector3.forward * rotatespeed * Time.deltaTime);
         else if (rotation < 0f)
-            this.transform.Rotate(Vector3.forward * -rotatespeed);
+            transform.Rotate(Vector3.forward * -rotatespeed * Time.deltaTime);
 
     }
 }
