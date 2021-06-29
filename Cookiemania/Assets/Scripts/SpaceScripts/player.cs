@@ -21,6 +21,7 @@ public class player : MonoBehaviour
     private float cooldownbullets = .18f;
     private float nextbullettime;
     public Animator fireanimator;
+    public Animator shieldplayer;
 
     
 
@@ -78,6 +79,7 @@ public class player : MonoBehaviour
             if (Time.time > nextskilltime)
             {
                 Shield();
+                shieldplayer.Play("shieldcooldown", -1, 0f);
                 nextskilltime = Time.time + cooldowntime;
             }
         }
@@ -101,6 +103,7 @@ public class player : MonoBehaviour
         }
         go.transform.parent = transform;
         go.transform.parent = null;
+        
         soundmanager.Instance.PlayOneShot(soundmanager.Instance.shield);
     }
 
