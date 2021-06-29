@@ -47,6 +47,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -120,8 +121,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32507e5e1da481940abf3ae9b652d69b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRemove: 1.5
+  timeToRemove: 2
   flashPeriod: 0.25
+  isVertical: 0
+  verticalPoint: {fileID: 0}
   enemyChild: {fileID: 0}
   placePlatformsAbove: 1
   playerHeightToRemoveThis: 15

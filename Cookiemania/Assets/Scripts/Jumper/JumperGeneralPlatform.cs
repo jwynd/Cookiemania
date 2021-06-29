@@ -8,7 +8,7 @@ public class JumperGeneralPlatform : MonoBehaviour
 {
     #region variables
     [SerializeField]
-    protected float timeToRemove = 1.5f;
+    protected float timeToRemove = 2f;
     [SerializeField]
     protected float flashPeriod = 0.25f;
     [SerializeField]
@@ -31,6 +31,7 @@ public class JumperGeneralPlatform : MonoBehaviour
     protected JumperManagerGame jm;
     protected bool notFlashing = true;
     protected SpriteRenderer rend = null;
+    private JumperGeneralPlatform myChild;
     #endregion
 
     #region startup
@@ -43,6 +44,10 @@ public class JumperGeneralPlatform : MonoBehaviour
     {
         jm = JumperManagerGame.Instance;
         gameObject.tag = jm.GetGroundTag();
+        if (IsVertical)
+        {
+            myChild = GetComponentsInChildren<JumperGeneralPlatform>()[1];
+        }
     }
     #endregion
 
@@ -120,6 +125,7 @@ public class JumperGeneralPlatform : MonoBehaviour
     {
         var tRemoveTime = 0.01f;
         var tFlashPeriod = 0.01f;
+        myChild?.Remove();
         if (!immediately)
         {
             tRemoveTime = timeToRemove;

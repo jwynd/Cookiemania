@@ -64,7 +64,7 @@ MonoBehaviour:
       type: 3}
     weight: 0.213
     dangerous: 1
-  - platform: {fileID: 8552561703256424470, guid: 86c3fec6584ea4844ac7cfe5b70164ff,
+  - platform: {fileID: 8552561703256424470, guid: 0b9ed7b1d488efc42896428a32653d58,
       type: 3}
     weight: 0.213
     dangerous: 0

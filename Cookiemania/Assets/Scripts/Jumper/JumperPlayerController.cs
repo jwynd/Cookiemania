@@ -49,7 +49,7 @@ public class JumperPlayerController : MonoBehaviour
     public Transform wallR2;
 
     public float wallJumpMaxTime = 0.5f;
-    public float wallFallSpeed = -0.2f;
+    public float wallFallSpeed = -0.8f;
 
     protected Rigidbody2D rb;
     protected Renderer rend;
@@ -222,7 +222,7 @@ public class JumperPlayerController : MonoBehaviour
         jumpInput = JumpInput(InputAxes.Instance.Jump.triggered);
         shieldInput = InputAxes.Instance.Action1.triggered || shieldInput;
         magnetInput = InputAxes.Instance.Action2.triggered || magnetInput;
-        horizontalInput = wallJumped ? 0f : InputAxes.Instance.Horizontal.ReadValue<float>();
+        horizontalInput = InputAxes.Instance.Horizontal.ReadValue<float>();
     }
 
     protected void ResetInputForCollisions()
@@ -354,7 +354,7 @@ public class JumperPlayerController : MonoBehaviour
         //changing the direction of the throw to the last direction moved
         float horizontal = HorizontalMovement();
         if (jumpInput) { Jump(horizontal); }
-        else if (walled && grounded)
+        else if (walled && !wallJumped)
         {
             rb.velocity = new Vector2(0f, wallFallSpeed);
         }
@@ -393,7 +393,7 @@ public class JumperPlayerController : MonoBehaviour
 
     protected void JumpHelper(float horizontalSpeed, float verticalSpeed)
     {
-        if (wallLeft)
+        /*if (wallLeft)
         {
             rb.velocity = new Vector2(maxSpeed * Math.Sign(transform.localScale.x), 0);
             wallJumped = true;
@@ -406,7 +406,13 @@ public class JumperPlayerController : MonoBehaviour
             wallJumpTime = wallJumpMaxTime;
         }
         else
-            rb.velocity = new Vector2(horizontalSpeed, 0);
+            */
+        if (wallLeft || wallRight)
+        {
+            wallJumped = true;
+            wallJumpTime = wallJumpMaxTime;
+        }
+        rb.velocity = new Vector2(horizontalSpeed, 0);
         rb.AddForce(new Vector2(0, verticalSpeed), ForceMode2D.Impulse);
     }
 
