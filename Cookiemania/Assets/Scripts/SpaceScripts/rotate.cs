@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class rotate : MonoBehaviour
 {
-    float rotatespeed = 1f;
+    float rotatespeed = 500f;
     public float sensitivity;
 
     void Update()
