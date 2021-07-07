@@ -285,6 +285,8 @@ public class JumperManagerGame : MonoBehaviour
         maxHeightReached = heightRightNow > maxHeightReached ? heightRightNow : maxHeightReached;
         if (maxHeightReached - maxFallDistance >= heightRightNow)
         {
+            Player.DisableCollision();
+            Player.DisableUI();
             JumperManagerUI.Instance.End(false, false);
         }
         if (!building && heightRightNow > checkAgainstPosition)

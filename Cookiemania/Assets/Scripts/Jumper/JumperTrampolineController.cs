@@ -54,6 +54,7 @@ public class JumperTrampolineController : JumperGeneralPlatform
         {
             //this is trigger, so dont' need to check height
             StopCoroutine(Sproing());
+            JumperSounds.Instance.Bounce();
             collision.gameObject.GetComponent<JumperPlayerController>().BouncePlayer(bounceMultiplier);
             StartCoroutine(Sproing());
         }

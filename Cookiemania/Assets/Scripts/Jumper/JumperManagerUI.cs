@@ -84,19 +84,28 @@ public class JumperManagerUI : MonoBehaviour
             
         }
     }
-    
+
     #region public
     public void End(bool isGood, bool runSequence = true, Transform target = null)
     {
         //ensuring this only gets run once
         if (endingGame) { return; }
-        
+
         jm.MainCam.PlayerDestroyed();
         endingGame = true;
-        if (!isGood && runSequence) 
-            jm.Player.RunDeathSequence();
-        else if (runSequence)
-            jm.Player.RunVictorySequence();
+        if (isGood)
+        {
+            JumperSounds.Instance.LevelComplete();
+            if (runSequence)
+                jm.Player.RunVictorySequence();
+        }
+        else
+        {
+            JumperSounds.Instance.Die();
+            if (runSequence)
+                jm.Player.RunDeathSequence();
+        }
+        
         if (target != null)
         {
             jm.MainCam.ZoomInToTarget(target);

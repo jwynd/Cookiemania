@@ -17,7 +17,6 @@ public class JumperPickupController : JumperGeneralPickup
     protected Rigidbody2D myRb;
     protected string enemyTag;
     protected string obstacleTag;
-    protected string groundTag;
     protected float parentLeft;
     protected float parentRight;
     protected bool exploding;
@@ -30,7 +29,7 @@ public class JumperPickupController : JumperGeneralPickup
         myRb.gravityScale = 0;
         enemyTag = JumperManagerGame.Instance.GetEnemyTag();
         obstacleTag = JumperManagerGame.Instance.GetObstacleTag();
-        groundTag = JumperManagerGame.Instance.GetGroundTag();
+
     }
     protected override void Start()
     {
@@ -43,7 +42,7 @@ public class JumperPickupController : JumperGeneralPickup
         parentLeft = pBounds.x;
         parentRight = pBounds.z;
         transform.position = new Vector2(Random.Range(parentLeft, parentRight), transform.position.y);
-        
+
 
     }
 
@@ -85,11 +84,8 @@ public class JumperPickupController : JumperGeneralPickup
         }
     }
 
-    protected void OnTriggerStay2D(Collider2D collision)
-    {
-        if (!collision.gameObject.CompareTag(obstacleTag)) { return; }
-        transform.position += UnityEngine.Random.rotation * Vector3.one * 2f;
-    }
+
+
 
     protected void RemoveFromParent()
     {
@@ -111,7 +107,7 @@ public class JumperPickupController : JumperGeneralPickup
             if (!exploding)
             {
                 Remove();
-            } 
+            }
         }
     }
 

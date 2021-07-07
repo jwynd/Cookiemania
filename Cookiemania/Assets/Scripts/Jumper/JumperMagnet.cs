@@ -100,8 +100,12 @@ public class JumperMagnet : MonoBehaviour
         }*/
         pickups.Clear();
         //threats.Clear();
-        myPlayer.GivePoints(accumulatedPoints);
-        accumulatedPoints = 0;
+        if (accumulatedPoints > 0.5f)
+        {
+
+            myPlayer.GivePoints(accumulatedPoints, true);
+            accumulatedPoints = 0f;
+        }
         coll.enabled = false;
     }
 

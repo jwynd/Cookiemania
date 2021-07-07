@@ -32,6 +32,7 @@ public class JumperGeneralPlatform : MonoBehaviour
     protected bool notFlashing = true;
     protected SpriteRenderer rend = null;
     private JumperGeneralPlatform myChild;
+    protected string pickupTag = "";
     #endregion
 
     #region startup
@@ -44,6 +45,7 @@ public class JumperGeneralPlatform : MonoBehaviour
     {
         jm = JumperManagerGame.Instance;
         gameObject.tag = jm.GetGroundTag();
+        pickupTag = jm.GetCollectiblesTag();
         if (IsVertical)
         {
             myChild = GetComponentsInChildren<JumperGeneralPlatform>()[1];
@@ -78,6 +80,14 @@ public class JumperGeneralPlatform : MonoBehaviour
         return bounds;
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(pickupTag))
+        {
+            collision.gameObject.GetComponent<JumperGeneralPickup>().BounceMeOut();
+        }
+    }
+
     public JumperGeneralPlatform GetClosestPlatform(bool trampolineAllowed = false)
     {
         var brethren = transform.parent.GetComponentsInChildren<Transform>();
@@ -110,6 +120,7 @@ public class JumperGeneralPlatform : MonoBehaviour
     //ensures child ALWAYS destroyed when this is destroyed. gotta make sure ya know
     public void OnDestroy()
     {
+        
         if (enemyChild)
             Destroy(enemyChild);
         foreach(var child in secondaryChildren)
@@ -123,6 +134,7 @@ public class JumperGeneralPlatform : MonoBehaviour
 
     public virtual void Remove(bool immediately = false)
     {
+        JumperSounds.Instance?.PlatformCollapse();
         var tRemoveTime = 0.01f;
         var tFlashPeriod = 0.01f;
         myChild?.Remove();

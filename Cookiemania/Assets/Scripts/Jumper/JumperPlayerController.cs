@@ -364,8 +364,7 @@ public class JumperPlayerController : MonoBehaviour
     protected void Jump(float horizontal)
     {
         SpawnJumpParticles();
-        audioPlayer.clip = jumpSound;
-        audioPlayer.Play();
+        JumperSounds.Instance.Jump();
         if (grounded)
         {
             JumpHelper(horizontal, jumpSpeed);
@@ -431,6 +430,7 @@ public class JumperPlayerController : MonoBehaviour
         if (magnetInput && canMagnet && magnetLevel > 0)
         {
             // activate magnet
+            JumperSounds.Instance.Magnet();
             magnetcdSymbol.StartAppear(() => { currentMagnetCD = 0f; canMagnet = true; }, magnetCooldown);
             currentMagnet = magnetDuration;
             isMagnetic = true;
@@ -452,7 +452,7 @@ public class JumperPlayerController : MonoBehaviour
     {
         if (shieldInput && canShield && shieldLevel > 0)
         {
-            Debug.LogWarning("shield up!");
+            JumperSounds.Instance.Shield();
             shieldcdSymbol.StartAppear(() => { currentShieldCD = 0f; canShield = true; }, shieldCooldown);
             currentShield = shieldDuration;
             isShielded = true;
@@ -494,6 +494,17 @@ public class JumperPlayerController : MonoBehaviour
         haveItem = false;*/
     }
 
+    public void DisableUI()
+    {
+        GetComponentInChildren<Canvas>().enabled = false;
+    }
+
+    public void DisableCollision()
+    {
+        coll.enabled = false;
+        shieldColl.enabled = false;
+    }
+
     public float GetJumpStrength()
     {
         return jumpSpeed;
@@ -519,8 +530,10 @@ public class JumperPlayerController : MonoBehaviour
         return currentHealth;
     }
 
-    public void GivePoints(float p)
+    public void GivePoints(float p, bool wasPickup = false)
     {
+        if (wasPickup)
+            JumperSounds.Instance.Pickup();
         var toAdd = Mathf.Abs(p);
         points += toAdd;
         if (toAdd >= 1f)
@@ -570,7 +583,7 @@ public class JumperPlayerController : MonoBehaviour
             if (pu.IsAutomaticPickup())
             {
                 //blah blah do stuff for picking up the item
-                GivePoints(pu.DepletePickupPoints());
+                GivePoints(pu.DepletePickupPoints(), true);
                 if (coinJump < 1 && jumpLevel > 0)
                 {
                     coinjumpSymbol.StartAppear(null, 0f);
@@ -606,6 +619,7 @@ public class JumperPlayerController : MonoBehaviour
         if (damageTimer <= 0 && !isShielded)
         {
             DamageHelper(obsControl.GetDamage());
+            JumperSounds.Instance.Hit();
             obsControl.RemoveOnDamage();
         }
         else if (isShielded)

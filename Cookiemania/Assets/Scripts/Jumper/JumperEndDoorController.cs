@@ -30,6 +30,7 @@ public class JumperEndDoorController : JumperGeneralPickup
         {
             //take control of player to walk through door during end
             runOnce = true;
+            collision.gameObject.GetComponent<JumperPlayerController>().DisableUI();
             StartCoroutine(PlayerWalkThroughDoor(collision.gameObject));
             JumperManagerUI.Instance.End(true, true, transform);
         }

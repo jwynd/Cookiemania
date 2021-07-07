@@ -17,7 +17,8 @@ public abstract class JumperGeneralPickup : MonoBehaviour
     [SerializeField]
     protected bool automaticallyPickup = false;
 
-
+    protected string groundTag;
+    protected string pickupTag;
     protected Collider2D myCollider;
     
     #endregion
@@ -32,6 +33,8 @@ public abstract class JumperGeneralPickup : MonoBehaviour
     protected virtual void Start()
     {
         gameObject.tag = JumperManagerGame.Instance.GetCollectiblesTag();
+        groundTag = JumperManagerGame.Instance.GetGroundTag();
+        pickupTag = JumperManagerGame.Instance.GetCollectiblesTag();
     }
 
     public virtual void Remove()
@@ -55,6 +58,20 @@ public abstract class JumperGeneralPickup : MonoBehaviour
         var returnVal = pointsOnPickup;
         pointsOnPickup = 0f;
         return returnVal;
+    }
+
+    protected void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(groundTag) || collision.gameObject.CompareTag(pickupTag))
+        {
+            BounceMeOut();
+        }
+    }
+
+    public void BounceMeOut()
+    {
+        transform.position += UnityEngine.Random.rotation * Vector3.one * 2f;
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
     }
     #endregion
 
