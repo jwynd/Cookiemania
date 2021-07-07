@@ -234,7 +234,7 @@ public class JumperManagerGame : MonoBehaviour
         minHeightIncrease = Player.gameObject.GetComponent<Renderer>().bounds.size.y * 2f + g.GetComponent<Renderer>().bounds.size.y;
         Destroy(g);
         jumpHeight = ( Player.GetOriginalJumpStrength() * alteredGravity ) / 3;
-        width = Player.GetMaxVelocity() * 2.2f;
+        width = Player.GetMaxVelocity() * 1.9f;
         max  = (int)(density * 1.5f);
         offset = Player.transform.position.x;
         height = Player.transform.position.y;
@@ -260,9 +260,11 @@ public class JumperManagerGame : MonoBehaviour
     private void PlaceCoins(Transform platform)
     {
         // 75% no coins
-        if (UnityEngine.Random.Range(0f, 1f) > 0.75f) return;
+        if (platform.GetComponent<JumperGeneralPlatform>().IsVertical) { return; }
+        if (UnityEngine.Random.Range(0f, 1f) > 0.75f) { return; }
+
         var modpos = platform.position;
-        modpos.y += 2f;
+        modpos.y += 3f;
         int amt = UnityEngine.Random.Range(1, 3);
         for (int i = 0; i < amt; i++)
         {

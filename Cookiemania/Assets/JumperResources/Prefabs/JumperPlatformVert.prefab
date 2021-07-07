@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20b9691b5e069ee4fb07572254db205a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRemove: 1.5
+  timeToRemove: 2
   flashPeriod: 0.25
   isVertical: 0
   verticalPoint: {fileID: 0}
