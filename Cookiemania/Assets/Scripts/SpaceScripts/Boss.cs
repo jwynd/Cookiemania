@@ -22,6 +22,7 @@ public class Boss : MonoBehaviour
     private int randomSpot;
     private float waitTime;
     public float startwaitTime;
+    private int bosslives = 3;
 
 
     // Start is called before the first frame update
@@ -50,6 +51,21 @@ public class Boss : MonoBehaviour
         moveSpots.Add(GameObject.Find("MoveSpot12").transform);
 
         randomSpot = Random.Range(0, moveSpots.Count);
+
+        if(PlayerData.Player.spacelvl <= 1)
+        {
+            bosslives = 2;
+        } else if (PlayerData.Player.spacelvl == 2)
+        {
+            bosslives = 3;
+        } else if (PlayerData.Player.spacelvl == 3)
+        {
+            bosslives = 5;
+        } else if (PlayerData.Player.spacelvl >= 4)
+        {
+            bosslives = 7;
+        }
+        Debug.Log(bosslives);
     }
 
 
@@ -59,13 +75,22 @@ public class Boss : MonoBehaviour
         if (col.gameObject.CompareTag("fire"))
         {
             soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemydies);
-            Destroy(gameObject);
+            bosslives = bosslives - 1;
+            if (bosslives <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
 
         if (col.gameObject.CompareTag("shield"))
         {
             soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemydies);
-            Destroy(gameObject);
+            bosslives = bosslives - 1;
+            if (bosslives <= 0)
+            {
+                Destroy(gameObject);
+            }
+            Destroy(col.gameObject);
         }
 
         if (col.gameObject.CompareTag("Player"))
@@ -86,9 +111,14 @@ public class Boss : MonoBehaviour
             {
                 soundmanager.Instance.PlayOneShot(soundmanager.Instance.playerdies);
                 col.gameObject.GetComponent<SpriteRenderer>().sprite = playerdeathImage;
-                Destroy(gameObject);
-                Destroy(col.gameObject, .05f); //.05f
             }
+            bosslives = bosslives - 1;
+            if (bosslives <= 0)
+            {
+                Destroy(gameObject);
+            }
+
+
 
         }
     }
@@ -155,13 +185,18 @@ public class Boss : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Player"))
         {
+            bosslives = bosslives - 1;
+            if (bosslives <= 0)
+            {
+                Destroy(gameObject);
+            }
             int lives = col.gameObject.GetComponent<health>().lives;
             if (lives > 1)
             {
                 soundmanager.Instance.PlayOneShot(soundmanager.Instance.loseheart);
                 col.gameObject.GetComponent<health>().takedamage();
                 lives = col.gameObject.GetComponent<health>().lives;
-                Destroy(gameObject);
+               
             }
             else if (lives == 1)
             {
@@ -172,17 +207,59 @@ public class Boss : MonoBehaviour
             {
                 soundmanager.Instance.PlayOneShot(soundmanager.Instance.playerdies);
                 col.gameObject.GetComponent<SpriteRenderer>().sprite = playerdeathImage;
-                Destroy(gameObject);
                 Destroy(col.gameObject, .05f); //.05f
             }
 
         }
         if (col.gameObject.CompareTag("fire"))
         {
+            StartCoroutine(FlashSprite(spriteRenderer, 0, 255, 1, 3));
             soundmanager.Instance.PlayOneShot(soundmanager.Instance.enemydies);
-            Destroy(gameObject);
+            bosslives = bosslives - 1;
+            if (bosslives <= 0)
+            {
+                Destroy(gameObject);
+            }
+            Destroy(col.gameObject);
+            
         }
 
+        if (col.gameObject.CompareTag("pierce"))
+        {
+            bosslives = bosslives - 1;
+            if (bosslives <= 0)
+            {
+                Destroy(gameObject);
+            }
+            Destroy(col.gameObject);
+        }
+
+    }
+    public static IEnumerator FlashSprite(SpriteRenderer renderer, float minAlpha, float maxAlpha, float interval, float duration)
+    {
+        Color colorNow = renderer.color;
+        Color minColor = new Color(renderer.color.r, renderer.color.g, renderer.color.b, minAlpha);
+        Color maxColor = new Color(renderer.color.r, renderer.color.g, renderer.color.b, maxAlpha);
+
+        float currentInterval = 0;
+        while (duration > 0)
+        {
+            float tColor = currentInterval / interval;
+            renderer.color = Color.Lerp(minColor, maxColor, tColor);
+
+            currentInterval += Time.deltaTime;
+            if (currentInterval >= interval)
+            {
+                Color temp = minColor;
+                minColor = maxColor;
+                maxColor = temp;
+                currentInterval = currentInterval - interval;
+            }
+            duration -= Time.deltaTime;
+            yield return null;
+        }
+
+        renderer.color = colorNow;
     }
 
     void moveCharacter(Vector2 direction)
